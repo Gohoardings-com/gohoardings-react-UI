@@ -254,7 +254,7 @@ export default function Api() {
                 <h1>Media Inventory</h1>
 
                 <label>Media Code:</label>
-                <input type="text" className="all" id="code" onChange={e=> setCode(e.target.value);}}/>
+                <input type="text" className="all" id="code" onChange={e=> setCode(e.target.value)}}/>
                 <br />
 
                 <label>City:</label>

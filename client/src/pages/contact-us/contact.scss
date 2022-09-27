@@ -1,0 +1,49 @@
+@import '../../assets/scss/_variables.scss';
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $black;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.head {
+  font-size: $head;
+}
+
+.subhead {
+  font-size: $subhead;
+}
+
+.normal {
+  font-size: $normal;
+}
+
+.midhead {
+  font-size: $midhead;
+}
+
+.login-form {
+  background-color: $grey;
+}
+
+.social-links {
+  background-color: $dark-grey;
+}
+
+.social-links > p {
+  margin: 0 !important;
+  text-align: center;
+}
+
+.social-links > p > img {
+  vertical-align: middle;
+  padding: 0 10px;
+  width: 55px;
+}
+
+.address {
+  background-color: $dark-grey;
+}

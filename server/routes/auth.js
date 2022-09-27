@@ -5,23 +5,26 @@ const router = express.Router()
 const db = require('../conn/conn')
 
 router.post('/login', async (req, res) => {
-  db.changeUser({database:"users"})
+  
+  db.changeUser({database:"gohoardi_crmapp"})
     const password = req.body.password;
     const email = req.body.email;
-    db.query("SELECT * FROM users WHERE email = ? ", [email], async (err, result) => {
+    db.query("SELECT * FROM tblcontacts WHERE email = ? ", [email], async (err, result) => {
+      // console.log(result[0].password);
         if (err) throw err;
-            if (!result.length || await bcrypt.compare(password, result[0].password))
+        if (!result.length || !(await bcrypt.compare(password, result[0].password)))
              {
-            
+            console.log("ggg");
               res.json({ success: false, message: "Wrong Email & Password" });
             } else {
-              const role = result[0].role
+              
               const email = result[0].email
               const id = result[0].id;
               const token = jwt.sign({ id }, "Login_Successfull", {
                 expiresIn: 5000,
               });
-              return res.send({ success: true, token: token, email: email,password, id, role });
+              console.log("success");
+              return res.send({ success: true, token: token, email: email,password, id });
              
             };
     });
