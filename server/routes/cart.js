@@ -21,7 +21,7 @@ router.post("/cart", async (req, res) => {
   router.put('/applycart', (req,res) => {
     const userid = req.body.userid;
     // Configure array to store all promises
-    const promises = []
+    let promises = [];
     db.changeUser({ database: "gohoardi_goh" });
     db.query("SELECT mediatype, mediaid FROM goh_shopping_carts_item WHERE userid = ? ",[userid], async (err,result) => {
       if (err) throw err;

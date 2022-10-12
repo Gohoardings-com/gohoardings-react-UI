@@ -1,58 +1,122 @@
-import { LOGIN_ADMIN_FAIL, LOGIN_ADMIN_REQUIEST, LOGIN_ADMIN_SUCCESS,CLEAR_ERROR, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGOUT_SUCCESS, LOAD_USER_FAIL, LOGOUT_FAIL } from "../consents/adminConsents";
+import { createSlice } from "@reduxjs/toolkit"
 
-export const adminReducer = (state = { admin: { } }, action)=>{
+export const loginReducer = (state = {login:[]}, action) =>{
     switch (action.type) {
-        case LOGIN_ADMIN_REQUIEST:
-            case LOAD_USER_REQUEST:
+        case "LoginRequest":
             return{
-                loading: true,
-                isAuthenticate: false,
+                loading:true,
             }
-        case LOGIN_ADMIN_SUCCESS:
-        case LOAD_USER_SUCCESS:    
-            return{
-                ...state,
-                loading: false,
-                isAuthenticate: true,
-                admin: action.payload.user
-            }
-          
-         case LOGOUT_SUCCESS:
-            return {
-                loading:false,
-                admin:null,
-                isAuthenticate:false
-            }    
-        case LOGIN_ADMIN_FAIL:
-            return{
-                ...state,
-                loading:false,
-                isAuthenticate: false,
-                error: action.payload
-            }
-
-        case LOAD_USER_FAIL:
-            return {
-                loading: false,
-               isAuthenticate:false,
-               user:null,
-              error: action.payload.message    
-        }
-
-        case LOGOUT_FAIL:
+        case "LoginSuccess":
             return{
                 loading:false,
-                isAuthenticate: false,
-                user:null,
-                error: action.payload
-            };
-            
-        case CLEAR_ERROR:
+                login:action.payload
+            }
+        case "LoginFail": 
             return{
-                ...state,
-                error: null
-            }        
+                loading:null,
+                login:"No data Found"
+            }
         default:
-            return state
+            return state;
     }
 }
+export const registerReducer = (state = {register:[]}, action) =>{
+    switch (action.type) {
+        case "RegisterRequest":
+            return{
+                loading:true,
+            }
+        case "RegisterSuccess":
+            return{
+                loading:false,
+                register:action.payload
+            }
+        case "RegisterFail": 
+            return{
+                loading:null,
+                register:"No data Found"
+            }
+        default:
+            return state;
+    }
+}
+export const UserReducer = (state = {user:[]}, action) =>{
+    switch (action.type) {
+        case "UserRequest":
+            return{
+                loading:true,
+            }
+        case "UserSuccess":
+            return{
+                loading:false,
+                user:action.payload
+            }
+        case "UserFail": 
+            return{
+                loading:null,
+                user:"No data Found"
+            }
+        default:
+            return state;
+    }
+}
+
+export const SearchReducer = (state = {search:{}}, action) =>{
+    switch (action.type) {
+        case "MediaWithCityRequest":
+            return{
+                loading:true,
+            }
+        case "MediaWithCitySuccess":
+            return{
+                loading:false,
+                search:action.payload
+            }
+        case "MediaWithCityFail": 
+            return{
+                loading:null,
+                search:"No data Found"
+            }
+        default:
+            return state;
+    }
+}
+
+const cartSlice = createSlice({
+    name:'cart',
+    initialState : [],
+    reducers:{
+        add(state, action)  {
+            // Redux : 
+        state.push(action.payload)
+        },
+        remove(state, action){
+           return  state.filter(item => item.id !== action.payload.id);
+
+        },
+    },
+})
+
+export const CartReducer = (state = {items:{}}, action) =>{
+    switch (action.type) {
+        case "CartRequest":
+            return{
+                loading:true,
+            }
+        case "CartSuccess":
+            return{
+                loading:false,
+                items:action.payload
+            }
+        case "CartFail": 
+            return{
+                loading:false,
+                items:"No data Found"
+            }
+        default:
+            return state;
+    }
+}
+
+export const {add, remove} = cartSlice.actions;
+export default cartSlice.reducer

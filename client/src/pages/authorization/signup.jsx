@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector, useDispatch } from 'react-redux'
 import Nav from "react-bootstrap/Nav";
+import {cartitems} from '../../action/adminAction'
 import "./login.scss";
 import { useNavigate } from 'react-router-dom';
 import { registerContact } from "../../action/adminAction";
 
-const Login = () => {
+const Registeration = () => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +23,10 @@ const Login = () => {
     navigate('/')
   })
 };
+
+useEffect(() => {
+  dispatch(cartitems())
+  },[])
 
   return (
     <>
@@ -145,4 +150,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default Registeration;

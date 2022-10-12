@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
+import { authActions } from "../../store";
 import Nav from "react-bootstrap/Nav";
 import { useSelector, useDispatch } from 'react-redux'
 import "./login.scss";
 import { LoginContact } from "../../action/adminAction";
 import {GoogleLogin, GoogleLogout} from 'react-google-login'
-import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+
 
 const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
@@ -15,35 +16,33 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setemail] = useState('')
-  const [posts,setPosts] = useState([])
+  const {loading} = useSelector((state) => state.login)
   const [password, setpassword] = useState('')
-  const [mess, setlMess] = useState([""]);
   const [googledata, setGoogledata] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+
   // const {result} = useSelector((state) => state.message.login)
 
   // console.log(result);
 
  
   const onLoginSuccess = async(res) => {
- await axios.post("http://localhost:8080/api/v1/googleSingUp",{
-    profile: res.profileObj
-  })
-  }
+    await axios.post("http://localhost:8080/api/v1/googleSingUp",{
+       profile: res.profileObj
+     }).then(() => dispatch(authActions.login()),
+     navigate('/'))
+     }
 
   const onLoginFailure = async(res) => {
   await  setGoogledata(null)
   }
 
+
+
   const loginUser = async (e) => {
     e.preventDefault()
-      const data = await axios.post("http://localhost:8080/api/v1/login",{
-        email:email,
-        password:password
-      })
-      data();
-  };
+     dispatch(LoginContact(email,password)).then(() => dispatch(authActions.login())
+      )
+  }
 
   const linkdinLogin = () => {
     window.open("http://localhost:8080/auth/linkedin");
@@ -130,19 +129,20 @@ const Login = () => {
                     Login
                   </button>
                 </form>
-                <h4 className="text-light"> {errorMessage}</h4>
+                {/* <h4 className="text-light"> {errorMessage}</h4> */}
                 <p className="divider"><span className="text-light">OR</span></p>
                 <p className="text-center pt-4 mt-3"><a href="/auth/linkedin"> 
                 <img src="./images/Linkedin.png" alt="" className="pe-3" onClick={linkdinLogin}/> 
                 </a> <img src="./images/twitter.png" alt="" />
-                <GoogleLogin
+                {/* <GoogleLogin
                       clientId={clientId}
                       buttonText="Sign In"
                       onSuccess={onLoginSuccess}
                       onFailure={onLoginFailure}
                       cookiePolicy={'single_host_origin'}
                       isSignedIn={true}
-                      style={{width:"25px", height:"25px"}}/></p>
+                      style={{width:"25px", height:"25px"}}/> */}
+                      </p>
               </div>
             </div>
           </div>

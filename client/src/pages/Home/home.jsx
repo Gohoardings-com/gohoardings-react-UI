@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
 import Nav from "react-bootstrap/Nav";
+import {cartitems} from '../../action/adminAction'
 import Navbar from '../../Components/Navbar/Navbar'
 import SearchMedia from "../SearchMedia/SeachMedia";
+import { Button } from "bootstrap";
 
 function useWindowSize() {
   const [size, setSize] = useState([window.innerWidth]);
+
+
   useEffect(() => {
+
     const handleResize = () => {
       setSize([window.innerWidth]);
     };
@@ -20,7 +26,10 @@ function useWindowSize() {
   return size;
 }
 
+
+
 function useWindowScroll() {
+  const dispatch = useDispatch()
   const [scrollPosition, setScrollPosition] = useState([window.pageYOffset]);
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +70,7 @@ const Home = () => {
     };
     handleCss();
   }, [width]);
-
+ 
 
 
   return (
@@ -69,7 +78,6 @@ const Home = () => {
       <div className="navbar-section p-0">
        <Navbar/>
       </div>
-
       <div className="home-section">
         <div
           className="container-fluid home-heading px-4"

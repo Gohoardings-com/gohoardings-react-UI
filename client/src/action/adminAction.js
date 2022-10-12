@@ -1,53 +1,10 @@
-import { CLEAR_ERRORS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOGIN_ADMIN_FAIL, LOGIN_ADMIN_REQUIEST, LOGIN_ADMIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS} from "../consents/adminConsents";
 
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const url = 'http://localhost:8080/api/v1'
 
-// export const adminLogin = (user) => async(dispatch)=>{
-//         try{
-//             dispatch({type: LOGIN_ADMIN_REQUIEST});
 
-//             const config = { headers : { "Content-Type" : "application/json"}};
-
-//             const { data } = await axios.post(`${url}/admin/login`, user, config)
-
-//             dispatch({ type: LOGIN_ADMIN_SUCCESS, payload: data.result});
-
-//         }catch(error){
-//             dispatch({type: LOGIN_ADMIN_FAIL, payload: error.response })
-//         }
-// } 
-
-export const getUser = ()=> async(dispatch)=>{
-    try{
-        dispatch({ type: "ProfileRequest"});
-
-        const { data } = await axios.get(`${url}/user`,{  withCredentials:true});
-        dispatch({ type: "ProfileSuccess", payload:data.result});
-    }catch(err){
-        dispatch({ type: "ProfileFail", payload: err.response.message})
-    }
-};
-
-
-
-// export const logout = () => async(dispatch)=>{
-//     try{
-//         await axios.get(`${url}/users/logout`);
-
-//         dispatch({type: LOGOUT_SUCCESS});
-//     }catch(err){
-//         dispatch({ type: LOGOUT_FAIL, payload: err.response.message})
-//     }
-// };
-
-
-// // Clearing Errors
-// export const clearErrors = () => async (dispatch) => {
-//     dispatch({ type: CLEAR_ERRORS });
-//   };
 
 export const registerContact = (name, email, phone, password, conpass) => async (dispatch) => {
     try{
@@ -95,4 +52,32 @@ export const userDetails =  async (dispatch) => {
         dispatch({type: "LoginFail", payload: error.response.data })
     }
 }
+
+export const mediawithcity  = (category_name, city_name)  => async (dispatch) =>{
+    try{
+        dispatch({type: "MediaWithCityRequest"});
+        const config = { headers : { "Content-Type" : "application/json"}};
+
+        const {data} = await axios.post(`${url}/media/inventory`,{category_name:"traditional-ooh-media", city_name:"Delhi"},config)
+        dispatch({ type: "MediaWithCitySuccess", payload: data});
+
+    }catch(error){
+        
+        dispatch({type: "MediaWithCityFail", payload: error.response.data })
+    }
+}
+
+export const cartitems = () => async (dispatch) => {
+    try{
+        dispatch({type: "CartRequest"});
+        const config = { headers : { "Content-Type" : "application/json"}};
+        const {data} = await axios.get(`${url}/cart/cartitems`,config)
+        console.log(data);
+        dispatch({ type: "CartSuccess", payload: data});
+    }catch(error){
+        
+        dispatch({type: "CartFail", payload: error.response.data })
+    }
+}
+
 

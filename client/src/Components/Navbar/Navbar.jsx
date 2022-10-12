@@ -1,31 +1,51 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
 import { AccountContext } from '../../context/Context'
+import { authActions } from '../../store';
+import {AiOutlineShoppingCart} from 'react-icons/ai'
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-
-
 const  NewNAvbar = () => {
-  const {profile} = useContext(AccountContext)
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-console.log(profile);
+  const {cartit} = useContext(AccountContext)
+  const {profile} = useContext(AccountContext)
+  const {isLoggedIn} = useSelector((state) => state.LoginStatus);
+  const [posts,setPosts] = useState(profile)
+  const items = useSelector((state) => state.cart)
+
+// console.log(hh.length);
+
+// console.log(profile);
 // Fetch user detai;ls from database 
 
 // User LogOut Function
-const logOut = async() => {
-  const {data} = await axios.post("http://localhost:8080/api/v1/logout",null,{
+// User LogOut Function
+const handelLogout = async() => {
+  const data = await axios.post("http://localhost:8080/api/v1/logout", null ,{
     withCredentials:true
   })
   if(data == 200){
-
+    isLoggedIn = true;
+    return data
   }
   return new Error("Unable to logOut Please Try Again")
 }
 
+const logOut = async() => {
+  handelLogout().then(() => dispatch(authActions.logout()))
+}
+const onCart = async() =>{
+  navigate('/cart')
+}
+
+useEffect(() => {
+  setPosts(profile)
+},[])
   return (
    <>
      <Navbar expand="lg px-md-4">
@@ -61,14 +81,15 @@ const logOut = async() => {
                   href="https://gohoardings.com/map-view"
                 >
                   Map View
-                </Nav.Link>
-                
-              {profile ? <>
+                </Nav.Link>          
+
+              {posts ? <>
+                <AiOutlineShoppingCart style={{width:"22px", height:"22px", color:'white'}} onClick={onCart} /> : <h6  style={{width:"22px", height:"22px", color:'white'}} onClick={onCart}>{items.length + cartit.length}</h6> 
                 <Nav.Link
                   className="text-light normal"
                   href="/profile"  
                 >
-                 {profile.firstname.toUpperCase()}
+                 {posts.firstname.toUpperCase()}
                 </Nav.Link>
                 <Nav.Link
                   className="text-light normal"
