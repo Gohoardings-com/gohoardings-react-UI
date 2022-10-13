@@ -1,6 +1,5 @@
 
 const db = require("../conn/conn");
-
 exports.City = async(req,res,err) => {
   try{
       db.changeUser({ database: "gohoardi_goh" });
