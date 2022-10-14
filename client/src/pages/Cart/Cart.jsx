@@ -24,25 +24,30 @@ const Cart = () => {
             <Navbar/>
         </div>
       <div className="container cart-box">
-        <div className="dates position-relative pb-2 pt-4">
-          <div className="start-date">
-            <input type="date" onChange={(e) => StartDate(e.target.value)} className="input-group overflow-hidden border" />
+        <div className="row">
+        <div className="col-9 dates position-relative pb-2 pt-4">
+          <div className="dates">
+            <div className="start-date">
+              <input type="date" onChange={(e) => StartDate(e.target.value)} className="input-group overflow-hidden border round-pill"/>
+            </div>
+            <div className="end-date position-absolute">
+              <input type="date" onChange={(e) => EndDate(e.target.value)} className="input-group overflow-hidden border ms-3 round-pill" />
+            </div>
           </div>
-          <div className="end-date position-absolute">
-            <input type="date" onChange={(e) => EndDate(e.target.value)} className="input-group overflow-hidden border ms-3" />
-          </div>
+        </div>
         </div>
         <div className="cart-items">
           <div className="row">
-            <div className="col-lg-9">
-              <div className="bg-dark">
-                <h4 className="my-3 py-1 ps-3 text-light">SELECTED MEDIA</h4>
+            <div className="col-lg-8">
+              <div className="grey my-3 round-circle">
+                <h4 className="pt-1 ps-3 text-light fw-normal">SELECTED MEDIA</h4>
               </div>
-              <div className="row pt-3">
+              <div className="col-lg-1"></div>
+              <div className="row pt-3 my-3 rounded-4 m-0 cart-item">
                 <div className="col-4">
                   <img src="./images/media.jpg" alt="N/A" className="media-img"/>
                 </div>
-                <div className="col-8">
+                <div className="col-8 mb-3 position-relative">
                   <ul className="list-unstyled">
                     <li>
                       <h5 className="text-light">type - name of the media</h5>
@@ -54,17 +59,17 @@ const Cart = () => {
                       <input type="number" min={5} placeholder="5" className="input-days"/>
                     </li>
                   </ul>
+                  <div className="position-relative">
+                  <button className="position-absolute btn bottom-0 remove-btn border-warning text-light">Remove</button>
                 </div>
-                <div className="position-relative mt-3">
-                  <button className="position-absolute btn btn-secondary mt-2 remove-btn">Remove</button>
-                  <hr />
                 </div>
+
               </div>
-              <div className="row pt-3">
+              <div className="row pt-3 my-3 rounded-4 m-0 cart-item">
                 <div className="col-4">
                   <img src="./images/media.jpg" alt="N/A" className="media-img"/>
                 </div>
-                <div className="col-8">
+                <div className="col-8 mb-3 position-relative">
                   <ul className="list-unstyled">
                     <li>
                       <h5 className="text-light">type - name of the media</h5>
@@ -76,17 +81,17 @@ const Cart = () => {
                       <input type="number" min={5} placeholder="5" className="input-days"/>
                     </li>
                   </ul>
+                  <div className="position-relative">
+                  <button className="position-absolute btn bottom-0 remove-btn border-warning text-light">Remove</button>
                 </div>
-                <div className="position-relative mt-3">
-                  <button className="position-absolute btn btn-secondary mt-2 remove-btn">Remove</button>
-                  <hr />
                 </div>
+
               </div>
-              <div className="row pt-3">
+              <div className="row pt-3 my-3 rounded-4 m-0 cart-item">
                 <div className="col-4">
                   <img src="./images/media.jpg" alt="N/A" className="media-img"/>
                 </div>
-                <div className="col-8">
+                <div className="col-8 mb-3 position-relative">
                   <ul className="list-unstyled">
                     <li>
                       <h5 className="text-light">type - name of the media</h5>
@@ -98,17 +103,18 @@ const Cart = () => {
                       <input type="number" min={5} placeholder="5" className="input-days"/>
                     </li>
                   </ul>
+                  <div className="position-relative">
+                  <button className="position-absolute btn bottom-0 remove-btn border-warning text-light">Remove</button>
                 </div>
-                <div className="position-relative mt-3">
-                  <button className="position-absolute btn btn-secondary mt-2 remove-btn">Remove</button>
-                  <hr />
                 </div>
+
               </div>
-              <div className="row pt-3">
+
+              <div className="row pt-3 my-3 rounded-4 m-0 cart-item">
                 <div className="col-4">
                   <img src="./images/media.jpg" alt="N/A" className="media-img"/>
                 </div>
-                <div className="col-8">
+                <div className="col-8 mb-3 position-relative">
                   <ul className="list-unstyled">
                     <li>
                       <h5 className="text-light">type - name of the media</h5>
@@ -120,21 +126,20 @@ const Cart = () => {
                       <input type="number" min={5} placeholder="5" className="input-days"/>
                     </li>
                   </ul>
+                  <div className="position-relative">
+                  <button className="position-absolute btn bottom-0 remove-btn border-warning text-light">Remove</button>
                 </div>
-                <div className="position-relative mt-3">
-                  <button className="position-absolute btn btn-secondary mt-2 remove-btn">Remove</button>
-                  <hr />
                 </div>
+
               </div>
             </div>
-            
-            <div className="col-lg-3">
-              <div className="bg-secondary text-center position-sticky total-price">
-                <div className="bg-dark">
-                  <h4 className="my-3 py-1 text-light">Gross Total</h4>
+            <div className="col-lg-4">
+              <div className="text-center position-sticky total-price">
+                <div className="rounded-5">
+                  <h4 className="my-3 rounded-5 py-2 text-light gross-total">Gross Total</h4>
                 </div>
-                <div>
-                  <h5>
+                <div className="cart-total text-light">
+                  <h5 className="pt-3">
                     total media : <span>3</span>
                   </h5>
                   <div>
