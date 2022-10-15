@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from 'axios';
+import instance from "../../Apis/apis";
 import { authActions } from "../../store";
 import Nav from "react-bootstrap/Nav";
 import { useSelector, useDispatch } from 'react-redux'
 import "./login.scss";
-import { LoginContact } from "../../action/adminAction";
+
 import {GoogleLogin, GoogleLogout} from 'react-google-login'
 import { useNavigate } from 'react-router-dom';
 
@@ -16,8 +16,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setemail] = useState('')
-  const {loading} = useSelector((state) => state.login)
   const [password, setpassword] = useState('')
+  const [message,setMessage] = useState([])
   const [googledata, setGoogledata] = useState([])
 
   // const {result} = useSelector((state) => state.message.login)
@@ -26,7 +26,7 @@ const Login = () => {
 
  
   const onLoginSuccess = async(res) => {
-    await axios.post("http://localhost:8080/api/v1/googleSingUp",{
+    await instance.post("registration/googleSingUp",{
        profile: res.profileObj
      }).then(() => dispatch(authActions.login()),
      navigate('/'))
@@ -36,12 +36,24 @@ const Login = () => {
   await  setGoogledata(null)
   }
 
-
-
   const loginUser = async (e) => {
-    e.preventDefault()
-     dispatch(LoginContact(email,password)).then(() => dispatch(authActions.login())
-      )
+    try{
+      e.preventDefault()
+      const {data} = await instance.post('registration/login',{
+        email:email, password:password
+      })
+      if(data.message === "User Login Successfull"){
+       const user = data.message
+       window.localStorage.setItem("user",user)
+       window.sessionStorage.setItem("user",user)
+       navigate("/").then(() => dispatch(authActions.login()))
+      }else{
+        setMessage("Email and Password Invalid")
+       
+      }
+    }catch(err){
+      setMessage("Email and Password Invalid");
+    }
   }
 
   const linkdinLogin = () => {
@@ -130,6 +142,7 @@ const Login = () => {
                   </button>
                 </form>
                 {/* <h4 className="text-light"> {errorMessage}</h4> */}
+                {message &&   <p className="divider"><span className="text-light">{message}</span></p>}
                 <p className="divider"><span className="text-light">OR</span></p>
                 <p className="text-center pt-4 mt-3"><a href="/auth/linkedin"> 
                 <img src="./images/Linkedin.png" alt="" className="pe-3" onClick={linkdinLogin}/> 

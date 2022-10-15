@@ -19,10 +19,7 @@ const authSlice = createSlice({
     }
 })
 
-
 const reducer = combineReducers({
-    register : registerReducer,
-    login:loginReducer,
     user:UserReducer,
     search:SearchReducer,
     cart:cart,
@@ -30,19 +27,20 @@ const reducer = combineReducers({
     LoginStatus:authSlice.reducer,
 })
 
-function savetoLocal(state)  {
+async function savetoLocalStorage(state) {
     try{
-        const serialSate = JSON.stringify(state);
-        localStorage.setItem('persistantState', serialSate)
+        const serialsedState = JSON.stringify(state);
+        localStorage.setItem('persistantState',serialsedState)
     }catch(e){
-        return e.message
+        console.warn(e);
     }
 }
- function loadFromLocaStroge(){
+
+function loasdFromLocalStorage(){
     try{
-        const loadSate = localStorage.getItem('persistantState')
-        if(loadSate === null) return undefined;
-        return JSON.parse(loadSate)
+        const serialsedState = localStorage.getItem('persistantState');
+        if(serialsedState === null) return undefined;
+        return JSON.parse(serialsedState)
     }catch(e){
         console.log(e);
         return undefined;
@@ -53,12 +51,11 @@ const middleware = [thunk];
 
 export const authActions = authSlice.actions
 const store = createStore(
-    reducer,
-    loadFromLocaStroge(),
+    reducer,  
+    loasdFromLocalStorage(),
     composeWithDevTools(applyMiddleware( ...middleware))
-
 )
 
-store.subscribe(() => savetoLocal(store.getState()))
+store.subscribe(() => savetoLocalStorage(store.getState()))
 
 export default store;

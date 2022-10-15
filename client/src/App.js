@@ -6,6 +6,7 @@ import Login from "./pages/authorization/login";
 import Register from "./pages/authorization/signup";
 import Contact from "./pages/contact-us/contact";
 import Vendor from './Components/userProfile/UserMediaStatus'
+import Test from './Components/Test'
 import ServicesData from "./pages/services/ServicesData";
 import Cart from "./pages/Cart/Cart";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/Signup" element={<Register/>}/>
           <Route path="/Contact" element={<Contact/>}/>
           <Route path="/profile" element={<Vendor/>}/>
+          <Route path="/test" element={<Test/>} />
           <Route path="/services/:city/:category_name" element={<ServicesData/>}/>
           <Route path="/cart" element={<Cart/>}/>
           <Route path="*" element={<h1>Nothing Here </h1>}/>

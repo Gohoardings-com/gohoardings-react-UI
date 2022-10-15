@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector, useDispatch } from 'react-redux'
 import Nav from "react-bootstrap/Nav";
-import {cartitems} from '../../action/adminAction'
 import "./login.scss";
+import { authActions } from "../../store";
+import instance from "../../Apis/apis";
 import { useNavigate } from 'react-router-dom';
-import { registerContact } from "../../action/adminAction";
 
 const Registeration = () => {
   const dispatch = useDispatch()
@@ -14,19 +14,31 @@ const Registeration = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [conpass, setconpass] = useState("");
+  const [message,setMessage] = useState([])
   const navigate = useNavigate();
 
   let getMessage;
   const registerUser = async (e) => {
-  e.preventDefault()
-  dispatch(registerContact(name ,email, phone, password, conpass)).then(() => {
-    navigate('/')
-  })
+    try{
+      e.preventDefault()
+      const {data} = await instance.post('registration/register',{
+        email, password, name, phone, conpass
+      })
+      if(data.message === "User Login Successfull"){
+       const user = data.message
+       localStorage.setItem("user",user)
+       sessionStorage.setItem("user",user)
+       navigate("/").then(() => dispatch(authActions.login()))
+      }else{
+        setMessage("Email and Password Invalid")
+       
+      }
+    }catch(err){
+      setMessage("Email and Password Invalid");
+    }
 };
 
-useEffect(() => {
-  dispatch(cartitems())
-  },[])
+
 
   return (
     <>
@@ -140,6 +152,7 @@ useEffect(() => {
                   Login
                 </button>
               </form>
+              {message &&   <p className="divider"><span className="text-light">{message}</span></p>}
               <p className="divider"><span className="text-light">OR</span></p>
               <p className="text-center pt-4 mt-3"><img src="./images/twitter.png" alt="" className="pe-3" /><img src="./images/twitter.png" alt="" /><img src="./images/twitter.png" alt="" className="ps-3" /></p>
             </div>

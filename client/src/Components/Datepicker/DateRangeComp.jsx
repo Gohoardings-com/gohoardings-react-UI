@@ -54,12 +54,12 @@ const DateRangeComp = () => {
   }
 
   return (
-    <div className="calendarWrap w-100 text-center">
+    <div className="calendarWrap w-100 h-100 text-center">
       
       <input
         value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(range[0].endDate, "MM/dd/yyyy")}`}
         readOnly
-        className="inputBox bg-transparent border round-pill text-light w-100 text-center"
+        className="inputBox bg-transparent border round-pill text-light w-100 text-center py-2"
         onClick={ () => setOpen(open => !open) }
       />
 

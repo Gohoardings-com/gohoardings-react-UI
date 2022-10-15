@@ -41,9 +41,9 @@ const SearchMedia = () => {
       />
       <div className="location">
         <div className="container mt-3">
-          <div className="row">
+          <div className="row pb-3">
             <div className="col-xl-3 col-lg-5 col-md-5 col-sm-12 col-12">
-              <div className="input-group mb-3 rounded-pill overflow-hidden border">
+              <div className="input-group rounded-pill overflow-hidden border h-100">
                 <select
                   className="bg-transparent border-0 py-2 text-light"
                   onChange={(e) => {
@@ -57,25 +57,9 @@ const SearchMedia = () => {
               </div>
             </div>
             <div className="col-xl-4 col-lg-7 col-md-7 col-sm-7 col-7">
-              <div className="input-group mb-3 rounded-pill overflow-hidden border">
-                <span
-                  className="input-group-text border-0 pe-1"
-                  id="basic-addon1"
-                >
-                  <img src="./images/search.svg" alt="" />
-                </span>
-                <input
-                  type="search"
-                  className="form-control hide-focus border-0"
-                  placeholder="Search"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                />
-                <label className="input-group-text border-0 pe-1">
-                  Media Category:
-                </label>
+              <div className="input-group rounded-pill overflow-hidden border h-100">
                 <select
-                  className="form-control hide-focus border-0"
+                  className="form-control hide-focus border-0 py-2"
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   <option value="None">None</option>
@@ -95,10 +79,10 @@ const SearchMedia = () => {
               <DateRangeComp />
             </div>
             <div className="col-xl-2 col-lg-5 col-md-5 col-sm-12 col-12">
-              <div className="input-group mb-3 rounded-pill overflow-hidden border">
+              <div className="w-100 text-center rounded-pill overflow-hidden border">
                 <Link
                   to={`/services/${category_name}/${city_name}`}
-                  className="button is-small is-info"
+                  className="button btn text-light is-small is-info py-2"
                 >
                   Search
                 </Link>

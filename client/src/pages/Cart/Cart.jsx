@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
 import axios from "axios";
+import { remove } from "../../reducer/adminReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { cartitems } from "../../action/adminAction";
 import "./cart.scss";
 import Navbar from '../../Components/Navbar/Navbar';
 import Footer from "../../Components/Footer/Footer";
@@ -10,6 +13,10 @@ const Cart = () => {
   const [Start, setStart] = useState(new Date());
   const [End, setEnd] = useState(new Date());
   const [totaldays, setTotaldays] = useState([]);
+  const dispatch = useDispatch()
+  const cartItem = useSelector((state) => state.cart)
+  const apiCartItems = useSelector((state) => state.item.items)
+  const [posts,setPosts] = useState(apiCartItems)
 
   const StartDate = (e) => {
     setStart(e);
@@ -17,6 +24,22 @@ const Cart = () => {
   const EndDate = (e) => {
     setEnd(e);
   };
+  // const removefroCart = async(obj) => {
+  //   await instance.post('cart/deleteFromCart', {
+  //     code: obj.code,
+  //   })
+  //   dispatch(remove(obj))
+  // }
+
+  // const getAllData = async() =>{
+  //   dispatch(cartitems())
+  // }
+  
+  // useEffect(() =>{
+  //   getAllData()
+  //   removefroCart()
+  //   setPosts(apiCartItems)
+  // },[])
 
   return (
     <>
