@@ -69,8 +69,6 @@ exports.login = async (req, res, next) => {
          };
       });
 
-   //   console.log(req.cookies.jwt);
-
    }
 
    catch (error) {
@@ -91,7 +89,6 @@ exports.protect = async (req, res, next) => {
       }
       else if (req.cookies.jwt) {
          token = req.cookies.jwt
-         // console.log(token);
       }
       if (!token) {
          return next(new AppError('you are not login! please Login', 401))
@@ -118,7 +115,6 @@ exports.protect = async (req, res, next) => {
 
 exports.getMe = async (req, res, next) => {
    try{
-      // console.log(req.user);
       req.params.id = req.user.id;
      
       next();

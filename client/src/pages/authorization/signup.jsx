@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector, useDispatch } from 'react-redux'
 import Nav from "react-bootstrap/Nav";
 import "./login.scss";
 import { authActions } from "../../store";
-import instance from "../../Apis/apis";
 import { useNavigate } from 'react-router-dom';
+import instance from "../../APIS/Axios";
 
 const Registeration = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +16,8 @@ const Registeration = () => {
   const [phone, setPhone] = useState("");
   const [conpass, setconpass] = useState("");
   const [message,setMessage] = useState([])
-  const navigate = useNavigate();
+
+
 
   let getMessage;
   const registerUser = async (e) => {
@@ -24,7 +26,7 @@ const Registeration = () => {
       const {data} = await instance.post('registration/register',{
         email, password, name, phone, conpass
       })
-      if(data.message === "User Login Successfull"){
+      if(data.message === "Register Successfully"){
        const user = data.message
        localStorage.setItem("user",user)
        sessionStorage.setItem("user",user)
@@ -37,8 +39,6 @@ const Registeration = () => {
       setMessage("Email and Password Invalid");
     }
 };
-
-
 
   return (
     <>
@@ -149,7 +149,7 @@ const Registeration = () => {
                     >Forget Password?</Nav.Link>
                 </div>
                 <button className="btn border text-light w-100 mt-3">
-                  Login
+                  Register
                 </button>
               </form>
               {message &&   <p className="divider"><span className="text-light">{message}</span></p>}

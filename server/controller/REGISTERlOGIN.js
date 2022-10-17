@@ -1,9 +1,9 @@
 const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
 const jwtToken = require('jsonwebtoken')
+const catchError = require('../middelware/catchError')
 
-exports.register = async (req, res, next) => {
-  try {
+exports.register = catchError(async (req, res) => {
     db.changeUser({ database: "gohoardi_crmapp" })
     const { name, email, phone, password: Npassword, conpass } = req.body
     const password = bcrypt.hashSync(Npassword, 8)
@@ -53,17 +53,10 @@ exports.register = async (req, res, next) => {
         })
       }
     })
-  } catch (err) {
-    return res.status(500).json({
-      messsage: err.mess
-    })
-  }
-}
+})
 
-exports.login = async (req, res, next) => {
-  try {
+exports.login = catchError(async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.body);
     db.changeUser({ database: "gohoardi_crmapp" })
     db.query("SELECT * FROM tblcontacts WHERE email ='"+email+"' ", async (err, result) => {
       if (err){
@@ -96,16 +89,10 @@ exports.login = async (req, res, next) => {
         return res.status(404).json({ messsage: "Invalid Email and password"});
       }
       })   
-  } catch (err) {
-    return res.status(404).json({
-      messsage: err.mess
-    })
-  }
-}
+})
 
 
-exports.googleLogin = async(req,res,next) => {
-  try{
+exports.googleLogin = catchError(async(req,res) => {
       const {profile} = req.body
       if(!profile){
         return res.status(400).json({mess:"Google authentication Failed"})
@@ -146,14 +133,10 @@ exports.googleLogin = async(req,res,next) => {
           return res.status(400).json({message: "User Exist Alreday"})
         }
       })
-     }catch{
-     return res.status(500).json({mess:"User Not Found"})
-     }
-}
+})
 
 
-exports.verifyToken = (req, res, next) => {
-  try{
+exports.verifyToken =catchError(async (req, res, next) => {
     const cookieData =  req.cookies;
 
   if (!cookieData) {
@@ -173,14 +156,10 @@ if(!token){
     }
   })
 }
-  }catch(err){
-    return res.status(500).json({err:message})
-   }
-}
+})
 
 
-exports.getuser = async (req, res, next) => {
- try{
+exports.getuser = catchError(async (req, res) => {
    const userId = req.id;
 
    if (!userId) {
@@ -195,14 +174,10 @@ exports.getuser = async (req, res, next) => {
       }
     })
   }
- }catch(err){
-  return res.status(500).json({err:message})
- }
-}
+})
 
 
-exports.logout = async(req,res,err) => {
- try{
+exports.logout = catchError(async(req,res) => {
   const user = req.id
     if (!user) {
         return next(new ErrorHandler("No user found Plese Login Again", 400))
@@ -210,14 +185,10 @@ exports.logout = async(req,res,err) => {
     res.clearCookie(`${user}`)
     req.cookies[`${user}`] = "";
     return res.status(200).json({ message: "User Logout SuccessFully" })
- }catch(err){
-  return res.status(500).json({err:message})
- }
-}
+})
 
 
-exports.Profile = async(req,res,next) => {
-    try {
+exports.Profile = catchError(async(req,res) => {
       const { userid } = req.body;
       db.changeUser({ database: "gohoardi_goh" });
       db.query(
@@ -234,8 +205,4 @@ exports.Profile = async(req,res,next) => {
           }
         }
       )
-   
-    } catch (err) {
-      return res.status(500).json(err.message);
-    }
-}
+})

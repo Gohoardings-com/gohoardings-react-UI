@@ -186,6 +186,10 @@ a.text-light.nav-link {
     padding: 10px;
   }
 
+  .cities-list {
+    transform: translateX(-15px) !important;
+  }
+
   .search-cities {
     padding: 10px 16px;
   }
@@ -326,6 +330,13 @@ a.text-light.nav-link {
   }
 }
 
+.new-search {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  width: 100%;
+}
+
 // screen 992px and small
 
 @media only screen and (max-width: 992px) {
@@ -337,6 +348,16 @@ a.text-light.nav-link {
     background-color: black;
     width: 100%;
     z-index: 100;
+  }
+  .cities-list {
+    transform: translateX(0px);
+  }
+  .new-search-fields {
+    position: absolute !important;
+    top: 64px !important;
+    background-color: $light-grey !important;
+    padding: 10px 100px 10px 100px;
+    text-align: center;
   }
 }
 

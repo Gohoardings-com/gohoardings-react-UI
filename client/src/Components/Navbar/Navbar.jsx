@@ -5,9 +5,9 @@ import { authActions } from "../../store";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-import instance from '../../Apis/apis'
+import instance from '../../APIS/Axios'
 import { userDetails } from "../../action/adminAction";
-import UserDetail from "../../pages/UserDetails";
+import UserDetail from "./UserDetail";
 
 
 const NewNAvbar = () => {

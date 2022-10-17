@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function useWindowSize() {
     const [size, setSize] = useState([window.innerWidth]);
@@ -20,7 +21,7 @@ function useWindowSize() {
 
 
 const Footer = () => {
-
+const navigate = useNavigate()
     const [width] = useWindowSize();
     const [widthcss, setWidthcss] = useState(false);
     useEffect(() => {
@@ -33,6 +34,10 @@ const Footer = () => {
       };
       handleCss();
     }, [width]);
+
+const contactPage = async() => {
+ navigate('/contact')
+}
 
 return (
     <>
@@ -58,7 +63,8 @@ return (
                 </p>
                 <input
                   type="button"
-                  value=" text text text "
+                  value=" Contact Us"
+                  onClick={contactPage}
                   className="float-end"
                 />
               </div>
@@ -70,18 +76,17 @@ return (
             <div className="row">
               <div className="col">
                 <p className="text-light px-5">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Temporibus impedit, labore assumenda optio ipsum, odio sunt
-                  numquam deserunt laborum autem quis nam facilis ab ducimus
-                  illo laboriosam consequatur reiciendis accusantium cupiditate
-                  saepe? Id, accusamus fugiat.
+                India's Largest Outdoor Advertising Company
+                </p>
+                <p className="text-light px-5">
+                It's advertising network spread across 130 cities with more than 1.2 lakh OOH and DOOH sites offering hassle-free branding experiences at an unmatched price.
                 </p>
               </div>
               <div className="col mobile footer-side-line">
                 <div className="quick-links text-light">
                   <p className="subhead text-center">Quick Links</p>
                   <ul className="position-relative px-5">
-                    <li>Register As Medai Owner</li>
+                    <li>Register As media Owner</li>
                     <li>Login As Media Owner</li>
                     <li>Register As Advertiser</li>
                     <li>Login As Advertiser</li>
@@ -96,13 +101,31 @@ return (
                 <div className="popular-services text-light">
                   <p className="subhead text-center">Popular Services</p>
                   <ul className="position-relative px-5">
-                    <li>Traditional OOH</li>
-                    <li>Mall Media</li>
-                    <li>Digital OOH Media</li>
-                    <li>Airport Medai</li>
+                    <li><Link
+                  to={`/services/${"traditional-ooh-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Traditional OOH</Link></li>
+                    <li><Link
+                  to={`/services/${"digital-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Digital Media</Link></li>
+                    <li><Link
+                  to={`/services/${"transit-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Transit-Media</Link></li>
+                    <li><Link
+                  to={`/services/${"mall-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Mall Media</Link></li>
                     <span className="pos-absolute end-0 top-0 me-5">
-                      <li>Office Space Advertising</li>
-                      <li>Transit Media</li>
+                      <li><Link
+                  to={`/services/${"airport-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Airport Media</Link></li>
+                      <li><Link
+                  to={`/services/${"inflight_media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Inflight Media</Link></li>
                     </span>
                   </ul>
                 </div>
@@ -187,10 +210,10 @@ return (
               <div className="row">
                 <div className="col-md-4 link-center">
                   <ul className="d-flex text-light list-inline pt-3 ps-md-3">
-                    <li>fb</li>
-                    <li className="ps-3">insta</li>
-                    <li className="ps-3">in</li>
-                    <li className="ps-3">twit</li>
+                  <li><img src="./images/Facebook.png" alt="facebook"/></li>
+                    <li className="ps-3"><img src="./images/Instagram.png" alt="facebook"/></li>
+                    <li className="ps-3"><img src="./images/Linkedin.png" alt="facebook"/></li>
+                    <li className="ps-3"><img src="./images/Twitter.png" alt="facebook"/></li>
                   </ul>
                 </div>
                 <div className="col-md-8">
@@ -221,10 +244,8 @@ return (
               </div>
               <div>
                 <p className="text-light text-center px-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-                  cumque amet iure saepe nihil quod sint magnam. Quis fugiat cum
-                  quasi quaerat. Assumenda sapiente exercitationem eum tenetur
-                  rerum animi rem.
+                It's advertising network spread across 130 cities with more than 1.2 lakh OOH and DOOH sites offering hassle-free branding experiences at an unmatched price.
+
                 </p>
               </div>
               <div className="col-12">
@@ -245,16 +266,34 @@ return (
               <p className="subhead text-center">Quick Links</p>
               <div className="row">
                 <ul className="col">
-                  <li>Traditional OOH</li>
-                  <li>Mall Media</li>
+                <li><Link
+                  to={`/services/${"traditional-ooh-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Traditional OOH</Link></li>
+                 <li><Link
+                  to={`/services/${"digital-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Digital Media</Link></li>
                 </ul>
                 <ul className="col">
-                  <li>Digital OOH Media</li>
-                  <li>Airport Medai</li>
+                <li><Link
+                  to={`/services/${"transit-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Transit-Media</Link></li>
+                  <li><Link
+                  to={`/services/${"mall-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Mall Media</Link></li>
                 </ul>
                 <ul className="col">
-                  <li>Office Space Advertising</li>
-                  <li>Transit Media</li>
+                <li><Link
+                  to={`/services/${"airport-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Airport Media</Link></li>
+                      <li><Link
+                  to={`/services/${"inflight_media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Inflight Media</Link></li>
                 </ul>
               </div>
             </div>
@@ -263,16 +302,34 @@ return (
               <p className="subhead text-center">Popular Services</p>
               <div className="row">
                 <ul className="col">
-                  <li>Traditional OOH</li>
-                  <li>Mall Media</li>
+                <li><Link
+                  to={`/services/${"transit-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Transit-Media</Link></li>
+                  <li><Link
+                  to={`/services/${"mall-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Mall Media</Link></li>
                 </ul>
                 <ul className="col">
-                  <li>Digital OOH Media</li>
-                  <li>Airport Medai</li>
+                <li><Link
+                  to={`/services/${"airport-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Airport Media</Link></li>
+                      <li><Link
+                  to={`/services/${"inflight_media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Inflight Media</Link></li>
                 </ul>
                 <ul className="col">
-                  <li>Office Space Advertising</li>
-                  <li>Transit Media</li>
+                <li><Link
+                  to={`/services/${"transit-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Transit-Media</Link></li>
+                  <li><Link
+                  to={`/services/${"mall-media"}/${"delhi"}`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >Mall Media</Link></li>
                 </ul>
               </div>
             </div>
@@ -285,10 +342,10 @@ return (
               <div className="row">
                 <div className="col-md-4">
                   <ul className="d-flex text-light list-inline pt-3 ps-md-3 link-center">
-                    <li>fb</li>
-                    <li className="ps-3">insta</li>
-                    <li className="ps-3">in</li>
-                    <li className="ps-3">twit</li>
+                    <li><img src="./images/Facebook.png" alt="facebook"/></li>
+                    <li className="ps-3"><img src="./images/Instagram.png" alt="facebook"/></li>
+                    <li className="ps-3"><img src="./images/Linkedin.png" alt="facebook"/></li>
+                    <li className="ps-3"><img src="./images/Twitter.png" alt="facebook"/></li>
                   </ul>
                 </div>
                 <div className="col-md-8">

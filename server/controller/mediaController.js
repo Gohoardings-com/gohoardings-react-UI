@@ -1,35 +1,20 @@
-
 const db = require("../conn/conn");
-exports.City = async(req,res,err) => {
-  try{
+const jwtToken = require('jsonwebtoken')
+const catchError = require('../middelware/catchError')
+
+exports.City = catchError(async(req,res,next) => {
       db.changeUser({ database: "gohoardi_goh" });
-      db.query("SELECT * FROM goh_cities", (err, result) => {
+      db.query("SELECT * FROM goh_cities LIMIT 100", (err, result) => {
         if (err) {
-          console.log(err);
+          return res.json({message:"No Data Found On this city"})
         } else {
           return res.send(result);
         }
       });
-  }catch(err){
-      return res.status(500).json({err:message})  
-  }
-}
-exports.Company = async(req,res,err) => {
-  try{
-      db.changeUser({ database: "odoads_tblcompanies" });
-db.query(
-  "SELECT name FROM tblcompanies WHERE name IS NOT NULL",
-  (err, result) => {
-    if (err) throw err;
-    return res.send(result);
-  }
-);
-  }catch(err){
-      return res.status(500).json({err:message})  
-  }
-}
+})
 
-exports.Invertor = async(req,res,next) => {
+
+exports.Invertor = catchError(async(req,res,next) => {
   db.changeUser({ database: "gohoardi_goh" });
   (code = req.body.code),
     (city = req.body.city_name),
@@ -155,13 +140,28 @@ exports.Invertor = async(req,res,next) => {
       res.json({ status: "error", error: "Media Not Found" });
     }
   }    
+})
+  
+exports.company = catchError(async(req,res)=>{
+    db.changeUser({ database: "odoads_tblcompanies" });
+    db.query(
+      "SELECT name FROM tblcompanies WHERE name IS NOT NULL",
+      (err, result) => {
+        if (err) throw err;
+        return res.send(result);
+      }
+    );
+  })
+
+
+exports.SearchData = catchError(async (req,res,next) => {
+const {category_name, city_name} = req.body
+const cookieData = req.cookies
+if (!cookieData) {
+  return res.status(400).json({message:"No Cookie Found"})
 }
 
-
-exports.SearchData = async (req,res,next) => {
-  try{
-  const {category_name, city_name} = req.body
-  const promises = []
+const promises = []
   db.changeUser({ database: "gohoardi_goh" });
   switch (category_name) {
           case "traditional-ooh-media":
@@ -188,19 +188,35 @@ exports.SearchData = async (req,res,next) => {
             default:
             table_name = "goh_media";
         }
+const token = Object.values(cookieData)[0];
+return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
+if(!token || token== 0 ){
         promises.push(new Promise((resolve, reject) => {
-        db.query("SELECT * FROM "+table_name+" WHERE city_name='"+city_name+"'",async (err,result) => {
-          if (err) {
-            return res.send({err: reject(err),message :"Wrong Data"})
-        } else if (resolve == []){
-            return res.send({resolve: "Empty",message :"Media Not Found"})
-        } else{
-        resolve(result)
-        }
-      })
-    
-    }))
-  
+          db.query("SELECT * FROM "+table_name+" WHERE city_name='"+city_name+"' LIMIT 51",async (err,result) => {
+            if (err) {
+              return res.send({err: reject(err),message :"Wrong Data"})
+          } else if (resolve == []){
+              return res.send({resolve: "Empty",message :"Media Not Found"})
+          } else{
+          resolve(result)
+          }
+        })
+      }))
+} else {
+  const userID = user.id;
+  promises.push(new Promise((resolve, reject) => {
+    db.query("SELECT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city_name+"' ORDER BY `cart`.`userid` DESC LIMIT 51",async (err,result) => {
+      if (err) {
+        return res.send({err: reject(err),message :"Wrong Data"})
+    } else if (resolve == []){
+        return res.send({resolve: "Empty",message :"Media Not Found"})
+    } else{
+    resolve(result)
+    }
+  })
+
+}))
+}
 try {
   const result = await Promise.allSettled(promises)
   let test = [];
@@ -209,24 +225,9 @@ try {
       test.push(obj);
     });
   });
-  return res.send(test);
+  return res.send(test); 
 } catch (err) {
   return (err)
-}} catch (err){
-  res.status(404).json({
-    messsage:err.res
+}}
+  ) 
   })
-}
-
-}
-  
-exports.company = async(req,res)=>{
-    db.changeUser({ database: "odoads_tblcompanies" });
-    db.query(
-      "SELECT name FROM tblcompanies WHERE name IS NOT NULL",
-      (err, result) => {
-        if (err) throw err;
-        return res.send(result);
-      }
-    );
-  }

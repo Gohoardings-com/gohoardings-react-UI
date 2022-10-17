@@ -6,7 +6,7 @@ import "../pages/home/home.scss";
 const Test = () => {
   return (
     <div>
-      <div className="scroll-navigation">
+      {/* <div className="scroll-navigation">
         <div className="px-4 pt-3">
           <div className="container-fluid">
             <div className="row">
@@ -86,7 +86,7 @@ const Test = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <Navbar expand="lg px-md-4 colapse-search-bar">
         <div className="container-fluid px-md-4">

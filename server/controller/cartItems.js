@@ -1,110 +1,75 @@
 const db = require("../conn/conn");
+const jwtToken = require('jsonwebtoken')
+const catchError  = require('../middelware/catchError')
 
-exports.addOnCart = async (req, res, next) => {
-  try {
-    console.log(req.body);
-    const { userid, mediaid, mediatype } = req.body;
-    db.changeUser({ database: "gohoardi_goh" });
-    db.query(
-      "SELECT campaigid  FROM  goh_shopping_carts_item ORDER BY campaigid DESC LIMIT 1",
-      async (err, result) => {
-        if (err) {
-          return res.send(err);
-        } else {
-          const campaigid = result[0].campaigid;
-          const inccampaigid = result[0].campaigid + 1;
-          db.query(
-            "SELECT userid  FROM  goh_shopping_carts_item ORDER BY userid DESC LIMIT 1",
-            async (err, result) => {
-              if (err) {
-                return res.send(err);
-              } else {
-                const lastuserid = result[0].userid;
-                if (userid !== lastuserid) {
-                  db.query(
-                    "INSERT INTO goh_shopping_carts_item (userid, mediaid, campaigid, mediatype) VALUES ('" +
-                      userid +
-                      "','" +
-                      mediaid +
-                      "','" +
-                      inccampaigid +
-                      "','" +
-                      mediatype +
-                      "')",
-                    async (err, result) => {
-                      if (err) {
-                        return res.send(err);
-                      } else {
-                        return res.send(result);
-                      }
-                    }
-                  );
-                } else {
-                  db.query(
-                    "INSERT INTO goh_shopping_carts_item (userid, mediaid, campaigid, mediatype) VALUES ('" +
-                      userid +
-                      "','" +
-                      mediaid +
-                      "','" +
-                      campaigid +
-                      "','" +
-                      mediatype +
-                      "')",
-                    async (err, result) => {
-                      if (err) {
-                        return res.send(err);
-                      } else {
-                        return res.send(result);
-                      }
-                    }
-                  );
-                }
-              }
-            }
-          );
+exports.addOnCart = catchError(async (req, res) => {
+const cookieData = req.cookies
+if (!cookieData) {
+  return res.status(400).json({message:"No Cookie Found"})
+} 
+const token = Object.values(cookieData)[0];
+return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
+if(!token || token == 0){
+      return res.status(200).json({message:"Login First"})
+    }else {
+      const userid = user.id
+      const { mediaid, mediatype } = req.body;
+      db.changeUser({ database: "gohoardi_goh" });
+      db.query("INSERT INTO goh_shopping_carts_item (userid, mediaid, campaigid, mediatype) VALUES ('" +
+        userid +
+        "','" +
+        mediaid +
+        "','" +
+        userid +
+        "','" +
+        mediatype +
+        "') LIMIT 10",
+        async (err, result) => {
+          if (err) {
+            return res.send(err);
+          } else {
+            return res.send(result);
+          }
         }
-      }
-    );
-  } catch (err) {
-    res.send(err);
-  }
-};
-exports.processdCart = async (req, res, next) => {
-  try {
+      )
+    }
+}) 
+})
+
+exports.processdCart = catchError(async (req, res) => {
     const { start_date, end_date, produts, userid, phonenumber } = req.body;
     db.changeUser({ database: "gohoardi_goh" });
     db.query(
       "SELECT DISTINCT campaigid FROM goh_shopping_carts_item WHERE userid = '" +
-        userid +
-        "'",
+      userid +
+      "'",
       (err, result) => {
         if (err) {
-          console.log(err);
         } else {
           const campaign_name = result[0].campaigid;
           produts.map((el) => {
             db.query(
               "INSERT into goh_serach_activities (user, phone, campaign_name, start_date, end_date, city, pincode, address, campaign_city, media_type, status, payment_status) VALUES ('" +
-                userid +
-                "','" +
-                phonenumber +
-                "','campaign-" +
-                campaign_name +
-                "','" +
-                start_date +
-                "','" +
-                end_date +
-                "','" +
-                el.city_name +
-                "','" +
-                el.city +
-                "','" +
-                el.location +
-                "','" +
-                el.city +
-                "','" +
-                el.category_name +
-                "', 2,0)",
+              userid +
+              "','" +
+              phonenumber +
+              "','campaign-" +
+              campaign_name +
+              "','" +
+              start_date +
+              "','" +
+              end_date +
+              "','" +
+              el.city_name +
+              "','" +
+              el.city +
+              "','" +
+              el.location +
+              "','" +
+              el.city +
+              "','" +
+              el.category_name +
+              "', 2,0)",
               (err, result) => {
                 if (err) {
                   return res.send(err);
@@ -117,23 +82,13 @@ exports.processdCart = async (req, res, next) => {
         }
       }
     );
-  } catch (err) {
-    res.send(err);
-  }
-};
+})
 
-exports.deleteFromCart = async (req, res, next) => {
-  try {
-    console.log(req.body);
-    const { userid, code } = req.body;
-
+exports.deleteFromCart = catchError(async (req, res, next) => {
+    const userid = req.id
+    const { code } = req.body;
     db.changeUser({ database: "gohoardi_goh" });
-    db.query(
-      "UPDATE goh_shopping_carts_item SET status=0 , isDelete=1 WHERE userid='" +
-        userid +
-        "' && mediaid='" +
-        code +
-        "'",
+    db.query(" UPDATE goh_shopping_carts_item SET isDelete=1 WHERE userid='" + userid + "' && mediaid='" + code + "'",
       async (err, result) => {
         if (err) {
           return res.send(err);
@@ -142,58 +97,48 @@ exports.deleteFromCart = async (req, res, next) => {
         }
       }
     );
-  } catch (err) {
-    res.send(err);
-  }
-};
+})
 
-exports.useritems = async (req, res, next) => {
-  const userid = req.body.userid;
-  try {
+
+exports.useritems = catchError(async (req, res, next) => {
+    const user = req.id
     db.changeUser({ database: "gohoardi_goh" });
     db.query(
-      'SELECT mediaid FROM goh_shopping_carts_item WHERE userid = "' +
-        userid +
-        '"',
+      `SELECT COUNT(userid) AS item FROM goh_shopping_carts_item WHERE userid = ${user} && isDelete=0 LIMIT 1`,
       (err, result) => {
         if (err) {
-          console.log(err);
+        return res.send(err)
         } else {
-          return res.send(result);
+        return res.status(200).json({item : result})
         }
       }
     );
-  } catch (err) {
-    res.send(err);
-  }
-};
+})
 
-exports.cartitems = async (req, res, next) => {
-  try {
+
+exports.cartitems = catchError(async (req, res, next) => {
+    const user = req.id
     db.changeUser({ database: "gohoardi_goh" });
     db.query(
-      `SELECT DISTINCT * FROM goh_shopping_carts_item WHERE userid = 5717`,
+      `SELECT * FROM goh_shopping_carts_item WHERE userid = ${user} && isDelete= 0`,
       (err, result) => {
         if (err) {
-          console.log(err);
+          return res.status(400).json({message:"No User Found"})
         } else {
           req.data = result;
           next();
         }
       }
     );
-  } catch (err) {
-    return res.send(err);
-  }
-};
+})
 
 exports.cartiemfromdb = async (req, res, next) => {
   const arr = req.data;
   var table_name;
   let promises = [];
-  arr.forEach((obj) => {
+  db.changeUser({ database: "gohoardi_goh" });
+  arr.map((obj) => {
     try {
-      db.changeUser({ database: "gohoardi_goh" });
       switch (obj.mediatype) {
         case "traditional-ooh-media":
           table_name = "goh_media";
@@ -222,7 +167,7 @@ exports.cartiemfromdb = async (req, res, next) => {
       promises.push(
         new Promise(async (reject, resolve) => {
           db.query(
-            "SELECT * FROM " + table_name + " WHERE code='" + obj.mediaid + "'",
+            "SELECT media.*,cart.isDelete FROM  "+ table_name +" AS media INNER JOIN goh_shopping_carts_item AS cart ON media.code='" + obj.mediaid + "' && cart.isDelete = 0  WHERE cart.userid = '"+obj.userid+"'",
             async (err, result) => {
               if (err) {
                 reject(err);
@@ -238,7 +183,11 @@ exports.cartiemfromdb = async (req, res, next) => {
     }
   });
   try {
-    const result = await Promise.allSettled(promises);
+    const data = await Promise.allSettled(promises);
+    let result = [];
+    data.forEach(element => {
+      result.push(element.reason[0])      
+    });
     return res.send(result);
   } catch (err) {
     return res.send(err);

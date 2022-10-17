@@ -1,12 +1,14 @@
 const express = require('express');
 
 
-const { Invertor, Company, City, SearchData } = require('../controller/mediaController');
+const { Invertor, City, SearchData, company } = require('../controller/mediaController');
+const { verifyToken } = require('../controller/REGISTERlOGIN');
 
 const router = express.Router();
 
-router.route('/inventory').post(Invertor).get(Company)
+router.route('/inventory').post(Invertor).get(company)
 router.route('/searchMedia').get(City).post(SearchData)
 
 
-module.exports = router
+
+module.exports = router;

@@ -26,7 +26,15 @@ const SearchMedia = () => {
   }, []);
 
   return (
+    
     <div className="search">
+      
+      <div className="px-5 home-heading-main">
+                  <p className="mb-0 pt-md-3">
+              <span className="text-light fw-bold search-headline subhead text-center">
+                Over 200,000 Hoardings across 3500 Cities
+              </span>
+            </p>
       <img
         src="./images/Hoardings.png"
         alt=""
@@ -79,10 +87,10 @@ const SearchMedia = () => {
               <DateRangeComp />
             </div>
             <div className="col-xl-2 col-lg-5 col-md-5 col-sm-12 col-12">
-              <div className="w-100 text-center rounded-pill overflow-hidden border">
+              <div className="w-100 text-center rounded-pill overflow-hidden border btn py-2">
                 <Link
                   to={`/services/${category_name}/${city_name}`}
-                  className="button btn text-light is-small is-info py-2"
+                  className="button text-light is-small is-info py-2 text-decoration-none"
                 >
                   Search
                 </Link>
@@ -90,6 +98,10 @@ const SearchMedia = () => {
             </div>
           </div>
         </div>
+      </div>
+      <p className="text-light normal py-3 ps-5">
+        Continue your Search....
+      </p>
       </div>
     </div>
   );

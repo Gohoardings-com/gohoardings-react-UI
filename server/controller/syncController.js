@@ -119,7 +119,7 @@ exports.rejectedData = async (req, res) => {
         // Return the result
         res.json(test);
       } catch (err) {
-        console.log(err);
+  
         // Send any error instead
         res.status(500).send(err);
       }
@@ -136,7 +136,7 @@ exports.rejectedAccept = async (req, res) => {
   const promises = [];
   const newdata = [allData]
   
-  console.log(allData);
+
   
   const keyValue = ("mediaownercompanyname,email,companyaddress,created,phonenumber,main_media_id,mediaownername")
   const keyData = ("name,contact_email,contact_address,created,contact_phone,mediano,contact_firstname,contact_lastname")
@@ -168,7 +168,7 @@ exports.rejectedAccept = async (req, res) => {
         const result = await Promise.all(promises);
           // result
       } catch (err) {
-        console.log(err);
+      return res.status(404).json({message:"HGllo"})
       }
   db.changeUser({ database: "gohoardi_goh" }); 
   
