@@ -53,13 +53,13 @@ const SearchMedia = () => {
             <div className="col-xl-3 col-lg-5 col-md-5 col-sm-12 col-12">
               <div className="input-group rounded-pill overflow-hidden border h-100">
                 <select
-                  className="bg-transparent border-0 py-2 text-light"
+                  className="bg-transparent border-0 py-2 ps-2 text-light sel-city"
                   onChange={(e) => {
                     setgetCity(e.target.value);
                   }}
                 >
                   {city.map((obj) => (
-                    <option value={obj.name}>{obj.name}</option>
+                    <option value={obj.name} className="text-dark">{obj.name}</option>
                   ))}
                 </select>
               </div>
@@ -70,16 +70,16 @@ const SearchMedia = () => {
                   className="form-control hide-focus border-0 py-2"
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  <option value="None">None</option>
-                  <option value="traditional-ooh-media">
+                  <option value="None" className="text-dark">None</option>
+                  <option value="traditional-ooh-media" className="text-dark">
                     traditional-ooh-media
                   </option>
-                  <option value="digital-media">digital-media</option>
-                  <option value="transit-media">transit-media</option>
-                  <option value="mall-media">mall-media</option>
-                  <option value="airport-media">airport-media</option>
-                  <option value="inflight_media">inflight_media</option>
-                  <option value="office-media">office-media</option>
+                  <option className="text-dark" value="digital-media">digital-media</option>
+                  <option className="text-dark" value="transit-media">transit-media</option>
+                  <option className="text-dark" value="mall-media">mall-media</option>
+                  <option className="text-dark" value="airport-media">airport-media</option>
+                  <option className="text-dark" value="inflight_media">inflight_media</option>
+                  <option className="text-dark" value="office-media">office-media</option>
                 </select>
               </div>
             </div>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Nav from "react-bootstrap/Nav";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function useWindowSize() {
     const [size, setSize] = useState([window.innerWidth]);
@@ -21,6 +23,22 @@ function useWindowSize() {
 
 
 const Footer = () => {
+  const category_name = "traditional-ooh-media"
+  const [city, setCity] = useState([]);
+  const [city_name, setgetCity] = useState("Delhi");
+
+  const getCity = async () => {
+    const { data } = await axios.get(
+      "http://localhost:8080/api/v1/media/searchMedia"
+    );
+    setCity(data);
+  };
+
+  useEffect(() => {
+    getCity();
+  }, []);
+
+
 const navigate = useNavigate()
     const [width] = useWindowSize();
     const [widthcss, setWidthcss] = useState(false);
@@ -86,13 +104,13 @@ return (
                 <div className="quick-links text-light">
                   <p className="subhead text-center">Quick Links</p>
                   <ul className="position-relative px-5">
-                    <li>Register As media Owner</li>
-                    <li>Login As Media Owner</li>
-                    <li>Register As Advertiser</li>
-                    <li>Login As Advertiser</li>
+                    <Nav.Link href="/register">Register As media Owner</Nav.Link>
+                    <Nav.Link href="/login">Login As Media Owner</Nav.Link>
+                    <Nav.Link href="/register">Register As Advertiser</Nav.Link>
+                    <Nav.Link href="/login">Login As Advertiser</Nav.Link>
                     <span className="pos-absolute end-0 top-0 me-5">
-                      <li>Odoads</li>
-                      <li>Blog</li>
+                      <Nav.Link href="https://odoads.com/"  target="_blank">Odoads</Nav.Link>
+                      <Nav.Link  href="https://www.gohoardings.com/blog/" target="_blank">Blog</Nav.Link>
                     </span>
                   </ul>
                 </div>
@@ -139,66 +157,13 @@ return (
             <div className="container-fluid px-5 text-light">
               <p className="subhead ps-4 ms-2">Trending Cities</p>
               <div className="row">
-                <div className="col">
-                  <ul>
-                    <li>Hoardings near me</li>
-                    <li>Hoardings in Manali</li>
-                    <li>Hoardings in Nanital</li>
-                    <li>Hoardings in Mount Abu</li>
-                    <li>Hoardings in Agra</li>
-                    <li>Hoardings in Haridwar</li>
-                    <li>Hoardings in Coimbatore</li>
-                    <li>Hoardings in Gurgaon</li>
-                  </ul>
-                </div>
-                <div className="col">
-                  <ul>
-                    <li>Hoardings near me</li>
-                    <li>Hoardings in Manali</li>
-                    <li>Hoardings in Nanital</li>
-                    <li>Hoardings in Mount Abu</li>
-                    <li>Hoardings in Agra</li>
-                    <li>Hoardings in Haridwar</li>
-                    <li>Hoardings in Coimbatore</li>
-                    <li>Hoardings in Gurgaon</li>
-                  </ul>
-                </div>
-                <div className="col">
-                  <ul>
-                    <li>Hoardings near me</li>
-                    <li>Hoardings in Manali</li>
-                    <li>Hoardings in Nanital</li>
-                    <li>Hoardings in Mount Abu</li>
-                    <li>Hoardings in Agra</li>
-                    <li>Hoardings in Haridwar</li>
-                    <li>Hoardings in Coimbatore</li>
-                    <li>Hoardings in Gurgaon</li>
-                  </ul>
-                </div>
-                <div className="col">
-                  <ul>
-                    <li>Hoardings near me</li>
-                    <li>Hoardings in Manali</li>
-                    <li>Hoardings in Nanital</li>
-                    <li>Hoardings in Mount Abu</li>
-                    <li>Hoardings in Agra</li>
-                    <li>Hoardings in Haridwar</li>
-                    <li>Hoardings in Coimbatore</li>
-                    <li>Hoardings in Gurgaon</li>
-                  </ul>
-                </div>
-                <div className="col">
-                  <ul>
-                    <li>Hoardings near me</li>
-                    <li>Hoardings in Manali</li>
-                    <li>Hoardings in Nanital</li>
-                    <li>Hoardings in Mount Abu</li>
-                    <li>Hoardings in Agra</li>
-                    <li>Hoardings in Haridwar</li>
-                    <li>Hoardings in Coimbatore</li>
-                    <li>Hoardings in Gurgaon</li>
-                  </ul>
-                </div>
+                  {
+                    city.map(obj => (
+                      <div className="col-3">
+                        <Link to={`/services/${category_name}/${obj.name}`} className="link-light text-decoration-none">Hoardings in {obj.name}</Link>
+                      </div>
+                    ))
+                  }
               </div>
               <div className="footer-bottom-short-line pt-4"></div>
             </div>
@@ -210,10 +175,10 @@ return (
               <div className="row">
                 <div className="col-md-4 link-center">
                   <ul className="d-flex text-light list-inline pt-3 ps-md-3">
-                  <li><img src="./images/Facebook.png" alt="facebook"/></li>
-                    <li className="ps-3"><img src="./images/Instagram.png" alt="facebook"/></li>
-                    <li className="ps-3"><img src="./images/Linkedin.png" alt="facebook"/></li>
-                    <li className="ps-3"><img src="./images/Twitter.png" alt="facebook"/></li>
+                  <Nav.Link href="https://www.facebook.com/gohoardings/" target="_blank"><img src="./images/Facebook.png" alt="facebook"/></Nav.Link>
+                    <Nav.Link className="ps-3" href="https://www.instagram.com/gohoardings/" target="_blank"><img src="./images/Instagram.png"  alt="instagram"/></Nav.Link>
+                    <Nav.Link className="ps-3" href="https://www.linkedin.com/company/gohoardings/" target="_blank"><img src="./images/Linkedin.png"  alt="linkedin"/></Nav.Link>
+                    <Nav.Link className="ps-3" href="https://twitter.com/gohoardings" target="_blank"><img src="./images/Twitter.png"  alt="twitter"/></Nav.Link>
                   </ul>
                 </div>
                 <div className="col-md-8">
@@ -342,10 +307,10 @@ return (
               <div className="row">
                 <div className="col-md-4">
                   <ul className="d-flex text-light list-inline pt-3 ps-md-3 link-center">
-                    <li><img src="./images/Facebook.png" alt="facebook"/></li>
-                    <li className="ps-3"><img src="./images/Instagram.png" alt="facebook"/></li>
-                    <li className="ps-3"><img src="./images/Linkedin.png" alt="facebook"/></li>
-                    <li className="ps-3"><img src="./images/Twitter.png" alt="facebook"/></li>
+                  <Nav.Link className="ps-3" href="https://www.facebook.com/gohoardings/" target="_blank"><img src="./images/Facebook.png" alt="facebook"/></Nav.Link>
+                    <Nav.Link className="ps-3" href="https://www.instagram.com/gohoardings/" target="_blank"><img src="./images/Instagram.png"  alt="instagram"/></Nav.Link>
+                    <Nav.Link className="ps-3" href="https://www.linkedin.com/company/gohoardings/" target="_blank"><img src="./images/Linkedin.png"  alt="linkedin"/></Nav.Link>
+                    <Nav.Link className="ps-3" href="https://twitter.com/gohoardings" target="_blank"><img src="./images/Twitter.png"  alt="twitter"/></Nav.Link>
                   </ul>
                 </div>
                 <div className="col-md-8">

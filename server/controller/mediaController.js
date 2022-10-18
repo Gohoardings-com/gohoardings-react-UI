@@ -4,7 +4,7 @@ const catchError = require('../middelware/catchError')
 
 exports.City = catchError(async(req,res,next) => {
       db.changeUser({ database: "gohoardi_goh" });
-      db.query("SELECT * FROM goh_cities LIMIT 100", (err, result) => {
+      db.query("SELECT DISTINCT * FROM `goh_cities` ORDER BY `name` ASC LIMIT 100", (err, result) => {
         if (err) {
           return res.json({message:"No Data Found On this city"})
         } else {

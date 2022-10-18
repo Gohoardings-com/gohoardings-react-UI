@@ -21,10 +21,17 @@ const SearchData = () => {
   const [list, setList] = useState(true)
   const navigate = useNavigate()
 
-
   const getData = async () => {
-    dispatch(mediawithcity(category_name ?? 'traditional-ooh-media', city_name ?? 'Delhi'));
+    // dispatch(mediawithcity(category_name ?? 'traditional-ooh-media', city_name ?? 'Delhi'));
+
+    const {data} = await instance.post("media/searchMedia",{
+      category_name : category_name,
+      city_name : city_name
+    })
+    setPosts(data);
   }
+
+
 
   const addonCart = async (e) => {
     

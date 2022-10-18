@@ -5,12 +5,12 @@ import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate,Link } from "react-router-dom";
-import {cartitems} from '../../action/adminAction'
 import NewNAvbar from '../../Components/Navbar/Navbar'
 import Navbar from "react-bootstrap/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import SearchMedia from "../SearchMedia/SeachMedia";
-import { Button } from "bootstrap";
+import Drop_Down_Image from "../../Components/DropDrown/Drop_Down_Image";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function useWindowSize() {
   const [size, setSize] = useState([window.innerWidth]);
@@ -56,7 +56,7 @@ const Home = () => {
   const [category_name, setCategory] = useState("traditional-ooh-media");
   const [city, setCity] = useState([]);
   const [city_name, setgetCity] = useState("Delhi");
-
+  const [show, setShow] = useState(false);
 
   const getCity = async () => {
     const { data } = await axios.get(
@@ -184,13 +184,18 @@ const Home = () => {
         <div style={scrollcss ? { display: "none" } : { display: "block" }} className="new-search">
                 <Navbar expand="lg px-md-4 colapse-search-bar">
         <div className="container-fluid px-md-4">
+        <Dropdown onMouseOver={() => setShow(true)} >
+            <Dropdown.Toggle variant="transparent"   >  
           <Navbar.Brand href="#home" id="home">
-            <div className="brand-logo">
+            {/* <div className="brand-logo"> */}
               <img src="./images/logo.png" alt="" srcSet="" className="brand" />
-              <div className="text-light"></div>
-            </div>
+              {/* <div className="text-light"></div> */}
+            {/* </div> */}
           </Navbar.Brand>
+          </Dropdown.Toggle>   
+          </Dropdown> 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown}/>
         <Navbar.Collapse id="basic-navbar-nav" className="new-search-fields">
                 <div className="input-group rounded-pill overflow-hidden border h-100 me-lg-2 ms-lg-5">
                 <span
@@ -252,8 +257,10 @@ const Home = () => {
                   className="input-group-text border-0"
                   id="basic-addon1"
                 >
-                 
-                  <img src="./images/search.svg" alt="" />
+                  <Link
+                  to={`/services/${category_name}/${city_name}`}>
+                  <img src="./images/search.svg" className="mb-3" alt="" />
+                </Link>
                 </span>
     
                 </Nav.Link>

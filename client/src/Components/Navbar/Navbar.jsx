@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AccountContext } from "../../context/Context";
 import { authActions } from "../../store";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from "react-bootstrap/Navbar";
@@ -8,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import instance from '../../APIS/Axios'
 import { userDetails } from "../../action/adminAction";
 import UserDetail from "./UserDetail";
+import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
 
 
 const NewNAvbar = () => {
@@ -81,7 +81,7 @@ const NewNAvbar = () => {
       </Navbar> */}
        <Navbar expand="lg px-md-4">
         <div className="container-fluid py-md-4 px-md-4">
-        <Dropdown onMouseLeave={() => setShow(false)}
+        <Dropdown
       onMouseOver={() => setShow(true)}>
       <Dropdown.Toggle variant="transparent"  id="dropdown-basic" >   
           <Navbar.Brand >
@@ -96,65 +96,7 @@ const NewNAvbar = () => {
           </Navbar.Collapse>
         </div>
       </Navbar>
-      <Dropdown.Menu show={show} className="w-100 ">
-      <div className="container-fluid bg-body">
-                  <div className="row">
-                    <div className="col-6">
-                      <h6>BROWSE MEDIA</h6>
-                    </div>
-                    <div className="col-3">
-                      <h6>GOHOARDINGS</h6>
-                    </div>
-                    <div className="col-3">SUPPORT & FAQ</div>
-                  </div>
-                  <div className="row">
-                    <div className="col-3">
-                      <ul className="list-none">
-                        <li>Traditional OOH</li>
-                        <li>Mall Media</li>
-                        <li>Airport Media</li>
-                        <li>Multiplex Advertising</li>
-                        <li>Office Branding</li>
-                        <li>Bus & Auto Branding</li>
-                      </ul>
-                    </div>
-                    <div className="col-3">
-                      <ul className="list-none">
-                        <li>Digital Screen</li>
-                        <li>InFlight Branding</li>
-                        <li>Transit Media</li>
-                      </ul>
-                    </div>
-                    <div className="col-3">
-                      <ul className="list-none">
-                        <li>About Us</li>
-                        <li>Team</li>
-                        <li>News & Media</li>
-                        <li>Testimonials</li>
-                        <li>Case Studies</li>
-                      </ul>
-                    </div>
-                    <div className="col-3">
-                      <ul className="list-none">
-                        <li>Contact Us</li>
-                        <li>Blogs</li>
-                        <li>FAQs</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-6">
-                      <h6>Get Instant Quote</h6>
-                      <h1>Call us on: +91 7777871717</h1>
-                    </div>
-                    <div className="col-6">
-                      <button className="btn btn-primary float-end">
-                        Write To Us
-                      </button>
-                    </div>
-                  </div>
-      </div>
-      </Dropdown.Menu>
+      <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown}/>
     </>
   );
 };
