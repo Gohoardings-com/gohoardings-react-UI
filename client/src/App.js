@@ -39,7 +39,6 @@ function App() {
           <Route path="/city" element={<City/>}/>
           <Route path="/contact" element={<Conatct/>}/>
           <Route path="/media" element={<Medias/>}/>
-
           <Route path="*" element={<h1>Nothing Here </h1>}/>
         </Routes>
       </BrowserRouter>

@@ -104,12 +104,12 @@ exports.useritems = catchError(async (req, res, next) => {
     const user = req.id
     db.changeUser({ database: "gohoardi_goh" });
     db.query(
-      `SELECT COUNT(userid) AS item FROM goh_shopping_carts_item WHERE userid = ${user} && isDelete=0 LIMIT 1`,
+      `SELECT COUNT(userid) AS item FROM goh_shopping_carts_item WHERE userid = ${user} && isDelete=0`,
       (err, result) => {
         if (err) {
         return res.send(err)
         } else {
-        return res.status(200).json({item : result})
+        return res.status(200).json(result)
         }
       }
     );

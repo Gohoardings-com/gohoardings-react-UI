@@ -1,47 +1,60 @@
-import React from 'react'
+import React,{useEffect, useState, useReducer} from 'react'
+import instance from '../../APIS/Axios';
+import { AccountContext } from '../../APIS/ApiContext';
 import { useSelector, useDispatch } from 'react-redux'
+import { authActions } from '../../store';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogout } from 'react-google-login'
 import Nav from "react-bootstrap/Nav";
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-const UserDetail = ({posts, logOut}) => {
-    const cartItem = useSelector((state) => state.cart)
-    const items = useSelector((state) => state.user.user);
+import { useContext } from 'react';
+
+const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
+
+const UserDetail = () => {
+  const dispatch = useDispatch();
+    const {state} = useContext(AccountContext)
     const navigate = useNavigate();
+    const { isLoggedIn } = useSelector((state) => state.LoginStatus);
+    const [posts, setPosts] = useState()
+
+
+    const handelLogout = async () => {
+      const data = await instance.post("registration/logout", null, {
+        withCredentials: true,
+      });
+      if (data.status == 200) {
+        localStorage.clear();
+        sessionStorage.clear()
+        isLoggedIn = true;
+        return data
+      }
+      return new Error("Unable to logOut Please Try Again");
+    };
+
+ 
+
+    const logOut = async () => {
+      handelLogout().then(() => dispatch(authActions.logout()))
+    }
+    useEffect(() => {
+  
+      const getUser = async () => {
+        const { data } = await instance.get("registration/user", {
+          withCredentials: true
+        })
+        setPosts(...data)
+      }
+      getUser().then(() => dispatch(authActions.login()))
+    }, [])
+    
     const onCart = async () => {
         navigate('/cart')
       }
-
   return (
    <>
-    <Nav className="ms-auto">
-              <Nav.Link
-                className="text-light normal"
-                href="https://odoads.com/"
-                target="_blank"
-              >
-                Odoads
-              </Nav.Link>
-              <Nav.Link
-                className="text-light normal"
-                href="https://www.gohoardings.com/blog/"
-                target="_blank"
-              >
-                Blog
-              </Nav.Link>
-              <Nav.Link
-                className="text-light normal"
-                href="https://gohoardings.com/contact-us"
-              >
-                Contact
-              </Nav.Link>
-              <Nav.Link
-                className="text-light normal px-lg-3 round-circle"
-                href="https://gohoardings.com/map-view"
-              >
-                Map View
-              </Nav.Link>
-              {posts ? <>
-                <AiOutlineShoppingCart className='ms-sm-4 mt-sm-2 text-light normal'  style={{ width: "22px", height: "22px", color: 'white' }} onClick={onCart} /> : <h6 href='/cart' className='mt-sm-2 text-light normal' style={{ width: "22px", height: "22px", color: 'white' }} onClick={onCart}  >{items == "No data Found" || cartItem.length ==0  ? cartItem.length : cartItem.length }</h6>
+    {posts ? <>
+                <AiOutlineShoppingCart className='cart ms-sm-4 mt-sm-2 text-light normal'  onClick={onCart}  /> : <h6 href='/cart' className='cart mt-sm-2 text-light normal'>{state}</h6>
                 <Nav.Link
                   className="text-light normal"
                   href="/"
@@ -49,17 +62,24 @@ const UserDetail = ({posts, logOut}) => {
                   {posts.firstname.toUpperCase()}
                 </Nav.Link>
                 <Nav.Link
-                  className="text-light normal"
+            
                   href="/"
                   onClick={logOut}
                 >
-                  LogOut
+                 <GoogleLogout
+                  className="bg-black p-0 text-light normal"
+                  href="/"
+  clientId={clientId}
+  buttonText={"Logout"}
+  onLogoutSuccess={logOut}
+  icon={false}
+ />
+
                 </Nav.Link>
               </> : <>
                 <Nav.Link
                   className="text-light normal"
                   href="/register"
-
                 >
                   Register
                 </Nav.Link>
@@ -70,10 +90,8 @@ const UserDetail = ({posts, logOut}) => {
                   Sign In
                 </Nav.Link>
               </>}
-
-            </Nav>
    </>
   )
 }
 
-export default UserDetail
+export default UserDetail;

@@ -11,6 +11,7 @@ import Footer from "../../Components/Footer/Footer";
 import SearchMedia from "../SearchMedia/SeachMedia";
 import Drop_Down_Image from "../../Components/DropDrown/Drop_Down_Image";
 import Dropdown from 'react-bootstrap/Dropdown';
+import UserDetail from "../../Components/Navbar/UserDetail";
 
 function useWindowSize() {
   const [size, setSize] = useState([window.innerWidth]);
@@ -66,7 +67,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getCity()
     const handleCss = () => {
       if (scroll > 325) {
         setScrollcss(false);
@@ -80,6 +80,7 @@ const Home = () => {
   const [width] = useWindowSize();
   const [widthcss, setWidthcss] = useState(false);
   useEffect(() => {
+    getCity()
     const handleCss = () => {
       if (width > 767) {
         setWidthcss(false);
@@ -89,6 +90,7 @@ const Home = () => {
     };
     handleCss();
   }, [width]);
+
  const getCites =async() =>{
   navigate('/city')
  }
@@ -96,6 +98,8 @@ const Home = () => {
  const getMedias = async() => {
   navigate('./media')
  }
+
+
 
   return (
     <>
@@ -209,7 +213,7 @@ const Home = () => {
                     setgetCity(e.target.value);
                   }}
                 >
-                  {city.map((obj) => (
+                  {city.slice(0,10).map((obj) => (
                     <option className="text-dark" value={obj.name}>{obj.name}</option>
                   ))}
                 </select>
@@ -264,14 +268,7 @@ const Home = () => {
                 </span>
     
                 </Nav.Link>
-            <Nav className="ms-auto">
-              <Nav.Link className="text-light normal" href="/Signup">
-                Register
-              </Nav.Link>
-              <Nav.Link className="text-light normal" href="/Signin">
-                SignIn
-              </Nav.Link>
-            </Nav>
+           <UserDetail/>
           </Navbar.Collapse>
  
    

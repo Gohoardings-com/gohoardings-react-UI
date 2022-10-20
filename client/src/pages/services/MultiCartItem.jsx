@@ -2,7 +2,7 @@ import React from 'react'
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 
 const CartPattern = ({ posts, addonCart, removefroCart }) => {
-
+    // console.log(posts);
     return (
         <div className='col'>
             {!posts ? <><h1>Loading...</h1></> :

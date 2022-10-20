@@ -2,6 +2,7 @@ import React from 'react'
 import { GrMapLocation } from 'react-icons/gr';
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 const SingleCartIcon = ({ posts, addonCart, removefroCart }) => {
+    console.log(posts);
     return (
         <>
             <div className="row">

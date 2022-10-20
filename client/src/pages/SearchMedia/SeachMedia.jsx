@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import DateRangeComp from "../../Components/Datepicker/DateRangeComp.jsx";
-import axios from "axios";
+import instance from "../../APIS/Axios.jsx";
 import { mediawithcity } from "../../action/adminAction";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -15,8 +15,8 @@ const SearchMedia = () => {
   const [city_name, setgetCity] = useState("Delhi");
 
   const getCity = async () => {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/media/searchMedia"
+    const { data } = await instance.get(
+      "media/searchMedia"
     );
     setCity(data);
   };

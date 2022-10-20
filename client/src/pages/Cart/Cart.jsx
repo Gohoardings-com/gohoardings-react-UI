@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
+import { AccountContext } from "../../APIS/ApiContext";
 import axios from "axios";
 import { remove } from "../../reducer/adminReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +14,12 @@ import instance from "../../APIS/Axios";
 const Cart = () => {
   const [Start, setStart] = useState(new Date());
   const [End, setEnd] = useState(new Date());
+  const {addRemove} = useContext(AccountContext)
   const [totaldays, setTotaldays] = useState([]);
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart);
   const apiCartItems = useSelector((state) => state.item.items)
-  const [posts,setPosts] = useState(apiCartItems)
+  const [posts,setPosts] = useState([])
 
   const StartDate = (e) => {
     setStart(e);
@@ -25,22 +27,33 @@ const Cart = () => {
   const EndDate = (e) => {
     setEnd(e);
   };
-
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
       code: obj.code,
     });
-    dispatch(remove(obj));
+    addRemove({type:"DECR"})
+    removeCart(obj)
   };
 
   const getAllData = async () => {
-    dispatch(cartitems());
+    // dispatch(cartitems());
+    const {data} = await instance.get('cart/cartitems');
+    setPosts(data);
   };
 
   useEffect(() => {
     getAllData();
   }, []);
-
+  
+  const removeCart = async(event) =>{
+    let data = [...posts]
+    data.forEach((element) =>{
+      if(element.code == event.code){
+        element.isDelete = 1
+        setPosts(data)
+      }
+    })
+  }
 
   return (
     <>
@@ -78,9 +91,11 @@ const Cart = () => {
               </div>
               <div className="col-lg-1"></div>
               <div className="row pt-3 my-3 rounded-4 m-0 cart-item">
-                {posts.length > 0 && posts.map((obj) => (
+               {!posts ? <><h1>Loding...</h1></>:<>
+               {posts.length > 0 && posts.map((obj) => (
                   <>
-                    <div className="col-4">
+                    {obj.isDelete == 0 ? <>
+                      <div className="col-4">
                       <img
                         src="./images/media.jpg"
                         alt="N/A"
@@ -112,8 +127,12 @@ const Cart = () => {
                         </button>
                       </div>
                     </div>
+                    </>:<>
+                    <h1 >Your Item Deleted Successfully</h1>
+                    </>}
                   </>
                 ))}
+               </>}
               </div>
             </div>
             <div className="col-lg-4">

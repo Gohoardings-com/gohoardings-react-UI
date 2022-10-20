@@ -1,153 +1,114 @@
-import React from "react";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import "../pages/home/home.scss";
+import React, { useState } from "react";
+import DateRangeComp from "../Components/Datepicker/DateRangeComp.jsx";
+import axios from "axios";
+import Select from 'react-select';
+import { mediawithcity } from "../action/adminAction";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import instance from "../APIS/Axios";
 
 const Test = () => {
+  const navigator = useNavigate();
+  const dispatch = useDispatch();
+  const [category_name, setCategory] = useState("traditional-ooh-media");
+  const [getCity, setgetcity] = useState([]);    // city Api State
+  const [cityname, setcityname] = useState([]) // Select State
+
+
+  const Showcity = async () => {
+    const { data } = await instance.get("media/searchMedia");
+    setgetcity(data);
+  };
+
+  useEffect(() => {
+    Showcity();
+  }, []);
+  let City = [];
+  getCity.forEach((obj) => {
+      City.push({ "label": obj.name, "value": obj.name })  // on make label and values
+  });
+
   return (
-    <div>
-      {/* <div className="scroll-navigation">
-        <div className="px-4 pt-3">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col">
-                <img
-                  src="./images/logo.png"
-                  alt=""
-                  srcSet=""
-                  className="brand"
-                />
-              </div>
-              <div className="col">
-                <div className="input-group mb-3 rounded-pill overflow-hidden border">
-                  <span
-                    className="input-group-text border-0 pe-1"
-                    id="basic-addon1"
-                  >
-                    <img src="./images/search.svg" alt="" />
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control hide-focus border-0"
-                    placeholder="Search"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-              </div>
-              <div className="col">
-                <div className="input-group mb-3 rounded-pill overflow-hidden border">
-                  <span
-                    className="input-group-text border-0 pe-1"
-                    id="basic-addon1"
-                  >
-                    <img src="./images/search.svg" alt="" />
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control hide-focus border-0"
-                    placeholder="Search"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-              </div>
-              <div className="col">
-                <div className="input-group mb-3 rounded-pill overflow-hidden border">
-                  <span
-                    className="input-group-text border-0 pe-1"
-                    id="basic-addon1"
-                  >
-                    <img src="./images/search.svg" alt="" />
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control hide-focus border-0"
-                    placeholder="Search"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-              </div>
-              <div className="col d-flex pt-2">
-                <Nav.Link
-                  className="text-light normal"
-                  href="https://gohoardings.com/Register"
+    <div className="search">
+       <label>City:</label>
+                <Select options={City} value={cityname} onChange={setcityname} labelledBy="Select" />
+                <br />
+      <div className="px-5 home-heading-main">
+                  <p className="mb-0 pt-md-3">
+              <span className="text-light fw-bold search-headline subhead text-center">
+                Over 200,000 Hoardings across 3500 Cities
+              </span>
+            </p>
+      <img
+        src="./images/Hoardings.png"
+        alt=""
+        srcSet=""
+        className="mt-4 ps-5 mobile-hide"
+      />
+      <img
+        src="./images/Hoardings.png"
+        className="scale mt-4 mobile-hide"
+        alt=""
+        srcSet=""
+      />
+      <div className="location">
+        <div className="container mt-3">
+          <div className="row pb-3">
+            <div className="col-xl-3 col-lg-5 col-md-5 col-sm-12 col-12">
+              <div className="input-group rounded-pill overflow-hidden border h-100">
+                {/* <select
+                  className="bg-transparent border-0 py-2 ps-2 text-light sel-city"
+                  onChange={(e) => {
+                    setgetCity(e.target.value);
+                  }}
                 >
-                  Register
-                </Nav.Link>
-                <Nav.Link
-                  className="text-light normal"
-                  href="https://gohoardings.com/Signin"
+                  {city.map((obj) => (
+                    <option value={obj.name} className="text-dark">{obj.name}</option>
+                  ))}
+                </select> */}
+                
+              </div>
+            </div>
+            <div className="col-xl-4 col-lg-7 col-md-7 col-sm-7 col-7">
+              <div className="input-group rounded-pill overflow-hidden border h-100">
+                <select
+                  className="form-control hide-focus border-0 py-2"
+                  onChange={(e) => setCategory(e.target.value)}
                 >
-                  Sign In
-                </Nav.Link>
+                  <option value="None" className="text-dark">None</option>
+                  <option value="traditional-ooh-media" className="text-dark">
+                    traditional-ooh-media
+                  </option>
+                  <option className="text-dark" value="digital-media">digital-media</option>
+                  <option className="text-dark" value="transit-media">transit-media</option>
+                  <option className="text-dark" value="mall-media">mall-media</option>
+                  <option className="text-dark" value="airport-media">airport-media</option>
+                  <option className="text-dark" value="inflight_media">inflight_media</option>
+                  <option className="text-dark" value="office-media">office-media</option>
+                </select>
+              </div>
+            </div>
+            <div className="col-xl-3 col-lg-7 col-md-7 col-sm-5 col-5">
+              <DateRangeComp />
+            </div>
+            <div className="col-xl-2 col-lg-5 col-md-5 col-sm-12 col-12">
+              <div className="w-100 text-center rounded-pill overflow-hidden border btn py-2">
+                <Link
+                  to={`/services/${category_name ?? "traditional-ooh-media"}/Delhi`}
+                  className="button text-light is-small is-info py-2 text-decoration-none"
+                >
+                  Search
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      </div> */}
-
-      <Navbar expand="lg px-md-4 colapse-search-bar">
-        <div className="container-fluid px-md-4">
-          <Navbar.Brand href="#home" id="home">
-            <div className="brand-logo">
-              <img src="./images/logo.png" alt="" srcSet="" className="brand" />
-              <div className="text-light"></div>
-            </div>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-                <div className="input-group rounded-pill overflow-hidden border h-100 me-2 ms-5">
-                <span
-                  className="input-group-text border-0 pe-1"
-                  id="basic-addon1"
-                >
-                  <img src="./images/search.svg" alt="" />
-                </span>
-                <input
-                  type="search"
-                  className="form-control hide-focus border-0 py-2"
-                  placeholder="Search"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                />
-                </div>
-                <div className="input-group rounded-pill overflow-hidden border h-100 me-2 ms-2">
-                <span
-                  className="input-group-text border-0 pe-1"
-                  id="basic-addon1"
-                >
-                  <img src="./images/search.svg" alt="" />
-                </span>
-                <input
-                  type="search"
-                  className="form-control hide-focus border-0 py-2"
-                  placeholder="Search"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                />
-                </div>
-                <Nav.Link className="text-center rounded-pill border search-btn-icon me-5 ms-2">
-              <span
-                  className="input-group-text border-0"
-                  id="basic-addon1"
-                >
-                  <img src="./images/search.svg" alt="" />
-                </span>
-    
-                </Nav.Link>
-            <Nav className="ms-auto">
-              <Nav.Link className="text-light normal" href="/Signup">
-                Register
-              </Nav.Link>
-              <Nav.Link className="text-light normal" href="/Signin">
-                SignIn
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </div>
-      </Navbar>
+      </div>
+      <p className="text-light normal py-3 ps-5">
+        Continue your Search....
+      </p>
+      </div>
     </div>
   );
 };

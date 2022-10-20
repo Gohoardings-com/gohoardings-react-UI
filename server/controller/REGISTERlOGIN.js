@@ -11,7 +11,7 @@ exports.register = catchError(async (req, res) => {
       if (err) {
         return res.send(err)
       }
-      if (result.length == []) {
+      else if (result.length == []) {
         if (Npassword === conpass) {
           req.body ? db.query("SELECT userid  FROM  tblcontacts ORDER BY userid DESC LIMIT 1", async (err, result) => {
             if (err) {
@@ -60,31 +60,34 @@ exports.login = catchError(async (req, res) => {
     db.changeUser({ database: "gohoardi_crmapp" })
     db.query("SELECT * FROM tblcontacts WHERE email ='"+email+"' ", async (err, result) => {
       if (err){
-    return res.status(400).json({message:"No User Found"})
-      } else if(!result == []){
-   
-        const keypassword = result[0].password;
-       const resetPassword = bcrypt.compareSync(password, keypassword)
-        if (!resetPassword) {
-        return res.status(404).json({
-            success: false,
-            message: "Wrong Email & Password"
-          });
-        }
-        res.clearCookie(String(result[0].userid))
-        req.cookies[`${String(result[0].userid)}`] = " ";
-        const token = jwtToken.sign({ id: result[0].userid }, process.env.jwt_secret, {
-          expiresIn: "7d",
-        });
-      
-        res.cookie(String(result[0].userid), token, {
-          path: '/',
-          expires: new Date(Date.now() + 1000 * 84000),
-          httpOnly: true,
-          sameSite: 'lax',
-          origin:"http://localhost:3000"
-        });
-        return res.status(200).json({message:"User Login Successfull" })
+    return res.json({message:"No User Found"})
+      } 
+     if(!result == []){
+   const keypassword = result[0].password;
+   if(!keypassword){
+    return res.status(404).json({ messsage: "Invalid Email and password"});
+   }else{
+    const resetPassword = bcrypt.compareSync(password, keypassword)
+    if (!resetPassword) {
+    return res.status(404).json({
+        success: false,
+        message: "Wrong Email & Password"
+      });
+    }
+    res.clearCookie(String(result[0].userid))
+    req.cookies[`${String(result[0].userid)}`] = " ";
+    const token = jwtToken.sign({ id: result[0].userid }, process.env.jwt_secret, {
+      expiresIn: "7d",
+    });
+    res.cookie(String(result[0].userid), token, {
+      path: '/',
+      expires: new Date(Date.now() + 1000 * 84000),
+      httpOnly: true,
+      sameSite: 'lax',
+      origin:"http://localhost:3000"
+    });
+    return res.status(200).json({message:"User Login Successfull" })
+   }
       } else{
         return res.status(404).json({ messsage: "Invalid Email and password"});
       }
@@ -138,7 +141,6 @@ exports.googleLogin = catchError(async(req,res) => {
 
 exports.verifyToken =catchError(async (req, res, next) => {
     const cookieData =  req.cookies;
-
   if (!cookieData) {
     return res.status(400).json({message:"No Cookie Found"})
   }

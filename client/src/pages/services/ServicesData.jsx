@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsListCheck } from 'react-icons/bs';
 import { MdChecklist } from 'react-icons/md';
 import { add,remove} from '../../reducer/adminReducer';
+import { AccountContext } from '../../APIS/ApiContext';
 import { mediawithcity } from '../../action/adminAction';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Service.scss"
@@ -16,14 +17,14 @@ import MediaFilter from './MediaFilter';
 const SearchData = () => {
   const dispatch = useDispatch()
   const { category_name, city_name } = useParams();
+  const {addRemove} = useContext(AccountContext)
   const data = useSelector((state) => state.search.search)
   const [posts, setPosts] = useState([])
   const [list, setList] = useState(true)
   const navigate = useNavigate()
-
   const getData = async () => {
     // dispatch(mediawithcity(category_name ?? 'traditional-ooh-media', city_name ?? 'Delhi'));
-
+    
     const {data} = await instance.post("media/searchMedia",{
       category_name : category_name,
       city_name : city_name
@@ -42,7 +43,8 @@ const SearchData = () => {
         if(data.message == 'Login First'){
           navigate('/login')
         }else{
-          dispatch(add(e))
+          addRemove({type:"INCR"})
+          add(e)
         }
     }
 
@@ -51,12 +53,40 @@ const SearchData = () => {
       await instance.post('cart/deleteFromCart', {
         code: obj.code,
       })
-      dispatch(remove(obj))
+      addRemove({type:"DECR"})
+      remove(obj)
     }
+
+
+    /***************************************************************** */
+
+    const add = (event) => {
+      let data = [...posts];
+      data.forEach((element) => {
+        if (element.code == event.code) {
+          console.log(element);
+          element.isDelete = 0;
+          setPosts(data);
+        }
+      });
+    };
+
+    const remove = (event) => {
+      let data = [...posts];
+      data.forEach((element) => {
+        if (element.code == event.code) {
+          console.log(element);
+          element.isDelete = 1;
+          setPosts(data);
+        }
+      });
+    };
+
+
+  /***************************************************************** */
 
   useEffect(() => {
     getData()
-    setPosts(data)
   }, [])
 
   return (

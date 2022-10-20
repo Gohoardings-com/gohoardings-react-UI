@@ -21,26 +21,26 @@ const Login = () => {
   const [googledata, setGoogledata] = useState([])
 
 // Google Login Request
-  // const onSuccess = async (res) => {
-  //   await instance.post("registration/googleSingUp", {
-  //     profile: res.profileObj
-  //   }).then(() => dispatch(authActions.login()),
-  //     navigate('/'))
-  // }
+  const onSuccess = async (res) => {
+    await instance.post("registration/googleSingUp", {
+      profile: res.profileObj
+    }).then(() => dispatch(authActions.login()),
+      navigate('/'))
+  }
 
-  // // Google Login failures
-  // const onFailure = async (res) => {
-  //   await setGoogledata(null)
-  // }
+  // Google Login failures
+  const onFailure = async (res) => {
+    await setGoogledata(null)
+  }
 
-  // const {signIn} = useGoogleLogin({
-  //   onSuccess,
-  //   onFailure,
-  //   clientId,
-  //   isSignedIn:true,
-  //   accessType:'offline',
+  const {signIn} = useGoogleLogin({
+    onSuccess,
+    onFailure,
+    clientId,
+    isSignedIn:true,
+    accessType:'offline',
 
-  // })
+  })
 
 
 
@@ -159,7 +159,7 @@ const Login = () => {
               <p className="text-center pt-4 mt-3"><a href="/auth/linkedin">
                 <img src="./images/Linkedin.png" alt="" className="pe-3" onClick={linkdinLogin} />
               </a> <img src="./images/twitter.png" alt="" />
-               {/* <button onClick={signIn} className="button">Google</button> */}
+               <button onClick={signIn} className="button">Google</button>
               </p>
             </div>
           </div>
