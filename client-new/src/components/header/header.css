@@ -1,0 +1,20 @@
+.header{
+    background: #20344d;
+}
+
+.heading-text{
+    font-weight: 600;
+    text-decoration: none;
+    color: #dbd9d9;
+
+}
+.icon-div{
+    border-right: 1px  solid white ;
+}
+
+.icon-div:hover{
+    display: block;
+    background: #337ab7;
+    justify-content: center;
+    align-items: center;
+}

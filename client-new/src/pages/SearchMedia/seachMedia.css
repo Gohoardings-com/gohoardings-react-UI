@@ -1,0 +1,22 @@
+.search{
+    background-color:rgb(105,227,255)
+}
+.headingText{
+    color: #2b3f43;
+    padding-bottom: 35px;
+    padding-top: 35px;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 90%);
+    padding-top: 3%;
+}
+h1{
+    color: #2a2b33;
+    font-weight: bolder;
+}
+p{
+    padding-bottom: 35px;
+    padding-top: 35px;
+    font: 1.3em sans-serif;
+    padding: 20px;
+
+}
+  

@@ -1,460 +1,460 @@
-@import '../../assets/scss/_variables.scss';
-@import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
-
-body {
-  padding: 0;
-  margin: 0;
-  background-color: $black !important;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.head {
-  font-size: $head;
-}
-
-.subhead {
-  font-size: $subhead;
-}
-
-.normal {
-  font-size: $normal;
-}
-
-.brand {
-  width: 200px;
-}
-
-.search-btn-icon {
-  height: 42px;
-  padding-top: 7px !important;
-}
-.colapse-search-bar{
-  background-color: #404040;
-}
-
-.home-heading {
-  background-color: $light-grey;
-}
-
-.list-none {
-  list-style: none;
-}
-
-.list-none > li::before {
-  content: ">";
-  padding-right:5px;
-}
-
-.scale {
-  transform: scaleX(-1);
-  right: 110px;
-  position: absolute;
-}
-
-.location {
-  padding: 10px;
-  width: 100%;
-  height: auto;
-  border-radius: 50px;
-  background-color: $dark-grey;
-}
-
-a.text-light.nav-link {
-  margin-left: 20px;
-}
-
-.search-headline {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.round-circle {
-  border: 2px solid;
-  border-radius: 25px;
-}
-
-.img-square {
-  position: relative;
-  height: 410px;
-  width: 300px;
-  background-color: $light-grey;
-  border-radius: 25px;
-}
-
-.img-square>img {
-  position: absolute;
-  width: 260px;
-  height: 310px;
-  right: -35px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.icons {
-  position: absolute;
-  transform: translateX(-50%);
-  z-index: -10;
-}
-
-.dots {
-  position: absolute;
-  right: 1em;
-}
-
-.search-cities {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-45%);
-  border: 2px solid $white;
-  border-radius: 25px;
-  padding: 10px 53px;
-  right: 25%;
-}
-
-.search-media {
-  position: absolute;
-  top: 62%;
-  transform: translateY(-45%);
-  border: 2px solid $yellow;
-  border-radius: 25px;
-  padding: 10px 50px;
-  right: 25%;
-}
-
-.india-map>img {
-  width: 85%;
-}
-
-.ul-list {
-  list-style: disc;
-}
-
-.cities-top {
-  position: relative;
-}
-
-.cities {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.footer {
-  background-color: $light-grey;
-}
-
-.footer-bottom-line {
-  border-bottom: 1px solid $white;
-}
-
-.footer-side-line {
-  border-left: 1px solid $white;
-}
-
-.footer-bottom-short-line {
-  border-bottom: 1px solid $white;
-  border-width: 95%;
-}
-
-.pos-absolute {
-  position: absolute;
-}
-
-.round-pill {
-  border: 1px solid $white;
-  border-radius: 25px;
-  padding: 10px 15px;
-  color: $white;
-  margin: 0;
-}
-
-.sel-city {
-  width: 95%;
-}
-.cities-list {
-  transform: translateX(-15px) !important;
-}
-
-// media query
-// screen 450px and small
-
-@media only screen and (max-width: 450px) {
-  .brand {
-    width: 140px;
-  }
-
-  span.search-headline {
-    padding: 15px 0 !important;
-  }
-
-  nav.navbar.navbar-expand-lg {
-    padding: 10px;
-  }
-
-  .search-cities {
-    padding: 10px 16px;
-  }
-
-  .search-media {
-    padding: 10px 13px;
-  }
-
-  p.fw-bold.fs-head.fs-heading.lh-sm.pt-5 {
-    font-size: 22px !important;
-    padding-top: 0 !important;
-  }
-
-  p.fs-head.pt-5.fw-bold {
-    font-size: 22px !important;
-  }
-
-  p.sub-head.fw-normal {
-    font-size: 12px !important;
-  }
-
-  .col.mobile.footer-side-line {
-    border: none !important;
-  }
-
-  ul.d-flex.list-inline.sub-head.ul-list {
-    padding: 0 !important;
-  }
-  .link-center {
-    justify-content: center;
-    text-align: center;
-  }
-}
-
-// screen 580px and small
-
-@media only screen and (max-width: 580px) {
-  .tagline {
-    text-align: center;
-  }
-  .left-cities {
-    display: block !important;
-    list-style: disc !important;
-    padding-left: 15px;
-  }
-  .right-cities {
-    position: absolute;
-    display: block !important;
-    list-style: disc !important;
-    top: 0;
-    right: 15px;
-  }
-  div#basic-navbar-nav {
-    top: 60px !important;
-  }
-}
-
-// screen 768px and small
-
-@media only screen and (max-width: 768px) {
-  .mobile-hide {
-    display: none;
-  }
-
-  p.fw-bold.fs-head.fs-heading {
-    font-size: 62px !important;
-    padding-top: 0 !important;
-  }
-
-  p.fs-head.pt-5 {
-    font-size: 52px !important;
-  }
-
-  p.sub-head {
-    font-size: 22px !important;
-  }
-
-  .home-heading-main {
-    padding: 0 !important;
-  }
-
-  .india-map>img {
-    width: 100%;
-    margin-top: 48px;
-    padding: 0 32px;
-  }
-
-  .home-map {
-    padding: 0 !important;
-  }
-
-  .container-fluid.home-main {
-    padding-top: 0px !important;
-  }
-
-  p.display-3.fw-bold {
-    padding: 0 10px !important;
-  }
-
-  ul.d-flex {
-    list-style: none;
-  }
-
-  p.display-3.fw-bold.px-5 {
-    font-size: 55px;
-  }
-
-  li.me-xxl-5 {
-    padding-right: 15px !important;
-  }
-
-  .search-buttons {
-    display: flex;
-    justify-content: center;
-  }
-
-  .search-cities,
-  .search-media {
-    position: unset;
-    transform: translateY(0);
-    margin: 0px 10px;
-  }
-
-  .search-headline {
-    position: unset;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 32px;
-  }
-  .cities {
-    padding-left: 32px;
-  }
-  .location {
-    background-color: $dark-grey;
-  }
-  div#basic-navbar-nav {
-    padding-left: 25px !important;
-  }
-}
-
-.new-search {
-  position: fixed;
-  z-index: 99999;
-  top: 0;
-  width: 100%;
-}
-
-// screen 992px and small
-
-@media only screen and (max-width: 992px) {
-  div#basic-navbar-nav {
-    position: absolute;
-    top: 100px;
-    left: 0px;
-    padding-left: 50px;
-    background-color: black;
-    width: 100%;
-    z-index: 100;
-  }
-  .cities-list {
-    transform: translateX(0px);
-  }
-  .new-search-fields {
-    position: absolute !important;
-    top: 64px !important;
-    background-color: $light-grey !important;
-    padding: 10px 100px 10px 100px;
-    text-align: center;
-  }
-}
-
-// screen 1024px and small
-
-@media only screen and (max-width: 1024px) {
-  a.text-light.nav-link {
-    margin-left: 0px;
-  }
-
-  .round-circle {
-    border: none;
-  }
-
-  .icons {
-    width: 550px;
-  }
-
-  .search-headline {
-    font-size: 1.2rem !important;
-    padding-top: 2rem !important;
-  }
-
-  .fs-head {
-    font-size: 2rem !important;
-  }
-
-  .sub-head {
-    font-size: 12px !important;
-  }
-
-  .dots {
-    width: 110px;
-  }
-
-  .fs-head {
-    font-size: 2.6rem;
-  }
-
-  .img-square {
-    height: 350px;
-    width: 250px;
-  }
-
-  .img-square>img {
-    width: 235px;
-    height: 270px;
-  }
-
-  .india-map>img {
-    display: flex;
-    justify-content: center;
-  }
-
-  .cities-top {
-    position: unset;
-  }
-
-  button.collapsed.navbar-toggler {
-    background-color: #404040;
-  }
-
-  button.navbar-toggler {
-    background-color: #404040;
-  }
-}
-
-// screen 1200px and small
-
-@media only screen and (max-width: 1200px){
-  .cities {
-    position: unset;
-    top: 50%;
-    transform: translateY(0);
-  }
-}
-
-// screen 1440px and small
-
-@media only screen and (max-width: 1440px) {
-  .pos-absolute {
-    position: unset;
-  }
-
-  .fs-heading {
-    font-size: $subhead;
-  }
-
-  .icons {
-    width: 650px;
-  }
-
-  .search-headline {
-    font-size: $midhead;
-    padding-top: 1.5rem;
-  }
-}
+// @import '../../assets/scss/_variables.scss';
+// @import "~bootstrap/scss/bootstrap";
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
+// body {
+//   padding: 0;
+//   margin: 0;
+//   background-color: $black !important;
+//   font-family: 'Montserrat', sans-serif;
+// }
+
+// .head {
+//   font-size: $head;
+// }
+
+// .subhead {
+//   font-size: $subhead;
+// }
+
+// .normal {
+//   font-size: $normal;
+// }
+
+// .brand {
+//   width: 200px;
+// }
+
+// .search-btn-icon {
+//   height: 42px;
+//   padding-top: 7px !important;
+// }
+// .colapse-search-bar{
+//   background-color: #404040;
+// }
+
+// .home-heading {
+//   background-color: $light-grey;
+// }
+
+// .list-none {
+//   list-style: none;
+// }
+
+// .list-none > li::before {
+//   content: ">";
+//   padding-right:5px;
+// }
+
+// .scale {
+//   transform: scaleX(-1);
+//   right: 110px;
+//   position: absolute;
+// }
+
+// .location {
+//   padding: 10px;
+//   width: 100%;
+//   height: auto;
+//   border-radius: 50px;
+//   background-color: $dark-grey;
+// }
+
+// a.text-light.nav-link {
+//   margin-left: 20px;
+// }
+
+// .search-headline {
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+// }
+
+// .round-circle {
+//   border: 2px solid;
+//   border-radius: 25px;
+// }
+
+// .img-square {
+//   position: relative;
+//   height: 410px;
+//   width: 300px;
+//   background-color: $light-grey;
+//   border-radius: 25px;
+// }
+
+// .img-square>img {
+//   position: absolute;
+//   width: 260px;
+//   height: 310px;
+//   right: -35px;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
+
+// .icons {
+//   position: absolute;
+//   transform: translateX(-50%);
+//   z-index: -10;
+// }
+
+// .dots {
+//   position: absolute;
+//   right: 1em;
+// }
+
+// .search-cities {
+//   position: absolute;
+//   top: 45%;
+//   transform: translateY(-45%);
+//   border: 2px solid $white;
+//   border-radius: 25px;
+//   padding: 10px 53px;
+//   right: 25%;
+// }
+
+// .search-media {
+//   position: absolute;
+//   top: 62%;
+//   transform: translateY(-45%);
+//   border: 2px solid $yellow;
+//   border-radius: 25px;
+//   padding: 10px 50px;
+//   right: 25%;
+// }
+
+// .india-map>img {
+//   width: 85%;
+// }
+
+// .ul-list {
+//   list-style: disc;
+// }
+
+// .cities-top {
+//   position: relative;
+// }
+
+// .cities {
+//   position: absolute;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
+
+// .footer {
+//   background-color: $light-grey;
+// }
+
+// .footer-bottom-line {
+//   border-bottom: 1px solid $white;
+// }
+
+// .footer-side-line {
+//   border-left: 1px solid $white;
+// }
+
+// .footer-bottom-short-line {
+//   border-bottom: 1px solid $white;
+//   border-width: 95%;
+// }
+
+// .pos-absolute {
+//   position: absolute;
+// }
+
+// .round-pill {
+//   border: 1px solid $white;
+//   border-radius: 25px;
+//   padding: 10px 15px;
+//   color: $white;
+//   margin: 0;
+// }
+
+// .sel-city {
+//   width: 95%;
+// }
+// .cities-list {
+//   transform: translateX(-15px) !important;
+// }
+
+// // media query
+// // screen 450px and small
+
+// @media only screen and (max-width: 450px) {
+//   .brand {
+//     width: 140px;
+//   }
+
+//   span.search-headline {
+//     padding: 15px 0 !important;
+//   }
+
+//   nav.navbar.navbar-expand-lg {
+//     padding: 10px;
+//   }
+
+//   .search-cities {
+//     padding: 10px 16px;
+//   }
+
+//   .search-media {
+//     padding: 10px 13px;
+//   }
+
+//   p.fw-bold.fs-head.fs-heading.lh-sm.pt-5 {
+//     font-size: 22px !important;
+//     padding-top: 0 !important;
+//   }
+
+//   p.fs-head.pt-5.fw-bold {
+//     font-size: 22px !important;
+//   }
+
+//   p.sub-head.fw-normal {
+//     font-size: 12px !important;
+//   }
+
+//   .col.mobile.footer-side-line {
+//     border: none !important;
+//   }
+
+//   ul.d-flex.list-inline.sub-head.ul-list {
+//     padding: 0 !important;
+//   }
+//   .link-center {
+//     justify-content: center;
+//     text-align: center;
+//   }
+// }
+
+// // screen 580px and small
+
+// @media only screen and (max-width: 580px) {
+//   .tagline {
+//     text-align: center;
+//   }
+//   .left-cities {
+//     display: block !important;
+//     list-style: disc !important;
+//     padding-left: 15px;
+//   }
+//   .right-cities {
+//     position: absolute;
+//     display: block !important;
+//     list-style: disc !important;
+//     top: 0;
+//     right: 15px;
+//   }
+//   div#basic-navbar-nav {
+//     top: 60px !important;
+//   }
+// }
+
+// // screen 768px and small
+
+// @media only screen and (max-width: 768px) {
+//   .mobile-hide {
+//     display: none;
+//   }
+
+//   p.fw-bold.fs-head.fs-heading {
+//     font-size: 62px !important;
+//     padding-top: 0 !important;
+//   }
+
+//   p.fs-head.pt-5 {
+//     font-size: 52px !important;
+//   }
+
+//   p.sub-head {
+//     font-size: 22px !important;
+//   }
+
+//   .home-heading-main {
+//     padding: 0 !important;
+//   }
+
+//   .india-map>img {
+//     width: 100%;
+//     margin-top: 48px;
+//     padding: 0 32px;
+//   }
+
+//   .home-map {
+//     padding: 0 !important;
+//   }
+
+//   .container-fluid.home-main {
+//     padding-top: 0px !important;
+//   }
+
+//   p.display-3.fw-bold {
+//     padding: 0 10px !important;
+//   }
+
+//   ul.d-flex {
+//     list-style: none;
+//   }
+
+//   p.display-3.fw-bold.px-5 {
+//     font-size: 55px;
+//   }
+
+//   li.me-xxl-5 {
+//     padding-right: 15px !important;
+//   }
+
+//   .search-buttons {
+//     display: flex;
+//     justify-content: center;
+//   }
+
+//   .search-cities,
+//   .search-media {
+//     position: unset;
+//     transform: translateY(0);
+//     margin: 0px 10px;
+//   }
+
+//   .search-headline {
+//     position: unset;
+//     display: flex;
+//     justify-content: center;
+//     padding-bottom: 32px;
+//   }
+//   .cities {
+//     padding-left: 32px;
+//   }
+//   .location {
+//     background-color: $dark-grey;
+//   }
+//   div#basic-navbar-nav {
+//     padding-left: 25px !important;
+//   }
+// }
+
+// .new-search {
+//   position: fixed;
+//   z-index: 99999;
+//   top: 0;
+//   width: 100%;
+// }
+
+// // screen 992px and small
+
+// @media only screen and (max-width: 992px) {
+//   div#basic-navbar-nav {
+//     position: absolute;
+//     top: 100px;
+//     left: 0px;
+//     padding-left: 50px;
+//     background-color: black;
+//     width: 100%;
+//     z-index: 100;
+//   }
+//   .cities-list {
+//     transform: translateX(0px);
+//   }
+//   .new-search-fields {
+//     position: absolute !important;
+//     top: 64px !important;
+//     background-color: $light-grey !important;
+//     padding: 10px 100px 10px 100px;
+//     text-align: center;
+//   }
+// }
+
+// // screen 1024px and small
+
+// @media only screen and (max-width: 1024px) {
+//   a.text-light.nav-link {
+//     margin-left: 0px;
+//   }
+
+//   .round-circle {
+//     border: none;
+//   }
+
+//   .icons {
+//     width: 550px;
+//   }
+
+//   .search-headline {
+//     font-size: 1.2rem !important;
+//     padding-top: 2rem !important;
+//   }
+
+//   .fs-head {
+//     font-size: 2rem !important;
+//   }
+
+//   .sub-head {
+//     font-size: 12px !important;
+//   }
+
+//   .dots {
+//     width: 110px;
+//   }
+
+//   .fs-head {
+//     font-size: 2.6rem;
+//   }
+
+//   .img-square {
+//     height: 350px;
+//     width: 250px;
+//   }
+
+//   .img-square>img {
+//     width: 235px;
+//     height: 270px;
+//   }
+
+//   .india-map>img {
+//     display: flex;
+//     justify-content: center;
+//   }
+
+//   .cities-top {
+//     position: unset;
+//   }
+
+//   button.collapsed.navbar-toggler {
+//     background-color: #404040;
+//   }
+
+//   button.navbar-toggler {
+//     background-color: #404040;
+//   }
+// }
+
+// // screen 1200px and small
+
+// @media only screen and (max-width: 1200px){
+//   .cities {
+//     position: unset;
+//     top: 50%;
+//     transform: translateY(0);
+//   }
+// }
+
+// // screen 1440px and small
+
+// @media only screen and (max-width: 1440px) {
+//   .pos-absolute {
+//     position: unset;
+//   }
+
+//   .fs-heading {
+//     font-size: $subhead;
+//   }
+
+//   .icons {
+//     width: 650px;
+//   }
+
+//   .search-headline {
+//     font-size: $midhead;
+//     padding-top: 1.5rem;
+//   }
+// }

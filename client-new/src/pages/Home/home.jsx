@@ -5,105 +5,104 @@ import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate,Link } from "react-router-dom";
-import NewNAvbar from '../../components/Navbar/Navbar'
-import Navbar from "react-bootstrap/Navbar";
-import Footer from "../../components/Footer/Footer";
-import SearchMedia from "../SearchMedia/SeachMedia";
+import Navbar from '../../components/Navbar/navbar'
+import SearchMedia from "../SearchMedia/seachMedia";
 import Drop_Down_Image from "../../components/DropDrown/Drop_Down_Image";
 import Dropdown from 'react-bootstrap/Dropdown';
 import UserDetail from "../../components/Navbar/UserDetail";
+import Header from "../../components/header/header";
 
-function useWindowSize() {
-  const [size, setSize] = useState([window.innerWidth]);
-
-
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSize([window.innerWidth]);
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  return size;
-}
+// function useWindowSize() {
+//   const [size, setSize] = useState([window.innerWidth]);
 
 
 
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setSize([window.innerWidth]);
+//     };
+//     window.addEventListener("resize", handleResize);
 
-function useWindowScroll() {
-  const dispatch = useDispatch()
-  const [scrollPosition, setScrollPosition] = useState([window.pageYOffset]);
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition([window.pageYOffset]);
-    };
-    window.addEventListener("scroll", handleScroll);
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//     };
+//   }, []);
+//   return size;
+// }
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  return scrollPosition;
-}
+
+
+
+// function useWindowScroll() {
+//   const dispatch = useDispatch()
+//   const [scrollPosition, setScrollPosition] = useState([window.pageYOffset]);
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setScrollPosition([window.pageYOffset]);
+//     };
+//     window.addEventListener("scroll", handleScroll);
+
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+//   return scrollPosition;
+// }
 
 const Home = () => {
-  const navigate = useNavigate()
-  const [scroll] = useWindowScroll();
-  const [scrollcss, setScrollcss] = useState(false);
-  const [category_name, setCategory] = useState("traditional-ooh-media");
-  const [city, setCity] = useState([]);
-  const [city_name, setgetCity] = useState("Delhi");
-  const [show, setShow] = useState(false);
+//   const navigate = useNavigate()
+//   const [scroll] = useWindowScroll();
+//   const [scrollcss, setScrollcss] = useState(false);
+//   const [category_name, setCategory] = useState("traditional-ooh-media");
+//   const [city, setCity] = useState([]);
+//   const [city_name, setgetCity] = useState("Delhi");
+//   const [show, setShow] = useState(false);
 
-  const getCity = async () => {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/media/searchMedia"
-    );
-    setCity(data);
-  };
+//   const getCity = async () => {
+//     const { data } = await axios.get(
+//       "http://localhost:8080/api/v1/media/searchMedia"
+//     );
+//     setCity(data);
+//   };
 
-  useEffect(() => {
-    const handleCss = () => {
-      if (scroll > 325) {
-        setScrollcss(false);
-      } else {
-        setScrollcss(true);
-      }
-    };
-    handleCss();
-  }, [scroll]);
+//   useEffect(() => {
+//     const handleCss = () => {
+//       if (scroll > 325) {
+//         setScrollcss(false);
+//       } else {
+//         setScrollcss(true);
+//       }
+//     };
+//     handleCss();
+//   }, [scroll]);
 
-  const [width] = useWindowSize();
-  const [widthcss, setWidthcss] = useState(false);
-  useEffect(() => {
-    getCity()
-    const handleCss = () => {
-      if (width > 767) {
-        setWidthcss(false);
-      } else {
-        setWidthcss(true);
-      }
-    };
-    handleCss();
-  }, [width]);
+//   const [width] = useWindowSize();
+//   const [widthcss, setWidthcss] = useState(false);
+//   useEffect(() => {
+//     getCity()
+//     const handleCss = () => {
+//       if (width > 767) {
+//         setWidthcss(false);
+//       } else {
+//         setWidthcss(true);
+//       }
+//     };
+//     handleCss();
+//   }, [width]);
 
- const getCites =async() =>{
-  navigate('/city')
- }
+//  const getCites =async() =>{
+//   navigate('/city')
+//  }
 
- const getMedias = async() => {
-  navigate('./media')
- }
+//  const getMedias = async() => {
+//   navigate('./media')
+//  }
 
 
 
   return (
     <>
-      <div className="navbar-section p-0">
+      {/* <div className="navbar-section p-0">
        <NewNAvbar/>
       </div>
       <div className="home-section">
@@ -114,87 +113,16 @@ const Home = () => {
            <SearchMedia/>
         </div>
 
-        {/* <div
-          className="home-heading"
-          style={widthcss ? { display: "block" } : { display: "none" }}
-        >
-          <div className="pt-3 text-center text-light">
-            <p>Over 200,000 Hoardings across 3500 cities</p>
-          </div>
-          <div className="container-fluid px-3">
-            <div className="row">
-              <div className="col-12">
-                <div className="input-group mb-3 rounded-pill overflow-hidden border-0 py-4 location">
-                  <span
-                    className="input-group-text border-0 pe-1"
-                    id="basic-addon1"
-                  >
-                    <img src="./images/search.svg" alt="" />
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control hide-focus border-0"
-                    placeholder="Search"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-              </div>
-              <div className="col-sm-7">
-                <div className="input-group mb-3 rounded-pill overflow-hidden border-0 py-4 location">
-                  <span
-                    className="input-group-text border-0 pe-1"
-                    id="basic-addon1"
-                  >
-                    <img src="./images/search.svg" alt="" />
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control hide-focus border-0"
-                    placeholder="Search"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-              </div>
-              <div className="col-sm-5">
-                <div className="input-group mb-3 rounded-pill overflow-hidden border-0 py-4 location">
-                  <span
-                    className="input-group-text border-0 pe-1"
-                    id="basic-addon1"
-                  >
-                    <img src="./images/search.svg" alt="" />
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control hide-focus border-0"
-                    placeholder="Search"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                  />
-                </div>
-              </div>
-              <div className="col-12">
-                <input
-                  className="btn btn-light py-3 w-100 mb-4"
-                  type="submit"
-                  value="Submit"
-                ></input>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         <div style={scrollcss ? { display: "none" } : { display: "block" }} className="new-search">
                 <Navbar expand="lg px-md-4 colapse-search-bar">
         <div className="container-fluid px-md-4">
         <Dropdown onMouseOver={() => setShow(true)} >
             <Dropdown.Toggle variant="transparent"   >  
           <Navbar.Brand href="#home" id="home">
-            {/* <div className="brand-logo"> */}
+        
               <img src="./images/logo.png" alt="" srcSet="" className="brand" />
-              {/* <div className="text-light"></div> */}
-            {/* </div> */}
+
+    
           </Navbar.Brand>
           </Dropdown.Toggle>   
           </Dropdown> 
@@ -206,7 +134,7 @@ const Home = () => {
                   className="input-group-text border-0 pe-1"
                   id="basic-addon1"
                 >
-                  {/* Select City  */}
+                
                     <select
                   className="form-control hide-focus border-0 text-white "
                   onChange={(e) => {
@@ -217,7 +145,7 @@ const Home = () => {
                     <option className="text-dark" value={obj.name}>{obj.name}</option>
                   ))}
                 </select>
-                  {/* <img src="./images/search.svg" alt="" /> */}
+ 
                 </span>
                 <input
                   type="search"
@@ -232,7 +160,7 @@ const Home = () => {
                   id="basic-addon1"
                 >
 
-                  {/* Select Media Category */}
+               
                   <select   className="form-control hide-focus border-0 text-white py-2"
                   onChange={(e) => setCategory(e.target.value)}
                 >
@@ -247,7 +175,7 @@ const Home = () => {
                   <option className="text-dark" value="inflight_media">inflight_media</option>
                   <option className="text-dark" value="office-media">office-media</option>
                 </select>
-                  {/* <img src="./images/search.svg" alt="" /> */}
+              
                 </span>
                 <input
                   className="form-control hide-focus border-0 py-2"
@@ -377,14 +305,7 @@ const Home = () => {
                   to={`/services/${"traditional-ooh-media"}/${"pune"}`}
                   className="button text-light is-small is-info py-2 text-decoration-none"
                 >Pune</Link></li>
-                          {/* <li className="pe-5 me-xxl-5">
-                            Delhi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          </li>
-                          <li className="pe-5 me-xxl-5">Chennai&nbsp;&nbsp;</li>
-                          <li className="pe-5 me-xxl-5">
-                            Ahamadabad&nbsp;&nbsp;&nbsp;&nbsp;
-                          </li>
-                          <li className="pe-5 me-xxl-5">Pune</li> */}
+                        
                         </ul>
                       </div>
                       <div className="right">
@@ -415,9 +336,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+<Header/>
 
-      <Footer />
+<Navbar/>
+<SearchMedia/>
+
+    
 
     </>
   );
