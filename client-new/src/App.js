@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/home";
+import Map from "./pages/map/map";
 // import "./App.css"
 
 
@@ -21,6 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/map" element={<Map/>} />
           {/* <Route exact path="/login" element={avlable == true ? <Home/>:<Login/>}></Route>
           <Route exact path="/register" element={avlable == true ? <Home/>:<Register/>}></Route>
           <Route path="/Contact" element={<Contact/>}/>
