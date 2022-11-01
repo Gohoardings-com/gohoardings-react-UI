@@ -21,8 +21,8 @@ body {
 }
 .media-items {
   overflow-y: scroll !important;
-  height: calc(100vh - 98px);
-  margin-bottom: 49px 0;
+  height: calc(100vh - 98px) !important;
+  margin-bottom: 49px;
 }
 .media-items::-webkit-scrollbar-track {
   border: 1px solid #000;
@@ -40,3 +40,14 @@ body {
   background-color: #737272;
   border: 1px solid #000;
 }
+.filter-icons>div:hover , .cart-icons>div:hover , .filter-icons>div[aria-expanded=true], .cart-icons>div[aria-expanded=true]{
+  background-color: yellow;
+}
+.collapsing {
+  -webkit-transition: none;
+  transition: none;
+  display: none;
+}
+
+
+
