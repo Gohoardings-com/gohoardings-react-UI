@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
+import './footer.scss'
 import { Link, useNavigate } from "react-router-dom";
+import {CgCheck} from 'react-icons/cg'
 import axios from "axios";
 
 function useWindowSize() {
@@ -23,22 +25,6 @@ function useWindowSize() {
 
 
 const Footer = () => {
-  const category_name = "traditional-ooh-media"
-  const [city, setCity] = useState([]);
-  const [city_name, setgetCity] = useState("Delhi");
-
-  const getCity = async () => {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/media/searchMedia"
-    );
-    setCity(data);
-  };
-
-  useEffect(() => {
-    getCity();
-  }, []);
-
-
 const navigate = useNavigate()
     const [width] = useWindowSize();
     const [widthcss, setWidthcss] = useState(false);
@@ -59,268 +45,162 @@ const contactPage = async() => {
 
 return (
     <>
-<div
-        className="footer pt-3 mt-4"
-        style={widthcss ? { display: "none" } : { display: "block" }}
-      >
-        <div className="row-1 footer-bottom-line">
-          <div className="container-fluid px-5 py-4">
-            <div className="row">
-              <div className="col-6">
-                <img src="./images/logo.png" alt="" className="brand pb-3" />
+<div className="footer pb-3 bg-dark">
+        <div className="row w-100 p-0">
+          <div className="container-fluid px-5 py-5">
+            <div className="row pe-5 pt-5 ps-5">
+              <div className="col-12 col-sm">
+              <img src="./images/logo.png" alt="" className="brand w-75 h-auto" />
+                <h6 className=" text-muted pt-5">
 
-                <p className="ps-lg-2">
-                  <span className="text-light">
-                    India's Leading Chain Of OOH Advertising Services Agency
-                  </span>
-                </p>
-              </div>
-              <div className="col-6">
-                <p className="text-light text-end">
-                  Join our network and grow your buisness!
-                </p>
-                <input
-                  type="button"
-                  value=" Contact Us"
-                  onClick={contactPage}
-                  className="float-end"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row-2">
-          <div className="container-fluid px-5 py-4">
-            <div className="row">
-              <div className="col">
-                <p className="text-light px-5">
                 India's Largest Outdoor Advertising Company
-                </p>
-                <p className="text-light px-5">
+                </h6>
+                <h6 className="text-muted pt-5">
                 It's advertising network spread across 130 cities with more than 1.2 lakh OOH and DOOH sites offering hassle-free branding experiences at an unmatched price.
-                </p>
+                </h6>
               </div>
-              <div className="col mobile footer-side-line">
+              <div className="col-12 col-sm mobile footer-side-line">
                 <div className="quick-links text-light">
-                  <p className="subhead text-center">Quick Links</p>
-                  <ul className="position-relative px-5">
-                    <Nav.Link href="/register">Register As media Owner</Nav.Link>
-                    <Nav.Link href="/login">Login As Media Owner</Nav.Link>
-                    <Nav.Link href="/register">Register As Advertiser</Nav.Link>
-                    <Nav.Link href="/login">Login As Advertiser</Nav.Link>
+                  <h5 className="subhead text-muted px-5">Quick Links</h5>
+                  <ul className="position-relative px-5 text-muted pt-3">
+                      <li href="/register" className="text-nowrap"> <CgCheck/> Register As media Owner</li>
+                      <li href="/login" className="text-nowrap"> <CgCheck/> Login As Media Owner</li>
+                      <li href="/register" className="text-nowrap"> <CgCheck/> Register As Advertiser</li>
+                      <li href="/login" className="text-nowrap"> <CgCheck/> Login As Advertiser</li>
                     <span className="pos-absolute end-0 top-0 me-5">
-                      <Nav.Link href="https://odoads.com/"  target="_blank">Odoads</Nav.Link>
-                      <Nav.Link  href="https://www.gohoardings.com/blog/" target="_blank">Blog</Nav.Link>
+                        <li className="text-nowrap" href="https://odoads.com/"  target="_blank">  <CgCheck/> Odoads</li>
+                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Blog</li>
+                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> About Us</li>
+                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Team</li>
+                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Contact</li>
+                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Privacy Policy</li>
                     </span>
                   </ul>
                 </div>
               </div>
-              <div className="col mobile footer-side-line">
+              <div className="col-12 col-sm mobile footer-side-line">
                 <div className="popular-services text-light">
-                  <p className="subhead text-center">Popular Services</p>
-                  <ul className="position-relative px-5">
-                    <li><Link
+                  <h5 className="subhead text-muted px-5">Popular Services</h5>
+                  <ul className="position-relative px-5 pt-3 text-muted">
+                    <li>
+                      <Link
                   to={`/services/${"traditional-ooh-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Traditional OOH</Link></li>
-                    <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                  > <CgCheck/> Traditional OOH</Link>
+                </li>
+                    <li>
+                      <Link
                   to={`/services/${"digital-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Digital Media</Link></li>
-                    <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Digital Media</Link></li>
+                    <li>
+                      <Link
                   to={`/services/${"transit-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Transit-Media</Link></li>
-                    <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Transit-Media</Link></li>
+                    <li>
+                   <Link
                   to={`/services/${"mall-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Mall Media</Link></li>
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Mall Media</Link></li>
                     <span className="pos-absolute end-0 top-0 me-5">
-                      <li><Link
+                      <li>
+                       <Link
                   to={`/services/${"airport-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Airport Media</Link></li>
-                      <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Airport Media</Link></li>
+                      <li>
+                        <Link
                   to={`/services/${"inflight_media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Inflight Media</Link></li>
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Inflight Media</Link></li>
                     </span>
                   </ul>
                 </div>
               </div>
-              <div className="footer-bottom-short-line pt-4"></div>
-            </div>
-          </div>
-        </div>
-        <div className="row-3">
-          <div className="trending-cities">
-            <div className="container-fluid px-5 text-light">
-              <p className="subhead ps-4 ms-2">Trending Cities</p>
-              <div className="row">
-                  {
-                    city.map(obj => (
-                      <div className="col-3">
-                        <Link to={`/services/${category_name}/${obj.name}`} className="link-light text-decoration-none">Hoardings in {obj.name}</Link>
-                      </div>
-                    ))
-                  }
-              </div>
-              <div className="footer-bottom-short-line pt-4"></div>
-            </div>
-          </div>
-        </div>
-        <div className="row-5">
-          <div className="social-links">
-            <div className="container-fluid px-5">
-              <div className="row">
-                <div className="col-md-4 link-center">
-                  <ul className="d-flex text-light list-inline pt-3 ps-md-3">
-                  <Nav.Link href="https://www.facebook.com/gohoardings/" target="_blank"><img src="./images/Facebook.png" alt="facebook"/></Nav.Link>
-                    <Nav.Link className="ps-3" href="https://www.instagram.com/gohoardings/" target="_blank"><img src="./images/Instagram.png"  alt="instagram"/></Nav.Link>
-                    <Nav.Link className="ps-3" href="https://www.linkedin.com/company/gohoardings/" target="_blank"><img src="./images/Linkedin.png"  alt="linkedin"/></Nav.Link>
-                    <Nav.Link className="ps-3" href="https://twitter.com/gohoardings" target="_blank"><img src="./images/Twitter.png"  alt="twitter"/></Nav.Link>
-                  </ul>
-                </div>
-                <div className="col-md-8">
-                  <p className="text-light text-md-end pt-md-3 link-center">
-                    copyrights &#169; 2022 Gohaordings.com
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="footer mt-4"
-        style={widthcss ? { display: "block" } : { display: "none" }}
-      >
-        <div className="row-1">
-          <div className="container-fluid">
-            <div className="row pt-3 tagline">
-              <div className="col-sm-4">
-                <img src="./images/logo.png" alt="" className="brand pb-3" />
-              </div>
-              <div className="col-sm-8">
-                <p className="text-sm-end text-light">
-                  India's Leading Chain Of OOH Advertising Services Agency
-                </p>
-              </div>
-              <div>
-                <p className="text-light text-center px-5">
-                It's advertising network spread across 130 cities with more than 1.2 lakh OOH and DOOH sites offering hassle-free branding experiences at an unmatched price.
-
-                </p>
-              </div>
-              <div className="col-12">
-                <p className="text-light text-center text-end">
-                  Join our network and grow your buisness!
-                </p>
-                <div className="w-100 d-flex justify-content-center">
-                  <input type="button" value=" text text text " />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="footer-bottom-short-line pt-4"></div>
-        </div>
-        <div className="row-2">
-          <div className="container-fluid px-5 pt-4">
-            <div className="quick-links text-light">
-              <p className="subhead text-center">Quick Links</p>
-              <div className="row">
-                <ul className="col">
-                <li><Link
+              <div className="col-12 col-sm mobile footer-slide-line">
+              <h5 className="text-muted px-5">Trending Cities</h5>
+              <ul className="position-relative px-5 pt-3 text-muted">
+                    <li>
+                      <Link
                   to={`/services/${"traditional-ooh-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Traditional OOH</Link></li>
-                 <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                  > <CgCheck/> Traditional OOH</Link>
+                </li>
+                    <li>
+                      <Link
                   to={`/services/${"digital-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Digital Media</Link></li>
-                </ul>
-                <ul className="col">
-                <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Digital Media</Link></li>
+                    <li>
+                      <Link
                   to={`/services/${"transit-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Transit-Media</Link></li>
-                  <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Transit-Media</Link></li>
+                    <li>
+                   <Link
                   to={`/services/${"mall-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Mall Media</Link></li>
-                </ul>
-                <ul className="col">
-                <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Mall Media</Link></li>
+                    <span className="pos-absolute end-0 top-0 me-5">
+                      <li>
+                       <Link
                   to={`/services/${"airport-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Airport Media</Link></li>
-                      <li><Link
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Airport Media</Link></li>
+                      <li>
+                        <Link
                   to={`/services/${"inflight_media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Inflight Media</Link></li>
-                </ul>
+                  className="button text-light is-small is-info py-2 text-decoration-none text-muted"
+                > <CgCheck/> Inflight Media</Link></li>
+                    </span>
+                  </ul>
               </div>
+             
             </div>
-            <div className="footer-bottom-short-line pt-4 mb-4"></div>
-            <div className="popular-services text-light">
-              <p className="subhead text-center">Popular Services</p>
-              <div className="row">
-                <ul className="col">
-                <li><Link
-                  to={`/services/${"transit-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Transit-Media</Link></li>
-                  <li><Link
-                  to={`/services/${"mall-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Mall Media</Link></li>
-                </ul>
-                <ul className="col">
-                <li><Link
-                  to={`/services/${"airport-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Airport Media</Link></li>
-                      <li><Link
-                  to={`/services/${"inflight_media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Inflight Media</Link></li>
-                </ul>
-                <ul className="col">
-                <li><Link
-                  to={`/services/${"transit-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Transit-Media</Link></li>
-                  <li><Link
-                  to={`/services/${"mall-media"}/${"delhi"}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
-                >Mall Media</Link></li>
-                </ul>
-              </div>
-            </div>
-            <div className="footer-bottom-short-line pt-4"></div>
           </div>
         </div>
-        <div className="row-5">
-          <div className="social-links">
-            <div className="container-fluid px-5">
-              <div className="row">
-                <div className="col-md-4">
-                  <ul className="d-flex text-light list-inline pt-3 ps-md-3 link-center">
-                  <Nav.Link className="ps-3" href="https://www.facebook.com/gohoardings/" target="_blank"><img src="./images/Facebook.png" alt="facebook"/></Nav.Link>
+        <div className="row  w-100 p-0">
+            <div className="col-12 col-sm-3 px-5 text-light">
+            <h5 className="subhead ps-2 ms-2 text-muted">Payment Option</h5>
+            <img className="w-100 h-auto px-2 pt-3" src="https://cdn.shopify.com/s/files/1/0075/1009/7979/files/credit-card-icons-footer-2_6c2944f9-234e-49f3-b545-deca18efbfb9.png"  alt="payment"/>
+            </div>
+             <div class="col-12 col-sm-3">
+                <h5 className="text-muted px-3 ps-5">Address</h5>
+              <h6 className="text-muted ps-5 pt-3">E-82, 3rd Floor, Sector 6, Noida - 201301 Landmark : Near Paytm Office</h6>
+              <span className="strong px-3 ps-5 text-light">Phone: </span><span className="highlighted text-light">+91 77778 71717</span>
+              </div>
+              <div className="col-12 col-sm-5 text-muted ps-5 ">
+                  <h5 className="ps-5">Best deals in your inbox</h5>
+                  <h6 className="pt-3 pe-5 text-center">Join our newsletter for the most recent information.</h6>
+                  <div  class="input-field">
+                   <div className="d-flex flex-row  w-100 ">
+                   <form  class="input-field text-center ps-5">
+                      <input className="px-1 m-2 text-dark bg-light"  type="email" placeholder="Enter you email address" formcontrolname="email"/>
+                     <input className="pe-5 text-dark bg-light" type="submit" value="Subscribe Now" disabled=""/>
+                    </form>
+                   </div>
+        </div>
+              </div>
+        </div>
+        <div className="container-fluid">
+        <div className="row  w-100">
+                <div className="col-sm-8 ps-5 pt-5">
+                  <h5 className="text-muted pt-4">Contact with Us</h5>
+                  <ul className="d-flex list-inline ps-1">
+                  <Nav.Link  href="https://www.facebook.com/gohoardings/" target="_blank"><img src="./images/Facebook.png" alt="facebook"/></Nav.Link>
                     <Nav.Link className="ps-3" href="https://www.instagram.com/gohoardings/" target="_blank"><img src="./images/Instagram.png"  alt="instagram"/></Nav.Link>
                     <Nav.Link className="ps-3" href="https://www.linkedin.com/company/gohoardings/" target="_blank"><img src="./images/Linkedin.png"  alt="linkedin"/></Nav.Link>
                     <Nav.Link className="ps-3" href="https://twitter.com/gohoardings" target="_blank"><img src="./images/Twitter.png"  alt="twitter"/></Nav.Link>
                   </ul>
-                </div>
-                <div className="col-md-8">
-                  <p className="text-light text-md-end pt-md-3 link-center">
+                  </div>
+                <div className="col-sm-4 ps-5  pt-5 text-end text-bottom">
+                  <h6 className="text-white pt-md-3 text-nowrap fw-bolder">
                     copyrights &#169; 2022 Gohaordings.com
-                  </p>
+                  </h6>
                 </div>
-              </div>
-            </div>
-          </div>
+              
+        </div>
         </div>
       </div>
       </>

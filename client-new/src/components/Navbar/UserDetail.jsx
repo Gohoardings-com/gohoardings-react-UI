@@ -1,18 +1,18 @@
-import React,{useEffect, useState, useReducer} from 'react'
-import instance from '../../apis/Axios';
-import { AccountContext } from '../../apis/ApiContext';
-import { useSelector, useDispatch } from 'react-redux'
-import { authActions } from '../../store';
-import './navbar.css'
-import { useNavigate } from 'react-router-dom';
-import { GoogleLogout } from 'react-google-login'
-import Nav from "react-bootstrap/Nav";
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { useContext } from 'react';
+// import React,{useEffect, useState, useReducer} from 'react'
+// import instance from '../../apis/Axios';
+// import { AccountContext } from '../../apis/ApiContext';
+// import { useSelector, useDispatch } from 'react-redux'
+// import { authActions } from '../../store';
+// import './navbar.css'
+// import { useNavigate } from 'react-router-dom';
+// import { GoogleLogout } from 'react-google-login'
+// import Nav from "react-bootstrap/Nav";
+// import { AiOutlineShoppingCart } from 'react-icons/ai'
+// import { useContext } from 'react';
 
-const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
+// const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
-const UserDetail = () => {
+// const UserDetail = () => {
   // const dispatch = useDispatch();
   //   const {state} = useContext(AccountContext)
   //   const navigate = useNavigate();
@@ -52,24 +52,24 @@ const UserDetail = () => {
   //   const onCart = async () => {
   //       navigate('/cart')
   //     }
-  return (
-   <>
+//   return (
+//    <>
    
-                <Nav.Link
-                  className="navLink ps-31"
-                  href="/register"
-                >
-                  Register
-                </Nav.Link>
-                <Nav.Link
-                  className="navLink ps-3"
-                  href="/login"
-                >
-                  Sign In
-                </Nav.Link>
+//                 <Nav.Link
+//                   className="navLink ps-31"
+//                   href="/register"
+//                 >
+//                   Register
+//                 </Nav.Link>
+//                 <Nav.Link
+//                   className="navLink ps-3"
+//                   href="/login"
+//                 >
+//                   Sign In
+//                 </Nav.Link>
               
-   </>
-  )
-}
+//    </>
+//   )
+// }
 
-export default UserDetail;
+// export default UserDetail;

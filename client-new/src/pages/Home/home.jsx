@@ -11,6 +11,12 @@ import Drop_Down_Image from "../../components/DropDrown/Drop_Down_Image";
 import Dropdown from 'react-bootstrap/Dropdown';
 import UserDetail from "../../components/Navbar/UserDetail";
 import Header from "../../components/header/header";
+import Ourservices from "../ourservices/ourservices";
+import City from "../citylist/city";
+import Enquire from "../enquire/enquire";
+import Footer from "../footer/footer";
+import Trandingcity from "../trandingcity/trandingcity";
+import Fixednavbar from "../../components/Navbar/fixednavbar";
 
 // function useWindowSize() {
 //   const [size, setSize] = useState([window.innerWidth]);
@@ -305,7 +311,6 @@ const Home = () => {
                   to={`/services/${"traditional-ooh-media"}/${"pune"}`}
                   className="button text-light is-small is-info py-2 text-decoration-none"
                 >Pune</Link></li>
-                        
                         </ul>
                       </div>
                       <div className="right">
@@ -337,10 +342,17 @@ const Home = () => {
           </div>
         </div>
       </div> */}
+
 <Header/>
 
 <Navbar/>
 <SearchMedia/>
+<Fixednavbar/>
+ <Ourservices/> 
+ <City/>
+<Enquire/>
+{/* <Trandingcity/>  */}
+<Footer/>
 
     
 

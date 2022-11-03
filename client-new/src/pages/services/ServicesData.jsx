@@ -2,96 +2,96 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { BsListCheck } from 'react-icons/bs';
 // import { MdChecklist } from 'react-icons/md';
-// import { add,remove} from '../../reducer/adminReducer';
+// // import { add,remove} from '../../reducer/adminReducer';
 // import { AccountContext } from '../../apis/ApiContext';
-// import { mediawithcity } from '../../action/adminAction';
+// // import { mediawithcity } from '../../action/adminAction';
 // import { useDispatch, useSelector } from 'react-redux';
 // import "./Service.scss"
-// import Newbar from '../../components/Navbar/Navbar'
 // import instance from '../../apis/Axios';
 // import { useParams,useNavigate } from 'react-router-dom';
 // import CartPattern from './MultiCartItem';
 // import SingleCartIcon from './SingleCartIcon';
 // import MediaFilter from './MediaFilter';
+// import Header from '../../components/header/header';
 
 // const SearchData = () => {
-//   const dispatch = useDispatch()
-//   const { category_name, city_name } = useParams();
-//   const {addRemove} = useContext(AccountContext)
-//   const data = useSelector((state) => state.search.search)
-//   const [posts, setPosts] = useState([])
-//   const [list, setList] = useState(true)
-//   const navigate = useNavigate()
-//   const getData = async () => {
-//     // dispatch(mediawithcity(category_name ?? 'traditional-ooh-media', city_name ?? 'Delhi'));
+// //   const dispatch = useDispatch()
+// //   const { category_name, city_name } = useParams();
+// //   const {addRemove} = useContext(AccountContext)
+// //   const data = useSelector((state) => state.search.search)
+// //   const [posts, setPosts] = useState([])
+// //   const [list, setList] = useState(true)
+// //   const navigate = useNavigate()
+// //   const getData = async () => {
+// //     // dispatch(mediawithcity(category_name ?? 'traditional-ooh-media', city_name ?? 'Delhi'));
     
-//     const {data} = await instance.post("media/searchMedia",{
-//       category_name : category_name,
-//       city_name : city_name
-//     })
-//     setPosts(data);
-//   }
+// //     const {data} = await instance.post("media/searchMedia",{
+// //       category_name : category_name,
+// //       city_name : city_name
+// //     })
+// //     setPosts(data);
+// //   }
 
 
 
-//   const addonCart = async (e) => {
+// //   const addonCart = async (e) => {
     
-//     const {data} =  await instance.post('cart/addOnCart', {
-//         mediaid: e.code,
-//         mediatype: e.category_name,
-//       })
-//         if(data.message == 'Login First'){
-//           navigate('/login')
-//         }else{
-//           addRemove({type:"INCR"})
-//           add(e)
-//         }
-//     }
+// //     const {data} =  await instance.post('cart/addOnCart', {
+// //         mediaid: e.code,
+// //         mediatype: e.category_name,
+// //       })
+// //         if(data.message == 'Login First'){
+// //           navigate('/login')
+// //         }else{
+// //           addRemove({type:"INCR"})
+// //           add(e)
+// //         }
+// //     }
 
-//     const removefroCart = async (obj) => {
-//       console.log(obj);
-//       await instance.post('cart/deleteFromCart', {
-//         code: obj.code,
-//       })
-//       addRemove({type:"DECR"})
-//       remove(obj)
-//     }
+// //     const removefroCart = async (obj) => {
+// //       console.log(obj);
+// //       await instance.post('cart/deleteFromCart', {
+// //         code: obj.code,
+// //       })
+// //       addRemove({type:"DECR"})
+// //       remove(obj)
+// //     }
 
 
 //     /***************************************************************** */
 
-//     const add = (event) => {
-//       let data = [...posts];
-//       data.forEach((element) => {
-//         if (element.code == event.code) {
-//           console.log(element);
-//           element.isDelete = 0;
-//           setPosts(data);
-//         }
-//       });
-//     };
+//     // const add = (event) => {
+//     //   let data = [...posts];
+//     //   data.forEach((element) => {
+//     //     if (element.code == event.code) {
+//     //       console.log(element);
+//     //       element.isDelete = 0;
+//     //       setPosts(data);
+//     //     }
+//     //   });
+//     // };
 
-//     const remove = (event) => {
-//       let data = [...posts];
-//       data.forEach((element) => {
-//         if (element.code == event.code) {
-//           console.log(element);
-//           element.isDelete = 1;
-//           setPosts(data);
-//         }
-//       });
-//     };
+//     // const remove = (event) => {
+//     //   let data = [...posts];
+//     //   data.forEach((element) => {
+//     //     if (element.code == event.code) {
+//     //       console.log(element);
+//     //       element.isDelete = 1;
+//     //       setPosts(data);
+//     //     }
+//     //   });
+//     // };
 
 
 //   /***************************************************************** */
 
-//   useEffect(() => {
-//     getData()
-//   }, [])
+// //   useEffect(() => {
+// //     getData()
+// //   }, [])
 
 //   return (
 //     <>
-//       <Newbar />
+//   <Header/>
 // <div className='container-fluid'>
 //         <h1 className=' col-sm-12 text-center pt-3 text-white'>Traditional OOH</h1>
 //         <div className=' col-12 col-sm-12 p-5 py-xxl-5 mt-5 mb-5 bg-light h-75' > </div>
@@ -104,11 +104,13 @@
 //                         aria-label='Default select example'>
 //                         <option selected>Selected Location</option>
 //                     </select>
-//                     {list  ? <BsListCheck className='img-fluid' style={{ height: "30px", width: "30px" }} onClick={() => setList(!list)} /> :  <MdChecklist className='img-fluid' style={{ height: "30px", width: "30px" }} onClick={() => setList(!list)} />}
+//                     {/* {list  ? <BsListCheck className='img-fluid' style={{ height: "30px", width: "30px" }} onClick={() => setList(!list)} /> :  <MdChecklist className='img-fluid' style={{ height: "30px", width: "30px" }} onClick={() => setList(!list)} />} */}
+//                     {list  ? <BsListCheck  /> :  <MdChecklist  />}
 
 //                 </div>
 //                 <div className='overflow text-center'>
-//              {list ? <CartPattern posts={posts} dispatch={dispatch} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/> :<SingleCartIcon posts={posts} dispatch={dispatch} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/> }
+//              {/* {list ? <CartPattern posts={posts} dispatch={dispatch} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/> :<SingleCartIcon posts={posts} dispatch={dispatch} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/> } */}
+//              {list ? <CartPattern /> :<SingleCartIcon /> }
                 
 //             </div>
 //             <div className='d-flex flex-row bd-highlight mb-3 pt-3'>

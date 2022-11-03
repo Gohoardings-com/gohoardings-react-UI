@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import Nav from "react-bootstrap/Nav";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from "react-bootstrap/Navbar";
-import './navbar.css'
+import './navbar.scss'
 import {MdLocationOn} from 'react-icons/md'
 import { useNavigate } from "react-router-dom";
-import UserDetail from "./UserDetail";
 import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
 
 
 const NewNAvbar = () => {
-
   const navigate = useNavigate();
-
   const [show, setShow] = useState(false);
 
 
@@ -23,49 +20,60 @@ const NewNAvbar = () => {
   return (
     <>
       <Navbar expand="lg px-md-0">
-        <div className="navbar container-fluid py-md-0 px-md-4">
+        <div className="navbar container-fluid py-md-0 ">
           {/* <Dropdown
             onMouseOver={() => setShow(true)}>
             <Dropdown.Toggle variant="transparent" id="dropdown-basic" > */}
               <Navbar.Brand >
-                <img src="./images/logo.png" className="brand" onClick={home} />
+                <img src="./images/logo.png" className="brand ms-5" onClick={home} />
             </Navbar.Brand>
              {/*  </Dropdown.Toggle>
 
           </Dropdown> */}
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle aria-controls="basic-navbar-nav " />
+          <Navbar.Collapse id="basic-navbar-nav ">
 
-            <Nav className=" ms-auto">
+            <Nav className=" ms-auto me-5">
               <Nav.Link
-                className="navLink  ps-3"
+                className="navLink ps-3"
                 href="https://odoads.com/"
                 target="_blank"
               >
                 Odoads
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3 "
+                className="navLink ps-3"
                 href="https://www.gohoardings.com/blog/"
                 target="_blank"
               >
                 Blog
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3 pe-2"
+                className="navLink ps-3 pe-3"
                 href="https://gohoardings.com/contact-us"
               >
                 Contact
               </Nav.Link>
               <Nav.Link
-                className="mapLink text-white text-center ps-5  px-lg-3 rounded-pill bold"
+                className="mapLink text-white text-center  px-lg-3 text-nowrap rounded-pill bold"
                 href="https://gohoardings.com/map-view"
               >
-                <MdLocationOn/>
+                <MdLocationOn className="ps-0"/>
                 Map View
               </Nav.Link>
-              <UserDetail />
-
+              {/* <UserDetail /> */}
+              <Nav.Link
+                  className="navLink ps-3"
+                  href="/register"
+                >
+                  Register
+                </Nav.Link>
+                <Nav.Link
+                  className="navLink ps-3"
+                  href="/login"
+                >
+                  Sign In
+                </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </div>

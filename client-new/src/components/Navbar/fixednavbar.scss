@@ -1,0 +1,27 @@
+// @import '../../assets/scss/_variables.scss';
+// @import "~bootstrap/scss/bootstrap";
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
+
+.new-search {
+  position: fixed;
+  background-color:#20344D ;
+  z-index: 1;
+  top: 24px;
+  width: 100%;
+  bottom: 557px;
+  
+}
+
+// screen 992px and small
+
+@media only screen and (max-width: 992px) {
+  
+  .new-search-fields {
+    position: absolute !important;
+    top: 64px !important;
+    background-color: #20344D ;
+    padding: 10px 100px 10px 100px;
+    text-align: center;
+  }
+}

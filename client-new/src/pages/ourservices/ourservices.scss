@@ -1,0 +1,30 @@
+.ourServices{
+        background-image: linear-gradient(to top,#e6e9f1,rgb(152, 211, 224));
+}
+.showAll{
+display: none;
+}
+.showAll{
+        font-weight: 300;
+        font-size: 10px;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+}
+.medias{
+        font-weight: 900;
+        text-decoration:2px underline blue;
+        cursor: pointer;
+        overflow: hidden;
+        width: auto;   
+}
+
+.medias>img:hover{
+        transition: 0.5s all ease-in-out;      
+        transform: scale(1.1);     
+}
+.card-img-top{
+        box-shadow: 0px 3px 3px gray;
+
+}
+
