@@ -13,20 +13,27 @@
     background: black;
   }
   
-  .customSlider-thumb {
-    cursor: pointer;
-    /*color for the thumb */
-    background: black;
-    /* shape of the thumb: circle */
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    /* remove default outline when selected */
-    outline: none;
+
+ .customSlider-thumb {
+  background: #e7dcbd;
+  display: inline-block;
+  height: 15px;
+  margin-left: -11px;
+  margin-top: 0px;
+  width: 20px;
+  outline: 0;
   }
-  
-  .customSlider-thumb:hover {
-    box-shadow: 0 0 0 8px black;
+  .customSlider-thumb:before {
+    border-top: 10px solid #e7dcbd;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 15px;
+    width: 0;
+    outline: 0;
   }
   
   .customSlider-mark {
@@ -43,4 +50,7 @@
   
   .customSlider-mark.customSlider-mark-active {
     display: none;
+  }
+  .tick-marks {
+    background-color: #e7dcbd;
   }

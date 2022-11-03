@@ -40,8 +40,9 @@ body {
   background-color: #737272;
   border: 1px solid #000;
 }
-.filter-icons>div:hover , .cart-icons>div:hover , .filter-icons>div[aria-expanded=true], .cart-icons>div[aria-expanded=true]{
+.filter-icons>div:hover , .cart-icons>.bag:hover , .filter-icons>div[aria-expanded=true], .cart-icons>div[aria-expanded=true]{
   background-color: yellow;
+  cursor: pointer;
 }
 .media-items.collapsing , .poi-items.collapsing ,.filter-items.collapsing {
   -webkit-transition: none;
@@ -70,3 +71,19 @@ body {
   border: 1px solid #000;
 }
 
+.poi-check {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    left: 50%;
+    transform: translateY(-50%);
+}
+.distance {
+  height: 90px;
+  background-color: darkgray;
+}
+
+.km-distance {
+  transform: translateY(-40px);
+}

@@ -6,6 +6,7 @@ const Slider = (props) => {
   const HandleDistance = async (e) => {
     props.onChange(e);
  }
+ 
   return (
     <ReactSlider
       className="customSlider"

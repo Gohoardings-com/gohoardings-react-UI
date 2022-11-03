@@ -6,7 +6,7 @@ import Slider from "./slider.jsx";
 import { useState } from "react";
 import MultiRangeSlider from "./multiRangeSlider";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = () => <div><img src="./assests/map-icons/billboard.png" alt="" /></div>;
 
 const Map = () => {
 
@@ -33,8 +33,8 @@ const Map = () => {
           </div>
           <div id="accordionTest">
             <div className="media-items p-2 accordion-collapse collapse show" id="collapseT1" data-bs-parent="#accordionTest">
-              <div class="accordion items mb-2 rounded" id="accordionExample">
-                <div class="accordion-item border rounded mb-2">
+              <div className="accordion items mb-2 rounded" id="accordionExample">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseOne"
@@ -70,11 +70,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseOne"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -88,7 +88,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border rounded mb-2">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo"
@@ -124,11 +124,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseTwo"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingTwo"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -142,7 +142,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border rounded mb-2">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseThree"
@@ -178,11 +178,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseThree"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -196,7 +196,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border rounded mb-2">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFour"
@@ -232,11 +232,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseFour"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingFour"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -250,7 +250,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border rounded mb-2">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFive"
@@ -286,11 +286,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseFive"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingFive"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -304,7 +304,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border rounded mb-2">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseSix"
@@ -340,11 +340,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseSix"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingSix"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -358,7 +358,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border rounded mb-2">
+                <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseSeven"
@@ -394,11 +394,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseSeven"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingSeven"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -417,60 +417,74 @@ const Map = () => {
             <div className="poi-items accordion-collapse collapse" id="collapseT2" data-bs-parent="#accordionTest">
 
                 <div className="row">
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiOne" aria-expanded="false">
                   <img src="./assests/map-icons/bag.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiOne"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiTwo" aria-expanded="false">
                   <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiTwo"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiThree" aria-expanded="false">
                   <img src="./assests/map-icons/toggle.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiThree"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFour" aria-expanded="false">
                   <img src="./assests/map-icons/bag.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiFour"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFive" aria-expanded="false">
                   <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiFive"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSix" aria-expanded="false">
                   <img src="./assests/map-icons/toggle.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiSix"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSeven" aria-expanded="false">
                   <img src="./assests/map-icons/bag.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiSeven"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border">
+                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiEight" aria-expanded="false">
                   <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
+                  <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiEight"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
               </div>
-
-              <Slider Distance={Distance} onChange={HandleDistance}/>
-
-
+              <div className="distance p-2 my-3">
+                <p className="m-1 mb-4">Distance</p>
+                <Slider Distance={Distance} onChange={HandleDistance}/>
+                <div className="row pt-3 ps-3 km-distance">
+                  <div className="col-lg-3 col-sm-2 ps-1">0km</div>
+                  <div className="col-lg-3 col-sm-2 ps-2">1km</div>
+                  <div className="col-lg-3 col-sm-2 ps-3">2km</div>
+                  <div className="col-lg-3 col-sm-2 ps-4">3km</div>
+                </div>
+              </div>
             </div>
             <div className="filter-items p-2 accordion accordion-collapse collapse" id="collapseT3" data-bs-parent="#accordionTest">
 
             <MultiRangeSlider min={0} max={1000000}
       onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}/>
               <br /><br />
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="flush-headingOne">
+                  <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                     Accordion Item #1
                   </button>
                 </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> className. This is the first item's accordion body.</div>
                 </div>
               </div>   
               <br />
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="flush-headingTwo">
+                  <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                     Accordion Item #2
                   </button>
                 </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
+                <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                  <div className="accordion-body">
                   <div className="pe-3 mb-2">
                 <input type="search" placeholder="Search Hoarding Type" className="w-100" />
                 </div>
@@ -506,8 +520,8 @@ const Map = () => {
 
             </div>
             <div className="media-items p-2 accordion-collapse collapse" id="collapseC1" data-bs-parent="#accordionTest">
-              <div class="accordion items border mb-2" id="accordionExample">
-                <div class="accordion-item">
+              <div className="accordion items border mb-2" id="accordionExample">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFour"
@@ -543,11 +557,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseOne"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -561,7 +575,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo"
@@ -597,11 +611,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseTwo"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingTwo"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -615,7 +629,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseThree"
@@ -651,11 +665,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseThree"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -669,7 +683,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFour"
@@ -705,11 +719,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseFour"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingFour"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -723,7 +737,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFive"
@@ -759,11 +773,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseFive"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingFive"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -777,7 +791,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseSix"
@@ -813,11 +827,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseSix"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingSix"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -831,7 +845,7 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <div className="accordion-item">
                   <div
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseSeven"
@@ -867,343 +881,11 @@ const Map = () => {
                     {/* </div> */}
                     <div
                       id="collapseSeven"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingSeven"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="media-items p-2 accordion-collapse collapse" id="collapseC2" data-bs-parent="#accordionTest">
-              <div class="accordion items border mb-2" id="accordionExample">
-                <div class="accordion-item">
-                  <div
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    {/* <div className=""> */}
-                    <div className="row m-0">
-                      <p className="my-2">
-                        {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
-                          0,
-                          20
-                        ) + "..."}
-                      </p>
-                      <div className="col-4">
-                        <img
-                          src="./images/media.jpg"
-                          alt="N/A"
-                          className="w-100 mt-2 pt-2"
-                        />
-                      </div>
-                      <div className="col-8">
-                        <ul className="list-unstyled">
-                          <li>Code : GOH00M61</li>
-                          <li>FTF : Unipole</li>
-                          <li>Size : 30 x 20 feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* </div> */}
-                    <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <div
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="true"
-                    aria-controls="collapseTwo"
-                  >
-                    {/* <div className=""> */}
-                    <div className="row m-0">
-                      <p className="my-2">
-                        {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
-                          0,
-                          20
-                        ) + "..."}
-                      </p>
-                      <div className="col-4">
-                        <img
-                          src="./images/media.jpg"
-                          alt="N/A"
-                          className="w-100 mt-2 pt-2"
-                        />
-                      </div>
-                      <div className="col-8">
-                        <ul className="list-unstyled">
-                          <li>Code : GOH00M61</li>
-                          <li>FTF : Unipole</li>
-                          <li>Size : 30 x 20 feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* </div> */}
-                    <div
-                      id="collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <div
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                    aria-expanded="true"
-                    aria-controls="collapseThree"
-                  >
-                    {/* <div className=""> */}
-                    <div className="row m-0">
-                      <p className="my-2">
-                        {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
-                          0,
-                          20
-                        ) + "..."}
-                      </p>
-                      <div className="col-4">
-                        <img
-                          src="./images/media.jpg"
-                          alt="N/A"
-                          className="w-100 mt-2 pt-2"
-                        />
-                      </div>
-                      <div className="col-8">
-                        <ul className="list-unstyled">
-                          <li>Code : GOH00M61</li>
-                          <li>FTF : Unipole</li>
-                          <li>Size : 30 x 20 feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* </div> */}
-                    <div
-                      id="collapseThree"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingThree"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="media-items p-2 accordion-collapse collapse" id="collapseC3" data-bs-parent="#accordionTest">
-              <div class="accordion items border mb-2" id="accordionExample">
-                <div class="accordion-item">
-                  <div
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    {/* <div className=""> */}
-                    <div className="row m-0">
-                      <p className="my-2">
-                        {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
-                          0,
-                          20
-                        ) + "..."}
-                      </p>
-                      <div className="col-4">
-                        <img
-                          src="./images/media.jpg"
-                          alt="N/A"
-                          className="w-100 mt-2 pt-2"
-                        />
-                      </div>
-                      <div className="col-8">
-                        <ul className="list-unstyled">
-                          <li>Code : GOH00M61</li>
-                          <li>FTF : Unipole</li>
-                          <li>Size : 30 x 20 feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* </div> */}
-                    <div
-                      id="collapseOne"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <div
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="true"
-                    aria-controls="collapseTwo"
-                  >
-                    {/* <div className=""> */}
-                    <div className="row m-0">
-                      <p className="my-2">
-                        {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
-                          0,
-                          20
-                        ) + "..."}
-                      </p>
-                      <div className="col-4">
-                        <img
-                          src="./images/media.jpg"
-                          alt="N/A"
-                          className="w-100 mt-2 pt-2"
-                        />
-                      </div>
-                      <div className="col-8">
-                        <ul className="list-unstyled">
-                          <li>Code : GOH00M61</li>
-                          <li>FTF : Unipole</li>
-                          <li>Size : 30 x 20 feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* </div> */}
-                    <div
-                      id="collapseTwo"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <div
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                    aria-expanded="true"
-                    aria-controls="collapseThree"
-                  >
-                    {/* <div className=""> */}
-                    <div className="row m-0">
-                      <p className="my-2">
-                        {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
-                          0,
-                          20
-                        ) + "..."}
-                      </p>
-                      <div className="col-4">
-                        <img
-                          src="./images/media.jpg"
-                          alt="N/A"
-                          className="w-100 mt-2 pt-2"
-                        />
-                      </div>
-                      <div className="col-8">
-                        <ul className="list-unstyled">
-                          <li>Code : GOH00M61</li>
-                          <li>FTF : Unipole</li>
-                          <li>Size : 30 x 20 feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* </div> */}
-                    <div
-                      id="collapseThree"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingThree"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
                         It is shown by default, until the collapse plugin adds the
                         appropriate classes that we use to style each element.
@@ -1221,14 +903,11 @@ const Map = () => {
             </div>
           </div>
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
-            <div className="col-4 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
+            <div className="col-6 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
               <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
-            <div className="col-4 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC2" aria-expanded="false" aria-controls="collapseC2">
-              <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
-            </div>
-            <div className="col-4 filter d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC3" aria-expanded="false" aria-controls="collapseC3">
-              <img src="./assests/map-icons/toggle.png" alt="N/A" />
+            <div className="col-6 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
+              <p className="m-0"><img src="./assests/map-icons/rupee-symbol.png" alt="N/A" /> : 999999</p>
             </div>
           </div>
         </div>
@@ -1240,9 +919,9 @@ const Map = () => {
             resetBoundsOnResize={true}
             defaultCenter={{ lat: 28.5355, lng: 77.391 }}
             style={{ height: `100vh` }}
-            defaultZoom={10}
+            defaultZoom={15}
           >
-            <AnyReactComponent lat={28.5355} lng={77.391} text="My Marker" />
+            <AnyReactComponent lat={28.5355} lng={77.391} />
           </GoogleMapReact>
         </div>
       </div>
