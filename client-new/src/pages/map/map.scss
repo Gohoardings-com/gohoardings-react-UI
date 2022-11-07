@@ -80,10 +80,26 @@ body {
     transform: translateY(-50%);
 }
 .distance {
-  height: 90px;
+  height: 100px;
   background-color: darkgray;
 }
 
 .km-distance {
-  transform: translateY(-40px);
+  transform: translateY(-44px);
+}
+.poi-submit {
+  position: relative;
+}
+.poi-submit>button {
+  position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.price-range {
+  height: 65px;
+}
+#flush-collapseOne.collapsing.price-range {
+  -webkit-transition: none;
+  transition: none;
+  display: none;
 }
