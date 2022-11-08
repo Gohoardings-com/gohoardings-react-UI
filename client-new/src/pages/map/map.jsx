@@ -418,40 +418,40 @@ const Map = () => {
 
                 <div className="row">
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiOne" aria-expanded="false">
-                  <img src="./assests/map-icons/bag.png" alt="N/A" />
+                  <img src="./assests/map-icons/education.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiOne"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiTwo" aria-expanded="false">
-                  <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
+                  <img src="./assests/map-icons/bar.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiTwo"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiThree" aria-expanded="false">
-                  <img src="./assests/map-icons/toggle.png" alt="N/A" />
+                  <img src="./assests/map-icons/hotel.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiThree"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFour" aria-expanded="false">
-                  <img src="./assests/map-icons/bag.png" alt="N/A" />
+                  <img src="./assests/map-icons/restaurant.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiFour"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFive" aria-expanded="false">
-                  <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
+                  <img src="./assests/map-icons/hospital.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiFive"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSix" aria-expanded="false">
-                  <img src="./assests/map-icons/toggle.png" alt="N/A" />
+                  <img src="./assests/map-icons/spa.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiSix"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSeven" aria-expanded="false">
-                  <img src="./assests/map-icons/bag.png" alt="N/A" />
+                  <img src="./assests/map-icons/cinema.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiSeven"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
                 <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiEight" aria-expanded="false">
-                  <img src="./assests/map-icons/rupee-symbol.png" alt="N/A" />
+                  <img src="./assests/map-icons/gym.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiEight"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
               </div>
-              <div className="distance p-2 my-3">
-                <p className="m-1 mb-4">Distance</p>
+              <div className="distance p-2 m-3">
+                <p className="m-1 mb-4 pb-2">Distance</p>
                 <Slider Distance={Distance} onChange={HandleDistance}/>
                 <div className="row pt-3 ps-3 km-distance">
                   <div className="col-lg-3 col-sm-2 ps-1">0km</div>
@@ -460,32 +460,35 @@ const Map = () => {
                   <div className="col-lg-3 col-sm-2 ps-4">3km</div>
                 </div>
               </div>
+              <div className="poi-submit">
+            <button type="submit" className="btn btn-warning btn-outline-dark px-4">Apply</button>
+          </div>
             </div>
             <div className="filter-items p-2 accordion accordion-collapse collapse" id="collapseT3" data-bs-parent="#accordionTest">
 
-            <MultiRangeSlider min={0} max={1000000}
-      onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}/>
-              <br /><br />
-              <div className="accordion-item">
+            <div id="accordionTest2">
+            <div className="accordion-item mb-3 mt-1">
                 <h2 className="accordion-header" id="flush-headingOne">
-                  <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Accordion Item #1
+                  <button className="accordion-button collapsed bg-secondary bg-opacity-25" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Price
                   </button>
                 </h2>
-                <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                  <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> className. This is the first item's accordion body.</div>
+                <div id="flush-collapseOne" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingOne" data-bs-parent="#accordionTest2">
+                            <div className="price-range">
+                            <MultiRangeSlider min={0} max={1000000}
+      onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}/>
+                            </div>
                 </div>
-              </div>   
-              <br />
-              <div className="accordion-item">
+              </div>
+              <div className="accordion-item mb-3">
                 <h2 className="accordion-header" id="flush-headingTwo">
-                  <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    Accordion Item #2
+                  <button className="accordion-button collapsed bg-secondary bg-opacity-25" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Hoarding Type
                   </button>
                 </h2>
-                <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div id="flush-collapseTwo" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionTest2">
                   <div className="accordion-body">
-                  <div className="pe-3 mb-2">
+                  <div className="pe-3 mb-2 pt-1">
                 <input type="search" placeholder="Search Hoarding Type" className="w-100" />
                 </div>
                 <div className="checkbox-items py-2">
@@ -508,9 +511,78 @@ const Map = () => {
                   </div>
                 </div>
               </div> 
-
-              
-
+              <div className="accordion-item mb-3">
+                <h2 className="accordion-header" id="flush-headingThree">
+                  <button className="accordion-button collapsed bg-secondary bg-opacity-25" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Locations
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingThree" data-bs-parent="#accordionTest2">
+                  <div className="accordion-body">
+                  <div className="pe-3 mb-2 pt-1">
+                <input type="search" placeholder="Search Hoarding Type" className="w-100" />
+                </div>
+                <div className="checkbox-items py-2">
+                <input type="checkbox" name="Unipole" className="me-1" />
+                <span>Unipole</span>
+                <br />
+                <input type="checkbox" name="Unipole" className="me-1" />
+                <span>Unipole</span>
+                <br />
+                <input type="checkbox" name="Unipole" className="me-1" />
+                <span>Unipole</span>
+                <br />
+                <input type="checkbox" name="Unipole" className="me-1" />
+                <span>Unipole</span>
+                <br />
+                <input type="checkbox" name="Unipole" className="me-1" />
+                <span>Unipole</span>
+                <br />
+                </div>
+                  </div>
+                </div>
+              </div> 
+              <div className="accordion-item mb-3">
+                <h2 className="accordion-header" id="flush-headingFour">
+                  <button className="accordion-button collapsed bg-secondary bg-opacity-25" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    Illumination
+                  </button>
+                </h2>
+                <div id="flush-collapseFour" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingFour" data-bs-parent="#accordionTest2">
+                  <div className="container">
+                    <div className="row pb-2">
+                      <div className="col-4">
+                        <input type="checkbox" id="1" />
+                        <label htmlFor="1" className="ps-2">Frontlit</label>
+                      </div>
+                      <div className="col-4">
+                        <input type="checkbox" id="2" />
+                        <label htmlFor="2" className="ps-2">Backlit</label>
+                      </div>
+                      <div className="col-4">
+                        <input type="checkbox" id="3" />
+                        <label htmlFor="3" className="ps-2">Amblit</label>
+                      </div>
+                      <div className="col-4">
+                        <input type="checkbox" id="1" />
+                        <label htmlFor="1" className="ps-2">Nonlit</label>
+                      </div>
+                      <div className="col-4">
+                        <input type="checkbox" id="2" />
+                        <label htmlFor="2" className="ps-2">Digital</label>
+                      </div>
+                      <div className="col-4">
+                        <input type="checkbox" id="3" />
+                        <label htmlFor="3" className="ps-2">LED</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="poi-submit">
+            <button type="submit" className="btn btn-warning btn-outline-dark px-4">Apply</button>
+          </div>
 
 
 
@@ -902,6 +974,7 @@ const Map = () => {
               </div>
             </div>
           </div>
+
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
             <div className="col-6 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
               <img src="./assests/map-icons/bag.png" alt="N/A" />
