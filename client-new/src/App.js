@@ -1,14 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
+import Home from "./pages/home/home";
+import Media from './pages/medias/media'
 // import "./App.css"
 
 
 function App() {
-
   // const [avlable,setAvlable] = useState(false)
-
-
   // const getUser = async() => {
   //  {localStorage.getItem("user") && setAvlable(true)}
   // }
@@ -20,6 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/media" element={<Media/>}/>
           {/* <Route exact path="/login" element={avlable == true ? <Home/>:<Login/>}></Route>
           <Route exact path="/register" element={avlable == true ? <Home/>:<Register/>}></Route>
           <Route path="/Contact" element={<Contact/>}/>
@@ -29,7 +28,6 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/city" element={<City/>}/>
           <Route path="/contact" element={<Conatct/>}/>
-          <Route path="/media" element={<Medias/>}/>
           <Route path="*" element={<h1>Nothing Here </h1>}/> */}
         </Routes>
       </BrowserRouter>

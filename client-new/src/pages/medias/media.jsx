@@ -1,11 +1,10 @@
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import './media.scss'
 import { MdLocationOn, MdChecklist } from 'react-icons/md'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 
-
 const Media = () => {
-    const [show,setShow] = useState(false)
+    const [show, setShow] = useState(false)
     return (
         <>
             <div className='container-fluid pt-3  mediabackground'>
@@ -68,7 +67,7 @@ const Media = () => {
                         </div>
                     </div>
                 </div>
-                <div className="row mt-3 rounded ">
+                <div className="row mt-3 rounded  ms-3 ps-3 ps-5 pe-5">
                     <div className="col-sm-2 col-12">
                         <div className="col pt-4" >
                             <div className='mediaName me-1 rounded-top ms-1 mt-5 me-1 p-2'>
@@ -265,7 +264,7 @@ const Media = () => {
                         </div>
                     </div>
                     <div className="col-12 col-sm-10 rounded">
-                        <div className='row mediaName rounded-top'>
+                        <div className='row mediaName rounded-top '>
                             <div className='col-sm-10 col-9'>
                                 <h3 className='mt-2'>Media Name</h3>
                             </div>
@@ -273,773 +272,213 @@ const Media = () => {
                                 <MdLocationOn className='h-75 w-auto mt-1' />
                             </div>
                             <div className='col-1'>
-                                <MdChecklist onClick={(e) =>setShow(!show)} className='h-75 w-auto mt-1' />
+                                <MdChecklist onClick={(e) => setShow(!show)} className='h-75 w-auto mt-1' />
                             </div>
                         </div>
-                        <div className='overflow h-auto backgroundArea rounded'>
-                            <div className='container-fluid pt-2'>
-                                <div className='row row-cols-md-2 row-cols-sm-1 row-cols-3 row-cols-lg-3 row-cols-xl-3 p-0'>
-                                  {!show ?<>
-                                    <div className='col w-100'>
-                                       <h1>Hello</h1>
-                                    </div>
-                                  </>:<>  <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                        <div className='overflow h-auto  rounded'>
+                            <div className='container-fluid '>
+                                {!show ? <>
+                                  
+                                       <div className='row rounded-2 bg-light mt-3 singlecartback'>
+                                            <div className='col-12 col-sm-12'>
+                                                <div className='row  backgroundArea'>
+                                                    <div className='col-4 col-sm-4 p-2'>
+                                                        <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3' />
                                                     </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
+                                                    <div className='col-8 col-sm-8 pt-2'>
+                                                        <a className='h4 ' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
+                                                        <div className='row'>
+                                                            <div className='col-9 singleMediaData'>
+                                                                <h5 className='fw-bold display overflow-wrap mt-3 text-muted'>Code : GOH00M61</h5>
+                                                                <h5 className='fw-bold overflow-wrap text-muted'>Size : 30*20 feet</h5>
+                                                                <h5 className='fw-bold overflow-wrap text-muted'>Illumation</h5>
+                                                                <h5 className='fw-bold overflow-wrap text-muted'>Price</h5>
+                                                                <button className='rounded-3 mt-3 mb-3 bg-warning border-0'>See Details</button>
+                                                            </div>
+                                                            <div className='col-3'>
+                                                                <div className='SinglerupeesDiv rounded-3 mt-5'>
+                                                                    <img src='./images/location.svg' className='img-fluid ps-5' />
+                                                                    <h6 className='text-black fw-bold text-nowrap text-center'>See at Map</h6>
+                                                                    <div className='SingleCartDiv rounded-3 mt-5'>
+                                                                       <MdOutlineShoppingCart className='cartlogo ms-3 mt-1'/> 
+                                                                        <h6 className='text-black fw-bold text-nowrap text-end me-3 mb-2'>Add to Cart</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                               </div>
+                                                </div>
+                                                <div className='row  backgroundArea'>
+                                                    <div className='col-4 col-sm-4 p-2'>
+                                                        <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3' />
+                                                    </div>
+                                                    <div className='col-8 col-sm-8 pt-2'>
+                                                        <a className='h4 ' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
+                                                        <div className='row'>
+                                                            <div className='col-9 singleMediaData'>
+                                                                <h5 className='fw-bold display overflow-wrap mt-3 text-muted'>Code : GOH00M61</h5>
+                                                                <h5 className='fw-bold overflow-wrap text-muted'>Size : 30*20 feet</h5>
+                                                                <h5 className='fw-bold overflow-wrap text-muted'>Illumation</h5>
+                                                                <h5 className='fw-bold overflow-wrap text-muted'>Price</h5>
+                                                                <button className='rounded-3 mt-3 mb-3 bg-warning border-0'>See Details</button>
+                                                            </div>
+                                                            <div className='col-3'>
+                                                                <div className='SinglerupeesDiv rounded-3 mt-5'>
+                                                                    <img src='./images/location.svg' className='img-fluid ps-5' />
+                                                                    <h6 className='text-black fw-bold text-nowrap text-center'>See at Map</h6>
+                                                                    <div className='SingleCartDiv rounded-3 mt-5'>
+                                                                       <MdOutlineShoppingCart className='cartlogo ms-3 mt-1'/> 
+                                                                        <h6 className='text-black fw-bold text-nowrap text-end me-3 mb-2'>Add to Cart</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                
-                                              </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                    </> : <>
+                                    <div className='row row-cols-md-2 row-cols-sm-1 row-cols-3 row-cols-lg-3 row-cols-xl-3 p-0'>
+
+
+                                        <div className='col-12 col-sm-12'>
+                                            <div className='mainImage p-1'>
+                                                <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
+                                                <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
+                                                    <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
+                                                    <div className='row'>
+                                                        <div className='col'>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                        </div>
+                                                        <div className='col  mt-5'>
+                                                            <div className='row'>
+                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                                    <img src='./images/rupee.png' className='img-fluid p-2' />
+                                                                </div>
+                                                                </div>
+                                                                <div className='col'><div className='CartDiv rounded-3 '>
+                                                                    <img src='./images/cart.png' className='img-fluid p-2' />
+                                                                </div></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
+
                                                 </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                        <div className='col-12 col-sm-12'>
+                                            <div className='mainImage p-1'>
+                                                <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
+                                                <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
+                                                    <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
+                                                    <div className='row'>
+                                                        <div className='col'>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                        </div>
+                                                        <div className='col  mt-5'>
+                                                            <div className='row'>
+                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                                    <img src='./images/rupee.png' className='img-fluid p-2' />
+                                                                </div>
+                                                                </div>
+                                                                <div className='col'><div className='CartDiv rounded-3 '>
+                                                                    <img src='./images/cart.png' className='img-fluid p-2' />
+                                                                </div></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
+
                                                 </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                        <div className='col-12 col-sm-12'>
+                                            <div className='mainImage p-1'>
+                                                <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
+                                                <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
+                                                    <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
+                                                    <div className='row'>
+                                                        <div className='col'>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                        </div>
+                                                        <div className='col  mt-5'>
+                                                            <div className='row'>
+                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                                    <img src='./images/rupee.png' className='img-fluid p-2' />
+                                                                </div>
+                                                                </div>
+                                                                <div className='col'><div className='CartDiv rounded-3 '>
+                                                                    <img src='./images/cart.png' className='img-fluid p-2' />
+                                                                </div></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
+
                                                 </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                        <div className='col-12 col-sm-12'>
+                                            <div className='mainImage p-1'>
+                                                <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
+                                                <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
+                                                    <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
+                                                    <div className='row'>
+                                                        <div className='col'>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                        </div>
+                                                        <div className='col  mt-5'>
+                                                            <div className='row'>
+                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                                    <img src='./images/rupee.png' className='img-fluid p-2' />
+                                                                </div>
+                                                                </div>
+                                                                <div className='col'><div className='CartDiv rounded-3 '>
+                                                                    <img src='./images/cart.png' className='img-fluid p-2' />
+                                                                </div></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
+
                                                 </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                        <div className='col-12 col-sm-12'>
+                                            <div className='mainImage p-1'>
+                                                <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
+                                                <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
+                                                    <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
+                                                    <div className='row'>
+                                                        <div className='col'>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
+                                                            <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                        </div>
+                                                        <div className='col  mt-5'>
+                                                            <div className='row'>
+                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                                    <img src='./images/rupee.png' className='img-fluid p-2' />
+                                                                </div>
+                                                                </div>
+                                                                <div className='col'><div className='CartDiv rounded-3 '>
+                                                                    <img src='./images/cart.png' className='img-fluid p-2' />
+                                                                </div></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
+
                                                 </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-12 col-sm-12'>
-                                        <div className='mainImage p-1'>
-                                            <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                            <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                               <div className='row'>
-                                                    <div className='col'>
-                                                    <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                    </div>
-                                                    <div className='col  mt-5'>
-                                                  <div className='row'>
-                                                        <div className='col ms-3'>  <div className='rupeesDiv rounded-3'>
-                                                    <img src='./images/rupee.png' className='img-fluid p-2'/>
-                                                </div>
-                                                </div>
-                                                        <div className='col'><div className='CartDiv ms-3 rounded-3 '>
-                                                <img src='./images/cart.png' className='img-fluid p-2'/>
-                                                </div></div>
-                                                  </div>
-                                                    </div>
-                                               </div>
-                                               
-                                              </div>
-                                        </div>
-                                    </div></>}
-                                </div>
+
+                                    </div> </>}
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@
 .overflow {
     position: relative;
     overflow-y: scroll;
-    height: 66rem !important;
+    height: 50rem !important;
     align-items: center;
     justify-content: center;
     scroll-behavior: smooth;
@@ -123,18 +123,40 @@ h5,h6{
     width: 40px;
     height: auto;
     background-color:gray;
- 
+}
+// .SinglerupeesDiv {
+//     width: 100px;
+//     height: auto;
+//     background-color:rgba(128, 128, 128, 0.705);
+// }
+.SinglerupeesDiv >img{
+    margin-left: 18px
 }
 .CartDiv {
     width: 40px;
     background-color: gray;
     height: auto;
-  
 }
+
 .mediacarddetails{
     background-color: #9fe2f1c7;
 }
 .thumlinImage{
     height: auto;
     width: 600px;
+}
+
+.singleMediaData>h5{font-size: larger;}
+.cartlogo{
+    width: 24px;
+    height: 40px;
+    margin: -36px;
+}
+.singlecartback{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.SingleCartDiv{
+    background-color: gray;
+    padding-bottom: 11px;
+    margin-bottom: 10px;
 }
