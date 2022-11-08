@@ -3,10 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
+import SearchMedia from '../SearchMedia/seachMedia'
+import Navbar from '../../components/Navbar/navbar'
 import Nav from "react-bootstrap/Nav";
 import { useNavigate,Link } from "react-router-dom";
-import Navbar from '../../components/Navbar/navbar'
-import SearchMedia from "../SearchMedia/seachMedia";
+// import Navbar from '../../components/Navbar/navbar'
+// import SearchMedia from "../SearchMedia/seachMedia";
 import Drop_Down_Image from "../../components/DropDrown/Drop_Down_Image";
 import Dropdown from 'react-bootstrap/Dropdown';
 import UserDetail from "../../components/Navbar/UserDetail";
@@ -342,9 +344,7 @@ const Home = () => {
           </div>
         </div>
       </div> */}
-
 <Header/>
-
 <Navbar/>
 <SearchMedia/>
 <Fixednavbar/>
@@ -354,8 +354,8 @@ const Home = () => {
 {/* <Trandingcity/>  */}
 <Footer/>
 
-    
-
+{/* <Navbar/>
+<SearchMedia/> */}
     </>
   );
 };

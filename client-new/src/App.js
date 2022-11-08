@@ -1,9 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
-import Media from "./pages/medias/media";
 // import "./App.css"
-
 
 
 function App() {
@@ -22,8 +20,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/media" element={<Media/>}/>
-          {/* <Route path="/services" element={<SearchData/>}/> */}
           {/* <Route exact path="/login" element={avlable == true ? <Home/>:<Login/>}></Route>
           <Route exact path="/register" element={avlable == true ? <Home/>:<Register/>}></Route>
           <Route path="/Contact" element={<Contact/>}/>
