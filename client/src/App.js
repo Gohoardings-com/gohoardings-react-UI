@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import "./App.css"
-import Home from "./pages/home/home";
+// import Home from "./pages/home/home";
 import Login from "./pages/authorization/login";
 import Register from "./pages/authorization/signup";
 import Contact from "./pages/contact-us/contact";
@@ -28,9 +28,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          {/* <Route path="/" element={<Home/>}/>
           <Route exact path="/login" element={avlable == true ? <Home/>:<Login/>}></Route>
-          <Route exact path="/register" element={avlable == true ? <Home/>:<Register/>}></Route>
+          <Route exact path="/register" element={avlable == true ? <Home/>:<Register/>}></Route> */}
           <Route path="/Contact" element={<Contact/>}/>
           <Route path="/profile" element={<Vendor/>}/>
           <Route path="/test" element={<Test/>} />
