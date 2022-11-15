@@ -6,6 +6,9 @@ import Header from './components/header/header';
 import Fixednavbar from './components/Navbar/fixednavbar';
 import Flotinggnavbar from './components/Navbar/flotingnavbar';
 import Footer from './pages/footer/footer';
+import Map from './pages/map/map'
+import Details from './pages/seeDetails/details'
+import Cart from './pages/Cart/Cart'
 // import "./App.css"
 
 
@@ -25,6 +28,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home setAvlable={setAvlable} />}/>
           <Route path="/media" element={<Media/>}/>
+          <Route path="/map" element={<Map/>}/>
+          <Route path="/details" element={<Details/>}/>
+          <Route path="/cart" element={<Cart/>}/>
           {/* <Route exact path="/login" element={avlable == true ? <Home/>:<Login/>}></Route>
           <Route exact path="/register" element={avlable == true ? <Home/>:<Register/>}></Route>
           <Route path="/Contact" element={<Contact/>}/>

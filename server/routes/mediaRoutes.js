@@ -1,8 +1,6 @@
 const express = require('express');
-
-
 const { Invertor, City, SearchData, company } = require('../controller/mediaController');
-const { verifyToken } = require('../controller/REGISTERlOGIN');
+
 
 const router = express.Router();
 

@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../../components/Navbar/navbar'
-import Header from "../../components/header/header";
 import {RiUser3Fill} from 'react-icons/ri'
 import {IoIosSettings,IoMdLocate} from 'react-icons/io'
 import './details.scss'
