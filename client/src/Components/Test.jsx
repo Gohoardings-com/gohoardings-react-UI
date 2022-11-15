@@ -6,7 +6,7 @@ import { mediawithcity } from "../action/adminAction";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import instance from "../APIS/Axios";
+import instance from "../Apis/Axios";
 
 const Test = () => {
   const navigator = useNavigate();

@@ -1,4 +1,4 @@
-import instance from '../APIS/Axios'
+import instance from '../Apis/Axios'
 
 export const userDetails =  async (dispatch) => {
     try{

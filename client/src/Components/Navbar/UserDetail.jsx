@@ -1,6 +1,6 @@
 import React,{useEffect, useState, useReducer} from 'react'
-import instance from '../../APIS/Axios';
-import { AccountContext } from '../../APIS/ApiContext';
+import instance from '../../Apis/Axios';
+import { AccountContext } from '../../Apis/ApiContext';
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
 import { useNavigate } from 'react-router-dom';

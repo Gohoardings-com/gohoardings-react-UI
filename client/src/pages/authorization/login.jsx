@@ -8,7 +8,7 @@ import "./login.scss";
 import { LoginContact } from "../../action/adminAction";
 import { useGoogleLogin } from 'react-google-login'
 import { useNavigate } from 'react-router-dom';
-import instance from '../../APIS/Axios'
+import instance from '../../Apis/Axios'
 
 const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 

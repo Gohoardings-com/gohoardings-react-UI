@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import "./login.scss";
 import { authActions } from "../../store";
 import { useNavigate } from 'react-router-dom';
-import instance from "../../APIS/Axios";
+import instance from "../../Apis/Axios";
 
 const Registeration = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import DateRangeComp from "../../Components/Datepicker/DateRangeComp.jsx";
-import instance from "../../APIS/Axios.jsx";
+import instance from "../../Apis/Axios";
 import { mediawithcity } from "../../action/adminAction";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
