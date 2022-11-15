@@ -4,7 +4,7 @@ import axios from "axios";
 import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
 import SearchMedia from '../SearchMedia/seachMedia'
-import Navbar from '../../components/Navbar/navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import Nav from "react-bootstrap/Nav";
 import { useNavigate,Link } from "react-router-dom";
 // import Navbar from '../../components/Navbar/navbar'

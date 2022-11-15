@@ -1,7 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/home";
-import Media from './pages/medias/media'
+import Media from './pages/medias/media';
+import Header from './components/header/header';
+import Fixednavbar from './components/Navbar/fixednavbar';
+import Flotinggnavbar from './components/Navbar/flotingnavbar';
+import Footer from './pages/footer/footer';
 // import "./App.css"
 
 

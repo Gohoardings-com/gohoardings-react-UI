@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './media.scss';
-import Navbar from '../../components/Navbar/navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import Header from "../../components/header/header";
 import { MdLocationOn, MdChecklist } from 'react-icons/md'
 import { MdOutlineShoppingCart } from 'react-icons/md'
