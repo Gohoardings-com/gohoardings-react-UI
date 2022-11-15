@@ -1,12 +1,11 @@
 import React from "react";
-import GoogleMapReact from "google-map-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./map.scss";
 import Slider from "./slider.jsx";
 import { useState } from "react";
 import MultiRangeSlider from "./multiRangeSlider";
-
-const AnyReactComponent = () => <div><img src="./assests/map-icons/billboard.png" alt="" /></div>;
+import { useJsApiLoader } from "@react-google-maps/api";
+import Markers from "./marker";
 
 const Map = () => {
 
@@ -16,10 +15,14 @@ const Map = () => {
     Setdistance(Dis)
   }
 
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
+  });
+
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-3 p-0 border-end position-relative">
+    <div className="container-fluid mh-100">
+      <div className="row" id="map-view-row">
+        <div className="col-lg-3 col-md-3 col-sm-12 p-0 border-end position-relative">
           <div className="row filter-icons m-0">
             <div className="col-4 list d-inline-block text-center py-2 shadow-sm border-top-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseT1" aria-expanded="true" aria-controls="collapseT1">
               <img src="./assests/map-icons/list.png" alt="N/A" />
@@ -31,8 +34,9 @@ const Map = () => {
               <img src="./assests/map-icons/filter.png" alt="N/A" />
             </div>
           </div>
+          
           <div id="accordionTest">
-            <div className="media-items p-2 accordion-collapse collapse show" id="collapseT1" data-bs-parent="#accordionTest">
+            <div className="media-items p-2 accordion-collapse collapse show map-media-item-list" id="collapseT1" data-bs-parent="#accordionTest">
               <div className="accordion items mb-2 rounded" id="accordionExample">
                 <div className="accordion-item border rounded mb-2">
                   <div
@@ -41,7 +45,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -49,14 +53,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -67,7 +71,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseOne"
                       className="accordion-collapse collapse"
@@ -95,7 +99,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseTwo"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -103,14 +107,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -121,7 +125,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseTwo"
                       className="accordion-collapse collapse"
@@ -149,7 +153,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseThree"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -157,14 +161,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -175,7 +179,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseThree"
                       className="accordion-collapse collapse"
@@ -203,7 +207,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseFour"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -211,14 +215,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -229,7 +233,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseFour"
                       className="accordion-collapse collapse"
@@ -257,7 +261,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseFive"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -265,14 +269,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -283,7 +287,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseFive"
                       className="accordion-collapse collapse"
@@ -311,7 +315,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseSix"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -319,14 +323,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -337,7 +341,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseSix"
                       className="accordion-collapse collapse"
@@ -365,7 +369,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseSeven"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -373,14 +377,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -391,7 +395,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseSeven"
                       className="accordion-collapse collapse"
@@ -416,36 +420,36 @@ const Map = () => {
             </div>
             <div className="poi-items accordion-collapse collapse" id="collapseT2" data-bs-parent="#accordionTest">
 
-                <div className="row">
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiOne" aria-expanded="false">
+                <div className="row poi-item">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiOne" aria-expanded="false">
                   <img src="./assests/map-icons/education.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiOne"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiTwo" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiTwo" aria-expanded="false">
                   <img src="./assests/map-icons/bar.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiTwo"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiThree" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiThree" aria-expanded="false">
                   <img src="./assests/map-icons/hotel.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiThree"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFour" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFour" aria-expanded="false">
                   <img src="./assests/map-icons/restaurant.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiFour"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFive" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiFive" aria-expanded="false">
                   <img src="./assests/map-icons/hospital.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiFive"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSix" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSix" aria-expanded="false">
                   <img src="./assests/map-icons/spa.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiSix"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSeven" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiSeven" aria-expanded="false">
                   <img src="./assests/map-icons/cinema.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiSeven"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
-                <div className="col-4 d-inline-block text-center py-4 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiEight" aria-expanded="false">
+                <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target="#poiEight" aria-expanded="false">
                   <img src="./assests/map-icons/gym.png" alt="N/A" />
                   <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id="poiEight"><img src="./assests/map-icons/check.png" className="poi-check" /></span>
                 </div>
@@ -461,8 +465,8 @@ const Map = () => {
                 </div>
               </div>
               <div className="poi-submit">
-            <button type="submit" className="btn btn-warning btn-outline-dark px-4">Apply</button>
-          </div>
+                <button type="submit" className="btn btn-warning btn-outline-dark px-4">Apply</button>
+              </div>
             </div>
             <div className="filter-items p-2 accordion accordion-collapse collapse" id="collapseT3" data-bs-parent="#accordionTest">
 
@@ -473,7 +477,7 @@ const Map = () => {
                     Price
                   </button>
                 </h2>
-                <div id="flush-collapseOne" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingOne" data-bs-parent="#accordionTest2">
+                <div id="flush-collapseOne" className="accordion-collapse collapse bg-secondary bg-opacity-25 pt-2" aria-labelledby="flush-headingOne" data-bs-parent="#accordionTest2">
                             <div className="price-range">
                             <MultiRangeSlider min={0} max={1000000}
       onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}/>
@@ -487,7 +491,7 @@ const Map = () => {
                   </button>
                 </h2>
                 <div id="flush-collapseTwo" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionTest2">
-                  <div className="accordion-body">
+                  <div className="accordion-body pt-0">
                   <div className="pe-3 mb-2 pt-1">
                 <input type="search" placeholder="Search Hoarding Type" className="w-100" />
                 </div>
@@ -518,7 +522,7 @@ const Map = () => {
                   </button>
                 </h2>
                 <div id="flush-collapseThree" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingThree" data-bs-parent="#accordionTest2">
-                  <div className="accordion-body">
+                  <div className="accordion-body pt-0">
                   <div className="pe-3 mb-2 pt-1">
                 <input type="search" placeholder="Search Hoarding Type" className="w-100" />
                 </div>
@@ -551,27 +555,27 @@ const Map = () => {
                 <div id="flush-collapseFour" className="accordion-collapse collapse bg-secondary bg-opacity-25" aria-labelledby="flush-headingFour" data-bs-parent="#accordionTest2">
                   <div className="container">
                     <div className="row pb-2">
-                      <div className="col-4">
+                      <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id="1" />
                         <label htmlFor="1" className="ps-2">Frontlit</label>
                       </div>
-                      <div className="col-4">
+                      <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id="2" />
                         <label htmlFor="2" className="ps-2">Backlit</label>
                       </div>
-                      <div className="col-4">
+                      <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id="3" />
                         <label htmlFor="3" className="ps-2">Amblit</label>
                       </div>
-                      <div className="col-4">
+                      <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id="1" />
                         <label htmlFor="1" className="ps-2">Nonlit</label>
                       </div>
-                      <div className="col-4">
+                      <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id="2" />
                         <label htmlFor="2" className="ps-2">Digital</label>
                       </div>
-                      <div className="col-4">
+                      <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id="3" />
                         <label htmlFor="3" className="ps-2">LED</label>
                       </div>
@@ -600,7 +604,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -608,14 +612,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -626,7 +630,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseOne"
                       className="accordion-collapse collapse"
@@ -654,7 +658,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseTwo"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -662,14 +666,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -680,7 +684,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseTwo"
                       className="accordion-collapse collapse"
@@ -708,7 +712,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseThree"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -716,14 +720,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -734,7 +738,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseThree"
                       className="accordion-collapse collapse"
@@ -762,7 +766,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseFour"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -770,14 +774,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -788,7 +792,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseFour"
                       className="accordion-collapse collapse"
@@ -816,7 +820,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseFive"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -824,14 +828,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -842,7 +846,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseFive"
                       className="accordion-collapse collapse"
@@ -870,7 +874,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseSix"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -878,14 +882,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -896,7 +900,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseSix"
                       className="accordion-collapse collapse"
@@ -924,7 +928,7 @@ const Map = () => {
                     aria-expanded="true"
                     aria-controls="collapseSeven"
                   >
-                    {/* <div className=""> */}
+                    
                     <div className="row m-0">
                       <p className="my-2">
                         {"UNIPOLE - E-359 NEW ASHOK NAGAR,NEW DELHI IN NEW DELHI".substring(
@@ -932,14 +936,14 @@ const Map = () => {
                           20
                         ) + "..."}
                       </p>
-                      <div className="col-4">
+                      <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                         <img
                           src="./images/media.jpg"
                           alt="N/A"
                           className="w-100 mt-2 pt-2"
                         />
                       </div>
-                      <div className="col-8">
+                      <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
                         <ul className="list-unstyled">
                           <li>Code : GOH00M61</li>
                           <li>FTF : Unipole</li>
@@ -950,7 +954,7 @@ const Map = () => {
                         </ul>
                       </div>
                     </div>
-                    {/* </div> */}
+                    
                     <div
                       id="collapseSeven"
                       className="accordion-collapse collapse"
@@ -975,27 +979,41 @@ const Map = () => {
             </div>
           </div>
 
-          <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
-            <div className="col-6 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
-              <img src="./assests/map-icons/bag.png" alt="N/A" />
+          <div id="map-view-mobile">
+          <div className="aval-hoarding d-inline-block position-absolute">
+              <div className="map-btns d-inline-block p-1 pe-2 border-end">
+                <img src="./assests/map-icons/billboard.png" alt="N/A" className="p-2" />
+                <span className="pe-2">Available</span>
+              </div>
+              <div className="map-btns d-inline-block p-1 pe-2">
+                <img src="./assests/map-icons/billboard.png" alt="N/A" className="p-2" />
+                <span className="pe-2">Not Available</span>
+              </div>
             </div>
-            <div className="col-6 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
-              <p className="m-0"><img src="./assests/map-icons/rupee-symbol.png" alt="N/A" /> : 999999</p>
+              { isLoaded ? <Markers /> : null }
+          </div>
+
+          <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
+          <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
+              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : 999999</p>
+            </div>
+            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
+              <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
           </div>
         </div>
-        <div className="col-9 p-0">
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY",
-            }}
-            resetBoundsOnResize={true}
-            defaultCenter={{ lat: 28.5355, lng: 77.391 }}
-            style={{ height: `100vh` }}
-            defaultZoom={15}
-          >
-            <AnyReactComponent lat={28.5355} lng={77.391} />
-          </GoogleMapReact>
+        <div className="col-9 p-0" id="map-view">
+          <div className="aval-hoarding d-inline-block position-absolute">
+              <div className="map-btns d-inline-block p-1 pe-2 border-end">
+                <img src="./assests/map-icons/billboard.png" alt="N/A" className="p-2" />
+                <span className="pe-2">Available</span>
+              </div>
+              <div className="map-btns d-inline-block p-1 pe-2">
+                <img src="./assests/map-icons/billboard.png" alt="N/A" className="p-2" />
+                <span className="pe-2">Not Available</span>
+              </div>
+            </div>
+              { isLoaded ? <Markers /> : null }
         </div>
       </div>
     </div>
