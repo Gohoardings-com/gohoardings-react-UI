@@ -31,12 +31,11 @@ const SearchMedia = () => {
           <h1 className="display-3 text-center text-dark fw-bold">India's Largest Outdoor<br />Advertising Agency</h1>
           <p className="fw-lighter text-center text-dark fw-bold">OOH Advertising made easy<br />Search Media. Check Availability. Book Online.</p>
         </div>
-        <div className="container p-5">
-            <div className="row cityCategory p-3  bg-light  rounded-pill">
-              <div className="col-xl-4 col-lg-5 col-md-5 col-sm-12">
-              <div className="input-group rounded-pill overflow-hidden border h-100">
+        <div className="container p-4 pb-0">
+            <div className="row cityCategory p-3  bg-light  rounded-pill" id="cityCategory">
+              <div className="col-xl-4 col-lg-4 col-md-5 col-sm-12 city-category">
               <select
-                  className="form-control hide-focus border-0 py-2"
+                  className="hide-focus border-0 py-3 ps-3 input-group rounded-pill overflow-hidden border h-100 bg-white"
                 >
                   <option value="None" className="text-dark">None</option>
                   <option value="traditional-ooh-media" className="text-dark">
@@ -50,11 +49,10 @@ const SearchMedia = () => {
                   <option className="text-dark" value="office-media">office-media</option>
                 </select>
               </div>
-              </div>
-              <div className="col-xl-4 col-lg-7 col-md-7 col-sm-12">
-              <div className="input-group rounded-pill overflow-hidden border h-100">
+              <div className="col-xl-5 col-lg-5 col-md-7 col-sm-12">
+              <div className="input-group rounded-pill overflow-hidden border h-100 bg-white">
                 <select
-                  className="form-control hide-focus border-0 py-2"
+                  className="hide-focus border-0 py-3 ps-3"
               
                 >
                   <option value="None" className="text-dark">None</option>
@@ -70,10 +68,8 @@ const SearchMedia = () => {
                 </select>
               </div>
             </div>
-           <div className="col-xl-4 col-lg-5 col-md-5 col-sm-12">
-              <div className="w-100 text-center rounded-pill overflow-hidden border btn py-2">
-                <button className="button-serch text-white rounded-pill p-3">Serach</button> 
-              </div>
+           <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 home-search-btn">
+                <button className="button-serch text-white rounded-pill p-3">Serach</button>
             </div>
             </div>
          

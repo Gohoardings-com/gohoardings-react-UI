@@ -17,7 +17,7 @@ const NewNAvbar = () => {
 
   return (
     <>
-      <Navbar expand="lg px-md-0">
+      <Navbar expand="lg px-md-0 pb-0">
         <div className="navbar container-fluid py-md-0 ">
           {/* <Dropdown
             onMouseOver={() => setShow(true)}>

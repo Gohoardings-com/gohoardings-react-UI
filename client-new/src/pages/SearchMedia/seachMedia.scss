@@ -1,3 +1,7 @@
+@import '../../assets/scss/_variables.scss';
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
 .search{
     background-image: linear-gradient(to bottom,rgb(105,227,255),rgb(103, 201, 223),rgb(152, 211, 224));
 }
@@ -34,7 +38,12 @@
     width: 350px;
     height: 60px;
 }
-
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 5px;
+}
 
 @media only screen and (max-width:425px){
    .cityCategory{
@@ -121,7 +130,22 @@
         border-radius: 50px;
     
         color: #fff;
-    } 
+    }
+    .city-category {
+        margin: 24px 0px 16px 0;
+    }
+}
+
+@media only screen and (max-width:992px){
+    .home-search-btn {
+        padding-top: 15px;
+    }
+    .border.h-100.input-group.overflow-hidden.rounded-pill{
+        height: 56px;
+    }
+    .cityCategory {
+        padding-top: 26px !important;
+    }
 }
 
 @media only screen and (max-width:1024px){
