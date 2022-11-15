@@ -1,0 +1,23 @@
+.icon-left-border{
+    border-right: 1px  solid black ;
+}
+.detailsHeader{
+    box-shadow:  2px  2px rgb(231, 228, 228);
+}
+.detailsSumbitButton{
+    background-color: crimson; color: white;
+}
+.detailsSumbitButton[disabled]{
+    button[disabled], html input[disabled] {
+        cursor: not-allowed;
+    }
+}
+.mediaAllDetails>.mediatype{background: #55bf15 !important;
+color: #fff;}
+.singlemediashow>.mediaAllDetails{
+    border-bottom: 1px solid #e2e2e2
+}
+.maindivbordermediadetails{
+    border: 1px solid #e4e4e4
+
+}

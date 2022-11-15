@@ -27,13 +27,12 @@ p{
 .button-serch:hover{
     background: #04a44b;
     background: linear-gradient(to bottom,#05d15f,#07c75c);
-
     color: #fff;
 }
+
 .category-select{
     width: 350px;
     height: 60px;
- 
 }
 
 
@@ -41,6 +40,7 @@ p{
    .cityCategory{
         display: flex;
     }
+
     .category-select{
         width: 40vh !important;
         margin-left:-1vh !important;
@@ -55,10 +55,10 @@ p{
         margin-top: 10vh !important;
         background: #000 ;
     }
+
     .button-serch:hover{
         background: #04a44b;
         background: linear-gradient(to bottom,#05d15f,#07c75c);
-
         color: #fff;
     }
 }
@@ -134,9 +134,9 @@ p{
 
     .category-select{
         width: 200px;
-    
         padding: 20px;
     }
+    
     .button-serch{
         width: 150px;
         background: rgb(21, 5, 243);

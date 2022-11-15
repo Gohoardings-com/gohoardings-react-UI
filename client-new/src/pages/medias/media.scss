@@ -19,10 +19,9 @@
 .mainImage{
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 3px 3px #0d6dfd8a;
+    box-shadow: 3px 3px 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: auto;
     margin:10px;
-    border:2px solid #0d6dfd4b;
 }
 
 .overflow {
@@ -67,6 +66,9 @@
     margin-left: 17px;
     margin-right: 17px;
 }
+.rowCheck > ul{
+    list-style-type: none;
+}
 
 .listCahnge {
     border-radius: 10%;
@@ -97,10 +99,12 @@ h5,h6{
     color: #fff;
 }
 .locationIcon {
-    width: 54px;
+    width: 55px;
     height: 54px;
-    padding: 15px;   
-    margin-top: 40px;
+    padding: 16px;
+    margin-top: 43px;
+    padding-left: 20px;
+    padding-top: 12px;
 }
 .viewabout{
     display: inline-flex;
@@ -139,7 +143,7 @@ h5,h6{
 }
 
 .mediacarddetails{
-    background-color: #9fe2f1c7;
+    // background-color: #9fe2f1c7;
 }
 .thumlinImage{
     height: auto;
@@ -159,4 +163,37 @@ h5,h6{
     background-color: gray;
     padding-bottom: 11px;
     margin-bottom: 10px;
+}
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 5px;
+}
+.btn-hover{
+    background-image: linear-gradient(90deg,#25aae1,#4481eb,#04befe,#3f86ed);
+    box-shadow: 0 4px 15px 0 rgb(65 132 234 / 75%);
+    --moz-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.backgroundArea:hover{
+    transition: 0.5s all ease-in-out;
+    transform: scale(0.9);
+}
+.backgroundArea{
+    overflow: hidden;
+    width: auto;  
+}
+.hello{
+    box-shadow: 3px 3px  rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.seeDetails{
+    background-color: #FFC34D;
 }

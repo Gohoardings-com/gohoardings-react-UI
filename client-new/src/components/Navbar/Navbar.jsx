@@ -12,7 +12,6 @@ const NewNAvbar = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
-
   const home = async () => {
     navigate('/')
   }
@@ -25,12 +24,12 @@ const NewNAvbar = () => {
             onMouseOver={() => setShow(true)}>
             <Dropdown.Toggle variant="transparent" id="dropdown-basic" > */}
               <Navbar.Brand >
-                <img src="./images/logo.png" className="brand ms-5" onClick={home} />
+                <img src="./images/logo.png" className="brand ms-sm-5 ms-3" onClick={home} />
             </Navbar.Brand>
              {/*  </Dropdown.Toggle>
 
           </Dropdown> */}
-          <Navbar.Toggle aria-controls="basic-navbar-nav " />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
           <Navbar.Collapse id="basic-navbar-nav ">
 
             <Nav className=" ms-auto me-5">

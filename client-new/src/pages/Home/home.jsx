@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
 import SearchMedia from '../SearchMedia/seachMedia'
 import Navbar from '../../components/Navbar/navbar'
+import Header from "../../components/header/header";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate,Link } from "react-router-dom";
 // import Navbar from '../../components/Navbar/navbar'
@@ -12,13 +13,12 @@ import { useNavigate,Link } from "react-router-dom";
 import Drop_Down_Image from "../../components/DropDrown/Drop_Down_Image";
 import Dropdown from 'react-bootstrap/Dropdown';
 import UserDetail from "../../components/Navbar/UserDetail";
-import Header from "../../components/header/header";
+import Fixednavbar from "../../components/Navbar/fixednavbar";
 import Ourservices from "../ourservices/ourservices";
 import City from "../citylist/city";
 import Enquire from "../enquire/enquire";
 import Footer from "../footer/footer";
 import Trandingcity from "../trandingcity/trandingcity";
-import Fixednavbar from "../../components/Navbar/fixednavbar";
 
 // function useWindowSize() {
 //   const [size, setSize] = useState([window.innerWidth]);
@@ -344,17 +344,13 @@ const Home = () => {
           </div>
         </div>
       </div> */}
-<Header/>
 <Navbar/>
 <SearchMedia/>
-<Fixednavbar/>
  <Ourservices/> 
  <City/>
 <Enquire/>
-{/* <Trandingcity/>  */}
-<Footer/>
-
-{/* <Navbar/>
+{/* <Trandingcity/> 
+ <Navbar/>
 <SearchMedia/> */}
     </>
   );

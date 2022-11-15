@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import './media.scss'
+import './media.scss';
+import Navbar from '../../components/Navbar/navbar'
+import Header from "../../components/header/header";
 import { MdLocationOn, MdChecklist } from 'react-icons/md'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 
@@ -9,7 +11,7 @@ const Media = () => {
         <>
             <div className='container-fluid pt-3  mediabackground'>
                 <div className='container-fluid bg-dark rounded-3 '>
-                    <div className='row'>
+                    <div className='row w-100'>
                         <div className='col-12 rounded-5 m-3'>
                             <h1 className="text-left text-light">Traditional OOH</h1>
                         </div>
@@ -22,7 +24,7 @@ const Media = () => {
                             <div className='col-2 vl mt-3 mb-3'>
                                 <div className='col viewabout rounded-3 pt-5' >
                                     <div className='bg-secondary locationIcon rounded-3'>
-                                        <img src='./images/location.svg' />
+                                        <img src='./images/location.svg' className='text-light'/>
                                     </div>
                                     <div className='me-3 ms-3 mt-5 mb-1 '>
                                         <h6 className="text-dark">7399</h6>
@@ -70,13 +72,14 @@ const Media = () => {
                 <div className="row mt-3 rounded  ms-3 ps-3 ps-5 pe-5">
                     <div className="col-sm-2 col-12">
                         <div className="col pt-4" >
-                            <div className='mediaName me-1 rounded-top ms-1 mt-5 me-1 p-2'>
-                                <h6 className="text-uppercase text-center">select media type(5)</h6>
+                            <div className='mediaName me-1 rounded-top ms-1 mt-5 p-2'>
+                                <h6 className="text-uppercase text-center">Select Media (5)</h6>
                             </div>
                             <div className='bg-light rounded-bottom rounded-1'>
                                 <input type="text" placeholder="Search.." className='initialism m-2 p-2 rounded-3' />
-                                <div className="rowCheck row  m-1 p-1">
-                                    <li className="w-100">
+                                <div className="rowCheck row m-1">
+                                  <ul>
+                                  <li className="w-100">
                                         <input className=" ms-2 " type="checkbox"></input>
                                         <span className=" ms-3">UniPole</span>
                                     </li>
@@ -132,6 +135,7 @@ const Media = () => {
                                         <input className=" ms-2" type="checkbox"></input>
                                         <span className=" ms-3">UniPole</span>
                                     </li>
+                                  </ul>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +144,8 @@ const Media = () => {
                                 <h6 className="text-uppercase text-center">Sub category(5)</h6>
                             </div>
                             <div className="rowCheck bg-light row rounded-bottom me-1 ms-1 mb-1 p-1">
-                                <li className="w-100">
+                               <ul>
+                               <li className="w-100">
                                     <input className=" ms-2 " type="checkbox"></input>
                                     <span className=" ms-3">UniPole</span>
                                 </li>
@@ -196,6 +201,7 @@ const Media = () => {
                                     <input className=" ms-2" type="checkbox"></input>
                                     <span className=" ms-3">UniPole</span>
                                 </li>
+                               </ul>
                             </div>
                         </div>
                         <div className="col pt-4" >
@@ -204,7 +210,8 @@ const Media = () => {
                             </div>
 
                             <div className="rowCheck bg-light row rounded-bottom mb-1 ms-1 me-1 p-1">
-                                <li className="w-100">
+                               <ul>
+                               <li className="w-100">
                                     <input className=" ms-2 " type="checkbox"></input>
                                     <span className=" ms-3">UniPole</span>
                                 </li>
@@ -260,6 +267,7 @@ const Media = () => {
                                     <input className=" ms-2" type="checkbox"></input>
                                     <span className=" ms-3">UniPole</span>
                                 </li>
+                               </ul>
                             </div>
                         </div>
                     </div>
@@ -276,86 +284,138 @@ const Media = () => {
                             </div>
                         </div>
                         <div className='overflow h-auto  rounded'>
-                            <div className='container-fluid '>
-                                {!show ? <>
-                                  
+                            <div className='container-fluid'>
+                                {!show ? <>     
                                        <div className='row rounded-2 bg-light mt-3 singlecartback'>
-                                            <div className='col-12 col-sm-12'>
+                                            <div className='col-12 col-sm-12 backgroundAreaCol'>
                                                 <div className='row  backgroundArea'>
                                                     <div className='col-4 col-sm-4 p-2'>
                                                         <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3' />
                                                     </div>
                                                     <div className='col-8 col-sm-8 pt-2'>
-                                                        <a className='h4 ' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
+                                                        <a className='h4 text-decoration-none text-black' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
                                                         <div className='row'>
                                                             <div className='col-9 singleMediaData'>
-                                                                <h5 className='fw-bold display overflow-wrap mt-3 text-muted'>Code : GOH00M61</h5>
-                                                                <h5 className='fw-bold overflow-wrap text-muted'>Size : 30*20 feet</h5>
-                                                                <h5 className='fw-bold overflow-wrap text-muted'>Illumation</h5>
-                                                                <h5 className='fw-bold overflow-wrap text-muted'>Price</h5>
-                                                                <button className='rounded-3 mt-3 mb-3 bg-warning border-0'>See Details</button>
+                                                                <h5 className='fw-bold display overflow-wrap mt-3'>Code : GOH00M61</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Size : 30*20 feet</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Illumation</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Price</h5>
+                                                                <button className='rounded-3 mt-3 mb-2 p-2 ourServices border-0'>See Details</button>
                                                             </div>
                                                             <div className='col-3'>
                                                                 <div className='SinglerupeesDiv rounded-3 mt-5'>
                                                                     <img src='./images/location.svg' className='img-fluid ps-5' />
                                                                     <h6 className='text-black fw-bold text-nowrap text-center'>See at Map</h6>
-                                                                    <div className='SingleCartDiv rounded-3 mt-5'>
+                                                                    <div className='SingleCartDiv border mt-4 ourServices rounded-3'>
                                                                        <MdOutlineShoppingCart className='cartlogo ms-3 mt-1'/> 
-                                                                        <h6 className='text-black fw-bold text-nowrap text-end me-3 mb-2'>Add to Cart</h6>
+                                                                        <h6 className='text-black fw-bold  text-nowrap text-end me-3 mb-1 '>Add to Cart</h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                             </div>
                                                 <div className='row  backgroundArea'>
                                                     <div className='col-4 col-sm-4 p-2'>
                                                         <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3' />
                                                     </div>
                                                     <div className='col-8 col-sm-8 pt-2'>
-                                                        <a className='h4 ' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
+                                                        <a className='h4 text-decoration-none text-black' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
                                                         <div className='row'>
                                                             <div className='col-9 singleMediaData'>
-                                                                <h5 className='fw-bold display overflow-wrap mt-3 text-muted'>Code : GOH00M61</h5>
-                                                                <h5 className='fw-bold overflow-wrap text-muted'>Size : 30*20 feet</h5>
-                                                                <h5 className='fw-bold overflow-wrap text-muted'>Illumation</h5>
-                                                                <h5 className='fw-bold overflow-wrap text-muted'>Price</h5>
-                                                                <button className='rounded-3 mt-3 mb-3 bg-warning border-0'>See Details</button>
+                                                                <h5 className='fw-bold display overflow-wrap mt-3'>Code : GOH00M61</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Size : 30*20 feet</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Illumation</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Price</h5>
+                                                                <button className='rounded-3 mt-3 mb-2 p-2 ourServices border-0'>See Details</button>
                                                             </div>
                                                             <div className='col-3'>
                                                                 <div className='SinglerupeesDiv rounded-3 mt-5'>
                                                                     <img src='./images/location.svg' className='img-fluid ps-5' />
                                                                     <h6 className='text-black fw-bold text-nowrap text-center'>See at Map</h6>
-                                                                    <div className='SingleCartDiv rounded-3 mt-5'>
+                                                                    <div className='SingleCartDiv border mt-4 ourServices rounded-3'>
                                                                        <MdOutlineShoppingCart className='cartlogo ms-3 mt-1'/> 
-                                                                        <h6 className='text-black fw-bold text-nowrap text-end me-3 mb-2'>Add to Cart</h6>
+                                                                        <h6 className='text-black fw-bold  text-nowrap text-end me-3 mb-1 '>Add to Cart</h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                               
-                                            </div>
+                                             </div>
+                                                <div className='row  backgroundArea'>
+                                                    <div className='col-4 col-sm-4 p-2'>
+                                                        <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3' />
+                                                    </div>
+                                                    <div className='col-8 col-sm-8 pt-2'>
+                                                        <a className='h4 text-decoration-none text-black' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
+                                                        <div className='row'>
+                                                            <div className='col-9 singleMediaData'>
+                                                                <h5 className='fw-bold display overflow-wrap mt-3'>Code : GOH00M61</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Size : 30*20 feet</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Illumation</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Price</h5>
+                                                                <button className='rounded-3 mt-3 mb-2 p-2 ourServices border-0'>See Details</button>
+                                                            </div>
+                                                            <div className='col-3'>
+                                                                <div className='SinglerupeesDiv rounded-3 mt-5'>
+                                                                    <img src='./images/location.svg' className='img-fluid ps-5' />
+                                                                    <h6 className='text-black fw-bold text-nowrap text-center'>See at Map</h6>
+                                                                    <div className='SingleCartDiv border mt-4 ourServices rounded-3'>
+                                                                       <MdOutlineShoppingCart className='cartlogo ms-3 mt-1'/> 
+                                                                        <h6 className='text-black fw-bold  text-nowrap text-end me-3 mb-1 '>Add to Cart</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                             </div>
+                                                <div className='row  backgroundArea'>
+                                                    <div className='col-4 col-sm-4 p-2'>
+                                                        <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3' />
+                                                    </div>
+                                                    <div className='col-8 col-sm-8 pt-2'>
+                                                        <a className='h4 text-decoration-none text-black' href='https://gohoardings.com/services/traditional-ooh-media/unipole-akshardham-station-pandav-nagar-in-delhi'>Unipole - Akshardham Station, Pandav Nagar in Delhi</a>
+                                                        <div className='row'>
+                                                            <div className='col-9 singleMediaData'>
+                                                                <h5 className='fw-bold display overflow-wrap mt-3'>Code : GOH00M61</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Size : 30*20 feet</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Illumation</h5>
+                                                                <h5 className='fw-bold overflow-wrap'>Price</h5>
+                                                                <button className='rounded-3 mt-3 mb-2 p-2 ourServices border-0'>See Details</button>
+                                                            </div>
+                                                            <div className='col-3'>
+                                                                <div className='SinglerupeesDiv rounded-3 mt-5'>
+                                                                    <img src='./images/location.svg' className='img-fluid ps-5' />
+                                                                    <h6 className='text-black fw-bold text-nowrap text-center'>See at Map</h6>
+                                                                    <div className='SingleCartDiv border mt-4 ourServices rounded-3'>
+                                                                       <MdOutlineShoppingCart className='cartlogo ms-3 mt-1'/> 
+                                                                        <h6 className='text-black fw-bold text-nowrap text-end me-3 mb-1 '>Add to Cart</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                             </div>
+                                           </div>
                                         </div>
                                     </> : <>
                                     <div className='row row-cols-md-2 row-cols-sm-1 row-cols-3 row-cols-lg-3 row-cols-xl-3 p-0'>
-
-
-                                        <div className='col-12 col-sm-12'>
-                                            <div className='mainImage p-1'>
+                                       <div className='col-12 col-sm-12 '>
+                                            <div className='mainImage p-1 hello'>
                                                 <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
                                                 <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
                                                     <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
                                                     <div className='row'>
                                                         <div className='col'>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold text-nowrap text-dark'>Code : GOH00M61</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                            <button className='rounded-3 mt-3 seeDetails border-0'>See Details</button>
+                                                       
                                                         </div>
                                                         <div className='col  mt-5'>
-                                                            <div className='row'>
-                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                            <div className='row mt-3'>
+                                                                <div className='col'>  <div className='rupeesDiv rounded-3'>
                                                                     <img src='./images/rupee.png' className='img-fluid p-2' />
                                                                 </div>
                                                                 </div>
@@ -369,20 +429,22 @@ const Media = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='col-12 col-sm-12'>
-                                            <div className='mainImage p-1'>
+                                       <div className='col-12 col-sm-12 '>
+                                            <div className='mainImage p-1 hello'>
                                                 <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
                                                 <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
                                                     <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
                                                     <div className='row'>
                                                         <div className='col'>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold text-nowrap text-dark'>Code : GOH00M61</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                            <button className='rounded-3 mt-3 seeDetails border-0'>See Details</button>
+                                                       
                                                         </div>
                                                         <div className='col  mt-5'>
-                                                            <div className='row'>
-                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                            <div className='row mt-3'>
+                                                                <div className='col'>  <div className='rupeesDiv rounded-3'>
                                                                     <img src='./images/rupee.png' className='img-fluid p-2' />
                                                                 </div>
                                                                 </div>
@@ -396,20 +458,22 @@ const Media = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='col-12 col-sm-12'>
-                                            <div className='mainImage p-1'>
+                                        <div className='col-12 col-sm-12 '>
+                                            <div className='mainImage p-1 hello'>
                                                 <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
                                                 <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
                                                     <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
                                                     <div className='row'>
                                                         <div className='col'>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold text-nowrap text-dark'>Code : GOH00M61</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                            <button className='rounded-3 mt-3 seeDetails border-0'>See Details</button>
+                                                       
                                                         </div>
                                                         <div className='col  mt-5'>
-                                                            <div className='row'>
-                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                            <div className='row mt-3'>
+                                                                <div className='col'>  <div className='rupeesDiv rounded-3'>
                                                                     <img src='./images/rupee.png' className='img-fluid p-2' />
                                                                 </div>
                                                                 </div>
@@ -423,20 +487,22 @@ const Media = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='col-12 col-sm-12'>
-                                            <div className='mainImage p-1'>
+                                        <div className='col-12 col-sm-12 '>
+                                            <div className='mainImage p-1 hello'>
                                                 <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
                                                 <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
                                                     <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
                                                     <div className='row'>
                                                         <div className='col'>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
+                                                            <h6 className='fw-bold text-nowrap text-dark'>Code : GOH00M61</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
                                                             <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
+                                                            <button className='rounded-3 mt-3 seeDetails border-0'>See Details</button>
+                                                       
                                                         </div>
                                                         <div className='col  mt-5'>
-                                                            <div className='row'>
-                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
+                                                            <div className='row mt-3'>
+                                                                <div className='col'>  <div className='rupeesDiv rounded-3'>
                                                                     <img src='./images/rupee.png' className='img-fluid p-2' />
                                                                 </div>
                                                                 </div>
@@ -450,39 +516,15 @@ const Media = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='col-12 col-sm-12'>
-                                            <div className='mainImage p-1'>
-                                                <img src='./images/media.jpg' alt='About media ' className='rounded-top ' />
-                                                <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                                    <h5 className='fw-bold overflow-wrap text-dark'>Fascade - DLF Promenada, Delhi</h5>
-                                                    <div className='row'>
-                                                        <div className='col'>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Code : GOH00M61</h6>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Size : 30*20 feet</h6>
-                                                            <h6 className='fw-bold overflow-wrap text-dark'>Illumation</h6>
-                                                        </div>
-                                                        <div className='col  mt-5'>
-                                                            <div className='row'>
-                                                                <div className='col ms-2'>  <div className='rupeesDiv rounded-3'>
-                                                                    <img src='./images/rupee.png' className='img-fluid p-2' />
-                                                                </div>
-                                                                </div>
-                                                                <div className='col'><div className='CartDiv rounded-3 '>
-                                                                    <img src='./images/cart.png' className='img-fluid p-2' />
-                                                                </div></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div> </>}
                             </div>
                         </div>
+                    <div  class="button offset-4 row pt-3 pb-3" >
+                        <button class="w-25 buttonload btn-hover"><i aria-hidden="true" class="fa fa-caret-down"></i>View More </button>
+                    <button class="w-25 ms-5 buttonload btn-hover" ><i  aria-hidden="true" class="fa fa-long-arrow-up"></i> Back to Top </button>
                     </div>
                 </div>
+                    </div>
             </div>
         </>
     )

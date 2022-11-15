@@ -3,7 +3,7 @@ import './ourservices.scss'
 const Ourservices = () => {
   return (  
 <div className='ourServices pb-5'>
-<h2 className='text-center display-4 pe-5 ps-5 pt-5 text-nowrap'>Our Services</h2>
+<h2 className='text-center display-4 pe-5 ps-5 pt-5 text-nowrap text-dark fw-bold'>Our Services</h2>
 <p className='text-center' >Choose from below to deliver advertisements in a truly exciting, innovative and creative way.</p>
 <div className="row row-cols-md-2 row-cols-sm-1 row-cols-1 row-cols-lg-3 row-cols-xl-3 ms-sm-5 me-sm-5 ps-sm-5 pe-sm-5 g-sm-4 ms-md-5 me-md-5 ps-md-5 pe-md-5 g-md-4 ms-2 me-2 ps-2 pe-2 g-1">
   

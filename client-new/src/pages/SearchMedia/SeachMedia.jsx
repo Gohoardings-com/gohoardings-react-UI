@@ -28,8 +28,8 @@ const SearchMedia = () => {
     <>
       <div className="search text-center">
         <div className="headingText">
-          <h1 className="display-3">India's Largest Outdoor<br />Advertising Agency</h1>
-          <p className="fw-lighter">OOH Advertising made easy<br />Search Media. Check Availability. Book Online.</p>
+          <h1 className="display-3 text-center text-dark fw-bold">India's Largest Outdoor<br />Advertising Agency</h1>
+          <p className="fw-lighter text-center text-dark fw-bold">OOH Advertising made easy<br />Search Media. Check Availability. Book Online.</p>
         </div>
         <div className="container p-5">
             <div className="row cityCategory p-3  bg-light  rounded-pill">
