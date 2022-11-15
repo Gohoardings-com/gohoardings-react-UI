@@ -23,9 +23,9 @@ function App() {
     <>
       <BrowserRouter>
   <Header/>
- {avlable == true ? <Fixednavbar/> : <Flotinggnavbar/>}
+ {avlable == true ? <Fixednavbar/> :  <Flotinggnavbar/>}
         <Routes>
-          <Route path="/" element={avlable == true ? <Home/>:<Home/>}/>
+          <Route path="/" element={<Home setAvlable={setAvlable} />}/>
           <Route path="/media" element={<Media/>}/>
           <Route path="/details" element={<Details/>}/>
           <Route path="/cart" element={<GohordingCart/>}/>

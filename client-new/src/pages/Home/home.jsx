@@ -57,7 +57,8 @@ import Trandingcity from "../trandingcity/trandingcity";
 //   return scrollPosition;
 // }
 
-const Home = () => {
+const Home = ({setAvlable}) => {
+  setAvlable(true)
 //   const navigate = useNavigate()
 //   const [scroll] = useWindowScroll();
 //   const [scrollcss, setScrollcss] = useState(false);
@@ -344,11 +345,13 @@ const Home = () => {
           </div>
         </div>
       </div> */}
+<div className="m-0 p-0">
 <Navbar/>
 <SearchMedia/>
  <Ourservices/> 
  <City/>
 <Enquire/>
+</div>
 {/* <Trandingcity/> 
  <Navbar/>
 <SearchMedia/> */}

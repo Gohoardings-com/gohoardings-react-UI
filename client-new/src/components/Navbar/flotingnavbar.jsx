@@ -9,7 +9,7 @@ const Flotinggnavbar = () => {
   return (
    <>
      <div className="container-fluid  ">
-    <Navbar expand="lg px-md-4 colapse-search-bar rounded-4">
+    <Navbar expand="lg px-md-4 colapse-search-bar rounded-4 w-100">
         <Dropdown  >
           {/* onMouseOver={() => setShow(true)} */}
           <Dropdown.Toggle variant="transparent"   >
@@ -24,27 +24,25 @@ const Flotinggnavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown}/> */}
         <Navbar.Collapse id="basic-navbar-nav" className="new-search-fields">
-          <div className="border border-dark h-auto input-group ms-lg-3 overflow-hidden rounded-pill w-50">
-           
-            <Form.Select aria-label="Default select example"   className="form-control hide-focus border-0 py-2">
-  <option>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</Form.Select>
-           
-          </div>
-          <div className="border border-dark h-auto input-group ms-lg-3 overflow-hidden rounded-pill w-50">
-          
-          <Form.Select aria-label="Default select example"   className="form-control hide-focus border-0  py-2">
-  <option>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</Form.Select>
-          </div>
-        
           <Nav>
+         <div className="border border-dark h-auto input-group ms-lg-3 overflow-hidden rounded-pill w-100">
+            <Form.Select aria-label="Default select example"   className="form-control  border-0 py-2 py-ms-0 py-lg-0">
+          <option>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          </Form.Select>
+      </div>
+        
+          <div className="border border-dark h-auto input-group ms-lg-3 overflow-hidden rounded-pill w-100">
+          
+          <Form.Select aria-label="Default select example"   className="form-control border-0  py-2">
+  <option>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</Form.Select>
+          </div>
           <Nav.Link
               className="fw-bolder ms-1 nav-link  text-dark"
               href="/register"

@@ -7,7 +7,6 @@ import {MdLocationOn} from 'react-icons/md'
 import { useNavigate } from "react-router-dom";
 import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
 
-
 const NewNAvbar = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -30,8 +29,7 @@ const NewNAvbar = () => {
 
           </Dropdown> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
-          <Navbar.Collapse id="basic-navbar-nav ">
-
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" ms-auto me-5">
               <Nav.Link
                 className="navLink ps-3"

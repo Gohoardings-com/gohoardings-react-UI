@@ -2,8 +2,8 @@ import React from 'react'
 import './citylist.scss'
 const City = () => {
   return (
-   <>
-<div className='citylist'>
+  
+<div className='citylist p-0 m-0'>
 <div className='underline'>
 <h1 className='text-center text-nowrap text-dark fw-bold'>Explore your City Listings</h1>
 <hr className='d-inline-block'/>
@@ -25,7 +25,7 @@ const City = () => {
 </div>
 </div>
 </div>
-   </>
+   
   )
 }
 
