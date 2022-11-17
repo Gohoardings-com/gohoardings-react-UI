@@ -18,8 +18,11 @@ const syncMediaRoutes = require('./routes/syncMediaRoutes')
 const mediaRouter = require('./routes/mediaRoutes')
 const LoginRoute = require('./routes/loginWeb');
 const addOnCart = require('./routes/CartItemRoute');
+const enquiryRoute = require('./routes/enquiryRoute');
+const productList = require('./routes/productListRoute');
 
-
+app.use("/api/v1/product", productList);
+app.use("/api/v1/enquiry", enquiryRoute);
 app.use("/auth", auth);
 app.use("/api/v1/cart", addOnCart);
 app.use('/api/v1/registration',LoginRoute)

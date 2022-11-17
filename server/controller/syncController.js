@@ -42,7 +42,6 @@ exports.updateSync = async (req, res) => {
 
 
 exports.updateStatus = async (req, res) => {
-
   const id = req.body.id;
   const promises = [];
   db.changeUser({ database: "odoads_tblcompanies" });
@@ -75,7 +74,6 @@ exports.updateStatus = async (req, res) => {
 
 
 exports.rejectedData = async (req, res) => {
-
   // Configure array to store all promises
   const promises = [];
   db.changeUser({ database: "odoads_tblcompanies" });
@@ -135,9 +133,6 @@ exports.rejectedAccept = async (req, res) => {
   const clientData = req.body.clientCode
   const promises = [];
   const newdata = [allData]
-  
-
-  
   const keyValue = ("mediaownercompanyname,email,companyaddress,created,phonenumber,main_media_id,mediaownername")
   const keyData = ("name,contact_email,contact_address,created,contact_phone,mediano,contact_firstname,contact_lastname")
    promises.push(new Promise  (async(reject, resolve) => {

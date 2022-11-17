@@ -29,6 +29,7 @@ const SearchData = () => {
       category_name : category_name,
       city_name : city_name
     })
+    console.log(data);
     setPosts(data);
   }
 

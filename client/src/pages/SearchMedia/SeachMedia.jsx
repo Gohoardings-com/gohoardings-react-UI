@@ -90,7 +90,7 @@ const SearchMedia = () => {
               <div className="w-100 text-center rounded-pill overflow-hidden border btn py-2">
                 <Link
                   to={`/services/${category_name}/${city_name}`}
-                  className="button text-light is-small is-info py-2 text-decoration-none"
+                  className="button text-light is-small is-info py-2 text-decoration-none "
                 >
                   Search
                 </Link>

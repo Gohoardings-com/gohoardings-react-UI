@@ -1,9 +1,28 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {RiUser3Fill} from 'react-icons/ri'
+import { useParams, } from 'react-router-dom';
 import {IoIosSettings,IoMdLocate} from 'react-icons/io'
 import './details.scss'
+import {useLocation} from 'react-router-dom';
+import instance from '../../apis/Axios';
+import Medialogo from '../../components/medialogo';
 
 const Details = () => {
+    const {code,category_name} = useParams();
+    const [posts,setPosts] = useState([])
+
+    const getMedia = async() =>{
+        const {data} =await instance.post('product/product',{
+            code :code,
+            category_name:category_name
+        })
+        console.log(data);
+        setPosts(data);
+    }
+
+useEffect(() => {
+    getMedia()
+}, []);
   return (
    <>
 <div className='detailsHeader d-flex flex-row justify-content-center w-100 p-0'>
@@ -19,11 +38,17 @@ const Details = () => {
 <IoMdLocate className='mb-1 text-dark'/> <a className='heading-text text-dark' href="#location">Location</a>
 </div>
     </div>
-<div className='conatiner-fluid'>
-    <div className='row mt-sm-5 pt-sm-5 ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5'>
+  <div className='container-fluid'>
+  </div>
+{!posts? <>
+<h1>Loading... Please wait</h1>
+</>:<>
+{posts.map((item,i) =>(
+    <div className='conatiner-fluid'>
+    <div className='row mt-sm-5  ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5'>
         <div className='col '>
         <div className='maindivbordermediadetails rounded-3 p-2'>
-        <img src='./images/media.jpg' alt='About media' className='w-100 h-auto rounded-3 img-fluid ' />
+        <img src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0,2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0,2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media' className='w-100 h-auto rounded-3 img-fluid ' />
         </div>
     
        {/* Map Section */}
@@ -31,16 +56,16 @@ const Details = () => {
             <div className='bg-primary p-2' id='location'>
             <h4 className='text-light'>Media Location</h4>
             </div>
-            <h6 className='mt-3 text-muted'>Address  : <span className='text-dark'>AKSHARDHAM STATION, PANDAV NAGAR IN DELHI</span></h6>
+            <h6 className='mt-3 text-muted'>Address  : <span className='text-dark'>{item.areadescription}</span></h6>
             <map></map>
             </div>
         </div>
         <div className='col ms-5 me-5 maindivbordermediadetails p-2 mb-2 rounded-2' id='media'>
           <div>
-          <h5 className='text-center pt-3 fw-bolder'>UNIPOLE - AKSHARDHAM STATION, PANDAV NAGAR IN DELHI</h5>
+          < h5 className='text-center pt-3 fw-bolder'>{item.page_title}</ h5>
           <div className='row'>
           <div className='col pt-4'>
-          <h6 className=' text-muted'>Code : GOH00T16001</h6>
+          <h6 className=' text-muted'>Code :<span className='text-dark'> {item.code}</span></h6>
            <h6>Price : <span className='text-primary'>Login to see price</span></h6>
           </div>
           <div className='col pt-4'>
@@ -53,29 +78,29 @@ const Details = () => {
             <h4 className='text-light'>Highlights</h4>
             </div>
             <div className='d-flex flex-row mt-4 pb-2 mediaAllDetails'>
-                <h5 className='fw-bold'>Media Type</h5>
-                <span className="ms-auto input-group-text bg-success mediatype">Unipole/Hoarding</span>
+                < h6 className='fw-bold'>Media Type</ h6>
+                <span className="ms-auto input-group-text bg-success mediatype">{item.subcategory}</span>
             </div>
             <div className='d-flex flex-row mt-4 pb-2 mediaAllDetails'>
-                <h5 className='fw-bold'>Height X Width</h5>
-                <span className="ms-auto input-group-text" >FTF</span>
+                < h6 className='fw-bold'>Height X Width</ h6>
+                <span className="ms-auto input-group-text" >{item.size}</span>
             </div>
             <div className='d-flex flex-row mt-4 pb-2 mediaAllDetails'>
-                <h5 className='fw-bold'>Illumination</h5>
-                <span className="ms-auto input-group-text" ></span>
+                < h6 className='fw-bold'>Illumination</ h6>
+                <span className="ms-auto input-group-text">{item.illumination}</span>
             </div>
             <div className='d-flex flex-row mt-4 pb-2 mediaAllDetails'>
-                <h5 className='fw-bold'>FTF</h5>
-                <span className="ms-auto input-group-text" ></span>
+                < h6 className='fw-bold'>FTF</ h6>
+                <span className="ms-auto input-group-text" >{item.ftf}</span>
             </div>
             <div className='d-flex flex-row mt-4 pb-2 mediaAllDetails'>
-                <h5 className='fw-bold'>Total Area</h5>
-                <span className="ms-auto input-group-text" ></span>
+                < h6 className='fw-bold'>Total Area</ h6>
+                <span className="ms-auto input-group-text" >{item.area}</span>
             </div>
             <div className='d-flex flex-row mt-4 pb-2 mediaAllDetails'>
-                <h5 className='fw-bold'>Additional information</h5>
+                < h6 className='fw-bold'>Additional information</ h6>
             </div>
-               <h5 className='pt-3'>The hoarding is placed in prime loaction. It is visible from all the crossing roads covering maximum views.</h5>
+               < h6 className='pt-3'>{item.companyaddress}</ h6>
           </div>
           </div>
          
@@ -96,6 +121,8 @@ const Details = () => {
         </div>
     </div>
 </div>
+))}
+</>}
    </>
   )
 }

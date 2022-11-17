@@ -138,7 +138,6 @@ exports.googleLogin = catchError(async(req,res) => {
       })
 })
 
-
 exports.verifyToken =catchError(async (req, res, next) => {
     const cookieData =  req.cookies;
   if (!cookieData) {
@@ -160,7 +159,6 @@ if(!token){
 }
 })
 
-
 exports.getuser = catchError(async (req, res) => {
    const userId = req.id;
 
@@ -178,7 +176,6 @@ exports.getuser = catchError(async (req, res) => {
   }
 })
 
-
 exports.logout = catchError(async(req,res) => {
   const user = req.id
     if (!user) {
@@ -188,7 +185,6 @@ exports.logout = catchError(async(req,res) => {
     req.cookies[`${user}`] = "";
     return res.status(200).json({ message: "User Logout SuccessFully" })
 })
-
 
 exports.Profile = catchError(async(req,res) => {
       const { userid } = req.body;

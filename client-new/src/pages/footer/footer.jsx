@@ -3,14 +3,12 @@ import Nav from "react-bootstrap/Nav";
 import './footer.scss'
 import { Link, useNavigate } from "react-router-dom";
 import {CgCheck} from 'react-icons/cg'
-import axios from "axios";
+import instance from "../../apis/Axios";
 
 function useWindowSize() {
     const [size, setSize] = useState([window.innerWidth]);
   
-  
     useEffect(() => {
-  
       const handleResize = () => {
         setSize([window.innerWidth]);
       };
@@ -22,9 +20,13 @@ function useWindowSize() {
     }, []);
     return size;
   }
-
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
 
 const Footer = () => {
+  const [getEmail,setEmail]= useState([])
 const navigate = useNavigate()
     const [width] = useWindowSize();
     const [widthcss, setWidthcss] = useState(false);
@@ -41,6 +43,13 @@ const navigate = useNavigate()
 
 const contactPage = async() => {
  navigate('/contact')
+}
+const handelSubmit = async(e) =>{
+  e.preventDefault()
+  const {data} = await instance.post("enquiry/message",{
+    email:getEmail,
+})
+console.log(data);
 }
 
 return (
@@ -78,39 +87,44 @@ return (
                 </div>
               </div>
               <div className="col  py-3">
-                <div className="popular-services text-light">
-                  <h4 className="fw-bold text-nowrap text-muted ps-5">Popular Services</h4>
+                <div className="popular-media text-light">
+                  <h4 className="fw-bold text-nowrap text-muted ps-5">Popular media</h4>
                   <ul className="   pt-3 text-muted">
                     <li>
                       <Link
-                  to={`/services/${"traditional-ooh-media"}/${"delhi"}`}
+                  to={`/media/traditional-ooh-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
+                  onClick={topFunction}
                   > <CgCheck/> Traditional OOH</Link>
                 </li>
                     <li>
                       <Link
-                  to={`/services/${"digital-media"}/${"delhi"}`}
+                  to={`/media/digital-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
+                  onClick={topFunction}
                 > <CgCheck/> Digital Media</Link></li>
                     <li>
                       <Link
-                  to={`/services/${"transit-media"}/${"delhi"}`}
+                  to={`/media/transit-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Transit-Media</Link></li>
                     <li>
                    <Link
-                  to={`/services/${"mall-media"}/${"delhi"}`}
+                  to={`/media/mall-media/delhi`}
+                  onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Mall Media</Link></li>
                     <span className="pos-absolute end-0 top-0 me-5">
                       <li>
                        <Link
-                  to={`/services/${"airport-media"}/${"delhi"}`}
+                          onClick={topFunction}
+                  to={`/media/airport-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Airport Media</Link></li>
                       <li>
                         <Link
-                  to={`/services/${"inflight_media"}/${"delhi"}`}
+                           onClick={topFunction}
+                  to={`/media/inflight_media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Inflight Media</Link></li>
                     </span>
@@ -122,34 +136,39 @@ return (
               <ul className="position-relative pt-3 text-muted">
                     <li>
                       <Link
-                  to={`/services/${"traditional-ooh-media"}/${"delhi"}`}
+                         onClick={topFunction}
+                  to={`/media/traditional-ooh-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                   > <CgCheck/> Traditional OOH</Link>
                 </li>
                     <li>
                       <Link
-                  to={`/services/${"digital-media"}/${"delhi"}`}
+                  to={`/media/digital-media/delhi`}
+                  onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Digital Media</Link></li>
                     <li>
                       <Link
-                  to={`/services/${"transit-media"}/${"delhi"}`}
+                  to={`/media/transit-media/delhi`}
+                  onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Transit-Media</Link></li>
                     <li>
                    <Link
-                  to={`/services/${"mall-media"}/${"delhi"}`}
+                  to={`/media/mall-media/delhi`}
+                  onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Mall Media</Link></li>
                     <span className="pos-absolute end-0 top-0 me-5">
                       <li>
                        <Link
-                  to={`/services/${"airport-media"}/${"delhi"}`}
+                  to={`/media/ "airport-media"}/ "delhi"}`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Airport Media</Link></li>
                       <li>
                         <Link
-                  to={`/services/${"inflight_media"}/${"delhi"}`}
+                  to={`/media/inflight_media/delhi`}
+                  onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Inflight Media</Link></li>
                     </span>
@@ -171,9 +190,9 @@ return (
               <div className="col-12 col-sm-4 py-3">
                   <h4 className="fw-bold text-muted  text-wrap">Best deals in your inbox</h4>
                   <h6 className=" p-2 text-muted">Join our newsletter for the most recent information.</h6>        
-                   <form  className="d-flex flex-sm-row flex-column flex-lg-row flex-md-column p-2">
-                      <input className="text-dark bg-light rounded-3"  type="email" placeholder="Enter you email address" formcontrolname="email"/>
-                     <input className="text-dark btn bg-black ms-lg-2 mt-2 rounded-3" type="submit" value="Contact" />
+                   <form onSubmit={handelSubmit}  className="d-flex flex-sm-row flex-column flex-lg-row flex-md-column p-2">
+                      <input className="text-dark bg-light rounded-3" onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter you email address" formcontrolname="email"/>
+                     <input className="text-light btn bg-black ms-lg-2 mt-2 rounded-3" type="submit" value="Contact" />
                     </form>
                   
        

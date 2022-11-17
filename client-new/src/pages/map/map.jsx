@@ -27,12 +27,12 @@ const Map = () => {
 
 
 useEffect(() => {
-  const medias  = async ()=>{
+  const mediasData  = async ()=>{
     const {data} = await instance.post("media/searchMedia")
     console.log(data);
     setMedias(data);
   }
-  medias();
+  mediasData();
 }, []);
 
 
