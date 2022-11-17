@@ -14,3 +14,13 @@ exports.categorieFilter = catchError(async (req, res) => {
       }
     });
     })
+
+
+exports.mapFilter = catchError(async (req,res) =>{
+  console.log(req.body);
+
+})
+exports.locationFilter = catchError(async (req,res) =>{
+  console.log(req.body);
+
+})

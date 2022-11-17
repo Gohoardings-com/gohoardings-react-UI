@@ -3,6 +3,7 @@ const jwtToken = require('jsonwebtoken')
 const catchError  = require('../middelware/catchError')
 
 exports.addOnCart = catchError(async (req, res) => {
+  console.log(req.body);
 const cookieData = req.cookies
 if (!cookieData) {
   return res.status(400).json({message:"No Cookie Found"})

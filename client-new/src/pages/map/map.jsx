@@ -1,46 +1,53 @@
 import React,{useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./map.scss";
+import "./icons.scss"
 import instance from "../../apis/Axios";
 import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
-import { MultiSelect } from "react-multi-select-component";
 
 const Map = () => {
   const [medias,setMedias] = useState([])
   const [price,setprice] = useState([])
-  const [illumna, setIllumna] = useState([]);
-  const [mlocation, setMlocation] = useState([]);
   const [query, setQuery] = useState("");
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
 
   const hording = [];
+  const type = [];
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
 
-  const getAllDetails =() =>{
-    console.log(illumna,price,hording, mlocation);
+  const getAllDetails = async () =>{
+    console.log(type,price,hording);
+    const { data } = await instance.post('filter/categoryfilter', {
+      hordingtype: type,
+      price :price,
+      hording:hording
+    })
+    setMedias(data)
   }
 
-  function multichecked(e){
+  function multicheck(e){
     if (e.currentTarget.checked) {
-      hording.push(e.target.value)
+      type.push(e.target.value)
     } else {
-      for (let i = 0; i < hording.length; i++) {
-        e.target.value = hording[i];
-        hording.splice(i, 1);
-      }
+      // for (let i = 0; i < hording.length; i++) {
+        // if (e.target.value == hording[i]) {
+          var index = type.indexOf(e.target.value)
+          if (index > -1) { // only splice array when item is found
+            type.splice(index, 1); // 2nd parameter means remove one item only
+          }
     }
-    console.log(hording);
   }
 
 
 useEffect(() => {
+
   const mediasData  = async ()=>{
     const {data} = await instance.post("media/searchMedia")
     setMedias(data);
@@ -48,6 +55,19 @@ useEffect(() => {
   mediasData();
 }, []);
 
+function multichecked(e){
+  if (e.currentTarget.checked) {
+    hording.push(e.target.value)
+  } else {
+    // for (let i = 0; i < hording.length; i++) {
+      // if (e.target.value == hording[i]) {
+        var index = hording.indexOf(e.target.value)
+        if (index > -1) { // only splice array when item is found
+          hording.splice(index, 1); // 2nd parameter means remove one item only
+        }
+  }
+  console.log(hording);
+}
 
  let ILLUMINATION = [
   { label: "Nonlit", value: " Nonlit" },
@@ -110,6 +130,9 @@ useEffect(() =>{
               <div className="accordion items mb-2 rounded" id="accordionExample">
 
 
+                   {!medias ? <>Loading .... Please wait</> :<>
+                   {medias.map((item,i) =>(
+                     <>
                 <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
@@ -117,9 +140,6 @@ useEffect(() =>{
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                   {!medias ? <>Loading .... Please wait</> :<>
-                   {medias.map((item,i) =>(
-                    <>
                      <div className="row m-0">
                       <p className="my-2">
                         {item.page_title.substring(
@@ -164,24 +184,16 @@ useEffect(() =>{
                         transition does limit overflow.
                       </div>
                     </div>
+                  </div>
+                </div>
                     </>
                    ))}
                    </>} 
                    
-                  </div>
-                </div>
 
               </div>
             </div>
-            <div className="poi-items accordion-collapse collapse" id="collapseT2" data-bs-parent="#accordionTest">
-              {/* Icons for selection */}
-                            <IconsSlection/>
-          
-             
-              <div className="poi-submit">
-                <button type="submit" className="btn btn-warning btn-outline-dark px-4">Apply</button>
-              </div>
-            </div>
+            <IconsSlection setMedias={setMedias}/>
             <div className="filter-items p-2 accordion accordion-collapse collapse" id="collapseT3" data-bs-parent="#accordionTest">
 
             <div id="accordionTest2">
@@ -222,7 +234,7 @@ useEffect(() =>{
                   <input type="checkbox" id={i} 
                   className="me-1"
                         value={illum.name}
-                        // onChange={(e) => multicheck(e)} 
+                        onChange={(e) => multicheck(e)} 
                         />
                   <span>{illum.name}</span>
                   <br />
@@ -334,6 +346,7 @@ useEffect(() =>{
                           </li>
                         </ul>
                       </div>
+                      
                     </div>
                    
                   </div>

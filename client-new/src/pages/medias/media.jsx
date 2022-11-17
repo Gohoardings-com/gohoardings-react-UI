@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './media.scss';
+import { BsListCheck } from 'react-icons/bs';
 import { useParams,useNavigate } from 'react-router-dom';
 import instance from '../../apis/Axios'
 import { MdLocationOn, MdChecklist } from 'react-icons/md'
@@ -15,8 +16,9 @@ const Media = () => {
     // const {addRemove} = useContext(AccountContext)
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
+
+
     const getData = async () => {
-      // dispatch(mediawithcity(category_name ?? 'traditional-ooh-media', city_name ?? 'Delhi'));
       const {data} = await instance.post("media/searchMedia",{
         category_name : category_name,
         city_name : city_name
@@ -26,28 +28,26 @@ const Media = () => {
   
   
   
-    // const addonCart = async (e) => {
-      
-    //   const {data} =  await instance.post('cart/addOnCart', {
-    //       mediaid: e.code,
-    //       mediatype: e.category_name,
-    //     })
-    //       if(data.message == 'Login First'){
-    //         navigate('/login')
-    //       }else{
-    //         addRemove({type:"INCR"})
-    //         add(e)
-    //       }
-    //   }
+    const addonCart = async (e) => {
+      console.log(e);
+      const {data} =  await instance.post('cart/addOnCart', {
+          mediaid: e.code,
+          mediatype: e.category_name,
+        })
+         
+            // addRemove({type:"INCR"})
+            add(e)
+          console.log(data);
+      }
   
-    //   const removefroCart = async (obj) => {
-    //     console.log(obj);
-    //     await instance.post('cart/deleteFromCart', {
-    //       code: obj.code,
-    //     })
-    //     addRemove({type:"DECR"})
-    //     remove(obj)
-    //   }
+      const removefroCart = async (obj) => {
+        console.log(obj);
+        await instance.post('cart/deleteFromCart', {
+          code: obj.code,
+        })
+        // addRemove({type:"DECR"})
+        remove(obj)
+      }
   
   
       /***************************************************************** */
@@ -74,8 +74,6 @@ const Media = () => {
         });
       };
   
-  console.log(posts);
-    /***************************************************************** */
   
     useEffect(() => {
       getData()
@@ -95,15 +93,15 @@ const Media = () => {
                                 <MdLocationOn className='h-75 w-auto mt-1' />
                             </div>
                             <div className='col-1'>
-                                <MdChecklist onClick={(e) => setShow(!show)} className='h-75 w-auto mt-1' />
+                               {!show ? <> <MdChecklist onClick={(e) => setShow(!show)} className='h-75 w-auto mt-1' /></>:<><BsListCheck onClick={(e) => setShow(!show)} className='h-75 w-auto mt-1' /></>}
                             </div>
                         </div>
                         <div className='overflow  rounded'>
                             <div className='container-fluid'>
                                 {!show ? <>     
-                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts}/>
+                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/>
                                     </> : <>
-                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts}/>
+                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/>
                                    </>}
                             </div>
                         </div>
