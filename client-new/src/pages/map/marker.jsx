@@ -1,26 +1,12 @@
 import React, { useState } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import "./marker.scss"
 
 const markers = [
   {
     id: 1,
     name: "Noida",
     position: { lat: 28.5821195, lng: 77.3266991 }
-  },
-  {
-    id: 2,
-    name: "Denver, Colorado",
-    position: { lat: 39.739235, lng: -104.99025 }
-  },
-  {
-    id: 3,
-    name: "Los Angeles, California",
-    position: { lat: 34.052235, lng: -118.243683 }
-  },
-  {
-    id: 4,
-    name: "New York, New York",
-    position: { lat: 40.712776, lng: -74.005974 }
   }
 ];
 
@@ -47,7 +33,7 @@ function Markers() {
 
   return (
     <GoogleMap
-      zoom={14}
+      zoom={10}
       onLoad={handleOnLoad}
       center={center}
       onClick={() => setActiveMarker(null)}
@@ -61,7 +47,19 @@ function Markers() {
         >
           {activeMarker === id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
+              <div className="infoWindow">
+                <div className="media-image">
+                <img src="./gohoarding/new1568268924_79858.jpg" alt="" />
+                </div>
+                <div className="info-window bg-white">
+                  <h5>Facade - DLF Promenade, Delhi</h5>
+                  <p><span>Media Type : </span>Unipole/Hoarding</p>
+                  <p><span>Height X Width : </span>30 X 20 feet</p>
+                  <p><span>Illumination : </span>Frontlit</p>
+                  <p><span>Price : Login to see price</span></p>
+                  <img src="./assests/map-icons/bag.png" alt="N/A" />
+                </div>
+              </div>
             </InfoWindow>
           ) : null}
         </Marker>
