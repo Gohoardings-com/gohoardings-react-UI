@@ -7,15 +7,17 @@ import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
+import { MultiSelect } from "react-multi-select-component";
 
 const Map = () => {
   const [medias,setMedias] = useState([])
   const [price,setprice] = useState([])
   const [illumna, setIllumna] = useState([]);
-  const [hording, sethording] = useState([]);
   const [mlocation, setMlocation] = useState([]);
   const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState([]);
 
+  const hording = [];
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
@@ -25,10 +27,27 @@ const Map = () => {
     console.log(illumna,price,hording, mlocation);
   }
 
+  function multichecked(e){
+    if (e.currentTarget.checked) {
+      hording.push(e.target.value)
+    } else {
+      for (let i = 0; i < hording.length; i++) {
+        e.target.value = hording[i];
+        hording.splice(i, 1);
+      }
+    }
+    console.log(hording);
+  }
+
 
 useEffect(() => {
   const medias  = async ()=>{
-    const {data} = await instance.post("media/searchMedia")
+    const {data} = await instance.post("media/searchMedia",
+    {
+      category_name : "traditional-ooh-media",
+      city_name : "Delhi"
+    }
+    )
     console.log(data);
     setMedias(data);
   }
@@ -240,7 +259,8 @@ useEffect(() => {
                   <input type="checkbox" id={i} 
                   className="me-1"
                         value={illum.value}
-                        onChange={(e) => sethording(e.target.value)} />
+                        // onChange={(e) => multicheck(e)} 
+                        />
                   <span>{illum.label}</span>
                   <br />
                 </>
@@ -250,7 +270,9 @@ useEffect(() => {
                 </div>
                   </div>
                 </div>
-              </div> 
+              </div>
+
+
               <div className="accordion-item mb-3">
                 <h2 className="accordion-header" id="flush-headingThree">
                   <button className="accordion-button collapsed bg-secondary bg-opacity-25" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
@@ -274,7 +296,8 @@ useEffect(() => {
                 <>
                   <input type="checkbox" id={i} 
                         value={illum.value}
-                        onChange={(e) => setMlocation(e.target.value)} />
+                        // onChange={(e) => multicheck(e.target.value)}
+                         />
                   <span>{illum.label}</span>
                   <br />
                 </>
@@ -298,7 +321,7 @@ useEffect(() => {
                       <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id={i} 
                         value={illumation.value}
-                        onChange={(e) => setIllumna(e.target.value)}/>
+                        onChange={(e) => multichecked(e)}/>
                         <label htmlFor="1" className="ps-2">{illumation.label}</label>
                       </div>
                       ))}

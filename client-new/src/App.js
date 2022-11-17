@@ -23,8 +23,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-  <Header/>
- {avlable == true ? <Fixednavbar/> :  <Flotinggnavbar/>}
+  {/* <Header/>
+ {avlable == true ? <Fixednavbar/> :  <Flotinggnavbar/>} */}
         <Routes>
           <Route path="/" element={<Home setAvlable={setAvlable} />}/>
           <Route path="/media" element={<Media/>}/>

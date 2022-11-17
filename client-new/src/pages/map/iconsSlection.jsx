@@ -1,5 +1,6 @@
 import React,{useEffect, useState } from "react";
 import Slider from "./slider.jsx";
+import "./icons.scss"
 
 const IconsSlection = () => {
   const [ Distance, Setdistance] = useState(0);
@@ -13,35 +14,43 @@ const IconsSlection = () => {
     {
       name: "education",
       value: "./assests/map-icons/education.png",
-    },
+      id:"cb1"
+      },
     {
       name: "bar",
       value: "./assests/map-icons/bar.png",
-    },
+      id:"cb2"
+      },
     {
       name: "hotel",
       value: "./assests/map-icons/hotel.png",
-    },
+      id:"cb3"
+      },
     {
       name: "restaurant",
       value: "./assests/map-icons/restaurant.png",
-    },
+      id:"cb4"
+      },
     {
       name: "hospital",
       value: "./assests/map-icons/hospital.png",
-    },
+      id:"cb5"
+      },
     {
       name: "spa",
       value: "./assests/map-icons/spa.png",
-    },
+      id:"cb6"
+      },
     {
       name: "spa",
       value: "./assests/map-icons/cinema.png",
-    },
+      id:"cb7"
+      },
     {
       name: "gym",
       value: "./assests/map-icons/gym.png",
-    },
+      id:"cb8"
+      },
   ];
 
   const distanceofMedia = [
@@ -66,21 +75,17 @@ const IconsSlection = () => {
   ]
 
 const iconfilter =(e) =>{
-    setImages(e.target.name);
+    console.log(e);
   
 }
-console.log(images);
 
   return (
    <>
     <div className="row poi-item">
     {Icons.map((icon) =>(
         <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target={`#${icon.name}`} aria-expanded="false">
-        <img src={icon.value} alt="N/A"  name={icon.name} onClick={(e) =>iconfilter(e)} />
-{images === icon.name && 
-        <span className="bg-light bg-opacity-75 position-absolute start-0 top-0 h-100 w-100 accordion-collapse collapse" id={icon.name}><img src="./assests/map-icons/check.png" className="poi-check" /></span>
-
-}
+      <input type="checkbox" id={icon.id} />
+      <label for={icon.id}><img src={icon.value} alt="N/A"  name={icon.name} /></label>
       </div>
     ))}
   </div>
