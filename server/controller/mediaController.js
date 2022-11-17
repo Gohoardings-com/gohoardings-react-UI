@@ -192,7 +192,7 @@ const token = Object.values(cookieData)[0];
 return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
 if(!token || token== 0 ){
         promises.push(new Promise((resolve, reject) => {
-          db.query("SELECT * FROM "+table_name+" WHERE city_name='"+city_name+"' LIMIT 51",async (err,result) => {
+          db.query("SELECT * FROM "+table_name+" WHERE city_name='delhi' LIMIT 51",async (err,result) => {
             if (err) {
               return res.send({err: reject(err),message :"Wrong Data"})
           } else if (resolve == []){
