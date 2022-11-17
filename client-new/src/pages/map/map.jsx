@@ -42,11 +42,20 @@ const Map = () => {
 
 useEffect(() => {
   const mediasData  = async ()=>{
+    console.log("asda");
+   // let {data}  = []
     const {data} = await instance.post("media/searchMedia")
-    setMedias(data);
+    if (data.length > 0) {
+      console.log(data);
+      setMedias(data);
+    }
   }
   mediasData();
 }, []);
+
+// medias.forEach(obj => {
+//   console.log(obj);
+// });
 
 
  let ILLUMINATION = [
@@ -356,7 +365,7 @@ useEffect(() =>{
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-              { isLoaded ? <Markers /> : null }
+              {/* { isLoaded ? <Markers /> : null } */}
           </div>
 
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
@@ -379,7 +388,7 @@ useEffect(() =>{
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-              { isLoaded ? <Markers /> : null }
+              { isLoaded && medias && medias.length > 0 ? <Markers data={medias}/> : null }
         </div>
       </div>
     </div>
