@@ -8,7 +8,7 @@ const IconsSlection = () => {
     
   function HandleDistance(Dis) {
     Setdistance(Dis)
-    console.log(Dis);
+
   }
   let Icons = [
     {
@@ -42,7 +42,7 @@ const IconsSlection = () => {
       id:"cb6"
       },
     {
-      name: "spa",
+      name: "cinema",
       value: "./assests/map-icons/cinema.png",
       id:"cb7"
       },
@@ -73,11 +73,9 @@ const IconsSlection = () => {
           },
   
   ]
+// const hello = [posts,...images]
+console.log(images);
 
-const iconfilter =(e) =>{
-    console.log(e);
-  
-}
 
   return (
    <>
@@ -85,7 +83,7 @@ const iconfilter =(e) =>{
     {Icons.map((icon) =>(
         <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target={`#${icon.name}`} aria-expanded="false">
       <input type="checkbox" id={icon.id} />
-      <label for={icon.id}><img src={icon.value} alt="N/A"  name={icon.name} /></label>
+      <label for={icon.id}><img src={icon.value} alt="N/A"  name={icon.name} onClick={(e) => setImages(e.target.name)}/></label>
       </div>
     ))}
   </div>

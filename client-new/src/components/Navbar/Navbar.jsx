@@ -53,7 +53,7 @@ const NewNAvbar = () => {
               </Nav.Link>
               <Nav.Link
                 className="mapLink text-white text-center  px-lg-3 text-nowrap rounded-pill bold"
-                href="https://gohoardings.com/map-view"
+                href="/map"
               >
                 <MdLocationOn className="ps-0"/>
                 Map View

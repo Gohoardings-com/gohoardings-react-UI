@@ -8,8 +8,8 @@ import Nav from "react-bootstrap/Nav";
 const Flotinggnavbar = () => {
   return (
    <>
-     <div className="container-fluid  ">
-    <Navbar expand="lg px-md-4 colapse-search-bar rounded-4 w-100">
+    
+    <Navbar expand="lg px-md-4 colapse-search-bar rounded-4 w-auto">
         <Dropdown  >
           {/* onMouseOver={() => setShow(true)} */}
           <Dropdown.Toggle variant="transparent"   >
@@ -59,7 +59,6 @@ const Flotinggnavbar = () => {
 
         </Navbar.Collapse>
     </Navbar>
-    </div>
    </>
    
   )

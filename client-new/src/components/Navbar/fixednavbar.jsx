@@ -53,7 +53,7 @@ const Fixednavbar = () => {
 
   return (
     <>
-      <div style={scrollcss ? { display: "none" } : { display: "block" }} className="new-search w-100">   
+      <div style={scrollcss ? { display: "none" } : { display: "inline-block" }} className="new-search w-auto">   
    <Flotinggnavbar/>
       </div>
 
