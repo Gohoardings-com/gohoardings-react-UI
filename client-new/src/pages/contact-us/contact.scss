@@ -1,49 +1,202 @@
-@import '../../assets/scss/_variables.scss';
+@import "../../assets/scss/_variables.scss";
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700");
 
-body {
-  padding: 0;
-  margin: 0;
-  background-color: $black;
-  font-family: 'Montserrat', sans-serif;
+#mainsection-contact {
+  margin-top: 0%;
+}
+.address {
+  margin-left: 0%;
+  padding-top: 0%;
+}
+.address h5 {
+  font-size: 20px;
+  margin-left: 3px;
+  font-weight: bold;
+  color: rgba(40, 39, 39, 0.891);
 }
 
-.head {
+.address-tag {
   font-size: $head;
 }
-
-.subhead {
+.address-details {
   font-size: $subhead;
 }
-
-.normal {
-  font-size: $normal;
+.contact-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
 }
-
-.midhead {
-  font-size: $midhead;
+.contact-tagchild {
+  width: 300px;
+  margin-top: -26%;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
 }
-
-.login-form {
-  background-color: $grey;
+.contact-form {
+  padding: 80px 15px 5px;
+  margin-top: 9%;
+  height: 445px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
 }
-
-.social-links {
-  background-color: $light-grey;
-}
-
-.social-links > p {
-  margin: 0 !important;
+.d-grid button {
   text-align: center;
+  background-color: $dark-blue;
+  color: $white;
+  border: none;
+  transition: 0.7 sec;
+}
+.d-grid button:hover {
+  background-color: $orange;
+}
+#contact-us-img{
+  height: 800px;
+  margin-left: 30%;
+  margin-top: 0%;
 }
 
-.social-links > p > img {
-  vertical-align: middle;
-  padding: 0 10px;
-  width: 55px;
+.location_logo {
+  font-size: 40px;
+  padding-bottom: 2px;
+  color: $red;
 }
 
-.address {
-  background-color: $dark-grey;
+.tooltips {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.tooltips .tooltiptext {
+  visibility: hidden;
+  padding: 0.25em 0.5em;
+  background-color: $white;
+  font-weight: 500;
+  color: $red;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: $box-shadow;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 18%;
+  left: 90%;
+  transition-property: visibility;
+  transition-delay: 0s;
+}
+.tooltips:hover .tooltiptext {
+  visibility: visible;
+  transition-delay: 0.1s;
+}
+.map_section {
+  box-shadow: $box-shadow;
+  margin-top: 6%;
+  margin-bottom: 4%;
+  position: relative;
+  align-items: center;
+  height: 60vh;
+  width: 100%;
+}
+
+.contact-form .input-box {
+  position: relative;
+  margin: 10px 10px;
+  .input-label {
+    position: absolute;
+    color: $dark-blue;
+    font-size: 16px;
+    font-weight: 500;
+    max-width: calc(100% - (2 * 8px));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    left: 8px;
+    top: 13px;
+    padding: 0 8px;
+    transition: 250ms;
+    user-select: none;
+    pointer-events: none;
+    svg {
+      position: relative;
+      width: 15px;
+      height: 15px;
+      top: 2px;
+      transition: 250ms;
+    }
+  }
+  .input-1 {
+    box-sizing: border-box;
+    height: 50px;
+    width: 100%;
+    color: $dark-blue;
+    border: none;
+    border-bottom: 2px solid $dark-blue;
+    padding: 13px 15px 3px;
+    background-color: transparent;
+    transition: 250ms;
+    &:focus {
+      outline: none;
+      border: none;
+      border-bottom: 2px solid $dark-blue;
+      transition: 250ms;
+    }
+  }
+}
+.input-box p {
+  color: $red;
+  font-size: 12px;
+  padding: 0%;
+  margin: 0%;
+}
+.input-box.focus,
+.input-box.active {
+  .input-label {
+    top: -8px;
+    background: transparent;
+    font-size: 15px;
+    transition: 250ms;
+    svg {
+      position: relative;
+      width: 11px;
+      height: 11px;
+      top: 2px;
+      transition: 250ms;
+    }
+  }
+}
+@media screen and (max-width: 425px) {
+  #contact-us-img{
+    display: none;
+  }
+  .address {
+    padding-top: 5%;
+    margin-right: 3.8%;
+  }
+  .form {
+    margin-top: 8.5%;
+    margin-right: 3.8%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .address-tag {
+    font-size: 2.2rem;
+  }
+  .address-details {
+    font-size: .7rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #contact-us-img{
+    height:600px;
+    margin-left: 15%;
+    margin-top: 10%;
+  }
+  .address {
+    padding-top: 5%;
+    margin-right: 3.8%;
+  }
+  
 }

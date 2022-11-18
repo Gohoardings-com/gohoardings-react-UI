@@ -10,7 +10,9 @@ import City from "../citylist/city";
 import Enquire from "../enquire/enquire";
 
 const Home = ({setAvlable}) => {
+
   setAvlable(true)
+
   return (
     <>
 <Navbar/>

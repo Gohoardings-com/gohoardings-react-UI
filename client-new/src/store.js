@@ -1,31 +1,31 @@
-// import { createStore, applyMiddleware, combineReducers} from 'redux'
-// import { createSlice} from '@reduxjs/toolkit'
-// import thunk from 'redux-thunk';
-// import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware, combineReducers} from 'redux'
+import { createSlice} from '@reduxjs/toolkit'
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 // import { registerReducer,loginReducer, UserReducer,SearchReducer, CartReducer}  from './reducer/adminReducer';
 // import cart from './reducer/adminReducer'
 
 
-// const authSlice = createSlice({
-//     name:'auth',
-//     initialState:{isLoggedIn:false},
-//     reducers:{
-//         login(state){
-//             state.isLoggedIn = true
-//         },
-//         logout(state){
-//             state.isLoggedIn = true;
-//         }
-//     }
-// })
+const authSlice = createSlice({
+    name:'auth',
+    initialState:{isLoggedIn:false},
+    reducers:{
+        login(state){
+            state.isLoggedIn = true
+        },
+        logout(state){
+            state.isLoggedIn = true;
+        }
+    }
+})
 
-// const reducer = combineReducers({
+const reducer = combineReducers({
 //     user:UserReducer,
 //     search:SearchReducer,
 //     cart:cart,
 //     item: CartReducer,
-//     LoginStatus:authSlice.reducer,
-// })
+    LoginStatus:authSlice.reducer,
+})
 
 // async function savetoLocalStorage(state) {
 //     try{
@@ -47,15 +47,14 @@
 //     }
 // }
 
-// const middleware = [thunk];
+const middleware = [thunk];
 
-// export const authActions = authSlice.actions
-// const store = createStore(
-//     reducer,  
-//     loasdFromLocalStorage(),
-//     composeWithDevTools(applyMiddleware( ...middleware))
-// )
+export const authActions = authSlice.actions
+const store = createStore(
+    reducer,  
+    composeWithDevTools(applyMiddleware( ...middleware))
+)
 
 // store.subscribe(() => savetoLocalStorage(store.getState()))
 
-// export default store;
+export default store;

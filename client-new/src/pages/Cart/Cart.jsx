@@ -1,177 +1,240 @@
-// import React, { useState, useEffect, useContext } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import moment from "moment";
-// import { AccountContext } from "../../apis/ApiContext";
-// import axios from "axios";
-// import { remove } from "../../reducer/adminReducer";
-// import { useDispatch, useSelector } from "react-redux";
-// import { cartitems } from "../../action/adminAction";
-// import "./cart.scss";
-// import Navbar from "../../components/Navbar/Navbar";
-// import Footer from "../../components/Footer/Footer";
-// import instance from "../../apis/Axios";
+import React, { useState, useEffect, useContext } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import moment from "moment";
+import { Button, Dropdown } from "react-bootstrap";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { FcCalendar } from "react-icons/fc";
+import { FaRupeeSign } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import './cart.scss'
+import instance from "../../apis/Axios";
 
-// const Cart = () => {
-//   const [Start, setStart] = useState(new Date());
-//   const [End, setEnd] = useState(new Date());
-//   const {addRemove} = useContext(AccountContext)
-//   const [totaldays, setTotaldays] = useState([]);
-//   const dispatch = useDispatch();
-//   const cartItem = useSelector((state) => state.cart);
-//   const apiCartItems = useSelector((state) => state.item.items)
-//   const [posts,setPosts] = useState([])
+const Cart = () => {
+    const [Start, setStart] = useState(new Date());
+    const [End, setEnd] = useState(new Date());
+    const [Nowtotal, setNewTotal] = useState([]);
+    const navigate = useNavigate();
+    const [posts, setPosts] = useState([])
+    const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
-//   const StartDate = (e) => {
-//     setStart(e);
-//   };
-//   const EndDate = (e) => {
-//     setEnd(e);
-//   };
-//   const removefroCart = async (obj) => {
-//     await instance.post("cart/deleteFromCart", {
-//       code: obj.code,
-//     });
-//     addRemove({type:"DECR"})
-//     removeCart(obj)
-//   };
+    const StartDate = (e) => {
+        setStart(e);
+    };
+    const EndDate = (e) => {
+        setEnd(e);
+    };
+    const removefroCart = async (obj) => {
+        await instance.post("cart/deleteFromCart", {
+            code: obj.code,
+        });
+        // addRemove({type:"DECR"})
+        removeCart(obj)
+    };
 
-//   const getAllData = async () => {
-//     // dispatch(cartitems());
-//     const {data} = await instance.get('cart/cartitems');
-//     setPosts(data);
-//   };
+    const getAllData = async () => {
+        const { data } = await instance.get('cart/cartitems');
+        console.log(data);
+        setPosts(data);
+    };
 
-//   useEffect(() => {
-//     getAllData();
-//   }, []);
-  
-//   const removeCart = async(event) =>{
-//     let data = [...posts]
-//     data.forEach((element) =>{
-//       if(element.code == event.code){
-//         element.isDelete = 1
-//         setPosts(data)
-//       }
-//     })
-//   }
+    useEffect(() => {
+        getAllData();
+    }, []);
 
-//   return (
-//     <>
-//       <div className="navbar-section p-0">
-//         <Navbar />
-//       </div>
-//       <div className="container cart-box">
-//         <div className="row">
-//           <div className="col-9 dates position-relative pb-2 pt-4">
-//             <div className="dates">
-//               <div className="start-date">
-//                 <input
-//                   type="date"
-//                   onChange={(e) => StartDate(e.target.value)}
-//                   className="input-group overflow-hidden border round-pill"
-//                 />
-//               </div>
-//               <div className="end-date position-absolute">
-//                 <input
-//                   type="date"
-//                   onChange={(e) => EndDate(e.target.value)}
-//                   className="input-group overflow-hidden border ms-3 round-pill"
-//                 />
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="cart-items">
-//           <div className="row">
-//             <div className="col-lg-8">
-//               <div className="grey my-3 round-circle">
-//                 <h4 className="pt-1 ps-3 text-light fw-normal">
-//                   SELECTED MEDIA
-//                 </h4>
-//               </div>
-//               <div className="col-lg-1"></div>
-//               <div className="row pt-3 my-3 rounded-4 m-0 cart-item">
-//                {!posts ? <><h1>Loding...</h1></>:<>
-//                {posts.length > 0 && posts.map((obj) => (
-//                   <>
-//                     {obj.isDelete == 0 ? <>
-//                       <div className="col-4">
-//                       <img
-//                         src="./images/media.jpg"
-//                         alt="N/A"
-//                         className="media-img"
-//                       />
-//                     </div>
-//                     <div className="col-8 mb-3 position-relative">
-//                       <ul className="list-unstyled">
-//                         <li>
-//                           <h5 className="text-light">
-//                             {obj.areadescription}
-//                           </h5>
-//                         </li>
-//                         <li className="text-light">{obj.code}</li>
-//                         <li className="text-light">{obj.size}</li>
-//                         <li className="text-light">{obj.iLLUMINATION}</li>
-//                         <li>
-//                           <input
-//                             type="number"
-//                             min={5}
-//                             placeholder="5"
-//                             className="input-days"
-//                           />
-//                         </li>
-//                       </ul>
-//                       <div className="position-relative">
-//                         <button className="position-absolute btn bottom-0 remove-btn border-warning text-light" onClick={() => removefroCart(obj)}>
-//                           Remove
-//                         </button>
-//                       </div>
-//                     </div>
-//                     </>:<>
-//                     <h1 >Your Item Deleted Successfully</h1>
-//                     </>}
-//                   </>
-//                 ))}
-//                </>}
-//               </div>
-//             </div>
-//             <div className="col-lg-4">
-//               <div className="text-center position-sticky total-price">
-//                 <div className="rounded-5">
-//                   <h4 className="my-3 rounded-5 py-2 text-light gross-total">
-//                     Gross Total
-//                   </h4>
-//                 </div>
-//                 <div className="cart-total text-light">
-//                   <h5 className="pt-3">
-//                     total media : <span>3</span>
-//                   </h5>
-//                   <div>
-//                     <input
-//                       type="number"
-//                       min={5}
-//                       placeholder="5"
-//                       className="total-days mt-2 mb-4"
-//                     />
-//                   </div>
-//                   <h5>
-//                     GST(18%) : <span>Rs 9999</span>
-//                   </h5>
-//                   <h5 className="mt-3">
-//                     total media : <span>Rs 69999</span>
-//                   </h5>
-//                   <button className="btn btn-warning my-4">
-//                     Check Availability
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
+    const removeCart = async (event) => {
+        let data = [...posts]
+        data.forEach((element) => {
+            if (element.code == event.code) {
+                element.isDelete = 1
+                setPosts(data)
+            }
+        })
+    }
+    const handleChange = (e, i, p) => {
+        setNewTotal({ total: e.target.value, index: i })
 
-//       <Footer />
-//     </>
-//   );
-// };
-// export default Cart;
+    };
+    const sumbitALlProduct = async () => {
+        await instance.post("cartItems/processdCart", {
+            start_date: Start,
+            end_date: End,
+            produts: posts,
+        });
+    };
+    async function addMore() {
+        navigate("/media")
+    }
+
+    return (
+        <>
+
+
+
+            <div className="container-fluid px-5 bg-light  p-3 mt-5">
+                <div className="container p-0 m-0">
+                    <div className="row justify-content-end">
+                        <div className="col ms-5 me-5">
+                            <Dropdown>
+                                <Dropdown.Toggle
+                                    variant="secondary"
+                                    id="dropdown-basic"
+
+                                >
+                                    Start Date
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Calendar value={Start} onChange={StartDate} />
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                        <div className="col ms-5 me-5">
+                            <Dropdown>
+                                <Dropdown.Toggle
+                                    variant="secondary"
+                                    id="dropdown-basic"
+                                >
+                                    End date
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Calendar value={End} onChange={EndDate} />
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div className="row mt-5 ">
+                    <div className="col-md-9">
+                        <h5 className=" p-2 ps-3 news-heading ">SELECTED MEDIA</h5>
+                        <div className="card mb-3 maincard ">
+                            <div className="row">
+                                {!posts ? <><h1>Loading... Please wait</h1></> : <>
+                                    {posts.length > 0 && posts.map((obj, index) => (
+                                        <>
+                                            {obj.isDelete == 0 ? <>
+                                                <div className="d-flex mb-3">
+                                                    <div className="col-md-4 pe-0 me-0">
+                                                        <img
+                                                            src={`https://${(obj.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(obj.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${obj.thumb}`}
+                                                            className="img-fluid rounded-start  cart-media"
+                                                            alt="..."
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-8 ms-0 ps-0">
+                                                        <div className="card-body cart-media pb-1">
+                                                            <h4 className="card-title">
+                                                                {obj.areadescription}
+                                                                <span className="float-end" onClick={() => removefroCart(obj)}>
+                                                                    <MdDeleteForever className="mb-2  delet-icon" />
+                                                                </span>
+                                                            </h4>
+                                                            <div className="row mt-4">
+                                                                <div className="col-md-6">
+                                                                    <h6 className="text-secondary">
+                                                                        {" "}
+                                                                        <FaRupeeSign />{obj.price * 30}/month
+                                                                    </h6>
+                                                                    <h6 className="text-secondary">
+                                                                        {" "}
+                                                                        <FaRupeeSign />{obj.price}/day
+                                                                    </h6>
+                                                                    <h6 className="text-secondary">
+                                                                        {" "}
+                                                                        <FaRupeeSign /> {index == Nowtotal.index ? obj.price_2 * Nowtotal.total : obj.price_2 * 5} /original
+                                                                        price
+                                                                    </h6>
+                                                                    <h6 className="text-secondary">
+                                                                        {" "}
+                                                                        <FaRupeeSign />   {index == Nowtotal.index ? obj.price_2 + (obj.price / 10) * Nowtotal.total : obj.price_2 + (obj.price / 10) * 5}/price after discount
+                                                                    </h6>
+                                                                    <h6 className="text-secondary">
+                                                                        {" "}
+                                                                        <FaRupeeSign /> {index == Nowtotal.index ? (obj.price_2 / 100) * 18 * Nowtotal.total : (obj.price_2 / 100) * 18 * 5}/gst(18%)
+                                                                    </h6>
+                                                                    <h6 className="text-secondary">
+                                                                        {" "}
+                                                                        <FaRupeeSign /> {index == Nowtotal.index ? (obj.price_2 + (obj.price / 10) * Nowtotal.total) + ((obj.price_2 / 100) * 18 * Nowtotal.total) : obj.price_2 + (obj.price / 10) * 5 + (obj.price_2 / 100) * 18 * 5} /total
+                                                                    </h6>
+                                                                </div>
+                                                                <div className="col-md-6 ">
+                                                                    <div className="button-section">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn btn-success rounded-1 me-2"
+                                                                        >
+                                                                            <AiOutlinePlus className="quantitey" />
+                                                                        </button>
+                                                                        <span
+                                                                            type="button"
+                                                                            class="btn btn-outline-secondary rounded-1 me-2"
+                                                                        >
+                                                                            5
+                                                                        </span>
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn btn-danger rounded-1"
+                                                                        >
+                                                                            <AiOutlineMinus className="quantitey" />
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </> : <>
+                                                <h1 >Your Item Deleted Successfully</h1>
+                                            </>}
+                                        </>
+                                    ))}
+                                </>}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <h5 className=" p-2 ps-3 news-heading ">Gross Total</h5>
+                        <div class="card text-center bill-card ">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Total media :
+                                    <span type="button" class=" ms-1">
+                                        5
+                                    </span>
+                                </h5>
+                                <div class="card-text">
+                                 
+                                    <h5 className="mt-4">Your Media Start on this date</h5>
+                                    <h6 className="mt-4">
+                                        {moment(Start).format("MMMM Do YYYY")}
+                                    </h6>
+                                       <h5 className="mt-4"> and Media End this date{" "}</h5>
+                                    
+                                    <h6 className="mt-4">
+                                        {moment(End).format("MMMM Do YYYY")}
+                                    </h6>
+                                    <h5 className=" mt-4" >{totalDays} Total Days</h5>
+                                    <h5 className="mt-4">
+                                        GST(18%) : <FaRupeeSign /> 9900
+                                    </h5>
+                                    <h5 className="mt-4">
+                                        Total ammount : <FaRupeeSign /> 55000
+                                    </h5>
+                                </div>
+                            </div>
+                            <div className="d-grid">
+                                <button type="submit" className="rounded bg-info chek-avl-btn btn-lg m-2" onClick={sumbitALlProduct}>
+                                    <h5 className="text-light  mt-2" onClick={sumbitALlProduct}>Chek Availiblity</h5>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </>
+    );
+};
+export default Cart;

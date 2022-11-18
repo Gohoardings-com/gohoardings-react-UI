@@ -10,7 +10,8 @@ import MultiCard from './multiCard';
 import MediaFilter from './mediaFilter';
 import Medialogo from '../../components/medialogo';
 
-const Media = () => {
+const Media = ({setAvlable}) => {
+  setAvlable(false)
     const [show, setShow] = useState(false)
     const { category_name, city_name } = useParams();
     // const {addRemove} = useContext(AccountContext)
@@ -26,8 +27,8 @@ const Media = () => {
       setPosts(data);
     }
   
-  
-  
+console.log(posts);
+
     const addonCart = async (e) => {
       console.log(e);
       const {data} =  await instance.post('cart/addOnCart', {
@@ -90,7 +91,10 @@ const Media = () => {
                                 <h3 className='mt-2'>{category_name.toUpperCase()}</h3>
                             </div>
                             <div className='col-1'>
-                                <MdLocationOn className='h-75 w-auto mt-1' />
+                              <a href='/map'  className='text-light'>
+                              <MdLocationOn className='h-75 w-auto mt-1'  />
+                              </a>
+                               
                             </div>
                             <div className='col-1'>
                                {!show ? <> <MdChecklist onClick={(e) => setShow(!show)} className='h-75 w-auto mt-1' /></>:<><BsListCheck onClick={(e) => setShow(!show)} className='h-75 w-auto mt-1' /></>}

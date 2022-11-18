@@ -1,172 +1,226 @@
-// import React, { useState, useEffect } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import axios from 'axios';
-// import Nav from "react-bootstrap/Nav";
-// import { useSelector, useDispatch } from 'react-redux'
-// import { authActions } from "../../store";
-// import "./login.scss";
-// import { LoginContact } from "../../action/adminAction";
-// import { useGoogleLogin } from 'react-google-login'
-// import { useNavigate } from 'react-router-dom';
-// import instance from '../../apis/Axios'
+import React, { useState } from "react";
+import "./login.scss";
+import { authActions } from "../../store";
+import { useSelector, useDispatch } from 'react-redux'
+import { useGoogleLogin } from 'react-google-login'
+import { MdOutlineError } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from 'react-router-dom';
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import Register from "./signup";
+import instance from "../../apis/Axios";
 
-// const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
+const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState("");
+  const [message,setMessage] = useState([])
+  const [password, setPassword] = useState("");
+  const [emailValidate, setEmailValidate] = useState();
+  const [passwordValidate, setPasswordValidate] = useState();
+  const [googledata, setGoogledata] = useState([])
 
-// const Login = () => {
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch()
-//   const [email, setemail] = useState('')
-//   const [password, setpassword] = useState('')
-//   const [message,setMessage] = useState([])
-//   const [googledata, setGoogledata] = useState([])
-
-// // Google Login Request
-//   const onSuccess = async (res) => {
-//     await instance.post("registration/googleSingUp", {
-//       profile: res.profileObj
-//     }).then(() => dispatch(authActions.login()),
-//       navigate('/'))
-//   }
-
-//   // Google Login failures
-//   const onFailure = async (res) => {
-//     await setGoogledata(null)
-//   }
-
-//   const {signIn} = useGoogleLogin({
-//     onSuccess,
-//     onFailure,
-//     clientId,
-//     isSignedIn:true,
-//     accessType:'offline',
-
-//   })
+  const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
 
+  function setFocus(on) {
+    var element = document.activeElement;
+    var $ = window.jQuery;
+    if (on) {
+      setTimeout(function () {
+        element.parentNode.classList.add("focus");
+      });
+    } else {
+      let box = document.querySelector(".input-box");
+      box.classList.remove("focus");
+      $("input").each(function () {
+        var $input = $(this);
+        var $parent = $input.closest(".input-box");
+        if ($input.val()) $parent.addClass("focus");
+        else $parent.removeClass("focus");
+      });
+    }
+  }
+// Google Login Request
+const onSuccess = async (res) => {
+  await instance.post("registration/googleSingUp", {
+    profile: res.profileObj
+  }).then(() => dispatch(authActions.login()),
+    navigate('/'))
+}
+ // Google Login failures
+ const onFailure = async (res) => {
+  await setGoogledata(null)
+}
 
-//   const loginUser = async (e) => {
-//     try{
-//       e.preventDefault()
-//       const {data} = await instance.post('registration/login',{
-//         email:email, password:password
-//       })
-//       if(data.message === "User Login Successfull"){
-//        const user = data.message
-//        window.localStorage.setItem("user",user)
-//        window.sessionStorage.setItem("user",user)
-//        navigate("/").then(() => dispatch(authActions.login()))
-//       }else{
-//         setMessage("Email and Password Invalid")
-       
-//       }
-//     }catch(err){
-//       setMessage("Email and Password Invalid");
-//     }
-//   }
+const {signIn} = useGoogleLogin({
+  onSuccess,
+  onFailure,
+  clientId,
+  isSignedIn:true,
+  accessType:'offline',
 
-//   const linkdinLogin = () => {
-//     window.open("http://localhost:8080/auth/linkedin");
-//   }
+})
+  const emailformate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  let count = 0;
+  const [eyeViseble, setEyeViseble] = useState(true);
+  const onVisible = () => {
+    let x = document.getElementById("inputPassword");
+
+    if (x.type == "password") {
+      x.type = "text";
+      setEyeViseble(!eyeViseble);
+    } else {
+      x.type = "password";
+      setEyeViseble(!eyeViseble);
+    }
+  };
+  //validation and submit  for signIn
 
 
-//   return (
-//     <>
-//       <div className="container-fluid px-4 py-5">
-//         <div className="row">
-//           <div className="col-6">
-//             <div>
-//               <p className="text-center text-light subhead fw-semibold">
-//                 Gohaordings OOH Advertising Made Easy And Affordable
-//               </p>
-//             </div>
+  const onSignIn = async(e) => {
+    if (email === "") {
+      count = +1;
+      setEmailValidate(<MdOutlineError className="text-danger" />);
+    } else if (!emailformate.test(email)) {
+      count = +1;
+      setEmailValidate("Type your email corectly");
+    } else if (password === "") {
+      count = +1;
+      setPasswordValidate(<MdOutlineError className="text-danger" />);
+    } else if (count === 0) {
+      try{
+        e.preventDefault()
+        const {data} = await instance.post('registration/login',{
+          email:email, password:password
+        })
+        if(data.message === "User Login Successfull"){
+         const user = data.message
+         window.localStorage.setItem("user",user)
+         window.sessionStorage.setItem("user",user)
+         navigate("/").then(() => dispatch(authActions.login()))
+        }else{
+          setMessage("Email and Password Invalid")
+         
+        }
+      }catch(err){
+        setMessage("Email and Password Invalid");
+      }
+      
+    }
+    e.preventDefault();
+  };
 
-//             <div className="text-center">
-//               <img src="./images/Capture.JPG" alt="" />
-//             </div>
-//           </div>
-//           <div className="col-6">
-//             <div className="login-form px-4 py-4 rounded-4">
-//               <p className="text-light subhead fw-semibold">Welcome</p>
-//               <button className="btn btn-warning mb-4 me-3 px-3 fw-semibold">
-//                 Login as
-//                 <br />
-//                 <span className="subhead">Customer</span>
-//               </button>
-//               <button className="btn border text-light mb-4 px-4 fw-semibold">
-//                 Login as
-//                 <br />
-//                 <span className="subhead">Business</span>
-//               </button>
-//               <form action="" onSubmit={loginUser} className="mt-2">
-//                 <label htmlFor="email" className="form-label text-light">
-//                   Email address
-//                 </label>
-//                 <input
-//                   type="email"
-//                   className="form-control"
-//                   id="email"
-//                   placeholder="Eg. email@domain.com"
-//                   aria-describedby="emailHelp"
-//                   onChange={(e) => {
-//                     setemail(e.target.value);
+  //toggle between signIn & register
+  const [signin, setSignIn] = useState(true);
+  const toggleSignUp = () => {
+    setSignIn(!signin);
+  };
 
-//                   }}
-//                   required
-//                 ></input>
-//                 <div id="emailHelp" className="form-text mb-2">
-//                   We'll never share your email with anyone else.
-//                 </div>
-//                 <label htmlFor="email" className="form-label text-light">
-//                   Password
-//                 </label>
-//                 <input
-//                   type="password"
-//                   className="form-control"
-//                   id="password"
-//                   placeholder="Eg. +91-123456789"
-//                   aria-describedby="passHelp"
-//                   onChange={(e) => {
-//                     setpassword(e.target.value);
-//                   }}
-//                   required
-//                 ></input>
-//                 <div id="passHelp" className="form-text">
-//                   We'll never share your email with anyone else.
-//                 </div>
-//                 <div className="position-relative">
-//                   <div className="form-check mt-3">
-//                     <input
-//                       className="form-check-input"
-//                       type="checkbox"
-//                       id="remeber-me"
-//                     />
-//                     <label className="form-check-label text-light" htmlFor="remeber-me">
-//                       Remember me
-//                     </label>
-//                   </div>
-//                   <Nav.Link
-//                     className="text-light normal position-absolute top-0 end-0"
-//                     href="/forget-password?"
-//                   >Forget Password?</Nav.Link>
-//                 </div>
-//                 <button className="btn border text-light w-100 mt-3" >
-//                   Login
-//                 </button>
-//               </form>
+ 
+  return (
+    <>
+      <section className=" " id="mainsection">
+        <div className="container-fluid px-5">
+          <div className="row mx-5  mt-5 rounded-5 all-content p-3  mb-4">
+            <div className="col-md-7 p-0  d-flex justify-content-center main_content2">
+              <img src="./images/login.png" className="img-fluid rounded " id="png" />
+            </div>
+            <div className="col-md-5 main_content1">
+              <div className="modal-heading mt-3 text-center">
+                <h1 className="modal-title">Welcome to Gohoardings!</h1>
+                <p className="modal-desc text-secondary">
+                  OOH Advertising made easy and affordable.
+                </p>
+              </div>
+              {signin ? (
+                <div className="signIn">
+                  <div className="form">
+                    <form onSubmit={onSignIn}>
+                      <div className="mb-4 mt-2">
+                        <div className="input-box">
+                          <label className="input-label">
+                            Enter your email@gmail.com
+                          </label>
+                          <input
+                            type="text"
+                            className="input-1"
+                            onFocus={() => setFocus(true)}
+                            value={email}
+                            onChange={(e) => {
+                              setEmail(e.target.value);
+                            }}
+                          />
+                          <p className="ms-2 p-0 text ">{emailValidate}</p>
+                        </div>
+                      </div>
+                      <div className="mb-2 mt-2">
+                        <div className="input-box">
+                          <label className="input-label">
+                            Enter your password
+                          </label>
+                          <input
+                            type="password"
+                            className="input-1"
+                            onFocus={() => setFocus(true)}
+                            value={password}
+                            onChange={(e) => {
+                              setPassword(e.target.value);
+                            }}
+                            id="inputPassword"
+                          />
+                          <span className="eye" onClick={() => onVisible()}>
+                            {" "}
+                            {eyeViseble ? (
+                              <AiFillEye id="visible-eye" />
+                            ) : (
+                              <AiFillEyeInvisible id="invisible-eye" />
+                            )}
+                          </span>
+                          <p className="ms-2 p-0 text">{passwordValidate}</p>
+                        </div>
+                      </div>
+                      <label className="ms-2 checkbox">
+                        <input type="checkbox" />
+                        <span></span>
+                        <small className="rmb ms-1 ">Remember me</small>
+                      </label>
+                      <a href="#" className="forgetpass">
+                        Forget Password?
+                      </a>
+                      <button type="submit" className="signin">
+                        <span>SIGN IN</span>
+                      </button>
+                    </form>
+                    <div className="row mt-4">
+                      <div className="col-md-5 or_border  "></div>
+                      {!message ? <div className="col-md-2 or  text-center ">OR</div>:<div className="col-md-2">{message}</div>}
+                      <div className="col-md-5  or_border  "></div>
+                    </div>
+                    <div className="col-md-12 ps-0 mt-4 text-center" onClick={signIn}>
+                      <a>
+                        <FcGoogle className="google-icon" />
+                      </a>
+                    </div>
+                    <div
+                      className=" text-center switch signin-switch"
+                      id="l-switch"
+                    >
+                      <a onClick={() => toggleSignUp()}>
+                        Don't have an account? Register here
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+              <Register setFocus={setFocus} onVisible={onVisible} eyeViseble={eyeViseble} toggleSignUp={toggleSignUp} setMessage={setMessage}/>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
 
-//             {message &&   <p className="divider"><span className="text-light">{message}</span></p>}
-//               <p className="divider"><span className="text-light">OR</span></p>
-//               <p className="text-center pt-4 mt-3"><a href="/auth/linkedin">
-//                 <img src="./images/Linkedin.png" alt="" className="pe-3" onClick={linkdinLogin} />
-//               </a> <img src="./images/twitter.png" alt="" />
-//                <button onClick={signIn} className="button">Google</button>
-//               </p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// export default Login
+export default Login;

@@ -11,7 +11,7 @@ const Medialogo = ({posts,category_name}) => {
     <div className='pe-1 ps-1'>
         <div className='bg-light rounded-5 rounded-bottom row'>
             <div className='col-4 '>
-                <img src='./images/media.jpg' alt='About media' className='w-100 h-auto mt-4 mb-4 ms-2 rounded-3' />
+                <img src='../../images/media.jpg' alt='About media' className='w-100 h-auto mt-4 mb-4 ms-2 rounded-3' />
             </div>
             <div className='col-2 vl mt-3 mb-3'>
                 <div className='col viewabout rounded-3 pt-5' >

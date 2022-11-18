@@ -1,166 +1,178 @@
-// import React, { useState } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { useSelector, useDispatch } from 'react-redux'
-// import Nav from "react-bootstrap/Nav";
-// import "./login.scss";
-// import { authActions } from "../../store";
-// import { useNavigate } from 'react-router-dom';
-// import instance from "../../apis/Axios";
-
-// const Registeration = () => {
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch()
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [name, setName] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [conpass, setconpass] = useState("");
-//   const [message,setMessage] = useState([])
+import React,{useState} from 'react'
+import { MdOutlineError } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
+import { useSelector, useDispatch } from 'react-redux'
+import { authActions } from "../../store";
+import instance from "../../apis/Axios";
+import { useNavigate } from 'react-router-dom';
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 
+const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [emails, setEmails] = useState("");
+  const [passwords, setPasswords] = useState("");
+  const [nameValidate, setNameValidate] = useState();
+  const [numbervalidate, setNumbervalidate] = useState();
+  const [emailsValidate, setEmailsValidate] = useState();
+  const [passwordsValidate, setPasswordsValidate] = useState();
 
-//   let getMessage;
-//   const registerUser = async (e) => {
-//     try{
-//       e.preventDefault()
-//       const {data} = await instance.post('registration/register',{
-//         email, password, name, phone, conpass
-//       })
-//       if(data.message === "Register Successfully"){
-//        const user = data.message
-//        localStorage.setItem("user",user)
-//        sessionStorage.setItem("user",user)
-//        navigate("/").then(() => dispatch(authActions.login()))
-//       }else{
-//         setMessage("Email and Password Invalid")
-       
-//       }
-//     }catch(err){
-//       setMessage("Email and Password Invalid");
-//     }
-// };
+  const onRegister = async(e) => {
+    if (name === "") {
+      count = +1;
+      setNameValidate(<MdOutlineError className="text-danger" />);
+    } else if (number.length <= 0) {
+      count = +1;
+      setNumbervalidate(<MdOutlineError className="text-danger" />);
+    } else if (number.length != 10) {
+      count = +1;
+      setNumbervalidate("Type your 10 digit no correctly");
+    } else if (emails === "") {
+      count = +1;
+      setEmailsValidate(<MdOutlineError className="text-danger" />);
+    } else if (!emailformate.test(emails)) {
+      count = +1;
+      setEmailsValidate("Type your email corectly");
+    } else if (passwords === "") {
+      count = +1;
+      setPasswordsValidate(<MdOutlineError className="text-danger" />);
+    } else if (passwords.length <= 3) {
+      setPasswordsValidate("Password should be atleast 4 digit ");
+    } else if (count === 0) {
+      try{
+        e.preventDefault()
+        const {data} = await instance.post('registration/register',{
+          emails, passwords, name, number
+        })
+        if(data.message === "Register Successfully"){
+         const user = data.message
+         localStorage.setItem("user",user)
+         sessionStorage.setItem("user",user)
+         navigate("/").then(() => dispatch(authActions.login()))
+        }else{
+          setMessage("Email and Password Invalid")
+         
+        }
+      }catch(err){
+        setMessage("Email and Password Invalid");
+      }
+    }
+    e.preventDefault();
+  };
 
-//   return (
-//     <>
-//       <div className="container-fluid px-4 py-5">
-//         <div className="row">
-//           <div className="col-6">
-//             <div>
-//               <p className="text-center text-light subhead fw-semibold">
-//                 Gohaordings OOH Advertising Made Easy And Affordable
-//               </p>
-//             </div>
-//             <div className="text-center">
-//               <img src="./images/Capture.JPG" alt="" />
-//             </div>
-//           </div>
-//           <div className="col-6 order-md-first">
-//             <div className="login-form px-4 py-4 rounded-4">
-//               <p className="text-light subhead fw-semibold">Welcome</p>
-//               <button className="btn btn-warning mb-4 me-3 px-3 fw-semibold">
-//                 Login as
-//                 <br />
-//                 <span className="subhead">Customer</span>
-//               </button>
-//               <button className="btn border text-light mb-4 px-4 fw-semibold">
-//                 Login as
-//                 <br />
-//                 <span className="subhead">Business</span>
-//               </button>
-//               <form action="" className="mt-2" onSubmit={registerUser}>
-//                 <label for="email" className="form-label text-light">
-//                   Name
-//                 </label>
-//                 <input
-//             type="text"
-//             className="form-control"
-//             onChange={(e) => setName(e.target.value)}
-//             placeholder="Name"
-//             required
-//             aria-describedby="nameHelp"/>
-//             <div id="emailHelp" className="form-text mb-2">
-//                  {getMessage ?? "Please Fill Your Full Name."}
-//                 </div>
-//                 <label for="email" className="form-label text-light">
-//                   Email address
-//                 </label>
-//                 <input
-//                   className="form-control"
-//               onChange={(e) => setEmail(e.target.value)}
-//               type="email"
-//               pattern="[a-zA-Z0-9._%+-]{4,19}@[a-zA-Z0-9.-]{4,19}[.]{1}[a-zA-Z]{2,4}$"
-//               placeholder="Eg. email@domain.com"
-//               required
-//             />
-//                 <div id="emailHelp" className="form-text mb-2">
-//                   {getMessage ?? "We'll never share your email with anyone else."}
-//                 </div>
-//                 <label for="email" className="form-label text-light">
-//                  Phone Number
-//                 </label>
-//                 <input  className="form-control"
-//             onChange={(e) => setPhone(e.target.value)}
-//             type="tel"
-//             pattern= "[6-9]{1}[0-9]{5}[0-9]{4}"
-//             placeholder="Eg. +91-123456789"
-//             required
-//           />
-//           <div id="emailHelp" className="form-text mb-2">
-//                  {getMessage ??  "We'll never share your PhoneNo with anyone else."}
-//                 </div>
-//                 <label for="email" className="form-label text-light">
-//                   Password
-//                 </label>
-//                 <input   className="form-control"
-//           type="password"
-//           onChange={(e) => setPassword(e.target.value)}
-//           placeholder="Password"
-//           required
-//         />
-//         <div id="emailHelp" className="form-text mb-2">
-//                  {getMessage ?? "Enter your Password hear"}
-//                 </div>
-//                 <label for="email" className="form-label text-light">
-//                   Confirm Password
-//                 </label>
-//                 <input   className="form-control"
-//           type="password"
-//           onChange={(e) => setconpass(e.target.value)}
-//           placeholder="Confirm Password"
-//           required
-//         />
-//                 <div id="passHelp" className="form-text">
-//                  {getMessage ??  "Please Enter your Password Again"}
-//                 </div>
-//                 <div className="position-relative">
-//                 <div className="form-check mt-3">
-//                   <input
-//                     className="form-check-input"
-//                     type="checkbox"
-//                     id="remeber-me"
-//                   />
-//                   <label className="form-check-label text-light" for="remeber-me">
-//                     Remember me
-//                   </label>
-//                 </div>
-//                 <Nav.Link
-//                       className="text-light normal position-absolute top-0 end-0"
-//                       href="/forget-password?"
-//                     >Forget Password?</Nav.Link>
-//                 </div>
-//                 <button className="btn border text-light w-100 mt-3">
-//                   Register
-//                 </button>
-//               </form>
-//               {message &&   <p className="divider"><span className="text-light">{message}</span></p>}
-//               <p className="divider"><span className="text-light">OR</span></p>
-//               <p className="text-center pt-4 mt-3"><img src="./images/twitter.png" alt="" className="pe-3" /><img src="./images/twitter.png" alt="" /><img src="./images/twitter.png" alt="" className="ps-3" /></p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
+  const emailformate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  let count = 0;
 
-// export default Registeration;
+
+  return (
+    <>
+      <div className="register mt-0">
+                  <div className="form">
+                    <form onSubmit={onRegister}>
+                      <div className="mb-2 mt-0 ">
+                        <div className="input-box">
+                          <label className="input-label">
+                            Enter your full name
+                          </label>
+                          <input
+                            type="text"
+                            className="input-1 "
+                            onFocus={() => setFocus(true)}
+                            value={name}
+                            onChange={(e) => {
+                              setName(e.target.value);
+                            }}
+                          />
+                          <p className="ms-3 p-0 text ">{nameValidate}</p>
+                        </div>
+                      </div>
+                      <div className="mb-2 mt-1 ">
+                        <div className="input-box">
+                          <label className="input-label">
+                            Enter your contact number
+                          </label>
+                          <input
+                            type="number"
+                            className="input-1 "
+                            onFocus={() => setFocus(true)}
+                            value={number}
+                            onChange={(e) => {
+                              setNumber(e.target.value);
+                            }}
+                          />
+                          <p className="ms-2 p-0 text ">{numbervalidate}</p>
+                        </div>
+                      </div>
+                      <div className="mb-2 mt-0">
+                        <div className="input-box">
+                          <label className="input-label">
+                            Enter your email@gmail.com
+                          </label>
+                          <input
+                            type="text"
+                            className="input-1"
+                            onFocus={() => setFocus(true)}
+                            value={emails}
+                            onChange={(e) => {
+                              setEmails(e.target.value);
+                            }}
+                          />
+                          <p className="ms-2 p-0 text ">{emailsValidate}</p>
+                        </div>
+                      </div>
+                      <div className="mb-3 mt-0">
+                        <div className="input-box">
+                          <label className="input-label">
+                            Enter your password
+                          </label>
+                          <input
+                            type="text"
+                            className="input-1"
+                            onFocus={() => setFocus(true)}
+                            value={passwords}
+                            onChange={(e) => {
+                              setPasswords(e.target.value);
+                            }}
+                            id="inputPassword"
+                          />
+                          <span className="eye" onClick={() => onVisible()}>
+                            {" "}
+                            {eyeViseble ? (
+                              <AiFillEye id="visible-eye" />
+                            ) : (
+                              <AiFillEyeInvisible id="invisible-eye" />
+                            )}
+                          </span>
+
+                          <p className="ms-2 p-0 text">{passwordsValidate}</p>
+                        </div>
+                      </div>
+                      <button type="submit" className="signin mt-4">
+                        <span>REGISTER</span>
+                      </button>
+                    </form>
+                    <div className="row mt-3">
+                      <div className="col-md-5 or_border  "></div>
+                      <div className="col-md-2 or  text-center ">OR</div>
+                      <div className="col-md-5  or_border  "></div>
+                    </div>
+                    <div className="col-md-12 ps-0 mt-3 text-center">
+                      <a>
+                        <FcGoogle className="google-icon" />
+                      </a>
+                    </div>
+                    <div className="mt-2 mb-0 text-center switch">
+                      <a onClick={() => toggleSignUp()}>
+                        Already have an account? Signin here
+                      </a>
+                    </div>
+                  </div>
+                </div>
+    </>
+  )
+}
+
+export default Register

@@ -1,0 +1,29 @@
+@import "../../assets/scss/_variables.scss";
+@import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
+
+.question-box{
+  background-image: $card_background;
+  .toggle-btn {
+    border: none;
+    background: transparent;
+  }
+}
+
+.toggle-btn h4{
+  font-size: 23.5px;
+    }
+.collapse {
+  background: transparent;
+}
+.down {
+  float: right;
+}
+@media screen and (max-width: 425px) {
+  .toggle-btn h4{
+    font-size: 15px;
+      }
+  .card-body h5{
+   font-size: 11px;
+  }
+}
