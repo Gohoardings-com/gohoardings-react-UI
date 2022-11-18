@@ -2,20 +2,17 @@ import React, { useState } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import "./marker.scss"
 
-const markers = [
-  {
-    id: 1,
-    name: "Noida",
-    position: { lat: 28.5821195, lng: 77.3266991 }
-  }
-];
-
 const center = {
     lat: 28.5821195,
     lng: 77.3266991
   };
 
-function Markers() {
+function Markers(markers) {
+  console.log(markers);
+  markers.data.forEach(e => {
+      e['position'] = {lat : e.latitude, lng : e.longitude}
+    })
+
   const [activeMarker, setActiveMarker] = useState(null);
 
   const handleActiveMarker = (marker) => {
@@ -27,7 +24,7 @@ function Markers() {
 
   const handleOnLoad = (map) => {
     const bounds = new window.google.maps.LatLngBounds();
-    markers.forEach(({ position }) => bounds.extend(position));
+    markers.data.forEach(({ position }) => bounds.extend(position));
     map.fitBounds(bounds);
   };
 
@@ -39,7 +36,7 @@ function Markers() {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ height: "100%" }}
     >
-      {markers.map(({ id, name, position }) => (
+      {markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf }) => (
         <Marker
           key={id}
           position={position}
@@ -52,10 +49,10 @@ function Markers() {
                 <img src="./gohoarding/new1568268924_79858.jpg" alt="" />
                 </div>
                 <div className="info-window bg-white">
-                  <h5>Facade - DLF Promenade, Delhi</h5>
-                  <p><span>Media Type : </span>Unipole/Hoarding</p>
-                  <p><span>Height X Width : </span>30 X 20 feet</p>
-                  <p><span>Illumination : </span>Frontlit</p>
+                  <h5>{illumination + "-" +medianame}</h5>
+                  <p><span>Media Type : </span>{subcategory}</p>
+                  <p><span>Height X Width : </span>{height} X {width} feet</p>
+                  <p><span>FTF : </span>{ftf}</p>
                   <p><span>Price : Login to see price</span></p>
                   <img src="./assests/map-icons/bag.png" alt="N/A" />
                 </div>

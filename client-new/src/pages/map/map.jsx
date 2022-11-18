@@ -49,25 +49,17 @@ const Map = () => {
 useEffect(() => {
 
   const mediasData  = async ()=>{
+    console.log("asda");
+   // let {data}  = []
     const {data} = await instance.post("media/searchMedia")
-    setMedias(data);
+    if (data.length > 0) {
+      console.log(data);
+      setMedias(data);
+    }
   }
   mediasData();
 }, []);
 
-function multichecked(e){
-  if (e.currentTarget.checked) {
-    hording.push(e.target.value)
-  } else {
-    // for (let i = 0; i < hording.length; i++) {
-      // if (e.target.value == hording[i]) {
-        var index = hording.indexOf(e.target.value)
-        if (index > -1) { // only splice array when item is found
-          hording.splice(index, 1); // 2nd parameter means remove one item only
-        }
-  }
-  console.log(hording);
-}
 
  let ILLUMINATION = [
   { label: "Nonlit", value: " Nonlit" },
@@ -369,7 +361,7 @@ useEffect(() =>{
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-              { isLoaded ? <Markers /> : null }
+              {/* { isLoaded ? <Markers /> : null } */}
           </div>
 
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
@@ -392,7 +384,7 @@ useEffect(() =>{
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-              { isLoaded ? <Markers /> : null }
+              { isLoaded && medias && medias.length > 0 ? <Markers data={medias}/> : null }
         </div>
       </div>
     </div>
