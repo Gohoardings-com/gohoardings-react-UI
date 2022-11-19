@@ -131,10 +131,7 @@ exports.me = async(req,res,next) =>{
    db.query("SELECT * FROM admin WHERE id = ? ", [req.params.id], async(err,result)=>{
       if(err) return next(new AppError('user not exist ', 401))
 
-      res.status(200).json({
-         message: 'success',
-          result
-      })
+      res.status(200).json({message: 'success',result })
    })
 
    }catch(err){

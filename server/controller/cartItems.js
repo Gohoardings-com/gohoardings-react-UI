@@ -3,7 +3,6 @@ const jwtToken = require('jsonwebtoken')
 const catchError  = require('../middelware/catchError')
 
 exports.addOnCart = catchError(async (req, res) => {
-  console.log(req.body);
 const cookieData = req.cookies
 if (!cookieData) {
   return res.status(400).json({message:"No Cookie Found"})
@@ -102,8 +101,7 @@ exports.deleteFromCart = catchError(async (req, res, next) => {
 
 
 exports.useritems = catchError(async (req, res, next) => {
-    // const user = req.id
-    const user = 5740
+    const user = req.id
     db.changeUser({ database: "gohoardi_goh" });
     db.query(
       `SELECT COUNT(userid) AS item FROM goh_shopping_carts_item WHERE userid = ${user} && isDelete=0`,
@@ -119,8 +117,7 @@ exports.useritems = catchError(async (req, res, next) => {
 
 
 exports.cartitems = catchError(async (req, res, next) => {
-    // const user = req.id
-    const user = 190
+    const user = req.id
     db.changeUser({ database: "gohoardi_goh" });
     db.query(
       `SELECT * FROM goh_shopping_carts_item WHERE userid = ${user} && isDelete= 0`,

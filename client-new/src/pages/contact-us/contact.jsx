@@ -196,7 +196,7 @@ const Contact = () => {
             </div>
             <div className="col-md-7 p-0  d-flex justify-content-center">
               <img
-                src="../contact-image.png"
+                src="./images/contact-image.png"
                 className="img-fluid rounded "
                 id="contact-us-img"
                 alt="contact.img"

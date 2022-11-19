@@ -1,4 +1,3 @@
-
 const db = require('../conn/conn')
 db.changeUser({database : "odoads_tblcompanies"})
 
@@ -14,8 +13,6 @@ exports.goUsers = async(req, res) => {
     })
 })
 }
-
-
 
 exports.odoUsers = async(req, res) => {
     db.query("SELECT * FROM tblcompanies ", function (err, result) {

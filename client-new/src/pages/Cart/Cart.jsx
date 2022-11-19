@@ -16,6 +16,7 @@ const Cart = () => {
     const [Start, setStart] = useState(new Date());
     const [End, setEnd] = useState(new Date());
     const [Nowtotal, setNewTotal] = useState([]);
+    const [lengthChange, setlengthChange] = useState(5);
     const navigate = useNavigate();
     const [posts, setPosts] = useState([])
     const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
@@ -36,7 +37,6 @@ const Cart = () => {
 
     const getAllData = async () => {
         const { data } = await instance.get('cart/cartitems');
-        console.log(data);
         setPosts(data);
     };
 
@@ -54,6 +54,7 @@ const Cart = () => {
         })
     }
     const handleChange = (e, i, p) => {
+        console.log(e,i,p);
         setNewTotal({ total: e.target.value, index: i })
 
     };
@@ -64,15 +65,9 @@ const Cart = () => {
             produts: posts,
         });
     };
-    async function addMore() {
-        navigate("/media")
-    }
 
     return (
         <>
-
-
-
             <div className="container-fluid px-5 bg-light  p-3 mt-5">
                 <div className="container p-0 m-0">
                     <div className="row justify-content-end">
@@ -81,7 +76,6 @@ const Cart = () => {
                                 <Dropdown.Toggle
                                     variant="secondary"
                                     id="dropdown-basic"
-
                                 >
                                     Start Date
                                 </Dropdown.Toggle>
@@ -163,18 +157,23 @@ const Cart = () => {
                                                                         <button
                                                                             type="button"
                                                                             class="btn btn-success rounded-1 me-2"
+                                                                            onClick={() => {setlengthChange(lengthChange < 5 ? 5 : lengthChange + 1 )}}
+                                                                            onChange={(e) => handleChange(e, index, obj)}
                                                                         >
                                                                             <AiOutlinePlus className="quantitey" />
                                                                         </button>
                                                                         <span
                                                                             type="button"
                                                                             class="btn btn-outline-secondary rounded-1 me-2"
+                                                                            onChange={(e) => handleChange(e, index, obj)}
                                                                         >
-                                                                            5
+                                                                            {lengthChange}
                                                                         </span>
                                                                         <button
                                                                             type="button"
                                                                             class="btn btn-danger rounded-1"
+                                                                            onClick={() => setlengthChange(lengthChange < 6 ? 5 : lengthChange - 1)}
+                                                                            onChange={(e) => handleChange(e, index, obj)}
                                                                         >
                                                                             <AiOutlineMinus className="quantitey" />
                                                                         </button>
@@ -185,7 +184,7 @@ const Cart = () => {
                                                     </div>
                                                 </div>
                                             </> : <>
-                                                <h1 >Your Item Deleted Successfully</h1>
+                                                <h6 className="text-center">Your Item Deleted Successfully</h6>
                                             </>}
                                         </>
                                     ))}
@@ -201,17 +200,17 @@ const Cart = () => {
                                 <h5 class="card-title">
                                     Total media :
                                     <span type="button" class=" ms-1">
-                                        5
+                                        {posts.length}
                                     </span>
                                 </h5>
                                 <div class="card-text">
-                                 
+
                                     <h5 className="mt-4">Your Media Start on this date</h5>
                                     <h6 className="mt-4">
                                         {moment(Start).format("MMMM Do YYYY")}
                                     </h6>
-                                       <h5 className="mt-4"> and Media End this date{" "}</h5>
-                                    
+                                    <h5 className="mt-4"> and Media End this date{" "}</h5>
+
                                     <h6 className="mt-4">
                                         {moment(End).format("MMMM Do YYYY")}
                                     </h6>
@@ -219,9 +218,9 @@ const Cart = () => {
                                     <h5 className="mt-4">
                                         GST(18%) : <FaRupeeSign /> 9900
                                     </h5>
-                                    <h5 className="mt-4">
+                                    {/* <h5 className="mt-4">
                                         Total ammount : <FaRupeeSign /> 55000
-                                    </h5>
+                                    </h5> */}
                                 </div>
                             </div>
                             <div className="d-grid">

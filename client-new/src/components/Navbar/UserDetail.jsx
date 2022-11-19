@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogout } from 'react-google-login'
 import Nav from "react-bootstrap/Nav";
 import instance from "../../apis/Axios";
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { AccountContext } from '../../apis/ApiContext';
+import { MdOutlineShoppingCart } from 'react-icons/md'
 import { useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -15,9 +16,9 @@ const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleuserc
 const UserDetail = () => {
   const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {person} = useContext(AccountContext)
     const { isLoggedIn } = useSelector((state) => state.LoginStatus);
     const [posts, setPosts] = useState()
-
 
     const handelLogout = async () => {
       const data = await instance.post("registration/logout", null, {
@@ -32,48 +33,45 @@ const UserDetail = () => {
       return new Error("Unable to logOut Please Try Again");
     };
 
- 
-
     const logOut = async () => {
       handelLogout().then(() => dispatch(authActions.logout()))
     }
+
+    const getUser = async () => {
+      const { data } = await instance.get("registration/user", {
+        withCredentials: true
+      })
+      setPosts(...data)
+    }
     useEffect(() => {
-  
-      const getUser = async () => {
-        const { data } = await instance.get("registration/user", {
-          withCredentials: true
-        })
-        setPosts(...data)
-      }
       getUser().then(() => dispatch(authActions.login()))
+      setPosts(posts)
     }, [])
     
-    const onCart = async () => {
-        navigate('/cart')
-      }
-
-      console.log(posts);
+useEffect(() =>{
+    setPosts(posts)
+},[])
   return (
    <>
-   
     {posts ? <>
-                <AiOutlineShoppingCart className='cart ms-sm-4 mt-sm-2 text-light normal navLink '  onClick={onCart}  /> 
+                <a href='/cart' className='text-decoration-none text-black mt-sm-1'>
+                <MdOutlineShoppingCart className='cart ms-sm-3 navLink'/> {person}
+                </a>
                 <Dropdown>
       <Dropdown.Toggle variant="transparent border-0" id="dropdown-basic" className="navLink ps-3">
       {posts.firstname.toUpperCase()}
       </Dropdown.Toggle>
 
       <Dropdown.Menu >
-        <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-        <Dropdown.Item href="#/action-2"   onClick={logOut}>
-
+        <Dropdown.Item href="/">Profile</Dropdown.Item>
+        <Dropdown.Item href="/" onClick={logOut}>
         <GoogleLogout
-                  className='border-0 bg-transparent'
-                  href="/"
-  clientId={clientId}
-  buttonText={"Logout"}
-  onLogoutSuccess={logOut}
-  icon={false}
+          className='border-0 bg-transparent'
+          href="/"
+          clientId={clientId}
+          buttonText={"Logout"}
+          onLogoutSuccess={logOut}
+          icon={false}
  /> 
         </Dropdown.Item>
       </Dropdown.Menu>

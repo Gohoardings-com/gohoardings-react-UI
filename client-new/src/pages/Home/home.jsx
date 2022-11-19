@@ -11,7 +11,7 @@ import Enquire from "../enquire/enquire";
 
 const Home = ({setAvlable}) => {
 
-  setAvlable(true)
+  setAvlable(false)
 
   return (
     <>

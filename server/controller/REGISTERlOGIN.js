@@ -5,14 +5,14 @@ const catchError = require('../middelware/catchError')
 
 exports.register = catchError(async (req, res) => {
     db.changeUser({ database: "gohoardi_crmapp" })
-    const { name, email, phone, password: Npassword, conpass } = req.body
+    const { name, email, phone, password: Npassword} = req.body
     const password = bcrypt.hashSync(Npassword, 8)
     db.query("SELECT email, phonenumber FROM tblcontacts WHERE email='" + email + "' && phonenumber='" + phone + "'", async (err, result) => {
       if (err) {
         return res.send(err)
       }
       else if (result.length == []) {
-        if (Npassword === conpass) {
+        // if (Npassword === conpass) {
           req.body ? db.query("SELECT userid  FROM  tblcontacts ORDER BY userid DESC LIMIT 1", async (err, result) => {
             if (err) {
               return res.send(err);
@@ -44,9 +44,6 @@ exports.register = catchError(async (req, res) => {
             }
           })
             :  res.send({ message: "User data Null" })
-        } else {
-          return res.send({ message: "Password Not Matched" })
-        }
       } else {
         return res.status(201).json({
           mess: "Profile Already Exist"
@@ -127,7 +124,7 @@ exports.googleLogin = catchError(async(req,res) => {
                   sameSite: 'lax',
                   origin:"http://localhost:3000"
                 });
-                return res.status(200).json(result)
+                return res.status(200).json({message:"User Login Successfull" })
                }
              })
             }
@@ -137,6 +134,7 @@ exports.googleLogin = catchError(async(req,res) => {
         }
       })
 })
+
 
 exports.verifyToken =catchError(async (req, res, next) => {
     const cookieData =  req.cookies;
@@ -161,7 +159,6 @@ if(!token){
 
 exports.getuser = catchError(async (req, res) => {
    const userId = req.id;
-
    if (!userId) {
      return res.status(404).json({ message: "Token Valid" })
     } else {

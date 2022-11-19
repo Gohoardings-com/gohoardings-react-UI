@@ -4,7 +4,6 @@ const catchError = require('../middelware/catchError')
 
 
 exports.test001 = catchError(async (req,res,next) => {
-    console.log("d");
   // const {category_name, city_name} = req.body
   const cookieData = req.cookies
   if (!cookieData) {
