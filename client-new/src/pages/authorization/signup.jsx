@@ -12,9 +12,9 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) =
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
-  const [emails, setEmails] = useState("");
-  const [passwords, setPasswords] = useState("");
+  const [phone, setNumber] = useState("");
+  const [email, setEmails] = useState("");
+  const [password, setPasswords] = useState("");
   const [nameValidate, setNameValidate] = useState();
   const [numbervalidate, setNumbervalidate] = useState();
   const [emailsValidate, setEmailsValidate] = useState();
@@ -24,34 +24,40 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) =
     if (name === "") {
       count = +1;
       setNameValidate(<MdOutlineError className="text-danger" />);
-    } else if (number.length <= 0) {
+    } else if (phone.length <= 0) {
       count = +1;
       setNumbervalidate(<MdOutlineError className="text-danger" />);
-    } else if (number.length != 10) {
+    } else if (phone.length != 10) {
       count = +1;
       setNumbervalidate("Type your 10 digit no correctly");
-    } else if (emails === "") {
+    } else if (email === "") {
       count = +1;
       setEmailsValidate(<MdOutlineError className="text-danger" />);
-    } else if (!emailformate.test(emails)) {
+    } else if (!emailformate.test(email)) {
       count = +1;
       setEmailsValidate("Type your email corectly");
-    } else if (passwords === "") {
+    } else if (password === "") {
       count = +1;
       setPasswordsValidate(<MdOutlineError className="text-danger" />);
-    } else if (passwords.length <= 3) {
+    } else if (password.length <= 3) {
       setPasswordsValidate("Password should be atleast 4 digit ");
     } else if (count === 0) {
       try{
         e.preventDefault()
         const {data} = await instance.post('registration/register',{
-          emails, passwords, name, number
+          name,  email,phone, password 
         })
         if(data.message === "Register Successfully"){
          const user = data.message
-         localStorage.setItem("user",user)
-         sessionStorage.setItem("user",user)
-         navigate("/").then(() => dispatch(authActions.login()))
+         window.localStorage.setItem("user",user)
+         window.sessionStorage.setItem("user",user)
+        const locate =  window.localStorage.getItem("login")
+         if(!locate){
+           navigate("/").then(() => dispatch(authActions.login()))
+          }else{
+            navigate(`${locate}`).then(() => dispatch(authActions.login()))
+            window.localStorage.removeItem("login")
+          }
         }else{
           setMessage("Email and Password Invalid")
          
@@ -92,13 +98,13 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) =
                       <div className="mb-2 mt-1 ">
                         <div className="input-box">
                           <label className="input-label">
-                            Enter your contact number
+                            Enter your contact phone
                           </label>
                           <input
-                            type="number"
+                            type="phone"
                             className="input-1 "
                             onFocus={() => setFocus(true)}
-                            value={number}
+                            value={phone}
                             onChange={(e) => {
                               setNumber(e.target.value);
                             }}
@@ -115,7 +121,7 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) =
                             type="text"
                             className="input-1"
                             onFocus={() => setFocus(true)}
-                            value={emails}
+                            value={email}
                             onChange={(e) => {
                               setEmails(e.target.value);
                             }}
@@ -132,7 +138,7 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) =
                             type="text"
                             className="input-1"
                             onFocus={() => setFocus(true)}
-                            value={passwords}
+                            value={password}
                             onChange={(e) => {
                               setPasswords(e.target.value);
                             }}

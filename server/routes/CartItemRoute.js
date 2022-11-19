@@ -9,11 +9,11 @@ router.route("/deleteFromCart").post(verifyToken,deleteFromCart)
 router.route("/processdCart").post(processdCart);
 
 //Real Api's
-// router.route("/cartitems").get(verifyToken,cartitems, cartiemfromdb);
-// router.route("/useritems").get(verifyToken,useritems);
+router.route("/cartitems").get(verifyToken,cartitems, cartiemfromdb);
+router.route("/useritems").get(verifyToken,useritems);
 
 // Tempory userid
-router.route("/cartitems").get(cartitems, cartiemfromdb);
-router.route("/useritems").get(useritems);
+// router.route("/cartitems").get(cartitems, cartiemfromdb);
+// router.route("/useritems").get(useritems);
 
 module.exports = router;

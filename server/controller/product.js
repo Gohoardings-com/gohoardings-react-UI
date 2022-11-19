@@ -90,7 +90,6 @@ switch (category_name) {
 
   db.query("SELECT * FROM "+table_name+" WHERE code='"+code+"'",async (err,result) => {
     if (err) {
-      console.log(err);
       return res.send({err: err,message :"Wrong Data"})
   } else if (result == []){
       return res.send({err: "Empty",message :"Media Not Found"})

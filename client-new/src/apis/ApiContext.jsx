@@ -1,6 +1,6 @@
 import React,{useEffect, useState, useReducer, createContext} from 'react'
 import instance from './Axios';
-import { useStateWithCallbackLazy } from 'use-state-with-callback';
+
 
 export const AccountContext = createContext(null);
 const reducer = (state, action) => {
@@ -15,20 +15,23 @@ const reducer = (state, action) => {
   var initalState;
   
 const ApiContext = ({children}) => {
-    const [person,setPerson] = useStateWithCallbackLazy();
+    const [person,setPerson] = useState();
     useEffect(() => {
         const item = async() =>{
             const {data} = await instance.get(`cart/useritems`)
-         setPerson = (data[0].item)
+         setPerson(data[0].item)
+      
          initalState =  person;
         }
         item()
     },[])
     const [state, addRemove] = useReducer(reducer, initalState)
-
+useEffect(() =>{
+  setPerson(person)
+},[])
   return (
     <AccountContext.Provider value={{
-       state,
+       person,
        addRemove
     }}>
         {children}

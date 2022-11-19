@@ -16,7 +16,7 @@ const Medialogo = ({posts,category_name}) => {
             <div className='col-2 vl mt-3 mb-3'>
                 <div className='col viewabout rounded-3 pt-5' >
                     <div className='bg-secondary locationIcon rounded-3'>
-                        <img src='./images/location.svg' className='text-light'/>
+                        <img src='../../images/location.svg' className='text-light'/>
                     </div>
                     <div className='me-3 ms-3 mt-5 mb-1 '>
                         <h6 className="text-dark">{(posts.length + posts.length)*12}</h6>

@@ -1,14 +1,19 @@
 import React,{useState, useEffect} from 'react'
 import {RiUser3Fill} from 'react-icons/ri'
 import { useParams, } from 'react-router-dom';
-import {IoIosSettings,IoMdLocate} from 'react-icons/io'
+import {IoIosSettings,IoMdLocate} from 'react-icons/io';
+import { GrMapLocation } from 'react-icons/gr';
+import {useNavigate } from 'react-router-dom';
 import './details.scss'
+import { MdOutlineShoppingCart } from 'react-icons/md'
 import {useLocation} from 'react-router-dom';
 import instance from '../../apis/Axios';
 import Medialogo from '../../components/medialogo';
 
 const Details = () => {
+    const priceState = window.localStorage.getItem("user")
     const {code,category_name} = useParams();
+    const navigate = useNavigate()
     const [posts,setPosts] = useState([])
 
     const getMedia = async() =>{
@@ -18,6 +23,9 @@ const Details = () => {
         })
         console.log(data);
         setPosts(data);
+    }
+    const locatetologin = async() =>{
+        navigate('/login')
     }
 
 useEffect(() => {
@@ -62,15 +70,20 @@ useEffect(() => {
         </div>
         <div className='col ms-5 me-5 maindivbordermediadetails p-2 mb-2 rounded-2' id='media'>
           <div>
-          < h5 className='text-center pt-3 fw-bolder'>{item.page_title}</ h5>
+         <div className='d-flex'>
+         < h5 className='text-center pt-3 fw-bolder'>{item.page_title}</ h5>
+          <MdOutlineShoppingCart className='mt-4 ms-3'/>
+         </div>
           <div className='row'>
           <div className='col pt-4'>
           <h6 className=' text-muted'>Code :<span className='text-dark'> {item.code}</span></h6>
-           <h6>Price : <span className='text-primary'>Login to see price</span></h6>
+          <h6 className='fw-bold overflow-wrap'>Price: {!priceState ? <a onClick={locatetologin} className='text-decoration-none'>Please Login first</a> : item.price}</h6>
           </div>
           <div className='col pt-4'>
-          <img src='./images/location.svg' className='img-fluid ps-5 ms-5 text-primary' />
+         <a href='/map' className=' text-decoration-none'>
+         <GrMapLocation className='ms-5'/>
          <h6 className=' text-primary fw-bold text-nowrap text-center pe-3 pt-1' id='highlights'>See at Map</h6>
+         </a>
           </div>
           </div>
           <div className='mt-5 singlemediashow' >

@@ -33,21 +33,21 @@ const NewNAvbar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" ms-auto me-5">
               <Nav.Link
-                className="navLink ps-3"
+                className="navLink ps-3 text-dark"
                 href="https://odoads.com/"
                 target="_blank"
               >
                 Odoads
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3"
+                className="navLink ps-3 text-dark"
                 href="https://www.gohoardings.com/blog/"
                 target="_blank"
               >
                 Blog
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3 pe-3"
+                className="navLink ps-3 pe-3 text-dark"
                 href="https://gohoardings.com/contact-us"
               >
                 Contact

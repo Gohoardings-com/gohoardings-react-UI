@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/home";
+import Home from "./pages/home/home";
 import Media from './pages/medias/media';
 import Header from './components/header/header';
 import "react-toastify/dist/ReactToastify.css";
@@ -31,13 +31,14 @@ function App() {
     <>
       <BrowserRouter>
   <Header/>
- {avlable == true ? <Fixednavbar/> :  <Flotinggnavbar/>}
+
+ {avlable ?   <Flotinggnavbar/> : <Fixednavbar/> }
         <Routes>
          <Route path="/" element={<Home setAvlable={setAvlable} />}/>
-          <Route path="/media/:category_name/:city_name" element={<Media setAvlable={setAvlable}/>}/>   
+          <Route path="/media/:category_name/:city_name" element={<Media/>}/>   
           <Route path="/map" element={<Map/>}/>
           <Route path="/details/:code/:category_name" element={<Details/>}/>
-          <Route path="/cart" element={<Cart/>}/> 
+          <Route path="/cart" element={<Cart />}/> 
            <Route path="/contact" element={<Contact/>}/> 
           <Route path="/about" element={<About/>}/> 
           <Route path="/faqs" element={<FAQS/>}/> 

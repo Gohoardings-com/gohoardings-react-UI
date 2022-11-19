@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./login.scss";
 import { authActions } from "../../store";
 import { useSelector, useDispatch } from 'react-redux'
@@ -43,11 +43,29 @@ const Login = () => {
   }
 // Google Login Request
 const onSuccess = async (res) => {
-  await instance.post("registration/googleSingUp", {
+  const {data} =  await instance.post("registration/googleSingUp", {
     profile: res.profileObj
-  }).then(() => dispatch(authActions.login()),
-    navigate('/'))
+  })
+  if(data.message === "User Login Successfull"){
+    const user = data.message
+    window.localStorage.setItem("user",user)
+    window.sessionStorage.setItem("user",user)
+   const locate =  window.localStorage.getItem("login")
+    if(!locate){
+      navigate("/").then(() => dispatch(authActions.login()))
+     }else{
+       navigate(`${locate}`).then(() => dispatch(authActions.login()))
+       window.localStorage.removeItem("login")
+     }
+   
+   }else{
+     setMessage("Email and Password Invalid")
+    
+   }
 }
+
+
+
  // Google Login failures
  const onFailure = async (res) => {
   await setGoogledata(null)
@@ -98,7 +116,14 @@ const {signIn} = useGoogleLogin({
          const user = data.message
          window.localStorage.setItem("user",user)
          window.sessionStorage.setItem("user",user)
-         navigate("/").then(() => dispatch(authActions.login()))
+        const locate =  window.localStorage.getItem("login")
+         if(!locate){
+           navigate("/").then(() => dispatch(authActions.login()))
+          }else{
+            navigate(`${locate}`).then(() => dispatch(authActions.login()))
+            window.localStorage.removeItem("login")
+          }
+        
         }else{
           setMessage("Email and Password Invalid")
          

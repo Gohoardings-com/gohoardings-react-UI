@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './media.scss';
+import { AccountContext } from '../../apis/ApiContext';
 import { BsListCheck } from 'react-icons/bs';
 import { useParams,useNavigate } from 'react-router-dom';
 import instance from '../../apis/Axios'
@@ -10,15 +11,59 @@ import MultiCard from './multiCard';
 import MediaFilter from './mediaFilter';
 import Medialogo from '../../components/medialogo';
 
-const Media = ({setAvlable}) => {
-  setAvlable(false)
+const Media = () => {
+  const priceState = window.localStorage.getItem("user")
     const [show, setShow] = useState(false)
     const { category_name, city_name } = useParams();
-    // const {addRemove} = useContext(AccountContext)
+    const {addRemove} = useContext(AccountContext)
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
+    const [category, setcategory] = useState([]);
+    const [query, setQuery] = useState("");
+    const [catego, setCatego] = useState('');
+    const [illumna, setIllumna] = useState('');
 
+  
+    let ILLUMINATION = [
+      { label: "Nonlit", value: " Nonlit" },
+      {
+        label: "Frontlit",
+        value: "Frontlit",
+      },
+      {
+        label: "Backlit",
+        value: "Backlit",
+      },
+      {
+        label: "Ambilit",
+        value: "Ambilit",
+      },
+      {
+        label: "LED",
+        value: "LED",
+      },
+      {
+        label: "Digital",
+        value: "Digital",
+      }
+    ];
+  
+    const holdingtype = async () => {
+      const { data } = await instance.get('filter/categoryfilter')
+      setcategory(data);
+    }
+    useEffect(() => {
+      holdingtype();
+    }, [])
+    
+    async function mediaFilter() {
+    var data  =  posts.filter((curElem) => {
+       return curElem.illumination == "backlit"
+      })
 
+      setPosts(data)
+    }
+    
     const getData = async () => {
       const {data} = await instance.post("media/searchMedia",{
         category_name : category_name,
@@ -27,26 +72,33 @@ const Media = ({setAvlable}) => {
       setPosts(data);
     }
   
-console.log(posts);
 
     const addonCart = async (e) => {
-      console.log(e);
       const {data} =  await instance.post('cart/addOnCart', {
           mediaid: e.code,
           mediatype: e.category_name,
         })
-         
-            // addRemove({type:"INCR"})
-            add(e)
-          console.log(data);
+        if(data.message == 'Login First'){
+          window.localStorage.setItem("login",`/media/${category_name}/${city_name}`)
+          window.sessionStorage.setItem("login",`/media${category_name}/${city_name}`)
+          navigate('/login')
+        }else{
+          addRemove({type:"INCR"})
+          add(e)
+        }
       }
   
+      const locatetologin = async() =>{
+        window.localStorage.setItem("login",`/media/${category_name}/${city_name}`)
+        window.sessionStorage.setItem("login",`/media${category_name}/${city_name}`)
+        navigate('/login')
+    }
       const removefroCart = async (obj) => {
         console.log(obj);
         await instance.post('cart/deleteFromCart', {
           code: obj.code,
         })
-        // addRemove({type:"DECR"})
+        addRemove({type:"DECR"})
         remove(obj)
       }
   
@@ -68,23 +120,141 @@ console.log(posts);
         let data = [...posts];
         data.forEach((element) => {
           if (element.code == event.code) {
-            console.log(element);
             element.isDelete = 1;
             setPosts(data);
           }
         });
       };
-  
-  
+
     useEffect(() => {
       getData()
-    }, [])
+      setPosts(posts)
+    }, [posts])
     return (
         <>
             <div className='container-fluid pt-3  mediabackground'>
                <Medialogo category_name={category_name} posts={posts}/>
                 <div className="row mt-3 rounded  ms-3 ps-3 ps-5 pe-5">
-                  <MediaFilter/>
+                <div className="col-sm-2 col-12">
+      <div className="col pt-4" >
+        <div className='mediaName me-1 rounded-top ms-1 mt-5 p-2'>
+          <h6 className="text-uppercase text-center">Sub category(5)</h6>
+        </div>
+        <input type="serach" placeholder="Search.." onChange={event => setQuery(event.target.value)} className=' w-100 mt-2 p-2 rounded-3' />
+
+        <div className="rowCheck bg-light row rounded-bottom me-1 ms-1 mb-1 p-1">
+          <ul>
+            {category.filter(obj => {
+              if (query == '') {
+                return obj;
+              } else if (obj.name.toLowerCase().includes(query.toLowerCase())) {
+                return obj;
+              }
+            }).map((illum, i) => (
+              <>
+                <input type="checkbox" id={i}
+                  className="me-1"
+                  name={illum.name}
+                  value={illum.value}
+                  onChange={(e) => setCatego(e.target.name)}
+                  onClick={() =>mediaFilter()}
+                />
+                <span className="text-wrap">{illum.name}</span>
+                <br />
+              </>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="col pt-4" >
+        <div className='mediaName me-1 rounded-top ms-1 mt-1 p-2'>
+          <h6 className="text-uppercase text-center">Select Media (5)</h6>
+        </div>
+        <div className='bg-light rounded-bottom rounded-1'>
+          <div className="rowCheck row m-1">
+            <ul>
+
+              {ILLUMINATION.map((item,i) => (
+                <li className="w-100">
+                  <input className=" ms-2 " id={i} type="checkbox" name={item.label} onChange={(e) => setIllumna(e.target.name)}
+                onClick={() =>mediaFilter()}/>
+                  <span className=" ms-3">{item.label}</span>
+                </li>
+
+              ))}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="col pt-4" >
+        {/* <div className=' mediaName mt-1 ms-1 me-1 p-2 rounded-top'>
+          <h6 className="text-uppercase text-center">Illumination(5)</h6>
+        </div> */}
+
+        {/* <div className="rowCheck bg-light row rounded-bottom mb-1 ms-1 me-1 p-1">
+          <ul>
+            <li className="w-100">
+              <input className=" ms-2 " type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+            <li className="w-100">
+              <input className=" ms-2" type="checkbox"></input>
+              <span className=" ms-3">UniPole</span>
+            </li>
+          </ul>
+        </div> */}
+      </div>
+    </div>
                     <div className="col-12 col-sm-10 rounded">
                         <div className='row mediaName rounded-top '>
                             <div className='col-sm-10 col-9'>
@@ -103,9 +273,9 @@ console.log(posts);
                         <div className='overflow  rounded'>
                             <div className='container-fluid'>
                                 {!show ? <>     
-                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/>
+                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                     </> : <>
-                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove}/>
+                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                    </>}
                             </div>
                         </div>
