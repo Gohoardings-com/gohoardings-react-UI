@@ -15,6 +15,11 @@ const Map = () => {
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
 
+  const [noOfLogo, setnoOfLogo] = useState(2);
+
+  const slice = medias.slice(0, noOfLogo);
+
+
   const hording = [];
   const type = [];
 
@@ -23,7 +28,6 @@ const Map = () => {
   });
 
   const getAllDetails = async () =>{
-    console.log(type,price,hording);
     const { data } = await instance.post('filter/categoryfilter', {
       hordingtype: type,
       price :price,
@@ -46,17 +50,18 @@ const Map = () => {
   }
 
 
-useEffect(() => {
-
   const mediasData  = async ()=>{
-    console.log("asda");
-   // let {data}  = []
     const {data} = await instance.post("media/searchMedia")
     if (data.length > 0) {
-      console.log(data);
       setMedias(data);
     }
   }
+
+  const nmedia  = async (arr) => {
+      setMedias(arr);
+  }
+
+useEffect(() => {
   mediasData();
 }, []);
 
@@ -92,10 +97,18 @@ const holdingtype = async() =>{
 
 const userCartItem = async() =>{
   const {data} = await instance.get('cart/cartitems');
-  console.log(data);
   setcartItem(data)
 }
-
+const More = () => {
+  if (medias.length >= noOfLogo) {
+    setnoOfLogo(noOfLogo + 2);
+  }
+};
+const Less = () => {
+  if (noOfLogo > 2) {
+    setnoOfLogo(noOfLogo - 2);
+  }
+};
 
 useEffect(() =>{
   holdingtype();
@@ -122,8 +135,8 @@ useEffect(() =>{
               <div className="accordion items mb-2 rounded" id="accordionExample">
 
 
-                   {!medias ? <>Loading .... Please wait</> :<>
-                   {medias.map((item,i) =>(
+                   {!slice ? <>Loading .... Please wait</> :<>
+                   {slice.map((item,i) =>(
                      <>
                 <div className="accordion-item border rounded mb-2">
                   <div
@@ -181,11 +194,13 @@ useEffect(() =>{
                     </>
                    ))}
                    </>} 
-                   
-
+                   <div>
+                    <button onClick={() => More()} >View More</button>
+                    <button className="ms-3" onClick={() => Less()}>View Less</button>
+                   </div>
               </div>
             </div>
-            <IconsSlection setMedias={setMedias}/>
+            { medias && medias.length > 0 ? <IconsSlection media={medias} fnmedia={nmedia}/> : null}
             <div className="filter-items p-2 accordion accordion-collapse collapse" id="collapseT3" data-bs-parent="#accordionTest">
 
             <div id="accordionTest2">
@@ -288,7 +303,7 @@ useEffect(() =>{
                       <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                         <input type="checkbox" id={i} 
                         value={illumation.value}
-                        onChange={(e) => multichecked(e)}/>
+                        onChange={(e) => multicheck(e)}/>
                         <label htmlFor="1" className="ps-2">{illumation.label}</label>
                       </div>
                       ))}

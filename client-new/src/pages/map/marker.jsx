@@ -8,7 +8,6 @@ const center = {
   };
 
 function Markers(markers) {
-  console.log(markers);
   markers.data.forEach(e => {
       e['position'] = {lat : e.latitude, lng : e.longitude}
     })

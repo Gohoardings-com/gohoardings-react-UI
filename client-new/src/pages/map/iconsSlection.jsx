@@ -2,12 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import Slider from "./slider.jsx";
-import instance from "../../apis/Axios";
 import "./icons.scss"
 
-const IconsSlection = ({ setMedias }) => {
+const IconsSlection = ({ media, fnmedia }) => {
   const [Distance, Setdistance] = useState(0);
-
 
   const hording = [];
 
@@ -94,14 +92,15 @@ const IconsSlection = ({ setMedias }) => {
     },
 
   ]
-  // const hello = [posts,...images]
   const submitfilters = async () => {
-    const { data } = await instance.post('filter/categoryfilter', {
-      filterdata: Distance,
-      hording :hording
-    })
-    setMedias(data)
+  var newArray = media.filter(function (el)
+  {
+    return el.id >= 3695;
   }
+  );
+  fnmedia(newArray)
+  }
+
 
   return (
     <>
@@ -133,7 +132,6 @@ const IconsSlection = ({ setMedias }) => {
           <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={() => submitfilters()}>Apply</button>
         </div>
       </div>
-
     </>
   )
 }
