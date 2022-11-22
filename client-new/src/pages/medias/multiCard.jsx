@@ -15,7 +15,7 @@ const MultiCard = ({ slice, addonCart, removefroCart, priceState, locatetologin 
                         <div className='mainImage p-1 hello'>
                             <img src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media ' className='rounded-top ' />
                             <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                <h5 className='fw-bold overflow-wrap'>{item.page_title}</h5>
+                                <h5 className='fw-bold overflow-hidden'>{item.page_title}</h5>
                                 <div className='row'>
                                     <div className='col singleMediaData'>
                                         <h6 className='fw-bold overflow-wrap'>Code : {item.code}</h6>

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./login.scss";
 import { authActions } from "../../store";
 import { ToastContainer, toast } from "react-toastify";
@@ -41,44 +41,44 @@ const Login = () => {
       });
     }
   }
-// Google Login Request
-const onSuccess = async (res) => {
-  const {data} =  await instance.post("registration/googleSingUp", {
-    profile: res.profileObj
+  // Google Login Request
+  const onSuccess = async (res) => {
+    const { data } = await instance.post("registration/googleSingUp", {
+      profile: res.profileObj
+    })
+    if (data.message === "User Login Successfull") {
+      const user = data.message
+      window.localStorage.setItem("user", user)
+      window.sessionStorage.setItem("user", user)
+      const locate = window.localStorage.getItem("login")
+      if (!locate) {
+        navigate("/").then(() => dispatch(authActions.login()))
+      } else {
+        navigate(`${locate}`).then(() => dispatch(authActions.login()))
+        window.localStorage.removeItem("login")
+      }
+
+    } else {
+      toast("Email or Password Invalid")
+
+    }
+  }
+
+
+
+  // Google Login failures
+  const onFailure = async (res) => {
+    await setGoogledata(null)
+  }
+
+  const { signIn } = useGoogleLogin({
+    onSuccess,
+    onFailure,
+    clientId,
+    isSignedIn: true,
+    accessType: 'offline',
+
   })
-  if(data.message === "User Login Successfull"){
-    const user = data.message
-    window.localStorage.setItem("user",user)
-    window.sessionStorage.setItem("user",user)
-   const locate =  window.localStorage.getItem("login")
-    if(!locate){
-      navigate("/").then(() => dispatch(authActions.login()))
-     }else{
-       navigate(`${locate}`).then(() => dispatch(authActions.login()))
-       window.localStorage.removeItem("login")
-     }
-   
-   }else{
-     toast("Email or Password Invalid")
-    
-   }
-}
-
-
-
- // Google Login failures
- const onFailure = async (res) => {
-  await setGoogledata(null)
-}
-
-const {signIn} = useGoogleLogin({
-  onSuccess,
-  onFailure,
-  clientId,
-  isSignedIn:true,
-  accessType:'offline',
-
-})
   const emailformate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   let count = 0;
   const [eyeViseble, setEyeViseble] = useState(true);
@@ -95,8 +95,7 @@ const {signIn} = useGoogleLogin({
   };
   //validation and submit  for signIn
 
-
-  const onSignIn = async(e) => {
+  const onSignIn = async (e) => {
     if (email === "") {
       count = +1;
       setEmailValidate(<MdOutlineError className="text-danger" />);
@@ -107,33 +106,32 @@ const {signIn} = useGoogleLogin({
       count = +1;
       setPasswordValidate(<MdOutlineError className="text-danger" />);
     } else if (count === 0) {
-      try{
+      try {
         e.preventDefault()
-        const {data} = await instance.post('registration/login',{
-          email:email, password:password
+        const { data } = await instance.post('registration/login', {
+          email: email, password: password
         })
-        if(data.message === "User Login Successfull"){
-         const user = data.message
-         window.localStorage.setItem("user",user)
-         window.sessionStorage.setItem("user",user)
-        const locate =  window.localStorage.getItem("login")
-         if(!locate){
-           navigate("/").then(() => dispatch(authActions.login()))
-          }else{
+        if (data.message === "User Login Successfull") {
+          const user = data.message
+          window.localStorage.setItem("user", user)
+          window.sessionStorage.setItem("user", user)
+          const locate = window.localStorage.getItem("login")
+          if (!locate) {
+            navigate("/").then(() => dispatch(authActions.login()))
+          } else {
             window.localStorage.removeItem("login")
             navigate(`${locate}`).then(() => dispatch(authActions.login()))
           }
-        }else{
+        } else {
           toast("Email or Password Invalid")
         }
-      }catch(err){
+      } catch (err) {
         toast("Email or Password Invalid");
       }
-      
+
     }
     e.preventDefault();
   };
-
 
   //toggle between signIn & register
   const [signin, setSignIn] = useState(true);
@@ -141,7 +139,6 @@ const {signIn} = useGoogleLogin({
     setSignIn(!signin);
   };
 
- 
   return (
     <>
       <section className=" " id="mainsection">
@@ -215,7 +212,7 @@ const {signIn} = useGoogleLogin({
                       <button type="submit" className="signin">
                         <span>SIGN IN</span>
                       </button>
-                      <ToastContainer/>
+                      <ToastContainer />
                     </form>
                     <div className="row mt-4">
                       <div className="col-md-5 or_border  "></div>
@@ -238,7 +235,7 @@ const {signIn} = useGoogleLogin({
                   </div>
                 </div>
               ) : (
-              <Register setFocus={setFocus} onVisible={onVisible} eyeViseble={eyeViseble} toggleSignUp={toggleSignUp}  toast={toast}/>
+                <Register setFocus={setFocus} onVisible={onVisible} eyeViseble={eyeViseble} toggleSignUp={toggleSignUp} toast={toast} />
               )}
             </div>
           </div>
@@ -247,5 +244,4 @@ const {signIn} = useGoogleLogin({
     </>
   );
 };
-
 export default Login;

@@ -8,12 +8,9 @@ import { useEffect } from "react";
 import './seachMedia.scss'
 
 const SearchMedia = () => {
-  //   const navigator = useNavigate();
-  //   const dispatch = useDispatch();
   const [category_name, setCategory] = useState("traditional-ooh-media");
   const [city, setCity] = useState([]);
   const [city_name, setgetCity] = useState("delhi");
-
 
     const getCity = async () => {
       const { data } = await instance.get(

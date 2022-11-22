@@ -148,7 +148,7 @@ const Media = () => {
 
     useEffect(() => {
       getData()
-        },[])
+        },[category_name, city_name])
     return (
         <>
             <div className='container-fluid pt-5 mt-3  mediabackground '>
@@ -295,7 +295,7 @@ const Media = () => {
                                 {!show ? <>     
                                     <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                     </> : <>
-                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
+                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                    </>}
                             </div>
                         </div>
