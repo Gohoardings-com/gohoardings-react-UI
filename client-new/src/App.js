@@ -17,7 +17,7 @@ import FAQS from './pages/faqs/faqs'
 import Team from './pages/team/team'
 import News from './pages/news_media/news_media'
 import Testimonial from './pages/testimonial/testimonial'
-// import "./App.css"
+// import "./App.css" 
 
 function App() {
   const [avlable,setAvlable] = useState(false)
