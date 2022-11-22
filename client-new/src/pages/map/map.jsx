@@ -192,7 +192,7 @@ useEffect(() =>{
                 <div className="accordion-item border rounded mb-2">
                   <div
                     data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
+                    data-bs-target={"#"+item.code+""}
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
@@ -224,7 +224,7 @@ useEffect(() =>{
                     </div>
 
                     <div
-                      id="collapseOne"
+                      id={item.code}
                       className="accordion-collapse collapse"
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
@@ -302,7 +302,8 @@ useEffect(() =>{
                 </div>
               </div>
 
-
+              {/* location filter */}
+                
               {/* <div className="accordion-item mb-3">
                 <h2 className="accordion-header" id="flush-headingThree">
                   <button className="accordion-button collapsed bg-secondary bg-opacity-25" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
@@ -448,7 +449,7 @@ useEffect(() =>{
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-              { isLoaded && medias && medias.length > 0 ? <Markers data={medias} add={addonCart}/> : null }
+              { isLoaded && medias && medias.length > 0 ? <Markers data={slice} add={addonCart}/> : null }
         </div>
       </div>
     </div>

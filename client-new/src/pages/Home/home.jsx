@@ -20,7 +20,7 @@ const Home = () => {
 <SearchMedia/>
  <Ourservices/> 
  <City/>
-<Enquire/>
+{/* <Enquire/> */}
 
 {/* <Trandingcity/> 
  <Navbar/>

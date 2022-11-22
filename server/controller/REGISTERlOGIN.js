@@ -99,6 +99,7 @@ exports.googleLogin = catchError(async (req, res) => {
   db.changeUser({ database: "gohoardi_crmapp" });
   db.query("SELECT email, provider FROM tblcontacts WHERE email='" + profile.email + "' && provider='Google'", async (err, selectResult) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({ message: "Wrong Data" })
     }
     if (selectResult.length == 0) {
