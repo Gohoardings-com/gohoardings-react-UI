@@ -48,9 +48,6 @@ const UserDetail = () => {
       setPosts(posts)
     }, [])
     
-useEffect(() =>{
-    setPosts(posts)
-},[])
   return (
    <>
     {posts ? <>

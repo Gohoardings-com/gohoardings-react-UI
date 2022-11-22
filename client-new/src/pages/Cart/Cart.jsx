@@ -27,6 +27,7 @@ const Cart = () => {
     const EndDate = (e) => {
         setEnd(e);
     };
+    
     const removefroCart = async (obj) => {
         await instance.post("cart/deleteFromCart", {
             code: obj.code,

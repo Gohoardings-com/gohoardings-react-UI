@@ -10,7 +10,7 @@ import Flotinggnavbar from './components/Navbar/flotingnavbar';
 import Footer from './pages/footer/footer';
 import Map from './pages/map/map'
 import Details from './pages/seeDetails/details'
-import Cart from './pages/Cart/Cart'
+import Cart from './pages/Cart/cart'
 import Contact from "./pages/contact-us/contact";
 import About from './pages/about-us/about'
 import FAQS from './pages/faqs/faqs'
@@ -21,6 +21,7 @@ import Testimonial from './pages/testimonial/testimonial'
 
 function App() {
   const [avlable,setAvlable] = useState(false)
+const [fix,setFix]= useState(false)
   const getUser = async() => {
    {localStorage.getItem("user") && setAvlable(true)}
   }
@@ -31,21 +32,20 @@ function App() {
     <>
       <BrowserRouter>
   <Header/>
-
- {avlable ?   <Flotinggnavbar/> : <Fixednavbar/> }
+  {/* <Fixednavbar/> */}
         <Routes>
-         <Route path="/" element={<Home setAvlable={setAvlable} />}/>
-          <Route path="/media/:category_name/:city_name" element={<Media/>}/>   
-          <Route path="/map" element={<Map/>}/>
-          <Route path="/details/:code/:category_name" element={<Details/>}/>
-          <Route path="/cart" element={<Cart />}/> 
-           <Route path="/contact" element={<Contact/>}/> 
-          <Route path="/about" element={<About/>}/> 
-          <Route path="/faqs" element={<FAQS/>}/> 
-          <Route path="/team" element={<Team/>}/>  
-        <Route path="/news" element={<News/>}/>  
-         <Route path="/testimonial" element={<Testimonial/>}/> 
-           <Route exact path="/login" element={avlable == true ? <Home/>:<Login/>}></Route>
+         <Route index path="/" element={<Home/>}/>
+           <Route exact path="/login" element={avlable ? <Home/>:<Login/>}></Route>
+          <Route exact path="/media/:category_name/:city_name" element={ <Media />}/>   
+          <Route exact path="/map" element={<Map/>}/>
+          <Route exact path="/details/:code/:category_name" element={<Details/>}/>
+          <Route exact path="/cart" element={<Cart />}/> 
+           <Route exact path="/contact" element={<Contact/>}/> 
+          <Route exact path="/about" element={<About/>}/> 
+          <Route exact path="/faqs" element={<FAQS/>}/> 
+          <Route exact path="/team" element={<Team/>}/>  
+        <Route exact path="/news" element={<News/>}/>  
+         <Route exact path="/testimonial" element={<Testimonial/>}/> 
         </Routes>
         <Footer/>
       </BrowserRouter>

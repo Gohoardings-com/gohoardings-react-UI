@@ -22,29 +22,34 @@ const Media = () => {
     const [query, setQuery] = useState("");
     const [catego, setCatego] = useState('');
     const [illumna, setIllumna] = useState('');
+  const [noOfLogo, setnoOfLogo] = useState(6)
+  const slice = posts.slice(0, noOfLogo);
 
-  
     let ILLUMINATION = [
-      { label: "Nonlit", value: " Nonlit" },
+      { label: "Nonlit", value: "nonlit" },
       {
         label: "Frontlit",
-        value: "Frontlit",
+        value: "frontlit",
       },
       {
         label: "Backlit",
-        value: "Backlit",
+        value: "backlit",
       },
       {
         label: "Ambilit",
-        value: "Ambilit",
+        value: "ambilit",
       },
       {
         label: "LED",
-        value: "LED",
+        value: "lED",
       },
       {
         label: "Digital",
-        value: "Digital",
+        value: "digital",
+      },
+      {
+        label: "Ledscreen",
+        value: "ledscreen",
       }
     ];
   
@@ -56,13 +61,18 @@ const Media = () => {
       holdingtype();
     }, [])
     
-    async function mediaFilter() {
-    var data  =  posts.filter((curElem) => {
-       return curElem.illumination == "backlit"
-      })
-
-      setPosts(data)
+    const  mediaFilter = async() => {
+   const {data} = await instance.post("filter/filterData",{
+    value : category_name,
+    illumna: illumna,
+    catego:catego,
+  })
+  setPosts(data)
     }
+    
+    useEffect(() =>{
+      mediaFilter()
+    },[category_name, illumna,catego])
     
     const getData = async () => {
       const {data} = await instance.post("media/searchMedia",{
@@ -72,7 +82,6 @@ const Media = () => {
       setPosts(data);
     }
   
-
     const addonCart = async (e) => {
       const {data} =  await instance.post('cart/addOnCart', {
           mediaid: e.code,
@@ -126,13 +135,23 @@ const Media = () => {
         });
       };
 
+      const More = () => {
+        if (posts.length >= noOfLogo) {
+          setnoOfLogo(noOfLogo + 10);
+        }
+      };
+      const Less = () => {
+        if (noOfLogo > 2) {
+          setnoOfLogo(noOfLogo - 10);
+        }
+      };
+
     useEffect(() => {
       getData()
-      setPosts(posts)
-    }, [posts])
+        },[])
     return (
         <>
-            <div className='container-fluid pt-3  mediabackground'>
+            <div className='container-fluid pt-5 mt-3  mediabackground '>
                <Medialogo category_name={category_name} posts={posts}/>
                 <div className="row mt-3 rounded  ms-3 ps-3 ps-5 pe-5">
                 <div className="col-sm-2 col-12">
@@ -155,9 +174,9 @@ const Media = () => {
                 <input type="checkbox" id={i}
                   className="me-1"
                   name={illum.name}
-                  value={illum.value}
+                  value="false"
                   onChange={(e) => setCatego(e.target.name)}
-                  onClick={() =>mediaFilter()}
+                  onClick={(e) =>mediaFilter(e)}
                 />
                 <span className="text-wrap">{illum.name}</span>
                 <br />
@@ -176,7 +195,8 @@ const Media = () => {
 
               {ILLUMINATION.map((item,i) => (
                 <li className="w-100">
-                  <input className=" ms-2 " id={i} type="checkbox" name={item.label} onChange={(e) => setIllumna(e.target.name)}
+                  <input className=" ms-2 collapse-none" id={i} type="checkbox" name={item.label} onChange={(e) => setIllumna(e.target.name)}
+                   data-bs-toggle="collapse" data-bs-target="#collapseT2" aria-expanded="false" aria-controls="collapseT2"
                 onClick={() =>mediaFilter()}/>
                   <span className=" ms-3">{item.label}</span>
                 </li>
@@ -273,15 +293,15 @@ const Media = () => {
                         <div className='overflow  rounded'>
                             <div className='container-fluid'>
                                 {!show ? <>     
-                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
+                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                     </> : <>
                                       <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} posts={posts} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                    </>}
                             </div>
                         </div>
                     <div  class="button offset-4 row pt-3 pb-3" >
-                        <button class="w-25 buttonload btn-hover"><i aria-hidden="true" class="fa fa-caret-down"></i>View More </button>
-                    <button class="w-25 ms-5 buttonload btn-hover" ><i  aria-hidden="true" class="fa fa-long-arrow-up"></i> Back to Top </button>
+                        <button class="w-25 buttonload btn-hover" onClick={() => More()}><i aria-hidden="true" class="fa fa-caret-down"></i>View More </button>
+                    <button class="w-25 ms-5 buttonload btn-hover" onClick={() => Less()}><i  aria-hidden="true" class="fa fa-long-arrow-up"></i> Back to Top </button>
                     </div>
                 </div>
                     </div>

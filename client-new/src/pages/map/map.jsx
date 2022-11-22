@@ -1,5 +1,7 @@
-import React,{useEffect, useState } from "react";
+import React,{useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AccountContext } from '../../apis/ApiContext';
+import {useNavigate } from 'react-router-dom';
 import "./map.scss";
 import "./icons.scss"
 import instance from "../../apis/Axios";
@@ -9,16 +11,23 @@ import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
 
 const Map = () => {
+  const priceState = window.localStorage.getItem("user")
+  const navigate = useNavigate()
   const [medias,setMedias] = useState([])
+  const {addRemove} = useContext(AccountContext)
   const [price,setprice] = useState([])
   const [query, setQuery] = useState("");
+  const [posts, setPosts] = useState([]);
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
 
-  const [noOfLogo, setnoOfLogo] = useState(2);
+  const [noOfLogo, setnoOfLogo] = useState(3);
 
   const slice = medias.slice(0, noOfLogo);
 
+  const locatetologin = async() =>{
+    navigate('/login')
+}
 
   const hording = [];
   const type = [];
@@ -35,6 +44,50 @@ const Map = () => {
     })
     setMedias(data)
   }
+  const addonCart = async (e) => {
+    console.log(e);
+    const {data} =  await instance.post('cart/addOnCart', {
+        mediaid: e.code,
+        mediatype: e.category_name,
+      })
+      if(data.message == 'Login First'){
+        window.localStorage.setItem("map",`/map`)
+        window.sessionStorage.setItem("map",`/map`)
+        navigate('/login')
+      }else{
+        addRemove({type:"INCR"})
+        add(e)
+      }
+    }
+
+    const removefroCart = async (obj) => {
+      console.log(obj);
+      await instance.post('cart/deleteFromCart', {
+        code: obj.code,
+      })
+      addRemove({type:"DECR"})
+      remove(obj)
+    }
+    
+    const add = (event) => {
+      let data = [...posts];
+      data.forEach((element) => {
+        if (element.code == event.code) {
+          element.isDelete = 0;
+          setPosts(data);
+        }
+      });
+    };
+    
+    const remove = (event) => {
+      let data = [...posts];
+      data.forEach((element) => {
+        if (element.code == event.code) {
+          element.isDelete = 1;
+          setPosts(data);
+        }
+      });
+    };
 
   function multicheck(e){
     if (e.currentTarget.checked) {
@@ -48,19 +101,6 @@ const Map = () => {
           }
     }
   }
-  function multichecked(e){
-    if (e.currentTarget.checked) {
-      type.push(e.target.value)
-    } else {
-      // for (let i = 0; i < hording.length; i++) {
-        // if (e.target.value == hording[i]) {
-          var index = type.indexOf(e.target.value)
-          if (index > -1) { // only splice array when item is found
-            type.splice(index, 1); // 2nd parameter means remove one item only
-          }
-    }
-  }
-
 
   const mediasData  = async ()=>{
     const {data} = await instance.post("media/searchMedia")
@@ -76,6 +116,8 @@ const Map = () => {
 useEffect(() => {
   mediasData();
 }, []);
+
+
 
 
  let ILLUMINATION = [
@@ -113,15 +155,14 @@ const userCartItem = async() =>{
 }
 const More = () => {
   if (medias.length >= noOfLogo) {
-    setnoOfLogo(noOfLogo + 2);
+    setnoOfLogo(noOfLogo + 6);
   }
 };
 const Less = () => {
   if (noOfLogo > 2) {
-    setnoOfLogo(noOfLogo - 2);
+    setnoOfLogo(noOfLogo - 6);
   }
 };
-
 useEffect(() =>{
   holdingtype();
 },[])
@@ -145,9 +186,7 @@ useEffect(() =>{
           <div id="accordionTest">
             <div className="media-items p-2 accordion-collapse collapse show map-media-item-list" id="collapseT1" data-bs-parent="#accordionTest">
               <div className="accordion items mb-2 rounded" id="accordionExample">
-
-
-                   {!slice ? <>Loading .... Please wait</> :<>
+          {!slice ? <>Loading .... Please wait</> :<>
                    {slice.map((item,i) =>(
                      <>
                 <div className="accordion-item border rounded mb-2">
@@ -176,8 +215,9 @@ useEffect(() =>{
                           <li>Code : {item.code}</li>
                           <li>FTF : {item.ftf}</li>
                           <li>Size : {item.size} feet</li>
-                          <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
+                      
+                          <li>Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+
                           </li>
                         </ul>
                       </div>
@@ -191,15 +231,11 @@ useEffect(() =>{
                     >
                       <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong>{" "}
-                        It is shown by default, until the collapse plugin adds the
-                        appropriate classes that we use to style each element.
-                        These classes control the overall appearance, as well as
-                        the showing and hiding via CSS transitions. You can modify
-                        any of this with custom CSS or overriding our default
-                        variables. It's also worth noting that just about any HTML
-                        can go within the <code>.accordion-body</code>, though the
-                        transition does limit overflow.
+                        {item.geoloc}
+          
                       </div>
+                        {item.userid == null || item.isDelete == null || item.userid != null && item.isDelete == 1 ?
+                            <button onClick={() => addonCart(item)}>Add To Cart</button> : <> <button onClick={() => removefroCart(item)}>Remove from Cart</button></>}
                     </div>
                   </div>
                 </div>
@@ -361,11 +397,12 @@ useEffect(() =>{
                           <li>FTF : {item.ftf}</li>
                           <li>Size : {item.size} feet</li>
                           <li>
-                            Price : <a href="JavaScript:void(0)">Login to see</a>
+                          Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
                           </li>
                         </ul>
-                      </div>
-                      
+                      <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>
+                      </div> 
+                                                           
                     </div>
                    
                   </div>
@@ -395,7 +432,7 @@ useEffect(() =>{
           <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
               <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : 999999</p>
             </div>
-            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
+            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onChange={() => userCartItem()}>
               <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
           </div>
@@ -411,7 +448,7 @@ useEffect(() =>{
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-              { isLoaded && medias && medias.length > 0 ? <Markers data={medias}/> : null }
+              { isLoaded && medias && medias.length > 0 ? <Markers data={medias} add={addonCart}/> : null }
         </div>
       </div>
     </div>

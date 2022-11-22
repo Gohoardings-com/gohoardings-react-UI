@@ -60,7 +60,6 @@ const NewNAvbar = () => {
                 Map View
               </Nav.Link>
               <UserDetail/>
-             
             </Nav>
           </Navbar.Collapse>
         </div>

@@ -190,10 +190,11 @@ const promises = []
         }
 const token = Object.values(cookieData)[0];
 return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
-if(token == 0 || !token){
+if(token == 0 || !token  && !city_name || !category_name){
         promises.push(new Promise((resolve, reject) => {
-          db.query("SELECT DISTINCT code,* FROM "+table_name+" WHERE city_name='delhi' LIMIT 51",async (err,result) => {
+          db.query("SELECT * FROM "+table_name+" WHERE city_name='delhi'",async (err,result) => {
             if (err) {
+              console.log(err);
               return res.send({err: reject(err),message :"Wrong Data"})
           } else if (resolve == []){
               return res.send({resolve: "Empty",message :"Media Not Found"})
@@ -207,8 +208,9 @@ if(token == 0 || !token){
   promises.push(new Promise((resolve, reject) => {
     db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city_name+"' ORDER BY `cart`.`userid` DESC ",async (err,result) => {
       if (err) {
+        console.log(err);
         return res.send({err: reject(err),message :"Wrong Data"})
-    } else if (resolve == []){
+    } else if (resolve === []){
         return res.send({resolve: "Empty",message :"Media Not Found"})
     } else{
     resolve(result)

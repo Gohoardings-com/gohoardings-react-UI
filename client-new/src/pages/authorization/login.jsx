@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import "./login.scss";
 import { authActions } from "../../store";
+import { ToastContainer, toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux'
 import { useGoogleLogin } from 'react-google-login'
 import { MdOutlineError } from "react-icons/md";
@@ -14,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
-  const [message,setMessage] = useState([])
   const [password, setPassword] = useState("");
   const [emailValidate, setEmailValidate] = useState();
   const [passwordValidate, setPasswordValidate] = useState();
@@ -59,7 +59,7 @@ const onSuccess = async (res) => {
      }
    
    }else{
-     setMessage("Email and Password Invalid")
+     toast("Email or Password Invalid")
     
    }
 }
@@ -120,21 +120,20 @@ const {signIn} = useGoogleLogin({
          if(!locate){
            navigate("/").then(() => dispatch(authActions.login()))
           }else{
-            navigate(`${locate}`).then(() => dispatch(authActions.login()))
             window.localStorage.removeItem("login")
+            navigate(`${locate}`).then(() => dispatch(authActions.login()))
           }
-        
         }else{
-          setMessage("Email and Password Invalid")
-         
+          toast("Email or Password Invalid")
         }
       }catch(err){
-        setMessage("Email and Password Invalid");
+        toast("Email or Password Invalid");
       }
       
     }
     e.preventDefault();
   };
+
 
   //toggle between signIn & register
   const [signin, setSignIn] = useState(true);
@@ -216,10 +215,11 @@ const {signIn} = useGoogleLogin({
                       <button type="submit" className="signin">
                         <span>SIGN IN</span>
                       </button>
+                      <ToastContainer/>
                     </form>
                     <div className="row mt-4">
                       <div className="col-md-5 or_border  "></div>
-                      {!message ? <div className="col-md-2 or  text-center ">OR</div>:<div className="col-md-2">{message}</div>}
+                      <div className="col-md-2 or  text-center ">OR</div>
                       <div className="col-md-5  or_border  "></div>
                     </div>
                     <div className="col-md-12 ps-0 mt-4 text-center" onClick={signIn}>
@@ -238,7 +238,7 @@ const {signIn} = useGoogleLogin({
                   </div>
                 </div>
               ) : (
-              <Register setFocus={setFocus} onVisible={onVisible} eyeViseble={eyeViseble} toggleSignUp={toggleSignUp} setMessage={setMessage}/>
+              <Register setFocus={setFocus} onVisible={onVisible} eyeViseble={eyeViseble} toggleSignUp={toggleSignUp}  toast={toast}/>
               )}
             </div>
           </div>

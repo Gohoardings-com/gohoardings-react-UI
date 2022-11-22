@@ -8,8 +8,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const SearchMedia = () => {
-  const navigator = useNavigate();
-  const dispatch = useDispatch();
   const [category_name, setCategory] = useState("traditional-ooh-media");
   const [city, setCity] = useState([]);
   const [city_name, setgetCity] = useState("Delhi");
@@ -58,9 +56,20 @@ const SearchMedia = () => {
                     setgetCity(e.target.value);
                   }}
                 >
+                  {!city ? 
+                    <>
+                    <option value="delhi" className="text-dark">Delhi</option>
+                    <option value="delhi" className="text-dark">Delhi</option>
+                    <option value="delhi" className="text-dark">Delhi</option>
+                    <option value="delhi" className="text-dark">Delhi</option>
+                    <option value="delhi" className="text-dark">Delhi</option>
+                    <option value="delhi" className="text-dark">Delhi</option>
+                    </>
+                  :<>
                   {city.map((obj) => (
-                    <option value={obj.name} className="text-dark">{obj.name}</option>
+                    <option value={obj.name} className="text-dark">{obj.name.toUpperCase()}</option>
                   ))}
+                  </>}
                 </select>
               </div>
             </div>

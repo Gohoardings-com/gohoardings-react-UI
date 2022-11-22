@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { ToastContainer, toast } from "react-toastify";
 import { MdOutlineError } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 
-const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) => {
+const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [name, setName] = useState("");
@@ -59,11 +60,11 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp, setMessage }) =
             window.localStorage.removeItem("login")
           }
         }else{
-          setMessage("Email and Password Invalid")
+          toast("Email or Password Invalid")
          
         }
       }catch(err){
-        setMessage("Email and Password Invalid");
+        toast("Email or Password Invalid");
       }
     }
     e.preventDefault();

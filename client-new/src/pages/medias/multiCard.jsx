@@ -3,16 +3,14 @@ import './media.scss';
 import { Link } from 'react-router-dom';
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 
-const MultiCard = ({ posts, addonCart, removefroCart, priceState, locatetologin }) => {
-
-
+const MultiCard = ({ slice, addonCart, removefroCart, priceState, locatetologin }) => {
 
     return (
         <div className='row row-cols-md-2 row-cols-sm-1 row-cols-3 row-cols-lg-3 row-cols-xl-3 p-0'>
-            {!posts ? <>
+            {!slice ? <>
                 <h1>Loading.... Please Wait</h1>
             </> : <>
-                {posts.map((item, i) => (
+                {slice.map((item, i) => (
                     <div className='col-12 col-sm-12 '>
                         <div className='mainImage p-1 hello'>
                             <img src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media ' className='rounded-top ' />

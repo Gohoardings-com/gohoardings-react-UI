@@ -14,6 +14,7 @@ const SearchMedia = () => {
   const [city, setCity] = useState([]);
   const [city_name, setgetCity] = useState("delhi");
 
+
     const getCity = async () => {
       const { data } = await instance.get(
         "media/searchMedia"
@@ -36,13 +37,14 @@ const SearchMedia = () => {
             <div className="row cityCategory p-3  bg-light  rounded-pill" id="cityCategory">
               <div className="col-xl-4 col-lg-4 col-md-5 col-sm-12 city-category">
               <select
+
                   className="hide-focus border-0 py-3 ps-3 input-group rounded-pill overflow-hidden border h-100 bg-white"
                   onChange={(e) => {
                     setgetCity(e.target.value);
                   }}
                 >
-                  {!city ?<> <option value={city_name} className="text-dark">delhi</option></>: city.map((obj) => (
-                    <option value={obj.name} className="text-dark">{obj.name}</option>
+                  {!city ?<> <option value={city_name} className="text-dark"   selected>delhi</option></>: city.map((obj) => (
+                    <option value={obj.name} className="text-dark" >{obj.name}</option>
                   ))}
                 </select>
               </div>
