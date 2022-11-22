@@ -10,7 +10,7 @@ import Flotinggnavbar from './components/Navbar/flotingnavbar';
 import Footer from './pages/footer/footer';
 import Map from './pages/map/map'
 import Details from './pages/seeDetails/details'
-import Cart from './pages/Cart/cart'
+import Cart from './pages/Cart/Cart'
 import Contact from "./pages/contact-us/contact";
 import About from './pages/about-us/about'
 import FAQS from './pages/faqs/faqs'

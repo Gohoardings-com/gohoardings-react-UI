@@ -15,7 +15,7 @@ const Header = () => {
 
 </div>
 <div className= "icon-div ps-3 pe-3">
-   <TbBrandWhatsapp className='mb-1 text-white'/><a className='heading-text'  href="https://api.whatsapp.com/send?phone=+917777871717">WhatsApp</a>
+   <TbBrandWhatsapp className='mb-1 text-white'/><a className='heading-text'  href="https://web.whatsapp.com/">WhatsApp</a>
 
 </div>
     </div>
