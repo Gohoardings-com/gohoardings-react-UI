@@ -12,6 +12,7 @@ import Register from "./signup";
 import instance from "../../apis/Axios";
 
 const Login = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
@@ -51,11 +52,15 @@ const Login = () => {
       window.localStorage.setItem("user", user)
       window.sessionStorage.setItem("user", user)
       const locate = window.localStorage.getItem("login")
+      const map = window.localStorage.getItem("map")
       if (!locate) {
         navigate("/").then(() => dispatch(authActions.login()))
+      } else if (map) {
+        window.localStorage.removeItem("map")
+        navigate(`${map}`).then(() => dispatch(authActions.login()))
       } else {
-        navigate(`${locate}`).then(() => dispatch(authActions.login()))
         window.localStorage.removeItem("login")
+        navigate(`${locate}`).then(() => dispatch(authActions.login()))
       }
 
     } else {
@@ -116,11 +121,22 @@ const Login = () => {
           window.localStorage.setItem("user", user)
           window.sessionStorage.setItem("user", user)
           const locate = window.localStorage.getItem("login")
-          if (!locate) {
-            navigate("/").then(() => dispatch(authActions.login()))
-          } else {
-            window.localStorage.removeItem("login")
-            navigate(`${locate}`).then(() => dispatch(authActions.login()))
+          const map = window.localStorage.getItem("map")
+          switch (window.localStorage) {
+            case locate:
+              console.log("hello");
+              window.localStorage.removeItem("login")
+              navigate(`${locate}`).then(() => dispatch(authActions.login()))
+              break;
+            case map:
+              console.log("bye");
+              window.localStorage.removeItem("map")
+              navigate(`${map}`).then(() => dispatch(authActions.login()))
+              break;
+            default:
+              console.log("hii");
+              navigate("/").then(() => dispatch(authActions.login()))
+              break;
           }
         } else {
           toast("Email or Password Invalid")

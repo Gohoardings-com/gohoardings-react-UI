@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import moment from "moment";
+import { AccountContext } from "../../apis/ApiContext";
+import moment, { parseZone } from "moment";
 import { Button, Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { FcCalendar } from "react-icons/fc";
 import { FaRupeeSign } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { parsePath, useNavigate } from 'react-router-dom';
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import './cart.scss'
@@ -16,8 +16,8 @@ const Cart = () => {
     const [Start, setStart] = useState(new Date());
     const [End, setEnd] = useState(new Date());
     const [Nowtotal, setNewTotal] = useState([]);
+    const { addRemove, initalState } = useContext(AccountContext)
     const [lengthChange, setlengthChange] = useState(5);
-    const navigate = useNavigate();
     const [posts, setPosts] = useState([])
     const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
@@ -27,12 +27,12 @@ const Cart = () => {
     const EndDate = (e) => {
         setEnd(e);
     };
-    
+
     const removefroCart = async (obj) => {
         await instance.post("cart/deleteFromCart", {
             code: obj.code,
         });
-        // addRemove({type:"DECR"})
+        addRemove({ type: "DECR" })
         removeCart(obj)
     };
 
@@ -54,11 +54,10 @@ const Cart = () => {
             }
         })
     }
-    const handleChange = (e, i, p) => {
-        console.log(e,i,p);
-        setNewTotal({ total: e.target.value, index: i })
-
+    const handleChange = (e, i) => {
+        setNewTotal({ total: lengthChange + 1, index: i })
     };
+
     const sumbitALlProduct = async () => {
         await instance.post("cartItems/processdCart", {
             start_date: Start,
@@ -76,8 +75,7 @@ const Cart = () => {
                             <Dropdown>
                                 <Dropdown.Toggle
                                     variant="secondary"
-                                    id="dropdown-basic"
-                                >
+                                    id="dropdown-basic" >
                                     Start Date
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -128,29 +126,29 @@ const Cart = () => {
                                                             <div className="row mt-4">
                                                                 <div className="col-md-6">
                                                                     <h6 className="text-secondary">
-                                                                        {" "}
-                                                                        <FaRupeeSign />{obj.price * 30}/month
+
+                                                                        <FaRupeeSign />{parseInt(obj.price * 30)}/month
                                                                     </h6>
                                                                     <h6 className="text-secondary">
-                                                                        {" "}
-                                                                        <FaRupeeSign />{obj.price}/day
+
+                                                                        <FaRupeeSign />{parseInt(obj.price)}/day
                                                                     </h6>
                                                                     <h6 className="text-secondary">
-                                                                        {" "}
-                                                                        <FaRupeeSign /> {index == Nowtotal.index ? obj.price_2 * Nowtotal.total : obj.price_2 * 5} /original
+
+                                                                        <FaRupeeSign /> {index == Nowtotal.index ? parseInt(obj.price * Nowtotal.total) : parseInt(obj.price * 5)} /original
                                                                         price
                                                                     </h6>
                                                                     <h6 className="text-secondary">
-                                                                        {" "}
-                                                                        <FaRupeeSign />   {index == Nowtotal.index ? obj.price_2 + (obj.price / 10) * Nowtotal.total : obj.price_2 + (obj.price / 10) * 5}/price after discount
+
+                                                                        <FaRupeeSign />   {index == Nowtotal.index ? parseInt(obj.price + obj.price / 10 * Nowtotal.total) : parseInt(obj.price + (obj.price / 10) * 5)}/price after discount
                                                                     </h6>
                                                                     <h6 className="text-secondary">
-                                                                        {" "}
-                                                                        <FaRupeeSign /> {index == Nowtotal.index ? (obj.price_2 / 100) * 18 * Nowtotal.total : (obj.price_2 / 100) * 18 * 5}/gst(18%)
+
+                                                                        <FaRupeeSign /> {index == Nowtotal.index ? parseInt((obj.price / 100) * 18 * Nowtotal.total) : parseInt((obj.price / 100) * 18 * 5)}/gst(18%)
                                                                     </h6>
                                                                     <h6 className="text-secondary">
-                                                                        {" "}
-                                                                        <FaRupeeSign /> {index == Nowtotal.index ? (obj.price_2 + (obj.price / 10) * Nowtotal.total) + ((obj.price_2 / 100) * 18 * Nowtotal.total) : obj.price_2 + (obj.price / 10) * 5 + (obj.price_2 / 100) * 18 * 5} /total
+
+                                                                        <FaRupeeSign /> {index == Nowtotal.index ? parseInt((obj.price + (obj.price / 10) * Nowtotal.total) + ((obj.price / 100) * 18 * Nowtotal.total)) : parseInt(obj.price + parseInt((obj.price / 10) * 5) + parseInt((obj.price / 100) * 18 * 5))} /total
                                                                     </h6>
                                                                 </div>
                                                                 <div className="col-md-6 ">
@@ -158,8 +156,8 @@ const Cart = () => {
                                                                         <button
                                                                             type="button"
                                                                             class="btn btn-success rounded-1 me-2"
-                                                                            onClick={() => {setlengthChange(lengthChange < 5 ? 5 : lengthChange + 1 )}}
-                                                                            onChange={(e) => handleChange(e, index, obj)}
+                                                                            onClick={(e) => { setlengthChange(lengthChange < 5 ? 5 : lengthChange + 1); handleChange(e, index, obj) }}
+
                                                                         >
                                                                             <AiOutlinePlus className="quantitey" />
                                                                         </button>
@@ -173,8 +171,8 @@ const Cart = () => {
                                                                         <button
                                                                             type="button"
                                                                             class="btn btn-danger rounded-1"
-                                                                            onClick={() => setlengthChange(lengthChange < 6 ? 5 : lengthChange - 1)}
-                                                                            onChange={(e) => handleChange(e, index, obj)}
+                                                                            onClick={(e) => { setlengthChange(lengthChange < 6 ? 5 : lengthChange - 1); handleChange(e, index, obj) }}
+
                                                                         >
                                                                             <AiOutlineMinus className="quantitey" />
                                                                         </button>
@@ -201,7 +199,7 @@ const Cart = () => {
                                 <h5 class="card-title">
                                     Total media :
                                     <span type="button" class=" ms-1">
-                                        {posts.length}
+                                        {initalState}
                                     </span>
                                 </h5>
                                 <div class="card-text">
@@ -210,7 +208,7 @@ const Cart = () => {
                                     <h6 className="mt-4">
                                         {moment(Start).format("MMMM Do YYYY")}
                                     </h6>
-                                    <h5 className="mt-4"> and Media End this date{" "}</h5>
+                                    <h5 className="mt-4"> and Media End this date</h5>
 
                                     <h6 className="mt-4">
                                         {moment(End).format("MMMM Do YYYY")}
@@ -219,9 +217,9 @@ const Cart = () => {
                                     <h5 className="mt-4">
                                         GST(18%) : <FaRupeeSign /> 9900
                                     </h5>
-                                    {/* <h5 className="mt-4">
+                                    <h5 className="mt-4">
                                         Total ammount : <FaRupeeSign /> 55000
-                                    </h5> */}
+                                    </h5>
                                 </div>
                             </div>
                             <div className="d-grid">

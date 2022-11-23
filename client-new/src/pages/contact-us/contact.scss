@@ -41,17 +41,18 @@
   height: 445px;
   border-radius: 5px;
   box-shadow: $box-shadow;
+  .d-grid button {
+    text-align: center;
+    background-color: $dark-blue;
+    color: $white;
+    border: none;
+    transition: 0.7 sec;
+  }
+  .d-grid button:hover {
+    background-color: $orange;
+  }
 }
-.d-grid button {
-  text-align: center;
-  background-color: $dark-blue;
-  color: $white;
-  border: none;
-  transition: 0.7 sec;
-}
-.d-grid button:hover {
-  background-color: $orange;
-}
+
 #contact-us-img{
   height: 800px;
   margin-left: 30%;

@@ -3,7 +3,22 @@ import instance from './Axios';
 
 
 export const AccountContext = createContext(null);
-const reducer = (state, action) => {
+
+const ApiContext = ({children}) => {
+
+  var [initalState, setInitalState] = useState(0)
+
+  const item = async() =>{
+    const {data} = await instance.get(`cart/useritems`)
+    setInitalState(data[0].item);
+   return initalState;
+}
+
+  useEffect(() => {    
+      item()
+    },[])
+
+  const reducer = (state, action) => {
     if(action.type === 'INCR'){
       state = state + 1;
     }
@@ -12,31 +27,19 @@ const reducer = (state, action) => {
     }
     return state
   };
-  var initalState;
-  
-const ApiContext = ({children}) => {
-    const [person,setPerson] = useState();
-    useEffect(() => {
-        const item = async() =>{
-            const {data} = await instance.get(`cart/useritems`)
-         setPerson(data[0].item)
-      
-         initalState =  person;
-        }
-        item()
-    },[])
-    const [state, addRemove] = useReducer(reducer, initalState)
-useEffect(() =>{
-  setPerson(person)
-},[])
+
+   const [state, addRemove] = useReducer(reducer, (item()))
+
   return (
     <AccountContext.Provider value={{
-       person,
-       addRemove
+      initalState,
+       addRemove,
     }}>
         {children}
     </AccountContext.Provider>
   )
 }
+
+
 
 export default ApiContext

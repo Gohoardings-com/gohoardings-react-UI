@@ -5,10 +5,9 @@ import Media from './pages/medias/media';
 import Header from './components/header/header';
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/authorization/login";
-import Fixednavbar from './components/Navbar/fixednavbar';
-import Flotinggnavbar from './components/Navbar/flotingnavbar';
 import Footer from './pages/footer/footer';
-import Map from './pages/map/map'
+import Map from './pages/map/map';
+import Fixednavbar from "./components/Navbar/fixednavbar";
 import Details from './pages/seeDetails/details'
 import Cart from './pages/Cart/Cart'
 import Contact from "./pages/contact-us/contact";
@@ -21,7 +20,7 @@ import Testimonial from './pages/testimonial/testimonial'
 
 function App() {
   const [avlable,setAvlable] = useState(false)
-const [fix,setFix]= useState(false)
+const [fix,setFix]= useState(true)
   const getUser = async() => {
    {localStorage.getItem("user") && setAvlable(true)}
   }
@@ -32,10 +31,10 @@ const [fix,setFix]= useState(false)
     <>
       <BrowserRouter>
   <Header/>
-  {/* <Fixednavbar/> */}
+{/* {fix ? <Fixednavbar/>:<></> } */}
         <Routes>
          <Route index path="/" element={<Home/>}/>
-           <Route exact path="/login" element={avlable ? <Home/>:<Login/>}></Route>
+           <Route exact path="/login" element={avlable ? <Home setFix={setFix}/>:<Login/>}></Route>
           <Route exact path="/media/:category_name/:city_name" element={ <Media />}/>   
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:code/:category_name" element={<Details/>}/>

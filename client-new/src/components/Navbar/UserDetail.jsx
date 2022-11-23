@@ -1,32 +1,30 @@
 import React,{useEffect, useState, useReducer} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
-import { useNavigate } from 'react-router-dom';
+import {BiUserPlus} from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import Nav from "react-bootstrap/Nav";
 import instance from "../../apis/Axios";
 import { AccountContext } from '../../apis/ApiContext';
-import { MdOutlineShoppingCart } from 'react-icons/md'
+import { AiOutlineShoppingCart} from 'react-icons/ai'
 import { useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
-const UserDetail = () => {
+const UserDetail = ({posts, setPosts}) => {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const {person} = useContext(AccountContext)
+    const {initalState} = useContext(AccountContext)
     const { isLoggedIn } = useSelector((state) => state.LoginStatus);
-    const [posts, setPosts] = useState()
 
     const handelLogout = async () => {
       const data = await instance.post("registration/logout", null, {
         withCredentials: true,
       });
       if (data.status == 200) {
-        localStorage.clear();
-        sessionStorage.clear()
+        window.localStorage.clear();
+        window.sessionStorage.clear()
         isLoggedIn = true;
         return data
       }
@@ -35,52 +33,60 @@ const UserDetail = () => {
 
     const logOut = async () => {
       handelLogout().then(() => dispatch(authActions.logout()))
+      // <AiOutlineShoppingCart className='cart-logo ms-4 mt-2 ' />  
     }
-
+    
     const getUser = async () => {
       const { data } = await instance.get("registration/user", {
         withCredentials: true
       })
       setPosts(...data)
     }
+    
     useEffect(() => {
       getUser().then(() => dispatch(authActions.login()))
+     
       setPosts(posts)
-    }, [])
+    }, [posts])
     
   return (
-   <>
-    {posts ? <>
-                <a href='/cart' className='text-decoration-none text-black mt-sm-1'>
-                <MdOutlineShoppingCart className='cart ms-sm-3 navLink'/> {person}
-                </a>
+    <>
+   
+    {posts ? <div className='p-0 m-0 d-flex userDetail'>
+                
                 <Dropdown>
-      <Dropdown.Toggle variant="transparent border-0" id="dropdown-basic" className="navLink ps-3">
-      {posts.firstname.toUpperCase()}
+      <Dropdown.Toggle variant="transparent" className=" btn-info ms-3 mt-1">
+      <h4 className='p-0 m-0 text-light'>{posts.firstname.toUpperCase().substring(0,1)}</h4>
       </Dropdown.Toggle>
-
+    
       <Dropdown.Menu >
         <Dropdown.Item href="/">Profile</Dropdown.Item>
-        <Dropdown.Item href="/" onClick={logOut}>
+        <Dropdown.Item href="/"   onClick={logOut}>
+
         <GoogleLogout
-          className='border-0 bg-transparent'
-          href="/"
-          clientId={clientId}
-          buttonText={"Logout"}
-          onLogoutSuccess={logOut}
-          icon={false}
+                  className='border-0 bg-transparent'
+                  href="/"
+  clientId={clientId}
+  buttonText={"Logout"}
+  onLogoutSuccess={logOut}
+  icon={false}
  /> 
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-              </> : <>
+    <a href='/cart'> <AiOutlineShoppingCart className='cart-logo ms-4 mt-2'/>: {initalState}  </a>
+   
+              </div> : <>
                 <Nav.Link
-                  className="text-dark normal"
+                  className="text-dark ms-2 pt-1 p-0 "
                   href="/login"
                 >
-                  Sign In
+                <BiUserPlus className='login-icon  pt-0 mb-1 ms-1'/>
+       
                 </Nav.Link>
+
               </>}
+             
    </>
   )
 }
