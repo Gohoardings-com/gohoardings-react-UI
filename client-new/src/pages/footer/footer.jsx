@@ -55,10 +55,10 @@ console.log(data);
 return (
     <>
 <div className="footer pb-3 w-100 p-0 bg-dark px-5 py-5">
-<div className="container-fluid">
+<div className="container-fluid ms-4">
             <div className="row w-100">
               <div className="col py-3">
-              <img src="./images/logo.png" alt="" className="brand " />
+              <img src="../../images/logo.png" alt="" className="brand " />
                 <h5 className=" text-muted pt-5">
 
                 India's Largest Outdoor Advertising Company
@@ -67,14 +67,14 @@ return (
                 It's advertising network spread across 130 cities with more than 1.2 lakh OOH and DOOH sites offering hassle-free branding experiences at an unmatched price.
                 </h6>
               </div>
-              <div className="col  py-3 ">
+              <div className="col  py-3 ms-2">
                 <div className="quick-links text-light">
-                  <h4 className="fw-bold  text-nowrap text-muted ps-5">Quick Links</h4>
-                  <ul className="position-relative text-muted pt-3">
-                      <li href="/register" className="text-nowrap"> <CgCheck/>Singup As media Owner</li>
-                      <li href="/login" className="text-nowrap"> <CgCheck/>Singin As Media Owner</li>
-                      <li href="/register" className="text-nowrap"> <CgCheck/>Register As Advertiser</li>
-                      <li href="/login" className="text-nowrap"> <CgCheck/>Login As Advertiser</li>
+                  <h4 className="fw-bold  text-nowrap text-muted ms-5">Quick Links</h4>
+                  <ul className="position-relative text-muted pt-3 ms-3">
+                      <li href="/register" className="text-nowrap"> <CgCheck/> Singup As media Owner</li>
+                      <li href="/login" className="text-nowrap"> <CgCheck/> Singin As Media Owner</li>
+                      <li href="/register" className="text-nowrap"> <CgCheck/> Register As Advertiser</li>
+                      <li href="/login" className="text-nowrap"> <CgCheck/> Login As Advertiser</li>
                     <span className="pos-absolute ">
                         <li className="text-nowrap" href="https://www.odoads.com/"  target="_blank">  <CgCheck/> Odoads</li>
                         <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Blog</li>
@@ -89,7 +89,7 @@ return (
               <div className="col  py-3">
                 <div className="popular-media text-light">
                   <h4 className="fw-bold text-nowrap text-muted ps-5">Popular media</h4>
-                  <ul className="   pt-3 text-muted">
+                  <ul className="   pt-3 text-muted ms-3">
                     <li>
                       <Link
                   to={`/media/traditional-ooh-media/delhi`}
@@ -133,7 +133,7 @@ return (
               </div>
               <div className="col  py-3">
               <h4 className="fw-bold text-nowrap text-muted ps-5">Trending Cities</h4>
-              <ul className="position-relative pt-3 text-muted">
+              <ul className="position-relative pt-3 text-muted ms-3">
                     <li>
                       <Link
                          onClick={topFunction}
@@ -179,20 +179,20 @@ return (
         </div>
         <div className="row  w-100 ">
             <div className="col-12 col-sm-3 text-light py-3">
-            <h4 className="fw-bold  text-nowrap ms-2 text-muted">Payment Option</h4>
-            <img className="w-50 h-auto  pt-3" src="https://cdn.shopify.com/s/files/1/0075/1009/7979/files/credit-card-icons-footer-2_6c2944f9-234e-49f3-b545-deca18efbfb9.png"  alt="payment"/>
+            <h4 className="fw-bold  text-nowrap  text-muted">Payment Option</h4>
+            <img className="w-100 h-auto bg-light  mt-3" src="https://cdn.shopify.com/s/files/1/0075/1009/7979/files/credit-card-icons-footer-2_6c2944f9-234e-49f3-b545-deca18efbfb9.png"  alt="payment"/>
             </div>
-             <div class="col-12 col-sm-4 py-3">
+             <div class="col-12 col-sm-4 py-3 ms-5 ps-2 ">
                 <h4 className=" fw-bold  text-nowrap text-muted  ">Address</h4>
               <h6 className="text-muted  pt-3">E-82, 3rd Floor, Sector 6, Noida - 201301 Landmark : Near Paytm Office</h6>
               <span className="strong   text-light">Phone: </span><span className="highlighted text-light">+91 77778 71717</span>
               </div>
-              <div className="col-12 col-sm-4 py-3">
+              <div className="col-12 col-sm-4 py-3 ms-5 ">
                   <h4 className="fw-bold text-muted  text-wrap">Best deals in your inbox</h4>
-                  <h6 className=" p-2 text-muted">Join our newsletter for the most recent information.</h6>        
-                   <form onSubmit={handelSubmit}  className="d-flex flex-sm-row flex-column flex-lg-row flex-md-column p-2">
-                      <input className="text-dark bg-light rounded-3" onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter you email address" formcontrolname="email"/>
-                     <input className="text-light btn bg-black ms-lg-2 mt-2 rounded-3" type="submit" value="Contact" />
+                  <h6 className=" p-2 ps-0 text-muted">Join our newsletter for the most recent information.</h6>        
+                   <form onSubmit={handelSubmit}  className="d-flex flex-sm-row flex-column flex-lg-row flex-md-column p-2 ps-1">
+                      <input className="text-dark border-0  rounded-3 cnt-input-box" onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter you email address" formcontrolname="email"/>
+                     <input className="text-light btn bg-black ms-lg-2 border-0 rounded-3" type="submit" value="Contact" />
                     </form>
                   
        
@@ -200,17 +200,17 @@ return (
         </div>
       
         <div className="row  w-100">
-                <div className="col-sm-8  py-3">
+                <div className="col-sm-7  py-3">
                   <h4 className="fw-bold text-nowrap text-muted">Contact with Us</h4>
                   <ul className="d-flex list-inline ">
-                  <Nav.Link  href="https://www.facebook.com/gohoardings/"  className="px-1" target="_blank"><img src="./images/Facebook.png" alt="facebook"/></Nav.Link>
-                    <Nav.Link className="px-1" href="https://www.instagram.com/gohoardings/" target="_blank"><img src="./images/Instagram.png"  alt="instagram"/></Nav.Link>
-                    <Nav.Link className="px-1" href="https://www.linkedin.com/company/gohoardings/" target="_blank"><img src="./images/Linkedin.png"  alt="linkedin"/></Nav.Link>
-                    <Nav.Link className="px-1" href="https://twitter.com/gohoardings" target="_blank"><img src="./images/Twitter.png"  alt="twitter"/></Nav.Link>
+                  <Nav.Link  href="https://www.facebook.com/gohoardings/"  className="px-1" target="_blank"><img src="../../images/Facebook.png" alt="facebook"/></Nav.Link>
+                    <Nav.Link className="px-1" href="https://www.instagram.com/gohoardings/" target="_blank"><img src="../../images/Instagram.png"  alt="instagram"/></Nav.Link>
+                    <Nav.Link className="px-1" href="https://www.linkedin.com/company/gohoardings/" target="_blank"><img src="../../images/Linkedin.png"  alt="linkedin"/></Nav.Link>
+                    <Nav.Link className="px-1" href="https://twitter.com/gohoardings" target="_blank"><img src="../../images/Twitter.png"  alt="twitter"/></Nav.Link>
                   </ul>
                   </div>
                 <div className="col-sm-4  py-3 text-sm-end text-start text-bottom">
-                  <h6 className="text-white fw-bolder">
+                  <h6 className="text-white fw-bolder mt-5 me-2">
                     copyrights &#169; 2022 Gohaordings.com
                   </h6>
                 </div> 

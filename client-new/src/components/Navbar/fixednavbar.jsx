@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import instance from '../../apis/Axios';
 import UserDetail from './UserDetail';
 import Drop_Down_Image from '../DropDrown/Drop_Down_Image';
-import { MdLocationOn, MdOutlineSearch, MdOutlineMail } from "react-icons/md";
+import { MdLocationOn, MdOutlineSearch } from "react-icons/md";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
@@ -41,10 +41,9 @@ setValue(searchTerm);
 };
 
 const handleSelect = (e) => {
-
 setUserType(e);
 };
- 
+
   return (
    <>
      <Navbar expand="lg  colapse-search-bar navbar-main-floating pt-2 pb-2 m-0  ">

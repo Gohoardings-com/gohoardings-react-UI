@@ -17,7 +17,6 @@ const Cart = () => {
     const [End, setEnd] = useState(new Date());
     const [Nowtotal, setNewTotal] = useState([]);
     const { addRemove, initalState } = useContext(AccountContext)
-    const [lengthChange, setlengthChange] = useState(5);
     const [posts, setPosts] = useState([])
     const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
@@ -54,8 +53,9 @@ const Cart = () => {
             }
         })
     }
-    const handleChange = (e, i) => {
-        setNewTotal({ total: lengthChange + 1, index: i })
+    const handleChange = (e, i, p) => {
+        setNewTotal({total : e.target.value, index: i})
+        
     };
 
     const sumbitALlProduct = async () => {
@@ -153,29 +153,13 @@ const Cart = () => {
                                                                 </div>
                                                                 <div className="col-md-6 ">
                                                                     <div className="button-section">
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-success rounded-1 me-2"
-                                                                            onClick={(e) => { setlengthChange(lengthChange < 5 ? 5 : lengthChange + 1); handleChange(e, index, obj) }}
-
-                                                                        >
-                                                                            <AiOutlinePlus className="quantitey" />
-                                                                        </button>
-                                                                        <span
-                                                                            type="button"
-                                                                            class="btn btn-outline-secondary rounded-1 me-2"
-                                                                            onChange={(e) => handleChange(e, index, obj)}
-                                                                        >
-                                                                            {lengthChange}
-                                                                        </span>
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-danger rounded-1"
-                                                                            onClick={(e) => { setlengthChange(lengthChange < 6 ? 5 : lengthChange - 1); handleChange(e, index, obj) }}
-
-                                                                        >
-                                                                            <AiOutlineMinus className="quantitey" />
-                                                                        </button>
+                                                                    <input
+                                                type="number"
+                                                min="5"
+                                                defaultValue={5}
+                                                
+                                                onChange={(e) => handleChange(e, index, obj)}/>
+                                                                       
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -215,7 +199,7 @@ const Cart = () => {
                                     </h6>
                                     <h5 className=" mt-4" >{totalDays} Total Days</h5>
                                     <h5 className="mt-4">
-                                        GST(18%) : <FaRupeeSign /> 9900
+                                        GST(18%) : <FaRupeeSign /> 675656
                                     </h5>
                                     <h5 className="mt-4">
                                         Total ammount : <FaRupeeSign /> 55000

@@ -20,7 +20,6 @@ const LoginRoute = require('./routes/loginWeb');
 const addOnCart = require('./routes/CartItemRoute');
 const productList = require('./routes/productListRoute');
 const enquiryRoute = require('./routes/enquiryRoute');
-
 const filters = require('./routes/filterRoute');
 
 app.use("/api/v1/filter", filters);

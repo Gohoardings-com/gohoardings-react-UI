@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./contact.scss";
+import instance from "../../apis/Axios";
 import { ToastContainer, toast } from "react-toastify";
-import { MdLocationPin, MdOutlineError,MdEmail } from "react-icons/md";
-import {ImMobile} from "react-icons/im";
+import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
+import { ImMobile } from "react-icons/im";
 
 const Contact = () => {
   function setFocus(on) {
@@ -32,7 +33,7 @@ const Contact = () => {
   const [numbervalidate, setNumbervalidate] = useState();
   const [emailValidate, setEmailValidate] = useState();
   const [messageValidate, setMessageValidate] = useState();
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
     let count = 0;
     if (name === "") {
@@ -54,8 +55,7 @@ const Contact = () => {
       count = +1;
       setMessageValidate(<MdOutlineError className="text-danger" />);
     } else if (count === 0) {
-      const data = { name, email, number, message };
-      console.log(data);
+      await instance.post("enquiry/message", { name, email, number, message });
       setName("");
       setNumber("");
       setEmail("");
@@ -74,7 +74,7 @@ const Contact = () => {
   };
 
   return (
-    <>  
+    <>
       <section id="mainsection-contact">
         <div className="container">
           <div className="row pb-0 mt-3 rounded-5 main_content">
@@ -94,10 +94,10 @@ const Contact = () => {
                     GOHOARDINGS Solutions LLP E-82,
                     <br />
                     3rd Floor,Sector 06 Noida,20130(U.P.)
-                    <br/>
-                   <ImMobile className="m-0 p-0"/>: +91 77778 71717
-                    <br/>
-                   <MdEmail className="m-0 p-0"/>: info@gohoardings.com
+                    <br />
+                    <ImMobile className="m-0 p-0" />: +91 77778 71717
+                    <br />
+                    <MdEmail className="m-0 p-0" />: info@gohoardings.com
                   </h5>
                   <a href="#google_map">
                     <div className=" tooltips">

@@ -55,8 +55,8 @@ const UserDetail = ({posts, setPosts}) => {
     {posts ? <div className='p-0 m-0 d-flex userDetail'>
                 
                 <Dropdown>
-      <Dropdown.Toggle variant="transparent" className=" btn-info ms-3 mt-1">
-      <h4 className='p-0 m-0 text-light'>{posts.firstname.toUpperCase().substring(0,1)}</h4>
+      <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 mt-1">
+      <h5 className='p-0 m-0 text-secondary'>{posts.firstname.toUpperCase().substring(0,1)}</h5>
       </Dropdown.Toggle>
     
       <Dropdown.Menu >
@@ -74,7 +74,7 @@ const UserDetail = ({posts, setPosts}) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-    <a href='/cart'> <AiOutlineShoppingCart className='cart-logo ms-4 mt-2'/>: {initalState}  </a>
+    <a href='/cart'> <AiOutlineShoppingCart className='cart-logo ms-4 mt-2'/> </a>
    
               </div> : <>
                 <Nav.Link

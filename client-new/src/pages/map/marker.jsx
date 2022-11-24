@@ -14,10 +14,8 @@ const center = {
 
 
 const Markers = (markers) => {
-  const [posts, setPosts] = useState([])
   const navigate = useNavigate()
   const {addRemove} = useContext(AccountContext)
-  console.log(markers);
   markers.data.forEach(e => {
       e['position'] = {lat : e.latitude, lng : e.longitude}
     })
@@ -25,7 +23,7 @@ const Markers = (markers) => {
 
   const [activeMarker, setActiveMarker] = useState(null);
 
-  const addonCart = async (code,category_name,city_name) => {
+  const addonCart = async (code,category_name) => {
     const {data} =  await instance.post('cart/addOnCart', {
         mediaid: code,
         mediatype: category_name,
@@ -41,7 +39,6 @@ const Markers = (markers) => {
     }
 
     const removefroCart = async (obj) => {
-      console.log(obj);
       await instance.post('cart/deleteFromCart', {
         code: obj.code,
       })
@@ -49,27 +46,28 @@ const Markers = (markers) => {
       remove(obj)
     }
     
-    
-    /***************************************************************** */
-    
+
     const add = (code) => {
-      let data = [...markers];
-      data.forEach((element) => {
-        
-        if (element.code == code) {
-          element.isDelete = 0;
-          setPosts(data);
-        }
+      let data = [markers.data];
+      data.map((element) => {
+        element.map((obj) =>{
+          if (obj.code == code) {
+            obj.isDelete = 0;
+            markers(data);
+          }
+        })
       });
     };
     
     const remove = (event) => {
-      let data = [...posts];
-      data.forEach((element) => {
-        if (element.code == event.code) {
-          element.isDelete = 1;
-          setPosts(data);
-        }
+      let data = [markers.data];
+      data.map((element) => {
+        element.map((obj) =>{
+          if (obj.code == event) {
+            obj.isDelete = 1;
+            markers(data);
+          }
+        })
       });
     };
 
@@ -114,9 +112,7 @@ const Markers = (markers) => {
                   <p><span>FTF : </span>{ftf}</p>
                   <p><span>Price : Login to see price</span></p>
                   {userid == null || isDelete == null || userid != null && isDelete == 1 ?
-                    <MdOutlineShoppingCart onClick={() => addonCart(code,category_name,city_name)} className="sitemark"/> : <> <MdOutlineRemoveShoppingCart  className="sitemark" onClick={() => removefroCart(code)} /></>}
-
-               
+                    <MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/> : <MdOutlineRemoveShoppingCart  className="sitemark" onClick={() => removefroCart(code)} />}
                 </div>
               </div>
             </InfoWindow>

@@ -13,7 +13,6 @@ exports.message = (req,res, next) => {
             return res.send({result: result,message :"Login Successfully"})
           }
     })
-    
  : res.send({message:"User data Null"})
 } catch (err){
   res.status(404).json({
