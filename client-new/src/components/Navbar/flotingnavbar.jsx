@@ -2,20 +2,6 @@ import React, { useEffect, useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './fixednavbar.scss'
 import Flotinggnavbar from './fixednavbar';
-function useWindowSize() {
-  const [size, setSize] = useState([window.innerWidth]);
-  useEffect(() => {
-    const handleResize = () => {
-      setSize([window.innerWidth]);
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  return size;
-}
 
 function useWindowScroll() {
   const [scrollPosition, setScrollPosition] = useState([window.pageYOffset]);
@@ -48,7 +34,7 @@ const Fixednavbar = () => {
 
   return (
     <>
-      <div style={scrollcss ? { display: "none" } : { display: "inline-block" }} className="new-search w-auto">   
+      <div style={scrollcss ? { display: "none" } : { display: "inline-block" }} className="new-search">   
    <Flotinggnavbar/>
       </div>
 

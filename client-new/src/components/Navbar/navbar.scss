@@ -1,22 +1,42 @@
-.navbar{
-    background-color:rgb(105,227,255);
+
+.fixd-nabar{
+    background-color: #68E2FE;
 }
 .mapLink{
     background-color: #2b3f43;
     width: 118px;
 }
+.login-icon{
+    font-size: 37px;
+    color: rgb(241, 241, 241);
+}
 
+.font-map-btn{
+    opacity: 85%;
+    border: 2px groove;
+   
+}
+.font-map-logo{
+    font-size: 22px;
+    color: red;
+}
+#dropdown-basic-user{
+    display: none ;
+}
+.userDetail{
+    .dropdown-toggle::after {
+        display: none;
+        
+    }
+}
+.cart-logo{
+    font-size: 35px;
+    color: white;
+}
 .navLink{
     color: #2b3f43;
     font-weight: 700;
     font-size: 16px;
     border-radius: 40px;
     cursor: pointer;
-}
-@media screen and (max-width:320px){
-    .brand {
-        width: 130px;
-        height: 30px;
-    }
-    
 }

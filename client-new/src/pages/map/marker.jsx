@@ -1,4 +1,5 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
+import { AccountContext } from "../../apis/ApiContext";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 import "./marker.scss"
@@ -15,6 +16,7 @@ const center = {
 const Markers = (markers) => {
   const [posts, setPosts] = useState([])
   const navigate = useNavigate()
+  const {addRemove} = useContext(AccountContext)
   console.log(markers);
   markers.data.forEach(e => {
       e['position'] = {lat : e.latitude, lng : e.longitude}
@@ -33,7 +35,7 @@ const Markers = (markers) => {
         window.sessionStorage.setItem("map",`/map`)
         navigate('/login')
       }else{
-        // addRemove({type:"INCR"})
+        addRemove({type:"INCR"})
         add(code)
       }
     }
@@ -43,7 +45,7 @@ const Markers = (markers) => {
       await instance.post('cart/deleteFromCart', {
         code: obj.code,
       })
-      // addRemove({type:"DECR"})
+      addRemove({type:"DECR"})
       remove(obj)
     }
     

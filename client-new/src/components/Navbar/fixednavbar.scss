@@ -1,28 +1,84 @@
-// @import '../../assets/scss/_variables.scss';
-// @import "~bootstrap/scss/bootstrap";
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+@import '../../assets/scss/_variables.scss';
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
 
 
+.navbar-main-floating{
+ background-color: #20344D;
+width:100vw !important;
+ .dropdown-toggle::after {
+   padding-left: 0%;
+   font-size: 26px;
+   color: #ffffff;
+ }
+ *:focus {
+  outline: none;
+}
+
+#search-button-flotnav{
+  width: 5vw;
+}
+ #search-location-box{
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: $white;
+  color: $grey;
+  height: 40px !important;
+  width: 20vw !important;
+}
+#select-media-box{
+ 
+  width: 25vw !important;
+  color: $grey;
+  background: $white !important;
+  text-align: left;
+  cursor: pointer;
+  font-size: 20px;
+  height: 40px !important;
+  border-radius: 5px;
+}
+
+.float-map-btn{
+  // opacity: 85%;
+  color: #FFFFFF;
+  font-weight: 500;
+  background-color: transparent;
+   border:  2px groove #fff312e1 ;
+  .float-map-logo{
+    font-size: 23px;
+  }
+}
+
+ 
+}
 .new-search {
-  position: fixed;
-  background-color:#20344D ;
-  z-index: 1;
-  top: 24px;
-  width: 100%;
+ position: fixed;
+ background-color:#20344D ;
+ z-index: 1;
+ top: 24px;
+//  width: 100%;
 }
-.fixed{
-  z-index: 1;
+.search-button{
+ background-color: #68E2FE !important;
+ transition: 0.5s;
+}
+.search-button:hover{
+ background-color: #9FD5E1;
 }
 
-// screen 992px and small
+
+.search-logo{
+font-size: 30px;
+
+}
 
 @media only screen and (max-width: 992px) {
-  
-  .new-search-fields {
-    position: absolute !important;
-    top: 64px !important;
-    background-color: #20344D ;
-    padding: 10px 100px 10px 100px;
-    text-align: center;
-  }
+ 
+ .new-search-fields {
+   position: absolute !important;
+   top: 64px !important;
+   background-color: #20344D ;
+   padding: 10px 100px 10px 100px;
+   text-align: center;
+ }
 }

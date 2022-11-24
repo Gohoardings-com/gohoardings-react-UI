@@ -53,12 +53,8 @@ const Register = ({setFocus,onVisible, eyeViseble, toggleSignUp }) => {
          window.localStorage.setItem("user",user)
          window.sessionStorage.setItem("user",user)
         const locate =  window.localStorage.getItem("login")
-         if(!locate){
-           navigate("/").then(() => dispatch(authActions.login()))
-          }else{
-            navigate(`${locate}`).then(() => dispatch(authActions.login()))
-            window.localStorage.removeItem("login")
-          }
+ 
+        const map = window.localStorage.getItem("map")
         }else{
           toast("Email or Password Invalid")
          

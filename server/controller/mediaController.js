@@ -4,7 +4,7 @@ const catchError = require('../middelware/catchError')
 
 exports.City = catchError(async(req,res,next) => {
       db.changeUser({ database: "gohoardi_goh" });
-      db.query("SELECT DISTINCT * FROM `goh_cities` ORDER BY `name` ASC LIMIT 100", (err, result) => {
+      db.query("SELECT DISTINCT * FROM `goh_cities`", (err, result) => {
         if (err) {
           return res.json({message:"No Data Found On this city"})
         } else {
@@ -12,7 +12,6 @@ exports.City = catchError(async(req,res,next) => {
         }
       });
 })
-
 
 exports.Invertor = catchError(async(req,res,next) => {
   db.changeUser({ database: "gohoardi_goh" });
@@ -160,7 +159,6 @@ const cookieData = req.cookies
 if (!cookieData) {
   return res.status(400).json({message:"No Cookie Found"})
 }
-
 const promises = []
   db.changeUser({ database: "gohoardi_goh" });
   switch (category_name) {
@@ -190,7 +188,7 @@ const promises = []
         }
 const token = Object.values(cookieData)[0];
 return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
-if(err  && !city_name || !category_name){
+if(token == 0 || !token  && !city_name || !category_name){
         promises.push(new Promise((resolve, reject) => {
           db.query("SELECT * FROM "+table_name+" WHERE city_name='delhi'",async (err,result) => {
             if (err) {

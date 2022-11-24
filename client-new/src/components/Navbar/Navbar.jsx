@@ -1,65 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from "react-bootstrap/Navbar";
 import './navbar.scss'
-import {MdLocationOn} from 'react-icons/md'
-import { useNavigate } from "react-router-dom";
+import { MdLocationOn } from 'react-icons/md'
 import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
 import UserDetail from "./UserDetail";
 
 const NewNAvbar = () => {
-  const navigate = useNavigate();
   const [show, setShow] = useState(false);
-
-  const home = async () => {
-    navigate('/')
-  }
-
+  const [posts, setPosts] = useState()
+  
+useEffect(() => {
+  setPosts(posts)
+}, [posts]);
   return (
     <>
-      <Navbar expand="lg px-md-0 pb-0">
+      <Navbar expand="lg px-md-0 pb-0 fixd-nabar">
         <div className="navbar container-fluid py-md-0 ">
-          <Dropdown
-            onMouseOver={() => setShow(true)}>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic" >
-              <Navbar.Brand >
-                <img src="./images/logo.png" className="brand ms-sm-5 ms-3" onClick={home} />
-            </Navbar.Brand>
-              </Dropdown.Toggle>
-
-          </Dropdown>
+          <Navbar.Brand >
+            <img src="./images/logo.png" className="brand ms-sm-5 ms-3" />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" ms-auto me-5">
               <Nav.Link
-                className="navLink ps-3 text-dark"
+                className="navLink ps-3 text-dark fw-bold"
                 href="https://odoads.com/"
                 target="_blank"
               >
                 Odoads
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3 text-dark"
+                className="navLink ps-3 text-dark fw-bold"
                 href="https://www.gohoardings.com/blog/"
                 target="_blank"
               >
                 Blog
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3 pe-3 text-dark"
+                className="navLink ps-3 pe-3 fw-bold text-dark"
                 href="https://gohoardings.com/contact-us"
               >
                 Contact
               </Nav.Link>
               <Nav.Link
-                className="mapLink text-white text-center  px-lg-3 text-nowrap rounded-pill bold"
+                className="mapLink font-map-btn text-white  text-nowrap rounded-pill "
                 href="/map"
               >
-                <MdLocationOn className="ps-0"/>
+                <MdLocationOn className="ps-0 p-0  pb-1 font-map-logo" />
                 Map View
               </Nav.Link>
-              <UserDetail/>
+              <UserDetail posts={posts} setPosts={setPosts}/>
             </Nav>
           </Navbar.Collapse>
         </div>
@@ -70,3 +62,4 @@ const NewNAvbar = () => {
 };
 
 export default NewNAvbar;
+

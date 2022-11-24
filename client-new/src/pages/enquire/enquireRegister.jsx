@@ -1,75 +1,170 @@
-import React,{useState} from 'react';
-import {RiUser3Fill,RiPhoneFill} from 'react-icons/ri'
-import {MdEmail} from 'react-icons/md';
-import instance from '../../apis/Axios';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
+import './enquire.scss';
+import { ImMobile } from "react-icons/im";
+
 
 const EnquireRegister = () => {
-    const [inpots, setInputs] = useState({
-        fullName: "",  phone: "",  email: "",  comment: ""
-    })
-    const [posts,setPosts] = useState([])
 
-    const handelChange = async (e) => {
-        setInputs({ ...inpots, [e.target.name]: e.target.value})
-    }
+    function setFocus(on) {
+        var element = document.activeElement;
+        var $ = window.jQuery;
+        if (on) {
+            setTimeout(function () {
+                element.parentNode.classList.add("focus");
+            });
+        } else {
+            let box = document.querySelector(".input-box");
+            box.classList.remove("focus");
+            $("input").each(function () {
+                var $input = $(this);
+                var $parent = $input.closest(".input-box");
+                if ($input.val()) $parent.addClass("focus");
+                else $parent.removeClass("focus");
+            });
+        };
+    };
 
-    const userData = async (e) => {
-        e.preventDefault()
-        const {data} = await instance.post("enquiry/message",{
-            name:inpots.fullName,
-            email:inpots.email,
-            phone:inpots.phone,
-            message:inpots.comment,
-        })
-        setPosts(data);
-    }
 
-  return (
-    <div className='col-lg-5 col-md-7 justify-content-center mb-md-2 me-md-0  ms-2 me-0 mt-1 mb-2 ms-md-0 ms-md-0  m-lg-0  '>
-<form className='text-center bg-dark rounded p-3' onSubmit={userData}>
-    <h2 className='no-wrap text-light'>Request a Call Back</h2>
-    <h6 className='text-light text-start pt-2'>*All fields are required</h6>
-           <div className='logo mt-4 mb-3 w-auto h-100'>
-           <i className='bg-light p-2  border-0 rounded-start'><RiUser3Fill /></i>
-            <input
-            className='messageUser border-0 rounded-end w-100'
-            type="text"
-            placeholder='Enter Your Full Name'
-            name='fullName'
-            value={inpots.fullName}
-            onChange={handelChange}/>
-           </div>
-           <div className='logo mt-4 mb-3 w-auto h-100 rounded-pill'>
-           <i className='bg-light p-2 border-0 rounded-start '><RiPhoneFill /></i>
-            <input
-            className='messageUser border-0 rounded-end w-100'
-            type='number'
+    const [name, setName] = useState("");
+    const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [nameValidate, setNameValidate] = useState();
+    const [numbervalidate, setNumbervalidate] = useState();
+    const [emailValidate, setEmailValidate] = useState();
+    const [messageValidate, setMessageValidate] = useState();
 
-                                placeholder='Enter Your Full Name'
-                                name='phone'
-                                value={inpots.phone}
-                                onChange={handelChange}/>
-           </div>
-           <div className='logo mt-4 mb-3 w-auto h-100'>
-           <i className='bg-light p-2 border-0 rounded-start'><MdEmail/></i>
-            <input
-            className='messageUser border-0  rounded-end w-100'
-            type='email'
-            placeholder='Enter Your Full Name'
-            name='email'
-            value={inpots.email}
-            onChange={handelChange}/>
-           </div>
-           <div className='logo mt-4 mb-3 w-auto h-100'>
-           <textarea rows="4" name="comment" cols="30" form="usrform" className='messageUser border-0 w-100 h-auto rounded' defaultValue="Enter the Text" value={inpots.comment}
-            onChange={handelChange} >
-          </textarea>
-           </div>
-{posts && <h1>{posts.message}</h1>}
-           <input className='submit-button border-0 rounded w-100' type="submit" value="SEND REQUEST"/>
-</form>
-</div>
-  )
+    const onSubmit = (e) => {
+        const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
+        let count = 0;
+        if (name === "") {
+            count = +1;
+            notify();
+            setNameValidate(<MdOutlineError className="text-danger" />);
+        } else if (number.length <= 0) {
+            count = +1;
+            setNumbervalidate(<MdOutlineError className="text-danger" />);
+        } else if (number.length !== 10) {
+            count = +1;
+            setNumbervalidate("Type your 10 digit number corectly");
+        } else if (email === "") {
+            count = +1;
+            setEmailValidate(<MdOutlineError className="text-danger" />);
+        } else if (!emailformate.test(email)) {
+            count = +1;
+            setEmailValidate("Type your email corectly");
+        } else if (message === "") {
+            count = +1;
+            setMessageValidate(<MdOutlineError className="text-danger" />);
+        } else if (count === 0) {
+            const data = { name, email, number, message };
+            console.log(data);
+            setName("");
+            setNumber("");
+            setEmail("");
+            setMessage("");
+            setNameValidate("");
+            setNumbervalidate("");
+            setEmailValidate("");
+            setMessageValidate("");
+            notify();
+        }
+        e.preventDefault();
+    };
+
+    const notify = () => {
+        toast("Thanks, we will contact you soon!");
+    };
+
+
+
+
+    return (
+        <div className='col-md-5  home-contact-form '>
+            <form className=' bg-dark rounded p-3' onSubmit={onSubmit}>
+                <h2 className='no-wrap text-light text-center'>Request a Call Back</h2>
+                <div className="mb-4 mt-4 ">
+                    <div className="input-box">
+                        <label className="input-label">Enter your full name</label>
+                        <input
+                            type="text"
+                            className="input-1 "
+                            onFocus={() => setFocus(true)}
+                            value={name}
+                            onChange={(e) => {
+                                setName(e.target.value);
+                            }}
+                        />
+                        <p className="ms-3 p-0 text ">{nameValidate}</p>
+                    </div>
+                </div>
+
+                <div className="mb-4 mt-2 ">
+                    <div className="input-box">
+                        <label className="input-label">
+                            Enter your contact number
+                        </label>
+                        <input
+                            type="number"
+                            className="input-1 "
+                            onFocus={() => setFocus(true)}
+                            value={number}
+                            onChange={(e) => {
+                                setNumber(e.target.value);
+                            }}
+                        />
+                        <p className="ms-2 p-0 text ">{numbervalidate}</p>
+                    </div>
+                </div>
+                <div className="mb-4 mt-2">
+                    <div className="input-box">
+                        <label className="input-label">
+                            Enter your email@gmail.com
+                        </label>
+                        <input
+                            type="text"
+                            className="input-1"
+                            onFocus={() => setFocus(true)}
+                            value={email}
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                            }}
+                        />
+                        <p className="ms-2 p-0 text ">{emailValidate}</p>
+                    </div>
+                </div>
+                <div className="mb-2 mt-2">
+                    <div className="input-box">
+                        <label className="input-label">
+                            Enter your message for our team
+                        </label>
+                        <input
+                            type="text"
+                            className="input-1"
+                            onFocus={() => setFocus(true)}
+                            // onBlur={() => setFocus(false)}
+                            value={message}
+                            onChange={(e) => {
+                                setMessage(e.target.value);
+                            }}
+                        />
+                        <p className="ms-2 p-0 text">{messageValidate}</p>
+                    </div>
+                </div>
+
+                <div className="d-grid">
+                    <button type="submit" className="rounded btn btn-danger  btn-lg mt-3">
+                        <h5 className=" mt-2">SEND MESSAGE</h5>
+                    </button>
+                    <ToastContainer />
+
+                </div>
+
+            </form>
+        </div>
+    )
 }
 
 export default EnquireRegister
