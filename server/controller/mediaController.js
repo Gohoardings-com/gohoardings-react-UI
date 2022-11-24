@@ -159,7 +159,6 @@ const cookieData = req.cookies
 if (!cookieData) {
   return res.status(400).json({message:"No Cookie Found"})
 }
-
 const promises = []
   db.changeUser({ database: "gohoardi_goh" });
   switch (category_name) {
@@ -189,7 +188,7 @@ const promises = []
         }
 const token = Object.values(cookieData)[0];
 return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
-if(token == 0 || !token  && !city_name || !category_name){
+if(err  || !city_name && !category_name){
         promises.push(new Promise((resolve, reject) => {
           db.query("SELECT * FROM "+table_name+" WHERE city_name='delhi'",async (err,result) => {
             if (err) {

@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/home";
+import Home from "./pages/home/home";
 import Media from './pages/medias/media';
 import Header from './components/header/header';
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/authorization/login";
 import Footer from './pages/footer/footer';
 import Map from './pages/map/map';
-import Fixednavbar from "./components/Navbar/fixednavbar";
 import Details from './pages/seeDetails/details'
 import Cart from './pages/Cart/Cart'
 import Contact from "./pages/contact-us/contact";

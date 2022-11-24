@@ -47,8 +47,6 @@ const SearchMedia = () => {
             Search Media. Check Availability. Book Online.
           </h4>
         </div>
-<<<<<<< HEAD
-
         <div className="container-fluid  mt-5 pt-3  px-5 m-0 ">
           <div className="row  mx-auto mb-5  mt-5 p-3 search-container">
             <div className="col-md-5  ">
@@ -134,8 +132,7 @@ const SearchMedia = () => {
             </div>
           </div>
         </div>
-=======
->>>>>>> 54bb0701b3a0a53411e5972eb3dc4bbac3b94fca
+
       </div>
     </>
   );

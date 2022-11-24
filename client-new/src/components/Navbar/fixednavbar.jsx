@@ -71,7 +71,7 @@ setUserType(e);
                     
                   />
  
-                <div className=" dropdown-menu border-0  ps-3  dropdown-menu-location">
+                <div className=" dropdown-menu border-0 show ps-3  dropdown-menu-location">
                 {city
                     .filter((item) => {
                       const searchTerm = value.toLowerCase();

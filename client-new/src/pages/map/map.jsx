@@ -432,7 +432,7 @@ useEffect(() =>{
           <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
               <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : 999999</p>
             </div>
-            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onChange={() => userCartItem()}>
+            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
               <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
           </div>
