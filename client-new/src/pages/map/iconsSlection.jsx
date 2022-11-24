@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import Slider from "./slider.jsx";
 import "./icons.scss"

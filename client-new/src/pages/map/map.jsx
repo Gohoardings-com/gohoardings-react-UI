@@ -93,11 +93,9 @@ const Map = () => {
     if (e.currentTarget.checked) {
       type.push(e.target.value)
     } else {
-      // for (let i = 0; i < hording.length; i++) {
-        // if (e.target.value == hording[i]) {
           var index = type.indexOf(e.target.value)
-          if (index > -1) { // only splice array when item is found
-            type.splice(index, 1); // 2nd parameter means remove one item only
+          if (index > -1) {
+            type.splice(index, 1); 
           }
     }
   }

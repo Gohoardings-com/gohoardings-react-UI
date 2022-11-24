@@ -91,10 +91,10 @@ const Media = () => {
           window.localStorage.setItem("login",`/media/${category_name}/${city_name}`)
           window.sessionStorage.setItem("login",`/media${category_name}/${city_name}`)
           navigate('/login')
-        }else{
+        }
           addRemove({type:"INCR"})
           add(e)
-        }
+        
       }
   
       const locatetologin = async() =>{
