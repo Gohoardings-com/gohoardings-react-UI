@@ -20,7 +20,6 @@ const NewNAvbar = () => {
   
   return (
     <>
-      
        <Navbar expand="lg px-md-4">
         <div className="container-fluid py-md-4 px-md-4">
         <Dropdown
