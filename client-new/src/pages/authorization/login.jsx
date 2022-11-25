@@ -120,24 +120,10 @@ const Login = () => {
           const user = data.message
           window.localStorage.setItem("user", user)
           window.sessionStorage.setItem("user", user)
-          const locate = window.localStorage.getItem("login")
-          const map = window.localStorage.getItem("map")
-          switch (window.localStorage) {
-            case locate:
-              console.log("hello");
-              window.localStorage.removeItem("login")
-              navigate(`${locate}`).then(() => dispatch(authActions.login()))
-              break;
-            case map:
-              console.log("bye");
-              window.localStorage.removeItem("map")
-              navigate(`${map}`).then(() => dispatch(authActions.login()))
-              break;
-            default:
-              console.log("hii");
-              navigate("/").then(() => dispatch(authActions.login()))
-              break;
-          }
+          const locate = window.localStorage.getItem("locate")
+          const backlink = locate ? locate : "/";
+          window.localStorage.removeItem("locate")
+          navigate(`${backlink}`).then(() => dispatch(authActions.login()))
         } else {
           toast("Email or Password Invalid")
         }

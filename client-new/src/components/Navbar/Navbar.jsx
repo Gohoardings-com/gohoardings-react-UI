@@ -40,7 +40,7 @@ useEffect(() => {
               </Nav.Link>
               <Nav.Link
                 className="navLink ps-3 pe-3 fw-bold text-dark"
-                href="https://gohoardings.com/contact-us"
+                href="/contact"
               >
                 Contact
               </Nav.Link>

@@ -60,7 +60,7 @@ res.status(404).json({
 
 exports.product =  async (req,res, next) => {
     try{
-const {code, category_name} = req.body
+const {meta_title, category_name} = req.body
 db.changeUser({ database: "gohoardi_goh" });
 switch (category_name) {
     case "traditional-ooh-media":
@@ -88,7 +88,7 @@ switch (category_name) {
       table_name = "goh_media";
   }
 
-  db.query("SELECT * FROM "+table_name+" WHERE code='"+code+"'",async (err,result) => {
+  db.query("SELECT * FROM "+table_name+" WHERE meta_title='"+meta_title+"'",async (err,result) => {
     if (err) {
       return res.send({err: err,message :"Wrong Data"})
   } else if (result == []){

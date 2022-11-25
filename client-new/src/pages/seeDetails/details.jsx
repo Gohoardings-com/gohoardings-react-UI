@@ -1,33 +1,74 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useContext} from 'react'
 import {RiUser3Fill} from 'react-icons/ri'
+import { AccountContext } from '../../apis/ApiContext';
 import { useParams, } from 'react-router-dom';
 import {IoIosSettings,IoMdLocate} from 'react-icons/io';
 import { GrMapLocation } from 'react-icons/gr';
 import {useNavigate } from 'react-router-dom';
 import './details.scss'
-import { MdOutlineShoppingCart } from 'react-icons/md'
-import {useLocation} from 'react-router-dom';
+import { MdOutlineShoppingCart, MdOutlineRemoveShoppingCart } from 'react-icons/md'
 import instance from '../../apis/Axios';
-import Medialogo from '../../components/medialogo';
 
 const Details = () => {
     const priceState = window.localStorage.getItem("user")
-    const {code,category_name} = useParams();
+    const {category_name,meta_title} = useParams();
+    const {addRemove} = useContext(AccountContext)
     const navigate = useNavigate()
     const [posts,setPosts] = useState([])
 
     const getMedia = async() =>{
         const {data} =await instance.post('product/product',{
-            code :code,
+            meta_title :meta_title,
             category_name:category_name
         })
         console.log(data);
         setPosts(data);
     }
     const locatetologin = async() =>{
+        window.localStorage.setItem("locate",`/${meta_title}/${category_name}`)
         navigate('/login')
     }
-
+    const addonCart = async (e) => {
+        const {data} =  await instance.post('cart/addOnCart', {
+            mediaid: e.code,
+            mediatype: e.category_name,
+          })
+          if(data.message == 'Login First'){
+            window.localStorage.setItem("locate",`/${meta_title}/${category_name}`)
+            navigate('/login')
+          }else{
+            addRemove({type:"INCR"})
+            add(e)}
+        }
+        const removefroCart = async (obj) => {
+            console.log(obj);
+            await instance.post('cart/deleteFromCart', {
+              code: obj.code,
+            })
+            addRemove({type:"DECR"})
+            remove(obj)
+          }
+      
+          const add = (event) => {
+            let data = [...posts];
+            data.forEach((element) => {
+              if (element.code == event.code) {
+                console.log(element);
+                element.isDelete = 0;
+                setPosts(data);
+              }
+            });
+          };
+      
+          const remove = (event) => {
+            let data = [...posts];
+            data.forEach((element) => {
+              if (element.code == event.code) {
+                element.isDelete = 1;
+                setPosts(data);
+              }
+            });
+          };
 useEffect(() => {
     getMedia()
 }, []);
@@ -56,7 +97,7 @@ useEffect(() => {
     <div className='row mt-sm-5  ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5'>
         <div className='col '>
         <div className='maindivbordermediadetails rounded-3 p-2'>
-        <img src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0,2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0,2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media' className='w-100 h-auto rounded-3 img-fluid ' />
+        <img src={item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0,2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0,2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media' className='w-100 h-auto rounded-3 img-fluid ' />
         </div>
     
        {/* Map Section */}
@@ -72,7 +113,8 @@ useEffect(() => {
           <div>
          <div className='d-flex'>
          < h5 className='text-center pt-3 fw-bolder'>{item.page_title}</ h5>
-          <MdOutlineShoppingCart className='mt-4 ms-3'/>
+         {item.userid == null || item.isDelete == null || item.userid != null && item.isDelete == 1 ?
+                                                        <MdOutlineShoppingCart onClick={() => addonCart(item)} className='m-4' /> : <> <MdOutlineRemoveShoppingCart onClick={() => removefroCart(item)} className='m-4' /></>}
          </div>
           <div className='row'>
           <div className='col pt-4'>

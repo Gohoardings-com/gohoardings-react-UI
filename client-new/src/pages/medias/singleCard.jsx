@@ -16,7 +16,7 @@ const SingleCard = ({ slice, addonCart, removefroCart, priceState, locatetologin
               <>
                 <div className='col-4 col-sm-4 p-2'>
                   <Link to={`/details/${item.code}/${item.category_name}`} className="text-decoration-none p-1 m-0">
-                    <img src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media' className='w-100 h-auto rounded-3' />
+                    <img src={item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media' className='w-100 h-auto rounded-3' />
                   </Link>
                 </div>
                 <div className='col-8 col-sm-8 pt-2'>

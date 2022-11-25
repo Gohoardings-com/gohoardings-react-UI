@@ -123,7 +123,7 @@ const SearchMedia = () => {
             </div>
             <div className="col-md-2 p-2 ">
               <Link
-                to={`/media/${userType}/${value}`}
+                to={`/${userType}/${value}`}
                 className="button-serch text-white rounded-pill p-3"
               ><button className="search-btn">
                   Search

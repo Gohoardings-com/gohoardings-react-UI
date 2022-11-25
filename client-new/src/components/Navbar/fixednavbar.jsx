@@ -123,7 +123,7 @@ setUserType(e);
                 </Dropdown.Item>
                 </DropdownButton>
                 <Link
-                 to={`/media/${userType}/${value}`}
+                 to={`/${userType}/${value}`}
                   
                 >
                 <Button

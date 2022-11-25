@@ -21,17 +21,17 @@ const Ourservices = () => {
     },
     {
       label: "Airport Branding",
-      value: "goh_media_airport",
+      value: "airport-media",
       srcImg: "./gohoarding/12.jpeg"
     },
     {
       label: "Office Branding",
-      value: "goh_media_office",
+      value: "office-media",
       srcImg: "./gohoarding/2.jpeg"
     },
     {
       label: "Transit Media",
-      value: "goh_media_transit",
+      value: "transit-media",
       srcImg: "./gohoarding/6.jpeg"
     },
 
@@ -46,7 +46,7 @@ const Ourservices = () => {
           <div className="col-12 col-sm-12 pt-2">
            
               <div className='medias text-decoration-none'>
-              <Link to={`/media/${pos.value}/delhi`} className="text-dark  open-sans fw-bold text-decoration-none">
+              <Link to={`/${pos.value}/delhi`} className="text-dark  open-sans fw-bold text-decoration-none">
                 <img src={pos.srcImg} className="card-img-top rounded-top" alt={pos.label} />
                 <div className="d-flex flex-row bg-light justify-content-around p-2 rounded-bottom ">
                   <h6 className="text-dark  open-sans fw-bold "> {pos.label} </h6>

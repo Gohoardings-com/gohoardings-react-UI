@@ -13,9 +13,9 @@ const MultiCard = ({ slice, addonCart, removefroCart, priceState, locatetologin 
                 {slice.map((item, i) => (
                     <div className='col-12 col-sm-12 '>
                         <div className='mainImage p-1 hello'>
-                            <img src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media ' className='rounded-top ' />
+                            <img src={item.thumb.startsWith("https") ? item.thumb : `https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`} alt='About media ' className='rounded-top' />
                             <div className='mediadetails rounded-bottom p-2 mediacarddetails'>
-                                <h5 className='fw-bold overflow-hidden'>{item.page_title}</h5>
+                                <h5 className='fw-bold overflow-hidden'>{item.page_title.substring(0,42) + "..."}</h5>
                                 <div className='row'>
                                     <div className='col singleMediaData'>
                                         <h6 className='fw-bold overflow-wrap'>Code : {item.code}</h6>
@@ -30,7 +30,7 @@ const MultiCard = ({ slice, addonCart, removefroCart, priceState, locatetologin 
                                                         <MdOutlineShoppingCart onClick={() => addonCart(item)} className='addonCart' /> : <> <MdOutlineRemoveShoppingCart onClick={() => removefroCart(item)} className='addonCart' /></>}
                                                 </div></div>
                                                 <div className='col-8'>
-                                                    <Link to={`/details/${item.code}/${item.category_name}`} className="text-decoration-none text-center">
+                                                    <Link to={`/details/${item.category_name}/${item.meta_title}`} className="text-decoration-none text-center">
                                                         <button className='rounded-2 btn bg-warning border-light w-100'>See Details</button>
                                                     </Link>
                                                 </div>

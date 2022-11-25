@@ -24,9 +24,7 @@ const Map = () => {
 
   const slice = medias.slice(0, noOfLogo);
 
-  const locatetologin = async () => {
-    navigate('/login')
-  }
+
 
   const hording = [];
   const type = [];
@@ -113,8 +111,10 @@ const Map = () => {
     mediasData();
   }, []);
 
-
-
+  const locatetologin = async() =>{
+    window.localStorage.setItem("locate",`/map`)
+    navigate('/login')
+}
 
   let ILLUMINATION = [
     { label: "Nonlit", value: " Nonlit" },
@@ -201,7 +201,7 @@ const Map = () => {
                             </p>
                             <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                               <img
-                                src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
+                                src={ item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
                                 alt="N/A"
                                 className="w-100 mt-2 pt-2"
                               />
@@ -384,7 +384,7 @@ const Map = () => {
                               </p>
                               <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
                                 <img
-                                  src={`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
+                                  src={item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
                                   alt="N/A"
                                   className="w-100 mt-2 pt-2"
                                 />

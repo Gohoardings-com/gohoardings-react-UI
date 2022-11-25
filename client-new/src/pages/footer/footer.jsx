@@ -41,15 +41,12 @@ const navigate = useNavigate()
       handleCss();
     }, [width]);
 
-const contactPage = async() => {
- navigate('/contact')
-}
+
 const handelSubmit = async(e) =>{
   e.preventDefault()
-  const {data} = await instance.post("enquiry/message",{
+  await instance.post("enquiry/message",{
     email:getEmail,
 })
-console.log(data);
 }
 
 return (
@@ -71,17 +68,17 @@ return (
                 <div className="quick-links text-light">
                   <h4 className="fw-bold  text-nowrap text-muted ms-5">Quick Links</h4>
                   <ul className="position-relative text-muted pt-3 ms-3">
-                      <li href="/register" className="text-nowrap"> <CgCheck/> Singup As media Owner</li>
-                      <li href="/login" className="text-nowrap"> <CgCheck/> Singin As Media Owner</li>
-                      <li href="/register" className="text-nowrap"> <CgCheck/> Register As Advertiser</li>
-                      <li href="/login" className="text-nowrap"> <CgCheck/> Login As Advertiser</li>
-                    <span className="pos-absolute ">
-                        <li className="text-nowrap" href="https://www.odoads.com/"  target="_blank">  <CgCheck/> Odoads</li>
-                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Blog</li>
-                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> About Us</li>
-                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Team</li>
-                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Contact</li>
-                        <li className="text-nowrap" href="https://www.gohoardings.com/blog/" target="_blank"> <CgCheck/> Privacy Policy</li>
+                      <li  className="text-nowrap"> <a className="text-muted text-decoration-none" href="https://odoads.com/register" target='_blank'><CgCheck/> Singup As media Owner</a></li>
+                      <li className="text-nowrap"><a className="text-muted text-decoration-none" href="https://odoads.com/login" target='_blank'> <CgCheck/> Singin As Media Owner </a></li>
+                      <li className="text-nowrap"> <a className="text-muted text-decoration-none" href="/login" target='_blank'><CgCheck/> Register As Advertiser</a></li>
+                      <li className="text-nowrap"> <a className="text-muted text-decoration-none" href="/login" target='_blank'><CgCheck/> Login As Advertiser</a></li>
+                    <span className="pos-absolute">
+                        <li className="text-nowrap"><a href="https://www.odoads.com/" target="_blank" className="text-muted text-decoration-none"><CgCheck/> Odoads</a></li>  
+                        <li className="text-nowrap"><a href="https://www.gohoardings.com/blog/" target="_blank" className="text-muted text-decoration-none"><CgCheck/> Blog</a></li>
+                        <li className="text-nowrap"><a href="/about" className="text-muted text-decoration-none"><CgCheck/> About Us</a> </li>
+                        <li className="text-nowrap"><a href="/team" className="text-muted text-decoration-none"><CgCheck/> Team</a></li>
+                        <li className="text-nowrap"><a href="/contact" className="text-muted text-decoration-none"><CgCheck/> Contact</a></li>
+                        <li className="text-nowrap"> <CgCheck/> Privacy Policy</li>
                     </span>
                   </ul>
                 </div>
@@ -92,25 +89,25 @@ return (
                   <ul className="   pt-3 text-muted ms-3">
                     <li>
                       <Link
-                  to={`/media/traditional-ooh-media/delhi`}
+                  to={`/traditional-ooh-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                   onClick={topFunction}
                   > <CgCheck/> Traditional OOH</Link>
                 </li>
                     <li>
                       <Link
-                  to={`/media/digital-media/delhi`}
+                  to={`/digital-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                   onClick={topFunction}
                 > <CgCheck/> Digital Media</Link></li>
                     <li>
                       <Link
-                  to={`/media/transit-media/delhi`}
+                  to={`/transit-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Transit-Media</Link></li>
                     <li>
                    <Link
-                  to={`/media/mall-media/delhi`}
+                  to={`/mall-media/delhi`}
                   onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Mall Media</Link></li>
@@ -118,13 +115,13 @@ return (
                       <li>
                        <Link
                           onClick={topFunction}
-                  to={`/media/airport-media/delhi`}
+                  to={`/airport-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Airport Media</Link></li>
                       <li>
                         <Link
                            onClick={topFunction}
-                  to={`/media/inflight_media/delhi`}
+                  to={`/inflight_media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
                 > <CgCheck/> Inflight Media</Link></li>
                     </span>
@@ -137,40 +134,41 @@ return (
                     <li>
                       <Link
                          onClick={topFunction}
-                  to={`/media/traditional-ooh-media/delhi`}
+                  to={`/traditional-ooh-media/delhi`}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
-                  > <CgCheck/> Traditional OOH</Link>
+                  > <CgCheck/>Delhi</Link>
                 </li>
                     <li>
                       <Link
-                  to={`/media/digital-media/delhi`}
+                  to={`/traditional-ooh-media/goa`}
                   onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
-                > <CgCheck/> Digital Media</Link></li>
+                > <CgCheck/>Goa</Link></li>
                     <li>
                       <Link
-                  to={`/media/transit-media/delhi`}
+                  to={`/traditional-ooh-media/bengaluru`}
                   onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
-                > <CgCheck/> Transit-Media</Link></li>
+                > <CgCheck/>Bengaluru</Link></li>
                     <li>
                    <Link
-                  to={`/media/mall-media/delhi`}
+                  to={`/traditional-ooh-media/chennai`}
                   onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
-                > <CgCheck/> Mall Media</Link></li>
+                > <CgCheck/>Chennai</Link></li>
                     <span className="pos-absolute end-0 top-0 me-5">
                       <li>
                        <Link
-                  to={`/media/ "airport-media"}/ "delhi"}`}
-                  className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
-                > <CgCheck/> Airport Media</Link></li>
-                      <li>
-                        <Link
-                  to={`/media/inflight_media/delhi`}
+                  to={`/traditional-ooh-media/hyderabad`}
                   onClick={topFunction}
                   className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
-                > <CgCheck/> Inflight Media</Link></li>
+                > <CgCheck/>Hyderabad</Link></li>
+                      <li>
+                        <Link
+                  to={`/traditional-ooh-media/Mumbai`}
+                  onClick={topFunction}
+                  className="button text-light text-nowrap is-small is-info text-decoration-none text-muted"
+                > <CgCheck/>Mumbai</Link></li>
                     </span>
                   </ul>
               </div>

@@ -8,7 +8,6 @@ import { MdLocationOn, MdChecklist } from 'react-icons/md'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import SingleCard from './singleCard';
 import MultiCard from './multiCard';
-import MediaFilter from './mediaFilter';
 import Medialogo from '../../components/medialogo';
 
 const Media = () => {
@@ -88,18 +87,14 @@ const Media = () => {
           mediatype: e.category_name,
         })
         if(data.message == 'Login First'){
-          window.localStorage.setItem("login",`/media/${category_name}/${city_name}`)
-          window.sessionStorage.setItem("login",`/media${category_name}/${city_name}`)
+          window.localStorage.setItem("locate",`/${category_name}/${city_name}`)
           navigate('/login')
         }
           addRemove({type:"INCR"})
           add(e)
-        
       }
-  
       const locatetologin = async() =>{
-        window.localStorage.setItem("login",`/media/${category_name}/${city_name}`)
-        window.sessionStorage.setItem("login",`/media${category_name}/${city_name}`)
+        window.localStorage.setItem("locate",`/${category_name}/${city_name}`)
         navigate('/login')
     }
       const removefroCart = async (obj) => {
@@ -110,9 +105,6 @@ const Media = () => {
         addRemove({type:"DECR"})
         remove(obj)
       }
-  
-  
-      /***************************************************************** */
   
       const add = (event) => {
         let data = [...posts];
@@ -151,7 +143,7 @@ const Media = () => {
         },[category_name, city_name])
     return (
         <>
-            <div className='container-fluid pt-5 mt-3  mediabackground '>
+            <div className='container-fluid pt-3  mediabackground '>
                <Medialogo category_name={category_name} posts={posts}/>
                 <div className="row mt-3 rounded  ms-3 ps-3 ps-5 pe-5">
                 <div className="col-sm-2 col-12">
@@ -161,7 +153,7 @@ const Media = () => {
         </div>
         <input type="serach" placeholder="Search.." onChange={event => setQuery(event.target.value)} className=' w-100 mt-2 p-2 rounded-3' />
 
-        <div className="rowCheck bg-light row rounded-bottom me-1 ms-1 mb-1 p-1">
+        <div className="rowCheck bg-light row rounded-bottom me-4 ms-1 mb-1 p-1">
           <ul>
             {category.filter(obj => {
               if (query == '') {

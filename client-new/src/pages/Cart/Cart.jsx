@@ -54,8 +54,9 @@ const Cart = () => {
             }
         })
     }
-    const handleChange = (e, i) => {
-        setNewTotal({ total: lengthChange + 1, index: i })
+    const handleChange = (e, i, p) => {
+        setNewTotal({total : e.target.value, index: i})
+        
     };
 
     const sumbitALlProduct = async () => {
@@ -110,7 +111,7 @@ const Cart = () => {
                                                 <div className="d-flex mb-3">
                                                     <div className="col-md-4 pe-0 me-0">
                                                         <img
-                                                            src={`https://${(obj.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(obj.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${obj.thumb}`}
+                                                            src={obj.thumb.startsWith("https") ? obj.thumb : `https://${(obj.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(obj.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${obj.thumb}`}
                                                             className="img-fluid rounded-start  cart-media"
                                                             alt="..."
                                                         />
@@ -153,29 +154,12 @@ const Cart = () => {
                                                                 </div>
                                                                 <div className="col-md-6 ">
                                                                     <div className="button-section">
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-success rounded-1 me-2"
-                                                                            onClick={(e) => { setlengthChange(lengthChange < 5 ? 5 : lengthChange + 1); handleChange(e, index, obj) }}
+                                                                        <input
+                                                                            type="number"
+                                                                            min="5"
+                                                                            defaultValue={5}
 
-                                                                        >
-                                                                            <AiOutlinePlus className="quantitey" />
-                                                                        </button>
-                                                                        <span
-                                                                            type="button"
-                                                                            class="btn btn-outline-secondary rounded-1 me-2"
-                                                                            onChange={(e) => handleChange(e, index, obj)}
-                                                                        >
-                                                                            {lengthChange}
-                                                                        </span>
-                                                                        <button
-                                                                            type="button"
-                                                                            class="btn btn-danger rounded-1"
-                                                                            onClick={(e) => { setlengthChange(lengthChange < 6 ? 5 : lengthChange - 1); handleChange(e, index, obj) }}
-
-                                                                        >
-                                                                            <AiOutlineMinus className="quantitey" />
-                                                                        </button>
+                                                                            onChange={(e) => handleChange(e, index, obj)} />
                                                                     </div>
                                                                 </div>
                                                             </div>

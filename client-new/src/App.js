@@ -15,6 +15,7 @@ import FAQS from './pages/faqs/faqs'
 import Team from './pages/team/team'
 import News from './pages/news_media/news_media'
 import Testimonial from './pages/testimonial/testimonial'
+import Fixednavbar from "./components/Navbar/fixednavbar";
 // import "./App.css" 
 
 function App() {
@@ -30,20 +31,20 @@ const [fix,setFix]= useState(true)
     <>
       <BrowserRouter>
   <Header/>
-{/* {fix ? <Fixednavbar/>:<></> } */}
+{fix ? <Fixednavbar/>:"" }
         <Routes>
-         <Route index path="/" element={<Home/>}/>
-           <Route exact path="/login" element={avlable ? <Home setFix={setFix}/>:<Login/>}></Route>
-          <Route exact path="/media/:category_name/:city_name" element={ <Media />}/>   
+         <Route index path="/" element={<Home setFix={setFix}/>}/>
+          <Route exact path="/login" element={avlable ? <Home setFix={setFix}/>:<Login/>}></Route>
+          <Route exact path="/:category_name/:city_name" element={ <Media />}/>   
           <Route exact path="/map" element={<Map/>}/>
-          <Route exact path="/details/:code/:category_name" element={<Details/>}/>
+          <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
           <Route exact path="/cart" element={<Cart />}/> 
-           <Route exact path="/contact" element={<Contact/>}/> 
+          <Route exact path="/contact" element={<Contact/>}/> 
           <Route exact path="/about" element={<About/>}/> 
           <Route exact path="/faqs" element={<FAQS/>}/> 
           <Route exact path="/team" element={<Team/>}/>  
-        <Route exact path="/news" element={<News/>}/>  
-         <Route exact path="/testimonial" element={<Testimonial/>}/> 
+          <Route exact path="/news" element={<News/>}/>  
+          <Route exact path="/testimonial" element={<Testimonial/>}/> 
         </Routes>
         <Footer/>
       </BrowserRouter>
@@ -51,4 +52,4 @@ const [fix,setFix]= useState(true)
   );
 }
 
-export default App
+export default App;

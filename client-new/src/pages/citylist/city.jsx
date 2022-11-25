@@ -14,25 +14,25 @@ const City = () => {
 <div className='container-fluid'>
 <div className='row p-5'>
 <div className='col-lg-6 col-md-12'>
-<Link to={`/media/traditional-ooh-media/delhi`} >
+<Link to={`/traditional-ooh-media/delhi`} >
   <img src="./gohoarding/home.jpg" className='onHover rounded h-auto m-md-1 w-100 firtCol' alt="..."/>
 </Link>
 </div>
 <div className='col-lg-3  col-md-12'>
-<Link to={`/media/traditional-ooh-media/bengaluru`} >
+<Link to={`/traditional-ooh-media/bengaluru`} >
   <img src="./gohoarding/home2.jpg"  className='onHover rounded m-md-1 w-100 ' alt="..."/>
   </Link>
-<Link to={`/media/traditional-ooh-media/chennai`} >
+<Link to={`/traditional-ooh-media/chennai`} >
   <img src="./gohoarding/home4.jpg"  className='onHover rounded m-md-1  w-100  pt-3' alt="..."/>
   </Link>
 </div>
 <div className='col-lg-3  col-md-12'>
-<Link to={`/media/traditional-ooh-media/hyderabad`} >
+<Link to={`/traditional-ooh-media/hyderabad`} >
 
  <img src="./gohoarding/home3.jpg" className='onHover rounded m-md-1 w-100  ' alt="..."/>
  </Link>
 
-<Link to={`/media/traditional-ooh-media/mumbai`} >
+<Link to={`/traditional-ooh-media/mumbai`} >
 
  <img src="./gohoarding/home1.jpg" className='onHover rounded m-md-1 w-100   pt-3' alt="..."/>
  </Link>

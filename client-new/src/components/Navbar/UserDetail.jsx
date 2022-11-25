@@ -74,7 +74,7 @@ const UserDetail = ({posts, setPosts}) => {
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-    <a href='/cart'> <AiOutlineShoppingCart className='cart-logo ms-4 mt-2'/> </a>
+    <a href='/cart'> <AiOutlineShoppingCart className='cart-logo ms-4 mt-2'/>: {initalState} </a>
    
               </div> : <>
                 <Nav.Link

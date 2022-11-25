@@ -154,7 +154,8 @@ exports.company = catchError(async(req,res)=>{
 
 
 exports.SearchData = catchError(async (req,res,next) => {
-const {category_name, city_name} = req.body
+const {category_name,  city_name } = req.body
+const city = city_name ? city_name : "delhi";
 const cookieData = req.cookies
 if (!cookieData) {
   return res.status(400).json({message:"No Cookie Found"})
@@ -184,15 +185,15 @@ const promises = []
             table_name = "goh_media_office";
             break;
             default:
-            table_name = "goh_media";
+            table_name = "goh_media" ;   
         }
 const token = Object.values(cookieData)[0];
-return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {
-if(err || !city_name && !category_name){
+return jwtToken.verify(token, process.env.jwt_secret ,async (err,user) => {
+if(err){
         promises.push(new Promise((resolve, reject) => {
-          db.query("SELECT * FROM "+table_name+" WHERE city_name='delhi'",async (err,result) => {
+          const sql = "SELECT * FROM "+table_name+" WHERE city_name='"+city+"'";
+          db.query(sql,async (err,result) => {
             if (err) {
-              console.log(err);
               return res.send({err: reject(err),message :"Wrong Data"})
           } else if (resolve == []){
               return res.send({resolve: "Empty",message :"Media Not Found"})
@@ -203,10 +204,9 @@ if(err || !city_name && !category_name){
       }))
 } else {
   const userID = user.id;
-  promises.push(new Promise((resolve, reject) => {
-    db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city_name+"' ORDER BY `cart`.`userid` DESC ",async (err,result) => {
+  promises.push(new Promise(async(resolve, reject) => {
+    db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city+"' ORDER BY `cart`.`userid` DESC ",async (err,result) => {
       if (err) {
-        console.log(err);
         return res.send({err: reject(err),message :"Wrong Data"})
     } else if (resolve === []){
         return res.send({resolve: "Empty",message :"Media Not Found"})
@@ -214,7 +214,6 @@ if(err || !city_name && !category_name){
     resolve(result)
     }
   })
-
 }))
 }
 try {

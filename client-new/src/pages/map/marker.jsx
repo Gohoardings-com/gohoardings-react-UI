@@ -93,7 +93,7 @@ const Markers = (markers) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ height: "100%" }}
     >
-      {markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, city_name, userid, isDelete }) => (
+      {markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
         <Marker
           key={id}
           position={position}
@@ -103,7 +103,7 @@ const Markers = (markers) => {
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
               <div className="infoWindow">
                 <div className="media-image">
-                <img src="./gohoarding/new1568268924_79858.jpg" alt="" />
+                <img src={thumb.startsWith("https") ? thumb : `https://${(mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${thumb}`} alt='About media ' className='rounded-top' />
                 </div>
                 <div className="info-window bg-white">
                   <h5>{illumination + "-" +medianame}</h5>
