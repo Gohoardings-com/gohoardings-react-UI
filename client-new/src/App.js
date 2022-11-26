@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/home";
+import Home from "./pages/Home/home";
 import Media from './pages/medias/media';
 import Header from './components/header/header';
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ import FAQS from './pages/faqs/faqs'
 import Team from './pages/team/team'
 import News from './pages/news_media/news_media'
 import Testimonial from './pages/testimonial/testimonial'
-import Fixednavbar from "./components/Navbar/fixednavbar";
+import Fixednavbar from "./components/navbar/fixednavbar";
 // import "./App.css" 
 
 function App() {
