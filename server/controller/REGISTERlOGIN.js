@@ -52,6 +52,7 @@ exports.register = catchError(async (req, res) => {
   })
 })
 
+
 exports.login = catchError(async (req, res) => {
   const { email, password } = req.body;
   db.changeUser({ database: "gohoardi_crmapp" })

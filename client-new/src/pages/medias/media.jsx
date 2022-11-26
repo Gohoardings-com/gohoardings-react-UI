@@ -9,6 +9,7 @@ import { MdOutlineShoppingCart } from 'react-icons/md'
 import SingleCard from './singleCard';
 import MultiCard from './multiCard';
 import Medialogo from '../../components/medialogo';
+import FixedNavbar from '../../components/Navbar/fixednavbar';
 
 const Media = () => {
   const priceState = window.localStorage.getItem("user")
@@ -143,6 +144,7 @@ const Media = () => {
         },[category_name, city_name])
     return (
         <>
+        <FixedNavbar/>
             <div className='container-fluid pt-3  mediabackground '>
                <Medialogo category_name={category_name} posts={posts}/>
                 <div className="row mt-3 rounded  ms-3 ps-3 ps-5 pe-5">

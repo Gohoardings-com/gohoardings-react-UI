@@ -20,6 +20,7 @@ const Cart = () => {
     const [lengthChange, setlengthChange] = useState(5);
     const [posts, setPosts] = useState([])
     const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
+    var totalprice = 0
 
     const StartDate = (e) => {
         setStart(e);
@@ -54,10 +55,14 @@ const Cart = () => {
             }
         })
     }
-    const handleChange = (e, i, p) => {
-        setNewTotal({total : e.target.value, index: i})
-        
-    };
+    const handleChange = async(e, i, p) => {
+        // e= "incement value"
+        // i = "index value"
+        // p = "data"
+        const data = [...posts]
+        const daysMedia = e.target.value
+        setlengthChange(data.id == p.id ? parseInt((p.price + (p.price / 10) * daysMedia) + ((p.price / 100) * 18 * daysMedia)) : parseInt(p.price + parseInt((p.price / 10) * 5) + parseInt((p.price / 100) * 18 * 5)))
+        };
 
     const sumbitALlProduct = async () => {
         await instance.post("cartItems/processdCart", {
@@ -107,7 +112,7 @@ const Cart = () => {
                                 {!posts ? <><h1>Loading... Please wait</h1></> : <>
                                     {posts.length > 0 && posts.map((obj, index) => (
                                         <>
-                                            {obj.isDelete == 0 ? <>
+                                            {obj.isDelete == 0 ? <> 
                                                 <div className="d-flex mb-3">
                                                     <div className="col-md-4 pe-0 me-0">
                                                         <img
@@ -115,7 +120,7 @@ const Cart = () => {
                                                             className="img-fluid rounded-start  cart-media"
                                                             alt="..."
                                                         />
-                                                    </div>
+                                        </div>
                                                     <div className="col-md-8 ms-0 ps-0">
                                                         <div className="card-body cart-media pb-1">
                                                             <h4 className="card-title">
@@ -149,7 +154,7 @@ const Cart = () => {
                                                                     </h6>
                                                                     <h6 className="text-secondary">
 
-                                                                        <FaRupeeSign /> {index == Nowtotal.index ? parseInt((obj.price + (obj.price / 10) * Nowtotal.total) + ((obj.price / 100) * 18 * Nowtotal.total)) : parseInt(obj.price + parseInt((obj.price / 10) * 5) + parseInt((obj.price / 100) * 18 * 5))} /total
+                                                                        <FaRupeeSign /> {lengthChange} /total
                                                                     </h6>
                                                                 </div>
                                                                 <div className="col-md-6 ">
@@ -199,7 +204,7 @@ const Cart = () => {
                                     </h6>
                                     <h5 className=" mt-4" >{totalDays} Total Days</h5>
                                     <h5 className="mt-4">
-                                        GST(18%) : <FaRupeeSign /> 9900
+                                        GST(18%) : <FaRupeeSign /> {totalprice}
                                     </h5>
                                     <h5 className="mt-4">
                                         Total ammount : <FaRupeeSign /> 55000
