@@ -20,7 +20,7 @@ const NewNAvbar = () => {
   
   return (
     <>
-       <Navbar expand="lg px-md-4">
+       {/* <Navbar expand="lg px-md-4">
         <div className="container-fluid py-md-4 px-md-4">
         <Dropdown
       onMouseOver={() => setShow(true)}>
@@ -67,7 +67,8 @@ const NewNAvbar = () => {
           </Navbar.Collapse>
         </div>
       </Navbar>
-      <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown}/>
+      <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown}/> */}
+      
     </>
   );
 };

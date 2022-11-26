@@ -28,7 +28,7 @@ const Flotinggnavbar = () => {
   }, [posts]);
 
   const [value, setValue] = useState("delhi");
-  const [userType, setUserType] = useState("Media Type");
+  const [userType, setUserType] = useState("Select Media Type");
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -49,15 +49,15 @@ const Flotinggnavbar = () => {
 
   return (
     <>
-      <Navbar expand="lg  colapse-search-bar navbar-main-floating pt-2 pb-2 m-0   ">
+      <Navbar expand="lg  colapse-search-bar navbar-main-floating pt-2 pb-3 m-0   ">
         <Dropdown onMouseOver={() => setShow(true)}>
-          <Dropdown.Toggle variant="transparent border-0 ">
+          <Dropdown.Toggle variant="transparent border-0 ms-3 ">
             <Navbar.Brand href="/" id="home">
               <img src="../../images/logo.png" className="brand " />
             </Navbar.Brand>
           </Dropdown.Toggle>
         </Dropdown>
-        <Navbar.Toggle aria-controls=" border-0" />
+        <Navbar.Toggle aria-controls=" border-0 mt-1" />
         <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
         <Navbar.Collapse>
         
@@ -101,7 +101,7 @@ const Flotinggnavbar = () => {
               <DropdownButton
                 align="center"
                 title={userType}
-                placeholder="Select your City"
+                placeholder="Search your City"
                 id="select-media-box"
                 onSelect={handleSelect}
                 className=""

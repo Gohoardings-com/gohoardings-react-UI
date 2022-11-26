@@ -47,7 +47,7 @@ width:100vw !important;
   cursor: pointer;
   font-size: 20px;
   padding-bottom: 2px;
-  height: 40px !important;
+  height: 41px !important;
   border-radius: 5px;
 }
 
@@ -58,11 +58,13 @@ width:100vw !important;
   background-color: transparent;
    border:  2px groove #fff312e1 ;
   .float-map-logo{
-    font-size: 25px;
+    font-size: 22px;
 
 
   }
-
+  // .map-view-floa{
+  //   margin-top: 15px !important;
+  // }
 }
 .float-map-btn:hover{
  color: $white;
