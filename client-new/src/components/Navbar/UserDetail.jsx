@@ -33,7 +33,6 @@ const UserDetail = ({posts, setPosts}) => {
 
     const logOut = async () => {
       handelLogout().then(() => dispatch(authActions.logout()))
-      // <AiOutlineShoppingCart className='cart-logo ms-4 mt-2 ' />  
     }
     
     const getUser = async () => {

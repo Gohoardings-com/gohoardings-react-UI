@@ -37,13 +37,12 @@ const EnquireRegister = () => {
     const [emailValidate, setEmailValidate] = useState();
     const [messageValidate, setMessageValidate] = useState();
 
-    const onSubmit = async(e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
         let count = 0;
         if (name === "") {
             count = +1;
-            notify();
             setNameValidate(<MdOutlineError className="text-danger" />);
         } else if (number.length <= 0) {
             count = +1;
@@ -61,7 +60,8 @@ const EnquireRegister = () => {
             count = +1;
             setMessageValidate(<MdOutlineError className="text-danger" />);
         } else if (count === 0) {
-            await instance.post("enquiry/message",{ name, email, number, message });
+            await instance.post("enquiry/message", { name, email, number, message });
+            notify();
             setName("");
             setNumber("");
             setEmail("");
@@ -70,16 +70,13 @@ const EnquireRegister = () => {
             setNumbervalidate("");
             setEmailValidate("");
             setMessageValidate("");
-            notify();
+
         }
     };
 
-    const notify = () => {
+    const notify = async () => {
         toast("Thanks, we will contact you soon!");
     };
-
-
-
 
     return (
         <div className='col-md-5  home-contact-form '>

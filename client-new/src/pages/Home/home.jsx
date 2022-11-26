@@ -9,8 +9,8 @@ import Enquire from "../enquire/enquire";
 import FlotingNavbar from "../../components/Navbar/flotingnavbar";
 import Fixednavbar from "../../components/Navbar/flotingnavbar";
 
-const Home = ({setFix}) => {
-  setFix(false)
+const Home = () => {
+ 
   return (
     <>
 <Navbar/>
