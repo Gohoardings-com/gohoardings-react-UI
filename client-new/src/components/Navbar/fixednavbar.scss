@@ -26,50 +26,18 @@ width:100vw !important;
   height: 40px !important;
   width: 30vw !important;
 }
-// .css-tlfecz-indicatorContainer {
-//  display:none;
 
-// }
-// .css-tlfecz-indicatorContainer:focus {
-//   display:none;
- 
-//  }
-
-.css-6j8wv5-Input {
-  margin: 0px;
-  padding-bottom: 0px;
-  padding-top: 0px;
-  visibility: visible;
-  color: hsl(0, 0%, 20%);
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  display: inline-grid;
-  grid-area: 1/1/2/3;
-  grid-template-columns: 0 min-content;
-  box-sizing: border-box;
-}
 .css-1s2u09g-control{
-  background-color: transparent;
+  margin: 0% !important;
   border: none;
-  padding-bottom: 0px;
-  padding-top: 0px;
   height:  40px !important;
   width: 30vw !important;
    font-size: 20px;
-  border-radius: 5px;
   background-color: $white;
   color: $grey;
-  
-  
-}
-.css-319lph-ValueContainer {
-  background-color: transparent !important;
-  height:  40px !important;
-  width: 30vw !important;
 
- 
 }
+
 #select-media-box{
  
   width: 20vw !important;
@@ -90,9 +58,11 @@ width:100vw !important;
   background-color: transparent;
    border:  2px groove #fff312e1 ;
   .float-map-logo{
-    font-size: 26px;
-    padding-bottom: 3px;
+    font-size: 25px;
+
+
   }
+
 }
 .float-map-btn:hover{
  color: $white;

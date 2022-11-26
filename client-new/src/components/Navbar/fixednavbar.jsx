@@ -141,7 +141,7 @@ const Flotinggnavbar = () => {
               className="mapLink float-map-btn pt-1 text-center   rounded-pill "
               href="/map"
             >
-              <MdLocationOn className=" float-map-logo text-bold text-danger" />
+              <MdLocationOn className=" float-map-logo  mb-1 text-danger" />
             
               <span className="map-view-float">Map View</span>
             </Nav.Link>
