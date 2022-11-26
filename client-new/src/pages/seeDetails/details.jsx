@@ -8,6 +8,7 @@ import {useNavigate } from 'react-router-dom';
 import './details.scss'
 import { MdOutlineShoppingCart, MdOutlineRemoveShoppingCart } from 'react-icons/md'
 import instance from '../../apis/Axios';
+import Fixednavbar from '../../components/Navbar/fixednavbar';
 
 const Details = () => {
     const priceState = window.localStorage.getItem("user")
@@ -74,6 +75,7 @@ useEffect(() => {
 }, []);
   return (
    <>
+   <Fixednavbar/>
 <div className='detailsHeader d-flex flex-row justify-content-center w-100 p-0'>
 <div className='icon-left-border ps-3 pe-3'>
    <RiUser3Fill className='mb-1 text-dark'/> <a className='heading-text text-dark' id='test' href="#media">About Media</a>
