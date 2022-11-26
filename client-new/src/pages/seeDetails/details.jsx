@@ -8,7 +8,7 @@ import {useNavigate } from 'react-router-dom';
 import './details.scss'
 import { MdOutlineShoppingCart, MdOutlineRemoveShoppingCart } from 'react-icons/md'
 import instance from '../../apis/Axios';
-import Fixednavbar from '../../components/Navbar/fixednavbar';
+import Fixednavbar from '../../components/navbar/fixednavbar';
 
 const Details = () => {
     const priceState = window.localStorage.getItem("user")

@@ -9,7 +9,7 @@ import { MdOutlineShoppingCart } from 'react-icons/md'
 import SingleCard from './singleCard';
 import MultiCard from './multiCard';
 import Medialogo from '../../components/medialogo';
-import FixedNavbar from '../../components/Navbar/fixednavbar';
+import FixedNavbar from '../../components/navbar/fixednavbar';
 
 const Media = () => {
   const priceState = window.localStorage.getItem("user")

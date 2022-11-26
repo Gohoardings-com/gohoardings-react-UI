@@ -30,6 +30,8 @@ const Fixednavbar = () => {
       }
     };
     handleCss();
+
+    // sfaf
   }, [scroll]);
 
   return (

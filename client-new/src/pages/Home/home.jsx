@@ -8,8 +8,8 @@ import City from "../citylist/city";
 import Enquire from "../enquire/enquire";
 import Fixednavbar from "../../components/navbar/flotingnavbar";
 
-const Home = () => {
- 
+const Home = ({setFix}) => {
+ setFix(false)
   return (
     <>
 <Navbar/>

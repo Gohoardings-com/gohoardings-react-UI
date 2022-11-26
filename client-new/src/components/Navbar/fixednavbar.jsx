@@ -60,7 +60,7 @@ const Flotinggnavbar = () => {
         <Navbar.Toggle aria-controls=" border-0 mt-1" />
         <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
         <Navbar.Collapse>
-        
+          {/*  */}
             <Form className="d-flex  ms-5 ">
               <Select
                 defaultValue={selectedOption}
