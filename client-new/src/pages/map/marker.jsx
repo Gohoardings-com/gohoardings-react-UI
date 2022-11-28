@@ -111,7 +111,7 @@ const Markers = (markers) => {
                   <p><span>Height X Width : </span>{height} X {width} feet</p>
                   <p><span>FTF : </span>{ftf}</p>
                   <p><span>Price : Login to see price</span></p>
-                  {userid == null || isDelete == null || userid != null && isDelete == 1 ?
+                  { userid == null || isDelete == null && userid != null|| isDelete == 1 ?
                     <MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/> : <MdOutlineRemoveShoppingCart  className="sitemark" onClick={() => removefroCart(code)} />}
                 </div>
               </div>

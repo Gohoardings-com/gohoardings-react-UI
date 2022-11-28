@@ -19,7 +19,6 @@ const Map = () => {
   const [query, setQuery] = useState("");
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
-
   const [noOfLogo, setnoOfLogo] = useState(3);
 
   const slice = medias.slice(0, noOfLogo);
@@ -33,6 +32,8 @@ const Map = () => {
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
 
+  const cartPrice = cartItem.reduce((totalPrice, item) => totalPrice + parseInt(item.price),0)
+
   const getAllDetails = async () => {
     const { data } = await instance.post('filter/categoryfilter', {
       hordingtype: type,
@@ -41,6 +42,7 @@ const Map = () => {
     })
     setMedias(data)
   }
+
 
   const addonCart = async (e) => {
     const { data } = await instance.post('cart/addOnCart', {
@@ -57,6 +59,7 @@ const Map = () => {
     }
   }
 
+  
   const removefroCart = async (obj) => {
     await instance.post('cart/deleteFromCart', {
       code: obj.code,
@@ -70,7 +73,7 @@ const Map = () => {
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 0;
-        setMedias(data);
+        setcartItem(data);
       }
     });
   };
@@ -432,7 +435,8 @@ const Map = () => {
 
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
             <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
-              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : 999999</p>
+              {/* Total Price */}
+              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {cartPrice}</p>
             </div>
             <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
               <img src="./assests/map-icons/bag.png" alt="N/A" />

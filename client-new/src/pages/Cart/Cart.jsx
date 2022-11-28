@@ -7,6 +7,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import './cart.scss'
 import instance from "../../apis/Axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
@@ -16,7 +17,7 @@ const Cart = () => {
     const [End, setEnd] = useState(new Date());
     const [Newtotal, setNewTotal] = useState([]);
     const { addRemove, initalState } = useContext(AccountContext)
-    const [lengthChange, setlengthChange] = useState(5);
+    const [lengthChange, setlengthChange] = useState(0);
     const [posts, setPosts] = useState([])
     const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
     var totalprice = 0
@@ -41,16 +42,15 @@ const Cart = () => {
         setPosts(data);
     };
 
-    const cartItemprice = async () =>{
-        posts.reduce(
-            (totalPrice, item) => totalPrice + parseInt(item.price),0)
-    } 
+    // const cartItemprice = async () =>{
+    //     posts.reduce(
+    //         (totalPrice, item) => totalPrice + parseInt(item.price),0)
+    // }
 
 
     useEffect(() => {
         getAllData();
-   setNewTotal(cartItemprice)
-    }, [cartItemprice]);
+    }, []);
 
     const removeCart = async (event) => {
         let data = [...posts]
@@ -61,15 +61,15 @@ const Cart = () => {
             }
         })
     }
-    const handleChange = async(e, i, p) => {
+    const handleChange = async (e, i, p) => {
         // e= "incement value"
         // i = "index value"
         // p = "data"
         // const data = [...posts]
         // const daysMedia = e.target.value
         // setlengthChange(data.id == p.id ? parseInt((p.price + (p.price / 10) * daysMedia) + ((p.price / 100) * 18 * daysMedia)) : parseInt(p.price + parseInt((p.price / 10) * 5) + parseInt((p.price / 100) * 18 * 5)))
-        setlengthChange({total : e.target.value, index: i})
-        };
+        setNewTotal({ total: e.target.value, index: i })
+    };
 
     const sumbitALlProduct = async () => {
         await instance.post("cartItems/processdCart", {
@@ -81,7 +81,7 @@ const Cart = () => {
 
     return (
         <>
-        <Fixednavbar/>
+            <Fixednavbar />
             <div className="container-fluid px-5 bg-light  p-3 mt-5">
                 <div className="container p-0 m-0">
                     <div className="row justify-content-end">
@@ -120,7 +120,7 @@ const Cart = () => {
                                 {!posts ? <><h1>Loading... Please wait</h1></> : <>
                                     {posts.length > 0 && posts.map((obj, index) => (
                                         <>
-                                            {obj.isDelete == 0 ? <> 
+                                            {obj.isDelete == 0 ? <>
                                                 <div className="d-flex mb-3">
                                                     <div className="col-md-4 pe-0 me-0">
                                                         <img
@@ -128,7 +128,7 @@ const Cart = () => {
                                                             className="img-fluid rounded-start  cart-media"
                                                             alt="..."
                                                         />
-                                         </div>
+                                                    </div>
                                                     <div className="col-md-8 ms-0 ps-0">
                                                         <div className="card-body cart-media pb-1">
                                                             <h4 className="card-title">
@@ -162,18 +162,51 @@ const Cart = () => {
                                                                     </h6>
                                                                     <h6 className="text-secondary">
 
-                                                                        <FaRupeeSign />{index == lengthChange.index ? (obj.price_2 + (obj.price / 10) * lengthChange.total) +  ((obj.price_2 / 100) * 18 * lengthChange.total) :obj.price_2 + (obj.price / 10) * 5 +  (obj.price_2 / 100) * 18 * 5 } /total
+                                                                        <FaRupeeSign />{index == Newtotal.index ? (obj.price + (obj.price / 10) * Newtotal.total) + ((obj.price / 100) * 18 * Newtotal.total) : obj.price + (obj.price / 10) * 5 + (obj.price / 100) * 18 * 5} /total
                                                                     </h6>
                                                                 </div>
                                                                 <div className="col-md-6 ">
                                                                     <div className="button-section">
-                                                                        <input
-                                                                            type="number"
-                                                                            min="5"
-                                                                            defaultValue={5}
+                                                                        <button
 
-                                                                            onChange={(e) => {handleChange(e, index, obj);cartItemprice(obj)}} />
-                                                                    </div>
+                                                                            type="button"
+
+                                                                            class="btn btn-success rounded-1 me-2"
+
+                                                                            onClick={(e) => setlengthChange(lengthChange < 5 ? 5 : lengthChange + 1)}
+                                                                        >
+
+                                                                            <AiOutlinePlus className="quantitey" />
+
+                                                                        </button>
+
+                                                                        <span
+
+                                                                            type="button"
+
+                                                                            class="btn btn-outline-secondary rounded-1 me-2"
+
+
+
+                                                                        >
+
+                                                                            {lengthChange}
+
+                                                                        </span>
+
+                                                                        <button
+
+                                                                            type="button"
+
+                                                                            class="btn btn-danger rounded-1"
+
+                                                                            onClick={(e) => setlengthChange(lengthChange < 6 ? 5 : lengthChange - 1)}
+
+                                                                        >
+
+                                                                            <AiOutlineMinus className="quantitey" />
+
+                                                                        </button>                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -226,7 +259,6 @@ const Cart = () => {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </>

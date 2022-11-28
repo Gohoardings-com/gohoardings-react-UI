@@ -31,7 +31,7 @@ exports.register = catchError(async (req, res) => {
               });
               res.cookie(String(lastuserid), token, {
                 path: '/',
-                expires: new Date(Date.now() + 1000 * 84000),
+                expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
                 sameSite: 'lax',
                 origin: "http://localhost:3000"
@@ -51,7 +51,6 @@ exports.register = catchError(async (req, res) => {
     }
   })
 })
-
 
 exports.login = catchError(async (req, res) => {
   const { email, password } = req.body;
@@ -79,7 +78,7 @@ exports.login = catchError(async (req, res) => {
         });
         res.cookie(String(result[0].userid), token, {
           path: '/',
-          expires: new Date(Date.now() + 1000 * 84000),
+          expires: new Date(Date.now() + 7 * 24 * 3600000),
           httpOnly: true,
           sameSite: 'lax',
           origin: "http://localhost:3000"
@@ -120,7 +119,7 @@ exports.googleLogin = catchError(async (req, res) => {
               req.cookies[`${String(lastid)}`] = " ";
               res.cookie(String(lastid), token, {
                 path: '/',
-                expires: new Date(Date.now() + 1000 * 84000),
+                expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
                 sameSite: 'lax',
                 origin: "http://localhost:3000"
@@ -157,6 +156,8 @@ exports.googleLogin = catchError(async (req, res) => {
     }
   })
 })
+
+// exports.refreshToken = catchError()
 
 exports.verifyToken = catchError(async (req, res, next) => {
   const cookieData = req.cookies;
