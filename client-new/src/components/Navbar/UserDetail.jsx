@@ -51,10 +51,10 @@ const UserDetail = ({posts, setPosts}) => {
   return (
     <>
    
-    {posts ? <div className='p-0 m-0 d-flex userDetail '>
+    {posts ? <div className='p-0 m-0 d-flex userDetail  '>
                 
                 <Dropdown>
-      <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 mt-1">
+      <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-2 mt-1">
       <h5 className='p-0 m-0 text-secondary'>{posts.firstname.toUpperCase().substring(0,1)}</h5>
       </Dropdown.Toggle>
     
@@ -76,7 +76,7 @@ const UserDetail = ({posts, setPosts}) => {
     {/* /cfh */}
 
 <a  href='/cart' className='anchor'>
-<div className="cart ms-4 mb-1">
+<div className="cart ms-2 mb-1">
           <span>
            <MdOutlineAddShoppingCart/>
            
@@ -88,7 +88,7 @@ const UserDetail = ({posts, setPosts}) => {
       
               </div> : <>
                 <Nav.Link
-                  className="text-dark ms-2 pt-1 p-0 "
+                  className="text-dark ms-5 pt-1 p-0 "
                   href="/login"
                 >
                 <BiUserPlus className='login-icon  pt-0 mb-1 ms-1'/>
