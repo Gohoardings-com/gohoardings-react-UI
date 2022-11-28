@@ -4,8 +4,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from "react-bootstrap/Navbar";
 import './navbar.scss'
 import { MdLocationOn } from 'react-icons/md'
-import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
-import UserDetail from "./UserDetail";
+import Drop_Down_Image from "../drop_drown/drop_down_image";
+import UserDetail from "./userdetail";
 
 const NewNAvbar = () => {
   const [show, setShow] = useState(false);

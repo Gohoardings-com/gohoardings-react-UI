@@ -4,8 +4,8 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import instance from "../../apis/Axios";
-import UserDetail from "./UserDetail";
-import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
+import UserDetail from "./userdetail";
+import Drop_Down_Image from "../drop_drown/drop_down_image";
 import { MdLocationOn, MdOutlineSearch } from "react-icons/md";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -52,12 +52,12 @@ const Flotinggnavbar = () => {
         <Navbar.Toggle aria-controls=" border-0 mt-1" />
         <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
         <Navbar.Collapse>
-<<<<<<< HEAD
+
             <Form className="d-flex  ms-3 ">
-=======
+
           
             <Form className="d-flex  float-nav-form w-auto">
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
+
               <Select
                 defaultValue={value}
                 onChange={setValue}
@@ -67,9 +67,6 @@ const Flotinggnavbar = () => {
                  id="search-location-box"
                 className="me-2 "
               />
-<<<<<<< HEAD
-=======
-
 
      
                 {city
@@ -96,7 +93,6 @@ const Flotinggnavbar = () => {
                     </div>
                   ))}
              
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
               <DropdownButton
                 align="center"
                 title={userType}
@@ -135,11 +131,10 @@ const Flotinggnavbar = () => {
               </Link>
             </Form>
       
-<<<<<<< HEAD
+
           <div className="d-flex ms-4  ">
-=======
+
           <div className="d-flex ms-4  " >
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
             <Nav.Link
               className="mapLink float-map-btn  ps-1 mb rounded-pill "
               href="/map"
@@ -148,12 +143,12 @@ const Flotinggnavbar = () => {
             
               <span className="map-view-float">Map View</span>
             </Nav.Link>
-<<<<<<< HEAD
-            <Nav className="ms-auto">
-=======
+
+            {/* <Nav className="ms-auto"> */}
+
             
             <Nav className="user-detail-float ms-4">
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
+
               <UserDetail posts={posts} setPosts={setPosts} />
             </Nav>
           </div>

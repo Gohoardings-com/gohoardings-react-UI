@@ -1,7 +1,7 @@
 import React, {  useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.scss";
-import SearchMedia from '../SearchMedia/SeachMedia'
+import SearchMedia from '../searchmedia/seachmedia'
 import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
 import City from "../citylist/city";
