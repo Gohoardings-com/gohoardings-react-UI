@@ -60,8 +60,8 @@ const Flotinggnavbar = () => {
         <Navbar.Toggle aria-controls=" border-0 mt-1" />
         <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
         <Navbar.Collapse>
-          {/*  */}
-            <Form className="d-flex  ms-5 ">
+          
+            <Form className="d-flex  float-nav-form w-auto">
               <Select
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
@@ -73,7 +73,7 @@ const Flotinggnavbar = () => {
               />
 
 
-              {/* <div className=" dropdown-menu border-0 show ps-3  dropdown-menu-location">
+     
                 {city
                     .filter((item) => {
                       const searchTerm = value.toLowerCase();
@@ -97,7 +97,7 @@ const Flotinggnavbar = () => {
                       </h6>
                     </div>
                   ))}
-                </div> */}
+             
               <DropdownButton
                 align="center"
                 title={userType}
@@ -136,16 +136,17 @@ const Flotinggnavbar = () => {
               </Link>
             </Form>
       
-          <div className="d-flex ms-5  ">
+          <div className="d-flex ms-4  " >
             <Nav.Link
-              className="mapLink float-map-btn pt-1 text-center   rounded-pill "
+              className="mapLink float-map-btn  ps-1 mb rounded-pill "
               href="/map"
             >
               <MdLocationOn className=" float-map-logo  mb-1 text-danger" />
             
               <span className="map-view-float">Map View</span>
             </Nav.Link>
-            <Nav className="ms-4">
+            
+            <Nav className="user-detail-float ms-4">
               <UserDetail posts={posts} setPosts={setPosts} />
             </Nav>
           </div>
