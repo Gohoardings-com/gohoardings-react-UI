@@ -16,6 +16,7 @@ import Team from './pages/team/team'
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import News from './pages/news_media/news_media'
 import Testimonial from './pages/testimonial/testimonial'
+
 // import "./App.css" 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/team" element={<Team/>}/>  
           <Route exact path="/news" element={<News/>}/>  
           <Route exact path="/testimonial" element={<Testimonial/>}/> 
+          <Route exact path="*" element={<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
         </Routes>
         <Footer/>
       </BrowserRouter>
