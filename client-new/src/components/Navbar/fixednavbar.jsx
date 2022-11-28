@@ -4,8 +4,8 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import instance from "../../apis/Axios";
-import UserDetail from "./UserDetail";
-import Drop_Down_Image from "../DropDrown/Drop_Down_Image";
+import UserDetail from "./userDetail";
+import Drop_Down_Image from "../dropDrown/Drop_Down_Image";
 import { MdLocationOn, MdOutlineSearch } from "react-icons/md";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -15,9 +15,7 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
-  const [value, setValue] = useState("delhi");
-  const [userType, setUserType] = useState("traditional-ooh-media");
-
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const getCity = async () => {
     const { data } = await instance.get("media/searchMedia");
@@ -29,7 +27,17 @@ const Flotinggnavbar = () => {
     setPosts(posts);
   }, [posts]);
 
+  const [value, setValue] = useState("delhi");
+  const [userType, setUserType] = useState("Select Media Type");
 
+  const onChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const onSearch = (searchTerm) => {
+    setValue(searchTerm);
+    // our api to fetch the search result
+  };
 
   const handleSelect = (e) => {
     setUserType(e);
@@ -43,7 +51,7 @@ const Flotinggnavbar = () => {
     <>
       <Navbar expand="lg  colapse-search-bar navbar-main-floating pt-2 pb-3 m-0   ">
         <Dropdown onMouseOver={() => setShow(true)}>
-          <Dropdown.Toggle variant="transparent border-0 ms-1 ">
+          <Dropdown.Toggle variant="transparent border-0 ms-3 ">
             <Navbar.Brand href="/" id="home">
               <img src="../../images/logo.png" className="brand " />
             </Navbar.Brand>
@@ -52,23 +60,17 @@ const Flotinggnavbar = () => {
         <Navbar.Toggle aria-controls=" border-0 mt-1" />
         <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
         <Navbar.Collapse>
-<<<<<<< HEAD
-            <Form className="d-flex  ms-3 ">
-=======
           
             <Form className="d-flex  float-nav-form w-auto">
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
               <Select
-                defaultValue={value}
-                onChange={setValue}
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
                 options={City}
                 isSearchable
                 placeholder="Select your City"
                  id="search-location-box"
                 className="me-2 "
               />
-<<<<<<< HEAD
-=======
 
 
      
@@ -96,7 +98,6 @@ const Flotinggnavbar = () => {
                     </div>
                   ))}
              
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
               <DropdownButton
                 align="center"
                 title={userType}
@@ -135,11 +136,7 @@ const Flotinggnavbar = () => {
               </Link>
             </Form>
       
-<<<<<<< HEAD
-          <div className="d-flex ms-4  ">
-=======
           <div className="d-flex ms-4  " >
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
             <Nav.Link
               className="mapLink float-map-btn  ps-1 mb rounded-pill "
               href="/map"
@@ -148,12 +145,8 @@ const Flotinggnavbar = () => {
             
               <span className="map-view-float">Map View</span>
             </Nav.Link>
-<<<<<<< HEAD
-            <Nav className="ms-auto">
-=======
             
             <Nav className="user-detail-float ms-4">
->>>>>>> 90aaddf41a69fa34f75fc5d6e05a69062e700bf7
               <UserDetail posts={posts} setPosts={setPosts} />
             </Nav>
           </div>
