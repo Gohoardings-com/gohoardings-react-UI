@@ -15,7 +15,9 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [value, setValue] = useState("delhi");
+  const [userType, setUserType] = useState("traditional-ooh-media");
+
 
   const getCity = async () => {
     const { data } = await instance.get("media/searchMedia");
@@ -27,17 +29,7 @@ const Flotinggnavbar = () => {
     setPosts(posts);
   }, [posts]);
 
-  const [value, setValue] = useState("delhi");
-  const [userType, setUserType] = useState("Select Media Type");
 
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const onSearch = (searchTerm) => {
-    setValue(searchTerm);
-    // our api to fetch the search result
-  };
 
   const handleSelect = (e) => {
     setUserType(e);
@@ -51,7 +43,7 @@ const Flotinggnavbar = () => {
     <>
       <Navbar expand="lg  colapse-search-bar navbar-main-floating pt-2 pb-3 m-0   ">
         <Dropdown onMouseOver={() => setShow(true)}>
-          <Dropdown.Toggle variant="transparent border-0 ms-3 ">
+          <Dropdown.Toggle variant="transparent border-0 ms-1 ">
             <Navbar.Brand href="/" id="home">
               <img src="../../images/logo.png" className="brand " />
             </Navbar.Brand>
@@ -60,44 +52,16 @@ const Flotinggnavbar = () => {
         <Navbar.Toggle aria-controls=" border-0 mt-1" />
         <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
         <Navbar.Collapse>
-          {/*  */}
-            <Form className="d-flex  ms-5 ">
+            <Form className="d-flex  ms-3 ">
               <Select
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
+                defaultValue={value}
+                onChange={setValue}
                 options={City}
                 isSearchable
                 placeholder="Select your City"
                  id="search-location-box"
                 className="me-2 "
               />
-
-
-              {/* <div className=" dropdown-menu border-0 show ps-3  dropdown-menu-location">
-                {city
-                    .filter((item) => {
-                      const searchTerm = value.toLowerCase();
-                      const fullName = item.name.toLowerCase();
-
-                      return (
-                        searchTerm &&
-                        fullName.startsWith(searchTerm) &&
-                        fullName !== searchTerm
-                      );
-                    })
-                    .slice(0, 10)
-                    .map((item) => (
-                      <div
-                      className="border-1"
-                      onClick={() => onSearch(item.name)}
-                      key={item.name}
-                    >
-                      <h6 className=" text-secondary mt-1">
-                        {item.name}
-                      </h6>
-                    </div>
-                  ))}
-                </div> */}
               <DropdownButton
                 align="center"
                 title={userType}
@@ -136,7 +100,7 @@ const Flotinggnavbar = () => {
               </Link>
             </Form>
       
-          <div className="d-flex ms-5  ">
+          <div className="d-flex ms-4  ">
             <Nav.Link
               className="mapLink float-map-btn pt-1 text-center   rounded-pill "
               href="/map"
@@ -145,7 +109,7 @@ const Flotinggnavbar = () => {
             
               <span className="map-view-float">Map View</span>
             </Nav.Link>
-            <Nav className="ms-4">
+            <Nav className="ms-auto">
               <UserDetail posts={posts} setPosts={setPosts} />
             </Nav>
           </div>

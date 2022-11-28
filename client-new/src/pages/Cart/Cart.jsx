@@ -6,16 +6,15 @@ import { Button, Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
-import { parsePath, useNavigate } from 'react-router-dom';
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import './cart.scss'
 import instance from "../../apis/Axios";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 
 const Cart = () => {
     const [Start, setStart] = useState(new Date());
     const [End, setEnd] = useState(new Date());
-    const [Nowtotal, setNewTotal] = useState([]);
+    const [Newtotal, setNewTotal] = useState([]);
     const { addRemove, initalState } = useContext(AccountContext)
     const [lengthChange, setlengthChange] = useState(5);
     const [posts, setPosts] = useState([])
@@ -42,9 +41,16 @@ const Cart = () => {
         setPosts(data);
     };
 
+    const cartItemprice = async () =>{
+        posts.reduce(
+            (totalPrice, item) => totalPrice + parseInt(item.price),0)
+    } 
+
+
     useEffect(() => {
         getAllData();
-    }, []);
+   setNewTotal(cartItemprice)
+    }, [cartItemprice]);
 
     const removeCart = async (event) => {
         let data = [...posts]
@@ -59,9 +65,10 @@ const Cart = () => {
         // e= "incement value"
         // i = "index value"
         // p = "data"
-        const data = [...posts]
-        const daysMedia = e.target.value
-        setlengthChange(data.id == p.id ? parseInt((p.price + (p.price / 10) * daysMedia) + ((p.price / 100) * 18 * daysMedia)) : parseInt(p.price + parseInt((p.price / 10) * 5) + parseInt((p.price / 100) * 18 * 5)))
+        // const data = [...posts]
+        // const daysMedia = e.target.value
+        // setlengthChange(data.id == p.id ? parseInt((p.price + (p.price / 10) * daysMedia) + ((p.price / 100) * 18 * daysMedia)) : parseInt(p.price + parseInt((p.price / 10) * 5) + parseInt((p.price / 100) * 18 * 5)))
+        setlengthChange({total : e.target.value, index: i})
         };
 
     const sumbitALlProduct = async () => {
@@ -74,6 +81,7 @@ const Cart = () => {
 
     return (
         <>
+        <Fixednavbar/>
             <div className="container-fluid px-5 bg-light  p-3 mt-5">
                 <div className="container p-0 m-0">
                     <div className="row justify-content-end">
@@ -120,7 +128,7 @@ const Cart = () => {
                                                             className="img-fluid rounded-start  cart-media"
                                                             alt="..."
                                                         />
-                                        </div>
+                                         </div>
                                                     <div className="col-md-8 ms-0 ps-0">
                                                         <div className="card-body cart-media pb-1">
                                                             <h4 className="card-title">
@@ -141,20 +149,20 @@ const Cart = () => {
                                                                     </h6>
                                                                     <h6 className="text-secondary">
 
-                                                                        <FaRupeeSign /> {index == Nowtotal.index ? parseInt(obj.price * Nowtotal.total) : parseInt(obj.price * 5)} /original
+                                                                        <FaRupeeSign /> {index == Newtotal.index ? parseInt(obj.price * Newtotal.total) : parseInt(obj.price * 5)} /original
                                                                         price
                                                                     </h6>
                                                                     <h6 className="text-secondary">
 
-                                                                        <FaRupeeSign />   {index == Nowtotal.index ? parseInt(obj.price + obj.price / 10 * Nowtotal.total) : parseInt(obj.price + (obj.price / 10) * 5)}/price after discount
+                                                                        <FaRupeeSign />   {index == Newtotal.index ? parseInt(obj.price + obj.price / 10 * Newtotal.total) : parseInt(obj.price + (obj.price / 10) * 5)}/price after discount
                                                                     </h6>
                                                                     <h6 className="text-secondary">
 
-                                                                        <FaRupeeSign /> {index == Nowtotal.index ? parseInt((obj.price / 100) * 18 * Nowtotal.total) : parseInt((obj.price / 100) * 18 * 5)}/gst(18%)
+                                                                        <FaRupeeSign /> {index == Newtotal.index ? parseInt((obj.price / 100) * 18 * Newtotal.total) : parseInt((obj.price / 100) * 18 * 5)}/gst(18%)
                                                                     </h6>
                                                                     <h6 className="text-secondary">
 
-                                                                        <FaRupeeSign /> {lengthChange} /total
+                                                                        <FaRupeeSign />{index == lengthChange.index ? (obj.price_2 + (obj.price / 10) * lengthChange.total) +  ((obj.price_2 / 100) * 18 * lengthChange.total) :obj.price_2 + (obj.price / 10) * 5 +  (obj.price_2 / 100) * 18 * 5 } /total
                                                                     </h6>
                                                                 </div>
                                                                 <div className="col-md-6 ">
@@ -164,7 +172,7 @@ const Cart = () => {
                                                                             min="5"
                                                                             defaultValue={5}
 
-                                                                            onChange={(e) => handleChange(e, index, obj)} />
+                                                                            onChange={(e) => {handleChange(e, index, obj);cartItemprice(obj)}} />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -207,7 +215,7 @@ const Cart = () => {
                                         GST(18%) : <FaRupeeSign /> {totalprice}
                                     </h5>
                                     <h5 className="mt-4">
-                                        Total ammount : <FaRupeeSign /> 55000
+                                        Total ammount : <FaRupeeSign /> {Newtotal ? Newtotal : 0}
                                     </h5>
                                 </div>
                             </div>
