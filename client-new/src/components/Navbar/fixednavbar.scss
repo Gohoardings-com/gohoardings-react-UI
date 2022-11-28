@@ -5,15 +5,11 @@
 
 .navbar-main-floating{
  background-color: #20344D;
-width:100vw !important;
-.float-nav-form{
- margin-left: 5%;
- 
-}
+
+
+
  .dropdown-toggle::after {
-   padding-left: 0%;
-   font-size: 26px;
-   color: #ffffff;
+   display: none;
  }
  *:focus {
   outline: none;
@@ -28,14 +24,16 @@ width:100vw !important;
   background-color: $white;
   color: $grey;
   height: 40px !important;
-  width: 30vw !important;
+  width: 25vw !important;
 }
+
 
 .css-1s2u09g-control{
   margin: 0% !important;
+  margin-bottom: 2px !important;
   border: none;
-  height:  40px !important;
-  width: 30vw !important;
+  height:  39px !important;
+  width:25vw !important;
    font-size: 20px;
   background-color: $white;
   color: $grey;
@@ -51,7 +49,7 @@ width:100vw !important;
   cursor: pointer;
   font-size: 20px;
   padding-bottom: 2px;
-  height: 41px !important;
+  height: 40px !important;
   border-radius: 5px;
 }
 // ghj
@@ -59,7 +57,7 @@ width:100vw !important;
   // opacity: 85%;
   color: #FFFFFF;
   font-weight: 500;
-  padding-top: 3%;
+  padding-top: 4%;
   background-color: transparent;
    border:  2px groove #fff312e1 ;
   .float-map-logo{
@@ -95,11 +93,12 @@ width:100vw !important;
 
 }
 .new-search {
- position: fixed;
+position: fixed;
  background-color:#20344D ;
  z-index: 1;
  top: 24px;
-//  width: 100%;
+ width: 100vw;
+
 }
 .search-button{
  background-color: #68E2FE !important;
@@ -119,7 +118,7 @@ font-size: 30px;
   cursor: pointer;
 }
 .cart span:nth-child(1) {
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   margin-top: 0%;
   color: white;
 }

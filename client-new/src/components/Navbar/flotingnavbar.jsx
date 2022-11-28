@@ -36,7 +36,7 @@ const Fixednavbar = () => {
 
   return (
     <>
-      <div style={scrollcss ? { display: "none" } : { display: "inline-block" }} className="new-search">   
+      <div style={scrollcss ? { display: "none" } : { display: "block" }} className="new-search ">   
    <Flotinggnavbar/>
       </div>
 

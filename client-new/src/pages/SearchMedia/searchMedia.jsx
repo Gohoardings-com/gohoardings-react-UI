@@ -4,7 +4,7 @@ import instance from "../../apis/Axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import "./seachMedia.scss";
+import "./searchmedia.scss";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
@@ -16,6 +16,7 @@ const SearchMedia = () => {
     setCity(data);
   };
 
+
   useEffect(() => {
     getCity();
   }, []);
@@ -26,6 +27,12 @@ const SearchMedia = () => {
   const onChange = (event) => {
 
     setValue(event.target.value);
+  };
+  
+  const onSearch = (searchTerm) => {
+    setValue(searchTerm);
+    // our api to fetch the search result
+    console.log("search ", searchTerm);
   };
 
   const handleSelect = (e) => {
@@ -82,9 +89,10 @@ const SearchMedia = () => {
                         className="border-1"
 
                         key={item.name}
+                        onClick={() => onSearch(item.name)}
                       >
                         <h6 className=" text-secondary mt-1">
-
+                         
                           {item.name}
                         </h6>
                       </div>

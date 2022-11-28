@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from "react-bootstrap/navbar";
 import './navbar.scss'
 import { MdLocationOn } from 'react-icons/md'
-import Drop_Down_Image from "../drop_drown/drop_down_image";
+import Drop_Down_Image from "../drop_down/drop_down_image";
 import UserDetail from "./userDetail";
 
 const NewNAvbar = () => {
@@ -56,7 +56,6 @@ useEffect(() => {
           </Navbar.Collapse>
         </div>
       </Navbar>
-      <Drop_Down_Image show={show} setShow={setShow} Dropdown={Dropdown} />
     </>
   );
 };
