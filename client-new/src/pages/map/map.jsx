@@ -32,7 +32,17 @@ const Map = () => {
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
 
-  const cartPrice = cartItem.reduce((totalPrice, item) => totalPrice + parseInt(item.price),0)
+
+  const [total,setNewTotal] = useState(0)
+  const handelprice = () => {
+    let ans = 0;
+    cartItem.map((item) => (item.isDelete==0? ans+=item.price:""));
+    setNewTotal(ans);
+  };
+
+  useEffect(() => {
+    handelprice();
+  });
 
   const getAllDetails = async () => {
     const { data } = await instance.post('filter/categoryfilter', {
@@ -436,7 +446,7 @@ const Map = () => {
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
             <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
               {/* Total Price */}
-              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {cartPrice}</p>
+              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {total}</p>
             </div>
             <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
               <img src="./assests/map-icons/bag.png" alt="N/A" />

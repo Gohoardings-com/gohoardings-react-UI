@@ -3,20 +3,12 @@
 @import "~bootstrap/scss/bootstrap";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
 
-.date-box {
-  background-color: $white;
-  font-size: 25px;
-  border-bottom: 2px solid $red;
-  width:180px;
-}
-.claender-logo {
-  margin-left: -15%;
-  cursor: pointer;
-  
-}
-.claender-logom {
-  font-size: 30px;
-}
+
+
+
+
+
+
 .quantitey {
   font-size: large;
 }
@@ -36,13 +28,12 @@
   color: rgb(237, 0, 0);
 }
 
-// .cart-media {
-//   background: $card_background;
-// }
+
 .maincard{
   box-shadow: $box-shadow  ;
   border: none;
 }
+
 .chek-avl-btn{
     border: none;
 }
@@ -54,4 +45,28 @@
 }
 .new{
   background-image: $card-background;
+}
+
+.date-select-section{
+  
+  .input-box.active-grey {
+    .input-1 {
+      border: 1px double rgb(198, 197, 197) ;
+      border-radius: 4px;
+      width: 219px !important;
+    }
+    .calender-logo{
+      font-size: 22px !important ;
+    }
+    .dropdown-toggle::after {
+      display: none;
+      
+  }
+    .input-label {
+      color: $grey;
+      top: -11px;
+      background: $white;
+      font-size: 14px;
+    }
+  }
 }
