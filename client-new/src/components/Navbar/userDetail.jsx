@@ -4,19 +4,24 @@ import { authActions } from '../../store';
 import {BiUserPlus} from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import Nav from "react-bootstrap/Nav";
-import { refreshToken, clientId, getCurrentuser, logoutUser } from '../../apis/apis';
+import instance from "../../apis/axios";
 import { AccountContext } from '../../apis/apiContext';
 import { MdOutlineAddShoppingCart} from 'react-icons/md'
 import { useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-let firstRender = true
+
+
+const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
+
 const UserDetail = ({posts, setPosts}) => {
   const dispatch = useDispatch();
     const {initalState} = useContext(AccountContext)
     const { isLoggedIn } = useSelector((state) => state.LoginStatus);
 
     const handelLogout = async () => {
-      const data = await logoutUser();
+      const data = await instance.post("registration/logout", null, {
+        withCredentials: true,
+      });
       if (data.status == 200) {
         window.localStorage.clear();
         window.sessionStorage.clear()
@@ -31,27 +36,24 @@ const UserDetail = ({posts, setPosts}) => {
     }
     
     const getUser = async () => {
-     const data = await getCurrentuser();
-      return data
+      const { data } = await instance.get("registration/user", {
+        withCredentials: true
+      })
+      setPosts(...data)
     }
     
     useEffect(() => {
-      if(firstRender){
-        firstRender = false
-        getUser().then((data) => setPosts(...data) && dispatch(authActions.login()))
-       }
-       let interval = setInterval(() =>{
-        refreshToken().then((data) => setPosts(...data))
-       },6 * 14 * 3600000)
-       return ()=>clearInterval(interval)
-    }, [])
-    useEffect(() =>{
+      getUser().then(() => dispatch(authActions.login()))
+     
       setPosts(posts)
-    },[])
+    }, [posts])
+    
   return (
     <>
-    { posts ? <div className='p-0 m-0  d-flex userDetail my-2 my-lg-0 '>
-         <Dropdown>
+   
+    {posts ? <div className='p-0 m-0  d-flex userDetail my-2 my-lg-0 '>
+                
+                <Dropdown>
       <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 ">
       <h5 className='p-0 m-0 text-secondary'>{posts.firstname.toUpperCase().substring(0,1)}</h5>
       </Dropdown.Toggle>

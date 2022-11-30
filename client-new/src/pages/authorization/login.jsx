@@ -5,7 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux'
 import { useGoogleLogin } from 'react-google-login'
 import { MdOutlineError } from "react-icons/md";
-import { clientId, googleLogin } from "../../apis/apis";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from 'react-router-dom';
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -13,13 +12,14 @@ import Register from "./signup";
 import instance from "../../apis/axios";
 
 const Login = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailValidate, setEmailValidate] = useState();
   const [passwordValidate, setPasswordValidate] = useState();
-
+  const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
 
   function setFocus(on) {
@@ -40,10 +40,11 @@ const Login = () => {
       });
     }
   }
-
   // Google Login Request
   const onSuccess = async (res) => {
-    const  data  = await googleLogin(res);
+    const { data } = await instance.post("registration/googleSingUp", {
+      profile: res.profileObj
+    })
     if (data.message === "User Login Successfull") {
       const user = data.message
       window.localStorage.setItem("user", user)

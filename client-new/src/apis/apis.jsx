@@ -24,8 +24,30 @@ export const refreshToken = async() => {
       return data
 }
 export const googleLogin = async(res) => {
-    const data = await  instance.post("registration/googleSingUp", {
+    const {data} = await  instance.post("registration/googleSingUp", {
         profile: res.profileObj
       })
       return data
+}
+
+export const loginUser = async(email, password) => {
+    const {data} = await instance.post('registration/login', {
+        email: email, password: password
+      })
+      return data
+}
+
+export const registerUser = async(name, email, phone, password) => {
+    const {data} = await instance.post('registration/register',{
+        name,  email,phone, password 
+      })
+      return data
+}
+
+export const deleteCartItem = async(obj) => {
+    const data=  await instance.post("cart/deleteFromCart", {
+        code: obj,
+      });
+      console.log(data);
+ return data
 }

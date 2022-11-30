@@ -4,6 +4,7 @@ import { AccountContext } from "../../apis/apiContext";
 import moment, { parseZone } from "moment";
 import { Button, Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
+import { deleteCartItem } from "../../apis/apis";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -16,9 +17,7 @@ import Fixednavbar from "../../components/navbar/fixednavbar";
 const Cart = () => {
   const [Start, setStart] = useState(new Date());
   const [End, setEnd] = useState(new Date());
-  const [Newtotal, setNewTotal] = useState([]);
   const { addRemove, initalState } = useContext(AccountContext);
-  const [lengthChange, setlengthChange] = useState(5);
   const [posts, setPosts] = useState([]);
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
@@ -30,9 +29,7 @@ const Cart = () => {
   };
 
   const removefroCart = async (obj) => {
-    await instance.post("cart/deleteFromCart", {
-      code: obj.code,
-    });
+   deleteCartItem();
     addRemove({ type: "DECR" });
     removeCart(obj);
   };
@@ -192,7 +189,7 @@ const Cart = () => {
                                       {obj.areadescription}
                                       <span
                                         className="float-end"
-                                        onClick={() => removefroCart(obj)}
+                                        onClick={() => removefroCart(obj.code)}
                                       >
                                         <MdDeleteForever className="mb-2  delet-icon" />
                                       </span>
