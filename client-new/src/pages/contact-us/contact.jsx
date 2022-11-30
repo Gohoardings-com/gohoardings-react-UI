@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./contact.scss";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import { ToastContainer, toast } from "react-toastify";
 import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";

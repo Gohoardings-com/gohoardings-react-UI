@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import './footer.scss'
 import { Link, useNavigate } from "react-router-dom";
 import {CgCheck} from 'react-icons/cg'
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 
 function useWindowSize() {
     const [size, setSize] = useState([window.innerWidth]);

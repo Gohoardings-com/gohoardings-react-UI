@@ -1,10 +1,10 @@
 import React, { useState,useEffect,useContext } from "react";
-import { AccountContext } from "../../apis/ApiContext";
+import { AccountContext } from "../../apis/apiContext";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 import "./marker.scss"
 import {useNavigate } from 'react-router-dom';
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 
 const center = {
     lat: 28.5821195,

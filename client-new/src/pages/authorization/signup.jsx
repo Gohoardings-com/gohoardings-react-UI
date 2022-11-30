@@ -4,7 +4,7 @@ import { MdOutlineError } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from "../../store";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import { useNavigate } from 'react-router-dom';
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 

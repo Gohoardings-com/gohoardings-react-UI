@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap"
 import './index.css';
-import ApiContext from './apis/ApiContext';
+import ApiContext from './apis/apiContext';
 import { Provider } from "react-redux";
 import App from './App';
 import store from './store'

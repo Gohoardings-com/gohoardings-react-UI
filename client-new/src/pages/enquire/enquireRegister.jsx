@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
-import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
+import { MdOutlineError } from "react-icons/md";
 import './enquire.scss';
-import { ImMobile } from "react-icons/im";
-import instance from '../../apis/Axios';
+import instance from '../../apis/axios';
 
 
 const EnquireRegister = () => {

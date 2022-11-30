@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AccountContext } from "../../apis/ApiContext";
+import { AccountContext } from "../../apis/apiContext";
 import moment, { parseZone } from "moment";
 import { Button, Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
@@ -10,7 +10,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import "./cart.scss";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 
 const Cart = () => {

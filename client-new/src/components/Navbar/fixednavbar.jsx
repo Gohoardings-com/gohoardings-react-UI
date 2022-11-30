@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import instance from "../../apis/Axios";
+import { getAllCity } from "../../apis/apis";
 import UserDetail from "./userDetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdLocationOn, MdOutlineSearch } from "react-icons/md";
@@ -15,12 +14,12 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const getCity = async () => {
-    const { data } = await instance.get("media/searchMedia");
+    const  data  = await getAllCity();
     setCity(data);
   };
+console.log(posts);
 
   useEffect(() => {
     getCity();
@@ -28,20 +27,8 @@ const Flotinggnavbar = () => {
   }, [posts]);
 
   const [value, setValue] = useState("delhi");
-  const [userType, setUserType] = useState("Select Media Type");
+  const [userType, setUserType] = useState("traditional-ooh-media");
 
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const onSearch = (searchTerm) => {
-    setValue(searchTerm);
-    // our api to fetch the search result
-  };
-
-  const handleSelect = (e) => {
-    setUserType(e);
-  };
   let City = [];
   city.forEach((obj) => {
     City.push({ label: obj.name, value: obj.name });
@@ -64,8 +51,8 @@ const Flotinggnavbar = () => {
             <Nav className="navbar-nav mx-auto  ">
              
                 <Select
-                  defaultValue={selectedOption}
-                  onChange={setSelectedOption}
+                  defaultValue={value}
+                  onChange={setValue}
                   options={City}
                   isSearchable
                   placeholder="Select your City"
@@ -77,7 +64,7 @@ const Flotinggnavbar = () => {
                   title={userType}
                   placeholder="Search your City"
                   id="select-media-box"
-                  onSelect={handleSelect}
+                  onSelect={(e) => setUserType(e)}
                   className=""
                 >
                   <Dropdown.Item eventKey="traditional-ooh-media">
@@ -102,7 +89,7 @@ const Flotinggnavbar = () => {
                     Transit Media
                   </Dropdown.Item>
                 </DropdownButton>
-                <Link to={`/${userType}/${value}`}>
+                <Link to={`/${userType}/${value.label ? value.label : "delhi"}`}>
                   <Button
                     className="border-0  btn-danger ms-2 "
                     id="search-button-flotnav"
@@ -110,8 +97,7 @@ const Flotinggnavbar = () => {
                     <MdOutlineSearch className="search-logo " />
                   </Button>
                 </Link>
-           
-             
+
             </Nav>
             <form class="form-inline my-2 my-lg-0 ">
                   <Nav.Link
