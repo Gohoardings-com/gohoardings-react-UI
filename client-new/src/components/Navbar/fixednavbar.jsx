@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import instance from "../../apis/Axios";
@@ -54,7 +53,7 @@ const Flotinggnavbar = () => {
           <Navbar.Brand href="/" id="home">
             <img
               src="../../images/logo.png"
-              className="brand  border-0 ms-3  pb-1 float-brand"
+              className="brand  border-0 ms-5  pb-1 float-brand"
               onMouseOver={() => setShow(false)}
             />
           </Navbar.Brand>

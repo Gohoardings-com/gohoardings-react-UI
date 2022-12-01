@@ -42,13 +42,13 @@ const SearchMedia = () => {
   return (
     <>
       <div className="heading-content text-center py-5 ">
-        <div className="headingText ">
+        <div className="headingText animate__animated animate__bounceInDown animate__slow	0.5s">
           <h1 className="text-center text-dark ">
             India's Largest Outdoor
             <br />
             Advertising Agency
           </h1>
-          <h4 className="fw-lighter mt-4 text-center text-dark">
+          <h4 className="fw-lighter mt-4 text-center text-dark ">
             OOH Advertising made easy
             <br />
             Search Media. Check Availability. Book Online.

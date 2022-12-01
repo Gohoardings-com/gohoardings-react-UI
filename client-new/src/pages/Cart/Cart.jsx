@@ -16,9 +16,7 @@ import Fixednavbar from "../../components/navbar/fixednavbar";
 const Cart = () => {
   const [Start, setStart] = useState(new Date());
   const [End, setEnd] = useState(new Date());
-  const [Newtotal, setNewTotal] = useState([]);
   const { addRemove, initalState } = useContext(AccountContext);
-  const [lengthChange, setlengthChange] = useState(5);
   const [posts, setPosts] = useState([]);
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
@@ -95,7 +93,8 @@ const Cart = () => {
       produts: posts,
     });
   };
-
+  const current = new Date();
+  const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   return (
     <>
       <Fixednavbar />
@@ -103,10 +102,10 @@ const Cart = () => {
         <div className="p-0 m-0 date-select-section">
           <div className="row">
             <div className="col-md-3 ps-0">
-              <div class="input-box active-grey">
+              <div class="input-box active-grey ">
                 <label class="input-label">Start Date</label>
-                <div type="text " class="input-1 d-flex ">
-                  <h6 className="me-2 calender-logo  text-secondary">29/11/2022</h6>
+                <div type="text " class="input-1 d-flex bg-light">
+                  <h6 className="me-2 calender-logo  text-secondary">{startdate}</h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
                       variant="transparent"
@@ -125,8 +124,8 @@ const Cart = () => {
             <div className="col-md-3">
               <div class="input-box active-grey">
                 <label class="input-label">End Date</label>
-                <div type="text " class="input-1 d-flex ">
-                  <h6 className="me-2  calender-logo  text-secondary">30/11/2022</h6>
+                <div type="text " class="input-1 d-flex bg-light ">
+                  <h6 className="me-2  calender-logo  text-secondary">{startdate}</h6>
 
                   <Dropdown className="p-0 m-0">
                     <Dropdown.Toggle
@@ -301,7 +300,7 @@ const Cart = () => {
 
                   <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6>
                   <h5 className=" mt-4">
-                    {totalDays ? totalDays : 5} Total Days
+                  Total  {totalDays ? totalDays : 5} Days
                   </h5>
 
                   <h5 className="mt-4">
