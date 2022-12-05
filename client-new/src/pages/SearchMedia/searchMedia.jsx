@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { DropdownButton, Dropdown } from "react-bootstrap";
@@ -42,20 +42,20 @@ const SearchMedia = () => {
   return (
     <>
       <div className="heading-content text-center py-5 ">
-        <div className="headingText animate__animated animate__bounceInDown animate__slow	0.5s">
-          <h1 className="text-center text-dark ">
+        <div className="headingText pt-3">
+          <h1 className="text-center text-light ">
             India's Largest Outdoor
             <br />
             Advertising Agency
           </h1>
-          <h4 className="fw-lighter mt-4 text-center text-dark ">
+          <h6 className="fw-lighter mt-4 text-center text-light ">
             OOH Advertising made easy
             <br />
             Search Media. Check Availability. Book Online.
-          </h4>
+          </h6>
         </div>
-        <div className="container-fluid  mt-5 pt-3  px-5 m-0 ">
-          <div className="row  mx-auto mb-5  mt-5 p-3 search-container">
+        <div className="container-fluid  mt-5 pt-2  px-5 m-0 ">
+          <div className="row  mx-auto mb-5  mt-5 p-1 search-container">
             <div className="col-md-5  ">
               <div className="search-location ">
                 <div className="search-inner">
@@ -71,7 +71,7 @@ const SearchMedia = () => {
                   </InputGroup>
                 </div>
 
-                <div className=" dropdown-menu border-0 show ps-3  dropdown-menu-location">
+                <div className=" dropdown-menu border-0  ps-3  dropdown-menu-location">
                   {city
                     .filter((item) => {
                       const searchTerm = value.toLowerCase();

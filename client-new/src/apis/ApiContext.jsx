@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useReducer, createContext} from 'react'
-import instance from './Axios';
+import instance from './axios';
 
 
 export const AccountContext = createContext(null);

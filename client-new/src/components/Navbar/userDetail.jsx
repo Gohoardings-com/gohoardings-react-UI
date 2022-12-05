@@ -4,8 +4,8 @@ import { authActions } from '../../store';
 import {BiUserPlus} from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import Nav from "react-bootstrap/Nav";
-import instance from "../../apis/Axios";
-import { AccountContext } from '../../apis/ApiContext';
+import instance from "../../apis/axios";
+import { AccountContext } from '../../apis/apiContext';
 import { MdOutlineAddShoppingCart} from 'react-icons/md'
 import { useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';

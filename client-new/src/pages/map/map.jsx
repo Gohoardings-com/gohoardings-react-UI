@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AccountContext } from '../../apis/ApiContext';
+import { AccountContext } from '../../apis/apiContext';
 import { useNavigate } from 'react-router-dom';
 import "./map.scss";
 import "./icons.scss"
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";

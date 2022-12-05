@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import instance from "../../apis/Axios";
+import { getAllCity } from "../../apis/apis";
 import UserDetail from "./userDetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdLocationOn, MdOutlineSearch } from "react-icons/md";
@@ -14,12 +14,12 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const getCity = async () => {
-    const { data } = await instance.get("media/searchMedia");
+    const  data  = await getAllCity();
     setCity(data);
   };
+console.log(posts);
 
   useEffect(() => {
     getCity();
@@ -27,20 +27,8 @@ const Flotinggnavbar = () => {
   }, [posts]);
 
   const [value, setValue] = useState("delhi");
-  const [userType, setUserType] = useState("Select Media Type");
+  const [userType, setUserType] = useState("traditional-ooh-media");
 
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const onSearch = (searchTerm) => {
-    setValue(searchTerm);
-    // our api to fetch the search result
-  };
-
-  const handleSelect = (e) => {
-    setUserType(e);
-  };
   let City = [];
   city.forEach((obj) => {
     City.push({ label: obj.name, value: obj.name });
@@ -53,7 +41,7 @@ const Flotinggnavbar = () => {
           <Navbar.Brand href="/" id="home">
             <img
               src="../../images/logo.png"
-              className="brand  border-0 ms-5  pb-1 float-brand"
+              className="brand  border-0 ms-5   float-brand"
               onMouseOver={() => setShow(false)}
             />
           </Navbar.Brand>
@@ -63,8 +51,8 @@ const Flotinggnavbar = () => {
             <Nav className="navbar-nav mx-auto  ">
              
                 <Select
-                  defaultValue={selectedOption}
-                  onChange={setSelectedOption}
+                  defaultValue={value}
+                  onChange={setValue}
                   options={City}
                   isSearchable
                   placeholder="Select your City"
@@ -76,7 +64,7 @@ const Flotinggnavbar = () => {
                   title={userType}
                   placeholder="Search your City"
                   id="select-media-box"
-                  onSelect={handleSelect}
+                  onSelect={(e) => setUserType(e)}
                   className=""
                 >
                   <Dropdown.Item eventKey="traditional-ooh-media">
@@ -101,7 +89,7 @@ const Flotinggnavbar = () => {
                     Transit Media
                   </Dropdown.Item>
                 </DropdownButton>
-                <Link to={`/${userType}/${value}`}>
+                <Link to={`/${userType}/${value.label ? value.label : "delhi"}`}>
                   <Button
                     className="border-0  btn-danger ms-2 "
                     id="search-button-flotnav"
@@ -109,17 +97,16 @@ const Flotinggnavbar = () => {
                     <MdOutlineSearch className="search-logo " />
                   </Button>
                 </Link>
-           
-             
+
             </Nav>
-            <form class="form-inline my-2 my-lg-0 ">
+            <form class="form-inline  ">
                   <Nav.Link
-                    className="mapLink float-map-btn  ps-1  mb rounded-pill "
+                    className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
                     href="/map"
                   >
-                    <MdLocationOn className=" float-map-logo  mb-1 text-danger" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991231.png" className=" float-map-logo ps-0 p-0 me-1" />
 
-                    <span className="map-view-float">Map View</span>
+                    <span className="map-view-float ">Map View</span>
                   </Nav.Link>
                 </form>
               

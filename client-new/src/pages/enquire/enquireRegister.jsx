@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
-import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
+import { MdOutlineError } from "react-icons/md";
 import './enquire.scss';
-import { ImMobile } from "react-icons/im";
-import instance from '../../apis/Axios';
+import instance from '../../apis/axios';
 
 
 const EnquireRegister = () => {
@@ -79,9 +78,9 @@ const EnquireRegister = () => {
     };
 
     return (
-        <div className='col-md-5  home-contact-form '>
-            <form className=' bg-dark rounded p-3' onSubmit={onSubmit}>
-                <h2 className='no-wrap text-light text-center'>Request a Call Back</h2>
+        <div className='col-md-5  home-contact-form px-5 mt-2 '>
+            <form className=' bg-dark rounded p-3 ' onSubmit={onSubmit}>
+                <h3 className='no-wrap text-light text-center'>Request a Call Back</h3>
                 <div className="mb-4 mt-4 ">
                     <div className="input-box">
                         <label className="input-label">Enter your full name</label>
@@ -151,7 +150,7 @@ const EnquireRegister = () => {
                     </div>
                 </div>
 
-                <div className="d-grid">
+                <div className="d-grid mt-2">
                     <button type="submit" className="rounded btn btn-danger  btn-lg mt-3">
                         <h5 className=" mt-2">SEND MESSAGE</h5>
                     </button>

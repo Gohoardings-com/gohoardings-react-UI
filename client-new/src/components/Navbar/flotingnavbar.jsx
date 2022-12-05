@@ -36,7 +36,7 @@ const Fixednavbar = () => {
 
   return (
     <>
-      <div style={scrollcss ? { display: "none" } : { display: "block" }} className="new-search ">   
+      <div style={scrollcss ? { display: "none" } : { display: "block" }} className="new-search animate__animated  animate__fadeInDown ">   
    <Flotinggnavbar/>
       </div>
 

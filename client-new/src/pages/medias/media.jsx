@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./media.scss";
-import { AccountContext } from "../../apis/ApiContext";
+import { AccountContext } from "../../apis/apiContext";
 import { useParams, useNavigate } from "react-router-dom";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import { MdOutlineShoppingCart,MdSearch } from "react-icons/md";
 import SingleCard from "./singleCard";
 import MultiCard from "./multiCard";

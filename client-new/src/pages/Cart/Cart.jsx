@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AccountContext } from "../../apis/ApiContext";
+import { AccountContext } from "../../apis/apiContext";
 import moment, { parseZone } from "moment";
 import { Button, Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
+import { deleteCartItem } from "../../apis/apis";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import "./cart.scss";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 
 const Cart = () => {
@@ -28,9 +29,7 @@ const Cart = () => {
   };
 
   const removefroCart = async (obj) => {
-    await instance.post("cart/deleteFromCart", {
-      code: obj.code,
-    });
+   deleteCartItem();
     addRemove({ type: "DECR" });
     removeCart(obj);
   };
@@ -191,7 +190,7 @@ const Cart = () => {
                                       {obj.areadescription}
                                       <span
                                         className="float-end"
-                                        onClick={() => removefroCart(obj)}
+                                        onClick={() => removefroCart(obj.code)}
                                       >
                                         <MdDeleteForever className="mb-2  delet-icon" />
                                       </span>

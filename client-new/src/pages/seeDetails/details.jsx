@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { RiUser3Fill } from "react-icons/ri";
-import { AccountContext } from "../../apis/ApiContext";
+import { AccountContext } from "../../apis/apiContext";
 import { useParams } from "react-router-dom";
 import { IoIosSettings, IoMdLocate } from "react-icons/io";
 import { GrMapLocation } from "react-icons/gr";
@@ -10,7 +10,7 @@ import {
   MdOutlineRemoveShoppingCart,
   MdOutlineAddShoppingCart,
 } from "react-icons/md";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 
 const Details = () => {

@@ -9,7 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from 'react-router-dom';
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Register from "./signup";
-import instance from "../../apis/Axios";
+import instance from "../../apis/axios";
 
 const Login = () => {
 
@@ -145,7 +145,7 @@ const Login = () => {
         <div className="container-fluid px-5">
           <div className="row mx-5  mt-5 rounded-5 all-content p-3  mb-4">
             <div className="col-md-7 p-0  d-flex justify-content-center main_content2">
-              <img src="./images/login.png" className="img-fluid rounded " id="png" />
+              <img src="./images/login.png" className="img-fluid rounded animate__animated animate__pulse animate__infinite	infinite animate__slow	1s " id="png" />
             </div>
             <div className="col-md-5 main_content1">
               <div className="modal-heading mt-3 text-center">
