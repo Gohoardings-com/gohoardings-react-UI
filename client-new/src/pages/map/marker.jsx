@@ -12,7 +12,6 @@ const center = {
   };
 
 
-
 const Markers = (markers) => {
   const navigate = useNavigate()
   const {addRemove} = useContext(AccountContext)

@@ -37,7 +37,7 @@ const Ourservices = () => {
   ];
 
   return (
-    <div className="ourServices pb-5  py-5 px-5 ">
+    <div className="ourServices pb-5  py-3 px-5 ">
       <h1 className="text-center pe-5 ps-5 pt-5 text-nowrap text-light ">
         Services We Provide
       </h1>
@@ -46,7 +46,7 @@ const Ourservices = () => {
         Choose from below to deliver advertisements in a truly exciting,
         innovative and creative way.
       </h6>
-      <div className="container px-5 pt-4 ">
+      <div className=" px-5 pt-4 ">
         <div className="row row-cols-md-2 row-cols-sm-1 row-cols-lg-3  ">
           {ILLUMINATION.map((pos) => (
             <div className="col-12 col-sm-12 mt-3">
@@ -73,23 +73,6 @@ const Ourservices = () => {
                   </div>
                   </div>
               </div>
-
-
-              {/* <div className=" ">
-                <Link
-                  to={`/${pos.value}/delhi`}
-                  className="  text-decoration-none  service-img-card"
-                >
-                  <img
-                    src={pos.srcImg}
-                    className="card-img-top rounded-top service-img "
-                    alt={pos.label}
-                  />
-                  <div className="bg-light  p-2 rounded-bottom service-img-card text-center  ">
-                    <h6 className="text-dark "> {pos.label} </h6>
-                  </div>
-                </Link>
-              </div> */}
             </div>
           ))}
         </div>

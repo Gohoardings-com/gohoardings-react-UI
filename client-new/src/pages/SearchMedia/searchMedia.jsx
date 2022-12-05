@@ -55,7 +55,7 @@ const SearchMedia = () => {
         </div>
         <div className="container-fluid  mt-5 pt-2  px-5 m-0 ">
           <div className="row  mx-auto mb-5  mt-5 p-1 search-container">
-            <div className="col-md-5  ">
+            <div className="col-md-5  me-0">
               <div className="search-location ">
                 <div className="search-inner">
                   <InputGroup className="" id="input-click">
@@ -100,7 +100,7 @@ const SearchMedia = () => {
               </div>
             </div>
 
-            <div className="col-md-5  ">
+            <div className="col-md-5  ms-0">
               <DropdownButton
                 align="center"
                 title={userType}
@@ -128,10 +128,10 @@ const SearchMedia = () => {
                 </Dropdown.Item>
               </DropdownButton>
             </div>
-            <div className="col-md-2 p-2 ">
+            <div className="col-md-2 p-2 ps-0">
               <Link
                 to={`/${userType}/${value}`}
-                className="button-serch text-white rounded-pill p-3"
+                className="button-serch text-white rounded-pill p-2"
               ><button className="search-btn">
                   Search
                 </button>

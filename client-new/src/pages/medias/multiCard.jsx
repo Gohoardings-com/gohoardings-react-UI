@@ -10,7 +10,7 @@ const MultiCard = ({ slice,loading, addonCart, removefroCart, priceState, locate
 
    
   return (
-    <div className="row row-cols-md-4 p-0 ms-3 mt-1">
+    <div className="row row-cols-md-4 p-0 ms-2  mt-1">
       {!slice ? (
         <>
           <h1>Loading.... Please Wait</h1>
@@ -19,7 +19,7 @@ const MultiCard = ({ slice,loading, addonCart, removefroCart, priceState, locate
         <>
           {slice.map((item, i) => (
             <>
-              <Card className="p-2 m-2 multi-card" style={{ width: "24rem" }}>
+              <Card className="p-2 m-2 multi-card" style={{ width: "20rem" }}>
                 <Card.Img
                   variant="top"
                   src={

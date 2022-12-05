@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const City = () => {
   return (
-    <div className="citylist p-0 m-0 pt-5 px-5">
+    <div className="citylist p-0 m-0 pt-5 ">
       <div className="">
         <h1 className="text-center text-nowrap text-light">
           Explore your City Listings
@@ -15,7 +15,7 @@ const City = () => {
         partners and friends.
       </h6>
       <div className="container-fluid px-5 pt-5">
-        <div className="row px-5">
+        <div className="row">
           <div className="col-lg-6 col-md-12 ps-5 ">
             <Link to={`/traditional-ooh-media/delhi`}>
             <div className="city-img-container p-0 m-0 ">
