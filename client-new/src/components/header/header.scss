@@ -1,5 +1,5 @@
 .header{
-    background: #20344d;
+    background: #20344D;
     position: sticky;
     top: 0px;
     z-index: 1;
@@ -18,12 +18,7 @@
     border-right: 1px  solid white ;
 }
 
-.icon-div:hover{
-    display: block;
-    background: #337ab7;
-    justify-content: center;
-    align-items: center;
-}
+
 
 @media only screen and (max-width: 768px) {
     a.heading-text {

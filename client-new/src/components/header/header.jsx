@@ -14,7 +14,7 @@ const Header = () => {
 <TbPhone className='mb-1 text-white'/> <a className='heading-text' href="tel:+917777871717">+91 7777 871717</a>
 
 </div>
-<div className= "icon-div ps-3 pe-3">
+<div className= " ps-3 pe-3">
    <TbBrandWhatsapp className='mb-1 text-white'/><a className='heading-text'  href="https://web.whatsapp.com/">WhatsApp</a>
 
 </div>

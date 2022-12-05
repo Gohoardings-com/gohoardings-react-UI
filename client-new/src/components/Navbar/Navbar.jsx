@@ -19,27 +19,27 @@ useEffect(() => {
       <Navbar expand="lg px-md-0 pb-0 fixd-nabar">
         <div className="navbar container-fluid py-md-0 ">
           <Navbar.Brand >
-            <img src="./images/logo.png" className="brand ms-sm-5 ms-3" />
+            <img src="./images/logo.png" className="brand-logo ms-sm-5 ms-3" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" ms-auto me-5">
               <Nav.Link
-                className="navLink ps-3 text-dark fw-bold"
+                className="me-2    nav-text-btn  text-center"
                 href="https://odoads.com/"
                 target="_blank"
               >
                 Odoads
               </Nav.Link>
               <Nav.Link
-                className="navLink ps-3 text-dark fw-bold"
+                className=" me-2  nav-text-btn text-center "
                 href="https://www.gohoardings.com/blog/"
                 target="_blank"
               >
                 Blog
               </Nav.Link>
-              <Nav.Link
-                className="navLink ps-3 pe-3 fw-bold text-dark"
+              <Nav.Link 
+                className="me-3    nav-text-btn text-center"
                 href="/contact"
               >
                 Contact
@@ -48,7 +48,7 @@ useEffect(() => {
                 className="mapLink font-map-btn text-white  text-nowrap rounded-pill "
                 href="/map"
               >
-                <MdLocationOn className="ps-0 p-0  pb-1 font-map-logo" />
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991231.png" className="ps-0 p-0 me-1  pb-1 font-map-logo" />
                 Map View
               </Nav.Link>
               <UserDetail posts={posts} setPosts={setPosts}/>

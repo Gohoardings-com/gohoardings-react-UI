@@ -4,25 +4,27 @@
 
 .heading-content {
   height: auto;
-  padding-top: 10%;
+  padding-top: 11%;
   
     
   background-image: linear-gradient(
     to bottom,
-    rgb(105, 227, 255),
-    rgb(103, 201, 223),
-    rgb(152, 211, 224)
+    #20344D,
+    #20344D,
+    #305581,
+  
   );
 
   h1 {
-    font-size: 76px;
-    font-weight: 700;
-    font-family: 'Times New Roman', Times, serif !important;
-    color: #2B3F43 !important;
+    font-size: 62px;
+    font-weight: 500;
+    font-family: "Montserrat";
+   
+
   }
-  h4{
-    font-weight: 400 !important;
-    color: #2b3f43 !important;
+  h6{
+    font-family: "Montserrat";
+    font-weight: 300;
   }
 }
 
@@ -30,8 +32,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75%;
-  margin-left: 5%;
+  width: 60%;
   background: #fff;
   border-radius: 50px;
   padding: 10px 10px 10px 10px;
@@ -40,11 +41,11 @@
 }
 #search-location-box{
   border: 1px solid #dfdfdf;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 50px;
   background-color: $white;
   color: $grey;
-  height: 63px;
+  height: 60px;
 }
 #select-media-box{
   width: 370px;
@@ -53,8 +54,8 @@
   text-align: left;
   cursor: pointer;
   border: 1px solid #dfdfdf;
-  font-size: 20px;
-  height: 63px;
+  font-size: 15px;
+  height: 60px;
   border-radius: 50px;
 }
 #select-media-box:focus{
@@ -69,10 +70,12 @@ box-shadow: none;
 }
 
 .search-btn{
+  font-family: "Montserrat";
+  text-transform: uppercase;
   border: 1px solid #dfdfdf;
-  font-size: 22px;
+  font-size: 16px;
   border-radius: 50px;
-  height: 63px;
+  height: 60px;
   width: 120px;
   background-color: $red;
   color:$white;

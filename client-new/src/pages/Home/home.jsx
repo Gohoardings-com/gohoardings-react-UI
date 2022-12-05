@@ -7,6 +7,7 @@ import Ourservices from "../ourservices/ourservices";
 import City from "../citylist/city";
 import Enquire from "../enquire/enquire";
 import Fixednavbar from "../../components/navbar/flotingnavbar";
+// import Flotinggnavbar from "../../components/navbar/fixednavbar";
 
 const Home = () => {
  

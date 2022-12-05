@@ -9,7 +9,7 @@
     .input-label {
       position: absolute;
       color: $white;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 500;
       max-width: calc(100% - (2 * 8px));
       overflow: hidden;
@@ -47,6 +47,17 @@
       }
     }
   }
+
+
+    .enquire-qsns-cant{
+      font-family: "Montserrat" !important;
+      font-weight: 500 !important;
+    }
+    .enquire-ans-cant{
+         font-family: "Montserrat" !important;
+         font-size: small;
+    }
+ 
 
 @media only screen and (max-width:425px){
     .details{

@@ -16,6 +16,8 @@ import Team from './pages/team/team'
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import News from './pages/news_media/news_media'
 import Testimonial from './pages/testimonial/testimonial'
+import "@fontsource/montserrat";
+import 'animate.css';
 
 // import "./App.css" 
 

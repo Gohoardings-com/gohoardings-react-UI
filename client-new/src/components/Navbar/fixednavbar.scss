@@ -6,8 +6,9 @@
 .navbar-main-floating{
  background-color: #20344D;
 
-
-
+.float-brand{
+  width: 200px;
+}
  .dropdown-toggle::after {
    display: none;
  }
@@ -17,13 +18,14 @@
 
 #search-button-flotnav{
   width: 5vw;
+  height: 38px;
 }
  #search-location-box{
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 5px;
   background-color: $white;
   color: $grey;
-  height: 40px !important;
+  height: 38px !important;
   width: 25vw !important;
 }
 
@@ -32,9 +34,9 @@
   margin: 0% !important;
   margin-bottom: 2px !important;
   border: none;
-  height:  39px !important;
+  height:  37px !important;
   width:25vw !important;
-   font-size: 20px;
+   font-size: 15px;
   background-color: $white;
   color: $grey;
 
@@ -47,21 +49,21 @@
   background: $white !important;
   text-align: left;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
   padding-bottom: 2px;
-  height: 40px !important;
+  height: 38px !important;
   border-radius: 5px;
 }
 // ghj
 .float-map-btn{
-  // opacity: 85%;
   color: #FFFFFF;
   font-weight: 500;
-  padding-top: 4%;
+  padding-top: 2px;
+  height: 38px;
   background-color: transparent;
-   border:  2px groove #fff312e1 ;
+   border:  2px groove #ffffffe1 ;
   .float-map-logo{
-    font-size: 26px;
+    height: 20px ;
 
 
   }
@@ -100,17 +102,17 @@ position: fixed;
  width: 100vw;
 
 }
-.search-button{
- background-color: #68E2FE !important;
- transition: 0.5s;
-}
-.search-button:hover{
- background-color: #9FD5E1;
-}
+// .search-button{
+//  background-color: #68E2FE !important;
+//  transition: 0.5s;
+// }
+// .search-button:hover{
+//  background-color: #9FD5E1;
+// }
 
 
 .search-logo{
-font-size: 30px;
+font-size: 26px;
 
 }
 
@@ -133,6 +135,3 @@ font-size: 30px;
   left: 26px;
   
 }
-// .user-detail-float{
-//   margin-left: 5% !important;
-// }
