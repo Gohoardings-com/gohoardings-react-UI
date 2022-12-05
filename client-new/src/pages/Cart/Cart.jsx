@@ -4,7 +4,6 @@ import { AccountContext } from "../../apis/apiContext";
 import moment, { parseZone } from "moment";
 import { Button, Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
-import { deleteCartItem } from "../../apis/apis";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -29,25 +28,22 @@ const Cart = () => {
   };
 
   const removefroCart = async (obj) => {
-   deleteCartItem();
+    await instance.post("cart/deleteFromCart", {
+      code: obj.code,
+    });
     addRemove({ type: "DECR" });
     removeCart(obj);
   };
 
   const getAllData = async () => {
     const { data } = await instance.get("cart/cartitems");
-    const hello = [...data];
-    hello.map((obj) => {
+    data.map((obj) => {
       obj["days"] = 5;
     });
-
-    setPosts(hello);
+    setPosts(data);
   };
 
-  const cartItemprice = posts.reduce(
-    (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
-    0
-  );
+  const cartItemprice = posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0);
 
   useEffect(() => {
     getAllData();
@@ -58,8 +54,8 @@ const Cart = () => {
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
-        setPosts(data);
       }
+      setPosts(data);
     });
   };
 
@@ -68,8 +64,8 @@ const Cart = () => {
     data.map((element) => {
       if (element.id == obj.id) {
         obj.days += 1;
-        setPosts(data);
       }
+      setPosts(data);
     });
   };
 
@@ -79,8 +75,8 @@ const Cart = () => {
       if (element.id == obj.id) {
         if (obj.days > 5) {
           obj.days -= 1;
-          setPosts(data);
         }
+        setPosts(data);
       }
     });
   };
@@ -93,6 +89,8 @@ const Cart = () => {
     });
   };
 
+  const current = new Date();
+  const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   return (
     <>
       <Fixednavbar />
@@ -100,10 +98,10 @@ const Cart = () => {
         <div className="p-0 m-0 date-select-section">
           <div className="row">
             <div className="col-md-3 ps-0">
-              <div class="input-box active-grey">
+              <div class="input-box active-grey ">
                 <label class="input-label">Start Date</label>
-                <div type="text " class="input-1 d-flex ">
-                  <h6 className="me-2 calender-logo  text-secondary">29/11/2022</h6>
+                <div type="text " class="input-1 d-flex bg-light">
+                  <h6 className="me-2 calender-logo  text-secondary">{startdate}</h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
                       variant="transparent"
@@ -122,8 +120,8 @@ const Cart = () => {
             <div className="col-md-3">
               <div class="input-box active-grey">
                 <label class="input-label">End Date</label>
-                <div type="text " class="input-1 d-flex ">
-                  <h6 className="me-2  calender-logo  text-secondary">30/11/2022</h6>
+                <div type="text " class="input-1 d-flex bg-light ">
+                  <h6 className="me-2  calender-logo  text-secondary">{startdate}</h6>
 
                   <Dropdown className="p-0 m-0">
                     <Dropdown.Toggle
@@ -189,7 +187,7 @@ const Cart = () => {
                                       {obj.areadescription}
                                       <span
                                         className="float-end"
-                                        onClick={() => removefroCart(obj.code)}
+                                        onClick={() => removefroCart(obj)}
                                       >
                                         <MdDeleteForever className="mb-2  delet-icon" />
                                       </span>
@@ -298,7 +296,7 @@ const Cart = () => {
 
                   <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6>
                   <h5 className=" mt-4">
-                    {totalDays ? totalDays : 5} Total Days
+                  Total  {totalDays ? totalDays : 5} Days
                   </h5>
 
                   <h5 className="mt-4">

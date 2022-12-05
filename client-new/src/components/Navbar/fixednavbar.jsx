@@ -24,7 +24,7 @@ console.log(posts);
   useEffect(() => {
     getCity();
     setPosts(posts);
-  }, [posts]);
+  }, []);
 
   const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("traditional-ooh-media");

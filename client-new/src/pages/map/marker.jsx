@@ -93,7 +93,9 @@ const Markers = (markers) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ height: "100%" }}
     >
-      {markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
+      {!markers ?
+                <h1>Loading.... Please Wait</h1>: 
+            markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
         <Marker
           key={id}
           position={position}
@@ -118,7 +120,8 @@ const Markers = (markers) => {
             </InfoWindow>
           ) : null}
         </Marker>
-      ))}
+        ))
+    }
     </GoogleMap>
   );
 }

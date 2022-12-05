@@ -4,9 +4,9 @@ const jwtToken = require('jsonwebtoken')
 const catchError = require('../middelware/catchError')
 
 exports.register = catchError(async (req, res) => {
-  db.changeUser({ database: "gohoardi_crmapp" })
   const { name, email, phone, password: Npassword } = req.body
   const password = bcrypt.hashSync(Npassword, 8)
+   db.changeUser({ database: "gohoardi_crmapp" })
   db.query("SELECT email, phonenumber FROM tblcontacts WHERE email='" + email + "' && phonenumber='" + phone + "'", async (err, result) => {
     if (err) {
       return res.send(err)
@@ -254,4 +254,10 @@ exports.Profile = catchError(async (req, res) => {
       }
     }
   )
+})
+
+
+exports.sendPasswordEmail = catchError(async(req,res,next) =>{
+  const {email} = req.body;
+
 })

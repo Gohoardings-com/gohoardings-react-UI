@@ -3,7 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from '../../apis/apiContext';
 import { useNavigate } from 'react-router-dom';
 import "./map.scss";
-import "./icons.scss"
+import "./icons.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import {medaiWithCity} from '../../apis/apis'
 import instance from "../../apis/axios";
 import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
@@ -12,8 +14,9 @@ import IconsSlection from "./iconsSlection";
 
 const Map = () => {
   const priceState = window.localStorage.getItem("user")
+  const {search, loading} = useSelector((state) => state.search)
   const navigate = useNavigate()
-  const [medias, setMedias] = useState([])
+  const [medias, setMedias] = useState(search)
   const { addRemove } = useContext(AccountContext)
   const [price, setprice] = useState([])
   const [query, setQuery] = useState("");
@@ -21,10 +24,12 @@ const Map = () => {
   const [cartItem, setcartItem] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(3);
 
-  const slice = medias.slice(0, noOfLogo);
+  // let slice;
+  // if(medias.length > 0){
 
-
-
+  //    slice = medias.slice(0, noOfLogo);
+  // }
+console.log();
   const hording = [];
   const type = [];
 
@@ -42,7 +47,7 @@ const Map = () => {
 
   useEffect(() => {
     handelprice();
-  });
+  },[]);
 
   const getAllDetails = async () => {
     const { data } = await instance.post('filter/categoryfilter', {
@@ -108,21 +113,21 @@ const Map = () => {
       }
     }
   }
-
-  const mediasData = async () => {
-    const { data } = await instance.post("media/searchMedia")
-    if (data.length > 0) {
-      setMedias(data);
-    }
-  }
+// console.log(category_name,city_name);
+//   const mediasData = async () => {
+//     const  data  = await medaiWithCity(category_name,city_name);
+//     if (data.length > 0) {
+//       setMedias(data);
+//     }
+//   }
 
   const nmedia = async (arr) => {
     setMedias(arr);
   }
 
-  useEffect(() => {
-    mediasData();
-  }, []);
+  // useEffect(() => {
+  //   mediasData();
+  // }, []);
 
   const locatetologin = async() =>{
     window.localStorage.setItem("locate",`/map`)
@@ -195,8 +200,8 @@ const Map = () => {
           <div id="accordionTest">
             <div className="media-items p-2 accordion-collapse collapse show map-media-item-list" id="collapseT1" data-bs-parent="#accordionTest">
               <div className="accordion items mb-2 rounded" id="accordionExample">
-                {!slice ? <>Loading .... Please wait</> : <>
-                  {slice.map((item, i) => (
+                {loading ? <>Loading .... Please wait</> : <>
+                  {search.map((item, i) => (
                     <>
                       <div className="accordion-item border rounded mb-2">
                         <div
@@ -464,10 +469,11 @@ const Map = () => {
               <span className="pe-2">Not Available</span>
             </div>
           </div>
-          {isLoaded && medias && medias.length > 0 ? <Markers data={slice} add={addonCart} /> : null}
+          {isLoaded && medias && medias.length > 0 ? <Markers data={search} add={addonCart} /> : null}
         </div>
       </div>
     </div>
+
   );
 };
 

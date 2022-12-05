@@ -3,11 +3,11 @@ import './media.scss';
 import { Link } from 'react-router-dom';
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 
-const MultiCard = ({ slice, addonCart, removefroCart, priceState, locatetologin }) => {
+const MultiCard = ({ slice,loading, addonCart, removefroCart, priceState, locatetologin }) => {
 
     return (
         <div className='row row-cols-md-2 row-cols-sm-1 row-cols-3 row-cols-lg-3 row-cols-xl-3 p-0'>
-            {!slice ? <>
+            {loading ? <>
                 <h1>Loading.... Please Wait</h1>
             </> : <>
                 {slice.map((item, i) => (

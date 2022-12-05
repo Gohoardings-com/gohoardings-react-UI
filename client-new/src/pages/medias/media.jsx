@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './media.scss';
+import { mediawithcity } from '../../action/adminAction';
+import { useSelector, useDispatch } from 'react-redux';
 import { AccountContext } from '../../apis/apiContext';
 import { BsListCheck } from 'react-icons/bs';
 import { useParams,useNavigate } from 'react-router-dom';
@@ -13,7 +15,9 @@ import FixedNavbar from '../../components/navbar/fixednavbar';
 
 const Media = () => {
   const priceState = window.localStorage.getItem("user")
-    const [show, setShow] = useState(false)
+  const dispatch = useDispatch()
+  const {search, loading} = useSelector((state) => state.search)
+  const [show, setShow] = useState(false)
     const { category_name, city_name } = useParams();
     const {addRemove} = useContext(AccountContext)
     const [posts, setPosts] = useState([])
@@ -23,9 +27,13 @@ const Media = () => {
     const [catego, setCatego] = useState('');
     const [illumna, setIllumna] = useState('');
   const [noOfLogo, setnoOfLogo] = useState(6)
-  const slice = posts.slice(0, noOfLogo);
+  var slice;
+  if(search){
+     slice = search.slice(0, noOfLogo);
+  }
 
-    let ILLUMINATION = [
+
+  let ILLUMINATION = [
       { label: "Nonlit", value: "nonlit" },
       {
         label: "Frontlit",
@@ -74,12 +82,8 @@ const Media = () => {
       mediaFilter()
     },[category_name, illumna,catego])
     
-    const getData = async () => {
-      const {data} = await instance.post("media/searchMedia",{
-        category_name : category_name,
-        city_name : city_name
-      })
-      setPosts(data);
+    const getData = async() => {
+    await dispatch(mediawithcity(category_name, city_name))
     }
   
     const addonCart = async (e) => {
@@ -287,9 +291,9 @@ const Media = () => {
                         <div className='overflow  rounded'>
                             <div className='container-fluid'>
                                 {!show ? <>     
-                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
+                                    <MultiCard MdOutlineShoppingCart={MdOutlineShoppingCart} loading={loading} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                     </> : <>
-                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
+                                      <SingleCard MdOutlineShoppingCart={MdOutlineShoppingCart } loading={loading} slice={slice} addonCart={addonCart} removefroCart={removefroCart} add={add} remove={remove} priceState={priceState} locatetologin={locatetologin}/>
                                    </>}
                             </div>
                         </div>

@@ -4,11 +4,11 @@ import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/
 import { GrMapLocation } from 'react-icons/gr';
 import { Link, useNavigate, useHref } from 'react-router-dom';
 
-const SingleCard = ({ slice, addonCart, removefroCart, priceState, locatetologin }) => {
+const SingleCard = ({ slice, loading,addonCart, removefroCart, priceState, locatetologin }) => {
   return (
     <div className='row rounded-2 bg-light mt-3 singlecartback'>
       <div className='col-12 col-sm-12 backgroundAreaCol'>
-        {!slice ? <>
+        {loading ? <>
           <h1>Loading.... Please Wait</h1>
         </> : <>
           <div className='row  backgroundArea'>

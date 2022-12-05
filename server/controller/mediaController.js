@@ -178,7 +178,7 @@ const promises = []
           case "airport-media":
             table_name = "goh_media_airport";
             break;
-          case "inflight_media":
+          case "inflight-media":
             table_name = "goh_media_inflight";
             break;
           case "office-media":

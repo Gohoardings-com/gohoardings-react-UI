@@ -21,6 +21,7 @@ import Testimonial from './pages/testimonial/testimonial'
 
 function App() {
   const [avlable,setAvlable] = useState(false)
+ 
 
   const getUser = async() => {
    {localStorage.getItem("user") && setAvlable(true)}
@@ -28,6 +29,7 @@ function App() {
   useEffect(() =>{
     getUser()
   },[])
+
   return (
     <>
       <BrowserRouter>
@@ -35,7 +37,7 @@ function App() {
         <Routes>
          <Route index path="/" element={<Home />}/>
           <Route exact path="/login" element={avlable ? <Home/>:<Login/>}></Route>
-          <Route exact path="/:category_name/:city_name" element={ <Media />}/>   
+          <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
           <Route exact path="/cart" element={<Cart />}/> 

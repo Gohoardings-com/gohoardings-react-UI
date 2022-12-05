@@ -31,7 +31,6 @@ const SearchMedia = () => {
   
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    // our api to fetch the search result
     console.log("search ", searchTerm);
   };
 
@@ -111,20 +110,20 @@ const SearchMedia = () => {
                 <Dropdown.Item eventKey="traditional-ooh-media">
                   Traditional OOH Media
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="mall_media">Mall Media</Dropdown.Item>
-                <Dropdown.Item eventKey="airport_media">
+                <Dropdown.Item eventKey="mall-media">Mall Media</Dropdown.Item>
+                <Dropdown.Item eventKey="airport-media">
                   Airport Media
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="office_branding">
+                <Dropdown.Item eventKey="office-branding">
                   Office Branding
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="inflight_media">
+                <Dropdown.Item eventKey="inflight-media">
                   Inflight Media
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="digital_screen">
+                <Dropdown.Item eventKey="digital-screen">
                   Digital Screen
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="transit_media">
+                <Dropdown.Item eventKey="transit-media">
                   Transit Media
                 </Dropdown.Item>
               </DropdownButton>
