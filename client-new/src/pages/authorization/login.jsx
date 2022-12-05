@@ -19,6 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailValidate, setEmailValidate] = useState();
   const [passwordValidate, setPasswordValidate] = useState();
+  const [remember, setRemember] = useState(false)
   const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
 
@@ -66,8 +67,6 @@ const Login = () => {
 
     }
   }
-
-
 
   // Google Login failures
   const onFailure = async (res) => {
@@ -202,7 +201,7 @@ const Login = () => {
                         </div>
                       </div>
                       <label className="ms-2 checkbox">
-                        <input type="checkbox" />
+                        <input type="checkbox"  onChange={() => setRemember(true)}/>
                         <span></span>
                         <small className="rmb ms-1 ">Remember me</small>
                       </label>
