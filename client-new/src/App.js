@@ -24,7 +24,6 @@ import 'animate.css';
 function App() {
   const [avlable,setAvlable] = useState(false)
  
-
   const getUser = async() => {
    {localStorage.getItem("user") && setAvlable(true)}
   }

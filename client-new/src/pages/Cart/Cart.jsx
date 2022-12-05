@@ -88,10 +88,7 @@ const Cart = () => {
       produts: posts,
     });
   };
-<<<<<<< HEAD
 
-=======
->>>>>>> 2071fe5e69ead65d441e3e93333db9e4c7020805
   const current = new Date();
   const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   return (
