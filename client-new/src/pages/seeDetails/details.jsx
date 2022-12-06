@@ -80,7 +80,7 @@ const Details = () => {
   return (
     <>
       <Fixednavbar />
-      <div className="detailsHeader d-flex flex-row justify-content-center w-100 p-0">
+      <div className=" detailsHeader d-flex flex-row justify-content-center  p-0">
         <div className="icon-left-border ps-3 pe-3">
           <RiUser3Fill className="mb-1 text-dark" />{" "}
           <a className="heading-text text-dark" id="test" href="#media">
@@ -107,10 +107,10 @@ const Details = () => {
       ) : (
         <>
           {posts.map((item, i) => (
-            <div className="conatiner-fluid">
+            <div className="conatiner-fluid px-4">
               <div className="row mt-sm-5  mb-5 pb-5 mt-3 ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5">
-                <div className="col ">
-                  <div className="maindivbordermediadetails rounded-3 p-2">
+                <div className="col-md-6 text-center">
+                  <div className=" rounded-3 p-2">
                     <img
                       src={
                         item.thumb.startsWith("https")
@@ -128,22 +128,22 @@ const Details = () => {
                               .toLowerCase()}/media/images/new${item.thumb}`
                       }
                       alt="About media"
-                      className="w-100 h-auto rounded-3 img-fluid "
+                      className="w-75 rounded-3 img-fluid maindivbordermediadetails p-2"
                     />
                   </div>
                 </div>
 
                 <div className="col " id="media">
 
-                  <div className="ms-3 me-3 maindivbordermediadetails p-3 mb-2 rounded-2">
-                    <h4 className=" pt-3 fw-bolder addonCart-plus ">{item.page_title}</h4>
+                  <div className="ms-3 me-3 maindivbordermediadetails p-3 pt-0  pb-1 rounded-2 mt-2">
+                    <h4 className=" pt-3 fw-bold">{item.page_title}</h4>
 
                     <div className="row ">
                       <div className="col pt-4">
-                        <h6 className=" text-muted">
+                        <h6 className=" ">
                           Code :<span className="text-dark"> {item.code}</span>
                         </h6>
-                        <h6 className="fw-bold overflow-wrap">
+                        <h6 className="overflow-wrap">
                           Price:{" "}
                           {!priceState ? (
                             <a
@@ -183,41 +183,41 @@ const Details = () => {
                         )}
                       </div>
                     </div>
-                    <div className="mt-4 singlemediashow ">
+                    <div className="mt-3 singlemediashow ">
                       {/* <div className=" p-2 datail-heading">
                         <h4 className="text-light">Highlights</h4>
                       </div> */}
                       <div className="d-flex flex-row mt-3 pb-2 mediaAllDetails">
-                        <h6 className="fw-bold pt-2">Address</h6>
+                        <h6 className=" pt-2">Address</h6>
                         <span className="ms-auto ">{item.areadescription}</span>
                       </div>
                       <div className="d-flex flex-row mt-2 pb-2 mediaAllDetails">
-                        <h6 className="fw-bold pt-2">Media Type</h6>
+                        <h6 className=" pt-2">Media Type</h6>
                         <span className="ms-auto input-group-text  mediatype">
                           {item.subcategory}
                         </span>
                       </div>
                       <div className="d-flex flex-row mt-2 pb-2 mediaAllDetails">
-                        <h6 className="fw-bold pt-2">Illumination</h6>
+                        <h6 className=" pt-2">Illumination</h6>
                         <span className="ms-auto input-group-text  mediatype">
                           {item.illumination}
                         </span>
                       </div>
                       <div className="d-flex flex-row mt-2 pb-2 mediaAllDetails">
-                        <h6 className="fw-bold pt-2">Height X Width</h6>
+                        <h6 className=" pt-2">Height X Width</h6>
                         <span className="ms-auto input-group-text  ">
                           {item.size}
                         </span>
                       </div>
 
                       <div className="d-flex flex-row mt-2 pb-2 mediaAllDetails">
-                        <h6 className="fw-bold pt-2">FTF</h6>
+                        <h6 className=" pt-2">FTF</h6>
                         <span className="ms-auto input-group-text ">
                           {item.ftf}
                         </span>
                       </div>
                       <div className="d-flex flex-row mt-2 pb-2 ">
-                        <h6 className="fw-bold pt-2">Total Area</h6>
+                        <h6 className=" pt-2">Total Area</h6>
                         <span className="ms-auto input-group-text">
                           {item.area}
                         </span>
@@ -228,7 +228,7 @@ const Details = () => {
                  {/* form section */}
                   <div className="row ms-3 me-3 mt-5 maindivbordermediadetails rounded-3 p-2">
                      <div className=" p-2 datail-heading  rounded-3">
-                        <h4 className="text-light ">GET A FREE CONSULTATION!</h4>
+                        <h4 className="text-light">GET A FREE CONSULTATION!</h4>
                       </div>
                       <form class="row g-3 needs-validation ms-1" novalidate>
   <div class="col-md-6 position-relative">
