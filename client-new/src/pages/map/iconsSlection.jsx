@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Slider from "./slider.jsx";
 import "./icons.scss"
+import instance from "../../apis/axios.jsx";
 
 const IconsSlection = ({ loading, fnmedia, search }) => {
   const [Distance, Setdistance] = useState(0);
@@ -93,12 +94,14 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
 
   ]
   const submitfilters = async () => {
-    if(!loading){
-      const data = [...search]
-     const category=  data[0].category_name
-     const city = data[0].city_name
-    console.log(category, city);
-    }
+    const { data } = await instance.post("filter/mapFilter", {
+      distance: Distance,
+      selected : hording,
+      tbl : "goh_media",
+      city : "Delhi"
+    });
+    
+    console.log(data);
   // var newArray = media.filter(function (el)
   // {
   //   return el.id >= 3695;
