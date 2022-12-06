@@ -20,7 +20,7 @@ const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState
         <>
           {slice.map((item, i) => (
             <>
-              <Card className="  multi-card col-md-4 p-2 mt-2 ">
+              <Card className="  multi-card col-md-4 p-2 mt-2">
                 <Card.Img
                   variant="top"
                   src={
