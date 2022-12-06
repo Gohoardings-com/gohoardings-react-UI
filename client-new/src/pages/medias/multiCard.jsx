@@ -16,7 +16,7 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
         <>
           {slice.map((item, i) => (
             <>
-              <Card className="  multi-card col-md-4 p-2 mt-2 ">
+              <Card className="  multi-card p-2 mt-2 w-25">
                 <Card.Img
                   variant="top"
                   src={
@@ -35,22 +35,22 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
                           .toLowerCase()}/media/images/new${item.thumb}`
                   }
                   alt="About media "
-                  className="media-card-img"
+                  className="media-card-img ps-0 pe-0"
                   
                 />
                 <Card.Body className="pb-1 ps-0 pe-0 ">
                   <Card.Title>
                     {" "}
-                    <h5 className=" overflow-hidden ">
-                      {item.page_title.substring(0, 30) + "..."}
+                    <h5 className=" overflow-hidden media-filter-text-card-head ">
+                      {item.page_title.substring(0, 42) + "..."}
                     </h5>
                   </Card.Title>
                   <Card.Text>
                     <div className="row">
-                      <div className="col ">
-                        <p className=" mb-0">Code : {item.code}</p>
-                        <p className="mb-0">Size : {item.size}</p>
-                        <p className="mb-0">
+                      <div className="col pt-1">
+                        {/* <p className=" mb-0 media-filter-text-card-detail">Code : {item.code}</p> */}
+                        <p className="mb-0 media-filter-text-card-detail" >Size : {item.size}</p>
+                        <p className="mb-0 media-filter-text-card-detail">
                           Price:{" "}
                           {!priceState ? (
                             <a
@@ -64,33 +64,33 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
                           )}
                         </p>
                       </div>
-                      <div className="col ">
-                        <div className="row mt-3 ">
+                      <div className="col  pb-0 mb-0">
+                        <div className="row pb-0 mb-0">
                           <div className="col">
                             <Link
                               to={`/details/${item.category_name}/${item.meta_title}`}
-                              className="text-decoration-none text-dark text-center  d-flex mt-3 btn-outline-info"
+                              className="text-decoration-none  text-center  d-flex mt-2 "
                             >
                             
-                                <p className="btn btn-outline-secondary mb-0 fw-bold ">   Details  </p>    
+                                <p className="btn p-1 btn-outline-secondary mb-0 detail-btn media-filter-text-card-detail">   Details  </p>    
                            
                             </Link>
                           </div>
-                          <div className="col ">
+                          <div className="col p-1">
                             {item.userid == null ||
                             item.isDelete == null ||
                             (item.userid != null && item.isDelete == 1) ? (
                               < MdOutlineAddShoppingCart
                              
                                 onClick={() => addonCart(item)}
-                                className="addonCart mt-4 addonCart-plus  "
+                                className="addonCart mt-2 addonCart-plus  "
                               />
                             ) : (
                               <>
                                 {" "}
                                 <MdOutlineRemoveShoppingCart
                                   onClick={() => removefroCart(item)}
-                                  className="addonCart text-danger mt-4 "
+                                  className="addonCart text-danger mt-2 "
                                 />
                               </>
                             )}

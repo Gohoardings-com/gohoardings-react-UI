@@ -5,20 +5,20 @@ import {TfiLayoutMediaCenterAlt} from "react-icons/tfi"
 
 const Medialogo = ({ posts, category_name }) => {
   return (
-    <div className="container px-5 ">
+    <div className="container  ">
   
         <div className="digit-media-brand rounded-3 pb-2 mt-5 row text-light animate__animated animate__zoomIn ">
           <div className="col-4 mb-xxl-auto p-2">
             <img
               src="../../images/media.jpg"
               alt="About media"
-              className="w-100  mt-2  ms-2 rounded-3"
+              className="w-75  mt-2  ms-2 rounded-3"
             />
           </div>
-          <div className="col-2  viewabout-main pt-5  ">
+          <div className="col-2  viewabout-main pt-4  ">
             <div className="col viewabout ms-3 mt-4 mb-3">
               <div className="locationIcon rounded-3 text-center">
-                <MdLocationOn className="media-location-logo mt-2"/>
+                <img src="https://cdn-icons-png.flaticon.com/512/753/753880.png" className="media-location-logo mt-2"/>
               </div>
               <div className=" ms-3 ">
                 <p className=" mb-0 ">{(posts.length + posts.length) * 12}</p>
@@ -27,7 +27,7 @@ const Medialogo = ({ posts, category_name }) => {
             </div>
             <div className="col viewabout ms-3">
               <div className="col iconback rounded-3   text-center">
-               <TfiLayoutMediaCenterAlt className="media-hording-logo mt-2 "/>
+               <img src="https://cdn-icons-png.flaticon.com/512/5053/5053559.png" className="media-hording-logo mt-2 "/>
               </div>
               <div className=" ms-3 ">
                 <p className="mb-0">{posts.length}</p>
@@ -37,7 +37,7 @@ const Medialogo = ({ posts, category_name }) => {
           </div>
           <div className="col aboutMedia ">
             <h5 className="ms-1 mt-3 aboutMedia-heading">{category_name.toUpperCase()}</h5>
-            <p className=" p-1 mt-2 About-media-detail">
+            <p className=" p-1 pb-0 mt-2 About-media-detail">
               {" "}
               Media is an ideal opportunity to attract consumers in a
               targeted retail environment. Media talks directly to the

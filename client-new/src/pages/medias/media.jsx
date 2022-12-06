@@ -25,7 +25,7 @@ const Media = () => {
     const [query, setQuery] = useState("");
     const [catego, setCatego] = useState('');
     const [illumna, setIllumna] = useState('');
-    const [noOfLogo, setnoOfLogo] = useState(6);
+    const [noOfLogo, setnoOfLogo] = useState(8);
 
     let slice;
     if(!loading){
@@ -133,12 +133,12 @@ const Media = () => {
   
     const More = () => {
       if (search.length >= noOfLogo) {
-        setnoOfLogo(noOfLogo + 6);
+        setnoOfLogo(noOfLogo + 8);
       }
     };
     const Less = () => {
       if (noOfLogo > 2) {
-        setnoOfLogo(noOfLogo - 6);
+        setnoOfLogo(noOfLogo - 8);
       }
     };
 
@@ -151,16 +151,16 @@ const Media = () => {
       <FixedNavbar />
      
         <Medialogo category_name={category_name} posts={posts} />
-        <div className="container-fluid px-5">
-        <div className="row mb-5 mt-5 p-5">
+        <div className="container-fluid px-5 ">
+        <div className="row m-4 p-5">
           <div className="col-md-2 ">
             <div className="col sub-category-search ">
-              <h6 className="text-uppercase media-heading  ms-4  mt-2">Sub category</h6>
-              <div class="form ms-3 mt-1 mb-1">
+              <h6 className="text-uppercase media-heading text-dark  media-filter-text-card-head  mt-2 ">Sub category</h6>
+              <div class="form  mt-1 mb-1">
                   <MdSearch class="fa fa-search" /> 
                   <input type="text" class="form-control form-input" placeholder="Search..."  onChange={(event) => setQuery(event.target.value)}/>
                 </div>
-              <div className="rowCheck  row rounded-bottom me-4 ms-1 mb-1 p-1">
+              <div className="rowCheck  row rounded-bottom   mb-1 ">
                 <ul>
                   {category
                     .filter((obj) => {
@@ -183,7 +183,8 @@ const Media = () => {
                           onChange={(e) => setCatego(e.target.name)}
                           onClick={(e) => mediaFilter(e)}
                         />
-                        <span className="text-wrap">{illum.name}</span>
+                        <span className="text-wrap  media-filter-text-card-detail ">{illum.name}
+                        </span>
                         <br />
                       </>
                     ))}
@@ -191,14 +192,14 @@ const Media = () => {
               </div>
             </div>
             <div className="col">
-                <h6 className="text-uppercase media-heading  ms-4  mt-2">Select Media</h6>
-              <div className="bg-light rounded-bottom rounded-1">
-                <div className=" row m-1">
+                <h6 className="text-uppercase media-heading  media-filter-text-card-head  mt-4 text-dark">Select Media</h6>
+              <div className=" rounded-bottom rounded-1">
+                <div className=" row ">
                   <ul>
                     {ILLUMINATION.map((item, i) => (
                       <li className="w-100">
                         <input
-                          className=" ms-2 collapse-none"
+                          className="  collapse-none"
                           id={i}
                           type="checkbox"
                           name={item.label}
@@ -209,7 +210,7 @@ const Media = () => {
                           aria-controls="collapseT2"
                           onClick={() => mediaFilter()}
                         />
-                        <span className=" ms-3">{item.label}</span>
+                        <span className=" ms-3  media-filter-text-card-detail">{item.label}</span>
                       </li>
                     ))}
                   </ul>
