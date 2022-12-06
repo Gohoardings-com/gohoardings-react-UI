@@ -152,11 +152,11 @@ const Media = () => {
       <FixedNavbar />
      
         <Medialogo category_name={category_name} posts={posts} />
-        <div className="container">
-        <div className="row   mb-5 mt-5">
+        <div className="container-fluid px-5">
+        <div className="row mb-5 mt-5 p-5">
           <div className="col-md-2 ">
             <div className="col sub-category-search ">
-              <h6 className="text-uppercase media-heading  ms-4  ">Sub category</h6>
+              <h6 className="text-uppercase media-heading  ms-4  mt-2">Sub category</h6>
               <div class="form ms-3 mt-1 mb-1">
                   <MdSearch class="fa fa-search" /> 
                   <input type="text" class="form-control form-input" placeholder="Search..."  onChange={(event) => setQuery(event.target.value)}/>
@@ -192,7 +192,7 @@ const Media = () => {
               </div>
             </div>
             <div className="col">
-                <h6 className="text-uppercase media-heading  ms-4  ">Select Media</h6>
+                <h6 className="text-uppercase media-heading  ms-4  mt-2">Select Media</h6>
               <div className="bg-light rounded-bottom rounded-1">
                 <div className=" row m-1">
                   <ul>

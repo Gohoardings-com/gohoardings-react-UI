@@ -7,7 +7,7 @@ import EnquireRegister from "./enquireRegister";
 const Enquire = () => {
   return (
     <>
-      <div className="enquire ps-lg-5 pe-lg-5 pt-lg-5 ps-md-2 pe-md-0 pt-md-0 t-text mt-5 ">
+      <div className="enquire ps-lg-5 pe-lg-5 pt-lg-5 ps-md-2 pe-md-0 pt-md-0 t-text mt-5 ms-5 me-5">
         <div className="row p-lg-5 p-md-0  p-0 ">
           <div className="col-lg-7 col-md-5 ">
             <h2 className="ps-lg-5 ps-md-2 enquire-qsns-cant">          

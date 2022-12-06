@@ -23,6 +23,7 @@ const Map = () => {
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(3);
+  const [total,setNewTotal] = useState(0)
 
   // let slice;
   // if(medias.length > 0){
@@ -37,17 +38,30 @@ console.log();
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
 
+  const userCartItem = async () => {
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data)
 
-  const [total,setNewTotal] = useState(0)
-  const handelprice = () => {
+  }
+ 
+
+    
+ 
+  console.log(cartItem);
+  
+  const handelprice =() => {
+    console.log(cartItem);
     let ans = 0;
-    cartItem.map((item) => (item.isDelete==0? ans+=item.price:""));
+    cartItem.map((item) => (ans += parseInt(item.price)));
     setNewTotal(ans);
-  };
+  }; 
+ 
 
   useEffect(() => {
     handelprice();
   },[]);
+
+
 
   const getAllDetails = async () => {
     const { data } = await instance.post('filter/categoryfilter', {
@@ -163,10 +177,8 @@ console.log();
     setcategory(data)
   }
 
-  const userCartItem = async () => {
-    const { data } = await instance.get('cart/cartitems');
-    setcartItem(data)
-  }
+ 
+
   const More = () => {
     if (medias.length >= noOfLogo) {
       setnoOfLogo(noOfLogo + 6);

@@ -40,7 +40,7 @@ const SearchMedia = () => {
   };
   return (
     <>
-      <div className="heading-content text-center py-5 ">
+      <div className="heading-content text-center py-5  pb-5">
         <div className="headingText pt-3">
           <h1 className="text-center text-light ">
             India's Largest Outdoor
