@@ -23,6 +23,7 @@ const Cart = () => {
   const StartDate = (e) => {
     setStart(e);
   };
+  
   const EndDate = (e) => {
     setEnd(e);
   };

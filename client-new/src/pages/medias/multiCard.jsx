@@ -6,8 +6,13 @@ import Card from "react-bootstrap/Card";
 
 const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
   return (
+<<<<<<< HEAD
     <div className="row row-cols-md-4 p-0 ms-2  mt-1">
       {loading ? 
+=======
+    <div className="row row-cols-md-4 p-0     ms-2 me-2 ">
+      {!slice ? (
+>>>>>>> fa3a62069f92195b62b3dd0d055a01a74a58f1ed
         <>
           <h1>Loading... Please Wait</h1>
         </>
@@ -15,7 +20,7 @@ const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState
         <>
           {slice.map((item, i) => (
             <>
-              <Card className="p-2 m-2 multi-card" style={{ width: "20rem" }}>
+              <Card className="  multi-card col-md-4 p-2 mt-2 ">
                 <Card.Img
                   variant="top"
                   src={
@@ -35,8 +40,9 @@ const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState
                   }
                   alt="About media "
                   className="media-card-img"
+                  
                 />
-                <Card.Body className="pb-1 ps-0 pe-0">
+                <Card.Body className="pb-1 ps-0 pe-0 ">
                   <Card.Title>
                     {" "}
                     <h5 className=" overflow-hidden ">

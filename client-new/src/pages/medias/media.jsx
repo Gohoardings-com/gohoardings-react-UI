@@ -150,10 +150,11 @@ const Media = () => {
   return (
     <>
       <FixedNavbar />
-      <div className="container-fluid ">
+     
         <Medialogo category_name={category_name} posts={posts} />
-        <div className="row rounded container-fluid  mb-5 mt-5">
-          <div className="col-sm-2 col-12  mt-5">
+        <div className="container">
+        <div className="row   mb-5 mt-5">
+          <div className="col-md-2 ">
             <div className="col sub-category-search ">
               <h6 className="text-uppercase media-heading  ms-4  ">Sub category</h6>
               <div class="form ms-3 mt-1 mb-1">
@@ -190,7 +191,7 @@ const Media = () => {
                 </ul>
               </div>
             </div>
-            <div className="col mt-5">
+            <div className="col">
                 <h6 className="text-uppercase media-heading  ms-4  ">Select Media</h6>
               <div className="bg-light rounded-bottom rounded-1">
                 <div className=" row m-1">
@@ -219,10 +220,10 @@ const Media = () => {
           </div>
 
 
-          <div className="col mt-5">
-            <div className="row  ">
+          <div className="col-md-10 ">
+            {/* <div className="row  ">
          
-              {/* <div className="col">
+              <div className="col">
                 {!show ? (
                   <>
                     {" "}
@@ -239,10 +240,10 @@ const Media = () => {
                     />
                   </>
                 )}
-              </div> */}
-            </div>
-            <div className="overflow  ">
-              <div className="container-fluid">
+              </div>
+            </div> */}
+            <div className="">
+           
                 {!show ? (
                   <>
                     <MultiCard
@@ -274,7 +275,7 @@ const Media = () => {
                     />
                   </>
                 )}
-              </div>
+             
             </div>
             <div class="button offset-3 row mt-4 pb-2">
               <button class="w-25 buttonload btn-hover" onClick={() => More()}>

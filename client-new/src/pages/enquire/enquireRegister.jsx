@@ -151,8 +151,8 @@ const EnquireRegister = () => {
                 </div>
 
                 <div className="d-grid mt-2">
-                    <button type="submit" className="rounded btn btn-danger  btn-lg mt-3">
-                        <h5 className=" mt-2">SEND MESSAGE</h5>
+                    <button type="submit" className="rounded btn btn-danger p-1 btn-lg mt-3">
+                        <h6 className=" mt-2">SEND MESSAGE</h6>
                     </button>
                     <ToastContainer />
 

@@ -64,8 +64,6 @@ const Login = () => {
     }
   }
 
-
-
   // Google Login failures
   const onFailure = async (res) => {
     toast("Google Login Failed")
@@ -202,7 +200,11 @@ const Login = () => {
                         </div>
                       </div>
                       <label className="ms-2 checkbox">
+<<<<<<< HEAD
                         <input type="checkbox" onChange={() => setRemember(true)}/>
+=======
+                        <input type="checkbox"  onChange={() => setRemember(true)}/>
+>>>>>>> fa3a62069f92195b62b3dd0d055a01a74a58f1ed
                         <span></span>
                         <small className="rmb ms-1 ">Remember me</small>
                       </label>
