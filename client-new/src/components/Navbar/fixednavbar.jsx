@@ -19,7 +19,6 @@ const Flotinggnavbar = () => {
     const  data  = await getAllCity();
     setCity(data);
   };
-console.log(posts);
 
   useEffect(() => {
     getCity();

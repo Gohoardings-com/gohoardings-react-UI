@@ -3,19 +3,20 @@ import "./media.scss";
 import {MdOutlineRemoveShoppingCart, MdOutlineAddShoppingCart} from 'react-icons/md'
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import {ImEye} from "react-icons/im"
 
-const MultiCard = ({ slice,loading, addonCart, removefroCart, priceState, locatetologin }) => {
-
-   
+const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
   return (
+<<<<<<< HEAD
+    <div className="row row-cols-md-4 p-0 ms-2  mt-1">
+      {loading ? 
+=======
     <div className="row row-cols-md-4 p-0     ms-2 me-2 ">
       {!slice ? (
+>>>>>>> fa3a62069f92195b62b3dd0d055a01a74a58f1ed
         <>
-          <h1>Loading.... Please Wait</h1>
+          <h1>Loading... Please Wait</h1>
         </>
-      ) : (
+       : 
         <>
           {slice.map((item, i) => (
             <>
@@ -107,7 +108,7 @@ const MultiCard = ({ slice,loading, addonCart, removefroCart, priceState, locate
             </>
           ))}
         </>
-      )}
+      }
     </div>
   );
 };

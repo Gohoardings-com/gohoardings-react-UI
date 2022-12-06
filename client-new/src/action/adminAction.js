@@ -32,6 +32,21 @@ export const mediawithcity  = (category_name, city_name)  => async (dispatch) =>
         dispatch({type: "MediaWithCityFail", payload: error.response.data })
     }
 }
+export const priceSubIllu  = (category_name,price,illumination,table,city)  => async (dispatch) =>{
+    try{
+        console.log();
+        dispatch({type: "MediaWithCityRequest"});
+        const config = { headers : { "Content-Type" : "application/json"}};
+
+        const {data} = await instance.post(`filter/categoryfilter`,{category_name,price,illumination,table,city},config)
+        console.log(data);
+        dispatch({ type: "MediaWithCitySuccess", payload: data});
+
+    }catch(error){
+        
+        dispatch({type: "MediaWithCityFail", payload: error.response.data })
+    }
+}
 
 
 

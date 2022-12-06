@@ -3,9 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from '../../apis/apiContext';
 import { useNavigate } from 'react-router-dom';
 import "./map.scss";
+import { priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from 'react-redux';
-import {medaiWithCity} from '../../apis/apis'
 import instance from "../../apis/axios";
 import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
@@ -14,6 +14,7 @@ import IconsSlection from "./iconsSlection";
 
 const Map = () => {
   const priceState = window.localStorage.getItem("user")
+  const dispatch = useDispatch();
   const {search, loading} = useSelector((state) => state.search)
   const navigate = useNavigate()
   const [medias, setMedias] = useState(search)
@@ -25,51 +26,40 @@ const Map = () => {
   const [noOfLogo, setnoOfLogo] = useState(3);
   const [total,setNewTotal] = useState(0)
 
-  // let slice;
-  // if(medias.length > 0){
 
-  //    slice = medias.slice(0, noOfLogo);
-  // }
-console.log();
-  const hording = [];
-  const type = [];
+  let slice;
+  if(!loading){
+     slice = search.slice(0, noOfLogo);
+  }
+
+  
+
+  const illumination = [];
+  const category_name = [];
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
-
-  const userCartItem = async () => {
-    const { data } = await instance.get('cart/cartitems');
-    setcartItem(data)
-
-  }
  
 
-    
- 
-  console.log(cartItem);
-  
-  const handelprice =() => {
-    console.log(cartItem);
-    let ans = 0;
-    cartItem.map((item) => (ans += parseInt(item.price)));
+  const handelprice = async() => {
+    let ans 
+   await cartItem.map((item) => (ans+=item.price));
+console.log(ans);
     setNewTotal(ans);
-  }; 
- 
+  };
 
+  
   useEffect(() => {
     handelprice();
   },[]);
 
-
-
   const getAllDetails = async () => {
-    const { data } = await instance.post('filter/categoryfilter', {
-      hordingtype: type,
-      price: price,
-      hording: hording
-    })
-    setMedias(data)
+      const value = [...search]
+     const table=  value[0].category_name
+     const city = value[0].city_name
+   dispatch(priceSubIllu(category_name,price,illumination,table,city))
+  
   }
 
 
@@ -79,8 +69,7 @@ console.log();
       mediatype: e.category_name,
     })
     if (data.message == 'Login First') {
-      window.localStorage.setItem("map", `/map`)
-      window.sessionStorage.setItem("map", `/map`)
+      window.localStorage.setItem("locate", `/map`)
       navigate('/login')
     } else {
       addRemove({ type: "INCR" })
@@ -119,11 +108,21 @@ console.log();
 
   function multicheck(e) {
     if (e.currentTarget.checked) {
-      type.push(e.target.value)
+      category_name.push(e.target.value)
     } else {
-      var index = type.indexOf(e.target.value)
+      var index =category_name.indexOf(e.target.value)
       if (index > -1) {
-        type.splice(index, 1);
+        category_name.splice(index, 1);
+      }
+    }
+  }
+  function mediaType(e) {
+    if (e.currentTarget.checked) {
+    illumination.push(e.target.value)
+    } else {
+      var index =illumination.indexOf(e.target.value)
+      if (index > -1) {
+      illumination.splice(index, 1);
       }
     }
   }
@@ -149,7 +148,7 @@ console.log();
 }
 
   let ILLUMINATION = [
-    { label: "Nonlit", value: " Nonlit" },
+    { label: "Nonlit", value: "Nonlit" },
     {
       label: "Frontlit",
       value: "Frontlit",
@@ -177,8 +176,10 @@ console.log();
     setcategory(data)
   }
 
- 
-
+  const userCartItem = async () => {
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data)
+  }
   const More = () => {
     if (medias.length >= noOfLogo) {
       setnoOfLogo(noOfLogo + 6);
@@ -213,7 +214,7 @@ console.log();
             <div className="media-items p-2 accordion-collapse collapse show map-media-item-list" id="collapseT1" data-bs-parent="#accordionTest">
               <div className="accordion items mb-2 rounded" id="accordionExample">
                 {loading ? <>Loading .... Please wait</> : <>
-                  {search.map((item, i) => (
+                  {slice.map((item, i) => (
                     <>
                       <div className="accordion-item border rounded mb-2">
                         <div
@@ -274,7 +275,7 @@ console.log();
                 </div>
               </div>
             </div>
-            {medias && medias.length > 0 ? <IconsSlection media={medias} fnmedia={nmedia} /> : null}
+            {search && search.length > 0 ? <IconsSlection search={search} loading={loading} fnmedia={search} /> : null}
             <div className="filter-items p-2 accordion accordion-collapse collapse" id="collapseT3" data-bs-parent="#accordionTest">
 
               <div id="accordionTest2">
@@ -287,7 +288,7 @@ console.log();
                   <div id="flush-collapseOne" className="accordion-collapse collapse bg-secondary bg-opacity-25 pt-2" aria-labelledby="flush-headingOne" data-bs-parent="#accordionTest2">
                     <div className="price-range">
                       <MultiRangeSlider min={0} max={1000000}
-                        onChange={({ min, max }) => setprice(`min = ${min}, max = ${max}`)}
+                        onChange={({ min, max }) => setprice(`min=${min},max=${max}`)}
                       />
                     </div>
                   </div>
@@ -378,7 +379,7 @@ console.log();
                           <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
                             <input type="checkbox" id={i}
                               value={illumation.value}
-                              onChange={(e) => multicheck(e)} />
+                              onChange={(e) => mediaType(e)} />
                             <label htmlFor="1" className="ps-2">{illumation.label}</label>
                           </div>
                         ))}
@@ -481,7 +482,7 @@ console.log();
               <span className="pe-2">Not Available</span>
             </div>
           </div>
-          {isLoaded && medias && medias.length > 0 ? <Markers data={search} add={addonCart} /> : null}
+          {isLoaded && search && search.length > 0 ? <Markers data={search} add={addonCart} /> : null}
         </div>
       </div>
     </div>

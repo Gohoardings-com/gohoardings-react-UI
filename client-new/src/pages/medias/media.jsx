@@ -26,12 +26,12 @@ const Media = () => {
     const [query, setQuery] = useState("");
     const [catego, setCatego] = useState('');
     const [illumna, setIllumna] = useState('');
-  const [noOfLogo, setnoOfLogo] = useState(6)
-  var slice;
-  if(search){
-     slice = search.slice(0, noOfLogo);
-  }
+    const [noOfLogo, setnoOfLogo] = useState(6);
 
+    let slice;
+    if(!loading){
+       slice = search.slice(0, noOfLogo);
+    }
 
   let ILLUMINATION = [
       { label: "Nonlit", value: "nonlit" },
@@ -133,16 +133,16 @@ const Media = () => {
     };
   
     const More = () => {
-      if (posts.length >= noOfLogo) {
-        setnoOfLogo(noOfLogo + 10);
+      if (search.length >= noOfLogo) {
+        setnoOfLogo(noOfLogo + 6);
       }
     };
     const Less = () => {
       if (noOfLogo > 2) {
-        setnoOfLogo(noOfLogo - 10);
+        setnoOfLogo(noOfLogo - 6);
       }
     };
-  
+
     useEffect(() => {
       getData();
     }, [category_name, city_name]);
@@ -249,7 +249,9 @@ const Media = () => {
                     <MultiCard
                       MdOutlineShoppingCart={MdOutlineShoppingCart}
                       slice={slice}
+                      search={search}
                       addonCart={addonCart}
+                      loading={loading}
                       removefroCart={removefroCart}
                       add={add}
                       remove={remove}
@@ -262,6 +264,8 @@ const Media = () => {
                     <SingleCard
                       MdOutlineShoppingCart={MdOutlineShoppingCart}
                       slice={slice}
+                      search={search}
+                      loading={loading}
                       addonCart={addonCart}
                       removefroCart={removefroCart}
                       add={add}

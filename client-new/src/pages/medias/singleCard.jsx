@@ -4,7 +4,7 @@ import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/
 import { GrMapLocation } from 'react-icons/gr';
 import { Link, useNavigate, useHref } from 'react-router-dom';
 
-const SingleCard = ({ slice, loading,addonCart, removefroCart, priceState, locatetologin }) => {
+const SingleCard = ({ slice,search, loading,addonCart, removefroCart, priceState, locatetologin }) => {
   return (
     <div className='row rounded-2 bg-light mt-3 singlecartback'>
       <div className='col-12 col-sm-12 backgroundAreaCol'>
@@ -12,7 +12,7 @@ const SingleCard = ({ slice, loading,addonCart, removefroCart, priceState, locat
           <h1>Loading.... Please Wait</h1>
         </> : <>
           <div className='row  backgroundArea'>
-            {slice.map((item, i) => (
+            {search.map((item, i) => (
               <>
                 <div className='col-4 col-sm-4 p-2'>
                   <Link to={`/details/${item.code}/${item.category_name}`} className="text-decoration-none p-1 m-0">

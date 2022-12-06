@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "./slider.jsx";
 import "./icons.scss"
 
-const IconsSlection = ({ media, fnmedia }) => {
+const IconsSlection = ({ loading, fnmedia, search }) => {
   const [Distance, Setdistance] = useState(0);
 
   const hording = [];
@@ -93,12 +93,18 @@ const IconsSlection = ({ media, fnmedia }) => {
 
   ]
   const submitfilters = async () => {
-  var newArray = media.filter(function (el)
-  {
-    return el.id >= 3695;
-  }
-  );
-  fnmedia(newArray)
+    if(!loading){
+      const data = [...search]
+     const category=  data[0].category_name
+     const city = data[0].city_name
+    console.log(category, city);
+    }
+  // var newArray = media.filter(function (el)
+  // {
+  //   return el.id >= 3695;
+  // }
+  // );
+  // fnmedia(newArray)
   }
 
 

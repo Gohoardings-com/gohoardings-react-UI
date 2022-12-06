@@ -48,19 +48,15 @@ const Login = () => {
     })
     if (data.message === "User Login Successfull") {
       const user = data.message
-      window.localStorage.setItem("user", user)
-      window.sessionStorage.setItem("user", user)
-      const locate = window.localStorage.getItem("login")
-      const map = window.localStorage.getItem("map")
-      if (!locate) {
-        navigate("/").then(() => dispatch(authActions.login()))
-      } else if (map) {
-        window.localStorage.removeItem("map")
-        navigate(`${map}`).then(() => dispatch(authActions.login()))
+      if(remember){
+        window.localStorage.setItem("user", user);
       } else {
-        window.localStorage.removeItem("login")
-        navigate(`${locate}`).then(() => dispatch(authActions.login()))
+        window.sessionStorage.setItem("user", user);
       }
+      const locate = window.localStorage.getItem("locate");
+          const backlink = locate ? locate : "/";
+          window.localStorage.removeItem("locate");
+          navigate(`${backlink}`).then(() => dispatch(authActions.login()));
 
     } else {
       toast("Email or Password Invalid")
@@ -115,8 +111,11 @@ const Login = () => {
         })
         if (data.message === "User Login Successfull") {
           const user = data.message
-          window.localStorage.setItem("user", user);
-          window.sessionStorage.setItem("user", user);
+          if(remember){
+            window.localStorage.setItem("user", user);
+          } else {
+            window.sessionStorage.setItem("user", user);
+          }
           const locate = window.localStorage.getItem("locate");
           const backlink = locate ? locate : "/";
           window.localStorage.removeItem("locate");
@@ -201,7 +200,11 @@ const Login = () => {
                         </div>
                       </div>
                       <label className="ms-2 checkbox">
+<<<<<<< HEAD
+                        <input type="checkbox" onChange={() => setRemember(true)}/>
+=======
                         <input type="checkbox"  onChange={() => setRemember(true)}/>
+>>>>>>> fa3a62069f92195b62b3dd0d055a01a74a58f1ed
                         <span></span>
                         <small className="rmb ms-1 ">Remember me</small>
                       </label>
