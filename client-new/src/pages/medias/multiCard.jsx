@@ -6,13 +6,13 @@ import Card from "react-bootstrap/Card";
 
 const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
   return (
-<<<<<<< HEAD
+
     <div className="row row-cols-md-4 p-0 ms-2  mt-1">
       {loading ? 
-=======
-    <div className="row row-cols-md-4 p-0     ms-2 me-2 ">
-      {!slice ? (
->>>>>>> fa3a62069f92195b62b3dd0d055a01a74a58f1ed
+
+    // <div className="row row-cols-md-4 p-0     ms-2 me-2 ">
+    //   {!slice ? (
+
         <>
           <h1>Loading... Please Wait</h1>
         </>
