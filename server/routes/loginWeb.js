@@ -6,6 +6,6 @@ router.route('/login').post(login);
 router.route('/user').get(verifyToken, getuser).post(Profile);
 router.route('/googleSingUp').post(googleLogin);
 router.route('/logout').post(verifyToken,logout).get(verifyToken, refreshToken, getuser)
-router.route('/forgetpassword').post(sendPasswordEmail).put(resetPassword)
+router.route('/forgetpassword').post(sendPasswordEmail).put(verifyToken,resetPassword)
 
 module.exports = router;

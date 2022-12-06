@@ -270,17 +270,17 @@ exports.sendPasswordEmail = catchError(async(req,res,next) =>{
 
       res.clearCookie(String(resetToken))
       req.cookies[`${String(resetToken)}`] = " ";
-    const token = jwtToken.sign({resetToken}, process.env.jwt_secret, {
+    const token = jwtToken.sign({id: resetToken}, process.env.jwt_secret, {
       expiresIn: "1h",
     });
     res.cookie(String(resetToken), token, {
       path: '/',
-      expires: new Date(Date.now() + 1000 * 300),
+      expires: new Date(Date.now() + 1000 * 3000),
       httpOnly: true,
       sameSite: 'lax',
       origin: "http://localhost:3000"
     });
-      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/forgetpassword?id=${resetToken}`;
       const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
       try {
         await sendEmail({ email: email, subject: "Reset Password", message, });
@@ -296,8 +296,8 @@ exports.sendPasswordEmail = catchError(async(req,res,next) =>{
 
 exports.resetPassword = catchError(async(req,res,next) => {
   const user = req.id
-  console.log(user);
-        const {id} = req.params
+
+        const id = req.params.id
         if(user.id === id){
           const {password: Npassword} = req.body;
           const password = bcrypt.hashSync(Npassword, 8)
