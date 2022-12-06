@@ -200,9 +200,12 @@ const Login = () => {
                         </div>
                       </div>
                       <label className="ms-2 checkbox">
+<<<<<<< HEAD
+=======
 
                         <input type="checkbox" onChange={() => setRemember(true)}/>
 
+>>>>>>> 3a796b5761a0d8c0cdfa51c4d53ddcbdec24d13d
                         <input type="checkbox"  onChange={() => setRemember(true)}/>
 
                         <span></span>

@@ -4,15 +4,18 @@ import {MdOutlineRemoveShoppingCart, MdOutlineAddShoppingCart} from 'react-icons
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-const MultiCard = ({ slice,search, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
+const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
   return (
 
     <div className="row row-cols-md-4 p-0 ms-2  mt-1">
       {loading ? 
 
+<<<<<<< HEAD
+=======
     // <div className="row row-cols-md-4 p-0     ms-2 me-2 ">
     //   {!slice ? (
 
+>>>>>>> 3a796b5761a0d8c0cdfa51c4d53ddcbdec24d13d
         <>
           <h1>Loading... Please Wait</h1>
         </>
