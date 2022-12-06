@@ -19,6 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailValidate, setEmailValidate] = useState();
   const [passwordValidate, setPasswordValidate] = useState();
+  const [remember, setRemember] = useState(false)
   const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
 
@@ -47,19 +48,15 @@ const Login = () => {
     })
     if (data.message === "User Login Successfull") {
       const user = data.message
-      window.localStorage.setItem("user", user)
-      window.sessionStorage.setItem("user", user)
-      const locate = window.localStorage.getItem("login")
-      const map = window.localStorage.getItem("map")
-      if (!locate) {
-        navigate("/").then(() => dispatch(authActions.login()))
-      } else if (map) {
-        window.localStorage.removeItem("map")
-        navigate(`${map}`).then(() => dispatch(authActions.login()))
+      if(remember){
+        window.localStorage.setItem("user", user);
       } else {
-        window.localStorage.removeItem("login")
-        navigate(`${locate}`).then(() => dispatch(authActions.login()))
+        window.sessionStorage.setItem("user", user);
       }
+      const locate = window.localStorage.getItem("locate");
+          const backlink = locate ? locate : "/";
+          window.localStorage.removeItem("locate");
+          navigate(`${backlink}`).then(() => dispatch(authActions.login()));
 
     } else {
       toast("Email or Password Invalid")
@@ -116,8 +113,11 @@ const Login = () => {
         })
         if (data.message === "User Login Successfull") {
           const user = data.message
-          window.localStorage.setItem("user", user);
-          window.sessionStorage.setItem("user", user);
+          if(remember){
+            window.localStorage.setItem("user", user);
+          } else {
+            window.sessionStorage.setItem("user", user);
+          }
           const locate = window.localStorage.getItem("locate");
           const backlink = locate ? locate : "/";
           window.localStorage.removeItem("locate");
@@ -202,7 +202,7 @@ const Login = () => {
                         </div>
                       </div>
                       <label className="ms-2 checkbox">
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={() => setRemember(true)}/>
                         <span></span>
                         <small className="rmb ms-1 ">Remember me</small>
                       </label>
