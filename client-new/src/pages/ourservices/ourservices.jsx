@@ -37,8 +37,8 @@ const Ourservices = () => {
   ];
 
   return (
-    <div className="ourServices pb-5  py-3 px-5 ">
-      <h1 className="text-center pe-5 ps-5 pt-5 text-nowrap text-light ">
+    <div className="ourServices pb-5  py-3 px-5 pt-5 ">
+      <h1 className="text-center pe-5 ps-5 pt-5 text-nowrap text-light mt-5">
         Services We Provide
       </h1>
 
@@ -46,10 +46,10 @@ const Ourservices = () => {
         Choose from below to deliver advertisements in a truly exciting,
         innovative and creative way.
       </h6>
-      <div className=" px-5 pt-4 ">
+      <div className=" container px-5 mt-3">
         <div className="row row-cols-md-2 row-cols-sm-1 row-cols-lg-3  ">
           {ILLUMINATION.map((pos) => (
-            <div className="col-12 col-sm-12 mt-3">
+            <div className="col-12 col-sm-12 mt-3 p-0 m-0">
               <div class="content ">
                 {" "}
                 <div

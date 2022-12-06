@@ -14,9 +14,9 @@ const City = () => {
         Explore some of the best business from around the world from our
         partners and friends.
       </h6>
-      <div className="container-fluid px-5 pt-5">
+      <div className="container  pt-4">
         <div className="row">
-          <div className="col-lg-6 col-md-12 ps-5 ">
+          <div className="col-lg-6 col-md-12 ">
             <Link to={`/traditional-ooh-media/delhi`}>
             <div className="city-img-container p-0 m-0 ">
             <img
@@ -29,7 +29,7 @@ const City = () => {
             </div>
             </Link>
           </div>
-          <div className="col-lg-3  col-md-6 ps-0 pe-0">
+          <div className="col-lg-3  col-md-6 ps-3 pe-0">
             <Link to={`/traditional-ooh-media/bengaluru`}>
             <div className="city-img-container p-0 m-0">
               <img
@@ -53,7 +53,7 @@ const City = () => {
             </div>
             </Link>
           </div>
-          <div className="col-lg-3  col-md-6 p-0 ">
+          <div className="col-lg-3  col-md-6 p-0 ps-3">
             <Link to={`/traditional-ooh-media/hyderabad`}>
              <div className="city-img-container p-0 m-0">
               <img

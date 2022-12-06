@@ -5,7 +5,7 @@ const Branding = (props) => {
  
   return (
    <>
-    <section className="inn-page-bg">
+    <section className="inn-page-bg ">
         <div className="container">
           <div className="row">
             <a href="/">
