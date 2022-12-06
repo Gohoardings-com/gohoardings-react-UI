@@ -9,13 +9,6 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
 
     <div className="row row-cols-md-4 p-0 ms-2  mt-1">
       {loading ? 
-
-<<<<<<< HEAD
-=======
-    // <div className="row row-cols-md-4 p-0     ms-2 me-2 ">
-    //   {!slice ? (
-
->>>>>>> 3a796b5761a0d8c0cdfa51c4d53ddcbdec24d13d
         <>
           <h1>Loading... Please Wait</h1>
         </>

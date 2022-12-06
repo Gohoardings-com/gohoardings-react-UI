@@ -32,7 +32,6 @@ const Map = () => {
      slice = search.slice(0, noOfLogo);
   }
 
-  
 
   const illumination = [];
   const category_name = [];
