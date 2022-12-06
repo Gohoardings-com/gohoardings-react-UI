@@ -161,7 +161,7 @@ const Media = () => {
                   <MdSearch class="fa fa-search" /> 
                   <input type="text" class="form-control form-input" placeholder="Search..."  onChange={(event) => setQuery(event.target.value)}/>
                 </div>
-              <div className="rowCheck  row rounded-bottom me-4 ms-1 mb-1 p-1">
+              <div className="rowCheck  row rounded-bottom me-5 ms-1 mb-1 p-1">
                 <ul>
                   {category
                     .filter((obj) => {
