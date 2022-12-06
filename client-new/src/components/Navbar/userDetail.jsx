@@ -76,7 +76,8 @@ const UserDetail = ({ posts, setPosts }) => {
         <a href='/cart' className='anchor m-0 p-0'>
           <div className="cart ms-3  pb-2">
             <span>
-              <MdOutlineAddShoppingCart />
+              {/* <MdOutlineAddShoppingCart /> */}
+              <img src='https://cdn-icons-png.flaticon.com/512/3737/3737151.png' className='login-icon-cart'/>
 
             </span>
             <span>{initalState}</span>
