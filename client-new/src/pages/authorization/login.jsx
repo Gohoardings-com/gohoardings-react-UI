@@ -203,8 +203,8 @@ const Login = () => {
 
                         <input type="checkbox" onChange={() => setRemember(true)}/>
 
+                        <input type="checkbox"  onChange={() => setRemember(true)}/>
 
-                  
                         <span></span>
                         <small className="rmb ms-1 ">Remember me</small>
                       </label>
