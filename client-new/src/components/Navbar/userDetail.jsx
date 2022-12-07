@@ -51,14 +51,14 @@ const UserDetail = ({ posts, setPosts }) => {
     <>
       {posts ? <div className='p-0 m-0  d-flex userDetail my-2 my-lg-0 '>
 
-        <Dropdown>
+        <Dropdown className='login-profile'>
           <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 ">
             <h5 className='p-0 m-0 text-secondary'>{posts.firstname.toUpperCase().substring(0, 1)}</h5>
           </Dropdown.Toggle>
 
-          <Dropdown.Menu >
-            <Dropdown.Item href="/">Profile</Dropdown.Item>
-            <Dropdown.Item href="/" onClick={logOut}>
+          <Dropdown.Menu className=''>
+            <Dropdown.Item href="/" className=''>Profile</Dropdown.Item>
+            <Dropdown.Item href="/"  className='' onClick={logOut}>
 
               <GoogleLogout
                 className='border-0 bg-transparent'
@@ -77,7 +77,7 @@ const UserDetail = ({ posts, setPosts }) => {
           <div className="cart ms-3  pb-2">
             <span>
               {/* <MdOutlineAddShoppingCart /> */}
-              <img src='https://cdn-icons-png.flaticon.com/512/3737/3737151.png' className='login-icon-cart'/>
+              <img src='../../gohoarding/new-icon/cart-icon.png' className='login-icon-cart'/>
 
             </span>
             <span>{initalState}</span>

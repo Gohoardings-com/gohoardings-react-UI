@@ -31,6 +31,7 @@ const Media = () => {
     if(!loading){
        slice = search.slice(0, noOfLogo);
     }
+    console.log(search);
 
   let ILLUMINATION = [
       { label: "Nonlit", value: "nonlit" },

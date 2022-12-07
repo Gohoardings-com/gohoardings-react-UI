@@ -41,7 +41,7 @@ const Flotinggnavbar = () => {
             <img
               src="../../images/logo.png"
               className="brand  border-0 ms-5   float-brand"
-              onMouseOver={() => setShow(false)}
+              onMouseOver={() => setShow(true)}
             />
           </Navbar.Brand>
 
@@ -103,7 +103,7 @@ const Flotinggnavbar = () => {
                     className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
                     href="/map"
                   >
-                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991231.png" className=" float-map-logo ps-0 p-0 me-1" />
+                    <img src="../../gohoarding/new-icon/map-icon.png" className=" float-map-logo ps-0 p-0 me-1" />
 
                     <span className="map-view-float ">Map View</span>
                   </Nav.Link>

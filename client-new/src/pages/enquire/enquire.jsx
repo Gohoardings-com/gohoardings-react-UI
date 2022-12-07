@@ -16,7 +16,7 @@ const Enquire = () => {
             <div className="d-flex flex-row p-xxl-0 m-lg-5 m-xxl-5 m-md-0 animate__animated animate__backInLeft ">
               {" "}
               <img
-                src="https://cdn-icons-png.flaticon.com/512/3298/3298716.png"
+                src="./gohoarding/new-icon/n1.png"
                 alt=""
                 className=" suggestion-logo"
               />
@@ -33,7 +33,7 @@ const Enquire = () => {
             </div>
             <div className="d-flex flex-row p-xxl-0 m-lg-5 m-xxl-5 m-md-0 animate__animated animate__backInLeft     animate__delay-1s	1s">
         
-              <img src="https://cdn-icons-png.flaticon.com/512/6728/6728474.png" alt="" className=" suggestion-logo" />
+              <img src="./gohoarding/new-icon/n2.png" alt="" className=" suggestion-logo" />
               <div className="row ps-5">
                 <div className="col">
                   <h6 className="enquire-qsns-cant">Have a query ?</h6>
@@ -47,7 +47,7 @@ const Enquire = () => {
             <div className="d-flex flex-row p-xxl-0 m-lg-5 m-xxl-5 m-md-0 animate__animated animate__backInLeft animate__delay-2s	2s">
               {" "}
               <img
-                src="https://cdn-icons-png.flaticon.com/512/1622/1622723.png"
+                src="./gohoarding/new-icon/n3.png"
                 alt=""
                 className=" suggestion-logo"
               />

@@ -48,7 +48,7 @@ useEffect(() => {
                 className="mapLink font-map-btn text-white  text-nowrap rounded-pill "
                 href="/map"
               >
-                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991231.png" className="ps-0 p-0 me-1  pb-1 font-map-logo" />
+                <img src="./gohoarding/new-icon/map-icon.png" className="ps-0 p-0 me-1  pb-1 font-map-logo" />
                 Map View
               </Nav.Link>
               <UserDetail posts={posts} setPosts={setPosts}/>

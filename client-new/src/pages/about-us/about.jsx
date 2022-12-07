@@ -52,7 +52,7 @@ const About = () => {
         </div>
       </section>
       <section>
-        <div className="media-container container-fluid px-5 pb-4">
+        <div className="media-container container pb-4">
           <div className="row">
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6">
               <div className="card about-cards">

@@ -18,7 +18,7 @@ const Medialogo = ({ posts, category_name }) => {
           <div className="col-2  viewabout-main pt-4  ">
             <div className="col viewabout ms-3 mt-4 mb-3">
               <div className="locationIcon rounded-3 text-center">
-                <img src="https://cdn-icons-png.flaticon.com/512/753/753880.png" className="media-location-logo mt-2"/>
+                <img src="../../gohoarding/new-icon/point-map.png" className="media-location-logo mt-2"/>
               </div>
               <div className=" ms-3 ">
                 <p className=" mb-0 ">{(posts.length + posts.length) * 12}</p>
@@ -27,7 +27,7 @@ const Medialogo = ({ posts, category_name }) => {
             </div>
             <div className="col viewabout ms-3">
               <div className="col iconback rounded-3   text-center">
-               <img src="https://cdn-icons-png.flaticon.com/512/5053/5053559.png" className="media-hording-logo mt-2 "/>
+               <img src="../../gohoarding/new-icon/add-icon.png" className="media-hording-logo mt-2 "/>
               </div>
               <div className=" ms-3 ">
                 <p className="mb-0">{posts.length}</p>
