@@ -3,10 +3,9 @@ import './media.scss';
 import { mediawithcity } from '../../action/adminAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { AccountContext } from '../../apis/apiContext';
-import { BsListCheck } from 'react-icons/bs';
 import { useParams,useNavigate } from 'react-router-dom';
 import instance from '../../apis/axios'
-import { MdLocationOn, MdChecklist, MdSearch } from 'react-icons/md'
+import {  MdSearch } from 'react-icons/md'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import SingleCard from './singleCard';
 import MultiCard from './multiCard';
@@ -14,7 +13,7 @@ import Medialogo from '../../components/medialogo';
 import FixedNavbar from '../../components/navbar/fixednavbar';
 
 const Media = () => {
-  const priceState = window.localStorage.getItem("user")
+  const priceState = window.localStorage.getItem("user") || window.sessionStorage.getItem("user");
   const dispatch = useDispatch()
   const {search, loading} = useSelector((state) => state.search)
   const [show, setShow] = useState(false)
@@ -78,9 +77,9 @@ const Media = () => {
   setPosts(data)
     }
     
-    useEffect(() =>{
-      mediaFilter()
-    },[category_name, illumna,catego])
+  //   useEffect(() =>{
+  //     mediaFilter()
+  //   },[category_name, illumna,catego])
     
     const getData = async() => {
     await dispatch(mediawithcity(category_name, city_name))
@@ -222,27 +221,7 @@ const Media = () => {
 
 
           <div className="col-md-10 ">
-            {/* <div className="row  ">
-         
-              <div className="col">
-                {!show ? (
-                  <>
-                    {" "}
-                    <MdChecklist
-                      onClick={(e) => setShow(!show)}
-                      className="h-75 w-auto mt-1 ms-4"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <BsListCheck
-                      onClick={(e) => setShow(!show)}
-                      className="h-75 w-auto mt-1"
-                    />
-                  </>
-                )}
-              </div>
-            </div> */}
+           
             <div className="">
            
                 {!show ? (

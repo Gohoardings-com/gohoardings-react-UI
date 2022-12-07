@@ -1,7 +1,9 @@
 const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
+const {sendEmail} = require('../middelware/sendEmail')
 const jwtToken = require('jsonwebtoken')
-const catchError = require('../middelware/catchError')
+const crypto = require('crypto')
+const catchError = require('../middelware/catchError');
 
 exports.register = catchError(async (req, res) => {
   const { name, email, phone, password: Npassword } = req.body
@@ -259,5 +261,58 @@ exports.Profile = catchError(async (req, res) => {
 
 exports.sendPasswordEmail = catchError(async(req,res,next) =>{
   const {email} = req.body;
+  db.changeUser({ database: "gohoardi_crmapp" })
+  db.query("Select id from tblcontacts Where email='"+email+"'", async(err,result) =>{
+    if(err || result.length == 0){
+     return res.status(400).json({message:err.message})
+    }else{  
+      const resetToken = result[0].id;
 
+      res.clearCookie(String(resetToken))
+      req.cookies[`${String(resetToken)}`] = " ";
+    const token = jwtToken.sign({id: resetToken}, process.env.jwt_secret, {
+      expiresIn: "1h",
+    });
+    res.cookie(String(resetToken), token, {
+      path: '/',
+      expires: new Date(Date.now() + 1000 * 3000),
+      httpOnly: true,
+      sameSite: 'lax',
+      origin: "http://localhost:3000"
+    });
+      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/forgetpassword?id=${resetToken}`;
+      const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
+      try {
+        await sendEmail({ email: email, subject: "Reset Password", message, });
+        res.status(200).json({ success: true, message: `Email sent to ${email}` ,message:message});
+    } catch (error) {
+      return res.status(500).json({message:error.message})
+    }
+    }
+  })
+
+})
+
+
+exports.resetPassword = catchError(async(req,res,next) => {
+  const user = req.id
+
+        const id = req.params.id
+        if(user.id === id){
+          const {password: Npassword} = req.body;
+          const password = bcrypt.hashSync(Npassword, 8)
+          db.changeUser({ database: "gohoardi_crmapp" })
+          db.query("UPDATE tblcontacts SET password='"+password+"' WHERE id='"+id+"'", async(err,result) =>{
+            if(err){
+              return res.status(500).json({message:err.message})
+            }else{
+              return res.status(200).json({message:"Password Change Successfully"})
+            }
+          })
+
+
+        }else{
+          
+        }
+    
 })
