@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
 const {sendEmail} = require('../middelware/sendEmail')
 const jwtToken = require('jsonwebtoken')
-const crypto = require('crypto')
 const catchError = require('../middelware/catchError');
 
 exports.register = catchError(async (req, res) => {
@@ -101,7 +100,6 @@ exports.googleLogin = catchError(async (req, res) => {
   db.changeUser({ database: "gohoardi_crmapp" });
   db.query("SELECT email, provider FROM tblcontacts WHERE email='" + profile.email + "' && provider='Google'", async (err, selectResult) => {
     if (err) {
-      console.log(err);
       return res.status(400).json({ message: "Wrong Data" })
     }
     if (selectResult.length == 0) {
@@ -109,17 +107,18 @@ exports.googleLogin = catchError(async (req, res) => {
         if (err) {
           return res.status(404).json(err.message)
         } else {
-          const lastid = (result[0].userid) + 1
-          db.query(`Insert into tblcontacts (firstname, email, userid, profile_image, provider) VALUES ('${profile.name}','${profile.email}','${lastid}','${profile.imageUrl}',"Google")`, async (err, result) => {
+          const userid = (result[0].userid) + 1
+          const password = bcrypt.hashSync(profile.givenName, 8)
+          db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${profile.name}','${profile.email}','${password}','${userid}','${profile.imageUrl}','Google')`, async (err, result) => {
             if (err) {
               return res.status(400).json({ err: err.message })
             } else {
-              const token = jwtToken.sign({ id: lastid }, process.env.jwt_secret, {
+              res.clearCookie(String(userid))
+              req.cookies[`${String(userid)}`] = " ";
+              const token = jwtToken.sign({ id: userid }, process.env.jwt_secret, {
                 expiresIn: "7d",
               });
-              res.clearCookie(String(lastid))
-              req.cookies[`${String(lastid)}`] = " ";
-              res.cookie(String(lastid), token, {
+              res.cookie(String(userid), token, {
                 path: '/',
                 expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
@@ -240,10 +239,10 @@ exports.logout = catchError(async (req, res) => {
 })
 
 exports.Profile = catchError(async (req, res) => {
-  const { userid } = req.body;
+  const userId = req.id;
   db.changeUser({ database: "gohoardi_goh" });
   db.query(
-    "SELECT campaign_name, start_date, end_date, CASE WHEN status=1 THEN 'IS BOOKED' WHEN status=2 THEN 'Processing' WHEN status=3 THEN 'IS Cancel' WHEN status=0 THEN 'Working On' END AS status FROM goh_serach_activities  WHERE user= " + userid + " ",
+    "SELECT campaign_name, start_date, end_date, CASE WHEN status=1 THEN 'IS BOOKED' WHEN status=2 THEN 'Processing' WHEN status=3 THEN 'IS Cancel' WHEN status=0 THEN 'Working On' END AS status FROM goh_serach_activities  WHERE user= " + userId + " ",
     async (err, result) => {
       if (err) {
         if (result == []) {
@@ -258,21 +257,19 @@ exports.Profile = catchError(async (req, res) => {
   )
 })
 
-
-exports.sendPasswordEmail = catchError(async(req,res,next) =>{
+exports.sendPasswordEmail = catchError(async(req,res,next) => {
   const {email} = req.body;
   db.changeUser({ database: "gohoardi_crmapp" })
   db.query("Select id from tblcontacts Where email='"+email+"'", async(err,result) =>{
     if(err || result.length == 0){
-     return res.status(400).json({message:err.message})
+     return res.status(400).json({message:"User Not Found"})
     }else{  
       const resetToken = result[0].id;
-
-      res.clearCookie(String(resetToken))
-      req.cookies[`${String(resetToken)}`] = " ";
     const token = jwtToken.sign({id: resetToken}, process.env.jwt_secret, {
       expiresIn: "1h",
     });
+    res.clearCookie(String(resetToken))
+    req.cookies[`${String(resetToken)}`] = " ";
     res.cookie(String(resetToken), token, {
       path: '/',
       expires: new Date(Date.now() + 1000 * 3000),
@@ -280,7 +277,7 @@ exports.sendPasswordEmail = catchError(async(req,res,next) =>{
       sameSite: 'lax',
       origin: "http://localhost:3000"
     });
-      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/forgetpassword?id=${resetToken}`;
+      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/resetPassword?code=${token}`;
       const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
       try {
         await sendEmail({ email: email, subject: "Reset Password", message, });
@@ -293,26 +290,76 @@ exports.sendPasswordEmail = catchError(async(req,res,next) =>{
 
 })
 
-
-exports.resetPassword = catchError(async(req,res,next) => {
-  const user = req.id
-
-        const id = req.params.id
-        if(user.id === id){
-          const {password: Npassword} = req.body;
-          const password = bcrypt.hashSync(Npassword, 8)
-          db.changeUser({ database: "gohoardi_crmapp" })
-          db.query("UPDATE tblcontacts SET password='"+password+"' WHERE id='"+id+"'", async(err,result) =>{
+exports.resetPasswordEmail = catchError(async(req,res,next) => {
+  const {code} = req.query
+  const cookieData = req.cookies;
+  if (!cookieData) {
+    return res.status(400).json({ message: "No Cookie Found" })
+  }
+  const token = Object.values(cookieData)[0];
+  if (!token) {
+    return res.status(400).json({ message: "No Token Found" })
+  } else {
+    if(token === code){
+      return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
+        if (err) {
+          return res.status(400).json({ message: "InValid Token" });
+        } else {
+          const userId = user.id
+          const {password}  = req.body;
+          const finalPassword = bcrypt.hashSync(password, 8)
+          const sql ="UPDATE tblcontacts SET password ='"+finalPassword+"' WHERE id='"+userId+"'";
+          db.query(sql,async(err,result) =>{
             if(err){
-              return res.status(500).json({message:err.message})
+              return res.status(800).json({message:err.message})
             }else{
-              return res.status(200).json({message:"Password Change Successfully"})
+              return res.status(200).json({message:result})
             }
           })
-
-
-        }else{
-          
         }
-    
+      })
+    }else{
+      return res.status(400).json({ message: "Verfication failed" })
+    }
+   
+  }
 })
+
+exports.changepasswoed = catchError(async(req,res,next) => {
+  const userId = req.id;
+  if(!userId){
+    return res.status(400).json({message:"User not found"})
+  }else{
+    db.changeUser({ database: "gohoardi_crmapp" })
+    db.query("SELECT password from tblcontacts WHERE userid='"+userId+"'", async(err,result) =>{
+      if(err){
+        return res.status(401).json({message:err.message})
+      }else{
+      const {oldPassword, newPassword, confirmPassword} = req.body;
+      const password = result[0].password
+      const resetPassword = bcrypt.compareSync(oldPassword, password)
+      if(resetPassword){
+        if(newPassword === confirmPassword){
+          const finalPassword = bcrypt.hashSync(newPassword, 8)
+          if(!finalPassword){
+            return res.status(500).json({message:"Password Error"})
+          }else{
+            const sql ="UPDATE tblcontacts SET password = '"+finalPassword+"' WHERE userid='"+userId+"'";
+            db.query(sql,async(err,result) =>{
+              if(err){
+                return res.status(800).json({message:err.message})
+              }else{
+                return res.status(200).json({message:result})
+              }
+            })
+          }
+         
+        }
+      }else{
+        return res.status(400).json({message:"Your Password Not Matched"})
+      }
+      
+      }
+    })
+  }
+}) 
