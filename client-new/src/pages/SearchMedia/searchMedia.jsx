@@ -4,7 +4,7 @@ import instance from "../../apis/axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import "./searchmedia.scss";
+import "./searchMedia.scss";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);

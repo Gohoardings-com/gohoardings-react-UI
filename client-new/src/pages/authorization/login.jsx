@@ -200,14 +200,7 @@ const Login = () => {
                         </div>
                       </div>
                       <label className="ms-2 checkbox">
-
-<<<<<<< HEAD
-=======
-                        <input type="checkbox" onChange={() => setRemember(true)}/>
-
->>>>>>> ffeed980830621d9d9fbdcafbdef24b810f7f949
                         <input type="checkbox"  onChange={() => setRemember(true)}/>
-
                         <span></span>
                         <small className="rmb ms-1 ">Remember me</small>
                       </label>
