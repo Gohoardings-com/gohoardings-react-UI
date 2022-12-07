@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 
 dotenv.config()
 const app = express();
-app.use(cors({credentials:true, origin:"http://localhost:3000",  methods: "GET,POST,PUT,DELETE",}))
+app.use(cors({credentials:true, origin:"http://localhost:3000",  methods: "GET,POST,PUT,DELETE"}))
 app.use( express.json({limit: '14kb'}))
 app.use(bodyparser.urlencoded({ extended: true}));
 app.use(cookieParser());
