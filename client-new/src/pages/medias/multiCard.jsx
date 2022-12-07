@@ -55,7 +55,7 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
                           {!priceState ? (
                             <a
                               onClick={locatetologin}
-                              className="text-decoration-none text-danger"
+                              className="text-decoration-none text-danger media-filter-text-card-detail "
                             >
                               Login to view
                             </a>
