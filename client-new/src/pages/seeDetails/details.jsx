@@ -160,7 +160,7 @@ const Details = () => {
                       <div className="col mt-4 d-flex offset-4">
                         <a href="/map" className=" text-decoration-none ms-5">
                           <img
-                            src="https://cdn-icons-png.flaticon.com/512/854/854878.png"
+                            src="../../gohoarding/new-icon/detail-map.png"
                             className="ms-4 mt-1"
                             id="detail-map-location"
                           />

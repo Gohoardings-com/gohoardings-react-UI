@@ -2,26 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./login.scss";
 import { authActions } from "../../store";
 import { ToastContainer, toast } from "react-toastify";
-import { useSelector, useDispatch } from 'react-redux'
-import { useGoogleLogin } from 'react-google-login'
+import { useSelector, useDispatch } from "react-redux";
+import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Register from "./signup";
 import instance from "../../apis/axios";
 
 const Login = () => {
-
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailValidate, setEmailValidate] = useState();
   const [passwordValidate, setPasswordValidate] = useState();
-  const [remember, setRemember] = useState(false)
-  const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
+  const [remember, setRemember] = useState(false);
 
+  const clientId =
+    "993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com";
 
   function setFocus(on) {
     var element = document.activeElement;
@@ -44,39 +44,36 @@ const Login = () => {
   // Google Login Request
   const onSuccess = async (res) => {
     const { data } = await instance.post("registration/googleSingUp", {
-      profile: res.profileObj
-    })
+      profile: res.profileObj,
+    });
     if (data.message === "User Login Successfull") {
-      const user = data.message
-      if(remember){
+      const user = data.message;
+      if (remember) {
         window.localStorage.setItem("user", user);
       } else {
         window.sessionStorage.setItem("user", user);
       }
       const locate = window.localStorage.getItem("locate");
-          const backlink = locate ? locate : "/";
-          window.localStorage.removeItem("locate");
-          navigate(`${backlink}`).then(() => dispatch(authActions.login()));
-
+      const backlink = locate ? locate : "/";
+      window.localStorage.removeItem("locate");
+      navigate(`${backlink}`).then(() => dispatch(authActions.login()));
     } else {
-      toast("Email or Password Invalid")
-
+      toast("Email or Password Invalid");
     }
-  }
+  };
 
   // Google Login failures
   const onFailure = async (res) => {
-    toast("Google Login Failed")
-  }
+    toast("Google Login Failed");
+  };
 
   const { signIn } = useGoogleLogin({
     onSuccess,
     onFailure,
     clientId,
     isSignedIn: true,
-    accessType: 'offline',
-
-  })
+    accessType: "offline",
+  });
   const emailformate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   let count = 0;
   const [eyeViseble, setEyeViseble] = useState(true);
@@ -105,13 +102,14 @@ const Login = () => {
       setPasswordValidate(<MdOutlineError className="text-danger" />);
     } else if (count === 0) {
       try {
-        e.preventDefault()
-        const { data } = await instance.post('registration/login', {
-          email: email, password: password
-        })
+        e.preventDefault();
+        const { data } = await instance.post("registration/login", {
+          email: email,
+          password: password,
+        });
         if (data.message === "User Login Successfull") {
-          const user = data.message
-          if(remember){
+          const user = data.message;
+          if (remember) {
             window.localStorage.setItem("user", user);
           } else {
             window.sessionStorage.setItem("user", user);
@@ -121,12 +119,11 @@ const Login = () => {
           window.localStorage.removeItem("locate");
           navigate(`${backlink}`).then(() => dispatch(authActions.login()));
         } else {
-          toast("Email or Password Invalid")
+          toast("Email or Password Invalid");
         }
       } catch (err) {
         toast("Email or Password Invalid");
       }
-
     }
     e.preventDefault();
   };
@@ -137,26 +134,54 @@ const Login = () => {
     setSignIn(!signin);
   };
 
+  //foget password
+  const [forget, setForget] = useState(false);
+  const [fremail, setFremail] = useState("");
+  const [fnotify,setFnotify] = useState(" ")
+  const clickforget = () => {
+    setForget(true);
+  };
+
+  
+  
+  const onForget = () => {
+    // after email validate condition chek
+    setFnotify("We send the link to your email")
+   let timeout = setTimeout(alertFunc, 4000);
+   
+  };
+   
+  function alertFunc() {
+    setForget(false);
+    setFnotify("");
+  }
   return (
     <>
       <section className=" " id="mainsection">
         <div className="container-fluid px-5">
           <div className="row mx-5  mt-5 rounded-5 all-content p-3  mb-4">
             <div className="col-md-7 p-0  d-flex justify-content-center main_content2">
-              <img src="./images/login.png" className="img-fluid rounded animate__animated animate__pulse animate__infinite	infinite animate__slow	1s " id="png" />
+              <img
+                src="./images/login.png"
+                className="img-fluid rounded animate__animated animate__pulse animate__infinite	infinite animate__slow	1s "
+                id="png"
+              />
             </div>
             <div className="col-md-5 main_content1">
-              <div className="modal-heading mt-3 text-center">
-                <h1 className="modal-title">Welcome to Gohoardings!</h1>
-                <p className="modal-desc text-secondary">
-                  OOH Advertising made easy and affordable.
-                </p>
-              </div>
-              {signin ? (
-                <div className="signIn">
-                  <div className="form">
-                    <form onSubmit={onSignIn}>
-                      <div className="mb-4 mt-2">
+              {forget ? (
+                <>
+                  <div className="modal-heading mt-3 text-center">
+                    <h1 className="modal-title">
+                      Did you forget your password ?
+                    </h1>
+                    <p className="modal-desc text-secondary">
+                    On Submit, an email with a link to create a password will be sent to your email account
+                    </p>
+                  </div>
+                  <div className="forget-content">
+                    <form onSubmit={onForget} novalidate>
+                      <div className="">
+                     
                         <div className="input-box">
                           <label className="input-label">
                             Enter your email@gmail.com
@@ -165,75 +190,133 @@ const Login = () => {
                             type="text"
                             className="input-1"
                             onFocus={() => setFocus(true)}
-                            value={email}
+                            value={fremail}
                             onChange={(e) => {
-                              setEmail(e.target.value);
+                              setFremail(e.target.fremail);
                             }}
+                            required
                           />
-                          <p className="ms-2 p-0 text ">{emailValidate}</p>
+                         <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6>
                         </div>
                       </div>
-                      <div className="mb-2 mt-2">
-                        <div className="input-box">
-                          <label className="input-label">
-                            Enter your password
-                          </label>
-                          <input
-                            type="password"
-                            className="input-1"
-                            onFocus={() => setFocus(true)}
-                            value={password}
-                            onChange={(e) => {
-                              setPassword(e.target.value);
-                            }}
-                            id="inputPassword"
-                          />
-                          <span className="eye" onClick={() => onVisible()}>
-                            {" "}
-                            {eyeViseble ? (
-                              <AiFillEye id="visible-eye" />
-                            ) : (
-                              <AiFillEyeInvisible id="invisible-eye" />
-                            )}
-                          </span>
-                          <p className="ms-2 p-0 text">{passwordValidate}</p>
-                        </div>
-                      </div>
-                      <label className="ms-2 checkbox">
-                        <input type="checkbox"  onChange={() => setRemember(true)}/>
-                        <span></span>
-                        <small className="rmb ms-1 ">Remember me</small>
-                      </label>
-                      <a href="#" className="forgetpass">
-                        Forget Password?
-                      </a>
                       <button type="submit" className="signin">
-                        <span>SIGN IN</span>
+                        <span>SUBMIT</span>
                       </button>
-                      <ToastContainer />
+                
                     </form>
-                    <div className="row mt-4">
-                      <div className="col-md-5 or_border  "></div>
-                      <div className="col-md-2 or  text-center ">OR</div>
-                      <div className="col-md-5  or_border  "></div>
-                    </div>
-                    <div className="col-md-12 ps-0 mt-4 text-center" onClick={signIn}>
-                      <a>
-                        <FcGoogle className="google-icon" />
-                      </a>
-                    </div>
-                    <div
-                      className=" text-center switch signin-switch"
-                      id="l-switch"
-                    >
-                      <a onClick={() => toggleSignUp()}>
-                        Don't have an account? Register here
-                      </a>
-                    </div>
                   </div>
-                </div>
+                </>
               ) : (
-                <Register setFocus={setFocus} onVisible={onVisible} eyeViseble={eyeViseble} toggleSignUp={toggleSignUp} toast={toast} />
+                <>
+                  {" "}
+                  <div className="modal-heading mt-3 text-center">
+                    <h1 className="modal-title">Welcome to Gohoardings!</h1>
+                    <p className="modal-desc text-secondary">
+                      OOH Advertising made easy and affordable.
+                    </p>
+                  </div>
+                  {signin ? (
+                    <div className="signIn">
+                      <div className="form">
+                        <form onSubmit={onSignIn}>
+                          <div className="mb-4 mt-2">
+                            <div className="input-box">
+                              <label className="input-label">
+                                Enter your email@gmail.com
+                              </label>
+                              <input
+                                type="text"
+                                className="input-1"
+                                onFocus={() => setFocus(true)}
+                                value={email}
+                                onChange={(e) => {
+                                  setEmail(e.target.value);
+                                }}
+                              />
+                              <p className="ms-2 p-0 text ">{emailValidate}</p>
+                            </div>
+                          </div>
+                          <div className="mb-2 mt-2">
+                            <div className="input-box">
+                              <label className="input-label">
+                                Enter your password
+                              </label>
+                              <input
+                                type="password"
+                                className="input-1"
+                                onFocus={() => setFocus(true)}
+                                value={password}
+                                onChange={(e) => {
+                                  setPassword(e.target.value);
+                                }}
+                                id="inputPassword"
+                              />
+                              <span className="eye" onClick={() => onVisible()}>
+                                {" "}
+                                {eyeViseble ? (
+                                  <AiFillEye id="visible-eye" />
+                                ) : (
+                                  <AiFillEyeInvisible id="invisible-eye" />
+                                )}
+                              </span>
+                              <p className="ms-2 p-0 text">
+                                {passwordValidate}
+                              </p>
+                            </div>
+                          </div>
+                          <label className="ms-2 checkbox">
+                            <input
+                              type="checkbox"
+                              onChange={() => setRemember(true)}
+                            />
+                            <span></span>
+                            <small className="rmb ms-1 ">Remember me</small>
+                          </label>
+                          <a
+                            href="#"
+                            className="forgetpass"
+                            onClick={() => clickforget()}
+                          >
+                            Forget Password?
+                          </a>
+                          <button type="submit" className="signin">
+                            <span>SIGN IN</span>
+                          </button>
+                          <ToastContainer />
+                        </form>
+                        <div className="row mt-4">
+                          <div className="col-md-5 or_border"></div>
+                          <div className="col-md-2 or  text-center ">OR</div>
+                          <div className="col-md-5  or_border  "></div>
+                        </div>
+                        <div
+                          className="col-md-12 ps-0 mt-4 text-center"
+                          onClick={signIn}
+                        >
+                          <a>
+                            <FcGoogle className="google-icon" />
+                          </a>
+                        </div>
+                        <div
+                          className=" text-center switch signin-switch"
+                          id="l-switch"
+                        >
+                          <a onClick={() => toggleSignUp()}>
+                            Don't have an account? Register here
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Register
+                      setFocus={setFocus}
+                      onVisible={onVisible}
+                      eyeViseble={eyeViseble}
+                      toggleSignUp={toggleSignUp}
+                      toast={toast}
+                    />
+                  )}
+                </>
               )}
             </div>
           </div>
