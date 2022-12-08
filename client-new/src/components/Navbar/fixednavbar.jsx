@@ -66,7 +66,8 @@ const Flotinggnavbar = () => {
                   onSelect={(e) => setUserType(e)}
                   className=""
                 >
-                  <Dropdown.Item eventKey="traditional-ooh-media">
+
+                  {/* <Dropdown.Item eventKey="traditional-ooh-media">
                     Traditional OOH Media
                   </Dropdown.Item>
                   <Dropdown.Item eventKey="mall_media">
@@ -86,7 +87,28 @@ const Flotinggnavbar = () => {
                   </Dropdown.Item>
                   <Dropdown.Item eventKey="transit_media">
                     Transit Media
+                  </Dropdown.Item> */}
+                  <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
+                  <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="mall-media" className="p-2">
+                <span><img src="../../gohoarding/new-icon/t2.png" className="select-media-icon"/></span>  Mall Media
                   </Dropdown.Item>
+                <Dropdown.Item eventKey="airport-media" className="p-2">
+                <span><img src="../../gohoarding/new-icon/t3.png" className="select-media-icon"/></span> Airport Media
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="office-branding" className="p-2">
+                <span><img src="../../gohoarding/new-icon/t4.png" className="select-media-icon"/></span>  Office Branding
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="inflight-media" className="p-2">
+                <span><img src="../../gohoarding/new-icon/t5.png" className="select-media-icon"/></span>  Inflight Media
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="digital-screen" className="p-2">
+                <span><img src="../../gohoarding/new-icon/t6.png" className="select-media-icon"/></span>  Digital Screen
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="transit-media" className="p-2">
+                <span><img src="../../gohoarding/new-icon/t7.png" className="select-media-icon"/></span>  Transit Media
+                </Dropdown.Item>
                 </DropdownButton>
                 <Link to={`/${userType}/${value.label ? value.label : "delhi"}`}>
                   <Button

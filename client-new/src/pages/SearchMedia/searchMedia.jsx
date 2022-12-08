@@ -93,7 +93,7 @@ const SearchMedia = () => {
                         key={item.name}
                         onClick={() => onSearch(item.name)}
                       >
-                        <h6 className=" text-secondary mt-1">{item.name}</h6>
+                        <h6 className=" text-dark mt-1">{item.name}</h6>
                       </div>
                     ))}
                 </div>
@@ -106,7 +106,7 @@ const SearchMedia = () => {
                 title={userType}
                 id="select-media-box"
                 onSelect={handleSelect}
-                className="p-0"
+                className=""
               >
                 <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
                   <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media
@@ -131,10 +131,10 @@ const SearchMedia = () => {
                 </Dropdown.Item>
               </DropdownButton>
             </div>
-            <div className="col-md-2 p-2 ps-0">
+            <div className="col-md-2 p-2 ">
               <Link
                 to={`/${userType}/${value}`}
-                className="button-serch text-white rounded-pill p-2"
+                className="button-serch text-white rounded-pill "
               >
                 <button className="search-btn">Search</button>
               </Link>
