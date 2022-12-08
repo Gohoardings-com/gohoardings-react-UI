@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
 const {sendEmail} = require('../middelware/sendEmail')
 const jwtToken = require('jsonwebtoken')
+var sessionstorage = require('sessionstorage');
 const catchError = require('../middelware/catchError');
 
 exports.register = catchError(async (req, res) => {
@@ -34,6 +35,7 @@ exports.register = catchError(async (req, res) => {
                 path: '/',
                 expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
+                secure: false,
                 sameSite: 'lax',
                 origin: "http://localhost:3000"
               });
@@ -82,6 +84,7 @@ exports.login = catchError(async (req, res) => {
           expires: new Date(Date.now() + 7 * 24 * 3600000),
           httpOnly: true,
           sameSite: 'lax',
+          secure: false,
           origin: "http://localhost:3000"
         });
         return res.status(200).json({ message: "User Login Successfull" })
@@ -123,6 +126,7 @@ exports.googleLogin = catchError(async (req, res) => {
                 expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
                 sameSite: 'lax',
+                secure: false,
                 origin: "http://localhost:3000"
               });
               return res.status(200).json({ message: "User Login Successfull" })
@@ -147,6 +151,7 @@ exports.googleLogin = catchError(async (req, res) => {
             expires: new Date(Date.now() + 1000 * 84000),
             httpOnly: true,
             sameSite: 'lax',
+            secure: false,
             origin: "http://localhost:3000"
           });
           return res.status(200).json({ message: "User Login Successfull" })
@@ -158,7 +163,7 @@ exports.googleLogin = catchError(async (req, res) => {
   })
 })
 
-exports.refreshToken = async(req,res,next) => {
+exports.refreshToken = catchError(async(req,res,next) => {
   const cookieData = req.cookies;
   if (!cookieData) {
     return res.status(400).json({ message: "No Cookie Found" })
@@ -181,7 +186,8 @@ exports.refreshToken = async(req,res,next) => {
               path:'/',
               expires:new Date(Date.now() + 6 * 24 * 3600000),
               httpOnly:true,
-              sameSite:"lax"
+              sameSite:"lax",
+              secure: false,
           })
           req.id = user.id;
           next()
@@ -189,9 +195,11 @@ exports.refreshToken = async(req,res,next) => {
         })
       }
     
-}
+})
 
 exports.verifyToken = catchError(async (req, res, next) => {
+
+  sessionstorage.setItem("adas", "dasdas");
   const cookieData = req.cookies;
   if (!cookieData) {
     return res.status(400).json({ message: "No Cookie Found" })
@@ -275,13 +283,15 @@ exports.sendPasswordEmail = catchError(async(req,res,next) => {
       expires: new Date(Date.now() + 1000 * 3000),
       httpOnly: true,
       sameSite: 'lax',
+      secure: false,
       origin: "http://localhost:3000"
     });
       const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/resetPassword?code=${token}`;
       const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
+      const subject = "Reset password gohoardings.com"
       try {
-        await sendEmail({ email: email, subject: "Reset Password", message, });
-        res.status(200).json({ success: true, message: `Email sent to ${email}` ,message:message});
+        await sendEmail({ email: email, subject: "Reset Password", message });
+        res.status(200).json({ success: true, message: `Email sent to ${email}` ,message:message, subject:subject});
     } catch (error) {
       return res.status(500).json({message:error.message})
     }

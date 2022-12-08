@@ -19,11 +19,9 @@ import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
 
-// import "./App.css" 
-
 function App() {
   const [avlable,setAvlable] = useState(false)
- 
+
   const getUser = async() => {
    {localStorage.getItem("user") || sessionStorage.getItem("user") && setAvlable(true)}
   }

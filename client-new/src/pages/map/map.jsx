@@ -32,7 +32,6 @@ const Map = () => {
      slice = search.slice(0, noOfLogo);
   }
 
-
   const illumination = [];
   const category_name = [];
 
@@ -44,13 +43,13 @@ const Map = () => {
   const handelprice = async() => {
     let ans 
    await cartItem.map((item) => (ans+=item.price));
-console.log(ans);
     setNewTotal(ans);
   };
 
   
   useEffect(() => {
     handelprice();
+
   },[]);
 
   const getAllDetails = async () => {
@@ -180,7 +179,7 @@ console.log(ans);
     setcartItem(data)
   }
   const More = () => {
-    if (medias.length >= noOfLogo) {
+    if (search.length >= noOfLogo) {
       setnoOfLogo(noOfLogo + 6);
     }
   };
@@ -481,7 +480,7 @@ console.log(ans);
               <span className="pe-2">Not Available</span>
             </div>
           </div>
-          {isLoaded && search && search.length > 0 ? <Markers data={search} add={addonCart} /> : null}
+          {isLoaded && slice && slice.length > 0 ? <Markers data={slice} add={addonCart} /> : null}
         </div>
       </div>
     </div>
