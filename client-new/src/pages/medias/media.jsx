@@ -31,7 +31,6 @@ const Media = () => {
     if(!loading){
        slice = search.slice(0, noOfLogo);
     }
-    console.log(search);
 
   let ILLUMINATION = [
       { label: "Nonlit", value: "nonlit" },
@@ -151,7 +150,7 @@ const Media = () => {
     <>
       <FixedNavbar />
      
-        <Medialogo category_name={category_name} posts={posts} />
+        <Medialogo category_name={category_name} search={search} />
         <div className="container-fluid px-5 ">
         <div className="row m-4 p-5">
           <div className="col-md-2 ">

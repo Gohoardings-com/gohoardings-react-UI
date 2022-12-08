@@ -1,9 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./medialogo.scss";
-import { MdLocationOn} from "react-icons/md";
-import {TfiLayoutMediaCenterAlt} from "react-icons/tfi"
 
-const Medialogo = ({ posts, category_name }) => {
+const Medialogo = ({ search, category_name }) => {
+  console.log(Object.keys(search).length);
+  const navigate = useNavigate();
+  const data=async() =>{
+    navigate('/map')
+    }
   return (
     <div className="container  ">
   
@@ -16,12 +20,12 @@ const Medialogo = ({ posts, category_name }) => {
             />
           </div>
           <div className="col-2  viewabout-main pt-4  ">
-            <div className="col viewabout ms-3 mt-4 mb-3">
+            <div className="col viewabout ms-3 mt-4 mb-3"    onClick={() => data()}>
               <div className="locationIcon rounded-3 text-center">
                 <img src="../../gohoarding/new-icon/point-map.png" className="media-location-logo mt-2"/>
               </div>
               <div className=" ms-3 ">
-                <p className=" mb-0 ">{(posts.length + posts.length) * 12}</p>
+                <p className=" mb-0 ">{(Object.keys(search).length + Object.keys(search).length) * 3}</p>
                 <p className="About-media-detail">No of Location</p>
               </div>
             </div>
@@ -30,7 +34,7 @@ const Medialogo = ({ posts, category_name }) => {
                <img src="../../gohoarding/new-icon/add-icon.png" className="media-hording-logo mt-2 "/>
               </div>
               <div className=" ms-3 ">
-                <p className="mb-0">{posts.length}</p>
+                <p className="mb-0">{Object.keys(search).length}</p>
                 <p className="About-media-detail">No of Media</p>
               </div>
             </div>
@@ -53,20 +57,7 @@ const Medialogo = ({ posts, category_name }) => {
               maximise their share of the available purchasing spend.
             </p>
           </div>
-          {/* <div className='row  p-2 rounded-bottom media-brand-tags'>
-        <div className='col-3 vl  bottomfooter'>
-            <h4 className="mt-3 text-center text-light">Features and Specification</h4>
-        </div>
-        <div className='col-3 vl  bottomfooter'>
-            <h4 className="mt-2 text-center text-light">Exposed 27/7 to the target customer</h4>
-        </div>
-        <div className='col-3 vl bottomfooter'>
-            <h4 className="mt-3 text-center text-light">Big, bold and Colourful</h4>
-        </div>
-        <div className='col-3 bottomfooter'>
-            <h4 className="text-center text-light">Can not be turend off, thrown away, or clicked away</h4>
-        </div>
-    </div> */}
+         
     
         
       </div>

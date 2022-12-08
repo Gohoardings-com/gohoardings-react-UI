@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./login.scss";
 import { authActions } from "../../store";
 import { ToastContainer, toast } from "react-toastify";
+import { clientId } from "../../apis/apis";
 import { useSelector, useDispatch } from "react-redux";
 import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
@@ -20,8 +21,6 @@ const Login = () => {
   const [passwordValidate, setPasswordValidate] = useState();
   const [remember, setRemember] = useState(false);
 
-  const clientId =
-    "993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com";
 
   function setFocus(on) {
     var element = document.activeElement;
