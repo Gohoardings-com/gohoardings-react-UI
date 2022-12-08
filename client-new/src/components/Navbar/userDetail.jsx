@@ -23,9 +23,9 @@ const UserDetail = ({ posts, setPosts }) => {
       withCredentials: true,
     });
     if (data.status == 200) {
+      isLoggedIn = true;
       window.localStorage.clear();
       window.sessionStorage.clear()
-      isLoggedIn = true;
       return data
     }
     return new Error("Unable to logOut Please Try Again");

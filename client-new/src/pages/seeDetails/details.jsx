@@ -14,7 +14,7 @@ import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 
 const Details = () => {
-  const priceState = window.localStorage.getItem("user");
+  const priceState = window.localStorage.getItem("user") || window.sessionStorage.getItem("user");
   const { category_name, meta_title } = useParams();
   const { addRemove } = useContext(AccountContext);
   const navigate = useNavigate();

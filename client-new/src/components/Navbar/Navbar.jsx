@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
-import Dropdown from 'react-bootstrap/Dropdown';
+import { mediawithcity } from "../../action/adminAction";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/navbar";
 import './navbar.scss'
-import { MdLocationOn } from 'react-icons/md'
-import Drop_Down_Image from "../drop_down/drop_down_image";
 import UserDetail from "./userDetail";
 
 const NewNAvbar = () => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [posts, setPosts] = useState()
+
+
+  const data=async() =>{
+  await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
+  navigate('/map')
+  }
   
 useEffect(() => {
   setPosts(posts)
-}, [posts]);
+}, []);
   return (
     <>
       <Navbar expand="lg px-md-0 pb-0 fixd-nabar">
@@ -46,7 +53,8 @@ useEffect(() => {
               </Nav.Link>
               <Nav.Link
                 className="mapLink font-map-btn text-white  text-nowrap rounded-pill "
-                href="/map"
+                onClick={(e) => data(e)}
+      
               >
                 <img src="https://cdn-icons-png.flaticon.com/512/2991/2991231.png" className="ps-0 p-0 me-1  pb-1 font-map-logo" />
                 Map View

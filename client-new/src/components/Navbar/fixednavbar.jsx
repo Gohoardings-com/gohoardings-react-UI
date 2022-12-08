@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import { mediawithcity } from "../../action/adminAction";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { getAllCity } from "../../apis/apis";
 import UserDetail from "./userDetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
@@ -11,6 +14,8 @@ import Button from "react-bootstrap/Button";
 import Select from "react-select";
 
 const Flotinggnavbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
@@ -19,7 +24,10 @@ const Flotinggnavbar = () => {
     const  data  = await getAllCity();
     setCity(data);
   };
-
+  const data=async() =>{
+    await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
+    navigate('/map')
+    }
   useEffect(() => {
     getCity();
     setPosts(posts);
@@ -101,7 +109,7 @@ const Flotinggnavbar = () => {
             <form class="form-inline  ">
                   <Nav.Link
                     className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
-                    href="/map"
+                    onClick={(e) => data(e)}
                   >
                     <img src="https://cdn-icons-png.flaticon.com/512/2991/2991231.png" className=" float-map-logo ps-0 p-0 me-1" />
 

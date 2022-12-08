@@ -20,7 +20,6 @@ export const userDetails =  async (dispatch) => {
 export const mediawithcity  = (category_name, city_name)  => async (dispatch) =>{
     console.log(category_name, city_name);
     try{
-        console.log();
         dispatch({type: "MediaWithCityRequest"});
         const config = { headers : { "Content-Type" : "application/json"}};
 
@@ -34,12 +33,12 @@ export const mediawithcity  = (category_name, city_name)  => async (dispatch) =>
 }
 export const priceSubIllu  = (category_name,price,illumination,table,city)  => async (dispatch) =>{
     try{
-        console.log();
+      
         dispatch({type: "MediaWithCityRequest"});
         const config = { headers : { "Content-Type" : "application/json"}};
 
         const {data} = await instance.post(`filter/categoryfilter`,{category_name,price,illumination,table,city},config)
-        console.log(data);
+
         dispatch({ type: "MediaWithCitySuccess", payload: data});
 
     }catch(error){
