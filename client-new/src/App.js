@@ -3,8 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/home";
 import Media from './pages/medias/media';
 import { authActions } from "./store";
-import { clientId } from "./apis/apis";
-import { GoogleLogout } from 'react-google-login'
 import instance from "./apis/axios";
 import Header from './components/header/header';
 import { useSelector, useDispatch } from 'react-redux'
