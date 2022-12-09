@@ -34,9 +34,7 @@ exports.register = catchError(async (req, res) => {
                 path: '/',
                 expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
-                secure: false,
                 sameSite: 'lax',
-                origin: "http://localhost:3000"
               });
 
               return res.status(200).json({ message: "Register Successfully" })
@@ -83,8 +81,6 @@ exports.login = catchError(async (req, res) => {
           expires: new Date(Date.now() + 7 * 24 * 3600000),
           httpOnly: true,
           sameSite: 'lax',
-          secure: false,
-          origin: "http://localhost:3000"
         });
         return res.status(200).json({ message: "User Login Successfull" })
       }
@@ -125,8 +121,7 @@ exports.googleLogin = catchError(async (req, res) => {
                 expires: new Date(Date.now() + 7 * 24 * 3600000),
                 httpOnly: true,
                 sameSite: 'lax',
-                secure: false,
-                origin: "http://localhost:3000"
+                
               });
               return res.status(200).json({ message: "User Login Successfull" })
             }
@@ -150,8 +145,7 @@ exports.googleLogin = catchError(async (req, res) => {
             expires: new Date(Date.now() + 1000 * 84000),
             httpOnly: true,
             sameSite: 'lax',
-            secure: false,
-            origin: "http://localhost:3000"
+         
           });
           return res.status(200).json({ message: "User Login Successfull" })
         } else {
@@ -186,7 +180,7 @@ exports.refreshToken = catchError(async(req,res,next) => {
               expires:new Date(Date.now() + 6 * 24 * 3600000),
               httpOnly:true,
               sameSite:"lax",
-              secure: false,
+             
           })
           req.id = user.id;
           next()
@@ -280,8 +274,7 @@ exports.sendPasswordEmail = catchError(async(req,res,next) => {
       expires: new Date(Date.now() + 1000 * 3000),
       httpOnly: true,
       sameSite: 'lax',
-      secure: false,
-      origin: "http://localhost:3000"
+     
     });
       const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/resetPassword?code=${token}`;
       const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;

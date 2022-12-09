@@ -178,14 +178,14 @@ const Map = () => {
     const { data } = await instance.get('cart/cartitems');
     setcartItem(data)
   }
-  const More = () => {
+  const More = async() => {
     if (search.length >= noOfLogo) {
-      setnoOfLogo(noOfLogo + 6);
+      await setnoOfLogo(noOfLogo + 6);
     }
   };
-  const Less = () => {
-    if (noOfLogo > 2) {
-      setnoOfLogo(noOfLogo - 6);
+  const Less = async() => {
+    if (noOfLogo >= 2) {
+      await setnoOfLogo(noOfLogo - 6 );
     }
   };
   useEffect(() => {
