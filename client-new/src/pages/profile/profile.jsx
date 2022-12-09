@@ -1,20 +1,33 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { profileDetails } from "../../apis/apis";
+import NewNAvbar from "../../components/navbar/navbar";
 import "./profile.scss";
 
 const Profile = () => {
   const [profile, setProfile] = useState(false);
   const [companey, setCompaney] = useState(false);
+  const [posts, setPosts] = useState([])
 
   const showProfile = () => {
     setProfile(!profile);
   };
 
+  const userData = async() =>{
+    const data = await(profileDetails());
+    setPosts(data.message)
+  }
+console.log(posts);
   const showCompaney = () => {
     setCompaney(!companey);
   };
+useEffect(() =>{
+userData()
+},[])
 
   return (
     <>
+    <NewNAvbar/>
       <div className="container">
         <div className="row container p-5">
           <div className="col-md-3">

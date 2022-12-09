@@ -240,7 +240,17 @@ exports.logout = catchError(async (req, res) => {
 exports.Profile = catchError(async (req, res) => {
   const userId = req.id;
   db.changeUser({ database: "gohoardi_crmapp" })
-  db.query("SELECT ")
+  const search_activity = 'activity.phone, activity.campaign_name, activity.start_date, activity.end_date, activity.city, activity.pincode, activity.address, activity.campaign_city, activity.media_type, activity.status, activity.payment_status';
+      const user_details = 'contact.userid,contact.firstname,contact.lastname,contact.email,contact.phonenumber'
+      const sql = "SELECT  "+user_details+",  "+search_activity+" FROM tblcontacts AS contact RIGHT JOIN gohoardi_goh.goh_serach_activities AS activity ON activity.user = contact.userid WHERE activity.user='"+userId+"'"
+  db.query(sql,async(err,result) =>{
+    if(err){
+      return res.status(401).json({message:err.message})
+    }else{
+      return res.status(200).json({message:result})
+    }
+  })
+  // 
 })
 
 exports.sendPasswordEmail = catchError(async(req,res,next) => {

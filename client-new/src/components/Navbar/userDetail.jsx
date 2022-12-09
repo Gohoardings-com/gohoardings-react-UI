@@ -31,6 +31,9 @@ const UserDetail = ({ posts, setPosts }) => {
     return new Error("Unable to logOut Please Try Again");
   };
 
+  const profile = async() =>{
+    navigate('/profile')
+  }
   const cart = async() =>{
     navigate('/cart')
   }
@@ -63,7 +66,7 @@ const UserDetail = ({ posts, setPosts }) => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="/" >Profile</Dropdown.Item>
+            <Dropdown.Item onClick={profile} >Profile</Dropdown.Item>
             <Dropdown.Item href="/" onClick={logOut}>
               <GoogleLogout
                 className='border-0 bg-transparent'

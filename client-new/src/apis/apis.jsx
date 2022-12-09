@@ -51,3 +51,10 @@ export const deleteCartItem = async(obj) => {
       console.log(data);
  return data
 }
+
+export const profileDetails = async() =>{
+    const {data} =  await instance.get("registration/login", {   
+      });
+ 
+ return data
+}
