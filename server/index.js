@@ -11,10 +11,6 @@ app.use( express.json({limit: '14kb'}))
 app.use(bodyparser.urlencoded({ extended: true}));
 app.use(cookieParser());
 
-const auth = require('./routes/auth');
-// const adminRoute = require('./routes/adminRoute.js');
-const usersRoutes = require('./routes/usersRoutes');
-const syncMediaRoutes = require('./routes/syncMediaRoutes')
 const mediaRouter = require('./routes/mediaRoutes')
 const LoginRoute = require('./routes/loginWeb');
 const addOnCart = require('./routes/CartItemRoute');
@@ -23,14 +19,10 @@ const enquiryRoute = require('./routes/enquiryRoute');
 const filters = require('./routes/filterRoute');
 
 app.use("/api/v1/filter", filters);
-app.use("/api/v1/product", productList);
 app.use("/api/v1/enquiry", enquiryRoute);
-app.use("/auth", auth);
+app.use("/api/v1/product", productList);
 app.use("/api/v1/cart", addOnCart);
 app.use('/api/v1/registration',LoginRoute)
-// app.use('/api/v1/admin', adminRoute);
-app.use('/api/v1/users', usersRoutes);
-app.use('/api/v1/syncMedia', syncMediaRoutes);
 app.use('/api/v1/media', mediaRouter)
 
 app.listen( process.env.PORT, () => {

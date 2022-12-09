@@ -1,6 +1,7 @@
 const db = require("../conn/conn");
+const catchError = require("../middelware/catchError");
 
-exports.message = (req,res, next) => {
+exports.message = catchError(async(req,res, next) => {
   try {   
     const {name, email, phone, message} = req.body
     db.changeUser({database:"sql_login"})
@@ -19,5 +20,5 @@ exports.message = (req,res, next) => {
     messsage:err.res
   })
 }
-}
+})
 

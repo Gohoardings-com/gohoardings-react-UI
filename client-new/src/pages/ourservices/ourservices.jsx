@@ -64,7 +64,7 @@ const Ourservices = () => {
                     <h3 class="content-title">{pos.label} </h3>
                     <Link
                   to={`/${pos.value}/delhi`}
-                  className="  text-decoration-none"
+                  className="text-decoration-none"
                 >
                     <p class="content-text btn btn-outline-light view-all-btn">
                        View all

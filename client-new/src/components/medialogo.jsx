@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./medialogo.scss";
 
 const Medialogo = ({ search, category_name }) => {
-  console.log(Object.keys(search).length);
+
   const navigate = useNavigate();
   const data=async() =>{
     navigate('/map')
@@ -25,7 +25,7 @@ const Medialogo = ({ search, category_name }) => {
                 <img src="../../gohoarding/new-icon/point-map.png" className="media-location-logo mt-2"/>
               </div>
               <div className=" ms-3 ">
-                <p className=" mb-0 ">{(Object.keys(search).length + Object.keys(search).length) * 3}</p>
+                {/* <p className=" mb-0 ">{(Object.keys(search).length + Object.keys(search).length) * 3}</p> */}
                 <p className="About-media-detail">No of Location</p>
               </div>
             </div>
@@ -34,7 +34,7 @@ const Medialogo = ({ search, category_name }) => {
                <img src="../../gohoarding/new-icon/add-icon.png" className="media-hording-logo mt-2 "/>
               </div>
               <div className=" ms-3 ">
-                <p className="mb-0">{Object.keys(search).length}</p>
+                {/* <p className="mb-0">{Object.keys(search).length}</p> */}
                 <p className="About-media-detail">No of Media</p>
               </div>
             </div>
