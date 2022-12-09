@@ -21,6 +21,7 @@ import News from './pages/news_media/news_media'
 import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
+import Signin from "./pages/authorization/signin";
 
 function App() {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ function App() {
   <Header/>
         <Routes>
          <Route index path="/" element={<Home />}/>
-          <Route exact path="/login" element={avlable ? <Home />:<Login />}></Route>
+          <Route exact path="/login" element={avlable ? <Home />:<Signin />}></Route>
           <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
