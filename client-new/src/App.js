@@ -15,6 +15,7 @@ import FAQS from './pages/faqs/faqs'
 import Team from './pages/team/team'
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import News from './pages/news_media/news_media'
+import Profile from './pages/profile/profile'
 import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
@@ -45,6 +46,7 @@ function App() {
           <Route exact path="/faqs" element={<FAQS/>}/> 
           <Route exact path="/team" element={<Team/>}/>  
           <Route exact path="/news" element={<News/>}/>  
+          <Route exact path="/profile" element={<Profile/>}/>
           <Route exact path="/testimonial" element={<Testimonial/>}/> 
           <Route exact path="*" element={<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
         </Routes>

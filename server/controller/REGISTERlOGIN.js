@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
 const {sendEmail} = require('../middelware/sendEmail')
 const jwtToken = require('jsonwebtoken')
-var sessionstorage = require('sessionstorage');
 const catchError = require('../middelware/catchError');
 
 exports.register = catchError(async (req, res) => {
@@ -198,8 +197,6 @@ exports.refreshToken = catchError(async(req,res,next) => {
 })
 
 exports.verifyToken = catchError(async (req, res, next) => {
-
-  sessionstorage.setItem("adas", "dasdas");
   const cookieData = req.cookies;
   if (!cookieData) {
     return res.status(400).json({ message: "No Cookie Found" })
