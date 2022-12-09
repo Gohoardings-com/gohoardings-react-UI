@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
 import { BiUserPlus } from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
+import {useNavigate} from 'react-router-dom'
 import { clientId } from '../../apis/apis';
 import Nav from "react-bootstrap/Nav";
 import instance from "../../apis/axios";
@@ -12,6 +13,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const UserDetail = ({ posts, setPosts }) => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
@@ -28,6 +30,10 @@ const UserDetail = ({ posts, setPosts }) => {
     }
     return new Error("Unable to logOut Please Try Again");
   };
+
+  const cart = async() =>{
+    navigate('/cart')
+  }
 
   const logOut = async () => {
     sessionStorage.clear()
@@ -72,8 +78,8 @@ const UserDetail = ({ posts, setPosts }) => {
         </Dropdown>
        
 
-        <a href='/cart' className='anchor m-0 p-0'>
-          <div className="cart ms-3  pb-2">
+     
+          <div className="cart ms-3  pb-2" onClick={cart}>
             <span>
            
               <img src='../../gohoarding/new-icon/cart-icon.png' className='login-icon-cart'/>
@@ -82,7 +88,7 @@ const UserDetail = ({ posts, setPosts }) => {
             <span>{initalState}</span>
           </div>
 
-        </a>
+       
 
       </div> : <>
         <Nav.Link

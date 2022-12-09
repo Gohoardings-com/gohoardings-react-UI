@@ -6,7 +6,7 @@ const { verifyToken } = require("../controller/REGISTERlOGIN");
 router.route("/addonCart").post(addOnCart)       
 // router.route("/getuserData").post(getUserData)               
 router.route("/deleteFromCart").post(verifyToken,deleteFromCart)
-router.route("/processdCart").post(processdCart);
+router.route("/processdCart").post(verifyToken,processdCart);
 
 //Real Api's
 router.route("/cartitems").get(verifyToken,cartitems, cartiemfromdb);

@@ -80,7 +80,7 @@ if(err){
 })
 
 //media filters
-  exports.filterData = async(req, res, next) => {
+  exports.filterData = catchError(async(req, res, next) => {
     try{
       const {value, illumna, catego} = req.body
       db.changeUser({ database: "gohoardi_goh" });
@@ -136,4 +136,4 @@ if(err){
       messsage:err.res
     })
   }
-}
+})

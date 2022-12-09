@@ -217,7 +217,7 @@ exports.getuser = catchError(async (req, res) => {
     return res.status(404).json({ message: "Token Valid" })
   } else {
     db.changeUser({ database: "gohoardi_crmapp" })
-    db.query("SELECT userid, email, firstname, phonenumber, profile_image FROM tblcontacts WHERE userid='" + userId + "'", async (err, result) => {
+    db.query("SELECT * FROM tblcontacts WHERE userid='" + userId + "'", async (err, result) => {
       if (err) {
         return res.status(404).json({ message: "User Not found" })
       } else {
@@ -239,21 +239,8 @@ exports.logout = catchError(async (req, res) => {
 
 exports.Profile = catchError(async (req, res) => {
   const userId = req.id;
-  db.changeUser({ database: "gohoardi_goh" });
-  db.query(
-    "SELECT campaign_name, start_date, end_date, CASE WHEN status=1 THEN 'IS BOOKED' WHEN status=2 THEN 'Processing' WHEN status=3 THEN 'IS Cancel' WHEN status=0 THEN 'Working On' END AS status FROM goh_serach_activities  WHERE user= " + userId + " ",
-    async (err, result) => {
-      if (err) {
-        if (result == []) {
-          return res.send("Data Not found");
-        } else {
-          res.send(err);
-        }
-      } else {
-        return res.status(200).json(result);
-      }
-    }
-  )
+  db.changeUser({ database: "gohoardi_crmapp" })
+  db.query("SELECT ")
 })
 
 exports.sendPasswordEmail = catchError(async(req,res,next) => {
@@ -306,7 +293,8 @@ exports.resetPasswordEmail = catchError(async(req,res,next) => {
           return res.status(400).json({ message: "InValid Token" });
         } else {
           const userId = user.id
-          const {password}  = req.body;
+          const {password, confirmPassword}  = req.body;
+         if(password == confirmPassword){
           const finalPassword = bcrypt.hashSync(password, 8)
           const sql ="UPDATE tblcontacts SET password ='"+finalPassword+"' WHERE id='"+userId+"'";
           db.query(sql,async(err,result) =>{
@@ -316,6 +304,9 @@ exports.resetPasswordEmail = catchError(async(req,res,next) => {
               return res.status(200).json({message:result})
             }
           })
+         }else{
+          return res.status(500).json({message:"Password not matched"})
+         }
         }
       })
     }else{

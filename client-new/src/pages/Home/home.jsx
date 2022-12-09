@@ -16,10 +16,6 @@ import Flotingnavbar from "../../components/navbar/flotingnavbar";
 const Home = () => {
 
 
-
-
-
-  
   return (
     <>
 <Navbar/>

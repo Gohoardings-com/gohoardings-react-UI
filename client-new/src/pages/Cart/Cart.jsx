@@ -83,7 +83,7 @@ const Cart = () => {
   };
 
   const sumbitALlProduct = async () => {
-    await instance.post("cartItems/processdCart", {
+    await instance.post("cart/processdCart", {
       start_date: Start,
       end_date: End,
       produts: posts,

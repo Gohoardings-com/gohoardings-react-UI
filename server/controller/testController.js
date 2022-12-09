@@ -54,7 +54,6 @@ exports.test001 = catchError(async (req,res,next) => {
         }))
   
   } else {
-  
     const userID = user.id;
     promises.push(new Promise((resolve, reject) => {
       db.query("SELECT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city_name+"' ORDER BY `cart`.`userid` DESC LIMIT 2",async (err,result) => {

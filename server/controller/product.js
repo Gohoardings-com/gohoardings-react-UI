@@ -1,8 +1,9 @@
-const express = require('express')
+
 const db = require('../conn/conn')
+const catchError = require('../middelware/catchError')
 
 
-exports.Nearproduct =  async (req,res, next) => {
+exports.Nearproduct = catchError( async (req,res, next) => {
   try{
     const {code, category_name} = req.body
     const promises = []
@@ -56,9 +57,9 @@ res.status(404).json({
   messsage:err.res
 })
 }
-}
+})
 
-exports.product =  async (req,res, next) => {
+exports.product =  catchError(async (req,res, next) => {
     try{
 const {meta_title, category_name} = req.body
 db.changeUser({ database: "gohoardi_goh" });
@@ -102,4 +103,4 @@ res.status(404).json({
 messsage:err.res
 })
 }
-}
+})
