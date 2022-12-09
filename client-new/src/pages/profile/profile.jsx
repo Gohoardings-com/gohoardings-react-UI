@@ -30,6 +30,9 @@ userData()
     <NewNAvbar/>
       <div className="container">
         <div className="row container p-5">
+      <div className=" container">
+        <div className="row  p-5">
+
           <div className="col-md-3">
             <div class="card">
               <img
@@ -59,7 +62,7 @@ userData()
                 role="tab"
                 aria-controls="list-home"
               >
-                Hyjhrty
+                My Dashboard
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -69,7 +72,7 @@ userData()
                 role="tab"
                 aria-controls="list-profile"
               >
-                yjtit6
+            Media Plan
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -79,7 +82,7 @@ userData()
                 role="tab"
                 aria-controls="list-messages"
               >
-                Messages
+                Campaigns
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -89,7 +92,7 @@ userData()
                 role="tab"
                 aria-controls="list-settings"
               >
-                Settings
+               Proforma invoice
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -99,7 +102,7 @@ userData()
                 role="tab"
                 aria-controls="list-messages"
               >
-                Messages
+                Invoice & Payments
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -109,7 +112,7 @@ userData()
                 role="tab"
                 aria-controls="list-settings"
               >
-                Settings
+                Announcement
               </a>
             </div>
           </div>
@@ -341,6 +344,11 @@ userData()
                         />
                       </div>
                     </div>
+                    <div class="col-md-12 text-right mtop20">
+<div class="form-group">
+<button type="submit" class="btn btn-info">Update</button>
+</div>
+</div>
                   </div>
                 </div>   
               </div>
