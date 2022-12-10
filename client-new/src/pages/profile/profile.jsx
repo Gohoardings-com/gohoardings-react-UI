@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { profileDetails } from "../../apis/apis";
 import NewNAvbar from "../../components/navbar/navbar";
+import ChangePassword from "./changePassword";
 import "./profile.scss";
+import UserProfile from "./userProfile";
 
 const Profile = () => {
   const [profile, setProfile] = useState(false);
@@ -25,14 +27,26 @@ useEffect(() =>{
 userData()
 },[])
 
+const [payment,setPayment]=useState(false)
+const [voise,setVoise]=useState(false)
+
+const showInvoise = () =>{
+  setVoise(!voise)
+}
+
+const showPlan = () =>{
+
+  setPayment(!payment);
+}
+const showPayment = ()=>{
+setPayment(!payment);
+}
+
   return (
     <>
     <NewNAvbar/>
-      <div className="container">
-        <div className="row container p-5">
-      <div className=" container">
+    <div className=" container">
         <div className="row  p-5">
-
           <div className="col-md-3">
             <div class="card">
               <img
@@ -116,6 +130,7 @@ userData()
               </a>
             </div>
           </div>
+
           {companey ? (
             <>
               <div className="col-md-9">
@@ -358,94 +373,7 @@ userData()
               <div className="col-md-6 ">
                 {profile ? (
                   <>
-                    <div className="card profile-detail p-3">
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <div class="form-group">
-                                <label
-                                  for="profile_image"
-                                  class="profile-image"
-                                >
-                                  Profile image
-                                </label>
-                                <input
-                                  type="file"
-                                  name="profile_image"
-                                  class="form-control"
-                                  id="profile_image"
-                                />
-                              </div>
-                              <label for="firstname">First Name</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="firstname"
-                                id="firstname"
-                                value=""
-                              />
-                            </div>
-                            <div class="form-group">
-                              <label for="lastname">Last Name</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="lastname"
-                                id="lastname"
-                                value=""
-                              />
-                            </div>
-                            <div class="form-group">
-                              <label for="title">Position</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="title"
-                                id="title"
-                                value=""
-                              />
-                            </div>
-                            <div class="form-group">
-                              <label for="email">Email Address</label>
-                              <input
-                                type="email"
-                                name="email"
-                                class="form-control"
-                                id="email"
-                                value="Uday@gohoardings.com"
-                              />
-                            </div>
-                            <div class="form-group">
-                              <label for="phonenumber">Phone</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="phonenumber"
-                                id="phonenumber"
-                                value=""
-                              />
-                            </div>
-
-                            {/* <p class="bold email-notifications-label">
-                          Email Notifications
-                        </p> */}
-                          </div>
-                          <div class="row p15">
-                            <div class="col-md-12 text-right mtop20">
-                              <div class="form-group mb-0">
-                                <button
-                                  type="submit"
-                                  class="btn btn-info text-light"
-                                >
-                                  Update
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                   <UserProfile posts={posts[0]}/>
                   </>
                 ) : (
                   <>
@@ -464,6 +392,7 @@ userData()
                               role="tab"
                               data-toggle="tab"
                               aria-expanded="true"
+                              onClick={showPlan}
                             >
                               <i class="fa fa-bullhorn menu-icon"></i> Booked
                               Plan
@@ -476,6 +405,7 @@ userData()
                               role="tab"
                               data-toggle="tab"
                               aria-expanded="false"
+                              onClick={showPayment}
                             >
                               <i class="fa fa-window-maximize menu-icon"></i>{" "}
                               Payment
@@ -488,6 +418,7 @@ userData()
                               role="tab"
                               data-toggle="tab"
                               aria-expanded="false"
+                              onClick={showInvoise}
                             >
                               <i class="fa fa-window-maximize menu-icon"></i>{" "}
                               Invoice
@@ -507,19 +438,64 @@ userData()
                               data-order-type="asc"
                               id="DataTables_Table_0"
                             >
-                              <thead>
+                              
+                              {voise?(<>
+                                <thead>
+                                <tr>
+                                  <th>SNowtrwt</th>
+                                  <th>Title</th>
+                                  <th>Start Date</th>
+                                  <th>End Date</th>
+                                </tr>
+                              </thead>
+                              No Invoise
+                              </>):
+                              (<> 
+                              {payment? (<> 
+                                <thead>
                                 <tr>
                                   <th>SNo</th>
+                                  <th>Campaign</th>
+                                  <th>Payment Mode</th>
+                                  <th>Date</th>
+                                </tr>
+                              </thead>
+                            
+                              <tbody>
+                                {posts.map((el,i) =>(
+                                 <tr key={i+1}>
+                                  <td>{i}</td>
+                                  <td>{el.campaign_name.slice(-4)}</td>
+                                  <td>{el.payment_status}</td>
+                                  <td>{el.start_date.slice(0,10)}</td>
+                              </tr>
+                                ))}
+                            </tbody>
+
+
+                              </>):
+                              (<>    
+                              <thead>
+                                <tr>
+                                  <th>SN.</th>
                                   <th>Title</th>
                                   <th>Start Date</th>
                                   <th>End Date</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td colspan="4">No Records</td>
-                                </tr>
-                              </tbody>
+                                {posts.map((el,i) =>(
+                                  <tr key={i+1}>
+                                  <td>{i}</td>
+                                  <td>{el.media_type}</td>
+                                  <td>{el.start_date.slice(0,10)}</td>
+                                  <td>{el.end_date.slice(0,10)}</td>
+                              </tr>
+                                ))}
+                            </tbody></>)
+                              }
+                              </>)
+                              }
                             </table>
                           </div>
                         </div>
@@ -531,52 +507,7 @@ userData()
               <div className="col-md-3 ">
                 {profile ? (
                   <>
-                    {" "}
-                    <div className="card p-3 password-data">
-                      <div class="panel-body">
-                        <form
-                          action="https://accounts.gohoardings.com/clients/profile"
-                          method="post"
-                          accept-charset="utf-8"
-                        >
-                          <div class="form-group mt-2">
-                            <label for="oldpassword">Old Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              name="oldpassword"
-                              id="oldpassword"
-                            />
-                          </div>
-                          <div class="form-group mt-2">
-                            <label for="newpassword">New Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              name="newpassword"
-                              id="newpassword"
-                            />
-                          </div>
-                          <div class="form-group mt-2">
-                            <label for="newpasswordr">Repeat Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              name="newpasswordr"
-                              id="newpasswordr"
-                            />
-                          </div>
-                          <div class="form-group mt-2">
-                            <button
-                              type="submit"
-                              class="btn btn-info btn-block text-light"
-                            >
-                              Change Password
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+                   <ChangePassword/>
                   </>
                 ) : (
                   <>
@@ -641,7 +572,7 @@ userData()
                           </div>
                         </div>
                       </div>
-                    </div>{" "}
+                    </div>
                   </>
                 )}
               </div>

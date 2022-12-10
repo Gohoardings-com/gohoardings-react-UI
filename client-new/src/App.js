@@ -47,7 +47,7 @@ function App() {
          }
     };
 
-    window.addEventListener('beforeunload', handleTabClose);
+    // window.addEventListener('beforeunload', handleTabClose);
   }, []);
 
   const handelLogout = async (e) => {
