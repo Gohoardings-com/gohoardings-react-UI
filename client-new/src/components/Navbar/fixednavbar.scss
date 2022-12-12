@@ -68,7 +68,7 @@
   font-weight: 500;
   padding-top: 2px;
   height: 38px;
-  background-color: transparent;
+  //background-color: transparent;
    border:  2px groove #ffffffe1 ;
   .float-map-logo{
     height: 20px ;
@@ -80,12 +80,13 @@
 .float-map-btn:hover{
  color: $white;
  border:  2px solid #fff200 ;
+ //background-color: #334e6e;
 }
 .cart {
   cursor: pointer;
 }
 .cart span:nth-child(1) {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   margin-top: 0%;
   color: white;
 }

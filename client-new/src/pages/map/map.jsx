@@ -39,17 +39,36 @@ const Map = () => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
- 
 
-  const handelprice = async() => {
-    let ans 
+  const userCartItem = async () => {
+ 
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data)
+    handelprice(cartItem);
+  }
+ 
+  if(cartItem.length==0){
+    console.log("empty");
+  }
+  else{
+    console.log("DATA");
+  }
+
+
+  const handelprice = async(cartItem) => {
+
+    let ans =0 ;
    await cartItem.map((item) => (ans+=item.price));
     setNewTotal(ans);
   };
 
   
   useEffect(() => {
+<<<<<<< HEAD
     handelprice();
+=======
+    userCartItem();
+>>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   },[]);
 
   const getAllDetails = async () => {
@@ -176,10 +195,6 @@ const Map = () => {
     setcategory(data)
   }
 
-  const userCartItem = async () => {
-    const { data } = await instance.get('cart/cartitems');
-    setcartItem(data)
-  }
   const More = async() => {
     if (search.length >= noOfLogo) {
       setnoOfLogo(noOfLogo + 6);

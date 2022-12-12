@@ -21,11 +21,12 @@ const NewNAvbar = () => {
 useEffect(() => {
   setPosts(posts)
 }, []);
+
   return (
     <>
       <Navbar expand="lg px-md-0 pb-0 fixd-nabar">
         <div className="navbar container-fluid py-md-0 ">
-          <Navbar.Brand >
+          <Navbar.Brand href="/">
             <img src="./images/logo.png" className="brand-logo ms-sm-5 ms-3" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />

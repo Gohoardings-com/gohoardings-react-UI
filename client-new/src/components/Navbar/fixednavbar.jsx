@@ -75,27 +75,6 @@ const Flotinggnavbar = () => {
                   className=""
                 >
 
-                  {/* <Dropdown.Item eventKey="traditional-ooh-media">
-                    Traditional OOH Media
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="mall_media">
-                    Mall Media
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="airport_media">
-                    Airport Media
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="office_branding">
-                    Office Branding
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="inflight_media">
-                    Inflight Media
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="digital_screen">
-                    Digital Screen
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="transit_media">
-                    Transit Media
-                  </Dropdown.Item> */}
                   <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
                   <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media
                 </Dropdown.Item>
