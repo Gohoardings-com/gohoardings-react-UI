@@ -11,6 +11,7 @@ import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
+import MapCart from "./mapCart";
 
 const Map = () => {
   const priceState = window.localStorage.getItem("user")
@@ -49,7 +50,6 @@ const Map = () => {
   
   useEffect(() => {
     handelprice();
-
   },[]);
 
   const getAllDetails = async () => {
@@ -114,6 +114,8 @@ const Map = () => {
       }
     }
   }
+
+
   function mediaType(e) {
     if (e.currentTarget.checked) {
     illumination.push(e.target.value)
@@ -180,12 +182,12 @@ const Map = () => {
   }
   const More = async() => {
     if (search.length >= noOfLogo) {
-      await setnoOfLogo(noOfLogo + 6);
+      setnoOfLogo(noOfLogo + 6);
     }
   };
   const Less = async() => {
     if (noOfLogo >= 2) {
-      await setnoOfLogo(noOfLogo - 6 );
+     setnoOfLogo(noOfLogo - 6);
     }
   };
   useEffect(() => {
@@ -390,59 +392,7 @@ const Map = () => {
                 <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>
               </div>
             </div>
-            <div className="media-items p-2 accordion-collapse collapse" id="collapseC1" data-bs-parent="#accordionTest">
-              <div className="accordion items border mb-2" id="accordionExample">
-
-                {!cartItem ? <><h1>Loading... Please Wait</h1></> : <>
-                  {cartItem.map((item) => (
-                    <>
-                      {item.isDelete == 0 ? <>
-                        <div className="accordion-item">
-                          <div
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour"
-                            aria-expanded="true"
-                            aria-controls="collapseOne"
-                          >
-                            <div className="row m-0">
-                              <p className="my-2">
-                                {item.page_title.substring(
-                                  0,
-                                  20
-                                ) + "..."}
-                              </p>
-                              <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
-                                <img
-                                  src={item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
-                                  alt="N/A"
-                                  className="w-100 mt-2 pt-2"
-                                />
-                              </div>
-                              <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
-                                <ul className="list-unstyled">
-                                  <li>Code : {item.code}</li>
-                                  <li>FTF : {item.ftf}</li>
-                                  <li>Size : {item.size} feet</li>
-                                  <li>
-                                    Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
-                                  </li>
-                                </ul>
-                                <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>
-                              </div>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </> : <>
-                        <h6 className="text-center">Your Item Deleted Successfully</h6>
-                      </>}
-
-                    </>
-                  ))}
-                </>}
-              </div>
-            </div>
+           <MapCart cartItem={cartItem} priceState={priceState} locatetologin={locatetologin} removefroCart={removefroCart}/>
           </div>
 
           <div id="map-view-mobile">
@@ -456,7 +406,7 @@ const Map = () => {
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-            {/* { isLoaded ? <Markers /> : null } */}
+
           </div>
 
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">

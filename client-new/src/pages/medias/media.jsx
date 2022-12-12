@@ -24,7 +24,6 @@ const Media = () => {
     const [category, setcategory] = useState([]);
     const [query, setQuery] = useState("");
     const [catego, setCatego] = useState('');
-    const [illumna, setIllumna] = useState('');
     const [noOfLogo, setnoOfLogo] = useState(8);
 
     let slice;
@@ -68,6 +67,7 @@ const Media = () => {
       holdingtype();
     }, [])
     
+
     const  mediaFilter = async() => {
    const {data} = await instance.post("filter/filterData",{
     value : category_name,
@@ -76,10 +76,8 @@ const Media = () => {
   })
   setPosts(data)
     }
+
     
-  //   useEffect(() =>{
-  //     mediaFilter()
-  //   },[category_name, illumna,catego])
     
     const getData = async() => {
     await dispatch(mediawithcity(category_name, city_name))
@@ -95,13 +93,16 @@ const Media = () => {
       }
       addRemove({ type: "INCR" });
       add(e);
-    };
+    }
+
+
     const locatetologin = async () => {
       window.localStorage.setItem("locate", `/${category_name}/${city_name}`);
       navigate("/login");
     };
+
+
     const removefroCart = async (obj) => {
-      console.log(obj);
       await instance.post("cart/deleteFromCart", {
         code: obj.code,
       });
@@ -113,7 +114,6 @@ const Media = () => {
       let data = [...posts];
       data.forEach((element) => {
         if (element.code == event.code) {
-          console.log(element);
           element.isDelete = 0;
           setPosts(data);
         }
@@ -141,10 +141,28 @@ const Media = () => {
         setnoOfLogo(noOfLogo - 8);
       }
     };
+    
+    var illumna = [];
+    function mediaType(e) {
+      if (e.currentTarget.checked) {
+        illumna.push(e.target.value)
+      } else {
+        var index = illumna.indexOf(e.target.value)
+        if (index > -1) {
+          console.log(illumna);
+          illumna.splice(index, 1);
+        }
+      }
+    }
+
+    console.log(illumna);
+
 
     useEffect(() => {
       getData();
     }, [category_name, city_name]);
+
+
 
   return (
     <>
@@ -199,16 +217,17 @@ const Media = () => {
                     {ILLUMINATION.map((item, i) => (
                       <li className="w-100">
                         <input
-                          className="  collapse-none"
+                          className="collapse-none"
                           id={i}
                           type="checkbox"
-                          name={item.label}
-                          onChange={(e) => setIllumna(e.target.name)}
+                          
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseT2"
                           aria-expanded="false"
                           aria-controls="collapseT2"
-                          onClick={() => mediaFilter()}
+                          value={item.value}
+                          onChange={(e) => mediaType(e)}
+                         
                         />
                         <span className=" ms-3  media-filter-text-card-detail">{item.label}</span>
                       </li>
@@ -275,81 +294,5 @@ const Media = () => {
   );
 };
 
-
-//       <div className="col pt-4" >
-//         {/* <div className=' mediaName mt-1 ms-1 me-1 p-2 rounded-top'>
-//           <h6 className="text-uppercase text-center">Illumination(5)</h6>
-//         </div> */}
-
-//         {/* <div className="rowCheck bg-light row rounded-bottom mb-1 ms-1 me-1 p-1">
-//           <ul>
-//             <li className="w-100">
-//               <input className=" ms-2 " type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//           </ul>
-//         </div> */}
-//       </div>
-//     </div>
-                  
-//                     </div>
-//             </div>
-//         </>
-//     )
-// }
-
-// export default Media
 export default Media;
 

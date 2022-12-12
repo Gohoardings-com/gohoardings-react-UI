@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from "../../apis/apiContext";
-import moment, { parseZone } from "moment";
-import { Button, Dropdown } from "react-bootstrap";
+import moment from "moment";
+import { Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
@@ -18,23 +18,8 @@ const Cart = () => {
   const [End, setEnd] = useState(new Date());
   const { addRemove, initalState } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
+  const [price, setPrice] = useState(posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0))
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
-
-  const StartDate = (e) => {
-    setStart(e);
-  };
-  
-  const EndDate = (e) => {
-    setEnd(e);
-  };
-
-  const removefroCart = async (obj) => {
-    await instance.post("cart/deleteFromCart", {
-      code: obj.code,
-    });
-    addRemove({ type: "DECR" });
-    removeCart(obj);
-  };
 
   const getAllData = async () => {
     const { data } = await instance.get("cart/cartitems");
@@ -43,45 +28,92 @@ const Cart = () => {
     });
     setPosts(data);
   };
-
-  const cartItemprice = posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0);
-
   useEffect(() => {
     getAllData();
   }, []);
 
+  // Start date of user item
+  const StartDate = (e) => {
+    setStart(e);
+  };
+    // End date of user item
+  const EndDate = (e) => {
+    setEnd(e);
+  };
+// remove from cart
+  const removefroCart = async (obj) => {
+    await instance.post("cart/deleteFromCart", {
+      code: obj.code,
+    });
+    addRemove({ type: "DECR" });
+    const pricese =  obj.price * obj.days
+    const withGST = (pricese * 18) / 100
+    const heloo = pricese + withGST
+    const finalStep = parseInt(price-heloo)
+    setPrice(finalStep)
+    removeCart(obj);
+  };
+
+
+  useEffect(() => {
+    nhhu()
+        setPrice(price)
+      },[price])
+      
+// Remove on item data
   const removeCart = async (event) => {
     let data = [...posts];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
-      }
+          }
       setPosts(data);
     });
   };
 
+const nhhu = async() =>{
+  const data = [...posts]
+  const ans = [];
+   ans+=data.price * data.days
+  const withGST = (ans * 18) / 100
+  const finalStep = ans + withGST
+  console.log(finalStep);
+  setPrice(finalStep)
+}
+
+// Increament days on of cart item
   const increaseDays = async (obj) => {
     let data = [...posts];
     data.map((element) => {
       if (element.id == obj.id) {
+        if(obj.isDelete == 0){
         obj.days += 1;
+        //  nhhu()
+        }
       }
       setPosts(data);
+
     });
+   
   };
 
+  // Decrement days on of cart item
   const decreaseDays = async (obj) => {
     let data = [...posts];
+
     data.map((element) => {
       if (element.id == obj.id) {
         if (obj.days > 5) {
           obj.days -= 1;
+          if(obj.isDelete == 0){
+            // nhhu()
+          }
         }
         setPosts(data);
       }
     });
   };
-
+// Submit all Items for payment
   const sumbitALlProduct = async () => {
     await instance.post("cart/processdCart", {
       start_date: Start,
@@ -92,6 +124,8 @@ const Cart = () => {
 
   const current = new Date();
   const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
+
   return (
     <>
       <Fixednavbar />
@@ -218,7 +252,7 @@ const Cart = () => {
                                         <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(
-                                            (obj.price * obj.days * 18) / 100
+                                            (obj.price * obj.days ) * 18/ 100
                                           )}
                                           /gst(18%)
                                         </h6>
@@ -301,11 +335,12 @@ const Cart = () => {
                   </h5>
 
                   <h5 className="mt-4">
-                    GST(18%) : <FaRupeeSign /> {(cartItemprice * 18) / 100}
+                    GST(18%) : <FaRupeeSign /> {(price * 18) / 100}
                   </h5>
                   <h5 className="mt-4">
-                    Total ammount : <FaRupeeSign /> {cartItemprice}
+                    Total ammount : <FaRupeeSign /> {parseInt(price)}
                   </h5>
+                
                 </div>
               </div>
               <div className="d-grid">

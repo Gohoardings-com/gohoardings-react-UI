@@ -137,6 +137,7 @@ setPayment(!payment);
                 <div className="card">
                   <div className=" row p-3">
                     <div class="col-md-6">
+                      
                       <div class="form-group">
                         <label for="company" class="control-label">
                           Company
