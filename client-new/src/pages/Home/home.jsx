@@ -4,7 +4,7 @@ import "./home.scss";
 import { GoogleLogout } from 'react-google-login'
 import { clientId } from "../../apis/apis";
 import { authActions } from "../../store";
-import SearchMedia from '../searchmedia/searchMedia'
+import SearchMedia from '../searchmedia/searchmedia'
 import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
 import City from "../citylist/city";
