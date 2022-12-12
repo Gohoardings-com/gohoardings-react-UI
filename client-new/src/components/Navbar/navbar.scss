@@ -12,7 +12,7 @@
 
 }
 .nav-text-btn {
-    color: rgb(217, 214, 214) !important;
+    color: white!important;
     font-weight: 600 !important;
     display: inline-block !important;
     width: auto !important;
@@ -44,15 +44,17 @@
 
 
 .font-map-btn{
-    color: #f0f0f0;
-    font-weight: 500;
-    border: 2px groove rgb(244, 242, 242) ;
+  
+    color: white!important;
+    font-weight: 600 !important;
+  //  border: 2px groove rgb(244, 242, 242) ;
     
    
 }
 .font-map-btn:hover{
     color: rgb(255, 255, 255);
-    border:  2px groove #fff200 ;
+   // border:  2px groove #fff200 ;
+   background-color: #334e6e;
    }
 .font-map-logo{
     

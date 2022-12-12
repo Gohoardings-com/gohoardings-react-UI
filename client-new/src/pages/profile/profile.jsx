@@ -10,44 +10,56 @@ import UserProfile from "./userProfile";
 const Profile = () => {
   const [profile, setProfile] = useState(false);
   const [companey, setCompaney] = useState(false);
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
+
+  const userData = async () => {
+    const data = await profileDetails();
+    console.log(data);
+    setPosts(data.message);
+  };
+
+  const showCompaney = () => {
+    setCompaney(true);
+    setProfile(false);
+  };
 
   const showProfile = () => {
-    setProfile(!profile);
+    setProfile(true);
+    setCompaney(false);
   };
 
-  const userData = async() =>{
-    const data = await(profileDetails());
-    console.log(data);
-    setPosts(data.message)
-  }
-console.log(posts);
-  const showCompaney = () => {
-    setCompaney(!companey);
+  const showDashboard = () => {
+    setProfile(false);
+    setCompaney(false);
   };
-useEffect(() =>{
-userData()
-},[])
 
-const [payment,setPayment]=useState(false)
-const [voise,setVoise]=useState(false)
+  const [payment, setPayment] = useState(false);
+  const [voise, setVoise] = useState(false);
 
-const showInvoise = () =>{
-  setVoise(!voise)
-}
+  
 
-const showPlan = () =>{
+  const showPlan = () => {
+    setPayment(false);
+    setVoise(false);
+  };
 
-  setPayment(!payment);
-}
-const showPayment = ()=>{
-setPayment(!payment);
-}
+  const showPayment = () => {
+    setPayment(true);
+    setVoise(false);
+  };
+  
+  const showInvoise = () => {
+    setVoise(true);
+    setPayment(false);
+  };
 
+  useEffect(() => {
+    userData();
+  }, []);
   return (
     <>
-    <NewNAvbar/>
-    <div className=" container">
+      <NewNAvbar />
+      <div className=" container">
         <div className="row  p-5">
           <div className="col-md-3">
             <div class="card">
@@ -56,14 +68,14 @@ setPayment(!payment);
                 class="card-img-top p-3 pb-2"
                 alt="..."
               />
-              <div class="card-body  row text-center pt-0 pb-2">
+              <div class="card-body text-light  row text-center pt-0 pb-2">
                 <div class="col ">
-                  <div class="p-1 border bg-light" onClick={showProfile}>
+                  <div class="p-1 border bg-success" onClick={showProfile}>
                     Profile
                   </div>
                 </div>
                 <div class="col">
-                  <div class="p-1 border bg-light" onClick={showCompaney}>
+                  <div class="p-1 border bg-success" onClick={showCompaney}>
                     Companey
                   </div>
                 </div>
@@ -77,6 +89,7 @@ setPayment(!payment);
                 href="#list-home"
                 role="tab"
                 aria-controls="list-home"
+                onClick={showDashboard}
               >
                 My Dashboard
               </a>
@@ -88,7 +101,7 @@ setPayment(!payment);
                 role="tab"
                 aria-controls="list-profile"
               >
-            Media Plan
+                Media Plan
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -108,7 +121,7 @@ setPayment(!payment);
                 role="tab"
                 aria-controls="list-settings"
               >
-               Proforma invoice
+                Proforma invoice
               </a>
               <a
                 class="list-group-item list-group-item-action"
@@ -135,14 +148,14 @@ setPayment(!payment);
 
           {companey ? (
             <>
-            <Companey/>
+              <Companey />
             </>
           ) : (
             <>
               <div className="col-md-6 ">
                 {profile ? (
                   <>
-                   <UserProfile posts={posts[0]}/>
+                    <UserProfile posts={posts[0]} />
                   </>
                 ) : (
                   <>
@@ -207,53 +220,61 @@ setPayment(!payment);
                               data-order-type="asc"
                               id="DataTables_Table_0"
                             >
-                              
-                              {voise?(<>
-                                <thead>
-                                <tr>
-                                  <th>SNowtrwt</th>
-                                  <th>Title</th>
-                                  <th>Start Date</th>
-                                  <th>End Date</th>
-                                </tr>
-                              </thead>
-                              No Invoise
-                              </>):
-                              (<> 
-                              {payment? (<> 
-                                <thead>
-                                <tr>
-                                  <th>SNo</th>
-                                  <th>Campaign</th>
-                                  <th>Payment Mode</th>
-                                  <th>Date</th>
-                                </tr>
-                              </thead>
-                            
-                              <tbody>
-                                {posts.map((el,i) =>(
+                              {voise ? (
+                                <>
+                                  <thead>
+                                    <tr>
+                                      <th>SNowtrwt</th>
+                                      <th>Title</th>
+                                      <th>Start Date</th>
+                                      <th>End Date</th>
+                                    </tr>
+                                  </thead>
+                                  No Invoise Record
+                                </>
+                              ) : (
+                                <>
+                                  {payment ? (
+                                    <>
+                                      <thead>
+                                        <tr>
+                                          <th>SNo</th>
+                                          <th>Campaign</th>
+                                          <th>Payment Mode</th>
+                                          <th>Date</th>
+                                        </tr>
+                                      </thead>
+
+                                      <tbody>
+                                        {posts.campaign_name?(<>
+                                          {posts.map((el,i) =>(
                                  <tr key={i+1}>
                                   <td>{i}</td>
                                   <td>{el.campaign_name.slice(-4)}</td>
                                   <td>{el.payment_status}</td>
                                   <td>{el.start_date.slice(0,10)}</td>
                               </tr>
-                                ))}
-                            </tbody>
+                                ))}</>):(<>No Record Found</>)
 
-
-                              </>):
-                              (<>    
-                              <thead>
-                                <tr>
-                                  <th>SN.</th>
-                                  <th>Title</th>
-                                  <th>Start Date</th>
-                                  <th>End Date</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {posts.map((el,i) =>(
+                                        }
+                                       
+                                     
+                                      </tbody>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <thead>
+                                        <tr>
+                                          <th>SN.</th>
+                                          <th>Title</th>
+                                          <th>Start Date</th>
+                                          <th>End Date</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {posts.media_type?(<>
+                                        
+                                          {posts.map((el,i) =>(
                                   <tr key={i+1}>
                                   <td>{i}</td>
                                   <td>{el.media_type}</td>
@@ -261,10 +282,17 @@ setPayment(!payment);
                                   <td>{el.end_date.slice(0,10)}</td>
                               </tr>
                                 ))}
-                            </tbody></>)
-                              }
-                              </>)
-                              }
+                                        
+                                        </>):(<> No Plan Found</>)
+
+                                        }
+
+                               
+                                      </tbody>
+                                    </>
+                                  )}
+                                </>
+                              )}
                             </table>
                           </div>
                         </div>
@@ -276,7 +304,7 @@ setPayment(!payment);
               <div className="col-md-3 ">
                 {profile ? (
                   <>
-                   <ChangePassword/>
+                    <ChangePassword />
                   </>
                 ) : (
                   <>

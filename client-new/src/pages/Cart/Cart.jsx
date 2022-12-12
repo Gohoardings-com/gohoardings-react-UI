@@ -18,15 +18,44 @@ const Cart = () => {
   const [End, setEnd] = useState(new Date());
   const { addRemove, initalState } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
+  const [price, setPrice] = useState();
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
-  const StartDate = (e) => {
-    setStart(e);
+  const getAllData = async () => {
+    const { data } = await instance.get("cart/cartitems");
+    data.map((obj) => {
+      obj["days"] = 5;
+    });
+    setPosts(data);
   };
+   
+  useEffect(() => {
+    getAllData(); 
+   
+  },[]);
+
+
+  if(posts.length!=0){
+    console.log("drged");
+  }
+  if(posts.length!=0){
+    console.log("abcd");
+  }
+  if(posts.length==0){
+    console.log("empty");
+  }
   
-  const EndDate = (e) => {
-    setEnd(e);
+
+  //const cartItemprice = posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0);
+
+   
+  const handelprice = () => {
+   
+    let ans = 0; 
+    posts.map((item) => (ans += item.price*item.days));
+    setPrice(ans);
   };
+
 
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
@@ -36,19 +65,7 @@ const Cart = () => {
     removeCart(obj);
   };
 
-  const getAllData = async () => {
-    const { data } = await instance.get("cart/cartitems");
-    data.map((obj) => {
-      obj["days"] = 5;
-    });
-    setPosts(data);
-  };
 
-  const cartItemprice = posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0);
-
-  useEffect(() => {
-    getAllData();
-  }, []);
 
   const removeCart = async (event) => {
     let data = [...posts];
@@ -58,7 +75,11 @@ const Cart = () => {
       }
       setPosts(data);
     });
+
   };
+
+ 
+
 
   const increaseDays = async (obj) => {
     let data = [...posts];
@@ -68,6 +89,7 @@ const Cart = () => {
       }
       setPosts(data);
     });
+     
   };
 
   const decreaseDays = async (obj) => {
@@ -80,7 +102,9 @@ const Cart = () => {
         setPosts(data);
       }
     });
+    
   };
+
 
   const sumbitALlProduct = async () => {
     await instance.post("cart/processdCart", {
@@ -88,8 +112,20 @@ const Cart = () => {
       end_date: End,
       produts: posts,
     });
-  };
+  };    
 
+
+
+
+  const StartDate = (e) => {
+    setStart(e);
+  };
+  
+  const EndDate = (e) => {
+    setEnd(e);
+  };
+  
+ 
   const current = new Date();
   const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   return (
@@ -213,7 +249,7 @@ const Cart = () => {
                                         <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(obj.price * obj.days)}
-                                          /price after discount
+                                          /after discount
                                         </h6>
                                         <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
@@ -301,10 +337,10 @@ const Cart = () => {
                   </h5>
 
                   <h5 className="mt-4">
-                    GST(18%) : <FaRupeeSign /> {(cartItemprice * 18) / 100}
+                    GST(18%) : <FaRupeeSign /> {(price * 18) / 100}
                   </h5>
-                  <h5 className="mt-4">
-                    Total ammount : <FaRupeeSign /> {cartItemprice}
+                  <h5 className="mt-4"> 
+                    Total ammount : <FaRupeeSign /> {price+(price * 18) / 100}
                   </h5>
                 </div>
               </div>
