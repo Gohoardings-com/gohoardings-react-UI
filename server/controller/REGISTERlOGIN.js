@@ -249,18 +249,18 @@ exports.Profile = catchError(async (req, res) => {
       return res.status(401).json({message:err.message})
     }else if(result.length ==0 ){
       const sql = "SELECT * FROM gohoardi_crmapp.tblcontacts WHERE userid='" + userId + "'"
-      console.log(sql);
+   
       db.query(sql, async (err, result) => {
         if(err){
          
           return res.status(401).json({message:err.message})
         }else{
-          console.log(result);
+        
           return res.status(200).json({message:result}) 
         }
       })
     }else{
-      console.log(result);
+    
       return res.status(200).json({message:result})
     }
   })
