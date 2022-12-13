@@ -28,35 +28,11 @@ const Map = () => {
   const [total,setNewTotal] = useState(0)
 
 
-  let slice;
-  if(!loading){
-     slice = search.slice(0, noOfLogo);
-  }
-
-  const illumination = [];
-  const category_name = [];
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
-  });
-
-  const userCartItem = async () => {
- 
-    const { data } = await instance.get('cart/cartitems');
-    setcartItem(data)
-    handelprice(cartItem);
-  }
- 
-  if(cartItem.length==0){
-    console.log("empty");
-  }
-  else{
-    console.log("DATA");
-  }
+  const { initalState } = useContext(AccountContext)
 
 
-  const handelprice = async(cartItem) => {
 
+<<<<<<< HEAD
     let ans =0 ;
    await cartItem.map((item) => (ans+=item.price));
     setNewTotal(ans);
@@ -78,6 +54,9 @@ const Map = () => {
 
 
   const addonCart = async (e) => {
+=======
+ const addonCart = async (e) => {
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
     const { data } = await instance.post('cart/addOnCart', {
       mediaid: e.code,
       mediatype: e.category_name,
@@ -91,15 +70,6 @@ const Map = () => {
     }
   }
 
-  
-  const removefroCart = async (obj) => {
-    await instance.post('cart/deleteFromCart', {
-      code: obj.code,
-    })
-    addRemove({ type: "DECR" })
-    remove(obj)
-  }
-
   const add = (event) => {
     let data = [...medias];
     data.forEach((element) => {
@@ -110,13 +80,64 @@ const Map = () => {
     });
   };
 
+
+  const userCartItem = async () => {
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data);
+  }
+  
+
+  useEffect(() => {
+    userCartItem();
+    holdingtype();
+  },[initalState]);
+
+  const cartItemprice = cartItem.reduce(
+    (totalPrice, item) => totalPrice + parseInt(item.price),
+    0
+  );
+
+  let slice;
+  if(!loading){
+     slice = search.slice(0, noOfLogo);
+  }
+
+  const illumination = [];
+  const category_name = [];
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
+  });
+
+  const getAllDetails = async () => {
+      const value = [...search]
+     const table=  value[0].category_name
+     const city = value[0].city_name
+   dispatch(priceSubIllu(category_name,price,illumination,table,city))
+  
+  }
+ 
+  
+  const removefroCart = async (obj) => {
+    await instance.post('cart/deleteFromCart', {
+      code: obj.code,
+    })
+    addRemove({ type: "DECR" })
+    remove(obj);
+  
+  }
+
+
   const remove = (event) => {
     let data = [...cartItem];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
-        setcartItem(data);
+      
       }
+      // const result = data.filter((word) => word.isDelete === 0);
+      // setcartItem(result)
+      
     });
   };
 
@@ -142,21 +163,10 @@ const Map = () => {
       }
     }
   }
-// console.log(category_name,city_name);
-//   const mediasData = async () => {
-//     const  data  = await medaiWithCity(category_name,city_name);
-//     if (data.length > 0) {
-//       setMedias(data);
-//     }
-//   }
 
-  const nmedia = async (arr) => {
-    setMedias(arr);
-  }
 
-  // useEffect(() => {
-  //   mediasData();
-  // }, []);
+
+
 
   const locatetologin = async() =>{
     window.localStorage.setItem("locate",`/map`)
@@ -202,9 +212,24 @@ const Map = () => {
      setnoOfLogo(noOfLogo - 6);
     }
   };
-  useEffect(() => {
-    holdingtype();
-  }, [])
+  // useEffect(() => {
+    
+  // }, [])
+
+    // const nmedia = async (arr) => {
+  //   setMedias(arr);
+  // }
+// console.log(category_name,city_name);
+//   const mediasData = async () => {
+//     const  data  = await medaiWithCity(category_name,city_name);
+//     if (data.length > 0) {
+//       setMedias(data);
+//     }
+//   }
+
+  // useEffect(() => {
+  //   mediasData();
+  // }, []);
 
   return (
     <div className="container-fluid mh-100">
@@ -404,7 +429,62 @@ const Map = () => {
                 <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>
               </div>
             </div>
+<<<<<<< HEAD
            <MapCart cartItem={cartItem} priceState={priceState} locatetologin={locatetologin} removefroCart={removefroCart}/>
+=======
+            <div className="media-items p-2 accordion-collapse collapse" id="collapseC1" data-bs-parent="#accordionTest">
+              <div className="accordion items border mb-2" id="accordionExample">
+
+                {!cartItem ? <><h1>Loading... Please Wait</h1></> : <>
+                  {cartItem.map((item) => (
+                    <>
+                      {item.isDelete == 0 ? <>
+                        <div className="accordion-item">
+                          <div
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                          >
+                            <div className="row m-0">
+                              <p className="my-2">
+                                {item.page_title.substring(
+                                  0,
+                                  20
+                                ) + "..."}
+                              </p>
+                              <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
+                                <img
+                                  src={item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
+                                  alt="N/A"
+                                  className="w-100 mt-2 pt-2"
+                                />
+                              </div>
+                              <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
+                                <ul className="list-unstyled">
+                                  <li>Code : {item.code}</li>
+                                  <li>FTF : {item.ftf}</li>
+                                  <li>Size : {item.size} feet</li>
+                                  <li>
+                                    Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+                                  </li>
+                                </ul>
+                                <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </> : <>
+                        <h6 className="text-center">Your Item Deleted Successfully</h6>
+                      </>}
+
+                    </>
+                  ))}
+                </>}
+              </div>
+            </div>
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
           </div>
 
           <div id="map-view-mobile">
@@ -424,9 +504,9 @@ const Map = () => {
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
             <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
               {/* Total Price */}
-              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {total}</p>
+              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {cartItemprice}</p>
             </div>
-            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
+            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
               <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
           </div>

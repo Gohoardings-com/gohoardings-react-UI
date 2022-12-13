@@ -77,7 +77,11 @@ function App() {
           <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
+<<<<<<< HEAD
           <Route exact path="/cart" element={ <Cart/>}/> 
+=======
+          <Route exact path="/cart" element={<Cart/>}/> 
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
           <Route exact path="/contact" element={<Contact/>}/> 
           <Route exact path="/about" element={<About/>}/> 
           <Route exact path="/faqs" element={<FAQS/>}/> 

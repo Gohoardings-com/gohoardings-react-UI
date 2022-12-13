@@ -31,12 +31,21 @@ const Cart = () => {
     setPosts(data);
   };
 
+<<<<<<< HEAD
    
   useEffect(() => {
     getAllData(); 
   },[]);
+=======
+  useEffect(() => {
+    getAllData();
+    // handelprice();
+  }, []);
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
 
+  // const handelprice = () => {
 
+<<<<<<< HEAD
   // Start date of user item
   const StartDate = (e) => {
     setStart(e);
@@ -46,6 +55,13 @@ const Cart = () => {
     setEnd(e);
   };
 // remove from cart
+=======
+  //   let ans = 0;
+  //   posts.map((item) => (ans += item.price*item.days));
+  //   setPrice(ans);
+  // };
+
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
       code: obj.code,
@@ -54,25 +70,38 @@ const Cart = () => {
     removeCart(obj);
   };
 
+<<<<<<< HEAD
 
   useEffect(() => {
         setPrice(price)
       },[price])
       
 // Remove on item data
+=======
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
   const removeCart = async (event) => {
+    console.log(event);
     let data = [...posts];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
+<<<<<<< HEAD
           }
       setPosts(data);
-    });
+=======
+      }
 
+      const result = data.filter((word) => word.isDelete === 0);
+      setPosts(result);
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
+    });
   };
 
+<<<<<<< HEAD
 
 // Increament days on of cart item
+=======
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
   const increaseDays = async (obj) => {
     let data = [...posts];
     data.map((element) => {
@@ -83,6 +112,11 @@ const Cart = () => {
         }
       }
       setPosts(data);
+<<<<<<< HEAD
+=======
+    });
+  };
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
 
     });
   }
@@ -91,7 +125,7 @@ const Cart = () => {
     let data = [...posts];
 
     data.map((element) => {
-      if (element.id == obj.id) {
+      if (element.id === obj.id) {
         if (obj.days > 5) {
           obj.days -= 1;
           if(obj.isDelete == 0){
@@ -101,7 +135,6 @@ const Cart = () => {
         setPosts(data);
       }
     });
-    
   };
 
   const sumbitALlProduct = async () => {
@@ -110,11 +143,34 @@ const Cart = () => {
       end_date: End,
       produts: posts,
     });
+<<<<<<< HEAD
   };    
 
   const current = new Date();
   const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
+=======
+  };
+
+  const StartDate = (e) => {
+    setStart(e);
+  };
+
+  const EndDate = (e) => {
+    setEnd(e);
+  };
+
+  const current = new Date();
+  const startdate = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+
+  console.log(posts);
+  const cartItemprice = posts.reduce(
+    (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
+    0
+  );
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
 
   return (
     <>
@@ -126,14 +182,16 @@ const Cart = () => {
               <div class="input-box active-grey ">
                 <label class="input-label">Start Date</label>
                 <div type="text " class="input-1 d-flex bg-light">
-                  <h6 className="me-2 calender-logo  text-secondary">{startdate}</h6>
+                  <h6 className="me-2 calender-logo  text-secondary">
+                    {startdate}
+                  </h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
                       variant="transparent"
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt  className="calender-logo ms-5 mb-1 text-secondary"/>
+                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-secondary" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={Start} onChange={StartDate} />
@@ -146,7 +204,9 @@ const Cart = () => {
               <div class="input-box active-grey">
                 <label class="input-label">End Date</label>
                 <div type="text " class="input-1 d-flex bg-light ">
-                  <h6 className="me-2  calender-logo  text-secondary">{startdate}</h6>
+                  <h6 className="me-2  calender-logo  text-secondary">
+                    {startdate}
+                  </h6>
 
                   <Dropdown className="p-0 m-0">
                     <Dropdown.Toggle
@@ -178,7 +238,7 @@ const Cart = () => {
                 {posts.length > 0 &&
                   posts.map((obj, index) => (
                     <>
-                      {obj.isDelete == 0 ? (
+                   
                         <>
                           <div className="card mb-3 mt-3 maincard ">
                             <div className="row">
@@ -219,26 +279,26 @@ const Cart = () => {
                                     </h4>
                                     <div className="row mt-4">
                                       <div className="col-md-6">
-                                        <h6 className="text-secondary">
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />
                                           {parseInt(obj.price * 30)}/month
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />
                                           {parseInt(obj.price)}/day
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(
                                             (obj.price * obj.days * 11) / 10
                                           )}{" "}
                                           /original price
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(obj.price * obj.days)}
                                           /after discount
-                                        </h6>
+                                        </h6> */}
                                         <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(
@@ -290,13 +350,7 @@ const Cart = () => {
                             </div>
                           </div>
                         </>
-                      ) : (
-                        <>
-                          <h6 className="text-center text-secondary">
-                            Your Item Deleted Successfully
-                          </h6>
-                        </>
-                      )}
+                      
                     </>
                   ))}
               </>
@@ -321,16 +375,22 @@ const Cart = () => {
 
                   <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6>
                   <h5 className=" mt-4">
-                  Total  {totalDays ? totalDays : 5} Days
+                    Total {totalDays ? totalDays : 5} Days
                   </h5>
 
                   <h5 className="mt-4">
-                    GST(18%) : <FaRupeeSign /> {(price * 18) / 100}
+                    GST(18%) : <FaRupeeSign /> {(cartItemprice * 18) / 100}
                   </h5>
+<<<<<<< HEAD
                  
                   <h5 className="mt-4"> 
                     Total ammount : <FaRupeeSign /> {price+(price * 18) / 100}
 
+=======
+                  <h5 className="mt-4">
+                    Total ammount : <FaRupeeSign />{" "}
+                    {cartItemprice + (cartItemprice * 18) / 100}
+>>>>>>> e7933c45380d207995993bf75c9623dc78a91324
                   </h5>
                 
                 </div>

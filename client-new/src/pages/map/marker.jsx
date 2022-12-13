@@ -44,6 +44,7 @@ const Markers = (markers) => {
       })
       addRemove({type:"DECR"})
       remove(obj)
+
     }
     
 
@@ -65,9 +66,13 @@ const Markers = (markers) => {
         element.map((obj) =>{
           if (obj.code == event) {
             obj.isDelete = 1;
-            markers(data);
+        
           }
+
+          const result = data.filter((word) => word.isDelete === 0);
+          markers(result);
         })
+
       });
     };
 
@@ -114,7 +119,7 @@ const Markers = (markers) => {
                   <p><span>FTF : </span>{ftf}</p>
                   <p><span>Price : Login to see price</span></p>
                   { userid == null || isDelete == null && userid != null|| isDelete == 1 ?
-                    <MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/> : <MdOutlineRemoveShoppingCart  className="sitemark" onClick={() => removefroCart(code)} />}
+                    <MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/> : <></>}
                 </div>
               </div>
             </InfoWindow>
