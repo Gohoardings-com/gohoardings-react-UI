@@ -76,7 +76,7 @@ function App() {
           <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
-          <Route exact path="/cart" element={avlable ? <Cart/>:<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
+          <Route exact path="/cart" element={<Cart/>}/> 
           <Route exact path="/contact" element={<Contact/>}/> 
           <Route exact path="/about" element={<About/>}/> 
           <Route exact path="/faqs" element={<FAQS/>}/> 

@@ -77,9 +77,8 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
                             </Link>
                           </div>
                           <div className="col p-1">
-                            {item.userid == null ||
-                            item.isDelete == null ||
-                            (item.userid != null && item.isDelete == 1) ? (
+                            {
+                             item.isDelete === 1  ? (
                               < MdOutlineAddShoppingCart
                              
                                 onClick={() => addonCart(item)}

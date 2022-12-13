@@ -28,34 +28,18 @@ const Cart = () => {
     });
     setPosts(data);
   };
-   
+
   useEffect(() => {
-    getAllData(); 
-   
-  },[]);
+    getAllData();
+    // handelprice();
+  }, []);
 
+  // const handelprice = () => {
 
-  if(posts.length!=0){
-    console.log("drged");
-  }
-  if(posts.length!=0){
-    console.log("abcd");
-  }
-  if(posts.length==0){
-    console.log("empty");
-  }
-  
-
-  //const cartItemprice = posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0);
-
-   
-  const handelprice = () => {
-   
-    let ans = 0; 
-    posts.map((item) => (ans += item.price*item.days));
-    setPrice(ans);
-  };
-
+  //   let ans = 0;
+  //   posts.map((item) => (ans += item.price*item.days));
+  //   setPrice(ans);
+  // };
 
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
@@ -65,21 +49,18 @@ const Cart = () => {
     removeCart(obj);
   };
 
-
-
   const removeCart = async (event) => {
+    console.log(event);
     let data = [...posts];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
       }
-      setPosts(data);
+
+      const result = data.filter((word) => word.isDelete === 0);
+      setPosts(result);
     });
-
   };
-
- 
-
 
   const increaseDays = async (obj) => {
     let data = [...posts];
@@ -89,22 +70,19 @@ const Cart = () => {
       }
       setPosts(data);
     });
-     
   };
 
   const decreaseDays = async (obj) => {
     let data = [...posts];
     data.map((element) => {
-      if (element.id == obj.id) {
+      if (element.id === obj.id) {
         if (obj.days > 5) {
           obj.days -= 1;
         }
         setPosts(data);
       }
     });
-    
   };
-
 
   const sumbitALlProduct = async () => {
     await instance.post("cart/processdCart", {
@@ -112,22 +90,27 @@ const Cart = () => {
       end_date: End,
       produts: posts,
     });
-  };    
-
-
-
+  };
 
   const StartDate = (e) => {
     setStart(e);
   };
-  
+
   const EndDate = (e) => {
     setEnd(e);
   };
-  
- 
+
   const current = new Date();
-  const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  const startdate = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+
+  console.log(posts);
+  const cartItemprice = posts.reduce(
+    (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
+    0
+  );
+
   return (
     <>
       <Fixednavbar />
@@ -138,14 +121,16 @@ const Cart = () => {
               <div class="input-box active-grey ">
                 <label class="input-label">Start Date</label>
                 <div type="text " class="input-1 d-flex bg-light">
-                  <h6 className="me-2 calender-logo  text-secondary">{startdate}</h6>
+                  <h6 className="me-2 calender-logo  text-secondary">
+                    {startdate}
+                  </h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
                       variant="transparent"
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt  className="calender-logo ms-5 mb-1 text-secondary"/>
+                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-secondary" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={Start} onChange={StartDate} />
@@ -158,7 +143,9 @@ const Cart = () => {
               <div class="input-box active-grey">
                 <label class="input-label">End Date</label>
                 <div type="text " class="input-1 d-flex bg-light ">
-                  <h6 className="me-2  calender-logo  text-secondary">{startdate}</h6>
+                  <h6 className="me-2  calender-logo  text-secondary">
+                    {startdate}
+                  </h6>
 
                   <Dropdown className="p-0 m-0">
                     <Dropdown.Toggle
@@ -190,7 +177,7 @@ const Cart = () => {
                 {posts.length > 0 &&
                   posts.map((obj, index) => (
                     <>
-                      {obj.isDelete == 0 ? (
+                   
                         <>
                           <div className="card mb-3 mt-3 maincard ">
                             <div className="row">
@@ -231,26 +218,26 @@ const Cart = () => {
                                     </h4>
                                     <div className="row mt-4">
                                       <div className="col-md-6">
-                                        <h6 className="text-secondary">
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />
                                           {parseInt(obj.price * 30)}/month
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />
                                           {parseInt(obj.price)}/day
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(
                                             (obj.price * obj.days * 11) / 10
                                           )}{" "}
                                           /original price
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                        {/* <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(obj.price * obj.days)}
                                           /after discount
-                                        </h6>
+                                        </h6> */}
                                         <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(
@@ -302,13 +289,7 @@ const Cart = () => {
                             </div>
                           </div>
                         </>
-                      ) : (
-                        <>
-                          <h6 className="text-center text-secondary">
-                            Your Item Deleted Successfully
-                          </h6>
-                        </>
-                      )}
+                      
                     </>
                   ))}
               </>
@@ -333,14 +314,15 @@ const Cart = () => {
 
                   <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6>
                   <h5 className=" mt-4">
-                  Total  {totalDays ? totalDays : 5} Days
+                    Total {totalDays ? totalDays : 5} Days
                   </h5>
 
                   <h5 className="mt-4">
-                    GST(18%) : <FaRupeeSign /> {(price * 18) / 100}
+                    GST(18%) : <FaRupeeSign /> {(cartItemprice * 18) / 100}
                   </h5>
-                  <h5 className="mt-4"> 
-                    Total ammount : <FaRupeeSign /> {price+(price * 18) / 100}
+                  <h5 className="mt-4">
+                    Total ammount : <FaRupeeSign />{" "}
+                    {cartItemprice + (cartItemprice * 18) / 100}
                   </h5>
                 </div>
               </div>

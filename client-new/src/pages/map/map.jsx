@@ -27,55 +27,11 @@ const Map = () => {
   const [total,setNewTotal] = useState(0)
 
 
-  let slice;
-  if(!loading){
-     slice = search.slice(0, noOfLogo);
-  }
-
-  const illumination = [];
-  const category_name = [];
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
-  });
-
-  const userCartItem = async () => {
- 
-    const { data } = await instance.get('cart/cartitems');
-    setcartItem(data)
-    handelprice(cartItem);
-  }
- 
-  if(cartItem.length==0){
-    console.log("empty");
-  }
-  else{
-    console.log("DATA");
-  }
+  const { initalState } = useContext(AccountContext)
 
 
-  const handelprice = async(cartItem) => {
 
-    let ans =0 ;
-   await cartItem.map((item) => (ans+=item.price));
-    setNewTotal(ans);
-  };
-
-  
-  useEffect(() => {
-    userCartItem();
-  },[]);
-
-  const getAllDetails = async () => {
-      const value = [...search]
-     const table=  value[0].category_name
-     const city = value[0].city_name
-   dispatch(priceSubIllu(category_name,price,illumination,table,city))
-  
-  }
-
-
-  const addonCart = async (e) => {
+ const addonCart = async (e) => {
     const { data } = await instance.post('cart/addOnCart', {
       mediaid: e.code,
       mediatype: e.category_name,
@@ -89,15 +45,6 @@ const Map = () => {
     }
   }
 
-  
-  const removefroCart = async (obj) => {
-    await instance.post('cart/deleteFromCart', {
-      code: obj.code,
-    })
-    addRemove({ type: "DECR" })
-    remove(obj)
-  }
-
   const add = (event) => {
     let data = [...medias];
     data.forEach((element) => {
@@ -108,13 +55,64 @@ const Map = () => {
     });
   };
 
+
+  const userCartItem = async () => {
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data);
+  }
+  
+
+  useEffect(() => {
+    userCartItem();
+    holdingtype();
+  },[initalState]);
+
+  const cartItemprice = cartItem.reduce(
+    (totalPrice, item) => totalPrice + parseInt(item.price),
+    0
+  );
+
+  let slice;
+  if(!loading){
+     slice = search.slice(0, noOfLogo);
+  }
+
+  const illumination = [];
+  const category_name = [];
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
+  });
+
+  const getAllDetails = async () => {
+      const value = [...search]
+     const table=  value[0].category_name
+     const city = value[0].city_name
+   dispatch(priceSubIllu(category_name,price,illumination,table,city))
+  
+  }
+ 
+  
+  const removefroCart = async (obj) => {
+    await instance.post('cart/deleteFromCart', {
+      code: obj.code,
+    })
+    addRemove({ type: "DECR" })
+    remove(obj);
+  
+  }
+
+
   const remove = (event) => {
     let data = [...cartItem];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
-        setcartItem(data);
+      
       }
+      // const result = data.filter((word) => word.isDelete === 0);
+      // setcartItem(result)
+      
     });
   };
 
@@ -138,21 +136,10 @@ const Map = () => {
       }
     }
   }
-// console.log(category_name,city_name);
-//   const mediasData = async () => {
-//     const  data  = await medaiWithCity(category_name,city_name);
-//     if (data.length > 0) {
-//       setMedias(data);
-//     }
-//   }
 
-  const nmedia = async (arr) => {
-    setMedias(arr);
-  }
 
-  // useEffect(() => {
-  //   mediasData();
-  // }, []);
+
+
 
   const locatetologin = async() =>{
     window.localStorage.setItem("locate",`/map`)
@@ -198,9 +185,24 @@ const Map = () => {
       await setnoOfLogo(noOfLogo - 6 );
     }
   };
-  useEffect(() => {
-    holdingtype();
-  }, [])
+  // useEffect(() => {
+    
+  // }, [])
+
+    // const nmedia = async (arr) => {
+  //   setMedias(arr);
+  // }
+// console.log(category_name,city_name);
+//   const mediasData = async () => {
+//     const  data  = await medaiWithCity(category_name,city_name);
+//     if (data.length > 0) {
+//       setMedias(data);
+//     }
+//   }
+
+  // useEffect(() => {
+  //   mediasData();
+  // }, []);
 
   return (
     <div className="container-fluid mh-100">
@@ -439,7 +441,6 @@ const Map = () => {
                                 </ul>
                                 <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>
                               </div>
-
                             </div>
 
                           </div>
@@ -472,9 +473,9 @@ const Map = () => {
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
             <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
               {/* Total Price */}
-              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {total}</p>
+              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {cartItemprice}</p>
             </div>
-            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
+            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
               <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
           </div>
