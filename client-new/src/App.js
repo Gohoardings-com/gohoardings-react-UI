@@ -28,12 +28,11 @@ function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const [avlable,setAvlable] = useState(false)
-
  
 
   const getUser = async() => {
-   {sessionStorage.getItem("user") || localStorage.getItem("user") && setAvlable(true)} 
-   {}
+   {sessionStorage.getItem("user") && setAvlable(true)} 
+   {localStorage.getItem("user") && setAvlable(true)}
   }
   useEffect(() =>{
     getUser()
@@ -48,7 +47,7 @@ function App() {
          }
     };
 
-    window.addEventListener('beforeunload', handleTabClose);
+    // window.addEventListener('beforeunload', handleTabClose);
   }, []);
 
   const handelLogout = async (e) => {
@@ -77,11 +76,7 @@ function App() {
           <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
-<<<<<<< HEAD
-          <Route exact path="/cart" element={ <Cart/>}/> 
-=======
           <Route exact path="/cart" element={<Cart/>}/> 
->>>>>>> e7933c45380d207995993bf75c9623dc78a91324
           <Route exact path="/contact" element={<Contact/>}/> 
           <Route exact path="/about" element={<About/>}/> 
           <Route exact path="/faqs" element={<FAQS/>}/> 

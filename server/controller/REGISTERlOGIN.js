@@ -1,8 +1,8 @@
 const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
 const {sendEmail} = require('../middelware/sendEmail')
-const jwtToken = require('jsonwebtoken')
 const catchError = require('../middelware/catchError');
+const {token} = require('../middelware/token')
 
 exports.register = catchError(async (req, res) => {
   const { name, email, phone, password: Npassword } = req.body
@@ -18,27 +18,16 @@ exports.register = catchError(async (req, res) => {
         if (err) {
           return res.send(err);
         } else {
-          const lastuserid = (result[0].userid) + 1
+          const userid = (result[0].userid) + 1
           db.query("INSERT INTO  tblcontacts (firstname, phonenumber, email, password, userid) VALUES  ('" + name + "','" + phone + "','" + email + "','" + password + "','" + lastuserid + "')", async (err, result) => {
             if (err) {
               return res.send({ err: err, message: "Something Wrong here" })
             } else if (result == []) {
               return res.send({ "err": err, message: "Something Wrong here" })
             } else {
-              res.clearCookie(String(lastuserid))
-              req.cookies[`${String(lastuserid)}`] = " ";
-              const token = jwtToken.sign({ id: lastuserid }, process.env.jwt_secret, {
-                expiresIn: "7d",
-              });
-              res.cookie(String(lastuserid), token, {
-                path: '/',
-                expires: new Date(Date.now() + 7 * 24 * 3600000),
-                httpOnly: true,
-                sameSite: 'lax',
-              });
-
-              return res.status(200).json({ message: "Register Successfully" })
-
+              res.clearCookie(String(userid))
+              req.cookies[`${String(userid)}`] = " ";
+              token(userid, 200, res)
             }
           })
         }
@@ -73,16 +62,7 @@ exports.login = catchError(async (req, res) => {
         }
         res.clearCookie(String(result[0].userid))
         req.cookies[`${String(result[0].userid)}`] = " ";
-        const token = jwtToken.sign({ id: result[0].userid }, process.env.jwt_secret, {
-          expiresIn: "7d",
-        });
-        res.cookie(String(result[0].userid), token, {
-          path: '/',
-          expires: new Date(Date.now() + 7 * 24 * 3600000),
-          httpOnly: true,
-          sameSite: 'lax',
-        });
-        return res.status(200).json({ message: "User Login Successfull" })
+        token(userid, 200, res)
       }
     } else {
       return res.status(404).json({ messsage: "Invalid Email and password" });
@@ -113,17 +93,7 @@ exports.googleLogin = catchError(async (req, res) => {
             } else {
               res.clearCookie(String(userid))
               req.cookies[`${String(userid)}`] = " ";
-              const token = jwtToken.sign({ id: userid }, process.env.jwt_secret, {
-                expiresIn: "7d",
-              });
-              res.cookie(String(userid), token, {
-                path: '/',
-                expires: new Date(Date.now() + 7 * 24 * 3600000),
-                httpOnly: true,
-                sameSite: 'lax',
-                
-              });
-              return res.status(200).json({ message: "User Login Successfull" })
+            token(userid, 200, res)
             }
           })
         }
@@ -137,17 +107,7 @@ exports.googleLogin = catchError(async (req, res) => {
         if (!result == []) {
           res.clearCookie(String(result[0].userid))
           req.cookies[`${String(result[0].userid)}`] = " ";
-          const token = jwtToken.sign({ id: result[0].userid }, process.env.jwt_secret, {
-            expiresIn: "7d",
-          });
-          res.cookie(String(result[0].userid), token, {
-            path: '/',
-            expires: new Date(Date.now() + 1000 * 84000),
-            httpOnly: true,
-            sameSite: 'lax',
-         
-          });
-          return res.status(200).json({ message: "User Login Successfull" })
+         token(userid, 200, res)
         } else {
           return res.status(404).json({ messsage: "Invalid Email and password" });
         }
@@ -190,26 +150,7 @@ exports.refreshToken = catchError(async(req,res,next) => {
     
 })
 
-exports.verifyToken = catchError(async (req, res, next) => {
-  const cookieData = req.cookies;
-  if (!cookieData) {
-    return res.status(400).json({ message: "No Cookie Found" })
-  }
-  const token = Object.values(cookieData)[0];
 
-  if (!token) {
-    return res.status(400).json({ message: "No Token Found" })
-  } else {
-    return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
-      if (err) {
-        return res.status(400).json({ message: "InValid Token" });
-      } else {
-        req.id = user.id;
-        next()
-      }
-    })
-  }
-})
 
 exports.getuser = catchError(async (req, res) => {
   const userId = req.id;

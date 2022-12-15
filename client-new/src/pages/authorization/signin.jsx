@@ -56,8 +56,8 @@ const Signin = () => {
       const { data } = await instance.post("registration/googleSingUp", {
         profile: res.profileObj,
       });
-      if (data.message === "User Login Successfull") {
-        const user = data.message;
+      if (data.success=== "true") {
+        const user = data.success;
         if (remember) {
           window.localStorage.setItem("user", user);
         } else {
@@ -117,8 +117,8 @@ const Signin = () => {
             email: email,
             password: password,
           });
-          if (data.message === "User Login Successfull") {
-            const user = data.message;
+          if (data.success === "User Login Successfull") {
+            const user = data.success;
             if (remember) {
               window.localStorage.setItem("user", user);
             } else {

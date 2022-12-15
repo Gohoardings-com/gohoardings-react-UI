@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer')
 exports.sendEmail = async (options)=>{
   var transport = nodemailer.createTransport({
+    
     // host: 'smtp.ethereal.email',
     // secureConnection: true,
     // port: 587,
@@ -8,7 +9,7 @@ exports.sendEmail = async (options)=>{
     //     user: 'drake.denesik46@ethereal.email',
     //     pass: 'tj14VPv2NMf1Q37Daw'
     // }
-  
+     
     host: "smtp.elasticemail.com",
     port: 2525,
     secureConnection: true,

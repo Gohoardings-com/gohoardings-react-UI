@@ -11,7 +11,6 @@ import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
-import MapCart from "./mapCart";
 
 const Map = () => {
   const priceState = window.localStorage.getItem("user")
@@ -32,31 +31,7 @@ const Map = () => {
 
 
 
-<<<<<<< HEAD
-    let ans =0 ;
-   await cartItem.map((item) => (ans+=item.price));
-    setNewTotal(ans);
-  };
-
-  
-  useEffect(() => {
-
-    handelprice();
-  },[]);
-
-  const getAllDetails = async () => {
-      const value = [...search]
-     const table=  value[0].category_name
-     const city = value[0].city_name
-   dispatch(priceSubIllu(category_name,price,illumination,table,city))
-  
-  }
-
-
-  const addonCart = async (e) => {
-=======
  const addonCart = async (e) => {
->>>>>>> e7933c45380d207995993bf75c9623dc78a91324
     const { data } = await instance.post('cart/addOnCart', {
       mediaid: e.code,
       mediatype: e.category_name,
@@ -151,8 +126,6 @@ const Map = () => {
       }
     }
   }
-
-
   function mediaType(e) {
     if (e.currentTarget.checked) {
     illumination.push(e.target.value)
@@ -204,12 +177,12 @@ const Map = () => {
 
   const More = async() => {
     if (search.length >= noOfLogo) {
-      setnoOfLogo(noOfLogo + 6);
+      await setnoOfLogo(noOfLogo + 6);
     }
   };
   const Less = async() => {
     if (noOfLogo >= 2) {
-     setnoOfLogo(noOfLogo - 6);
+      await setnoOfLogo(noOfLogo - 6 );
     }
   };
   // useEffect(() => {
@@ -347,7 +320,7 @@ const Map = () => {
                             return obj;
                           } else if (obj.name.toLowerCase().includes(query.toLowerCase())) {
                             return obj;
-                          }
+                         }
                         }).map((illum, i) => (
                           <>
                             <input type="checkbox" id={i}
@@ -358,9 +331,7 @@ const Map = () => {
                             <span>{illum.name}</span>
                             <br />
                           </>
-
                         ))}
-
                       </div>
                     </div>
                   </div>
@@ -429,16 +400,13 @@ const Map = () => {
                 <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>
               </div>
             </div>
-<<<<<<< HEAD
-           <MapCart cartItem={cartItem} priceState={priceState} locatetologin={locatetologin} removefroCart={removefroCart}/>
-=======
             <div className="media-items p-2 accordion-collapse collapse" id="collapseC1" data-bs-parent="#accordionTest">
               <div className="accordion items border mb-2" id="accordionExample">
 
                 {!cartItem ? <><h1>Loading... Please Wait</h1></> : <>
                   {cartItem.map((item) => (
                     <>
-                      {item.isDelete == 0 ? <>
+                      {item.isDelete == 0 ?
                         <div className="accordion-item">
                           <div
                             data-bs-toggle="collapse"
@@ -449,7 +417,7 @@ const Map = () => {
                             <div className="row m-0">
                               <p className="my-2">
                                 {item.page_title.substring(
-                                  0,
+                                  0, 
                                   20
                                 ) + "..."}
                               </p>
@@ -475,16 +443,15 @@ const Map = () => {
 
                           </div>
                         </div>
-                      </> : <>
+                       : 
                         <h6 className="text-center">Your Item Deleted Successfully</h6>
-                      </>}
+                      }
 
                     </>
                   ))}
                 </>}
               </div>
             </div>
->>>>>>> e7933c45380d207995993bf75c9623dc78a91324
           </div>
 
           <div id="map-view-mobile">
@@ -498,7 +465,7 @@ const Map = () => {
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-
+            {/* { isLoaded ? <Markers /> : null } */}
           </div>
 
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
