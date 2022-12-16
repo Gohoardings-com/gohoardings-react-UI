@@ -1,17 +1,18 @@
 const jwtToken = require('jsonwebtoken')
 const catchError = require('./catchError')
 
-exports.token = catchError(async(userid, statusCode, res) =>{
-    jwtToken.sign({ id: userid }, process.env.jwt_secret, {
+exports.token = catchError(async(userid, statuscode,res) =>{
+  
+  const token =  jwtToken.sign({ id: userid }, process.env.jwt_secret, {
         expiresIn: "7d",
       });
-      res.cookie(String(userid), token, {
+     const option =  {
         path: '/',
-        expires: new process.env.cookie_exipre_time,
+        expires:  new Date(Date.now() + 7 * 24 * 3600000),
         httpOnly: true,
         sameSite: 'lax',
-      });
-      return res.status(statusCode).json({success:"true", message: "Register Successfully" })
+      }
+      return res.status(statuscode).cookie(String(userid), token,option).json({success:true, message:"Login Successfully"})
 })
 
 exports.verifyToken = catchError(async (req, res, next) => {

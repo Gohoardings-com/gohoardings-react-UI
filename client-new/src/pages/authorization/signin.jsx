@@ -3,12 +3,11 @@ import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { clientId } from "../../apis/apis";
+import { clientId, googleLogin, loginUser } from "../../apis/apis";
 import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Register from "./signup";
-import instance from "../../apis/axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from "../../store";
 import { registerUser } from '../../apis/apis';
@@ -53,10 +52,8 @@ const Signin = () => {
     }
     // Google Login Request
     const onSuccess = async (res) => {
-      const { data } = await instance.post("registration/googleSingUp", {
-        profile: res.profileObj,
-      });
-      if (data.success=== "true") {
+      const  data  = await googleLogin(res);
+      if (data.success=== true) {
         const user = data.success;
         if (remember) {
           window.localStorage.setItem("user", user);
@@ -113,11 +110,8 @@ const Signin = () => {
       } else if (count === 0) {
         try {
           e.preventDefault();
-          const { data } = await instance.post("registration/login", {
-            email: email,
-            password: password,
-          });
-          if (data.success === "User Login Successfull") {
+          const data = await loginUser(email, password)
+          if (data.success === true) {
             const user = data.success;
             if (remember) {
               window.localStorage.setItem("user", user);
@@ -191,8 +185,8 @@ const Signin = () => {
         try {
           e.preventDefault()
           const data = await registerUser(name, email, phone, password);
-          if (data.message === "Register Successfully") {
-            const user = data.message
+          if (data.success === true) {
+            const user = data.success
             window.localStorage.setItem("user", user)
             window.sessionStorage.setItem("user", user)
             const locate = window.localStorage.getItem("locate");
@@ -209,10 +203,7 @@ const Signin = () => {
       }
       e.preventDefault();
     };
-  
-
-
-    
+      
   return (
     <section className=" " id="mainsection">
         <div className="container-fluid px-5">
@@ -272,6 +263,7 @@ const Signin = () => {
                       onVisible={onVisible}
                       eyeViseble={eyeViseble}
                       toggleSignUp={toggleSignUp}
+                      signIn={signIn}
                       toast={toast}
                       passwordsValidate={passwordsValidate}
                       setPassword={setPassword}

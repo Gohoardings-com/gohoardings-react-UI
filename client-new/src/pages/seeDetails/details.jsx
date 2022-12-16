@@ -230,34 +230,34 @@ const Details = () => {
                      <div className=" p-2 datail-heading  rounded-3">
                         <h4 className="text-light">GET A FREE CONSULTATION!</h4>
                       </div>
-                      <form class="row g-3 needs-validation ms-1" novalidate>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip01" class="form-label">Name</label>
-    <input type="text" class="form-control" id="validationTooltip01"  required/>
+                      <form className="row g-3 needs-validation ms-1" novalidate>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip01" className="form-label">Name</label>
+    <input type="text" className="form-control" id="validationTooltip01"  required/>
 
   </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip02" class="form-label">Number</label>
-    <input type="number" class="form-control" id="validationTooltip02" required/>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip02" className="form-label">Number</label>
+    <input type="number" className="form-control" id="validationTooltip02" required/>
  
   </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip03" class="form-label">Email</label>
-    <input type="text" class="form-control" id="validationTooltip03" required/>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip03" className="form-label">Email</label>
+    <input type="text" className="form-control" id="validationTooltip03" required/>
   
   </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip03" class="form-label">City</label>
-    <input type="text" class="form-control" id="validationTooltip03" required/>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip03" className="form-label">City</label>
+    <input type="text" className="form-control" id="validationTooltip03" required/>
  
   </div>
-  <div class="col-md-12 position-relative">
-    <label for="validationTextarea" class="form-label">Textarea</label>
-    <textarea class="form-control " id="validationTextarea" placeholder="Required example textarea" required></textarea>
+  <div className="col-md-12 position-relative">
+    <label for="validationTextarea" className="form-label">Textarea</label>
+    <textarea className="form-control " id="validationTextarea" placeholder="Required example textarea" required></textarea>
   </div>
 
-  <div class="col-12 d-grid ">
-    <button class="btn get-btn text-light " type="submit">Send request</button>
+  <div className="col-12 d-grid ">
+    <button className="btn get-btn text-light " type="submit">Send request</button>
   </div>
 </form>
                 </div>

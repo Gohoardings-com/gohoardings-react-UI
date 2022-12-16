@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
+const jwtToken = require('jsonwebtoken')
 const {sendEmail} = require('../middelware/sendEmail')
 const catchError = require('../middelware/catchError');
 const {token} = require('../middelware/token')
@@ -19,7 +20,7 @@ exports.register = catchError(async (req, res) => {
           return res.send(err);
         } else {
           const userid = (result[0].userid) + 1
-          db.query("INSERT INTO  tblcontacts (firstname, phonenumber, email, password, userid) VALUES  ('" + name + "','" + phone + "','" + email + "','" + password + "','" + lastuserid + "')", async (err, result) => {
+          db.query("INSERT INTO  tblcontacts (firstname, phonenumber, email, password, userid) VALUES  ('" + name + "','" + phone + "','" + email + "','" + password + "','" + userid + "')", async (err, result) => {
             if (err) {
               return res.send({ err: err, message: "Something Wrong here" })
             } else if (result == []) {
@@ -48,7 +49,6 @@ exports.login = catchError(async (req, res) => {
     if (err) {
       return res.json({ message: "No User Found" })
     }else if (!result.length == 0) {
-      
       const keypassword = result[0].password;
       if (!keypassword) {
         return res.status(404).json({ messsage: "Invalid Email and password" });
@@ -60,8 +60,9 @@ exports.login = catchError(async (req, res) => {
             message: "Wrong Email & Password"
           });
         }
-        res.clearCookie(String(result[0].userid))
-        req.cookies[`${String(result[0].userid)}`] = " ";
+        const userid = result[0].userid
+        res.clearCookie(String(userid))
+        req.cookies[`${String(userid)}`] = " ";
         token(userid, 200, res)
       }
     } else {
@@ -105,8 +106,9 @@ exports.googleLogin = catchError(async (req, res) => {
           return res.json({ message: "No User Found" })
         }
         if (!result == []) {
-          res.clearCookie(String(result[0].userid))
-          req.cookies[`${String(result[0].userid)}`] = " ";
+          const userid = result[0].userid
+          res.clearCookie(String(userid))
+          req.cookies[`${String(userid)}`] = " ";
          token(userid, 200, res)
         } else {
           return res.status(404).json({ messsage: "Invalid Email and password" });
@@ -150,8 +152,6 @@ exports.refreshToken = catchError(async(req,res,next) => {
     
 })
 
-
-
 exports.getuser = catchError(async (req, res) => {
   const userId = req.id;
   if (!userId) {
@@ -190,18 +190,14 @@ exports.Profile = catchError(async (req, res) => {
       return res.status(401).json({message:err.message})
     }else if(result.length ==0 ){
       const sql = "SELECT * FROM gohoardi_crmapp.tblcontacts WHERE userid='" + userId + "'"
-   
       db.query(sql, async (err, result) => {
         if(err){
-         
           return res.status(401).json({message:err.message})
         }else{
-        
-          return res.status(200).json({message:result}) 
+        return res.status(200).json({message:result}) 
         }
       })
-    }else{
-    
+    }else{ 
       return res.status(200).json({message:result})
     }
   })
@@ -216,11 +212,12 @@ exports.sendPasswordEmail = catchError(async(req,res,next) => {
      return res.status(400).json({message:"User Not Found"})
     }else{  
       const resetToken = result[0].id;
+      res.clearCookie(String(resetToken))
+      req.cookies[`${String(resetToken)}`] = " ";
     const token = jwtToken.sign({id: resetToken}, process.env.jwt_secret, {
       expiresIn: "1h",
     });
-    res.clearCookie(String(resetToken))
-    req.cookies[`${String(resetToken)}`] = " ";
+   
     res.cookie(String(resetToken), token, {
       path: '/',
       expires: new Date(Date.now() + 1000 * 3000),
@@ -319,3 +316,7 @@ exports.changepasswoed = catchError(async(req,res,next) => {
     })
   }
 }) 
+
+exports.imageupload = catchError(async(req,res,next) =>{
+const {filename} = req.file
+})

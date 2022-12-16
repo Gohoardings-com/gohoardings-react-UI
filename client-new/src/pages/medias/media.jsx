@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "../../apis/apiContext";
 import { useParams, useNavigate } from "react-router-dom";
 import instance from "../../apis/axios";
+import { ILLUMINATION } from "../../apis/apis";
 import { MdSearch } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import SingleCard from "./singleCard";
@@ -34,33 +35,6 @@ const Media = () => {
     slice = search.slice(0, noOfLogo);
   }
 
-  let ILLUMINATION = [
-    { label: "Nonlit", value: "nonlit" },
-    {
-      label: "Frontlit",
-      value: "frontlit",
-    },
-    {
-      label: "Backlit",
-      value: "backlit",
-    },
-    {
-      label: "Ambilit",
-      value: "ambilit",
-    },
-    {
-      label: "LED",
-      value: "lED",
-    },
-    {
-      label: "Digital",
-      value: "digital",
-    },
-    {
-      label: "Ledscreen",
-      value: "ledscreen",
-    },
-  ];
 
   const holdingtype = async () => {
     const { data } = await instance.get("filter/categoryfilter");
@@ -153,83 +127,7 @@ const Media = () => {
       <Medialogo category_name={category_name} search={search} />
       <div className="container-fluid px-5 ">
         <div className="row m-4 p-5">
-          <div className="col-md-2 ">
-            <div className="col sub-category-search ">
-              <h6 className="text-uppercase media-heading text-dark  media-filter-text-card-head  mt-2 ">
-                Sub category
-              </h6>
-              <div class="form  mt-1 mb-1">
-                <MdSearch class="fa fa-search" />
-                <input
-                  type="text"
-                  class="form-control form-input"
-                  placeholder="Search..."
-                  onChange={(event) => setQuery(event.target.value)}
-                />
-              </div>
-              <div className="rowCheck  row rounded-bottom   mb-1 ">
-                <ul>
-                  {category
-                    .filter((obj) => {
-                      if (query == "") {
-                        return obj;
-                      } else if (
-                        obj.name.toLowerCase().includes(query.toLowerCase())
-                      ) {
-                        return obj;
-                      }
-                    })
-                    .map((illum, i) => (
-                      <>
-                        <input
-                          type="checkbox"
-                          id={i}
-                          className="me-1"
-                          name={illum.name}
-                          value="false"
-                          onChange={(e) => setCatego(e.target.name)}
-                          onClick={(e) => mediaFilter(e)}
-                        />
-                        <span className="text-wrap  media-filter-text-card-detail ">
-                          {illum.name}
-                        </span>
-                        <br />
-                      </>
-                    ))}
-                </ul>
-              </div>
-            </div>
-            <div className="col">
-              <h6 className="text-uppercase media-heading  media-filter-text-card-head  mt-4 text-dark">
-                Select Media
-              </h6>
-              <div className=" rounded-bottom rounded-1">
-                <div className=" row ">
-                  <ul>
-                    {ILLUMINATION.map((item, i) => (
-                      <li className="w-100">
-                        <input
-                          className="  collapse-none"
-                          id={i}
-                          type="checkbox"
-                          name={item.label}
-                          onChange={(e) => setIllumna(e.target.name)}
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseT2"
-                          aria-expanded="false"
-                          aria-controls="collapseT2"
-                          onClick={() => mediaFilter()}
-                        />
-                        <span className=" ms-3  media-filter-text-card-detail">
-                          {item.label}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <div className="col-md-10 ">
             <div className="">
@@ -265,15 +163,15 @@ const Media = () => {
                 </>
               )}
             </div>
-            <div class="button offset-3 row mt-4 pb-2">
-              <button class="w-25 buttonload btn-hover" onClick={() => More()}>
-                <i aria-hidden="true" class="fa fa-caret-down"></i>View More{" "}
+            <div className="button offset-3 row mt-4 pb-2">
+              <button className="w-25 buttonload btn-hover" onClick={() => More()}>
+                <i aria-hidden="true" className="fa fa-caret-down"></i>View More{" "}
               </button>
               <button
-                class="w-25 ms-5 buttonload btn-hover"
+                className="w-25 ms-5 buttonload btn-hover"
                 onClick={() => Less()}
               >
-                <i aria-hidden="true" class="fa fa-long-arrow-up"></i> View Less
+                <i aria-hidden="true" className="fa fa-long-arrow-up"></i> View Less
               </button>
             </div>
           </div>

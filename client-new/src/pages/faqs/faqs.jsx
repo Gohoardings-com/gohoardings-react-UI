@@ -23,8 +23,8 @@ const Faqs = () => {
                     {data.question} <BsCaretDown className="down" />
                   </h4>
                 </p>
-                <div class="collapse" id={data.id}>
-                  <div class="card-body  text-secondary pb-1 ps-2">
+                <div className="collapse" id={data.id}>
+                  <div className="card-body  text-secondary pb-1 ps-2">
                     <h5>{data.answer}</h5>
                   </div>
                 </div>

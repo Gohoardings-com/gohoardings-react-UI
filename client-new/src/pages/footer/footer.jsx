@@ -322,7 +322,7 @@ const Footer = () => {
                 alt="payment"
               />
             </div>
-            <div class="col-12 col-sm-4 py-3 ms-5 ps-2 ">
+            <div className="col-12 col-sm-4 py-3 ms-5 ps-2 ">
               <h4 className=" fw-bold  text-nowrap text-muted  ">Address</h4>
               <h6 className="text-muted  pt-3">
                 E-82, 3rd Floor, Sector 6, Noida - 201301 Landmark : Near Paytm

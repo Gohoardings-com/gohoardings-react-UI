@@ -12,6 +12,7 @@ import { MdLocationOn, MdOutlineSearch } from "react-icons/md";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
+import MediaDropDown from "../Media_dropDown/mediaDropDown";
 
 const Flotinggnavbar = () => {
   const dispatch = useDispatch()
@@ -66,37 +67,7 @@ const Flotinggnavbar = () => {
                   id="search-location-box"
                   className="me-2  "
                 />
-                <DropdownButton
-                  align="center"
-                  title={userType}
-                  placeholder="Search your City"
-                  id="select-media-box"
-                  onSelect={(e) => setUserType(e)}
-                  className=""
-                >
-
-                  <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
-                  <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="mall-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t2.png" className="select-media-icon"/></span>  Mall Media
-                  </Dropdown.Item>
-                <Dropdown.Item eventKey="airport-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t3.png" className="select-media-icon"/></span> Airport Media
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="office-branding" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t4.png" className="select-media-icon"/></span>  Office Branding
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="inflight-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t5.png" className="select-media-icon"/></span>  Inflight Media
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="digital-screen" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t6.png" className="select-media-icon"/></span>  Digital Screen
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="transit-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t7.png" className="select-media-icon"/></span>  Transit Media
-                </Dropdown.Item>
-                </DropdownButton>
+                <MediaDropDown userType={userType} setUserType={setUserType}/>
                 <Link to={`/${userType}/${value.label ? value.label : "delhi"}`}>
                   <Button
                     className="border-0  btn-danger ms-2 "
@@ -107,7 +78,7 @@ const Flotinggnavbar = () => {
                 </Link>
 
             </Nav>
-            <form class="form-inline  ">
+            <form className="form-inline  ">
                   <Nav.Link
                     className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
                     onClick={(e) => data(e)}
@@ -118,7 +89,7 @@ const Flotinggnavbar = () => {
                   </Nav.Link>
                 </form>
               
-            <form class="form-inline my-2 my-lg-0 me-auto">
+            <form className="form-inline my-2 my-lg-0 me-auto">
                 <UserDetail posts={posts} setPosts={setPosts} />
               </form>
           </Navbar.Collapse>

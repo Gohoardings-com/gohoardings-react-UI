@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import instance from "../../apis/axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./searchmedia.scss";
+import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
@@ -101,35 +101,7 @@ const SearchMedia = () => {
             </div>
 
             <div className="col-md-5  ms-0 ">
-              <DropdownButton
-                align="center"
-                title={userType}
-                id="select-media-box"
-                onSelect={handleSelect}
-                className=""
-              >
-                <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
-                  <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="mall-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t2.png" className="select-media-icon"/></span>  Mall Media
-                  </Dropdown.Item>
-                <Dropdown.Item eventKey="airport-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t3.png" className="select-media-icon"/></span> Airport Media
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="office-branding" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t4.png" className="select-media-icon"/></span>  Office Branding
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="inflight-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t5.png" className="select-media-icon"/></span>  Inflight Media
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="digital-screen" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t6.png" className="select-media-icon"/></span>  Digital Screen
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="transit-media" className="p-2">
-                <span><img src="../../gohoarding/new-icon/t7.png" className="select-media-icon"/></span>  Transit Media
-                </Dropdown.Item>
-              </DropdownButton>
+             <MediaDropDown userType={userType} setUserType={setUserType}/>
             </div>
             <div className="col-md-2 p-2 ">
               <Link
