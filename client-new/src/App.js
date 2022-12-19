@@ -19,7 +19,6 @@ import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
 import Signin from "./pages/authorization/signin";
-import Images from "./pages/images";
 
 function App() {
   const [avlable,setAvlable] = useState(false)
@@ -32,8 +31,6 @@ function App() {
   useEffect(() =>{
     getUser()
   },[])
-
-
 
 
   return (
@@ -54,7 +51,6 @@ function App() {
           <Route exact path="/news" element={<News/>}/>  
           <Route exact path="/profile" element={<Profile/>}/>
           <Route exact path="/testimonial" element={<Testimonial/>}/> 
-          <Route exact path="/image" element={<Images/>}/> 
           <Route exact path="*" element={<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
         </Routes>
         <Footer/>

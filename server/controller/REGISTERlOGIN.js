@@ -306,7 +306,6 @@ exports.changepasswoed = catchError(async(req,res,next) => {
               }
             })
           }
-         
         }
       }else{
         return res.status(400).json({message:"Your Password Not Matched"})
@@ -317,6 +316,24 @@ exports.changepasswoed = catchError(async(req,res,next) => {
   }
 }) 
 
-exports.imageupload = catchError(async(req,res,next) =>{
-const {filename} = req.file
+
+exports.updateProfile = catchError(async(req,res,next) =>{
+  const {filename} = req.file;
+const {firstname,email,phonenumber} =req.body
+const userId = req.id;
+console.log(userId);
+if (!userId) {
+  return res.status(404).json({ message: "Token Valid" })
+} else {
+  db.changeUser({ database: "gohoardi_crmapp" })
+  const sql = "UPDATE tblcontacts SET firstname='"+firstname+"', email='"+email+"', phonenumber='"+phonenumber+"',profile_image='"+filename+"' WHERE userid='"+userId+"'"
+  db.query(sql,async(err,result) =>{
+    if(err){
+      return res.status(400).json({sucess:false, message:"Updation failed"})
+    } else{
+      return res.status(200).json({sucess:false, message:"Profile Updated"})
+    }
+  })
+}
+
 })

@@ -14,7 +14,6 @@ const Profile = () => {
 
   const userData = async () => {
     const data = await profileDetails();
-    console.log(data);
     setPosts(data.message);
   };
 
@@ -64,7 +63,7 @@ const Profile = () => {
           <div className="col-md-3">
             <div className="card">
               <img
-                // src={posts[0].profile_image}
+                src="Image Not found"
                 className="card-img-top p-3 pb-2"
                 alt="..."
               />
@@ -389,7 +388,7 @@ const Profile = () => {
               <div className="col-md-6 ">
                 {profile ? (
                   <>
-                    <UserProfile posts={posts[0]} />
+                    <UserProfile posts={posts} />
                   </>
                 ) : (
                   <>

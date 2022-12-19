@@ -70,3 +70,18 @@ export const profileDetails = async() =>{
  
  return data
 }
+
+export const updateProfile = async(formData) =>{
+  console.log(formData);
+    const {data} =  await instance.post("registration/updateProfile",formData);
+ return data
+}
+
+
+export const updatePassword = async(state) =>{
+  console.log(state);
+    const {data} =  await instance.put("registration/forgetpassword",{
+      oldPassword: state.oldPassword, newPassword:state.newPassword,confirmPassword:state.confirmPassword
+    });
+ return data
+}

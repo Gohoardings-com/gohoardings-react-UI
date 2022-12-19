@@ -8,6 +8,7 @@ const imageConfig = multer.diskStorage({
         callback(null, `image-${Date.now()}.${file.originalname}`)
     }
 })
+
 const isImage = (req,file,callback) => {
     if(file.mimetype.startsWith("image")){
         callback(null, true)
