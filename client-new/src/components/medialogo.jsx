@@ -2,12 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./medialogo.scss";
 
-const Medialogo = ({ search, category_name }) => {
+const Medialogo = ({ search, category_name,loading }) => {
+ console.log(search);
+  
 
-  const navigate = useNavigate();
-  const data=async() =>{
-    navigate('/map')
-    }
+
   return (
     <div className="container  ">
   
@@ -19,13 +18,13 @@ const Medialogo = ({ search, category_name }) => {
               className="w-75  mt-2  ms-2 rounded-3"
             />
           </div>
-          <div className="col-2  viewabout-main pt-4  ">
-            <div className="col viewabout ms-3 mt-4 mb-3"    onClick={() => data()}>
+          <div className="col-2  viewabout-main pt-4 ps-0 ">
+            <div className="col viewabout ms-3 mt-4 mb-3"    >
               <div className="locationIcon rounded-3 text-center">
                 <img src="../../gohoarding/new-icon/point-map.png" className="media-location-logo mt-2"/>
               </div>
-              <div className=" ms-3 ">
-                {/* <p className=" mb-0 ">{(Object.keys(search).length + Object.keys(search).length) * 3}</p> */}
+              <div className=" ms-3 mt-1">
+                <p className=" mb-0 About-media-detail">{!loading && (Object.keys(search).length)}</p>
                 <p className="About-media-detail">No of Location</p>
               </div>
             </div>
@@ -33,9 +32,9 @@ const Medialogo = ({ search, category_name }) => {
               <div className="col iconback rounded-3   text-center">
                <img src="../../gohoarding/new-icon/add-icon.png" className="media-hording-logo mt-2 "/>
               </div>
-              <div className=" ms-3 ">
-                {/* <p className="mb-0">{Object.keys(search).length}</p> */}
-                <p className="About-media-detail">No of Media</p>
+              <div className=" ms-3 mt-1">
+                <p className="mb-0 About-media-detail">{!loading && (Object.keys(search).length)*3}</p>
+                <p className="About-media-detail" >No of Media</p>
               </div>
             </div>
           </div>

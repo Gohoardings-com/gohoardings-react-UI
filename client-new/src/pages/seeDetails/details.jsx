@@ -154,7 +154,7 @@ const Details = () => {
                               onClick={locatetologin}
                               className="text-decoration-none text-danger"
                             >
-                              Please Login first
+                              Login first
                             </a>
                           ) : (
                             item.price
@@ -165,26 +165,24 @@ const Details = () => {
                         <a href="/map" className=" text-decoration-none ms-5">
                           <img
                             src="../../gohoarding/new-icon/detail-map.png"
-                            className="ms-4 mt-1"
+                            className="ms-4 "
                             id="detail-map-location"
                           />
                         </a>
-                        {item.userid == null ||
-                        item.isDelete == null ||
-                        (item.userid != null && item.isDelete == 1) ? (
-                          <MdOutlineAddShoppingCart
-                            onClick={() => addonCart(item)}
-                            className="addonCart mt-3 ms-5 addonCart-plus  "
-                          />
-                        ) : (
-                          <>
-                            {" "}
-                            <MdOutlineRemoveShoppingCart
-                              onClick={() => removefroCart(item)}
-                              className="addonCart text-danger mt-3 ms-5 "
-                            />
-                          </>
-                        )}
+                        {item.isDelete === 0 ? (
+                        <img
+                          src="../../gohoarding/new-icon/remove-cart.png"
+                          onClick={() => removefroCart(item)}
+                          className="detail-Cart ms-3"
+                          
+                        />
+                      ) : (
+                        <img
+                          src="../../gohoarding/new-icon/add-cart.png"
+                          onClick={() => addonCart(item)}
+                          className="detail-Cart ms-3"
+                        />
+                      )}
                       </div>
                     </div>
                     <div className="mt-3 singlemediashow ">

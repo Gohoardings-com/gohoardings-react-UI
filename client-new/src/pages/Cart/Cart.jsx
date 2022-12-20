@@ -129,9 +129,9 @@ const Cart = () => {
         <div className="p-0 m-0 date-select-section">
           <div className="row">
             <div className="col-md-3 ps-0">
-              <div className="input-box active-grey ">
-                <label className="input-label">Start Date</label>
-                <div type="text " className="input-1 d-flex bg-light">
+              <div class="input-box active-grey ">
+                <label class="input-label">Start Date</label>
+                <div type="text " class="input-1 d-flex bg-light">
                   <h6 className="me-2 calender-logo  text-secondary">
                     {startdate}
                   </h6>
@@ -151,9 +151,9 @@ const Cart = () => {
               </div>
             </div>
             <div className="col-md-3">
-              <div className="input-box active-grey">
-                <label className="input-label">End Date</label>
-                <div type="text " className="input-1 d-flex bg-light ">
+              <div class="input-box active-grey">
+                <label class="input-label">End Date</label>
+                <div type="text " class="input-1 d-flex bg-light ">
                   <h6 className="me-2  calender-logo  text-secondary">
                     {startdate}
                   </h6>
@@ -268,7 +268,7 @@ const Cart = () => {
                                       <div className="button-section">
                                         <button
                                           type="button"
-                                          className="btn btn-success rounded-1 me-2"
+                                          class="btn btn-success rounded-1 me-2"
                                           onClick={() => {
                                             increaseDays(obj);
                                           }}
@@ -277,13 +277,13 @@ const Cart = () => {
                                         </button>
                                         <span
                                           type="button"
-                                          className="btn btn-outline-secondary rounded-1 me-2"
+                                          class="btn btn-outline-secondary rounded-1 me-2"
                                         >
                                           {obj.days} Days
                                         </span>
                                         <button
                                           type="button"
-                                          className="btn btn-danger rounded-1"
+                                          class="btn btn-danger rounded-1"
                                           onClick={() => {
                                             decreaseDays(obj);
                                           }}
@@ -306,15 +306,15 @@ const Cart = () => {
           </div>
           <div className="col-md-3 ">
             <h5 className=" p-2 ps-3 news-heading ">Gross Total</h5>
-            <div className="card text-center bill-card mt-3 bg-light ">
-              <div className="card-body">
-                <h5 className="card-title">
+            <div class="card text-center bill-card mt-3 bg-light ">
+              <div class="card-body">
+                <h5 class="card-title">
                   Total media :
-                  <span type="button" className=" ms-1">
+                  <span type="button" class=" ms-1">
                     {initalState}
                   </span>
                 </h5>
-                <div className="card-text">
+                <div class="card-text">
                   <h5 className="mt-4">Media Start on this date</h5>
                   <h6 className="mt-4">
                     {moment(Start).format("MMMM Do YYYY")}

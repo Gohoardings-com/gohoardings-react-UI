@@ -16,7 +16,7 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, isLoggedIn, locat
         <>
           {slice.map((item, i) => (
             <>
-              <Card className="  multi-card p-2 mt-2 ">
+              <Card className="  multi-card p-2 mt-2 w-25">
                 <Card.Img
                   variant="top"
                   src={
@@ -57,7 +57,7 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, isLoggedIn, locat
                               onClick={locatetologin}
                               className="text-decoration-none text-danger media-filter-text-card-detail "
                             >
-                              Login first
+                              Login to view
                             </a>
                           ) : (
                             item.price
@@ -66,32 +66,32 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, isLoggedIn, locat
                       </div>
                       <div className="col  pb-0 mb-0">
                         <div className="row pb-0 mb-0">
-                          <div className="col pt-1">
+                          <div className="col">
                             <Link
                               to={`/details/${item.category_name}/${item.meta_title}`}
                               className="text-decoration-none  text-center  d-flex mt-2 "
                             >
                             
-                                <p className="btn p-0 btn-outline-secondary mb-0 detail-btn  see-detail">   Details  </p>    
+                                <p className="btn p-1 btn-outline-secondary mb-0 detail-btn media-filter-text-card-detail">   Details  </p>    
                            
                             </Link>
                           </div>
                           <div className="col p-1">
                             {
-                             item.isDelete === 0 ? (
-                              <MdOutlineRemoveShoppingCart
-                              onClick={() => removefroCart(item)}
-                              className="addonCart text-danger mt-2 "
-                            />
-                            
-                            ) : (
+                             item.isDelete === 1  ? (
                               < MdOutlineAddShoppingCart
                              
-                              onClick={() => addonCart(item)}
-                              className="addonCart mt-2 addonCart-plus  "
-                            />
-                                
-                              
+                                onClick={() => addonCart(item)}
+                                className="addonCart mt-2 addonCart-plus  "
+                              />
+                            ) : (
+                              <>
+                                {" "}
+                                <MdOutlineRemoveShoppingCart
+                                  onClick={() => removefroCart(item)}
+                                  className="addonCart text-danger mt-2 "
+                                />
+                              </>
                             )}
                           </div>
                         </div>
