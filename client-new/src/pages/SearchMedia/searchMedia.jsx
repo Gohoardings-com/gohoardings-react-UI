@@ -21,7 +21,7 @@ const SearchMedia = () => {
     getCity();
   }, []);
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("traditional-ooh-media");
 
   const onChange = (event) => {

@@ -4,14 +4,18 @@ import { mediawithcity } from "../../action/adminAction";
 import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "../../apis/apiContext";
 import { useParams, useNavigate } from "react-router-dom";
+import { Modal} from "react-bootstrap";
 import instance from "../../apis/axios";
-import { MdSearch } from "react-icons/md";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import SingleCard from "./singleCard";
+import {
+  MdOutlineShoppingCart,
+  MdArrowUpward,
+  MdOutlineArrowDownward,
+} from "react-icons/md";
 import MultiCard from "./multiCard";
 import Medialogo from "../../components/medialogo";
 import FixedNavbar from "../../components/navbar/fixednavbar";
-
+import { BsFilterRight } from "react-icons/bs";
+import { MdSearch } from "react-icons/md";
 const Media = () => {
   const priceState =
     window.localStorage.getItem("user") ||
@@ -111,7 +115,7 @@ const Media = () => {
   };
 
   const add = (event) => {
-    let data = [...posts];
+    let data = [...search];
     data.forEach((element) => {
       if (element.code == event.code) {
         console.log(element);
@@ -122,7 +126,7 @@ const Media = () => {
   };
 
   const remove = (event) => {
-    let data = [...posts];
+    let data = [...search];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
@@ -137,7 +141,7 @@ const Media = () => {
     }
   };
   const Less = () => {
-    if (noOfLogo > 2) {
+    if (noOfLogo > 9) {
       setnoOfLogo(noOfLogo - 8);
     }
   };
@@ -146,216 +150,158 @@ const Media = () => {
     getData();
   }, [category_name, city_name]);
 
+  const [userModal, setUserModal] = useState(false);
+  const showUserModal = () => {
+    setUserModal(!userModal);
+  };
+
+  const data=async() =>{
+    navigate('/map')
+    }
+
   return (
     <>
       <FixedNavbar />
 
-      <Medialogo category_name={category_name} search={search} />
+      <Medialogo category_name={category_name} search={search} loading={loading} />
       <div className="container-fluid px-5 ">
-        <div className="row m-4 p-5">
-          <div className="col-md-2 ">
-            <div className="col sub-category-search ">
-              <h6 className="text-uppercase media-heading text-dark  media-filter-text-card-head  mt-2 ">
-                Sub category
-              </h6>
-              <div class="form  mt-1 mb-1">
-                <MdSearch class="fa fa-search" />
+        <div className="row m-4 p-5 ">
+          <p>
+            <h5
+              className="filter-down me-3 btn btn-outline-secondary"
+              onClick={showUserModal}
+            >
+              Filter <BsFilterRight className=" text-dark " />
+            </h5>
+            <h5
+              className="filter-down me-3 "
+              onClick={() => data()}
+            >
+            <img src="https://cdn-icons-png.flaticon.com/512/854/854894.png" className="media-location-logo-map "/>
+            </h5>
+          </p>
+
+          {userModal ? (
+            <Modal
+              show={userModal}
+              onHide={showUserModal}
+              backdrop="static"
+              centered
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  {" "}
+                  <h5 className="text-dark"> Filter</h5>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="row">
+                  <div className="col ms-3">
+                    <h6 className="text-uppercase media-heading  media-filter-text-card-head  mt-2 text-dark mb-1">
+                     Media Type
+                    </h6>
+
+                    <div className=" row ">
+                      <ul>
+                        {ILLUMINATION.map((item, i) => (
+                          <li className="w-100">
+                            <input
+                              className="  collapse-none"
+                              id={i}
+                              type="checkbox"
+                              name={item.label}
+                              onChange={(e) => setIllumna(e.target.name)}
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseT2"
+                              aria-expanded="false"
+                              aria-controls="collapseT2"
+                              onClick={() => mediaFilter()}
+                            />
+                            <span className=" ms-1  media-filter-text-card-detail-filt">
+                              {item.label}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="col sub-category-search ">
+                    <h6 className="text-uppercase media-heading text-dark  media-filter-text-card-head  mt-2 ">
+                      Sub category
+                    </h6>
                 <input
                   type="text"
-                  class="form-control form-input"
+                  className="form-control form-input text-start"
                   placeholder="Search..."
                   onChange={(event) => setQuery(event.target.value)}
                 />
-              </div>
-              <div className="rowCheck  row rounded-bottom   mb-1 ">
-                <ul>
-                  {category
-                    .filter((obj) => {
-                      if (query == "") {
-                        return obj;
-                      } else if (
-                        obj.name.toLowerCase().includes(query.toLowerCase())
-                      ) {
-                        return obj;
-                      }
-                    })
-                    .map((illum, i) => (
-                      <>
-                        <input
-                          type="checkbox"
-                          id={i}
-                          className="me-1"
-                          name={illum.name}
-                          value="false"
-                          onChange={(e) => setCatego(e.target.name)}
-                          onClick={(e) => mediaFilter(e)}
-                        />
-                        <span className="text-wrap  media-filter-text-card-detail ">
-                          {illum.name}
-                        </span>
-                        <br />
-                      </>
-                    ))}
-                </ul>
-              </div>
-            </div>
-            <div className="col">
-              <h6 className="text-uppercase media-heading  media-filter-text-card-head  mt-4 text-dark">
-                Select Media
-              </h6>
-              <div className=" rounded-bottom rounded-1">
-                <div className=" row ">
-                  <ul>
-                    {ILLUMINATION.map((item, i) => (
-                      <li className="w-100">
-                        <input
-                          className="  collapse-none"
-                          id={i}
-                          type="checkbox"
-                          name={item.label}
-                          onChange={(e) => setIllumna(e.target.name)}
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseT2"
-                          aria-expanded="false"
-                          aria-controls="collapseT2"
-                          onClick={() => mediaFilter()}
-                        />
-                        <span className=" ms-3  media-filter-text-card-detail">
-                          {item.label}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                    <div className="rowCheck  row    ">
+                      <ul>
+                        {category
+                          .filter((obj) => {
+                            if (query == "") {
+                              return obj;
+                            } else if (
+                              obj.name
+                                .toLowerCase()
+                                .includes(query.toLowerCase())
+                            ) {
+                              return obj;
+                            }
+                          })
+                          .map((illum, i) => (
+                            <>
+                              <input
+                                type="checkbox"
+                                id={i}
+                                className="me-1"
+                                name={illum.name}
+                                value="false"
+                                onChange={(e) => setCatego(e.target.name)}
+                                onClick={(e) => mediaFilter(e)}
+                              />
+                              <span className="text-wrap  media-filter-text-card-detail-filt ">
+                                {illum.name}
+                              </span>
+                              <br />
+                            </>
+                          ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-10 ">
-            <div className="">
-              {!show ? (
-                <>
-                  <MultiCard
-                    MdOutlineShoppingCart={MdOutlineShoppingCart}
-                    slice={slice}
-                    search={search}
-                    addonCart={addonCart}
-                    loading={loading}
-                    removefroCart={removefroCart}
-                    add={add}
-                    remove={remove}
-                    priceState={priceState}
-                    locatetologin={locatetologin}
-                  />
-                </>
-              ) : (
-                <>
-                  <SingleCard
-                    MdOutlineShoppingCart={MdOutlineShoppingCart}
-                    slice={slice}
-                    search={search}
-                    loading={loading}
-                    addonCart={addonCart}
-                    removefroCart={removefroCart}
-                    add={add}
-                    remove={remove}
-                    priceState={priceState}
-                    locatetologin={locatetologin}
-                  />
-                </>
-              )}
-            </div>
-            <div class="button offset-3 row mt-4 pb-2">
-              <button class="w-25 buttonload btn-hover" onClick={() => More()}>
-                <i aria-hidden="true" class="fa fa-caret-down"></i>View More{" "}
-              </button>
-              <button
-                class="w-25 ms-5 buttonload btn-hover"
-                onClick={() => Less()}
-              >
-                <i aria-hidden="true" class="fa fa-long-arrow-up"></i> View Less
-              </button>
-            </div>
-          </div>
+              </Modal.Body>
+            </Modal>
+          ) : (
+            ""
+          )}
+          <MultiCard
+            MdOutlineShoppingCart={MdOutlineShoppingCart}
+            slice={slice}
+            search={search}
+            addonCart={addonCart}
+            loading={loading}
+            removefroCart={removefroCart}
+            add={add}
+            remove={remove}
+            priceState={priceState}
+            locatetologin={locatetologin}
+          />
+        </div>
+      </div>
+      <div className="position-relative mb-5 pb-5">
+        <div class=" position-absolute  top-0 start-50 translate-middle">
+          <button class=" buttonload btn-hover" onClick={() => More()}>
+            View More <MdOutlineArrowDownward />
+          </button>
+          {}
+          <button class=" ms-5 buttonload btn-hover" onClick={() => Less()}>
+            View Less <MdArrowUpward />
+          </button>
         </div>
       </div>
     </>
   );
 };
 
-//       <div className="col pt-4" >
-//         {/* <div className=' mediaName mt-1 ms-1 me-1 p-2 rounded-top'>
-//           <h6 className="text-uppercase text-center">Illumination(5)</h6>
-//         </div> */}
-
-//         {/* <div className="rowCheck bg-light row rounded-bottom mb-1 ms-1 me-1 p-1">
-//           <ul>
-//             <li className="w-100">
-//               <input className=" ms-2 " type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//             <li className="w-100">
-//               <input className=" ms-2" type="checkbox"></input>
-//               <span className=" ms-3">UniPole</span>
-//             </li>
-//           </ul>
-//         </div> */}
-//       </div>
-//     </div>
-
-//                     </div>
-//             </div>
-//         </>
-//     )
-// }
-
-// export default Media
 export default Media;

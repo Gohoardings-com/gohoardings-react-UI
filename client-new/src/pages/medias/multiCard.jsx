@@ -1,109 +1,131 @@
 import React from "react";
 import "./media.scss";
-import {MdOutlineRemoveShoppingCart, MdOutlineAddShoppingCart} from 'react-icons/md'
+import { TfiEye } from "react-icons/tfi";
+
 import { Link } from "react-router-dom";
-import Card from "react-bootstrap/Card";
 
-const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
+const MultiCard = ({
+  slice,
+  loading,
+  addonCart,
+  removefroCart,
+  priceState,
+  locatetologin,
+}) => {
   return (
-
-    <div className="row row-cols-md-4 p-0 ms-2  mt-1">
-      {loading ? 
+    <div className="row row-cols-md-4 p-0 ms-1  mt-1 multi-card-contaier">
+      {loading ? (
         <>
           <h1>Loading... Please Wait</h1>
         </>
-       : 
+      ) : (
         <>
           {slice.map((item, i) => (
             <>
-              <Card className="  multi-card p-2 mt-2 w-25">
-                <Card.Img
-                  variant="top"
-                  src={
-                    item.thumb.startsWith("https")
-                      ? item.thumb
-                      : `https://${item.mediaownercompanyname
-                          .trim()
-                          .split(" ")
-                          .slice(0, 2)
-                          .join("_")
-                          .toLowerCase()}.odoads.com/media/${item.mediaownercompanyname
-                          .trim()
-                          .split(" ")
-                          .slice(0, 2)
-                          .join("_")
-                          .toLowerCase()}/media/images/new${item.thumb}`
-                  }
-                  alt="About media "
-                  className="media-card-img ps-0 pe-0"
-                  
-                />
-                <Card.Body className="pb-1 ps-0 pe-0 ">
-                  <Card.Title>
-                    {" "}
-                    <h5 className=" overflow-hidden media-filter-text-card-head ">
-                      {item.page_title.substring(0, 42) + "..."}
-                    </h5>
-                  </Card.Title>
-                  <Card.Text>
-                    <div className="row">
-                      <div className="col pt-1">
-                        {/* <p className=" mb-0 media-filter-text-card-detail">Code : {item.code}</p> */}
-                        <p className="mb-0 media-filter-text-card-detail" >Size : {item.size}</p>
-                        <p className="mb-0 media-filter-text-card-detail">
-                          Price:{" "}
-                          {!priceState ? (
-                            <a
-                              onClick={locatetologin}
-                              className="text-decoration-none text-danger media-filter-text-card-detail "
-                            >
-                              Login to view
-                            </a>
-                          ) : (
-                            item.price
-                          )}
-                        </p>
-                      </div>
-                      <div className="col  pb-0 mb-0">
-                        <div className="row pb-0 mb-0">
-                          <div className="col">
-                            <Link
-                              to={`/details/${item.category_name}/${item.meta_title}`}
-                              className="text-decoration-none  text-center  d-flex mt-2 "
-                            >
-                            
-                                <p className="btn p-1 btn-outline-secondary mb-0 detail-btn media-filter-text-card-detail">   Details  </p>    
-                           
-                            </Link>
-                          </div>
-                          <div className="col p-1">
-                            {
-                             item.isDelete === 1  ? (
-                              < MdOutlineAddShoppingCart
-                             
-                                onClick={() => addonCart(item)}
-                                className="addonCart mt-2 addonCart-plus  "
-                              />
-                            ) : (
-                              <>
-                                {" "}
-                                <MdOutlineRemoveShoppingCart
-                                  onClick={() => removefroCart(item)}
-                                  className="addonCart text-danger mt-2 "
-                                />
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <div className="project text-center ">
+                <figure className="img-responsive  ">
+                  <img
+                    className="img-responsive-media rounded-top"
+                    src={
+                      item.thumb.startsWith("https")
+                        ? item.thumb
+                        : `https://${item.mediaownercompanyname
+                            .trim()
+                            .split(" ")
+                            .slice(0, 2)
+                            .join("_")
+                            .toLowerCase()}.odoads.com/media/${item.mediaownercompanyname
+                            .trim()
+                            .split(" ")
+                            .slice(0, 2)
+                            .join("_")
+                            .toLowerCase()}/media/images/new${item.thumb}`
+                    }
+                  />
+                  <figcaption className="rounded-top">
+                    <span className="project-details">
+                      {" "}
+                      {item.page_title.substring(9, 28)}
+                    </span>
+
+                    <span className="project-creator mt-2 ms-0 ">
+                      <img
+                        src="../../gohoarding/new-icon/rupees-logo.png"
+                        onClick={() => removefroCart(item)}
+                        className="rupees-logo"
+                      />{" "}
+                      Price {""}
+                      {!priceState ? (
+                        <a
+                          onClick={locatetologin}
+                          className="text-decoration-none text-danger media-filter-text-card-detail "
+                        >
+                          Login first
+                        </a>
+                      ) : (
+                        <>
+                          <span className="text-muted text-decoration-line-through">
+                            {" "}
+                            {parseInt((item.price * 11) / 10)}{" "}
+                          </span>
+                          <span className=" ms-2 off-text">
+                            {" "}
+                            9% off 
+                          </span>
+
+                        </>
+                      )}
+                    </span>
+                    <span className="project-creator mt-2 ms-0">
+                      <img
+                        src="../../gohoarding/new-icon/offer-logo.png"
+                        className="offer-logo"
+                      />{" "}
+                      Offer {""}
+                      {!priceState ? (
+                        <a
+                          onClick={locatetologin}
+                          className="text-decoration-none text-danger media-filter-text-card-detail "
+                        >
+                          Login first
+                        </a>
+                      ) : (
+                        parseInt(item.price)
+                      )}
+                    </span>
+
+                    <span className="project-price">
+                      {item.isDelete === 0 ? (
+                        <img
+                          src="../../gohoarding/new-icon/remove-cart.png"
+                          onClick={() => removefroCart(item)}
+                          className="addonCart text-danger  "
+                        />
+                      ) : (
+                        <img
+                          src="../../gohoarding/new-icon/add-cart.png"
+                          onClick={() => addonCart(item)}
+                          className="addonCart addonCart-plus  "
+                        />
+                      )}
+                    </span>
+                  </figcaption>
+                  <span className="actions rounded-top">
+                    <Link
+                      to={`/details/${item.category_name}/${item.meta_title}`}
+                      className="text-decoration-none"
+                    >
+                      <button className="btn  bnt-action p-0 border-0">
+                        <TfiEye className="eye-icon display-4 " />
+                      </button>
+                    </Link>
+                  </span>
+                </figure>
+              </div>
             </>
           ))}
         </>
-      }
+      )}
     </div>
   );
 };

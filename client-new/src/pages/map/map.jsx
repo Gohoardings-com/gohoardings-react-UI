@@ -320,7 +320,7 @@ const Map = () => {
                             return obj;
                           } else if (obj.name.toLowerCase().includes(query.toLowerCase())) {
                             return obj;
-                          }
+                         }
                         }).map((illum, i) => (
                           <>
                             <input type="checkbox" id={i}
@@ -331,9 +331,7 @@ const Map = () => {
                             <span>{illum.name}</span>
                             <br />
                           </>
-
                         ))}
-
                       </div>
                     </div>
                   </div>
@@ -408,7 +406,7 @@ const Map = () => {
                 {!cartItem ? <><h1>Loading... Please Wait</h1></> : <>
                   {cartItem.map((item) => (
                     <>
-                      {item.isDelete == 0 ? <>
+                      {item.isDelete == 0 ?
                         <div className="accordion-item">
                           <div
                             data-bs-toggle="collapse"
@@ -419,7 +417,7 @@ const Map = () => {
                             <div className="row m-0">
                               <p className="my-2">
                                 {item.page_title.substring(
-                                  0,
+                                  0, 
                                   20
                                 ) + "..."}
                               </p>
@@ -445,9 +443,9 @@ const Map = () => {
 
                           </div>
                         </div>
-                      </> : <>
+                       : 
                         <h6 className="text-center">Your Item Deleted Successfully</h6>
-                      </>}
+                      }
 
                     </>
                   ))}

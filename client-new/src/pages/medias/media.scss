@@ -1,13 +1,18 @@
-
 .overflow {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
 .rowCheck {
   scrollbar-width: thin;
-  height: 150px;
-  width: 200px;
+  height: 124px;
+   margin-top: 2% !important;
   overflow-y: scroll;
+
+}
+.media-location-logo-map {
+  width: 36px;
+  height: 37px;
+  cursor: pointer;
 }
 
 .listCahnge {
@@ -18,19 +23,35 @@
   width: 23px;
   height: 25px;
 }
-.media-filter-text-card-head{
+.media-filter-text-card-head {
   font-family: "Montserrat";
   font-size: medium;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+
 }
-.media-filter-text-card-detail{
+.media-filter-text-card-detail {
   font-family: "Montserrat";
   font-size: 13px;
 }
-
-.detail-btn{
-  font-size: 20px ;
+.media-filter-text-card-detail-filt {
+  font-family: "Montserrat";
+  font-size: 15px;
 }
+.detail-btn {
+  margin-top: 4px;
+  height: 28px;
+  border: 1px solid #65beeb !important;
+  transition: 1.7s;
+}
+.detail-btn-ex{
+  color: #65beeb !important;
+}
+.detail-btn:hover, .detail-btn:focus {
+  border: 1px solid #65beeb;
+ color:  #ffffff  !important;
+ box-shadow: inset 10em 0 0 0 #65beeb;
+}
+
 .iconback {
   width: 46px;
   padding-top: 5px;
@@ -48,24 +69,13 @@
   background-color: #445c77;
   width: 46px !important;
   height: 48px !important;
-
 }
-
 .viewabout {
   display: inline-flex;
 }
-
-
-
 .mediabackground {
   background-color: white;
 }
-
-
-
-
-
- 
 .cartlogo {
   width: 24px;
   height: 40px;
@@ -95,8 +105,8 @@
   border-radius: 5px;
 }
 .btn-hover {
-  background-image: linear-gradient(90deg, #25aae1, #4481eb, #04befe, #3f86ed);
-  box-shadow: 0 4px 15px 0 rgb(65 132 234 / 75%);
+  background-image: linear-gradient(90deg, #223852, #3b6ca7, #2460aa,#0f4e9a);
+  box-shadow: 0 4px 15px 0 (#223852);
   --moz-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
@@ -115,11 +125,19 @@
   background-color: #ffc34d;
 }
 .addonCart {
-  height: 30px;
-  width: 30px;
+  height: 29px;
+  width: 29px;
   margin-left: 6px;
 }
+.filter-down {
+  float: right;
+  color: #727272;
 
+}
+.filter-down:hover{
+  background-color: #fff  !important;
+  color: #2a2a2a !important;
+}
 .sub-category-search {
   .form {
     position: relative;
@@ -135,9 +153,8 @@
 
   .form-input {
     height: 35px;
-    text-indent: 33px;
+   
     width: 188px;
-    
   }
 
   .form-input:focus {
@@ -145,31 +162,162 @@
     border: none;
   }
 }
-.multi-card{
-    border: 1px solid transparent !important;
-    cursor: pointer;
-    transition: 0.6s;
+.multi-card {
+  border: 1px solid transparent !important;
+  cursor: pointer;
+  transition: 0.6s;
 }
 
-.multi-card:hover{
-  
-    border: 1px solid rgb(205, 204, 204) !important;
-    background: linear-gradient(
-      to bottom,
-      rgb(229, 227, 227),
-      rgb(236, 235, 235),
-      transparent
-    ) !important ;
-    box-shadow:   0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.multi-card:hover {
+  border: 1px solid #65beeb !important;
+  background: linear-gradient(
+    to bottom,
+    rgb(229, 227, 227),
+    rgb(236, 235, 235),
+    transparent
+  ) !important ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.media-card-img{
-    height: 180px;
-  
+.media-card-img {
+  height: 200px;
 }
-.addonCart-plus{
-  color: #233751;
- height: 29px;
+.addonCart-plus {
+  color: #1e3656;
 }
-.addonCart-img{
+.addonCart-img {
   height: 26px;
+}
+.multi-card-contaier{
+
+  .project {
+    margin-bottom: 15px;
+    vertical-align: top;
+  
+    float: center;
+    cursor: pointer;
+
+}
+
+.project figure {
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    display: inline-block;
+    width: 283px;
+
+}
+
+.project figure figcaption {
+    position: relative;
+    z-index: 2;
+    padding: 8px 18px 11px;
+    background: #fff;
+    -ms-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    text-align: left;
+    color: #555;
+}
+
+.project figure:hover .actions {
+    opacity: 1;
+}
+
+.project figure .actions {
+  
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    -ms-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.project figure img {
+    border: 0;
+    width: 100%;
+}
+.bnt-action{
+    margin: 0% 0% auto;   
+    color: white !important;
+    // opacity: 65% !important;
+    // background-color: #DC3545 !important; 
+    .eye-icon{
+  height: 25px !important;
+}
+}
+
+.img-responsive-media{
+  height: 200px !important;
+}
+figcaption .project-details {
+    display: block;
+    font-size: 20px;
+   font-weight: 600;
+    color: #000000;
+  
+    width: 100%;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+figcaption .project-price {
+    position: absolute;
+    right: 15px;
+    top: 53px;
+    // font-size: 22px;
+    text-align: right;
+    margin-top: 8px;
+    letter-spacing: -1px;
+    -webkit-font-smoothing: antialiased;
+}
+
+figcaption .project-creator {
+    font-size: 15px;
+    color: #20344D;
+    display: block;
+}
+.rupees-logo{
+  height: 17px !important;
+  width: 17px !important;
+  margin-bottom: 2px !important;
+  margin-right: 2px !important;
+}
+.offer-logo{
+  height: 16px !important;
+  width:16px !important;
+  margin-bottom: 3px !important;
+  margin-right: 2px !important;
+}
+.off-text{
+  color: #388e3c;
+  font-size: small;
+}
+
+.project figure .actions button {
+    padding: 13px 20px;
+    font-size: 16px;
+    top: 32%;
+    position: absolute;
+    left: 50%;
+    width: 90%;
+    margin-left: -45%;
+    line-height: 18px;
+    letter-spacing: 1px;
+}    
+.addonCart {
+  height: 36px !important;
+  width: 36px !important;
+
+}
+
 }
