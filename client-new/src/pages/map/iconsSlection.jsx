@@ -94,6 +94,7 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
 
   ]
   const submitfilters = async () => {
+    console.log("mapfilter");
     const { data } = await instance.post("filter/mapFilter", {
       distance: Distance,
       selected : hording,
@@ -101,7 +102,6 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
       city : "Delhi"
     });
     
-    console.log(data);
   // var newArray = media.filter(function (el)
   // {
   //   return el.id >= 3695;

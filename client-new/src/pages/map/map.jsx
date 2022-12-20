@@ -64,11 +64,7 @@ const Map = () => {
 
   
   useEffect(() => {
-<<<<<<< HEAD
     handelprice();
-=======
-    userCartItem();
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   },[]);
 
   const getAllDetails = async () => {

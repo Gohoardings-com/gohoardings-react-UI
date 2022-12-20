@@ -18,11 +18,7 @@ const Cart = () => {
   const [End, setEnd] = useState(new Date());
   const { addRemove, initalState } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
-<<<<<<< HEAD
-  const [price, setPrice] = useState(posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0))
-=======
   const [price, setPrice] = useState();
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
   const getAllData = async () => {
@@ -32,11 +28,6 @@ const Cart = () => {
     });
     setPosts(data);
   };
-<<<<<<< HEAD
-  useEffect(() => {
-    getAllData();
-  }, []);
-=======
    
   useEffect(() => {
     getAllData(); 
@@ -66,16 +57,15 @@ const Cart = () => {
   };
 
 
-  const removefroCart = async (obj) => {
-    await instance.post("cart/deleteFromCart", {
-      code: obj.code,
-    });
-    addRemove({ type: "DECR" });
-    removeCart(obj);
-  };
+  // const removefroCart = async (obj) => {
+  //   await instance.post("cart/deleteFromCart", {
+  //     code: obj.code,
+  //   });
+  //   addRemove({ type: "DECR" });
+  //   removeCart(obj);
+  // };
 
 
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
 
   // Start date of user item
   const StartDate = (e) => {
@@ -100,10 +90,10 @@ const Cart = () => {
   };
 
 
-  useEffect(() => {
-    nhhu()
-        setPrice(price)
-      },[price])
+  // useEffect(() => {
+  //   nhhu()
+  //       setPrice(price)
+  //     },[price])
       
 // Remove on item data
   const removeCart = async (event) => {
@@ -117,23 +107,9 @@ const Cart = () => {
 
   };
 
-<<<<<<< HEAD
-const nhhu = async() =>{
-  const data = [...posts]
-  const ans = [];
-   ans+=data.price * data.days
-  const withGST = (ans * 18) / 100
-  const finalStep = ans + withGST
-  console.log(finalStep);
-  setPrice(finalStep)
-}
-
-// Increament days on of cart item
-=======
  
 
 
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   const increaseDays = async (obj) => {
     let data = [...posts];
     data.map((element) => {
@@ -146,11 +122,7 @@ const nhhu = async() =>{
       setPosts(data);
 
     });
-<<<<<<< HEAD
-   
-=======
      
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   };
 
   // Decrement days on of cart item
@@ -170,12 +142,8 @@ const nhhu = async() =>{
     });
     
   };
-<<<<<<< HEAD
-// Submit all Items for payment
-=======
 
 
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   const sumbitALlProduct = async () => {
     await instance.post("cart/processdCart", {
       start_date: Start,
@@ -187,13 +155,13 @@ const nhhu = async() =>{
 
 
 
-  const StartDate = (e) => {
-    setStart(e);
-  };
+  // const StartDate = (e) => {
+  //   setStart(e);
+  // };
   
-  const EndDate = (e) => {
-    setEnd(e);
-  };
+  // const EndDate = (e) => {
+  //   setEnd(e);
+  // };
   
  
   const current = new Date();
@@ -411,13 +379,8 @@ const nhhu = async() =>{
                   <h5 className="mt-4">
                     GST(18%) : <FaRupeeSign /> {(price * 18) / 100}
                   </h5>
-<<<<<<< HEAD
-                  <h5 className="mt-4">
-                    Total ammount : <FaRupeeSign /> {parseInt(price)}
-=======
                   <h5 className="mt-4"> 
                     Total ammount : <FaRupeeSign /> {price+(price * 18) / 100}
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
                   </h5>
                 
                 </div>
