@@ -8,7 +8,9 @@
 
 
 
-
+.cart-media-img{
+  height: 200px !important;
+}
 .quantitey {
   font-size: large;
 }
@@ -53,10 +55,13 @@
     .input-1 {
       border: 1px double rgb(198, 197, 197) ;
       border-radius: 4px;
-      width: 219px !important;
+      width: 200px !important;
+      font-size: 10px !important ;
+     padding-top: 2%;
+      height: 35px;
     }
     .calender-logo{
-      font-size: 22px !important ;
+      font-size: 20px !important ;
     }
     .dropdown-toggle::after {
       display: none;

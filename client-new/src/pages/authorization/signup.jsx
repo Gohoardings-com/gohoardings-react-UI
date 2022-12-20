@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { FcGoogle } from "react-icons/fc";
+import Logingoogle from './loginGoogle';
 
 
-const Register = ({ setFocus, onVisible, eyeViseble, toggleSignUp, passwordsValidate, setPassword, password, setEmail, email, emailsValidate, numbervalidate, phone, AiFillEye, AiFillEyeInvisible, setNumber, nameValidate, setName, name, onRegister}) => {
+const Register = ({ signIn,setFocus, onVisible, eyeViseble, toggleSignUp, passwordsValidate, setPassword, password, setEmail, email, emailsValidate, numbervalidate, phone, AiFillEye, AiFillEyeInvisible, setNumber, nameValidate, setName, name, onRegister}) => {
   return (
     <>
       <div className="register mt-0">
@@ -91,16 +92,7 @@ const Register = ({ setFocus, onVisible, eyeViseble, toggleSignUp, passwordsVali
               <span>REGISTER</span>
             </button>
           </form>
-          <div className="row mt-3">
-            <div className="col-md-5 or_border  "></div>
-            <div className="col-md-2 or  text-center ">OR</div>
-            <div className="col-md-5  or_border  "></div>
-          </div>
-          <div className="col-md-12 ps-0 mt-3 text-center">
-            <a>
-              <FcGoogle className="google-icon" />
-            </a>
-          </div>
+          <Logingoogle signIn={signIn}/>
           <div className="mt-2 mb-0 text-center switch">
             <a onClick={() => toggleSignUp()}>
               Already have an account? Signin here

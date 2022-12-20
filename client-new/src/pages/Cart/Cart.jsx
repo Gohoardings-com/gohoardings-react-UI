@@ -19,6 +19,10 @@ const Cart = () => {
   const { addRemove, initalState } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
   const [price, setPrice] = useState();
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
 
   const getAllData = async () => {
@@ -28,6 +32,7 @@ const Cart = () => {
     });
     setPosts(data);
   };
+<<<<<<< HEAD
    
   useEffect(() => {
     getAllData(); 
@@ -64,8 +69,17 @@ const Cart = () => {
   //   addRemove({ type: "DECR" });
   //   removeCart(obj);
   // };
+=======
+  useEffect(() => {
+    getAllData();
+  }, []);
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
 
+  useEffect(() => {
+    getAllData();
+  }, []);
 
+<<<<<<< HEAD
 
   // Start date of user item
   const StartDate = (e) => {
@@ -76,19 +90,23 @@ const Cart = () => {
     setEnd(e);
   };
 // remove from cart
+=======
+  // remove from cart
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
       code: obj.code,
     });
     addRemove({ type: "DECR" });
-    const pricese =  obj.price * obj.days
-    const withGST = (pricese * 18) / 100
-    const heloo = pricese + withGST
-    const finalStep = parseInt(price-heloo)
-    setPrice(finalStep)
+    const pricese = obj.price * obj.days;
+    const withGST = (pricese * 18) / 100;
+    const heloo = pricese + withGST;
+    const finalStep = parseInt(price - heloo);
+    setPrice(finalStep);
     removeCart(obj);
   };
 
+<<<<<<< HEAD
 
   // useEffect(() => {
   //   nhhu()
@@ -96,33 +114,43 @@ const Cart = () => {
   //     },[price])
       
 // Remove on item data
+=======
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
   const removeCart = async (event) => {
+    console.log(event);
     let data = [...posts];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
-          }
-      setPosts(data);
-    });
+      }
 
+      const result = data.filter((word) => word.isDelete === 0);
+      setPosts(result);
+    });
   };
 
+<<<<<<< HEAD
  
 
 
+=======
+  // Increament days on of cart item
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
   const increaseDays = async (obj) => {
     let data = [...posts];
     data.map((element) => {
       if (element.id == obj.id) {
-        if(obj.isDelete == 0){
-        obj.days += 1;
-        //  nhhu()
+        if (obj.isDelete == 0) {
+          obj.days += 1;
+     
         }
       }
       setPosts(data);
-
     });
+<<<<<<< HEAD
      
+=======
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
   };
 
   // Decrement days on of cart item
@@ -130,31 +158,31 @@ const Cart = () => {
     let data = [...posts];
 
     data.map((element) => {
-      if (element.id == obj.id) {
+      if (element.id === obj.id) {
         if (obj.days > 5) {
           obj.days -= 1;
-          if(obj.isDelete == 0){
-            // nhhu()
+          if (obj.isDelete == 0) {
+   
           }
         }
         setPosts(data);
       }
     });
-    
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
   const sumbitALlProduct = async () => {
     await instance.post("cart/processdCart", {
       start_date: Start,
       end_date: End,
       produts: posts,
     });
-  };    
+  };
 
-
-
-
+<<<<<<< HEAD
   // const StartDate = (e) => {
   //   setStart(e);
   // };
@@ -164,9 +192,26 @@ const Cart = () => {
   // };
   
  
-  const current = new Date();
-  const startdate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+=======
+  const StartDate = (e) => {
+    setStart(e);
+  };
 
+  const EndDate = (e) => {
+    setEnd(e);
+  };
+
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
+  const current = new Date();
+  const startdate = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+
+ 
+  const cartItemprice = posts.reduce(
+    (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
+    0
+  );
 
   return (
     <>
@@ -178,14 +223,16 @@ const Cart = () => {
               <div class="input-box active-grey ">
                 <label class="input-label">Start Date</label>
                 <div type="text " class="input-1 d-flex bg-light">
-                  <h6 className="me-2 calender-logo  text-secondary">{startdate}</h6>
+                  <h6 className="me-2 calender-logo  text-secondary">
+                    {startdate}
+                  </h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
                       variant="transparent"
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt  className="calender-logo ms-5 mb-1 text-secondary"/>
+                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-secondary" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={Start} onChange={StartDate} />
@@ -198,7 +245,9 @@ const Cart = () => {
               <div class="input-box active-grey">
                 <label class="input-label">End Date</label>
                 <div type="text " class="input-1 d-flex bg-light ">
-                  <h6 className="me-2  calender-logo  text-secondary">{startdate}</h6>
+                  <h6 className="me-2  calender-logo  text-secondary">
+                    {startdate}
+                  </h6>
 
                   <Dropdown className="p-0 m-0">
                     <Dropdown.Toggle
@@ -230,110 +279,108 @@ const Cart = () => {
                 {posts.length > 0 &&
                   posts.map((obj, index) => (
                     <>
-                      {obj.isDelete == 0 ? (
-                        <>
-                          <div className="card mb-3 mt-3 maincard ">
-                            <div className="row">
-                              <div className="d-flex ">
-                                <div className="col-md-4 pe-0 me-0">
-                                  <img
-                                    src={
-                                      obj.thumb.startsWith("https")
-                                        ? obj.thumb
-                                        : `https://${obj.mediaownercompanyname
-                                            .trim()
-                                            .split(" ")
-                                            .slice(0, 2)
-                                            .join("_")
-                                            .toLowerCase()}.odoads.com/media/${obj.mediaownercompanyname
-                                            .trim()
-                                            .split(" ")
-                                            .slice(0, 2)
-                                            .join("_")
-                                            .toLowerCase()}/media/images/new${
-                                            obj.thumb
-                                          }`
-                                    }
-                                    className="img-fluid rounded-start  cart-media-img"
-                                    alt="..."
-                                  />
-                                </div>
-                                <div className="col-md-8 ms-0 ps-0">
-                                  <div className="card-body pb-1">
-                                    <h4 className="card-title">
-                                      {obj.areadescription}
-                                      <span
-                                        className="float-end"
-                                        onClick={() => removefroCart(obj)}
-                                      >
-                                        <MdDeleteForever className="mb-2  delet-icon" />
-                                      </span>
-                                    </h4>
-                                    <div className="row mt-4">
-                                      <div className="col-md-6">
-                                        <h6 className="text-secondary">
+                      <>
+                        <div className="card mb-3 mt-3 maincard ">
+                          <div className="row">
+                            <div className="d-flex ">
+                              <div className="col-md-4 pe-0 me-0">
+                                <img
+                                  src={
+                                    obj.thumb.startsWith("https")
+                                      ? obj.thumb
+                                      : `https://${obj.mediaownercompanyname
+                                          .trim()
+                                          .split(" ")
+                                          .slice(0, 2)
+                                          .join("_")
+                                          .toLowerCase()}.odoads.com/media/${obj.mediaownercompanyname
+                                          .trim()
+                                          .split(" ")
+                                          .slice(0, 2)
+                                          .join("_")
+                                          .toLowerCase()}/media/images/new${
+                                          obj.thumb
+                                        }`
+                                  }
+                                  className="img-fluid w-100 rounded-start  cart-media-img"
+                                  alt="..."
+                                />
+                              </div>
+                              <div className="col-md-8 ms-0 ps-0">
+                                <div className="card-body pb-1">
+                                  <h4 className="card-title">
+                                    {obj.areadescription}
+                                    <span
+                                      className="float-end"
+                                      onClick={() => removefroCart(obj)}
+                                    >
+                                      <MdDeleteForever className="mb-2  delet-icon" />
+                                    </span>
+                                  </h4>
+                                  <div className="row mt-4">
+                                    <div className="col-md-6">
+                                      {/* <h6 className="text-secondary">
                                           <FaRupeeSign />
                                           {parseInt(obj.price * 30)}/month
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                      {/* <h6 className="text-secondary">
                                           <FaRupeeSign />
                                           {parseInt(obj.price)}/day
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                      {/* <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(
                                             (obj.price * obj.days * 11) / 10
                                           )}{" "}
                                           /original price
-                                        </h6>
-                                        <h6 className="text-secondary">
+                                        </h6> */}
+                                      {/* <h6 className="text-secondary">
                                           <FaRupeeSign />{" "}
                                           {parseInt(obj.price * obj.days)}
                                           /after discount
-                                        </h6>
-                                        <h6 className="text-secondary">
-                                          <FaRupeeSign />{" "}
-                                          {parseInt(
-                                            (obj.price * obj.days ) * 18/ 100
-                                          )}
-                                          /gst(18%)
-                                        </h6>
-                                        <h6 className="text-secondary">
-                                          <FaRupeeSign />
-                                          {parseInt(
-                                            obj.price * obj.days +
-                                              (obj.price * obj.days * 18) / 100
-                                          )}
-                                          /total
-                                        </h6>
-                                      </div>
-                                      <div className="col-md-6 ">
-                                        <div className="button-section">
-                                          <button
-                                            type="button"
-                                            class="btn btn-success rounded-1 me-2"
-                                            onClick={() => {
-                                              increaseDays(obj);
-                                            }}
-                                          >
-                                            <AiOutlinePlus className="quantitey" />
-                                          </button>
-                                          <span
-                                            type="button"
-                                            class="btn btn-outline-secondary rounded-1 me-2"
-                                          >
-                                            {obj.days} Days
-                                          </span>
-                                          <button
-                                            type="button"
-                                            class="btn btn-danger rounded-1"
-                                            onClick={() => {
-                                              decreaseDays(obj);
-                                            }}
-                                          >
-                                            <AiOutlineMinus className="quantitey" />
-                                          </button>{" "}
-                                        </div>
+                                        </h6> */}
+                                      <h6 className="text-secondary">
+                                        <FaRupeeSign />{" "}
+                                        {parseInt(
+                                          (obj.price * obj.days * 18) / 100
+                                        )}
+                                        /gst(18%)
+                                      </h6>
+                                      <h6 className="text-secondary">
+                                        <FaRupeeSign />
+                                        {parseInt(
+                                          obj.price * obj.days +
+                                            (obj.price * obj.days * 18) / 100
+                                        )}
+                                        /total
+                                      </h6>
+                                    </div>
+                                    <div className="col-md-6 ">
+                                      <div className="button-section">
+                                        <button
+                                          type="button"
+                                          class="btn btn-success rounded-1 me-2"
+                                          onClick={() => {
+                                            increaseDays(obj);
+                                          }}
+                                        >
+                                          <AiOutlinePlus className="quantitey" />
+                                        </button>
+                                        <span
+                                          type="button"
+                                          class="btn btn-outline-secondary rounded-1 me-2"
+                                        >
+                                          {obj.days} Days
+                                        </span>
+                                        <button
+                                          type="button"
+                                          class="btn btn-danger rounded-1"
+                                          onClick={() => {
+                                            decreaseDays(obj);
+                                          }}
+                                        >
+                                          <AiOutlineMinus className="quantitey" />
+                                        </button>{" "}
                                       </div>
                                     </div>
                                   </div>
@@ -341,14 +388,8 @@ const Cart = () => {
                               </div>
                             </div>
                           </div>
-                        </>
-                      ) : (
-                        <>
-                          <h6 className="text-center text-secondary">
-                            Your Item Deleted Successfully
-                          </h6>
-                        </>
-                      )}
+                        </div>
+                      </>
                     </>
                   ))}
               </>
@@ -373,16 +414,21 @@ const Cart = () => {
 
                   <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6>
                   <h5 className=" mt-4">
-                  Total  {totalDays ? totalDays : 5} Days
+                    Total {totalDays ? totalDays : 5} Days
                   </h5>
 
                   <h5 className="mt-4">
-                    GST(18%) : <FaRupeeSign /> {(price * 18) / 100}
+                    GST(18%) : <FaRupeeSign /> {(cartItemprice * 18) / 100}
                   </h5>
+<<<<<<< HEAD
                   <h5 className="mt-4"> 
                     Total ammount : <FaRupeeSign /> {price+(price * 18) / 100}
+=======
+                  <h5 className="mt-4">
+                    Total ammount : <FaRupeeSign />
+                    {cartItemprice + (cartItemprice * 18) / 100}
+>>>>>>> ba3e6f7b2951842e613409307486d8d505917f7c
                   </h5>
-                
                 </div>
               </div>
               <div className="d-grid">

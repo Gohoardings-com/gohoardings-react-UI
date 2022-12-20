@@ -14,6 +14,7 @@ const center = {
 
 
 const Markers = (markers) => {
+
   const navigate = useNavigate()
   const {addRemove} = useContext(AccountContext)
   markers.data.forEach(e => {
@@ -35,17 +36,8 @@ const Markers = (markers) => {
       }else{
         addRemove({type:"INCR"})
         add(code)
-      }
+     }
     }
-
-    const removefroCart = async (obj) => {
-      await instance.post('cart/deleteFromCart', {
-        code: obj.code,
-      })
-      addRemove({type:"DECR"})
-      remove(obj)
-    }
-    
 
     const add = (code) => {
       let data = [markers.data];
@@ -58,16 +50,32 @@ const Markers = (markers) => {
         })
       });
     };
+
+    const removefroCart = async (obj) => {
+
+      // await instance.post('cart/deleteFromCart', {
+      //   code: obj.code,
+      // })
+
+      // addRemove({type:"DECR"})
+      remove(obj)
+    }
+    
+
+    
     
     const remove = (event) => {
       let data = [markers.data];
+      
       data.map((element) => {
         element.map((obj) =>{
           if (obj.code == event) {
+            console.log(obj);
             obj.isDelete = 1;
-            markers(data);
+        
           }
         })
+
       });
     };
 
@@ -113,8 +121,8 @@ const Markers = (markers) => {
                   <p><span>Height X Width : </span>{height} X {width} feet</p>
                   <p><span>FTF : </span>{ftf}</p>
                   <p><span>Price : Login to see price</span></p>
-                  { userid == null || isDelete == null && userid != null|| isDelete == 1 ?
-                    <MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/> : <MdOutlineRemoveShoppingCart  className="sitemark" onClick={() => removefroCart(code)} />}
+                  {isDelete === 0 ?
+                    <MdOutlineRemoveShoppingCart onClick={() => removefroCart(code,category_name)} className="sitemark text-danger"/> : < MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/>}
                 </div>
               </div>
             </InfoWindow>

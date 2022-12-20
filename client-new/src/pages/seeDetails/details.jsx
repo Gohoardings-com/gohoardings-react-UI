@@ -4,6 +4,7 @@ import { AccountContext } from "../../apis/apiContext";
 import { useParams } from "react-router-dom";
 import { IoIosSettings, IoMdLocate } from "react-icons/io";
 import { GrMapLocation } from "react-icons/gr";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./details.scss";
 import {
@@ -12,20 +13,20 @@ import {
 } from "react-icons/md";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
+import Markers from "../map/marker";
 
 const Details = () => {
-  const priceState = window.localStorage.getItem("user") || window.sessionStorage.getItem("user");
   const { category_name, meta_title } = useParams();
   const { addRemove } = useContext(AccountContext);
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  const [markers, setPosts] = useState([]);
+  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
 
   const getMedia = async () => {
     const { data } = await instance.post("product/product", {
       meta_title: meta_title,
       category_name: category_name,
     });
-    console.log(data);
     setPosts(data);
   };
   const locatetologin = async () => {
@@ -55,7 +56,7 @@ const Details = () => {
   };
 
   const add = (event) => {
-    let data = [...posts];
+    let data = [...markers];
     data.forEach((element) => {
       if (element.code == event.code) {
         console.log(element);
@@ -66,7 +67,7 @@ const Details = () => {
   };
 
   const remove = (event) => {
-    let data = [...posts];
+    let data = [...markers];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
@@ -100,13 +101,13 @@ const Details = () => {
           </a>
         </div>
       </div>
-      {!posts ? (
+      {!markers ? (
         <>
           <h1>Loading... Please wait</h1>
         </>
       ) : (
         <>
-          {posts.map((item, i) => (
+          {markers.map((item, i) => (
             <div className="conatiner-fluid px-4">
               <div className="row mt-sm-5  mb-5 pb-5 mt-3 ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5">
                 <div className="col-md-6 text-center">
@@ -131,6 +132,9 @@ const Details = () => {
                       className="w-75 rounded-3 img-fluid maindivbordermediadetails p-2"
                     />
                   </div>
+                  <div style={{width:"20px", height:"20px"}}>
+                   {/* <Markers markers={markers} /> */}
+                  </div>
                 </div>
 
                 <div className="col " id="media">
@@ -145,12 +149,12 @@ const Details = () => {
                         </h6>
                         <h6 className="overflow-wrap">
                           Price:{" "}
-                          {!priceState ? (
+                          {!isLoggedIn ? (
                             <a
                               onClick={locatetologin}
                               className="text-decoration-none text-danger"
                             >
-                              Please Login first
+                              Login first
                             </a>
                           ) : (
                             item.price
@@ -161,32 +165,28 @@ const Details = () => {
                         <a href="/map" className=" text-decoration-none ms-5">
                           <img
                             src="../../gohoarding/new-icon/detail-map.png"
-                            className="ms-4 mt-1"
+                            className="ms-4 "
                             id="detail-map-location"
                           />
                         </a>
-                        {item.userid == null ||
-                        item.isDelete == null ||
-                        (item.userid != null && item.isDelete == 1) ? (
-                          <MdOutlineAddShoppingCart
-                            onClick={() => addonCart(item)}
-                            className="addonCart mt-3 ms-5 addonCart-plus  "
-                          />
-                        ) : (
-                          <>
-                            {" "}
-                            <MdOutlineRemoveShoppingCart
-                              onClick={() => removefroCart(item)}
-                              className="addonCart text-danger mt-3 ms-5 "
-                            />
-                          </>
-                        )}
+                        {item.isDelete === 0 ? (
+                        <img
+                          src="../../gohoarding/new-icon/remove-cart.png"
+                          onClick={() => removefroCart(item)}
+                          className="detail-Cart ms-3"
+                          
+                        />
+                      ) : (
+                        <img
+                          src="../../gohoarding/new-icon/add-cart.png"
+                          onClick={() => addonCart(item)}
+                          className="detail-Cart ms-3"
+                        />
+                      )}
                       </div>
                     </div>
                     <div className="mt-3 singlemediashow ">
-                      {/* <div className=" p-2 datail-heading">
-                        <h4 className="text-light">Highlights</h4>
-                      </div> */}
+                    
                       <div className="d-flex flex-row mt-3 pb-2 mediaAllDetails">
                         <h6 className=" pt-2">Address</h6>
                         <span className="ms-auto ">{item.areadescription}</span>
@@ -230,34 +230,34 @@ const Details = () => {
                      <div className=" p-2 datail-heading  rounded-3">
                         <h4 className="text-light">GET A FREE CONSULTATION!</h4>
                       </div>
-                      <form class="row g-3 needs-validation ms-1" novalidate>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip01" class="form-label">Name</label>
-    <input type="text" class="form-control" id="validationTooltip01"  required/>
+                      <form className="row g-3 needs-validation ms-1" novalidate>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip01" className="form-label">Name</label>
+    <input type="text" className="form-control" id="validationTooltip01"  required/>
 
   </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip02" class="form-label">Number</label>
-    <input type="number" class="form-control" id="validationTooltip02" required/>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip02" className="form-label">Number</label>
+    <input type="number" className="form-control" id="validationTooltip02" required/>
  
   </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip03" class="form-label">Email</label>
-    <input type="text" class="form-control" id="validationTooltip03" required/>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip03" className="form-label">Email</label>
+    <input type="text" className="form-control" id="validationTooltip03" required/>
   
   </div>
-  <div class="col-md-6 position-relative">
-    <label for="validationTooltip03" class="form-label">City</label>
-    <input type="text" class="form-control" id="validationTooltip03" required/>
+  <div className="col-md-6 position-relative">
+    <label for="validationTooltip03" className="form-label">City</label>
+    <input type="text" className="form-control" id="validationTooltip03" required/>
  
   </div>
-  <div class="col-md-12 position-relative">
-    <label for="validationTextarea" class="form-label">Textarea</label>
-    <textarea class="form-control " id="validationTextarea" placeholder="Required example textarea" required></textarea>
+  <div className="col-md-12 position-relative">
+    <label for="validationTextarea" className="form-label">Textarea</label>
+    <textarea className="form-control " id="validationTextarea" placeholder="Required example textarea" required></textarea>
   </div>
 
-  <div class="col-12 d-grid ">
-    <button class="btn get-btn text-light " type="submit">Send request</button>
+  <div className="col-12 d-grid ">
+    <button className="btn get-btn text-light " type="submit">Send request</button>
   </div>
 </form>
                 </div>

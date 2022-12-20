@@ -3,7 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from '../../apis/apiContext';
 import { useNavigate } from 'react-router-dom';
 import "./map.scss";
-import { priceSubIllu } from "../../action/adminAction";
+import { ILLUMINATION } from "../../apis/apis";
+import { mediawithcity, priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import instance from "../../apis/axios";
@@ -11,10 +12,9 @@ import MultiRangeSlider from "./multiRangeSlider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
-import MapCart from "./mapCart";
 
 const Map = () => {
-  const priceState = window.localStorage.getItem("user")
+  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const dispatch = useDispatch();
   const {search, loading} = useSelector((state) => state.search)
   const navigate = useNavigate()
@@ -25,8 +25,53 @@ const Map = () => {
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(3);
-  const [total,setNewTotal] = useState(0)
+  const { initalState } = useContext(AccountContext)
 
+
+
+ const addonCart = async (e) => {
+    const { data } = await instance.post('cart/addOnCart', {
+      mediaid: e.code,
+      mediatype: e.category_name,
+    })
+    if (data.message == 'Login First') {
+      window.localStorage.setItem("locate", `/map`)
+      navigate('/login')
+    } else {
+      addRemove({ type: "INCR" })
+      add(e)
+    }
+  }
+
+  const add = (event) => {
+    let data = [...medias];
+    data.forEach((element) => {
+      if (element.code == event.code) {
+        element.isDelete = 0;
+        setcartItem(data);
+      }
+    });
+  };
+const previousData = async() =>{
+ 
+dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}))
+}
+
+  const userCartItem = async () => {
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data);
+  }
+  
+
+  useEffect(() => {
+    userCartItem();
+    holdingtype();
+  },[initalState]);
+
+  const cartItemprice = cartItem.reduce(
+    (totalPrice, item) => totalPrice + parseInt(item.price),
+    0
+  );
 
   let slice;
   if(!loading){
@@ -64,7 +109,11 @@ const Map = () => {
 
   
   useEffect(() => {
+<<<<<<< HEAD
     handelprice();
+=======
+    userCartItem();
+>>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
   },[]);
 
   const getAllDetails = async () => {
@@ -74,48 +123,28 @@ const Map = () => {
    dispatch(priceSubIllu(category_name,price,illumination,table,city))
   
   }
-
-
-  const addonCart = async (e) => {
-    const { data } = await instance.post('cart/addOnCart', {
-      mediaid: e.code,
-      mediatype: e.category_name,
-    })
-    if (data.message == 'Login First') {
-      window.localStorage.setItem("locate", `/map`)
-      navigate('/login')
-    } else {
-      addRemove({ type: "INCR" })
-      add(e)
-    }
-  }
-
+ 
   
   const removefroCart = async (obj) => {
     await instance.post('cart/deleteFromCart', {
       code: obj.code,
     })
     addRemove({ type: "DECR" })
-    remove(obj)
+    remove(obj);
+  
   }
 
-  const add = (event) => {
-    let data = [...medias];
-    data.forEach((element) => {
-      if (element.code == event.code) {
-        element.isDelete = 0;
-        setcartItem(data);
-      }
-    });
-  };
 
   const remove = (event) => {
     let data = [...cartItem];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
-        setcartItem(data);
+      
       }
+      // const result = data.filter((word) => word.isDelete === 0);
+      // setcartItem(result)
+      
     });
   };
 
@@ -129,8 +158,6 @@ const Map = () => {
       }
     }
   }
-
-
   function mediaType(e) {
     if (e.currentTarget.checked) {
     illumination.push(e.target.value)
@@ -141,50 +168,12 @@ const Map = () => {
       }
     }
   }
-// console.log(category_name,city_name);
-//   const mediasData = async () => {
-//     const  data  = await medaiWithCity(category_name,city_name);
-//     if (data.length > 0) {
-//       setMedias(data);
-//     }
-//   }
 
-  const nmedia = async (arr) => {
-    setMedias(arr);
-  }
-
-  // useEffect(() => {
-  //   mediasData();
-  // }, []);
 
   const locatetologin = async() =>{
     window.localStorage.setItem("locate",`/map`)
     navigate('/login')
 }
-
-  let ILLUMINATION = [
-    { label: "Nonlit", value: "Nonlit" },
-    {
-      label: "Frontlit",
-      value: "Frontlit",
-    },
-    {
-      label: "Backlit",
-      value: "Backlit",
-    },
-    {
-      label: "Ambilit",
-      value: "Ambilit",
-    },
-    {
-      label: "LED",
-      value: "LED",
-    },
-    {
-      label: "Digital",
-      value: "Digital",
-    }
-  ];
 
   const holdingtype = async () => {
     const { data } = await instance.get('filter/categoryfilter')
@@ -193,19 +182,35 @@ const Map = () => {
 
   const More = async() => {
     if (search.length >= noOfLogo) {
-      setnoOfLogo(noOfLogo + 6);
+      await setnoOfLogo(noOfLogo + 6);
     }
   };
   const Less = async() => {
     if (noOfLogo >= 2) {
-     setnoOfLogo(noOfLogo - 6);
+      await setnoOfLogo(noOfLogo - 6 );
     }
   };
-  useEffect(() => {
-    holdingtype();
-  }, [])
+  // useEffect(() => {
+    
+  // }, [])
+
+    // const nmedia = async (arr) => {
+  //   setMedias(arr);
+  // }
+// console.log(category_name,city_name);
+//   const mediasData = async () => {
+//     const  data  = await medaiWithCity(category_name,city_name);
+//     if (data.length > 0) {
+//       setMedias(data);
+//     }
+//   }
+
+  // useEffect(() => {
+  //   mediasData();
+  // }, []);
 
   return (
+    
     <div className="container-fluid mh-100">
       <div className="row" id="map-view-row">
         <div className="col-lg-3 col-md-3 col-sm-12 p-0 border-end position-relative">
@@ -254,7 +259,7 @@ const Map = () => {
                                 <li>FTF : {item.ftf}</li>
                                 <li>Size : {item.size} feet</li>
 
-                                <li>Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+                                <li>Price: {!isLoggedIn ? <a onClick={locatetologin} >Please Login first</a> : item.price}
 
                                 </li>
                               </ul>
@@ -321,7 +326,7 @@ const Map = () => {
                             return obj;
                           } else if (obj.name.toLowerCase().includes(query.toLowerCase())) {
                             return obj;
-                          }
+                         }
                         }).map((illum, i) => (
                           <>
                             <input type="checkbox" id={i}
@@ -332,9 +337,7 @@ const Map = () => {
                             <span>{illum.name}</span>
                             <br />
                           </>
-
                         ))}
-
                       </div>
                     </div>
                   </div>
@@ -400,10 +403,63 @@ const Map = () => {
                 </div>
               </div>
               <div className="poi-submit">
-                <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>
+                <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>                
+
+              </div>
+                <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={previousData}>Clear All</button>                
+            </div>
+            <div className="media-items p-2 accordion-collapse collapse" id="collapseC1" data-bs-parent="#accordionTest">
+              <div className="accordion items border mb-2" id="accordionExample">
+
+                {!cartItem ? <><h1>Loading... Please Wait</h1></> : <>
+                  {cartItem.map((item) => (
+                    <>
+                      {item.isDelete == 0 ?
+                        <div className="accordion-item">
+                          <div
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                          >
+                            <div className="row m-0">
+                              <p className="my-2">
+                                {item.page_title.substring(
+                                  0, 
+                                  20
+                                ) + "..."}
+                              </p>
+                              <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
+                                <img
+                                  src={item.thumb.startsWith("https") ? item.thumb :`https://${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}.odoads.com/media/${(item.mediaownercompanyname.trim().split(' ').slice(0, 2).join('_')).toLowerCase()}/media/images/new${item.thumb}`}
+                                  alt="N/A"
+                                  className="w-100 mt-2 pt-2"
+                                />
+                              </div>
+                              <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
+                                <ul className="list-unstyled">
+                                  <li>Code : {item.code}</li>
+                                  <li>FTF : {item.ftf}</li>
+                                  <li>Size : {item.size} feet</li>
+                                  <li>
+                                    Price: {!isLoggedIn ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+                                  </li>
+                                </ul>
+                                <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                       : 
+                        <h6 className="text-center">Your Item Deleted Successfully</h6>
+                      }
+
+                    </>
+                  ))}
+                </>}
               </div>
             </div>
-           <MapCart cartItem={cartItem} priceState={priceState} locatetologin={locatetologin} removefroCart={removefroCart}/>
           </div>
 
           <div id="map-view-mobile">
@@ -417,15 +473,15 @@ const Map = () => {
                 <span className="pe-2">Not Available</span>
               </div>
             </div>
-
+            {/* { isLoaded ? <Markers /> : null } */}
           </div>
 
           <div className="row cart-icons m-0 position-absolute w-100 bottom-0">
             <div className="col-lg-9 col-sm-12 rupee d-inline-block text-center py-2 shadow-sm border-bottom-0 border">
               {/* Total Price */}
-              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {total}</p>
+              <p className="m-0"><img src="./assests/map-icons/rupee.png" alt="N/A" /> : {cartItemprice}</p>
             </div>
-            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1" onClick={() => userCartItem()}>
+            <div className="col-lg-3 col-sm-12 p-0 bag d-inline-block text-center py-2 shadow-sm border-bottom-0 border collapse-none" data-bs-toggle="collapse" data-bs-target="#collapseC1" aria-expanded="false" aria-controls="collapseC1">
               <img src="./assests/map-icons/bag.png" alt="N/A" />
             </div>
           </div>

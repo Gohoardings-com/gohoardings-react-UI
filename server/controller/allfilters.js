@@ -19,16 +19,16 @@ exports.mapFilter = catchError(async (req,res) =>{
   
     const { distance, selected, tbl, city } = req.body;
   
-  //   db.query("SELECT  * FROM "+tbl+" WHERE illumination='"+illumna+"' || subcategory= '"+catego+"'  &&  subcategory= '"+catego+"' &&  illumination='"+illumna+"'",async (err,result) => {
-  //     if (err) {
-  //       console.log(err);
-  //       return res.status(404).json({err: err,message :"Wrong Data"})
-  //      } else if (result.length == 0 ){
-  //       return res.status(400).json({message:"No data"})
-  //   } else{
-  //   return res.send(result); 
-  //   }
-  // })
+    db.query("SELECT  * FROM "+tbl+" WHERE illumination='"+illumna+"' || subcategory= '"+catego+"'  &&  subcategory= '"+catego+"' &&  illumination='"+illumna+"'",async (err,result) => {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({err: err,message :"Wrong Data"})
+       } else if (result.length == 0 ){
+        return res.status(400).json({message:"No data"})
+    } else{
+    return res.send(result); 
+    }
+  })
   
 })
 
@@ -80,9 +80,13 @@ if(err){
 //media filters
   exports.filterData = catchError(async(req, res, next) => {
     try{
-      const {value, illumna, catego} = req.body
+      const {category_name, illumna, catego} = req.body
+      const Illumation = illumna.toString()
+  var newIllumation = Illumation.replace(/,/g, "','");
+  const SubCategory = catego.toString()
+  const newSubCate = SubCategory.replace(/,/g, "','")
       db.changeUser({ database: "gohoardi_goh" });
-      switch (value) {
+      switch (category_name) {
               case "traditional-ooh-media":
                 table_name = "goh_media";
                 break;
@@ -108,24 +112,24 @@ if(err){
                 table_name = "goh_media";
             }   
             if(illumna == ![] && locat == ![] && catego == ![]) {
-              db.query("SELECT  DISTINCT * FROM "+table_name+"",async (err,result) => {
+              db.query("SELECT DISTINCT * FROM "+table_name+"",async (err,result) => {
                           if (err) {
                             return res.send({err: err,message :"Wrong Data"})
                         } else if (result == []){
-                            return res.send({err: "Empty",message :"Media Not Found"})
+                          return res.status(400).json("No data")
                         } else{
-                          return res.send(result); 
+                          return res.status(200).json(result) 
                         }
                       }) 
             } else {
-              const sql = "SELECT  * FROM "+table_name+" WHERE illumination='"+illumna+"' || subcategory= '"+catego+"'  &&  subcategory= '"+catego+"' &&  illumination='"+illumna+"'"
+              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+newIllumation+"' || subcategory= '"+newSubCate+"'  &&  subcategory= '"+newSubCate+"' &&  illumination='"+newIllumation+"'"
    db.query(sql,async (err,result) => {
                 if (err) {
                   return res.status(404).json({err: err,message :"Wrong Data"})
                  } else if (result.length == 0 ){
-                  return res.status(400).json({message:"No data"})
+                  return res.status(400).json("No data")
               } else{
-              return res.send(result)  ; 
+              return res.status(200).json(result)
               }
             })
             }

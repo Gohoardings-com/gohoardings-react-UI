@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {addOnCart, processdCart, deleteFromCart, getUserData, cartitems, cartiemfromdb, useritems} = require('../controller/cartItems');
-const { verifyToken } = require("../controller/REGISTERlOGIN");
+const { verifyToken } = require("../middelware/token");
+
 
 router.route("/addonCart").post(addOnCart)       
 // router.route("/getuserData").post(getUserData)               

@@ -4,7 +4,7 @@ import {MdOutlineRemoveShoppingCart, MdOutlineAddShoppingCart} from 'react-icons
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locatetologin}) => {  
+const MultiCard = ({ slice, loading, addonCart, removefroCart, isLoggedIn, locatetologin}) => {  
   return (
 
     <div className="row row-cols-md-4 p-0 ms-2  mt-1">
@@ -52,7 +52,7 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
                         <p className="mb-0 media-filter-text-card-detail" >Size : {item.size}</p>
                         <p className="mb-0 media-filter-text-card-detail">
                           Price:{" "}
-                          {!priceState ? (
+                          {!isLoggedIn ? (
                             <a
                               onClick={locatetologin}
                               className="text-decoration-none text-danger media-filter-text-card-detail "
@@ -77,9 +77,8 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart, priceState, locat
                             </Link>
                           </div>
                           <div className="col p-1">
-                            {item.userid == null ||
-                            item.isDelete == null ||
-                            (item.userid != null && item.isDelete == 1) ? (
+                            {
+                             item.isDelete === 1  ? (
                               < MdOutlineAddShoppingCart
                              
                                 onClick={() => addonCart(item)}

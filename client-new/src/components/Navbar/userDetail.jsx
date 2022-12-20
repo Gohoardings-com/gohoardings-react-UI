@@ -4,12 +4,12 @@ import { authActions } from '../../store';
 import { BiUserPlus } from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
-import { clientId } from '../../apis/apis';
+import { clientId, getCurrentuser, logoutUser, refreshToken } from '../../apis/apis';
 import Nav from "react-bootstrap/Nav";
-import instance from "../../apis/axios";
 import { AccountContext } from '../../apis/apiContext';
 import { useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useCookies } from 'react-cookie';
 
 
 const UserDetail = ({ posts, setPosts }) => {
@@ -17,13 +17,12 @@ const UserDetail = ({ posts, setPosts }) => {
   const dispatch = useDispatch();
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 
 
-
+  let firstRender = true;
   const handelLogout = async () => {
-    const data = await instance.post("registration/logout", null, {
-      withCredentials: true,
-    });
+    const data = await logoutUser()
     if (data.status == 200){
       isLoggedIn = true;
       return data
@@ -37,6 +36,15 @@ const UserDetail = ({ posts, setPosts }) => {
   const cart = async() =>{
     navigate('/cart')
   }
+// console.log();
+const getUser = async () => {
+  const data  = await getCurrentuser()
+  setPosts(...data)
+} 
+
+const hgh = window.sessionStorage.getItem("user")
+
+ 
 
   const logOut = async () => {
     sessionStorage.clear()
@@ -44,16 +52,28 @@ const UserDetail = ({ posts, setPosts }) => {
     handelLogout().then(() => dispatch(authActions.logout()))
   }
 
-  const getUser = async () => {
-    const { data } = await instance.get("registration/user", {
-      withCredentials: true
-    })
-    setPosts(...data)
+ console.log(posts);
+  const refreshUser = async() =>{ 
+      const data = await refreshToken()
+   return data;
+
   }
 
+  // {!hgh &&  removeCookie(`${posts.userid}`,[`${posts.userid}`])}
   useEffect(() => {
-    getUser().then(() => dispatch(authActions.login()))
-    setPosts(posts)
+
+ 
+     if(firstRender){
+  firstRender = true
+  getUser().then(() => dispatch(authActions.login()))
+   }else{
+    let interval = setInterval(() => {
+      refreshUser().then(() => dispatch(authActions.login()))
+    },6 * 24 * 3600000)
+   return () => clearInterval(interval)
+   }
+   setPosts(posts)
+   
   }, [])
 
   return (
@@ -79,9 +99,6 @@ const UserDetail = ({ posts, setPosts }) => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-       
-
-     
           <div className="cart ms-3  pb-2" onClick={cart}>
             <span>
            
