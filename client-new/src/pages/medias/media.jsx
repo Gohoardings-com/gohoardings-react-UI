@@ -14,9 +14,6 @@ import Medialogo from "../../components/medialogo";
 import FixedNavbar from "../../components/navbar/fixednavbar";
 
 const Media = () => {
-  const priceState =
-    window.localStorage.getItem("user") ||
-    window.sessionStorage.getItem("user");
   const dispatch = useDispatch();
   const { search, loading } = useSelector((state) => state.search);
   const [show, setShow] = useState(false);
@@ -28,7 +25,9 @@ const Media = () => {
   const [query, setQuery] = useState("");
   const [catego, setCatego] = useState("");
   const [illumna, setIllumna] = useState("");
+  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const [noOfLogo, setnoOfLogo] = useState(8);
+
 
   let slice;
   if (!loading) {
@@ -142,7 +141,7 @@ const Media = () => {
                     removefroCart={removefroCart}
                     add={add}
                     remove={remove}
-                    priceState={priceState}
+                    isLoggedIn={isLoggedIn}
                     locatetologin={locatetologin}
                   />
                 </>
@@ -157,7 +156,7 @@ const Media = () => {
                     removefroCart={removefroCart}
                     add={add}
                     remove={remove}
-                    priceState={priceState}
+                    isLoggedIn={isLoggedIn}
                     locatetologin={locatetologin}
                   />
                 </>

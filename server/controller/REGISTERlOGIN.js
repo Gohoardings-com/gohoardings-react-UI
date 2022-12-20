@@ -77,7 +77,7 @@ exports.googleLogin = catchError(async (req, res) => {
     return res.status(400).json({ mess: "Google authentication Failed" })
   }
   db.changeUser({ database: "gohoardi_crmapp" });
-  db.query("SELECT email, provider FROM tblcontacts WHERE email='" + profile.email + "' && provider='Google'", async (err, selectResult) => {
+  db.query("SELECT * FROM tblcontacts WHERE email='" + profile.email + "' && provider='Google'", async (err, selectResult) => {
     if (err) {
       return res.status(400).json({ message: "Wrong Data" })
     }
@@ -93,7 +93,7 @@ exports.googleLogin = catchError(async (req, res) => {
               return res.status(400).json({ err: err.message })
             } else {
               res.clearCookie(String(userid))
-              req.cookies[`${String(userid)}`] = " ";
+              // req.cookies[`${String(userid)}`] = " ";
             token(userid, 200, res)
             }
           })
@@ -101,19 +101,10 @@ exports.googleLogin = catchError(async (req, res) => {
       })
 
     } else {
-      db.query("SELECT * FROM tblcontacts WHERE email ='" +profile.email + "' ", async (err, result) => {
-        if (err) {
-          return res.json({ message: "No User Found" })
-        }
-        if (!result == []) {
-          const userid = result[0].userid
+          const userid = selectResult[0].userid
           res.clearCookie(String(userid))
           req.cookies[`${String(userid)}`] = " ";
          token(userid, 200, res)
-        } else {
-          return res.status(404).json({ messsage: "Invalid Email and password" });
-        }
-      })
     }
   })
 })

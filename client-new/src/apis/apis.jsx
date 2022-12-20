@@ -30,6 +30,7 @@ export const refreshToken = async() => {
     const {data} = await instance.get(`registration/logout`,{
         withCredentials:true
       })
+      console.log(data);
       return data
 }
 

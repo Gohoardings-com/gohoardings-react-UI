@@ -21,7 +21,7 @@ const SearchMedia = () => {
     getCity();
   }, []);
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("traditional-ooh-media");
 
   const onChange = (event) => {
@@ -33,9 +33,6 @@ const SearchMedia = () => {
     console.log("search ", searchTerm);
   };
 
-  const handleSelect = (e) => {
-    setUserType(e);
-  };
   return (
     <>
       <div className="heading-content text-center py-5  pb-5">
