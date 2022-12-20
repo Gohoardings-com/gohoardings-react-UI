@@ -4,7 +4,7 @@ import { authActions } from '../../store';
 import { BiUserPlus } from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
-import { clientId } from '../../apis/apis';
+import { clientId, getCurrentuser, logoutUser, refreshToken } from '../../apis/apis';
 import Nav from "react-bootstrap/Nav";
 import instance from "../../apis/axios";
 import { AccountContext } from '../../apis/apiContext';
@@ -19,11 +19,9 @@ const UserDetail = ({ posts, setPosts }) => {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
 
 
-
+  let firstRender = true;
   const handelLogout = async () => {
-    const data = await instance.post("registration/logout", null, {
-      withCredentials: true,
-    });
+    const data = await logoutUser()
     if (data.status == 200){
       isLoggedIn = true;
       return data
@@ -45,15 +43,28 @@ const UserDetail = ({ posts, setPosts }) => {
   }
 
   const getUser = async () => {
-    const { data } = await instance.get("registration/user", {
-      withCredentials: true
-    })
+    const data  = await getCurrentuser()
     setPosts(...data)
   }
 
+  const refreshUser = async() =>{
+    if(window.localStorage.getItem("user")){
+      const data = await refreshToken()
+   return data;
+    }
+  }
+
   useEffect(() => {
-    getUser().then(() => dispatch(authActions.login()))
-    setPosts(posts)
+     if(firstRender){
+  firstRender = false
+  getUser().then(() => dispatch(authActions.login()))
+   }else{
+    let interval = setInterval(() => {
+      refreshUser().then(() => dispatch(authActions.login()))
+    },6 * 24 * 3600000)
+   return () => clearInterval(interval)
+   }
+   setPosts(posts)
   }, [])
 
   return (
@@ -79,9 +90,6 @@ const UserDetail = ({ posts, setPosts }) => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-       
-
-     
           <div className="cart ms-3  pb-2" onClick={cart}>
             <span>
            

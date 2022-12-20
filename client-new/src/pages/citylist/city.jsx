@@ -24,8 +24,8 @@ const City = () => {
                 className="rounded    firtCol gate-img "
                 alt="..."
               />
-              <div class="bottom-left">Delhi</div>
-              <div class="bottom-left-media">1893 medias</div>
+              <div className="bottom-left">Delhi</div>
+              <div className="bottom-left-media">1893 medias</div>
             </div>
             </Link>
           </div>
@@ -37,8 +37,8 @@ const City = () => {
                 className="rounded  ec-gate-img"
                 alt="..."
               />
-                <div class="bottom-left">Bengalore</div>
-                  <div class="bottom-left-media">660 medias</div>
+                <div className="bottom-left">Bengalore</div>
+                  <div className="bottom-left-media">660 medias</div>
             </div>
             </Link>
             <Link to={`/traditional-ooh-media/chennai`}>
@@ -48,8 +48,8 @@ const City = () => {
                 className="rounded  mt-3 ec-gate-img"
                 alt="..."
               />
-                  <div class="bottom-left">Hyderabad</div>
-                    <div class="bottom-left-media">497 medias</div>
+                  <div className="bottom-left">Hyderabad</div>
+                    <div className="bottom-left-media">497 medias</div>
             </div>
             </Link>
           </div>
@@ -61,8 +61,8 @@ const City = () => {
                 className=" rounded   ec-gate-img hover-overlay"
                 alt="..."
               />
-                  <div class="bottom-left">Chennai</div>
-                    <div class="bottom-left-media">282 medias</div>
+                  <div className="bottom-left">Chennai</div>
+                    <div className="bottom-left-media">282 medias</div>
             </div>
             </Link>
 
@@ -73,8 +73,8 @@ const City = () => {
                 className="rounded mt-3   ec-gate-img"
                 alt="..."
               />
-                  <div class="bottom-left">Mumbai</div>
-                  <div class="bottom-left-media">1316 medias</div>
+                  <div className="bottom-left">Mumbai</div>
+                  <div className="bottom-left-media">1316 medias</div>
             </div>
             </Link>
           </div>

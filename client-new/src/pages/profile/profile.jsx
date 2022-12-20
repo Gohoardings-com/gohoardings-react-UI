@@ -14,7 +14,6 @@ const Profile = () => {
 
   const userData = async () => {
     const data = await profileDetails();
-    console.log(data);
     setPosts(data.message);
   };
 
@@ -59,31 +58,31 @@ const Profile = () => {
   return (
     <>
       <NewNAvbar />
-      <div className=" container">
+    <div className=" container">
         <div className="row  p-5">
           <div className="col-md-3">
-            <div class="card">
+            <div className="card">
               <img
-                src="../../gohoarding/new-icon/user-profile.png"
-                class="card-img-top p-3 pb-2"
+                src="Image Not found"
+                className="card-img-top p-3 pb-2"
                 alt="..."
               />
-              <div class="card-body text-light  row text-center pt-0 pb-2">
-                <div class="col ">
-                  <div class="p-1 border bg-success" onClick={showProfile}>
+              <div className="card-body text-light  row text-center pt-0 pb-2">
+                <div className="col ">
+                  <div className="p-1 border bg-success" onClick={showProfile}>
                     Profile
                   </div>
                 </div>
-                <div class="col">
-                  <div class="p-1 border bg-success" onClick={showCompaney}>
+                <div className="col">
+                  <div className="p-1 border bg-success" onClick={showCompaney}>
                     Companey
                   </div>
                 </div>
               </div>
             </div>
-            <div class="list-group card mt-5" id="list-tab" role="tablist">
+            <div className="list-group card mt-5" id="list-tab" role="tablist">
               <a
-                class="list-group-item list-group-item-action active"
+                className="list-group-item list-group-item-action active"
                 id="list-home-list"
                 data-bs-toggle="list"
                 href="#list-home"
@@ -94,7 +93,7 @@ const Profile = () => {
                 My Dashboard
               </a>
               <a
-                class="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action"
                 id="list-profile-list"
                 data-bs-toggle="list"
                 href="#list-profile"
@@ -104,7 +103,7 @@ const Profile = () => {
                 Media Plan
               </a>
               <a
-                class="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action"
                 id="list-messages-list"
                 data-bs-toggle="list"
                 href="#list-messages"
@@ -114,7 +113,7 @@ const Profile = () => {
                 Campaigns
               </a>
               <a
-                class="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action"
                 id="list-settings-list"
                 data-bs-toggle="list"
                 href="#list-settings"
@@ -124,7 +123,7 @@ const Profile = () => {
                 Proforma invoice
               </a>
               <a
-                class="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action"
                 id="list-messages-list"
                 data-bs-toggle="list"
                 href="#list-messages"
@@ -134,7 +133,7 @@ const Profile = () => {
                 Invoice & Payments
               </a>
               <a
-                class="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action"
                 id="list-settings-list"
                 data-bs-toggle="list"
                 href="#list-settings"
@@ -151,102 +150,102 @@ const Profile = () => {
               <div className="col-md-9">
                 <div className="card">
                   <div className=" row p-3">
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                       
-                      <div class="form-group">
-                        <label for="company" class="control-label">
+                      <div className="form-group">
+                        <label for="company" className="control-label">
                           Company
                         </label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="company"
                           value="0"
                         />
                       </div>
-                      <div class="form-group">
-                        <label for="vat" class="control-label">
+                      <div className="form-group">
+                        <label for="vat" className="control-label">
                           VAT Number
                         </label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="vat"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="phonenumber">Phone</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="phonenumber"
                           id="phonenumber"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
-                        <label class="control-label" for="website">
+                      <div className="form-group">
+                        <label className="control-label" for="website">
                           Website
                         </label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="website"
                           id="website"
                           value=""
                         />
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
+                    <div className="col-md-6">
+                      <div className="form-group">
                         <label for="city">City</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="city"
                           id="city"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="address">Address</label>
                         <textarea
                           name="address"
                           id="address"
-                          class="form-control"
+                          className="form-control"
                           rows="4"
                         ></textarea>
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="zip">Zip Code</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="zip"
                           id="zip"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="state">State</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="state"
                           id="state"
                           value=""
                         />
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                       <div
-                        class="form-group"
+                        className="form-group"
                         app-field-wrapper="custom_fields[customers][10]"
                       >
                         <label
                           for="custom_fields[customers][10]"
-                          class="control-label"
+                          className="control-label"
                         >
                           PAN
                         </label>
@@ -254,21 +253,21 @@ const Profile = () => {
                           type="text"
                           id="custom_fields[customers][10]"
                           name="custom_fields[customers][10]"
-                          class="form-control"
+                          className="form-control"
                           data-fieldto="customers"
                           data-fieldid="10"
                           value=""
                         />
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                       <div
-                        class="form-group"
+                        className="form-group"
                         app-field-wrapper="custom_fields[customers][11]"
                       >
                         <label
                           for="custom_fields[customers][11]"
-                          class="control-label"
+                          className="control-label"
                         >
                           GSTIN
                         </label>
@@ -276,108 +275,108 @@ const Profile = () => {
                           type="text"
                           id="custom_fields[customers][11]"
                           name="custom_fields[customers][11]"
-                          class="form-control"
+                          className="form-control"
                           data-fieldto="customers"
                           data-fieldid="11"
                           value=""
                         />
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    <div className="col-md-12">
                       <h3>Billing &amp; Shipping</h3>
-                      <hr class="no-mbot" />
+                      <hr className="no-mbot" />
                     </div>
                          
-                    <div class="col-md-6">
-                      <h4 class="mbot15 mtop20">Billing Address</h4>
-                      <div class="form-group">
+                    <div className="col-md-6">
+                      <h4 className="mbot15 mtop20">Billing Address</h4>
+                      <div className="form-group">
                         <label for="billing_street">Street</label>
                         <textarea
                           name="billing_street"
                           id="billing_street"
-                          class="form-control"
+                          className="form-control"
                           rows="4"
                         ></textarea>
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="billing_city">City</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="billing_city"
                           id="billing_city"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="billing_state">State</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="billing_state"
                           id="billing_state"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="billing_zip">Zip Code</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="billing_zip"
                           id="billing_zip"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="billing_country">Country</label>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <h4 class="mbot15 mtop20">Shipping Address</h4>
-                      <div class="form-group">
+                    <div className="col-md-6">
+                      <h4 className="mbot15 mtop20">Shipping Address</h4>
+                      <div className="form-group">
                         <label for="shipping_street">Street</label>
                         <textarea
                           name="shipping_street"
                           id="shipping_street"
-                          class="form-control"
+                          className="form-control"
                           rows="4"
                         ></textarea>
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="shipping_city">City</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="shipping_city"
                           id="shipping_city"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="shipping_state">State</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="shipping_state"
                           id="shipping_state"
                           value=""
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="shipping_zip">Zip Code</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           name="shipping_zip"
                           id="shipping_zip"
                           value=""
                         />
                       </div>
                     </div>
-                    <div class="col-md-12 text-right mtop20">
-<div class="form-group">
-<button type="submit" class="btn btn-info">Update</button>
+                    <div className="col-md-12 text-right mtop20">
+<div className="form-group">
+<button type="submit" className="btn btn-info">Update</button>
 </div>
 </div>
                   </div>
@@ -389,19 +388,19 @@ const Profile = () => {
               <div className="col-md-6 ">
                 {profile ? (
                   <>
-                    <UserProfile posts={posts[0]} />
+                    <UserProfile posts={posts} />
                   </>
                 ) : (
                   <>
                     <div className="card p-3 mid-card">
                       <p>Overview</p>
 
-                      <div class="horizontal-tabs">
+                      <div className="horizontal-tabs">
                         <ul
-                          class="nav nav-tabs nav-tabs-horizontal mb-4"
+                          className="nav nav-tabs nav-tabs-horizontal mb-4"
                           role="tablist"
                         >
-                          <li role="presentation" class="active">
+                          <li role="presentation" className="active">
                             <a
                               href="#booked_media"
                               aria-controls="booked_media"
@@ -410,11 +409,11 @@ const Profile = () => {
                               aria-expanded="true"
                               onClick={showPlan}
                             >
-                              <i class="fa fa-bullhorn menu-icon"></i> Booked
+                              <i className="fa fa-bullhorn menu-icon"></i> Booked
                               Plan
                             </a>
                           </li>
-                          <li role="presentation" class="">
+                          <li role="presentation" className="">
                             <a
                               href="#payment"
                               aria-controls="payment"
@@ -423,11 +422,11 @@ const Profile = () => {
                               aria-expanded="false"
                               onClick={showPayment}
                             >
-                              <i class="fa fa-window-maximize menu-icon"></i>{" "}
+                              <i className="fa fa-window-maximize menu-icon"></i>{" "}
                               Payment
                             </a>
                           </li>
-                          <li role="presentation" class="">
+                          <li role="presentation" className="">
                             <a
                               href="#invoice"
                               aria-controls="invoice"
@@ -436,20 +435,20 @@ const Profile = () => {
                               aria-expanded="false"
                               onClick={showInvoise}
                             >
-                              <i class="fa fa-window-maximize menu-icon"></i>{" "}
+                              <i className="fa fa-window-maximize menu-icon"></i>{" "}
                               Invoice
                             </a>
                           </li>
                         </ul>
 
-                        <div class="tab-content">
+                        <div className="tab-content">
                           <div
                             role="tabpanel"
-                            class="tab-pane active"
+                            className="tab-pane active"
                             id="booked_media"
                           >
                             <table
-                              class="table dt-table table-announcements dataTable no-footer"
+                              className="table dt-table table-announcements dataTable no-footer"
                               data-order-col="1"
                               data-order-type="asc"
                               id="DataTables_Table_0"
@@ -543,22 +542,22 @@ const Profile = () => {
                 ) : (
                   <>
                     <div
-                      class="widget card p-2  pb-4 "
+                      className="widget card p-2  pb-4 "
                       id="widget-user_data"
                       data-name="User Widget"
                     >
-                      <div class="panel_s user-data ">
-                        <div class="panel-body home-activity">
-                          <p class="bold">Activity</p>
-                          <div class="clearfix"></div>
-                          <hr class="hr-panel-heading" />
-                          <div class="horizontal-scrollable-tabs">
-                            <div class="horizontal-tabs">
+                      <div className="panel_s user-data ">
+                        <div className="panel-body home-activity">
+                          <p className="bold">Activity</p>
+                          <div className="clearfix"></div>
+                          <hr className="hr-panel-heading" />
+                          <div className="horizontal-scrollable-tabs">
+                            <div className="horizontal-tabs">
                               <ul
-                                class="nav nav-tabs nav-tabs-horizontal"
+                                className="nav nav-tabs nav-tabs-horizontal"
                                 role="tablist"
                               >
-                                <li role="presentation" class="active">
+                                <li role="presentation" className="active">
                                   <a
                                     href="#favourite_added"
                                     aria-controls="favourite_added"
@@ -569,7 +568,7 @@ const Profile = () => {
                                     Saved Media
                                   </a>
                                 </li>
-                                <li role="presentation" class="">
+                                <li role="presentation" className="">
                                   <a
                                     href="#media_activity"
                                     aria-controls="media_activity"
@@ -581,22 +580,22 @@ const Profile = () => {
                                   </a>
                                 </li>
                               </ul>
-                              <div class="tab-content">
+                              <div className="tab-content">
                                 <div
                                   role="tabpanel"
-                                  class="tab-pane active"
+                                  className="tab-pane active"
                                   id="favourite_added"
                                 >
-                                  <div class="">
-                                    <p class="no-margin">No Announcements</p>
+                                  <div className="">
+                                    <p className="no-margin">No Announcements</p>
                                   </div>
                                 </div>
                                 <div
                                   role="tabpanel"
-                                  class="tab-pane "
+                                  className="tab-pane "
                                   id="media_activity"
                                 >
-                                  <div class="activity-feed"></div>
+                                  <div className="activity-feed"></div>
                                 </div>
                               </div>
                             </div>
@@ -610,7 +609,7 @@ const Profile = () => {
             </>
           )}
         </div>
-      </div>
+      </div> 
     </>
   );
 };

@@ -15,7 +15,7 @@ const Branding = (props) => {
                 className="logo ps-2"
               />
             </a>
-            <div class="inn-pag-ban">
+            <div className="inn-pag-ban">
               <h2>{props.title}</h2>
             </div>
           </div>

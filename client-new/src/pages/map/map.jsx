@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from '../../apis/apiContext';
 import { useNavigate } from 'react-router-dom';
 import "./map.scss";
+import { ILLUMINATION } from "../../apis/apis";
 import { priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from 'react-redux';
@@ -145,30 +146,6 @@ const Map = () => {
     window.localStorage.setItem("locate",`/map`)
     navigate('/login')
 }
-
-  let ILLUMINATION = [
-    { label: "Nonlit", value: "Nonlit" },
-    {
-      label: "Frontlit",
-      value: "Frontlit",
-    },
-    {
-      label: "Backlit",
-      value: "Backlit",
-    },
-    {
-      label: "Ambilit",
-      value: "Ambilit",
-    },
-    {
-      label: "LED",
-      value: "LED",
-    },
-    {
-      label: "Digital",
-      value: "Digital",
-    }
-  ];
 
   const holdingtype = async () => {
     const { data } = await instance.get('filter/categoryfilter')
