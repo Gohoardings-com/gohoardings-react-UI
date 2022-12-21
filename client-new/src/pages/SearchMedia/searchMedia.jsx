@@ -35,8 +35,8 @@ const SearchMedia = () => {
 
   return (
     <>
-      <div className="heading-content text-center py-5  pb-5">
-        <div className="headingText pt-3">
+      <div className="heading-content text-center pt-5   pb-5">
+        <div className="headingText pt-5">
           <h1 className="text-center text-light ">
             India's Largest Outdoor
             <br />
@@ -49,8 +49,8 @@ const SearchMedia = () => {
           </h6>
         </div>
         <div className="container-fluid  mt-5 pt-2  px-5 m-0 ">
-          <div className="row  mx-auto mb-5  mt-5 p-1 search-container">
-            <div className="col-md-5  me-0">
+          <div className="row  mx-auto mb-5   p-1 search-container">
+            <div className="col-md-5  me-0 pe-0">
               <div className="search-location ">
                 <div className="search-inner">
                   <InputGroup className="" id="input-click">
@@ -97,10 +97,10 @@ const SearchMedia = () => {
               </div>
             </div>
 
-            <div className="col-md-5  ms-0 ">
+            <div className="col-md-5  ms-0  ">
              <MediaDropDown userType={userType} setUserType={setUserType}/>
             </div>
-            <div className="col-md-2 p-2 ">
+            <div className="col-md-2 p-2 pe-1 ">
               <Link
                 to={`/${userType}/${value}`}
                 className="button-serch text-white rounded-pill "

@@ -1,4 +1,4 @@
-import instance from "./axios";
+import instance from './axios'
 export const clientId = '993204517237-7ugkv9g11enginni1jruiidpg0ck618h.apps.googleusercontent.com';
 
 export const  ILLUMINATION = [
@@ -8,6 +8,40 @@ export const  ILLUMINATION = [
     {label: "Ambilit",value: "Ambilit"},
     {label: "LED",value: "LED"},
     {label: "Digital",value: "Digital"}
+  ];
+
+
+  export const CityNameImage = [
+    {
+      label: "Tradition Ooh",
+      value: "traditional-ooh-media",
+      srcImg: ".././images/tradition.jpg",
+    },
+    {
+      label: "Digital OOH Media",
+      value: "digital-media",
+      srcImg: ".././images/digit.jpg",
+    },
+    {
+      label: "Mall Media",
+      value: "mall-media",
+      srcImg: ".././images/mall.jpg",
+    },
+    {
+      label: "Airport Branding",
+      value: "airport-media",
+      srcImg: ".././images/airport.jpg",
+    },
+    {
+      label: "Office Branding",
+      value: "office-media",
+      srcImg: ".././images/office.jpg",
+    },
+    {
+      label: "Transit Media",
+      value: "transit-media",
+      srcImg: ".././images/transit.jpg",
+    },
   ];
 
 export const getAllCity = async() =>{

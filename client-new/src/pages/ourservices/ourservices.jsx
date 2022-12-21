@@ -1,40 +1,8 @@
 import React from "react";
 import "./ourservices.scss";
 import { useNavigate, Link } from "react-router-dom";
-
+import { CityNameImage } from "../../apis/apis";
 const Ourservices = () => {
-  let ILLUMINATION = [
-    {
-      label: "Tradition Ooh",
-      value: "traditional-ooh-media",
-      srcImg: "./images/tradition.jpg",
-    },
-    {
-      label: "Digital OOH Media",
-      value: "digital-media",
-      srcImg: "./images/digit.jpg",
-    },
-    {
-      label: "Mall Media",
-      value: "mall-media",
-      srcImg: "./images/mall.jpg",
-    },
-    {
-      label: "Airport Branding",
-      value: "airport-media",
-      srcImg: "./images/airport.jpg",
-    },
-    {
-      label: "Office Branding",
-      value: "office-media",
-      srcImg: "./images/office.jpg",
-    },
-    {
-      label: "Transit Media",
-      value: "transit-media",
-      srcImg: "./images/transit.jpg",
-    },
-  ];
 
   return (
     <div className="ourServices pb-5  py-3 px-5 pt-5 ">
@@ -47,7 +15,7 @@ const Ourservices = () => {
       </h6>
       <div className=" container px-5 mt-3">
         <div className="row row-cols-md-2 row-cols-sm-1 row-cols-lg-3  ">
-          {ILLUMINATION.map((pos,i) => (
+          {CityNameImage.map((pos,i) => (
             <div className="col-12 col-sm-12 mt-3 p-0 m-0" key={i}>
               <div className="content ">
                 {" "}

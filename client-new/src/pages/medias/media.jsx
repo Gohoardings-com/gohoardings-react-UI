@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./media.scss";
+import { ILLUMINATION } from "../../apis/apis";
 import { mediawithcity } from "../../action/adminAction";
 import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "../../apis/apiContext";
@@ -38,33 +39,6 @@ const Media = () => {
     slice = search.slice(0, noOfLogo);
   }
 
-  let ILLUMINATION = [
-    { label: "Nonlit", value: "nonlit" },
-    {
-      label: "Frontlit",
-      value: "frontlit",
-    },
-    {
-      label: "Backlit",
-      value: "backlit",
-    },
-    {
-      label: "Ambilit",
-      value: "ambilit",
-    },
-    {
-      label: "LED",
-      value: "lED",
-    },
-    {
-      label: "Digital",
-      value: "digital",
-    },
-    {
-      label: "Ledscreen",
-      value: "ledscreen",
-    },
-  ];
 
   const holdingtype = async () => {
     const { data } = await instance.get("filter/categoryfilter");

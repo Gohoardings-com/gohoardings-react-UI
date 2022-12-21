@@ -42,9 +42,17 @@ const getUser = async () => {
   setPosts(...data)
 } 
 
-const hgh = window.sessionStorage.getItem("user")
+function clearStorage() {
 
- 
+  let session = sessionStorage.getItem('user');
+
+  if (session == null) {
+  
+    removeCookie(`${posts.userid}`,[`${posts.userid}`])
+
+  }
+  sessionStorage.setItem('user', false);
+}
 
   const logOut = async () => {
     sessionStorage.clear()
@@ -52,17 +60,15 @@ const hgh = window.sessionStorage.getItem("user")
     handelLogout().then(() => dispatch(authActions.logout()))
   }
 
- console.log(posts);
+
+
+
   const refreshUser = async() =>{ 
       const data = await refreshToken()
    return data;
 
   }
-
-  // {!hgh &&  removeCookie(`${posts.userid}`,[`${posts.userid}`])}
   useEffect(() => {
-
- 
      if(firstRender){
   firstRender = true
   getUser().then(() => dispatch(authActions.login()))
@@ -75,6 +81,10 @@ const hgh = window.sessionStorage.getItem("user")
    setPosts(posts)
    
   }, [])
+
+
+
+
 
   return (
     <>

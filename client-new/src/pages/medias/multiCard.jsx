@@ -13,7 +13,7 @@ const MultiCard = ({
   locatetologin,
 }) => {
   return (
-    <div className="m-auto mt-1 multi-card-contaier row row-cols-md-3 row-cols-xl-4">
+    <div className="m-auto mt-1 multi-card-contaier row row-cols-md-3 row-cols-xl-3">
       {loading ? (
         <>
           <h1>Loading... Please Wait</h1>
