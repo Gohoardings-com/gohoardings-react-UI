@@ -16,12 +16,12 @@ exports.categorieFilter = catchError(async (req, res) => {
 
 
 exports.mapFilter = catchError(async (req,res) =>{
-  exports.mapFilter = catchError(async (req,res) =>{
   
     const { distance, selected, tbl, city } = req.body;
   
     db.query("SELECT  * FROM "+tbl+" WHERE illumination='"+illumna+"' || subcategory= '"+catego+"'  &&  subcategory= '"+catego+"' &&  illumination='"+illumna+"'",async (err,result) => {
       if (err) {
+        console.log(err);
         return res.status(404).json({err: err,message :"Wrong Data"})
        } else if (result.length == 0 ){
         return res.status(400).json({message:"No data"})
@@ -30,7 +30,6 @@ exports.mapFilter = catchError(async (req,res) =>{
     }
   })
   
-  })
 })
 
 exports.locationFilter = catchError(async (req,res) =>{

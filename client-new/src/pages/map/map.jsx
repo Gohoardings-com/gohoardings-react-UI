@@ -4,7 +4,7 @@ import { AccountContext } from '../../apis/apiContext';
 import { useNavigate } from 'react-router-dom';
 import "./map.scss";
 import { ILLUMINATION } from "../../apis/apis";
-import { priceSubIllu } from "../../action/adminAction";
+import { mediawithcity, priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import instance from "../../apis/axios";
@@ -14,7 +14,7 @@ import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
 
 const Map = () => {
-  const priceState = window.localStorage.getItem("user")
+  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const dispatch = useDispatch();
   const {search, loading} = useSelector((state) => state.search)
   const navigate = useNavigate()
@@ -25,9 +25,6 @@ const Map = () => {
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(3);
-  const [total,setNewTotal] = useState(0)
-
-
   const { initalState } = useContext(AccountContext)
 
 
@@ -55,7 +52,10 @@ const Map = () => {
       }
     });
   };
-
+const previousData = async() =>{
+ 
+dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}))
+}
 
   const userCartItem = async () => {
     const { data } = await instance.get('cart/cartitems');
@@ -84,6 +84,37 @@ const Map = () => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
+
+  const userCartItem = async () => {
+ 
+    const { data } = await instance.get('cart/cartitems');
+    setcartItem(data)
+    handelprice(cartItem);
+  }
+ 
+  if(cartItem.length==0){
+    console.log("empty");
+  }
+  else{
+    console.log("DATA");
+  }
+
+
+  const handelprice = async(cartItem) => {
+
+    let ans =0 ;
+   await cartItem.map((item) => (ans+=item.price));
+    setNewTotal(ans);
+  };
+
+  
+  useEffect(() => {
+<<<<<<< HEAD
+    handelprice();
+=======
+    userCartItem();
+>>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
+  },[]);
 
   const getAllDetails = async () => {
       const value = [...search]
@@ -139,9 +170,6 @@ const Map = () => {
   }
 
 
-
-
-
   const locatetologin = async() =>{
     window.localStorage.setItem("locate",`/map`)
     navigate('/login')
@@ -182,6 +210,7 @@ const Map = () => {
   // }, []);
 
   return (
+    
     <div className="container-fluid mh-100">
       <div className="row" id="map-view-row">
         <div className="col-lg-3 col-md-3 col-sm-12 p-0 border-end position-relative">
@@ -230,7 +259,7 @@ const Map = () => {
                                 <li>FTF : {item.ftf}</li>
                                 <li>Size : {item.size} feet</li>
 
-                                <li>Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+                                <li>Price: {!isLoggedIn ? <a onClick={locatetologin} >Please Login first</a> : item.price}
 
                                 </li>
                               </ul>
@@ -374,8 +403,10 @@ const Map = () => {
                 </div>
               </div>
               <div className="poi-submit">
-                <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>
+                <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={getAllDetails}>Apply</button>                
+
               </div>
+                <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={previousData}>Clear All</button>                
             </div>
             <div className="media-items p-2 accordion-collapse collapse" id="collapseC1" data-bs-parent="#accordionTest">
               <div className="accordion items border mb-2" id="accordionExample">
@@ -411,7 +442,7 @@ const Map = () => {
                                   <li>FTF : {item.ftf}</li>
                                   <li>Size : {item.size} feet</li>
                                   <li>
-                                    Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+                                    Price: {!isLoggedIn ? <a onClick={locatetologin} >Please Login first</a> : item.price}
                                   </li>
                                 </ul>
                                 <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>

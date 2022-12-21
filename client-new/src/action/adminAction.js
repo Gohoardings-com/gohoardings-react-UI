@@ -19,6 +19,7 @@ export const userDetails =  async (dispatch) => {
 
 export const mediawithcity  = (category_name, city_name)  => async (dispatch) =>{
     try{
+        console.log(category_name, city_name);
         dispatch({type: "MediaWithCityRequest"});
         const config = { headers : { "Content-Type" : "application/json"}};
 

@@ -4,6 +4,7 @@ import { AccountContext } from "../../apis/apiContext";
 import { useParams } from "react-router-dom";
 import { IoIosSettings, IoMdLocate } from "react-icons/io";
 import { GrMapLocation } from "react-icons/gr";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./details.scss";
 import {
@@ -12,20 +13,20 @@ import {
 } from "react-icons/md";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
+import Markers from "../map/marker";
 
 const Details = () => {
-  const priceState = window.localStorage.getItem("user") || window.sessionStorage.getItem("user");
   const { category_name, meta_title } = useParams();
   const { addRemove } = useContext(AccountContext);
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  const [markers, setPosts] = useState([]);
+  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
 
   const getMedia = async () => {
     const { data } = await instance.post("product/product", {
       meta_title: meta_title,
       category_name: category_name,
     });
-    console.log(data);
     setPosts(data);
   };
   const locatetologin = async () => {
@@ -55,7 +56,7 @@ const Details = () => {
   };
 
   const add = (event) => {
-    let data = [...posts];
+    let data = [...markers];
     data.forEach((element) => {
       if (element.code == event.code) {
         console.log(element);
@@ -66,7 +67,7 @@ const Details = () => {
   };
 
   const remove = (event) => {
-    let data = [...posts];
+    let data = [...markers];
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
@@ -100,13 +101,13 @@ const Details = () => {
           </a>
         </div>
       </div>
-      {!posts ? (
+      {!markers ? (
         <>
           <h1>Loading... Please wait</h1>
         </>
       ) : (
         <>
-          {posts.map((item, i) => (
+          {markers.map((item, i) => (
             <div className="conatiner-fluid px-4">
               <div className="row mt-sm-5  mb-5 pb-5 mt-3 ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5">
                 <div className="col-md-6 text-center">
@@ -131,6 +132,9 @@ const Details = () => {
                       className="w-75 rounded-3 img-fluid maindivbordermediadetails p-2"
                     />
                   </div>
+                  <div style={{width:"20px", height:"20px"}}>
+                   {/* <Markers markers={markers} /> */}
+                  </div>
                 </div>
 
                 <div className="col " id="media">
@@ -145,7 +149,7 @@ const Details = () => {
                         </h6>
                         <h6 className="overflow-wrap">
                           Price:{" "}
-                          {!priceState ? (
+                          {!isLoggedIn ? (
                             <a
                               onClick={locatetologin}
                               className="text-decoration-none text-danger"
@@ -182,9 +186,7 @@ const Details = () => {
                       </div>
                     </div>
                     <div className="mt-3 singlemediashow ">
-                      {/* <div className=" p-2 datail-heading">
-                        <h4 className="text-light">Highlights</h4>
-                      </div> */}
+                    
                       <div className="d-flex flex-row mt-3 pb-2 mediaAllDetails">
                         <h6 className=" pt-2">Address</h6>
                         <span className="ms-auto ">{item.areadescription}</span>

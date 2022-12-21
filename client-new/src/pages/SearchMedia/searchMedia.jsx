@@ -33,9 +33,6 @@ const SearchMedia = () => {
     console.log("search ", searchTerm);
   };
 
-  const handleSelect = (e) => {
-    setUserType(e);
-  };
   return (
     <>
       <div className="heading-content text-center py-5  pb-5">

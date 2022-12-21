@@ -9,7 +9,7 @@ exports.token = catchError(async(userid, statuscode,res) =>{
      const option =  {
         path: '/',
         expires:  new Date(Date.now() + 7 * 24 * 3600000),
-        httpOnly: true,
+        httpOnly: false,
         sameSite: 'lax',
       }
       return res.status(statuscode).cookie(String(userid), token,option).json({success:true, message:"Login Successfully"})
@@ -34,3 +34,13 @@ exports.verifyToken = catchError(async (req, res, next) => {
       })
     }
   })
+
+
+
+
+
+
+
+
+
+ 
