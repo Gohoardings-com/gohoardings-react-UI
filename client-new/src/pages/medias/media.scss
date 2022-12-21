@@ -219,6 +219,7 @@
     transition: all .2s ease-out;
     text-align: left;
     color: #555;
+    
 }
 
 .project figure:hover .actions {
@@ -249,8 +250,6 @@
 .bnt-action{
     margin: 0% 0% auto;   
     color: white !important;
-    // opacity: 65% !important;
-    // background-color: #DC3545 !important; 
     .eye-icon{
   height: 25px !important;
 }

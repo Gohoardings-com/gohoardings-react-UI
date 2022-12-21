@@ -9,13 +9,14 @@
   background-image: linear-gradient(to bottom, #20344d, #20344d, #305581);
 
   h1 {
-    font-size: 50px;
+    font-size: 53px;
     font-weight: 500;
     font-family: "Montserrat";
   }
   h6 {
     font-family: "Montserrat";
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 17px;
   }
 }
 
@@ -35,12 +36,24 @@
   padding: 0px ;
 
 }
+
 .select-media-icon{
   height: 24px;
   margin-right: 4%;
   margin-left: 2%;
 }
 
+}
+@media screen and (max-width: 1024px){
+  .search-container {
+    width: 72%;
+  }
+  .search-btn {
+    width: 100px !important;
+  }
+  #select-media-box {
+width: 255px !important;
+  }
 }
 
 
@@ -54,7 +67,7 @@
 
 }
 #select-media-box {
-  width: 22vw;
+  width: 21.5vw;
   color: $grey;
   background: $white;
   text-align: left;
@@ -67,6 +80,7 @@
 #select-media-box:focus {
   box-shadow: none;
 }
+
 
 .dropdown-toggle::after {
   margin-top: 12px;
