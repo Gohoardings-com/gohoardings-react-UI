@@ -147,7 +147,7 @@ const Profile = () => {
 
           {companey ? (
             <>
-<<<<<<< HEAD
+
               <div className="col-md-9">
                 <div className="card">
                   <div className=" row p-3">
@@ -383,9 +383,9 @@ const Profile = () => {
                   </div>
                 </div>   
               </div>
-=======
+
               <Companey />
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
+
             </>
           ) : (
             <>

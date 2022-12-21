@@ -78,7 +78,7 @@ const EnquireRegister = () => {
     };
 
     return (
-        <div className='col-md-5  home-contact-form px-5 mt-2 '>
+        <div className='col-md-5  home-contact-form  mt-2 '>
             <form className=' bg-dark rounded p-3 ' onSubmit={onSubmit}>
                 <h3 className='no-wrap text-light text-center'>Request a Call Back</h3>
                 <div className="mb-4 mt-4 ">

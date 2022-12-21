@@ -85,12 +85,7 @@ dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY"
   });
 
-  const userCartItem = async () => {
  
-    const { data } = await instance.get('cart/cartitems');
-    setcartItem(data)
-    handelprice(cartItem);
-  }
  
   if(cartItem.length==0){
     console.log("empty");
@@ -100,20 +95,15 @@ dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}
   }
 
 
-  const handelprice = async(cartItem) => {
-
-    let ans =0 ;
-   await cartItem.map((item) => (ans+=item.price));
-    setNewTotal(ans);
-  };
+ 
 
   
   useEffect(() => {
-<<<<<<< HEAD
-    handelprice();
-=======
+
+  
+
     userCartItem();
->>>>>>> 179e4f0a779cd2b900cb9c08ea8c7bec489bb4f9
+
   },[]);
 
   const getAllDetails = async () => {
@@ -142,9 +132,6 @@ dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}
         element.isDelete = 1;
       
       }
-      // const result = data.filter((word) => word.isDelete === 0);
-      // setcartItem(result)
-      
     });
   };
 
@@ -190,24 +177,7 @@ dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}
       await setnoOfLogo(noOfLogo - 6 );
     }
   };
-  // useEffect(() => {
-    
-  // }, [])
 
-    // const nmedia = async (arr) => {
-  //   setMedias(arr);
-  // }
-// console.log(category_name,city_name);
-//   const mediasData = async () => {
-//     const  data  = await medaiWithCity(category_name,city_name);
-//     if (data.length > 0) {
-//       setMedias(data);
-//     }
-//   }
-
-  // useEffect(() => {
-  //   mediasData();
-  // }, []);
 
   return (
     
