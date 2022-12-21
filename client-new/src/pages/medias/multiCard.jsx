@@ -55,15 +55,7 @@ const MultiCard = ({
                         className="rupees-logo"
                       />{" "}
                       Price {""}
-                      {!priceState ? (
-                        <a
-                          onClick={locatetologin}
-                          className="text-decoration-none text-danger media-filter-text-card-detail "
-                        >
-                          Login first
-                        </a>
-                      ) : (
-                        <>
+                     
                           <span className="text-muted text-decoration-line-through">
                             {" "}
                             {parseInt((item.price * 11) / 10)}{" "}
@@ -73,8 +65,8 @@ const MultiCard = ({
                             9% off 
                           </span>
 
-                        </>
-                      )}
+                        
+                     
                     </span>
                     <span className="project-creator mt-2 ms-0">
                       <img
@@ -82,16 +74,10 @@ const MultiCard = ({
                         className="offer-logo"
                       />{" "}
                       Offer {""}
-                      {!priceState ? (
-                        <a
-                          onClick={locatetologin}
-                          className="text-decoration-none text-danger media-filter-text-card-detail "
-                        >
-                          Login first
-                        </a>
-                      ) : (
-                        parseInt(item.price)
-                      )}
+                     
+                       
+                       { parseInt(item.price)}
+                      
                     </span>
 
                     <span className="project-price">
