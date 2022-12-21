@@ -11,12 +11,12 @@ h6{
     font-family: "Montserrat";
 }
 .gate-img{
-    width:570px ;
+    width:580px ;
     height: 366px;
 }
 .ec-gate-img{
-    width: 280px !important;
-    height: 175px !important;
+    width: 280px ;
+    height: 175px ;
 }
 .city-img-container {
     position: relative;
@@ -75,26 +75,18 @@ z-index: 2;
 }
 
 
-@media screen and (max-width:425px) {
-    .citylist {
-        display: none;
-    }
-}
+
 
 @media screen and (max-width:1024px) {
 
-    .heading {
-        border-bottom: 4px solid black;
-        margin-bottom: 50px !important;
-        margin-left: 90px !important;
-        margin-right: 90px !important;
-
-        padding-top: 50px !important;
+    .gate-img{
+        width:430px !important;
+        height: 300px !important;
     }
+    .ec-gate-img{
+        width: 210px !important ;
+        height: 141px !important ;
+    }
+    
 }
 
-@media screen and (min-width:2560px) {
-    .citylist {
-        display: none;
-    }
-}
