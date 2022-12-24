@@ -1,5 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit"
-
 export const loginReducer = (state = {login:[]}, action) =>{
     switch (action.type) {
         case "LoginRequest":
@@ -53,7 +51,7 @@ export const UserReducer = (state = {user:[]}, action) =>{
             }
         case "UserFail": 
             return{
-                loading:null,
+                loading:true,
                 user:"No data Found"
             }
         default:
@@ -74,7 +72,7 @@ export const SearchReducer = (state = {search:[]}, action) =>{
             }
         case "MediaWithCityFail": 
             return{
-                loading:null,
+                loading:true,
                 search:"No data Found"
             }
         default:
@@ -82,20 +80,7 @@ export const SearchReducer = (state = {search:[]}, action) =>{
     }
 }
 
-const cartSlice = createSlice({
-    name:'cart',
-    initialState : [],
-    reducers:{
-        add(state, action)  {
-            // Redux : 
-        state.push(action.payload)
-        },
-        remove(state, action){
-           return  state.filter(item => item.id !== action.payload.id);
 
-        },
-    },
-})
 
 export const CartReducer = (state = {items:{}}, action) =>{
     switch (action.type) {
@@ -118,5 +103,3 @@ export const CartReducer = (state = {items:{}}, action) =>{
     }
 }
 
-export const {add, remove} = cartSlice.actions;
-export default cartSlice.reducer

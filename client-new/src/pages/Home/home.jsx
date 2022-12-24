@@ -2,11 +2,13 @@ import React, {  useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.scss";
 import axios from "axios";
+import { authActions } from "../../store";
 import SearchMedia from '../searchmedia/searchmedia'
 import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
 import City from "../citylist/city";
-
+import { useSelector, useDispatch } from 'react-redux'
+import { useCookies } from 'react-cookie';
 import Enquire from "../enquire/enquire";
 import Flotingnavbar from "../../components/navbar/flotingnavbar";
 
@@ -27,9 +29,9 @@ const Home = () => {
   };
   
   axios.request(options).then(function (response) {
-    console.log(response.data[0]);
+    // console.log(response.data[0]);
   }).catch(function (error) {
-    console.error(error);
+    // console.error(error);
   });
     })
   },[])

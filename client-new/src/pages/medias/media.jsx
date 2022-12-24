@@ -23,7 +23,6 @@ const Media = () => {
     window.sessionStorage.getItem("user");
   const dispatch = useDispatch();
   const { search, loading } = useSelector((state) => state.search);
-  const [show, setShow] = useState(false);
   const { category_name, city_name } = useParams();
   const { addRemove } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
