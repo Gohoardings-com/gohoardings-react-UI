@@ -1,23 +1,31 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./medialogo.scss";
-
+import { CityNameImage } from "../apis/apis";
 const Medialogo = ({ search, category_name,loading }) => {
- console.log(search);
-  
 
+  
+console.log(category_name);
 
   return (
     <div className="container  ">
   
         <div className="digit-media-brand rounded-3 pb-2 mt-5 row text-light animate__animated animate__zoomIn ">
           <div className="col-4 mb-xxl-auto p-2">
-            <img
-              src="../../images/tradition.jpg"
-              alt="About media"
+          {CityNameImage.map((el) =>{
+            if(category_name === el.value){
+             return (
+              <>
+               <img
+              src={el.srcImg}
+              alt={el.srcImg}
               className="About-media-img  mt-2  ms-2 rounded-1"
               id="About-media-img-d"
             />
+            </>
+             )
+            }
+          })} 
           </div>
           <div className="col-2  viewabout-main pt-4 ps-0 ">
             <div className="col viewabout ms-3 mt-4 mb-3"    >

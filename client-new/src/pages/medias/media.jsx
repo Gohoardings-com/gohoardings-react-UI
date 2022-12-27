@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./media.scss";
+import { ILLUMINATION } from "../../apis/apis";
 import { mediawithcity } from "../../action/adminAction";
 import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "../../apis/apiContext";
@@ -17,12 +18,8 @@ import FixedNavbar from "../../components/navbar/fixednavbar";
 import { BsFilterRight } from "react-icons/bs";
 import { MdSearch } from "react-icons/md";
 const Media = () => {
-  const priceState =
-    window.localStorage.getItem("user") ||
-    window.sessionStorage.getItem("user");
   const dispatch = useDispatch();
   const { search, loading } = useSelector((state) => state.search);
-  const [show, setShow] = useState(false);
   const { category_name, city_name } = useParams();
   const { addRemove } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
@@ -38,33 +35,6 @@ const Media = () => {
     slice = search.slice(0, noOfLogo);
   }
 
-  let ILLUMINATION = [
-    { label: "Nonlit", value: "nonlit" },
-    {
-      label: "Frontlit",
-      value: "frontlit",
-    },
-    {
-      label: "Backlit",
-      value: "backlit",
-    },
-    {
-      label: "Ambilit",
-      value: "ambilit",
-    },
-    {
-      label: "LED",
-      value: "lED",
-    },
-    {
-      label: "Digital",
-      value: "digital",
-    },
-    {
-      label: "Ledscreen",
-      value: "ledscreen",
-    },
-  ];
 
   const holdingtype = async () => {
     const { data } = await instance.get("filter/categoryfilter");
@@ -284,7 +254,6 @@ const Media = () => {
             removefroCart={removefroCart}
             add={add}
             remove={remove}
-            priceState={priceState}
             locatetologin={locatetologin}
           />
         </div>
