@@ -125,9 +125,7 @@ const UserDetail = ({ posts, setPosts }) => {
 
             <Dropdown.Menu className="dropdown-menu-end  p-0">
               <Dropdown.Item variant="transparent" className="rounded-top ps-2 pt-2 pb-2 drop-item " href="/login">
-             
                 Sign in
-             
               </Dropdown.Item>
  <hr className="p-0 m-0"/>
               <Dropdown.Item className="rounded-bottom ps-2 pt-2 pb-2 drop-item" href="/contact">
