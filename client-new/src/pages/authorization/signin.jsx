@@ -56,15 +56,14 @@ const Signin = () => {
     const onSuccess = async (res) => {
       const  data  = await googleLogin(res);
       if (data.success=== true) {
-        const user = data.success;
         if (remember) {
-          window.localStorage.setItem("user", user);
+           localStorage.setItem(remember, "long");
         } else {
-          window.sessionStorage.setItem("user", user);
+          localStorage.setItem(remember, "short");
         }
-        const locate = window.localStorage.getItem("locate");
+        const locate =  localStorage.getItem("locate");
         const backlink = locate ? locate : "/";
-        window.localStorage.removeItem("locate");
+         localStorage.removeItem("locate");
         navigate(`${backlink}`).then(() => dispatch(authActions.login()));
       } else {
         toast("Email or Password Invalid");
@@ -115,15 +114,14 @@ const Signin = () => {
           e.preventDefault();
           const data = await loginUser(email, password)
           if (data.success === true) {
-            const user = data.success;
             if (remember) {
-              window.localStorage.setItem("user", user);
-            } else {
-              window.sessionStorage.setItem("user", user);
-            }
-            const locate = window.localStorage.getItem("locate");
+              localStorage.setItem(remember, "long");
+           } else {
+             localStorage.setItem(remember, "short");
+           }
+            const locate =  localStorage.getItem("locate");
             const backlink = locate ? locate : "/";
-            window.localStorage.removeItem("locate");
+             localStorage.removeItem("locate");
             navigate(`${backlink}`).then(() => dispatch(authActions.login()));
           } else {
             toast("Email or Password Invalid");
@@ -189,12 +187,11 @@ const Signin = () => {
           e.preventDefault()
           const data = await registerUser(name, email, phone, password);
           if (data.success === true) {
-            const user = data.success
-            window.localStorage.setItem("user", user)
-            window.sessionStorage.setItem("user", user)
-            const locate = window.localStorage.getItem("locate");
+          
+            localStorage.setItem(remember, "long");
+            const locate =  localStorage.getItem("locate");
             const backlink = locate ? locate : "/";
-            window.localStorage.removeItem("locate");
+             localStorage.removeItem("locate");
             navigate(`${backlink}`).then(() => dispatch(authActions.login()));
           } else {
             toast("Email or Password Invalid")

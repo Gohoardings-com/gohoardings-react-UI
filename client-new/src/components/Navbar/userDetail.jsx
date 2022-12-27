@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
 import { BiUserPlus } from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { clientId, getCurrentuser, logoutUser, refreshToken } from '../../apis/apis';
 import Nav from "react-bootstrap/Nav";
 import { AccountContext } from '../../apis/apiContext';
@@ -18,77 +18,75 @@ const UserDetail = () => {
   const dispatch = useDispatch();
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
-  const {user,loading} = useSelector((state) => state.user)
-  
+  const { user, loading } = useSelector((state) => state.user)
+
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 
 
   let firstRender = true;
   const handelLogout = async () => {
     const data = await logoutUser()
-    if (data.status == 200){
+    if (data.status == 200) {
       isLoggedIn = true;
       return data
     }
     return new Error("Unable to logOut Please Try Again");
   };
 
-  const profile = async() =>{
+  const profile = async () => {
     navigate('/profile')
   }
-  const cart = async() =>{
+  const cart = async () => {
     navigate('/cart')
   }
-// console.log();
-const getUser = async () => {
-  dispatch(userDetails)
-} 
-
-const logoutSession = async() =>{
-  const dataLocal = window.localStorage.getItem("user") 
-  const dataSession = window.sessionStorage.getItem("user")
-
-  if(!dataSession && !dataLocal){
-    window.localStorage.removeItem("persistantState")
-    localStorage.clear();
-    window.localStorage.clear() 
-    window.onunload = () => {
-      localStorage.clear();
-      window.localStorage.clear();
-    }
-    removeCookie(`${user[0].userid}`,[`${user[0].userid}`])
-  }else if(dataSession){
-    window.localStorage.setItem("sessionStorage","user")
+  // console.log();
+  const getUser = async () => {
+    dispatch(userDetails)
   }
-}
-useEffect(() =>{
-  logoutSession().then(() => dispatch(authActions.logout()))
-},[])
+  const dataLocal = localStorage.getItem("false")
+
+  const logoutSession = async () => {
+    window.onload = async () => {
+      if (dataLocal === "short") {
+        localStorage.clear()
+        handelLogout().then(() => dispatch(authActions.logout()))
+       // window.location.reload();
+
+      }
+    }
+  }
+
+  logoutSession()
+
+  // useEffect(() => {
+    
+  // }, [])
 
   const logOut = async () => {
-    sessionStorage.clear()
     localStorage.clear()
     handelLogout().then(() => dispatch(authActions.logout()))
   }
 
 
-  const refreshUser = async() =>{ 
-      const data = await refreshToken()
-   return data;
+  const refreshUser = async () => {
+    const data = await refreshToken()
+    return data;
   }
 
+
   useEffect(() => {
-     if(firstRender){
-  firstRender = true
-  getUser().then(() => dispatch(authActions.login()))
-   }else{
-    let interval = setInterval(() => {
-      refreshUser().then(() => dispatch(authActions.login()))
-    },6 * 24 * 3600000)
-   return () => clearInterval(interval)
-   }
-  getUser()
+    if (firstRender) {
+      firstRender = true
+      getUser().then(() => dispatch(authActions.login()))
+    } else {
+      let interval = setInterval(() => {
+        refreshUser().then(() => dispatch(authActions.login()))
+      }, 6 * 24 * 3600000)
+      return () => clearInterval(interval)
+    }
+    getUser()
   }, [])
+
 
   return (
     <>
@@ -111,12 +109,12 @@ useEffect(() =>{
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-          <div className="cart ms-3  pb-2" onClick={cart}>
-            <span>
-              <img src='../../gohoarding/new-icon/cart-icon.png' className='login-icon-cart'/>
-            </span>
-            <span>{initalState}</span>
-          </div>
+        <div className="cart ms-3  pb-2" onClick={cart}>
+          <span>
+            <img src='../../gohoarding/new-icon/cart-icon.png' className='login-icon-cart' />
+          </span>
+          <span>{initalState}</span>
+        </div>
       </div> :
         <Nav.Link
           className="text-dark ms-3  pt-1 p-0 "
@@ -125,7 +123,6 @@ useEffect(() =>{
           <BiUserPlus className='login-icon  pt-0 mb-1 ' />
 
         </Nav.Link>
-
       }
 
     </>

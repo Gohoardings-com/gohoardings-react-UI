@@ -30,7 +30,7 @@ const Details = () => {
     setPosts(data);
   };
   const locatetologin = async () => {
-    window.localStorage.setItem("locate", `/${meta_title}/${category_name}`);
+     localStorage.setItem("locate", `/${meta_title}/${category_name}`);
     navigate("/login");
   };
   const addonCart = async (e) => {
@@ -39,7 +39,7 @@ const Details = () => {
       mediatype: e.category_name,
     });
     if (data.message == "Login First") {
-      window.localStorage.setItem("locate", `/${meta_title}/${category_name}`);
+       localStorage.setItem("locate", `/${meta_title}/${category_name}`);
       navigate("/login");
     } else {
       addRemove({ type: "INCR" });

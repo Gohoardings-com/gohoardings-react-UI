@@ -29,8 +29,10 @@ function App() {
  
 
   const getUser = async() => {
-   {sessionStorage.getItem("user") && localStorage.getItem("user") && setAvlable(true)} 
+  if(localStorage.getItem("true") || localStorage.getItem("false")){
+    setAvlable(true)
   }
+}
 
   useEffect(() =>{
     getUser()

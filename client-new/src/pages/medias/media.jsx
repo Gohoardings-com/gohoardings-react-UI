@@ -18,9 +18,6 @@ import FixedNavbar from "../../components/navbar/fixednavbar";
 import { BsFilterRight } from "react-icons/bs";
 import { MdSearch } from "react-icons/md";
 const Media = () => {
-  const priceState =
-    window.localStorage.getItem("user") ||
-    window.sessionStorage.getItem("user");
   const dispatch = useDispatch();
   const { search, loading } = useSelector((state) => state.search);
   const { category_name, city_name } = useParams();
@@ -257,7 +254,6 @@ const Media = () => {
             removefroCart={removefroCart}
             add={add}
             remove={remove}
-            priceState={priceState}
             locatetologin={locatetologin}
           />
         </div>

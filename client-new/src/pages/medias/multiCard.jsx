@@ -9,8 +9,6 @@ const MultiCard = ({
   loading,
   addonCart,
   removefroCart,
-  priceState,
-  locatetologin,
 }) => {
   return (
     <div className="m-auto mt-1 multi-card-contaier row row-cols-md-3 row-cols-xl-3">
