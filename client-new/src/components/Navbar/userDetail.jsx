@@ -47,7 +47,22 @@ const UserDetail = ({ posts, setPosts }) => {
     setPosts(...data);
   };
 
-  const hgh = window.sessionStorage.getItem("user");
+  const logoutSession = async () => {
+    const dataLocal = localStorage.getItem("false")
+    window.onload = async () => {
+      if (dataLocal) {
+        //  if(!window.location.hash){
+        // window.location = window.location + '#loaded';
+        // window.location.reload();
+        localStorage.clear()
+        handelLogout().then(() => dispatch(authActions.logout()))
+      }
+    }
+  }
+
+  useEffect(() => {
+    logoutSession()
+  }, [])
 
   const logOut = async () => {
     sessionStorage.clear();
@@ -55,7 +70,7 @@ const UserDetail = ({ posts, setPosts }) => {
     handelLogout().then(() => dispatch(authActions.logout()));
   };
 
-  console.log(posts);
+
   const refreshUser = async () => {
     const data = await refreshToken();
     return data;
