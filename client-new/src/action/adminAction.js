@@ -19,11 +19,12 @@ export const userDetails =  async (dispatch) => {
 
 export const mediawithcity  = (category_name, city_name)  => async (dispatch) =>{
     try{
+        console.log("hello");
         console.log(category_name, city_name);
         dispatch({type: "MediaWithCityRequest"});
         const config = { headers : { "Content-Type" : "application/json"}};
 
-        const {data} = await instance.post(`media/searchMedia`,{category_name,city_name},config)
+        const {data} = await instance.post(`media/searchMedia`,category_name,city_name)
         dispatch({ type: "MediaWithCitySuccess", payload: data});
 
     }catch(error){

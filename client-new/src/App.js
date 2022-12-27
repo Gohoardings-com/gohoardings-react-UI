@@ -24,6 +24,7 @@ import "@fontsource/montserrat";
 import 'animate.css';
 import Signin from "./pages/authorization/signin";
 
+
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
@@ -69,7 +70,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-  <Header/>
         <Routes>
          <Route index path="/" element={<Home />}/>
           <Route exact path="/login" element={avlable ? <Home />:<Signin />}></Route>

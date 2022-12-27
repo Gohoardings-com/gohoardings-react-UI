@@ -4,7 +4,7 @@
 
 
 .navbar-main-floating{
- background-color: #20344D;
+ background-color: #373435;
 
 .float-brand{
   width: 200px;
@@ -105,9 +105,9 @@
 }
 .new-search {
 position: fixed;
- background-color:#20344D ;
+
  z-index: 5;
- top: 24px;
+ top: 0%;
  width: 100vw;
 
 }
@@ -129,7 +129,7 @@ font-size: 26px;
   cursor: pointer;
 }
 .cart span:nth-child(1) {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   margin-top: 0%;
   color: white;
 }

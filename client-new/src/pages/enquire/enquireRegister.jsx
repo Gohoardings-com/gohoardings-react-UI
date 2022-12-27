@@ -7,26 +7,7 @@ import instance from '../../apis/axios';
 
 const EnquireRegister = () => {
 
-    function setFocus(on) {
-        var element = document.activeElement;
-        var $ = window.jQuery;
-        if (on) {
-            setTimeout(function () {
-                element.parentNode.classList.add("focus");
-            });
-        } else {
-            let box = document.querySelector(".input-box");
-            box.classList.remove("focus");
-            $("input").each(function () {
-                var $input = $(this);
-                var $parent = $input.closest(".input-box");
-                if ($input.val()) $parent.addClass("focus");
-                else $parent.removeClass("focus");
-            });
-        };
-    };
-
-
+   
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
@@ -77,90 +58,131 @@ const EnquireRegister = () => {
         toast("Thanks, we will contact you soon!");
     };
 
-    return (
-        <div className='col-md-5  home-contact-form  mt-2 '>
-            <form className=' bg-dark rounded p-3 ' onSubmit={onSubmit}>
-                <h3 className='no-wrap text-light text-center'>Request a Call Back</h3>
-                <div className="mb-4 mt-4 ">
-                    <div className="input-box">
-                        <label className="input-label">Enter your full name</label>
-                        <input
-                            type="text"
-                            className="input-1 "
-                            onFocus={() => setFocus(true)}
-                            value={name}
-                            onChange={(e) => {
-                                setName(e.target.value);
-                            }}
-                        />
-                        <p className="ms-3 p-0 text ">{nameValidate}</p>
-                    </div>
-                </div>
-
-                <div className="mb-4 mt-2 ">
-                    <div className="input-box">
-                        <label className="input-label">
-                            Enter your contact number
-                        </label>
-                        <input
-                            type="number"
-                            className="input-1 "
-                            onFocus={() => setFocus(true)}
-                            value={number}
-                            onChange={(e) => {
-                                setNumber(e.target.value);
-                            }}
-                        />
-                        <p className="ms-2 p-0 text ">{numbervalidate}</p>
-                    </div>
-                </div>
-                <div className="mb-4 mt-2">
-                    <div className="input-box">
-                        <label className="input-label">
-                            Enter your email@gmail.com
-                        </label>
-                        <input
-                            type="text"
-                            className="input-1"
-                            onFocus={() => setFocus(true)}
-                            value={email}
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                            }}
-                        />
-                        <p className="ms-2 p-0 text ">{emailValidate}</p>
-                    </div>
-                </div>
-                <div className="mb-2 mt-2">
-                    <div className="input-box">
-                        <label className="input-label">
-                            Enter your message for our team
-                        </label>
-                        <input
-                            type="text"
-                            className="input-1"
-                            onFocus={() => setFocus(true)}
-                            // onBlur={() => setFocus(false)}
-                            value={message}
-                            onChange={(e) => {
-                                setMessage(e.target.value);
-                            }}
-                        />
-                        <p className="ms-2 p-0 text">{messageValidate}</p>
-                    </div>
-                </div>
-
-                <div className="d-grid mt-2">
-                    <button type="submit" className="rounded btn btn-danger p-1 btn-lg mt-3">
-                        <h6 className=" mt-2">SEND MESSAGE</h6>
-                    </button>
-                    <ToastContainer />
-
-                </div>
-
-            </form>
-        </div>
+    return (<>
+    <h1 className="txt-clr-tlk">Talk to us!</h1>
+            <h6 className="txt-clr" >*Please fill all the details.</h6>
+            <form className='mt-4 "position-relative' onSubmit={onSubmit}>
+  <div class="form-group py-3 ">
+    <label for="formGroupExampleInput">Name*</label>
+    <input type="text" class="form-control ps-0 rounded-0" id="formGroupExampleInput" placeholder="Your Full Name" value={name}
+                onChange={(e) => {
+                    setName(e.target.value);
+                }}/>
+  </div>
+  <div class="row py-3">
+  <div class="col">
+    <label for="Last-name">Email*</label>
+      <input type="text" class="form-control ps-0 rounded-0" placeholder="Your Mail ID" id='first-name'   value={email}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                }}/>
+    </div>
+    <div class="col">
+    <label for="Last-name">Phone Number*</label>
+      <input type="text" class="form-control ps-0 rounded-0" placeholder="+1 012 3456 789" id='+1 012 3456 789'  value={number}
+                onChange={(e) => {
+                    setNumber(e.target.value);
+                }}/>
+    </div>
+  </div>
+  <div class="form-group py-3">
+    <label for="formGroupExampleInput2">Message*</label>
+    <input type="text" class="form-control ps-0 rounded-0" id="formGroupExampleInput2" placeholder="Write your message.."   value={message}
+                onChange={(e) => {
+                    setMessage(e.target.value);
+                }}/>
+  </div>
+ <div className=' p-0 m-0 position-relative '>
+ <button type="submit" class="btn btn-lg  message-btn position-absolute top-75 end-0 " role="button">Send Message</button>
+ </div>
+ 
+</form>
+    </>
+     
     )
 }
 
-export default EnquireRegister
+export default EnquireRegister;
+
+{/* <div className='col-md-5  home-contact-form  mt-2 '>
+<form className=' bg-dark rounded p-3 ' onSubmit={onSubmit}>
+    <h3 className='no-wrap text-light text-center'>Request a Call Back</h3>
+    <div className="mb-4 mt-4 ">
+        <div className="input-box">
+            <label className="input-label">Enter your full name</label>
+            <input
+                type="text"
+                className="input-1 "
+                onFocus={() => setFocus(true)}
+                value={name}
+                onChange={(e) => {
+                    setName(e.target.value);
+                }}
+            />
+            <p className="ms-3 p-0 text ">{nameValidate}</p>
+        </div>
+    </div>
+
+    <div className="mb-4 mt-2 ">
+        <div className="input-box">
+            <label className="input-label">
+                Enter your contact number
+            </label>
+            <input
+                type="number"
+                className="input-1 "
+                onFocus={() => setFocus(true)}
+                value={number}
+                onChange={(e) => {
+                    setNumber(e.target.value);
+                }}
+            />
+            <p className="ms-2 p-0 text ">{numbervalidate}</p>
+        </div>
+    </div>
+    <div className="mb-4 mt-2">
+        <div className="input-box">
+            <label className="input-label">
+                Enter your email@gmail.com
+            </label>
+            <input
+                type="text"
+                className="input-1"
+                onFocus={() => setFocus(true)}
+                value={email}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                }}
+            />
+            <p className="ms-2 p-0 text ">{emailValidate}</p>
+        </div>
+    </div>
+    <div className="mb-2 mt-2">
+        <div className="input-box">
+            <label className="input-label">
+                Enter your message for our team
+            </label>
+            <input
+                type="text"
+                className="input-1"
+                onFocus={() => setFocus(true)}
+                // onBlur={() => setFocus(false)}
+                value={message}
+                onChange={(e) => {
+                    setMessage(e.target.value);
+                }}
+            />
+            <p className="ms-2 p-0 text">{messageValidate}</p>
+        </div>
+    </div>
+
+    <div className="d-grid mt-2">
+        <button type="submit" className="rounded btn btn-danger p-1 btn-lg mt-3">
+            <h6 className=" mt-2">SEND MESSAGE</h6>
+        </button>
+        <ToastContainer />
+
+    </div>
+
+</form>
+</div> */}

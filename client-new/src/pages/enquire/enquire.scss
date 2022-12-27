@@ -3,67 +3,108 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700");
 
-.home-contact-form .input-box {
-    position: relative;
-    margin: 10px 10px;
-    .input-label {
-      position: absolute;
-      color: $white;
-      font-size: 13px;
+.enquire-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .enquire-description-row {
+    background-color: #fdfdfd;
+    border-radius: 7px;
+    box-shadow: rgba(98, 98, 105, 0.2) 0px 7px 29px 0px;
+    width: 65vw !important;
+  }
+  .enquire-description {
+    background-color: #373435;
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+    .enquire-qsns-cant {
+      color: #ffff;
+      font-size: 1.2rem;
       font-weight: 500;
-      max-width: calc(100% - (2 * 8px));
-      overflow: hidden;
-      text-overflow: ellipsis;
-      $white-space: nowrap;
-      left: 8px;
-      top: 13px;
-      padding: 0 8px;
-      transition: 250ms;
-      user-select: none;
-      pointer-events: none;
-      svg {
-        position: relative;
-        width: 15px;
-        height: 15px;
-        top: 2px;
-        transition: 250ms;
-      }
     }
-    .input-1 {
-      box-sizing: border-box;
-      height: 50px;
-      width: 100%;
-      color: $white;
-      border: none;
-      border-bottom: 1px solid $white;
-      padding: 13px 15px 3px;
-      background-color: transparent;
-      transition: 250ms;
-      &:focus {
-        outline: none;
-        border: none;
-        border-bottom: 2px solid $white;
-        transition: 250ms;
-      }
+    .enquire-qsns-cant-qsn {
+      color: #ffff;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    .enquire-ans-cant {
+      font-size: small;
+      color: #ffff;
+    }
+    .hor-border {
+      border-top: 3px solid #ffff !important;
+      width: 118px !important;
     }
   }
+  .txt-clr-tlk {
+    color: #373435;
+    font-size: 2.2rem;
+  }
+  .txt-clr{
+    color: #373435;
+  }
+  .form-control {
+    border: none !important;
+    border-bottom: 1px solid #b5b4b4 !important;
+  }
+  label {
+    color: #6c757d !important;
+    font-size: 0.9rem;
+  }
+  ::-webkit-input-placeholder {
+    font-size: 1rem !important;
+  }
+  .form-control:focus {
+    border-color: rgba(100, 100, 100, 1) !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+  .message-btn{
+   background-color: #373435;
+   color: rgb(237, 237, 237);
+   font-size: 1rem;
+   border-radius: 4px !important;
+  }
+  .message-btn:hover{
+    background-color: #4a494a;
+    color: rgb(237, 237, 237);
+    
+   }
+   @media screen and (max-width: 1024px) {
+    // .enquire-description-row {
+ 
+    //   width: 80vw !important;
+    // }
+    .enquire-description {
+ 
+      .enquire-qsns-cant {
+     
+        font-size: 1.1rem;
+ 
+      }
+      .enquire-qsns-cant-qsn {
 
-
-    .enquire-qsns-cant{
-      font-family: "Montserrat" !important;
-      font-weight: 500 !important;
+        font-size: 1.1rem;
+        
+      }
+      .enquire-ans-cant {
+        font-size: small;
+   
+      }
+      .hor-border {
+        width: 110px !important;
+      }
     }
-    .enquire-ans-cant{
-         font-family: "Montserrat" !important;
-         font-size: small;
+    .txt-clr-tlk {
+      font-size: 2.1rem;
     }
- .suggestion-logo{
-  height: 50px !important;
-  width: 50px !important;
- }
-
-@media only screen and (max-width:425px){
-    .details{
-    display: none;
+    label {
+    
+      font-size: 0.8rem;
     }
+    ::-webkit-input-placeholder {
+      font-size: .9rem !important;
+    }
+   }
 }

@@ -1,73 +1,92 @@
-import React from 'react'
-import Carousel from 'react-bootstrap/Carousel';
-import './trandingcity.scss'
+import React, { useEffect } from "react";
+import "./trandingcity.scss";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { mediawithcity } from "../../action/adminAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const Trandingcity = () => {
-    return (
-        <>
-<div className="text-center pe-5 ps-5 m-5">
-    <div className='heading'>
+  const dispatch = useDispatch()
+  
+  
+  const data = async () => { 
+    dispatch(mediawithcity({ category_name: "digital-media", city_name: "delhi", })
+    );
+  };
+  
+  useEffect(() => {
+    data();
+  }, []);
+  const { search, loading } = useSelector((state) => state.search);
 
-    <h2 className='fw-bold'>Choose what is TRENDING in your City</h2>
-    </div>
-    <p className='text-muted'>Choose the best ways to deliver relevant messages to the relevant audience.</p>
-</div>
-<Carousel  className="text-center pe-5 ps-5 pb-0">
-    <Carousel.Item className=" data " interval={1500}>
-        <img
-            className=" d-block w-100 "
-            src="https://jcdecaux.odoads.com/media/jcdecaux/media/images/new1568265826_84160.jpg"
-            alt="Smart Bus Shelter - Nehru Place, Delhi"
-        />
-        <Carousel.Caption className=" opacity-75">
-        <div className='bg-success p-2 rounded-5'>
-            <h3 className="text-dark fw-bold">Smart Bus Shelter - Nehru Place, Delhi</h3>
-            </div>
-        </Carousel.Caption>
-    </Carousel.Item>
-     <Carousel.Item className='data' interval={1500}>
-        <img
-            className=" d-block w-100"
-            src="https://surendera_advertiesrs.odoads.com/media/surendera_advertiesrs/media/images/new1568270534_73906.jpg"
-            alt="Unipole - Delhi Rohtak Road, Rohtak"
-        />
+  {
+    var settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 4,
+      slidesToScroll: 2,
+      autoplay: true,
+      speed: 4700,
+      autoplaySpeed: 4700,
+      cssEase: "linear",
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 2,
+            initialSlide: 0,
+          },
+        },
+      ],
+    };
+  }
+  return (
+    <>
+      <div className="container-xxl  container-xl container-lg container-md  mt-5 mt-md-2 mb-md-4  py-5 mb-5 trending-contain ">
+        <section>
+          <h1 className="text-center text-nowrap ">
+            Choose what is Trending in your City
+          </h1>
+          <h6 className=" text-center">
+            Choose the best ways to deliver relevant <br />
+            messages to the relevant audience.
+          </h6>
+        </section>
 
-        <Carousel.Caption className=" opacity-75">
-        <div className='bg-success p-2 rounded-5'>
-            <h3 className="text-dark fw-bold">Unipole - Delhi Rohtak Road, Rohtak</h3>
-            </div>
-        </Carousel.Caption>
-        
-    </Carousel.Item>
-    <Carousel.Item className='data'  interval={1500}>
-        <img
-            className=" d-block w-100"
-            src="https://pioneer_publicity.odoads.com/media/pioneer_publicity/media/images/new1568265665_67156.jpg"
-            alt="Unipole - Anand Vihar, Delhi"
-        />
+        {loading || loading == null? (
+          <>
+            <h1>Loading... Please Wait</h1>
+          </>
+        ) : (
+          <>
+            <Slider {...settings}>
+              {search.map((pos, i) => (
+                <div class="container pt-3 ">
+                  <div class="row  ">
+                    <div class="col p-3 ">
+                      <div className="trending-card-img  rounded-2">
+                        <img
+                          src={pos.thumb}
+                          className="  rounded-2  trending-cardd "
+                          key={i}
+                        />
+                        <div className="bottom-left">Delhi</div>
+                        <div className="bottom-left-media">
+                          {pos.medianame.substring(17, 30)}{" "}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
 
-        <Carousel.Caption className=" opacity-75">
-        <div className='bg-success p-2 rounded-5'>
-            <h3 className="text-dark fw-bold">Unipole - Anand Vihar, Delhi</h3>
-            </div>
-        </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item className='data' interval={1500}>
-        <img
-            className=" d-block w-100"
-            src="https://naks.odoads.com/media/naks/media/images/U11.jpg"
-            alt="Unipole - Site No-U11"
-        />
-        <Carousel.Caption className=" opacity-75">
-           <div className='bg-success p-2 rounded-5'>
-           <h3 className="text-black fw-bold">Unipole - Site No-U11</h3>
-           </div>
-        </Carousel.Caption>
-    </Carousel.Item> 
-</Carousel>
-
-        </>
-    )
-}
-
-export default Trandingcity
+export default Trandingcity;

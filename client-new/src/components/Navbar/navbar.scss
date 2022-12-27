@@ -1,84 +1,108 @@
-
-.fixd-nabar{
-    background-color: #20344D;
-    .brand-logo {
-       width: 200px;
-    }
+.fixd-nabar {
+  background-color: #ffffff;
+  .brand-logo {
+    width: 190px;
+  }
 }
-.mapLink{
-    background-color: #20344D;
-    width: 116px;
-    height: 44px;
-
+.mapLink {
+  width: 116px;
+  height: 44px;
 }
 .nav-text-btn {
-    color: white!important;
-    font-weight: 600 !important;
-    display: inline-block !important;
-    width: auto !important;
+  color: #373435 !important;
+  font-weight: 600 !important;
+  display: inline-block !important;
+  width: auto !important;
 }
 
 .nav-text-btn::after {
-    content: '' !important;
-    display: block !important;
-    width: 0 !important;
-    height: 3px !important;
-    background: #fff312e1 !important;
-    transition: width .4s ease-in !important;
-  }
-  
-  .nav-text-btn:hover::after {
-    width: 100% !important;
-  }
-
-
-.login-icon{
-    font-size: 37px;
-    color: rgb(255, 255, 255);
-    transition: 0.3s;
+  content: "" !important;
+  display: block !important;
+  width: 0 !important;
+  height: 4px !important;
+  background: #fff212 !important;
+  transition: width 0.4s ease-in !important;
 }
-.login-icon:hover{
-    font-size: 37px;
 
-    color: rgb(217, 214, 214) ;
+.nav-text-btn:hover::after {
+  width: 100% !important;
 }
 
 
-.font-map-btn{
-  
-    color: white!important;
+.user-detail-login{
+  .login-icon {
+    height: 31px !important;
+    width: 31px !important;
+  }
+  .dropdown-toggle::after {
+display: none;
+  }
+  .drop-togel{
+    border: transparent !important;
+  }
+  .drop-item{
+    color: #373435 !important;
     font-weight: 600 !important;
-  //  border: 2px groove rgb(244, 242, 242) ;
-    
-   
+  }
+
 }
-.font-map-btn:hover{
-    color: rgb(255, 255, 255);
-   // border:  2px groove #fff200 ;
-   background-color: #334e6e;
-   }
-.font-map-logo{
-    
-    height: 23px ;
-    
-}
-#dropdown-basic-user{
-    display: none ;
-}
-.userDetail{
-    .dropdown-toggle::after {
-        display: none;
-        
-    }
-}
-.cart-logo{
-    font-size: 35px;
-    color: white;
+.font-map-btn {
+    color: #373435 !important;
+  font-weight: 600 !important;
 }
 
-.anchor{
-    text-decoration: none;
+.font-map-logo {
+  height: 23px;
 }
-.login-icon-cart{
-    height: 35px;
+#dropdown-basic-user {
+  display: none;
+}
+.userDetail {
+  .dropdown-toggle::after {
+    display: none;
+  }
+}
+.cart-logo {
+  font-size: 35px;
+  color: white;
+}
+
+.anchor {
+  text-decoration: none;
+}
+.login-icon-cart {
+  height: 32px;
+}
+.hello:active {
+  background-color: #ffbf00;
+  width: 100%;
+  height: 100%;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .fixd-nabar {
+        background-color: #ffffff;
+        .brand-logo {
+          width: 175px;
+        }
+      }
+      .nav-text-btn {
+       font-size: .9rem !important;
+       
+        
+      }
+      .font-map-btn {
+      
+        font-size: .9rem !important;
+      }
+      
+      .font-map-logo {
+        height: 21px !important;
+      }
+      .login-icon {
+        font-size: 31px;
+       
+      }
+
 }

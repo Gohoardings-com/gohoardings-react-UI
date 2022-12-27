@@ -4,84 +4,85 @@ import { Link } from "react-router-dom";
 
 const City = () => {
   return (
-    <div className="citylist p-0 m-0 pt-5 ">
-      <div className="">
-        <h1 className="text-center text-nowrap text-light">
-          Explore your City Listings
-        </h1>
-      </div>
-      <h6 className=" text-light text-center">
-        Explore some of the best business from around the world from our
-        partners and friends.
-      </h6>
-      <div className="container  pt-4">
-        <div className="row">
-          <div className="col-lg-6 col-md-12 ">
-            <Link to={`/traditional-ooh-media/delhi`}>
-            <div className="city-img-container p-0 m-0 ">
+    <div className="citylist m-0 mt-5 py-5 py-md-4">
+      <section>
+        <h1 className="text-center text-nowrap ">Explore your City Listings</h1>
+        <h6 className=" text-center">
+          Explore some of the best business from around the
+          <br />
+          world from our partners and friends.
+        </h6>
+      </section>
+      <div class="container mt-5 ">
+        <div class="row">
+          <div class="col col-md-4"> 
+          <Link to={`/traditional-ooh-media/delhi`}>
+            <div className="city-img-container ">
             <img
                 src="./gohoarding/home.jpg"
-                className="rounded    firtCol gate-img "
+                className="rounded iimmgg   "
                 alt="..."
               />
               <div className="bottom-left">Delhi</div>
-              <div className="bottom-left-media">1893 medias</div>
+              <div className="bottom-left-media">1893 <span className="bottom-left-media-text" >medias  </span> </div>
             </div>
-            </Link>
-          </div>
-          <div className="col-lg-3  col-md-6 ps-3 pe-0">
-            <Link to={`/traditional-ooh-media/bengaluru`}>
-            <div className="city-img-container p-0 m-0">
-              <img
-                src="./gohoarding/home2.jpg"
-                className="rounded  ec-gate-img"
-                alt="..."
-              />
-                <div className="bottom-left">Bengalore</div>
-                  <div className="bottom-left-media">660 medias</div>
-            </div>
-            </Link>
-            <Link to={`/traditional-ooh-media/chennai`}>
-             <div className="city-img-container p-0 m-0">
-              <img
-                src="./gohoarding/home4.jpg"
-                className="rounded  mt-3 ec-gate-img"
-                alt="..."
-              />
-                  <div className="bottom-left">Hyderabad</div>
-                    <div className="bottom-left-media">497 medias</div>
-            </div>
-            </Link>
-          </div>
-          <div className="col-lg-3  col-md-6 p-0 ps-3">
-            <Link to={`/traditional-ooh-media/hyderabad`}>
-             <div className="city-img-container p-0 m-0">
-              <img
-                src="./gohoarding/home3.webp"
-                className=" rounded   ec-gate-img hover-overlay"
-                alt="..."
-              />
-                  <div className="bottom-left">Chennai</div>
-                    <div className="bottom-left-media">282 medias</div>
-            </div>
-            </Link>
-
-            <Link to={`/traditional-ooh-media/mumbai`}>
-             <div className="city-img-container p-0 m-0">
+            </Link></div>
+          <div class="col col-md-4"><Link to={`/traditional-ooh-media/mumbai`}>
+             <div className="city-img-container ">
               <img
                 src="./gohoarding/home1.jpg"
-                className="rounded mt-3   ec-gate-img"
+                className="rounded iimmgg "
                 alt="..."
               />
                   <div className="bottom-left">Mumbai</div>
-                  <div className="bottom-left-media">1316 medias</div>
+                  <div className="bottom-left-media">1316 <span className="bottom-left-media-text">medias  </span> </div>
             </div>
-            </Link>
-          </div>
+            </Link></div>
+          <div class="col col-md-4"><Link to={`/traditional-ooh-media/bengaluru`}>
+            <div className="city-img-container" >
+              <img
+                src="./gohoarding/home2.jpg"
+                className="rounded iimmgg  "
+                alt="..."
+              />
+                <div className="bottom-left">Bengalore</div>
+                  <div className="bottom-left-media">660 <span className="bottom-left-media-text">medias  </span> </div>
+            </div>
+            </Link></div>
         </div>
+      </div>
+
+      <div class="container mt-4">
+           <div class="row justify-content-md-center">
+          <div class="col"><Link to={`/traditional-ooh-media/hyderabad`}>
+             <div className="city-img-container">
+              <img
+                src="./gohoarding/home3.webp"
+                className=" rounded   iimmgg"
+                alt="..."
+              />
+                  <div className="bottom-left">Chennai</div>
+                    <div className="bottom-left-media">282 <span className="bottom-left-media-text">medias  </span> </div>
+            </div>
+            </Link></div>
+   
+          <div class="col"><Link to={`/traditional-ooh-media/chennai`}>
+             <div className="city-img-container ">
+              <img
+                src="./gohoarding/home4.jpg"
+                className="rounded iimmgg "
+                alt="..."
+              />
+                  <div className="bottom-left">Hyderabad</div>
+                    <div className="bottom-left-media">497 <span className="bottom-left-media-text">medias  </span> </div>
+            </div>
+            </Link></div>
+        </div>
+
       </div>
     </div>
   );
 };
 
 export default City;
+

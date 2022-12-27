@@ -21,8 +21,8 @@ const SearchMedia = () => {
     getCity();
   }, []);
 
-  const [value, setValue] = useState("delhi");
-  const [userType, setUserType] = useState("traditional-ooh-media");
+  const [value, setValue] = useState("New Delhi,India");
+  const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -35,19 +35,34 @@ const SearchMedia = () => {
 
   return (
     <>
-      <div className="heading-content text-center pt-5   pb-5">
-        <div className="headingText pt-5">
-          <h1 className="text-center text-light ">
-            India's Largest Outdoor
-            <br />
-            Advertising Agency
-          </h1>
-          <h6 className="fw-lighter mt-4 text-center text-light ">
-            OOH Advertising made easy
-            <br />
-            Search Media. Check Availability. Book Online.
-          </h6>
+      <div className="container-xxl  container-xl container-lg container-md mb-4  search-media-content">
+        <div className="row">
+          <div className="col-md-8 ps-0">
+            <div className="heading-text mt-4">
+              <h2>india's Largest</h2>
+
+              <h1>
+                Outdoor Advertising <br />
+                Agency
+              </h1>
+              <h6 className="pt-2">
+                OOH Advertising made easy Search
+                <br />
+                Media. Check Availability. Book Online.
+              </h6>
+            </div>
+            <button type="button" class="btn  fw-bold p-2 ps-3 pe-3 mt-3 enquire-now">
+              Enquire now
+            </button>
+          </div>
+          <div className="col-md-4 text-center p-md-0">
+            <img
+              src="./../gohoarding/new-icon/home-img.png"
+              className="search-media-img  "
+            />
+          </div>
         </div>
+        <section>
         <div className="container-fluid  mt-5 pt-2  px-5 m-0 ">
           <div className="row  mx-auto mb-5   p-1 search-container">
             <div className="col-md-5  me-0 pe-0">
@@ -96,11 +111,10 @@ const SearchMedia = () => {
                 </div>
               </div>
             </div>
-
-            <div className="col-md-5  ms-0  ">
+            <div className="col-md-5  ms-0 pt-2 pb-2 ">
              <MediaDropDown userType={userType} setUserType={setUserType}/>
             </div>
-            <div className="col-md-2 p-2 pe-1 ">
+            <div className="col-md-2 pt-2 pb-2">
               <Link
                 to={`/${userType}/${value}`}
                 className="button-serch text-white rounded-pill "
@@ -110,6 +124,7 @@ const SearchMedia = () => {
             </div>
           </div>
         </div>
+        </section>
       </div>
     </>
   );

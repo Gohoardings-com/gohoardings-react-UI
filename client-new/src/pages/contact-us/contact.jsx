@@ -12,7 +12,7 @@ const Contact = () => {
     if (on) {
       setTimeout(function () {
         element.parentNode.classList.add("focus");
-      });
+      });  
     } else {
       let box = document.querySelector(".input-box");
       box.classList.remove("focus");

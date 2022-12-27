@@ -29,6 +29,7 @@ const Flotinggnavbar = () => {
     await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
     navigate('/map')
     }
+    
   useEffect(() => {
     getCity();
     setPosts(posts);
@@ -44,7 +45,7 @@ const Flotinggnavbar = () => {
 
   return (
     <>
-      <Navbar expand="lg px-md-0 pb-2 pt-0  navbar-main-floating">
+      <Navbar expand="lg px-md-0 p-1   navbar-main-floating">
        
           <Navbar.Brand href="/" id="home">
             <img
@@ -89,7 +90,7 @@ const Flotinggnavbar = () => {
                   </Nav.Link>
                 </form>
               
-            <form className="form-inline my-2 my-lg-0 me-auto">
+            <form className="form-inline mt-2 me-auto">
                 <UserDetail posts={posts} setPosts={setPosts} />
               </form>
           </Navbar.Collapse>

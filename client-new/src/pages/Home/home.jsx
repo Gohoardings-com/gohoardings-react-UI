@@ -5,6 +5,7 @@ import axios from "axios";
 import SearchMedia from '../searchmedia/searchmedia'
 import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
+import Trandingcity from "../trandingcity/trandingcity";
 import City from "../citylist/city";
 
 import Enquire from "../enquire/enquire";
@@ -42,7 +43,7 @@ const Home = () => {
  <Ourservices/> 
  <City/>
 <Enquire/>
-
+<Trandingcity/>
     </>
   );
 };
