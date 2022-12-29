@@ -50,7 +50,7 @@ const Flotinggnavbar = () => {
           <Navbar.Brand href="/" id="home">
             <img
               src="../../images/logo.png"
-              className="brand  border-0 ms-5   float-brand"
+              className="border-0 brand float-brand  "
               onMouseOver={() => setShow(true)}
             />
           </Navbar.Brand>

@@ -11,7 +11,7 @@ const MultiCard = ({
   removefroCart,
 }) => {
   return (
-    <div className="m-auto mt-1 multi-card-contaier row row-cols-md-3 row-cols-xl-3">
+    <div className="m-auto mt-1 multi-card-contaier row row-cols-md-4 row-cols-xl-3">
       {loading ? (
         <>
           <h1>Loading... Please Wait</h1>
@@ -20,7 +20,7 @@ const MultiCard = ({
         <>
           {slice.map((item, i) => (
             <>
-              <div className="project text-center ">
+              <div className="project text-center m-auto">
                 <figure className="img-responsive  ">
                   <img
                     className="img-responsive-media rounded-top"

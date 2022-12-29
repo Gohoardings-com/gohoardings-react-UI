@@ -20,6 +20,7 @@ import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
 import Signin from "./pages/authorization/signin";
+import FooterN from "./pages/footer/footerN";
 
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
           <Route exact path="/testimonial" element={<Testimonial/>}/> 
           <Route exact path="*" element={<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
         </Routes>
-        <Footer/>
+        <FooterN/>
       </BrowserRouter>  
     </>
   );
