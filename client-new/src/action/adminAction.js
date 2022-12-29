@@ -3,11 +3,10 @@ import instance from '../apis/axios'
 export const userDetails =  async (dispatch) => {
     try{
         dispatch({type: "UserRequest"});
-     
-
         const {data} = await instance.get("registration/user", {
             withCredentials: true
           })
+          console.log(data);
         dispatch({ type: "UserSuccess", payload: data});
 
     }catch(error){

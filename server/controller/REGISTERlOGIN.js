@@ -150,7 +150,6 @@ exports.getuser = catchError(async (req, res) => {
       if (err) {
         return res.status(404).json({ message: "User Not found" })
       } else {
-        console.log("jj");
         return res.status(200).json(result)
       }
     })
