@@ -86,19 +86,14 @@ const Map = () => {
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY",
   });
 
-<<<<<<< HEAD
- 
 
-
-  
-=======
   if (cartItem.length == 0) {
     console.log("empty");
   } else {
     console.log("DATA");
   }
 
->>>>>>> 9419840d1516694db034679b0b68b24e76ca1267
+
   useEffect(() => {
     userCartItem();
   }, []);
