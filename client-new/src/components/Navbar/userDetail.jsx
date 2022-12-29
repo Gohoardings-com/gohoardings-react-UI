@@ -20,7 +20,11 @@ const UserDetail = () => {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
   
+<<<<<<< HEAD
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+=======
+console.log(user);
+>>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
 
   let firstRender = true;
   const handelLogout = async () => {
@@ -74,9 +78,15 @@ const getUser = async () => {
 
   return (
     <>
+<<<<<<< HEAD
      {loading == false ? <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
         <Dropdown className='login-profile'>
           <Dropdown.Toggle variant="transparent" className=" ">
+=======
+{loading == false ? <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
+        <Dropdown className='login-profile'>
+          <Dropdown.Toggle variant="transparent" className=" ms-3 ">
+>>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
           <img
                 src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
                 className="login-icon  pt-0 mb-1 "
@@ -126,7 +136,6 @@ const getUser = async () => {
         </Dropdown.Menu>
       </Dropdown>
       }
-
     </>
   )
 }

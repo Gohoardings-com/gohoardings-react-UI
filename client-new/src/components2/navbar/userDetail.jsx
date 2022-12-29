@@ -90,13 +90,21 @@ const UserDetail = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
+=======
+    <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
+>>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
         <Dropdown className='login-profile'>
           <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 ">
             <h5 className='p-0 m-0 text-secondary'>A</h5>
           </Dropdown.Toggle>
           <Dropdown.Menu>
+<<<<<<< HEAD
             <Dropdown.Item  >Profile</Dropdown.Item>
+=======
+            <Dropdown.Item >Profile</Dropdown.Item>
+>>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
             <Dropdown.Item >
               <GoogleLogout
                 className='border-0 bg-transparent'
@@ -124,8 +132,12 @@ const UserDetail = () => {
                 src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
                 className="login-icon  pt-0 mb-1 "
               />
+<<<<<<< HEAD
         </Nav.Link>
 
+=======
+        </Nav.Link>   
+>>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
     </>
   )
 }
