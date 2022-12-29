@@ -29,7 +29,10 @@ const Flotinggnavbar = () => {
     await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
     navigate('/map')
     }
-    
+    const onSearch = (searchTerm) => {
+      setValue(searchTerm);
+    };
+  
   useEffect(() => {
     getCity();
     setPosts(posts);
@@ -39,9 +42,21 @@ const Flotinggnavbar = () => {
   const [userType, setUserType] = useState("traditional-ooh-media");
 
   let City = [];
-  city.forEach((obj) => {
-    City.push({ label: obj.name, value: obj.name });
-  });
+  city.filter((item) => {
+      const searchTerm = value.toLowerCase();
+      const fullName = item.name.toLowerCase();
+      return (
+        searchTerm &&
+        fullName !== searchTerm
+      );
+    })
+    .map((item) =>{ 
+        City.push({ label: item.name, value: item.name });
+      
+       })
+ 
+     
+
 
   return (
     <>
@@ -63,6 +78,7 @@ const Flotinggnavbar = () => {
                   defaultValue={value}
                   onChange={setValue}
                   options={City}
+                  openMenuOnClick={onSearch}
                   isSearchable
                   placeholder="Select your City"
                   id="search-location-box"

@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import { mediawithcity } from "../../action/adminAction";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Navbar from "react-bootstrap/navbar";
+import Navbar from "react-bootstrap/Navbar";
 import './navbar.scss'
 import UserDetail from "./userDetail";
 

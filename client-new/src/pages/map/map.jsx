@@ -86,16 +86,7 @@ dispatch(mediawithcity({category_name:"traditional-ooh-media",city_name:"delhi"}
   });
 
  
- 
-  if(cartItem.length==0){
-    console.log("empty");
-  }
-  else{
-    console.log("DATA");
-  }
 
-
- 
 
   
   useEffect(() => {

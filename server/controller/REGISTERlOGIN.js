@@ -14,7 +14,6 @@ exports.register = catchError(async (req, res) => {
       return res.send(err)
     }
     else if (result.length == []) {
-      // if (Npassword === conpass) {
       req.body ? db.query("SELECT userid  FROM  tblcontacts ORDER BY userid DESC LIMIT 1", async (err, result) => {
         if (err) {
           return res.send(err);
@@ -22,12 +21,10 @@ exports.register = catchError(async (req, res) => {
           const userid = (result[0].userid) + 1
           db.query("INSERT INTO  tblcontacts (firstname, phonenumber, email, password, userid) VALUES  ('" + name + "','" + phone + "','" + email + "','" + password + "','" + userid + "')", async (err, result) => {
             if (err) {
-              return res.send({ err: err, message: "Something Wrong here" })
-            } else if (result == []) {
-              return res.send({ "err": err, message: "Something Wrong here" })
+              return res.send({ err: err.message, message: "Something Wrong here" })
             } else {
               res.clearCookie(String(userid))
-              req.cookies[`${String(userid)}`] = " ";
+              // req.cookies[`${String(userid)}`] = " ";
               token(userid, 200, res)
             }
           })
@@ -53,8 +50,8 @@ exports.login = catchError(async (req, res) => {
       if (!keypassword) {
         return res.status(404).json({ messsage: "Invalid Email and password" });
       } else {
-        const resetPassword = bcrypt.compareSync(password, keypassword)
-        if (!resetPassword) {
+        const confimPassword = bcrypt.compareSync(password, keypassword)
+        if (!confimPassword) {
           return res.status(404).json({
             success: false,
             message: "Wrong Email & Password"
@@ -153,6 +150,7 @@ exports.getuser = catchError(async (req, res) => {
       if (err) {
         return res.status(404).json({ message: "User Not found" })
       } else {
+        console.log("jj");
         return res.status(200).json(result)
       }
     })
@@ -312,7 +310,6 @@ exports.updateProfile = catchError(async(req,res,next) =>{
   const {filename} = req.file;
 const {firstname,email,phonenumber} =req.body
 const userId = req.id;
-console.log(userId);
 if (!userId) {
   return res.status(404).json({ message: "Token Valid" })
 } else {

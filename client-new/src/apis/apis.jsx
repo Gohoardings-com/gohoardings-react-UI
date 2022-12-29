@@ -53,11 +53,6 @@ export const logoutUser = async() =>{
     return data;    
 }
 
-export const getCurrentuser =  async() =>{
-    const {data} = await instance.get("registration/user", {withCredentials: true})
-      return data
-}
-
 export const refreshToken = async() => {
     const {data} = await instance.get(`registration/logout`,{withCredentials:true})
       return data

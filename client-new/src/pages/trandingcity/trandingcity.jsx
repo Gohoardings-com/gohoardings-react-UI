@@ -11,7 +11,9 @@ const Trandingcity = () => {
   
   
   const data = async () => { 
-    dispatch(mediawithcity({ category_name: "digital-media", city_name: "delhi", })
+    const category_name = "digital-media"
+    const city_name = "delhi"
+    dispatch(mediawithcity(category_name, city_name)
     );
   };
   

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/home";
 import Media from './pages/medias/media';
-import Header from './components/header/header';
 import "react-toastify/dist/ReactToastify.css";
 import Footer from './pages/footer/footer';
 import Map from './pages/map/map';
@@ -12,7 +11,7 @@ import Contact from "./pages/contact-us/contact";
 import About from './pages/about-us/about'
 import FAQS from './pages/faqs/faqs'
 import Team from './pages/team/team'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import News from './pages/news_media/news_media'
 import Profile from './pages/profile/profile'

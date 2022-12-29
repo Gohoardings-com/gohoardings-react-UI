@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import instance from "../../apis/axios";
+import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchmedia.scss";
@@ -8,12 +8,10 @@ import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
-  const [scity, setSCity] = useState(
-    "dropdown-menu show border-0  ps-3  dropdown-menu-location"
-  );
+
 
   const getCity = async () => {
-    const { data } = await instance.get("media/searchMedia");
+    const  data  = await getAllCity();
     setCity(data);
   };
 
@@ -21,7 +19,7 @@ const SearchMedia = () => {
     getCity();
   }, []);
 
-  const [value, setValue] = useState("New Delhi,India");
+  const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = (event) => {
@@ -91,7 +89,6 @@ const SearchMedia = () => {
                     .filter((item) => {
                       const searchTerm = value.toLowerCase();
                       const fullName = item.name.toLowerCase();
-
                       return (
                         searchTerm &&
                         fullName.startsWith(searchTerm) &&

@@ -21,7 +21,7 @@ exports.mapFilter = catchError(async (req,res) =>{
   
     db.query("SELECT  * FROM "+tbl+" WHERE illumination='"+illumna+"' || subcategory= '"+catego+"'  &&  subcategory= '"+catego+"' &&  illumination='"+illumna+"'",async (err,result) => {
       if (err) {
-        console.log(err);
+
         return res.status(404).json({err: err,message :"Wrong Data"})
        } else if (result.length == 0 ){
         return res.status(400).json({message:"No data"})
@@ -80,10 +80,8 @@ if(err){
 //media filters
   exports.filterData = catchError(async(req, res, next) => {
     try{
-      const {category_name, illumna, catego} = req.body
-      const Illumation = illumna.toString()
-  var newIllumation = Illumation.replace(/,/g, "','");
-  const SubCategory = catego.toString()
+      const {category_name, illunation, categorys,city_name} = req.body
+  const SubCategory = categorys.toString()
   const newSubCate = SubCategory.replace(/,/g, "','")
       db.changeUser({ database: "gohoardi_goh" });
       switch (category_name) {
@@ -111,24 +109,24 @@ if(err){
                 default:
                 table_name = "goh_media";
             }   
-            if(illumna == ![] && locat == ![] && catego == ![]) {
-              db.query("SELECT DISTINCT * FROM "+table_name+"",async (err,result) => {
+            if(newSubCate == ![] &&  illunation == ![]) {
+              const sql = "SELECT DISTINCT * FROM "+table_name+" WHERE city_name='"+city_name+"'"
+              db.query(sql,async (err,result) => {
                           if (err) {
+                         
                             return res.send({err: err,message :"Wrong Data"})
-                        } else if (result == []){
-                          return res.status(400).json("No data")
                         } else{
+          
                           return res.status(200).json(result) 
                         }
                       }) 
             } else {
-              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+newIllumation+"' || subcategory= '"+newSubCate+"'  &&  subcategory= '"+newSubCate+"' &&  illumination='"+newIllumation+"'"
-   db.query(sql,async (err,result) => {
+           
+              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+illunation+"' || subcategory IN ('"+newSubCate+"') "
+              db.query(sql,async (err,result) => {
                 if (err) {
                   return res.status(404).json({err: err,message :"Wrong Data"})
-                 } else if (result.length == 0 ){
-                  return res.status(400).json("No data")
-              } else{
+                 } else{
               return res.status(200).json(result)
               }
             })
