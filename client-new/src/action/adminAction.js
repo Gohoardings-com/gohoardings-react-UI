@@ -6,7 +6,6 @@ export const userDetails =  async (dispatch) => {
         const {data} = await instance.get("registration/user", {
             withCredentials: true
           })
-          console.log(data);
         dispatch({ type: "UserSuccess", payload: data});
 
     }catch(error){
