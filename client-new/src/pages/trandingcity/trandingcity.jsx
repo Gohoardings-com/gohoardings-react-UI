@@ -28,6 +28,7 @@ const Trandingcity = () => {
       slidesToScroll: 2,
       autoplay: true,
       speed: 4700,
+      pauseOnHover: true,
       autoplaySpeed: 4700,
       cssEase: "linear",
       responsive: [

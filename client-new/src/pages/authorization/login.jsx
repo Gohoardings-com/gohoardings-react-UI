@@ -1,4 +1,4 @@
-import { FcGoogle } from "react-icons/fc";
+import {FiLogIn} from "react-icons/fi";
 import Logingoogle from "./loginGoogle";
 
 
@@ -72,7 +72,7 @@ const Login = ({onSignIn, setFocus, email, setEmail, signIn,toggleSignUp,ToastCo
               Forget Password?
             </a>
             <button type="submit" className="signin">
-              <span>SIGN IN</span>
+              <span>SIGN IN <FiLogIn/></span>
             </button>
             <ToastContainer />
           </form>

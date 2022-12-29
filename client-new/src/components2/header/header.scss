@@ -1,0 +1,27 @@
+.header2{
+    background: #20344D;
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+    bottom: 528px;
+    .heading-text{
+        font-weight: 600;
+        text-decoration: none;
+        color: #dbd9d9;
+    
+    }
+    .icon-div{
+        border-right: 1px  solid white ;
+    }
+   
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+    a.heading-text {
+        display: none;
+    }
+}

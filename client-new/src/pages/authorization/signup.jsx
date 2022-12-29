@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FcGoogle } from "react-icons/fc";
+import {FiLogIn} from "react-icons/fi";
 import Logingoogle from './loginGoogle';
 
 
@@ -89,7 +89,7 @@ const Register = ({ signIn,setFocus, onVisible, eyeViseble, toggleSignUp, passwo
               </div>
             </div>
             <button type="submit" className="signin mt-4">
-              <span>REGISTER</span>
+              <span>REGISTER <FiLogIn/></span>
             </button>
           </form>
           <Logingoogle signIn={signIn}/>

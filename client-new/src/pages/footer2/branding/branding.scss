@@ -1,0 +1,73 @@
+@import "../../assets/scss/_variables.scss";
+@import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
+
+.inn-page-bg:before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to top,
+    rgba(32, 52, 76, 0.64) 14%,
+    rgba(0, 0, 0, 0.55) 66%
+  );
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.inn-page-bg {
+  background: url(https://gohoardings.com/assets/images/inn-bg.jpg) no-repeat;
+  background-size: cover;
+  position: relative;
+  margin-top: 0px;
+  background-color: none;
+  
+
+}
+
+.logo {
+  position: absolute;
+  top: 35px;
+  left: 50px;
+  height: 38px;
+}
+.inn-pag-ban h2 {
+  font-size: 50px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 75px 35px;
+  color: #fff;
+  text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+    .logo {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        height: 14px;
+      }
+      .inn-pag-ban h2 {
+        font-size: 18px;
+        padding: 55px 17px;
+      }
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+      position: absolute;
+      top: 25px;
+      left: 30px;
+      height: 25px;
+    }
+    .inn-pag-ban h2 {
+      font-size: 40px;
+      padding: 55px 17px;
+      font-weight: 600;
+    }
+}

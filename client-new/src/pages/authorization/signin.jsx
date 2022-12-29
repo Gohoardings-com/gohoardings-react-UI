@@ -211,7 +211,7 @@ const Signin = () => {
             <div className="col-md-7 p-0  d-flex justify-content-center main_content2">
               <img
                 src="./images/login.png"
-                className="img-fluid rounded animate__animated animate__pulse animate__infinite	infinite animate__slow	1s "
+                className="img-fluid rounded  "
                 id="png"
               />
             </div>
