@@ -62,7 +62,7 @@ const Footer = () => {
               <h5 className=" text-muted pt-5">
                 India's Largest Outdoor Advertising Company
               </h5>
-              <h6 className="text-muted pt-5 ">
+              <h6 className="text-muted pt-5">
                 It's advertising network spread across 130 cities with more than
                 1.2 lakh OOH and DOOH sites offering hassle-free branding
                 experiences at an unmatched price.

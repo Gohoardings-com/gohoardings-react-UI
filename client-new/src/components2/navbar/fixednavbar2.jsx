@@ -29,10 +29,6 @@ const Flotinggnavbar = () => {
     await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
     navigate('/map')
     }
-    const onSearch = (searchTerm) => {
-      setValue(searchTerm);
-    };
-  
   useEffect(() => {
     getCity();
     setPosts(posts);
@@ -42,30 +38,18 @@ const Flotinggnavbar = () => {
   const [userType, setUserType] = useState("traditional-ooh-media");
 
   let City = [];
-  city.filter((item) => {
-      const searchTerm = value.toLowerCase();
-      const fullName = item.name.toLowerCase();
-      return (
-        searchTerm &&
-        fullName !== searchTerm
-      );
-    })
-    .map((item) =>{ 
-        City.push({ label: item.name, value: item.name });
-      
-       })
- 
-     
-
+  city.forEach((obj) => {
+    City.push({ label: obj.name, value: obj.name });
+  });
 
   return (
     <>
-      <Navbar expand="lg px-md-0 p-1   navbar-main-floating">
+      <Navbar expand="lg px-md-0 pb-2 pt-0  navbar-main-floating2">
        
           <Navbar.Brand href="/" id="home">
             <img
               src="../../images/logo.png"
-              className="border-0 brand float-brand  "
+              className="brand  border-0 ms-5   float-brand"
               onMouseOver={() => setShow(true)}
             />
           </Navbar.Brand>
@@ -78,7 +62,6 @@ const Flotinggnavbar = () => {
                   defaultValue={value}
                   onChange={setValue}
                   options={City}
-                  openMenuOnClick={onSearch}
                   isSearchable
                   placeholder="Select your City"
                   id="search-location-box"
@@ -106,7 +89,7 @@ const Flotinggnavbar = () => {
                   </Nav.Link>
                 </form>
               
-            <form className="form-inline mt-2 me-auto">
+            <form className="form-inline my-2 my-lg-0 me-auto">
                 <UserDetail posts={posts} setPosts={setPosts} />
               </form>
           </Navbar.Collapse>

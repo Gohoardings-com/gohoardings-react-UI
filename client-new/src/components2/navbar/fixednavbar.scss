@@ -3,35 +3,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
 
 
-.navbar-main-floating{
- background-color: #000000;
+.navbar-main-floating2{
+ background-color: #20344D;
 
-.float-brand{
-  box-shadow: rgba(28, 28, 28, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+ .float-brand{
   width: 200px;
-
+  height: 38px;
   margin-left: 48px;
 
 }
 @media screen and (max-width: 1024px) {
-  
-.float-brand{
-  box-shadow: rgba(28, 28, 28, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   width: 180px;
- 
-  margin-left: 19px;}
-  .cart {
-  margin-left: 0px !important;
-  }
-  .float-map-btn{
-
-  
-    .float-map-logo{
-      height: 19px ;
-  
-  
-    }
-  }  
 }
  .dropdown-toggle::after {
    display: none;
@@ -70,7 +52,7 @@
 }
 
 #select-media-box{
- border: transparent !important;
+ 
   width: 20vw !important;
   color: $grey;
   background: $white !important;
@@ -88,12 +70,13 @@
 }
 // ghj
 .float-map-btn{
-  color: #FFFFFF;
+ 
   font-weight: 500;
   padding-top: 2px;
   height: 38px;
-  //background-color: transparent;
-   border:  2px groove #ffffffe1 ;
+  color: rgb(255, 255, 255);
+
+ background-color: #334e6e !important;
   .float-map-logo{
     height: 20px ;
 
@@ -102,17 +85,42 @@
  
 }
 
+.cart {
+  cursor: pointer;
+}
+.cart span:nth-child(1) {
+  font-size: 1.8rem;
+  margin-top: 0%;
+  color: white;
+}
+.cart span:nth-child(2) {
+  padding: 0 3px;
+  background-color: $red;
+  color: white;
+
+  border-radius: 5px;
+  position: relative;
+  top: -45px;
+  left: 26px;
+  
+}
 
 }
-.new-search {
+.new-search2 {
 position: fixed;
-
+ background-color:#20344D ;
  z-index: 5;
- top: 0%;
+ top: 24px;
  width: 100vw;
 
 }
-
+// .search-button{
+//  background-color: #68E2FE !important;
+//  transition: 0.5s;
+// }
+// .search-button:hover{
+//  background-color: #9FD5E1;
+// }
 
 
 .search-logo{
@@ -121,7 +129,6 @@ font-size: 26px;
 }
 
 .cart {
-  margin-left: 16px;
   cursor: pointer;
 }
 .cart span:nth-child(1) {
@@ -136,7 +143,7 @@ font-size: 26px;
 
   border-radius: 5px;
   position: relative;
-  top: -42px;
+  top: -43px;
   left: 26px;
   
 }

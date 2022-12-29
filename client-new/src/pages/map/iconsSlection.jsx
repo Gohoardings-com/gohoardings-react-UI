@@ -136,10 +136,15 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
             <div className="col-lg-3 col-sm-2 ps-4">3km</div>
           </div>
         </div>
-
-        <div className="poi-submit">
-          <button type="submit" className="btn btn-warning btn-outline-dark px-4" onClick={() => submitfilters()}>Apply</button>
-        </div>
+      
+                   
+        <div class="text-center map-btn-more">
+          <button class=" buttonload btn-hover" onClick={() => submitfilters()}>
+            Apply
+          </button>
+          
+      </div>
+  
       </div>
     </>
   )

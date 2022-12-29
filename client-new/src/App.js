@@ -19,6 +19,8 @@ import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
 import Signin from "./pages/authorization/signin";
+import FooterN from "./pages/footer/footerN";
+import Home2 from "./pages/Home2/home2";
 
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
       <BrowserRouter>
         <Routes>
          <Route index path="/" element={<Home/>}/>
+         <Route index path="/2" element={<Home2/>}/>
           <Route exact path="/login" element={avlable ? <Home />:<Signin />}></Route>
           <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>
@@ -59,7 +62,7 @@ function App() {
           <Route exact path="/testimonial" element={<Testimonial/>}/> 
           <Route exact path="*" element={<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
         </Routes>
-        <Footer/>
+        <FooterN/>
       </BrowserRouter>  
     </>
   );

@@ -7,6 +7,25 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
 }
+.map-btn-more{
+  .btn-hover {
+    width: 150px;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin: 20px;
+    height: 45px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, #24272a, #3b6ca7, #2460aa,#0f4e9a);
+    box-shadow: 0 4px 15px 0 (#223852);
+    --moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }
+}
 
 .head {
   font-size: $head;
@@ -44,7 +63,7 @@ body {
   background-color: white;
 }
 .filter-icons>div:hover , .cart-icons>.bag:hover , .filter-icons>div[aria-expanded=true], .cart-icons>div[aria-expanded=true]{
-  background-color: yellow;
+  background-color: #365C8A;
   cursor: pointer;
 }
 .media-items.collapsing , .poi-items.collapsing ,.filter-items.collapsing {

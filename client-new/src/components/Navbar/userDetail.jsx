@@ -80,6 +80,7 @@ const getUser = async () => {
 
   return (
     <>
+<<<<<<< HEAD
       {loading == false ? <div className='p-0 m-0  d-flex userDetail my-2 my-lg-0 '>
         <Dropdown className='login-profile'>
           <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 ">
@@ -102,6 +103,47 @@ const getUser = async () => {
           <div className="cart ms-3  pb-2" onClick={cart}>
             <span>
               <img src='../../gohoarding/new-icon/cart-icon.png' className='login-icon-cart'/>
+=======
+      {posts ? (
+        <div className="p-0 m-0  d-flex userDetail my-2 my-lg-0 ">
+          <Dropdown className="login-profile ">
+            <Dropdown.Toggle
+              variant="transparent"
+              className="  mb-2 drop-togel"
+            >
+                 <img
+                src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
+                className="login-icon  pt-0 mb-1 "
+              />
+              {/* <h5 className="p-0 m-0 text-light">
+                {posts.firstname.toUpperCase().substring(0, 1)}
+              </h5> */}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className=" dropdown-menu-end pt-0 pb-0">
+            <Dropdown.Item className="drop-item  rounded-top  ps-2 pt-2 pb-2" >{posts.firstname.toUpperCase().substring(0, 12)}</Dropdown.Item>
+            <hr className=" m-0"/>
+              <Dropdown.Item onClick={profile} className="drop-item  ps-2 pt-2 pb-2">Profile</Dropdown.Item>
+              <hr className=" m-0"/>
+              <Dropdown.Item href="/" onClick={logOut} className="drop-item rounded-bottom  ps-2 pt-2 pb-2">
+                <GoogleLogout
+                  className="border-0 bg-transparent"
+                  href="/"
+                  clientId={clientId}
+                  buttonText={"Logout"}
+                  onLogoutSuccess={logOut}
+                  icon={false}
+                />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <div className="cart  me-2 " onClick={cart}>
+            <span>
+              <img
+                src="../../gohoarding/new-icon/cart-icon.png"
+                className="login-icon-cart "
+              />
+>>>>>>> 9419840d1516694db034679b0b68b24e76ca1267
             </span>
             <span>{initalState}</span>
           </div>
