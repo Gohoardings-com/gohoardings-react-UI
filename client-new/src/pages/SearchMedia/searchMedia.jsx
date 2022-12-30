@@ -49,9 +49,11 @@ const SearchMedia = () => {
                 Media. Check Availability. Book Online.
               </h6>
             </div>
-            <button type="button" class="btn  fw-bold p-2 ps-3 pe-3 mt-3 enquire-now">
+           <a href="/contact" className="text-decoration-none">
+           <button type="button" class="btn  fw-bold p-2 ps-3 pe-3 mt-3 enquire-now text-decoration-none">
               Enquire now
             </button>
+           </a>
           </div>
           <div className="col-md-4 text-center p-md-0">
             <img
