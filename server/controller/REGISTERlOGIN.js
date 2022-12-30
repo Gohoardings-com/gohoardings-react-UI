@@ -46,6 +46,7 @@ exports.login = catchError(async (req, res) => {
     if (err) {
       return res.json({ message: "No User Found" })
     }else if (!result.length == 0) {
+
       const keypassword = result[0].password;
       if (!keypassword) {
         return res.status(404).json({ messsage: "Invalid Email and password" });

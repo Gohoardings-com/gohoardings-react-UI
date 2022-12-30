@@ -27,7 +27,6 @@ function topFunction() {
 
 const Footer = () => {
   const [getEmail, setEmail] = useState([]);
-  const navigate = useNavigate();
   const [width] = useWindowSize();
   const [widthcss, setWidthcss] = useState(false);
   useEffect(() => {

@@ -10,6 +10,7 @@ const MultiCard = ({
   addonCart,
   removefroCart,
 }) => {
+
   return (
     <div className="m-auto mt-1 multi-card-contaier row row-cols-md-4 row-cols-xl-3">
       {loading ? (
@@ -18,7 +19,10 @@ const MultiCard = ({
         </>
       ) : (
         <>
-          {slice.map((item, i) => (
+         {slice.length == 0?
+          <h1>No Data Found</h1>
+         :<>
+         {slice.map((item, i) => (
             <>
               <div className="project text-center m-auto">
                 <figure className="img-responsive  ">
@@ -108,6 +112,9 @@ const MultiCard = ({
               </div>
             </>
           ))}
+         </>
+
+         }
         </>
       )}
     </div>

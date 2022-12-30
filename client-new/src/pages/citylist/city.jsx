@@ -54,7 +54,7 @@ const City = () => {
 
       <div class="container mt-4">
            <div class="row justify-content-md-center">
-          <div class="col"><Link to={`/traditional-ooh-media/hyderabad`}>
+          <div class="col"><Link to={`/traditional-ooh-media/chennai`}>
              <div className="city-img-container">
               <img
                 src="./gohoarding/home3.webp"
@@ -66,7 +66,7 @@ const City = () => {
             </div>
             </Link></div>
    
-          <div class="col"><Link to={`/traditional-ooh-media/chennai`}>
+          <div class="col"><Link to={`/traditional-ooh-media/hyderabad`}>
              <div className="city-img-container ">
               <img
                 src="./gohoarding/home4.jpg"

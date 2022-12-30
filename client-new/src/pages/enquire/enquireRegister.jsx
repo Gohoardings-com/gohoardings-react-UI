@@ -18,6 +18,7 @@ const EnquireRegister = () => {
     const [messageValidate, setMessageValidate] = useState();
 
     const onSubmit = async (e) => {
+
         e.preventDefault();
         const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
         let count = 0;
@@ -40,7 +41,8 @@ const EnquireRegister = () => {
             count = +1;
             setMessageValidate(<MdOutlineError className="text-danger" />);
         } else if (count === 0) {
-            await instance.post("enquiry/message", { name, email, number, message });
+          await instance.post("enquiry/message", { name, email, number, message });
+           
             notify();
             setName("");
             setNumber("");
@@ -94,6 +96,7 @@ const EnquireRegister = () => {
   </div>
  <div className=' p-0 m-0 position-relative '>
  <button type="submit" class="btn btn-lg  message-btn position-absolute top-75 end-0 " role="button">Send Message</button>
+ <ToastContainer/>
  </div>
  
 </form>

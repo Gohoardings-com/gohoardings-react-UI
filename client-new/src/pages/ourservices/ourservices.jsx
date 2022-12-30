@@ -1,5 +1,6 @@
 import React from "react";
 import "./ourservices.scss";
+import { CityNameImage } from "../../apis/apis";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,39 +8,6 @@ import {HiOutlineArrowNarrowRight} from 'react-icons/hi'
 import { useNavigate, Link } from "react-router-dom";
 
 const Ourservices = () => {
-  let ILLUMINATION = [
-    {
-      label: "Tradition Ooh",
-      value: "traditional-ooh-media",
-      srcImg: "./images/tradition.jpg",
-    },
-    {
-      label: "Digital OOH Media",
-      value: "digital-media",
-      srcImg: "./images/digit.jpg",
-    },
-    {
-      label: "Mall Media",
-      value: "mall-media",
-      srcImg: "./images/mall.jpg",
-    },
-    {
-      label: "Airport Branding",
-      value: "airport-media",
-      srcImg: "./images/airport.jpg",
-    },
-    {
-      label: "Office Branding",
-      value: "office-media",
-      srcImg: "./images/office.jpg",
-    },
-    {
-      label: "Transit Media",
-      value: "transit-media",
-      srcImg: "./images/transit.jpg",
-    },
-  ];
-
   {
     var settings = {
       dots: false,
@@ -74,7 +42,7 @@ const Ourservices = () => {
         </h6>
         <div>
         <Slider {...settings}>
-          {ILLUMINATION.map((pos,i) => (
+          {CityNameImage.map((pos,i) => (
              <div class="container pt-4 " key={i}>
             <div class="row bg-light rounded-2 service-card me-2 ms-2 " >
               <div class="col p-3"><img src={pos.srcImg} className="  rounded-2 service-card-img"/>

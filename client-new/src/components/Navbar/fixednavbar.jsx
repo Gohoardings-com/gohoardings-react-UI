@@ -42,18 +42,9 @@ const Flotinggnavbar = () => {
   const [userType, setUserType] = useState("traditional-ooh-media");
 
   let City = [];
-  city.filter((item) => {
-      const searchTerm = value.toLowerCase();
-      const fullName = item.name.toLowerCase();
-      return (
-        searchTerm &&
-        fullName !== searchTerm
-      );
-    })
-    .map((item) =>{ 
-        City.push({ label: item.name, value: item.name });
-      
-       })
+  city.forEach((obj) => {
+    City.push({ label: obj.name, value: obj.name });
+  });
  
      
 

@@ -56,26 +56,31 @@ const FooterN = () => {
 
       img: "../../clientslogo/facebook.png",
       alt: "logo1",
+      link:"https://www.facebook.com/gohoardings/"
     },
     {
       id: 2,
-      img: "./clientslogo/insta.png",
+      img: "../../clientslogo/insta.png",
       alt: "logo2",
+      link:"https://www.instagram.com/gohoardings/"
     },
     {
       id: 3,
-      img: "./clientslogo/twiter.png",
+      img: "../../clientslogo/twiter.png",
       alt: "logo3",
+      link:"https://twitter.com/gohoardings"
     },
     {
       id: 4,
-      img: "./clientslogo/linkdin.png",
+      img: "../../clientslogo/linkdin.png",
       alt: "logo4",
+      link:"https://www.linkedin.com/company/gohoardings/"
     },
     {
       id: 5,
-      img: "./clientslogo/meail.png",
+      img: "../../clientslogo/meail.png",
       alt: "logo5",
+      link:"/"
     },
   ];
   return (
@@ -355,11 +360,15 @@ const FooterN = () => {
                 {logo.map((clients, index) => {
                   return (
                     <div className="grid-item" key={index}>
+                      <a href={clients.link}   target="_blank">
                       <img
                         src={clients.img}
                         alt={clients.alt}
+                    
                         className="img-fluid logo-img"
                       />
+                        
+                      </a>
                     </div>
                   );
                 })}

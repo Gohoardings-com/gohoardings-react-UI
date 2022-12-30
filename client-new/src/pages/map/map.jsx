@@ -87,16 +87,6 @@ const Map = () => {
   });
 
 
-<<<<<<< HEAD
-=======
-  if (cartItem.length == 0) {
-    console.log("empty");
-  } else {
-    console.log("DATA");
-  }
-
-
->>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
   useEffect(() => {
     userCartItem();
   }, []);

@@ -27,6 +27,7 @@ const Media = () => {
   const [category, setcategory] = useState([]);
   const [illunation, setillunation] = useState([]);
   const [query, setQuery] = useState("");
+  const [news, setNew] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(8);
   let ILLUMINATION ;
   let slice;
@@ -41,9 +42,13 @@ const Media = () => {
 
   useEffect(() => {
     getData()
+    topFunction()
   }, []);
-
-
+// open on header 
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
   const getData = async () => {
     await dispatch(mediawithcity(category_name, city_name));
   };
@@ -115,13 +120,8 @@ const Media = () => {
     setUserModal(!userModal);
   };
 
-  const datas = []
-  function categoryFilter(cate) {
-  // setillunation(catey) => [...catey,cate]
-    
-  }
+console.log(illunation);
 
-console.log(datas);
   function illuminationfilter(illum) {
    if(!loading){
     const data  = mediaData.filter((el) => el.illumination == illum)
@@ -135,7 +135,7 @@ console.log(datas);
   // const mediaFilter = async() => {
   //   dispatch(mediaFilters(category_name, illunation, categorys, city_name));
   // };
-// console.log(illunation);
+
   const data=async() =>{
     navigate('/map')
     }
@@ -188,8 +188,9 @@ console.log(datas);
                             <input
                               className="  collapse-none"
                               id={i}
-                              type="checkbox"
+                              type="radio"
                               onChange={(e) => illuminationfilter(item)}
+                              name="media-category"
                               data-bs-toggle="collapse"
                               data-bs-target="#collapseT2"
                               aria-expanded="false"
@@ -234,7 +235,8 @@ console.log(datas);
                                 id={i}
                                 className="me-1"
                                 value={cate}
-                                onChange={(e) => categoryFilter(cate)}
+                                onChange={() => setillunation((cat =>[...cat,cate]))}
+                                // onChange={(e) => categoryFilter(cate)}
                        
                               />
                               <span className="text-wrap  media-filter-text-card-detail-filt ">

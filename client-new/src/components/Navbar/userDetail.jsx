@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
-import { BiUserPlus } from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
 import { clientId, getCurrentuser, logoutUser, refreshToken } from '../../apis/apis';
-import Nav from "react-bootstrap/Nav";
 import { AccountContext } from '../../apis/apiContext';
 import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useCookies } from 'react-cookie';
-
 
 const UserDetail = () => {
   const navigate = useNavigate()
@@ -19,12 +15,6 @@ const UserDetail = () => {
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
-  
-<<<<<<< HEAD
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
-=======
-console.log(user);
->>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
 
   let firstRender = true;
   const handelLogout = async () => {
@@ -78,15 +68,11 @@ const getUser = async () => {
 
   return (
     <>
-<<<<<<< HEAD
      {loading == false ? <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
         <Dropdown className='login-profile'>
           <Dropdown.Toggle variant="transparent" className=" ">
-=======
-{loading == false ? <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
-        <Dropdown className='login-profile'>
-          <Dropdown.Toggle variant="transparent" className=" ms-3 ">
->>>>>>> e5ba1e3c83f28141d6a22400cf25042065b118ef
+
+
           <img
                 src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
                 className="login-icon  pt-0 mb-1 "
