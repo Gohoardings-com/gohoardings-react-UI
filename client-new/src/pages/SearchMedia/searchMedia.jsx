@@ -66,7 +66,7 @@ const SearchMedia = () => {
             <div className="col-md-5  me-0 pe-0">
               <div className="search-location ">
                 <div className="search-inner">
-                  <InputGroup className="" id="input-click">
+                  <InputGroup className="" id="input-click ">
                     {/* <InputGroup.Text id="basic-addon1 ">@</InputGroup.Text> */}
                     <Form.Control
                       placeholder="Search your Location"
@@ -74,6 +74,7 @@ const SearchMedia = () => {
                       onChange={onChange}
                       value={value}
                       id="search-location-box"
+                      className=" rounded-2"
                     />
                   </InputGroup>
                 </div>

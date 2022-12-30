@@ -54,27 +54,27 @@ const FooterN = () => {
     {
       id: 1,
 
-      img: "../../clientslogo/facebook.png",
+      img: "../.../../clientslogo/facebook.png",
       alt: "logo1",
     },
     {
       id: 2,
-      img: "./clientslogo/insta.png",
+      img: "../../clientslogo/insta.png",
       alt: "logo2",
     },
     {
       id: 3,
-      img: "./clientslogo/twiter.png",
+      img: "../../clientslogo/twiter.png",
       alt: "logo3",
     },
     {
       id: 4,
-      img: "./clientslogo/linkdin.png",
+      img: "../../clientslogo/linkdin.png",
       alt: "logo4",
     },
     {
       id: 5,
-      img: "./clientslogo/meail.png",
+      img: "../../clientslogo/meail.png",
       alt: "logo5",
     },
   ];
@@ -377,7 +377,7 @@ const FooterN = () => {
               </h4>
               <img
                 className="w-100   mt-3"
-                src="../../clientslogo/payment.png"
+                src="../.../../clientslogo/payment.png"
                 alt="payment"
               />
                  <h6 className=" py-4 text-muted">

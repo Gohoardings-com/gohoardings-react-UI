@@ -188,7 +188,8 @@ console.log(datas);
                             <input
                               className="  collapse-none"
                               id={i}
-                              type="checkbox"
+                              name="radio"
+                              type="radio"
                               onChange={(e) => illuminationfilter(item)}
                               data-bs-toggle="collapse"
                               data-bs-target="#collapseT2"

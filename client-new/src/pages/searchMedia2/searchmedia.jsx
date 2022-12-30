@@ -51,7 +51,7 @@ const SearchMedia = () => {
         <div className="container-fluid  mt-5 pt-2  px-5 m-0 ">
           <div className="row  mx-auto mb-5   p-1 search-container">
             <div className="col-md-5  me-0 pe-0">
-              <div className="search-location ">
+              <div className="search-location  rounded-1">
                 <div className="search-inner">
                   <InputGroup className="" id="input-click">
                     {/* <InputGroup.Text id="basic-addon1 ">@</InputGroup.Text> */}

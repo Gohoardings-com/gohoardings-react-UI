@@ -74,9 +74,9 @@ const getUser = async () => {
     <>
 {loading == false ? <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
         <Dropdown className='login-profile'>
-          <Dropdown.Toggle variant="transparent" className=" ms-3 ">
+          <Dropdown.Toggle variant="transparent" className=" drop-togel">
           <img
-                src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
+                src="../../clientslogo/user-login-round.png"
                 className="login-icon  pt-0 mb-1 "
               />
           </Dropdown.Toggle>
@@ -108,7 +108,7 @@ const getUser = async () => {
         <Dropdown className="border-0  ms-2  pt-1 p-0 me-md-0  user-detail-login">
         <Dropdown.Toggle variant="transparent" className="pt-0 drop-togel">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/1144/1144709.png"
+            src="https://cdn-icons-png.flaticon.com/512/2050/2050106.png"
             className="login-icon  pt-0 mb-1 "
           />
         </Dropdown.Toggle>

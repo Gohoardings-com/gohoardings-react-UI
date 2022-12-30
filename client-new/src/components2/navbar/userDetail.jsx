@@ -91,7 +91,7 @@ const UserDetail = () => {
   return (
     <>
     <div className='p-0 m-0  d-flex userDetail2 my-2 my-lg-0 '>
-        <Dropdown className='login-profile'>
+        {/* <Dropdown className='login-profile'>
           <Dropdown.Toggle variant="transparent" className=" btn-light rounded-pill ms-3 ">
             <h5 className='p-0 m-0 text-secondary'>A</h5>
           </Dropdown.Toggle>
@@ -108,14 +108,14 @@ const UserDetail = () => {
               />
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
-        <div className="cart ms-3  pb-2" >
+        </Dropdown> */}
+        {/* <div className="cart ms-3  pb-2" >
           <span>
             <img src='../../gohoarding/new-icon/cart-icon.png' className='login-icon-cart' />
           </span>
           <span>0</span>
-        </div>
-      </div> :
+        </div> */}
+      </div> 
         <Nav.Link
           className="text-dark ms-3  pt-1 p-0 "
           // href="/login"
