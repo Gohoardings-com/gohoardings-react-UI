@@ -113,6 +113,38 @@
   transition: 0.5s all ease-in-out;
   // transform: scale(0.9);
 }
+@media screen and (max-width: 1366px) {
+
+  .btn-hover {
+    width: 175px;
+    font-size: 16px;
+    font-weight: 600;
+
+    margin: 17px;
+    height: 50px;
+   
+  }
+  .media-location-logo-map {
+    width: 35px;
+    height: 36px;
+  
+  }
+}
+@media screen and (max-width: 1024px) {
+  .btn-hover {
+    width: 165px;
+
+    margin: 16px;
+
+    height: 45px;
+   
+  } 
+  .media-location-logo-map {
+    width: 34px;
+    height: 35px;
+  
+  }
+}
 .backgroundArea {
   overflow: hidden;
   width: auto;
@@ -189,7 +221,7 @@
 .multi-card-contaier{
 
   .project {
-    width: 300px !important;
+    width: 314px !important;
     margin-bottom: 15px;
     vertical-align: top;
   
@@ -203,8 +235,39 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: relative;
     display: inline-block;
-    width: 300px;
+    width: 314px;
 
+}
+.img-responsive-media{
+  height: 200px !important;
+}
+@media screen and (max-width: 1366px) {
+  .project {
+    width: 269px !important;
+
+}
+
+.project figure {
+    width:269px;
+
+} 
+.img-responsive-media{
+  height: 168px !important;
+}
+}
+@media screen and (max-width: 1024px) {
+  .project {
+    width: 304px !important;
+
+}
+
+.project figure {
+    width:304px;
+
+} 
+.img-responsive-media{
+  height: 170px !important;
+}
 }
 
 .project figure figcaption {
@@ -255,9 +318,7 @@
 }
 }
 
-.img-responsive-media{
-  height: 200px !important;
-}
+
 figcaption .project-details {
     display: block;
     font-size: 20px;
