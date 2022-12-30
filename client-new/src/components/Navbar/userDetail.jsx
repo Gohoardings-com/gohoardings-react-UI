@@ -5,7 +5,6 @@ import { BiUserPlus } from 'react-icons/bi';
 import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
 import { clientId, getCurrentuser, logoutUser, refreshToken } from '../../apis/apis';
-import Nav from "react-bootstrap/Nav";
 import { AccountContext } from '../../apis/apiContext';
 import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
@@ -18,7 +17,6 @@ const UserDetail = () => {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
   
-console.log(user);
 
   let firstRender = true;
   const handelLogout = async () => {

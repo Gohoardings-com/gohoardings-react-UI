@@ -121,8 +121,13 @@ if(err){
                         }
                       }) 
             } else {
+              let addsubcategoryQuery = "";
+              if(newSubCate){
+               addsubcategoryQuery = "&& subcategory IN ('"+newSubCate+"')"; 
+              }
            
-              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+illunation+"' || subcategory IN ('"+newSubCate+"') "
+              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+illunation+"' "+addsubcategoryQuery+" && city_name='"+city_name+"'"
+             console.log(sql);
               db.query(sql,async (err,result) => {
                 if (err) {
                   return res.status(404).json({err: err,message :"Wrong Data"})

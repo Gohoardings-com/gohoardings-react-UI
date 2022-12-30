@@ -28,22 +28,23 @@ const Media = () => {
   const [illunation, setillunation] = useState([]);
   const [query, setQuery] = useState("");
   const [noOfLogo, setnoOfLogo] = useState(8);
-  let ILLUMINATION ;
+  const [mediaData, setMediadata] = useState([]);
+  const [singlemedia, setsingleMedia] = useState([]);
+  const [news, setNews] = useState([]);
+
   let slice;
-  let mediaData ;
   if (!loading) {
     slice = search.slice(0, noOfLogo);
-    mediaData = [...search]
-    const fff = mediaData.map((o) => o.illumination)
-  ILLUMINATION = [...new Set(fff)
- ]
   }
 
   useEffect(() => {
-    getData()
+    topFunction()
   }, []);
 
-
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
   const getData = async () => {
     await dispatch(mediawithcity(category_name, city_name));
   };
@@ -108,34 +109,53 @@ const Media = () => {
 
   useEffect(() => {
     getData();
+    getDataByApi()
   }, [category_name, city_name]);
+
+  let ILLUMINATION ;
+  const getDataByApi = async() => {
+    const {data} =await instance.post("media/searchMedia",{category_name, city_name})
+    const mediaDatas = [...data]
+    setMediadata(mediaDatas) 
+  }
+
+
+  const fff = mediaData.map((o) => o.illumination)
+  ILLUMINATION = [...new Set(fff)
+ ]
+
 
   const [userModal, setUserModal] = useState(false);
   const showUserModal = () => {
     setUserModal(!userModal);
   };
 
-  const datas = []
   function categoryFilter(cate) {
-  // setillunation(catey) => [...catey,cate]
-    
+category.forEach((el) => {
+   if(el === cate && news.indexOf(el) > -1){
+  news.splice(news.indexOf(el),1);
+setNews(news)
+
+   }
+  else if(el === cate && !news.indexOf(el)  > -1){
+    news.push(cate)
+    setNews(news)
+  }  
+  dispatch(mediaFilters(category_name, singlemedia, news, city_name))
+})  
   }
 
-console.log(datas);
+
   function illuminationfilter(illum) {
    if(!loading){
     const data  = mediaData.filter((el) => el.illumination == illum)
     const hhh = data.map((el) => el.subcategory)
    const category = [...new Set(hhh)]
     setcategory(category)
-    
    }
-
+   dispatch(mediaFilters(category_name, illum, news, city_name))
   }
-  // const mediaFilter = async() => {
-  //   dispatch(mediaFilters(category_name, illunation, categorys, city_name));
-  // };
-// console.log(illunation);
+  
   const data=async() =>{
     navigate('/map')
     }
@@ -191,6 +211,7 @@ console.log(datas);
                               name="radio"
                               type="radio"
                               onChange={(e) => illuminationfilter(item)}
+                              onClick={(e) =>setsingleMedia(item)}
                               data-bs-toggle="collapse"
                               data-bs-target="#collapseT2"
                               aria-expanded="false"
