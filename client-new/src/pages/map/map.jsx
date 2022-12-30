@@ -206,6 +206,10 @@ const Map = () => {
                   <>Loading .... Please wait</>
                 ) : (
                   <>
+                  {slice.length == 0 ? 
+                   <>No Data Found</>
+                  :
+                   <>
                     {slice.map((item, i) => (
                       <>
                         <div className="accordion-item border rounded mb-2">
@@ -281,6 +285,8 @@ const Map = () => {
                         </div>
                       </>
                     ))}
+                   </>
+                  }
                   </>
                 )}
                 {/* <div className="d-flex">
