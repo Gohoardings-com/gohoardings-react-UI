@@ -12,7 +12,7 @@ const MultiCard = ({
 }) => {
 
   return (
-    <div className="m-auto mt-1 multi-card-contaier row row-cols-md-4 row-cols-xl-3">
+    <div className=" mt-1 multi-card-contaier row row-cols-4 ">
       {loading ? (
         <>
           <h1>Loading... Please Wait</h1>
@@ -24,7 +24,7 @@ const MultiCard = ({
          :<>
          {slice.map((item, i) => (
             <>
-              <div className="project text-center m-auto">
+              <div className="project text-center m-2">
                 <figure className="img-responsive  ">
                   <img
                     className="img-responsive-media rounded-top"

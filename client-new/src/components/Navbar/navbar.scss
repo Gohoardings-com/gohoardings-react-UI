@@ -29,10 +29,6 @@
 }
 .login-profile{
 
-  .login-icon {
-    height: 30px !important;
-    width: 30px !important;
-  }
   .drop-togel{
     border: transparent !important;
     margin-left: 16px;
@@ -61,8 +57,8 @@
 
 .user-detail-login{
   .login-icon {
-    height: 31px !important;
-    width: 31px !important;
+    height: 30px ;
+    width: 30px ;
   }
   .dropdown-toggle::after {
 display: none;
@@ -108,6 +104,7 @@ display: none;
 }
 
 @media screen and (max-width: 1366px) {
+  
     .fixd-nabar {
         background-color: #ffffff;
         .brand-logo {

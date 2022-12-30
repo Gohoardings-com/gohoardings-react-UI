@@ -1,86 +1,85 @@
 import React, { useState, useEffect } from "react";
 import "./footer.scss";
 
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import instance from "../../apis/axios";
 import { FiPhoneCall } from "react-icons/fi";
 import { BiMailSend } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
 
 function useWindowSize() {
-    const [size, setSize] = useState([window.innerWidth]);
-  
-    useEffect(() => {
-      const handleResize = () => {
-        setSize([window.innerWidth]);
-      };
-      window.addEventListener("resize", handleResize);
-  
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
-    return size;
-  }
-  function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
+  const [size, setSize] = useState([window.innerWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize([window.innerWidth]);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  return size;
+}
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 
 const FooterN = () => {
-    
-    const [getEmail, setEmail] = useState([]);
+  const [getEmail, setEmail] = useState([]);
 
-    const [width] = useWindowSize();
-    const [widthcss, setWidthcss] = useState(false);
-    useEffect(() => {
-      const handleCss = () => {
-        if (width > 767) {
-          setWidthcss(false);
-        } else {
-          setWidthcss(true);
-        }
-      };
-      handleCss();
-    }, [width]);
-  
-    const handelSubmit = async (e) => {
-      e.preventDefault();
-      await instance.post("enquiry/message", {
-        email: getEmail,
-      });
+  const [width] = useWindowSize();
+  const [widthcss, setWidthcss] = useState(false);
+  useEffect(() => {
+    const handleCss = () => {
+      if (width > 767) {
+        setWidthcss(false);
+      } else {
+        setWidthcss(true);
+      }
     };
+    handleCss();
+  }, [width]);
+
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+    await instance.post("enquiry/message", {
+      email: getEmail,
+    });
+  };
   const logo = [
     {
       id: 1,
 
       img: "../.../../clientslogo/facebook.png",
       alt: "logo1",
-      link:"https://www.facebook.com/gohoardings/"
+      link: "https://www.facebook.com/gohoardings/",
     },
     {
       id: 2,
       img: "../../clientslogo/insta.png",
       alt: "logo2",
-      link:"https://www.instagram.com/gohoardings/"
+      link: "https://www.instagram.com/gohoardings/",
     },
     {
       id: 3,
       img: "../../clientslogo/twiter.png",
       alt: "logo3",
-      link:"https://twitter.com/gohoardings"
+      link: "https://twitter.com/gohoardings",
     },
     {
       id: 4,
       img: "../../clientslogo/linkdin.png",
       alt: "logo4",
-      link:"https://www.linkedin.com/company/gohoardings/"
+      link: "https://www.linkedin.com/company/gohoardings/",
     },
     {
       id: 5,
       img: "../../clientslogo/meail.png",
       alt: "logo5",
-      link:"/"
+      link: "/",
     },
   ];
   return (
@@ -101,7 +100,8 @@ const FooterN = () => {
             <h6 className="f-second-heading pt-1">
               It s advertising network spread across 130 cities with more than
               1.2 lakh OOH and DOOH sites offering hassle free branding
-              experiences<br/> at an unmatched price.
+              experiences
+              <br /> at an unmatched price.
             </h6>
           </div>
         </div>
@@ -205,7 +205,7 @@ const FooterN = () => {
             <div className="popular-media ">
               <h4 className=" f-heading  ">Popular Services</h4>
               <ul className=" pt-3  ps-0">
-              <li className="py-1">
+                <li className="py-1">
                   <Link
                     to={`/traditional-ooh-media/delhi`}
                     className="   text-decoration-none f-heading-clr "
@@ -215,7 +215,7 @@ const FooterN = () => {
                     Traditional OOH
                   </Link>
                 </li>
-              <li className="py-1">
+                <li className="py-1">
                   <Link
                     to={`/digital-media/delhi`}
                     className="   text-decoration-none f-heading-clr"
@@ -225,7 +225,7 @@ const FooterN = () => {
                     Digital Media
                   </Link>
                 </li>
-              <li className="py-1">
+                <li className="py-1">
                   <Link
                     to={`/transit-media/delhi`}
                     className="   text-decoration-none f-heading-clr"
@@ -234,7 +234,7 @@ const FooterN = () => {
                     Transit-Media
                   </Link>
                 </li>
-              <li className="py-1">
+                <li className="py-1">
                   <Link
                     to={`/mall-media/delhi`}
                     onClick={topFunction}
@@ -245,7 +245,7 @@ const FooterN = () => {
                   </Link>
                 </li>
                 <span className="pos-absolute end-0 top-0 me-5">
-                <li className="py-1">
+                  <li className="py-1">
                     <Link
                       onClick={topFunction}
                       to={`/airport-media/delhi`}
@@ -255,7 +255,7 @@ const FooterN = () => {
                       Airport Media
                     </Link>
                   </li>
-                <li className="py-1">
+                  <li className="py-1">
                     <Link
                       onClick={topFunction}
                       to={`/inflight_media/delhi`}
@@ -272,7 +272,7 @@ const FooterN = () => {
           <div className="col  py-3">
             <h4 className="   f-heading">Trending Cities</h4>
             <ul className=" pt-3  ps-0 ">
-            <li className="py-1">
+              <li className="py-1">
                 <Link
                   onClick={topFunction}
                   to={`/traditional-ooh-media/delhi`}
@@ -282,7 +282,7 @@ const FooterN = () => {
                   Delhi
                 </Link>
               </li>
-            <li className="py-1">
+              <li className="py-1">
                 <Link
                   to={`/traditional-ooh-media/goa`}
                   onClick={topFunction}
@@ -292,7 +292,7 @@ const FooterN = () => {
                   Goa
                 </Link>
               </li>
-            <li className="py-1">
+              <li className="py-1">
                 <Link
                   to={`/traditional-ooh-media/bengaluru`}
                   onClick={topFunction}
@@ -302,7 +302,7 @@ const FooterN = () => {
                   Bengaluru
                 </Link>
               </li>
-            <li  className="py-1">
+              <li className="py-1">
                 <Link
                   to={`/traditional-ooh-media/chennai`}
                   onClick={topFunction}
@@ -313,7 +313,7 @@ const FooterN = () => {
                 </Link>
               </li>
               <span className="pos-absolute end-0 top-0 me-5">
-              <li className="py-1">
+                <li className="py-1">
                   <Link
                     to={`/traditional-ooh-media/hyderabad`}
                     onClick={topFunction}
@@ -323,7 +323,7 @@ const FooterN = () => {
                     Hyderabad
                   </Link>
                 </li>
-              <li className="py-1">
+                <li className="py-1">
                   <Link
                     to={`/traditional-ooh-media/Mumbai`}
                     onClick={topFunction}
@@ -352,7 +352,8 @@ const FooterN = () => {
                 <p className="reach-clr">
                   E-82, 3rd Floor, Sector 6,
                   <br />
-                  Noida 201301,<br />
+                  Noida 201301,
+                  <br />
                   Near Paytm Office
                 </p>
               </li>
@@ -360,14 +361,12 @@ const FooterN = () => {
                 {logo.map((clients, index) => {
                   return (
                     <div className="grid-item" key={index}>
-                      <a href={clients.link}   target="_blank">
-                      <img
-                        src={clients.img}
-                        alt={clients.alt}
-                    
-                        className="img-fluid logo-img"
-                      />
-                        
+                      <a href={clients.link} target="_blank">
+                        <img
+                          src={clients.img}
+                          alt={clients.alt}
+                          className="img-fluid logo-img"
+                        />
                       </a>
                     </div>
                   );
@@ -376,51 +375,46 @@ const FooterN = () => {
             </ul>
           </div>
         </div>
-        <div className="row  ">
-        <div className="col text-light ">
-
-            </div>
-            <div className="col text-light ">
-              <h4 className=" f-heading  text-nowrap  ">
-                Payment Option
-              </h4>
-              <img
-                className="w-100   mt-3"
-                src="../.../../clientslogo/payment.png"
-                alt="payment"
+        <div className="row  payment-footer-section">
+          <div className="col text-light "></div>
+          <div className="col text-light ">
+            <h4 className=" f-heading  text-nowrap  ">Payment Option</h4>
+            <img
+              className="w-100   mt-3"
+              src="../.../../clientslogo/payment.png"
+              alt="payment"
+            />
+            <h6 className=" py-4 text-muted">
+              copyrights &#169; 2022 Gohaordings.com
+            </h6>
+          </div>
+          <div className="col text-light  offset-2">
+            <h4 className="f-heading  text-nowrap  ">
+              Best deals in your inbox
+            </h4>
+            <form
+              onSubmit={handelSubmit}
+              className="d-flex flex-sm-row flex-column flex-lg-row flex-md-column p-2 ps-1"
+            >
+              <input
+                className="text-dark border-0  p-2 cnt-input-box rounded-start mt-2 "
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Enter you email address"
+                formcontrolname="email"
               />
-                 <h6 className=" py-4 text-muted">
-                 copyrights &#169; 2022 Gohaordings.com 
-              </h6>
-            </div>
-            <div className="col text-light  offset-2">
-              <h4 className="f-heading  text-nowrap  ">
-                Best deals in your inbox
-              </h4>
-              <form
-             onSubmit={handelSubmit}
-                className="d-flex flex-sm-row flex-column flex-lg-row flex-md-column p-2 ps-1"
+              <button
+                className="text-light btn bg-warning p-2 w-25  border-0 rounded-0 rounded-end mt-2"
+                type="submit"
               >
-                <input
-                  className="text-dark border-0  p-2 cnt-input-box rounded-start mt-2 "
-                 onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  placeholder="Enter you email address"
-                  formcontrolname="email"
-                />
-                <button
-                  className="text-light btn bg-warning p-2 w-25  border-0 rounded-0 rounded-end mt-2"
-                  type="submit"
-                >
-                 Contact   </button>
-
-              </form>
-              <h6 className=" py-4 text-muted">
-                * Join our newsletter for the most recent information.
-              </h6>
-            </div>
-            </div>
-  
+                Contact{" "}
+              </button>
+            </form>
+            <h6 className=" py-4 text-muted">
+              * Join our newsletter for the most recent information.
+            </h6>
+          </div>
+        </div>
       </div>
     </>
   );
