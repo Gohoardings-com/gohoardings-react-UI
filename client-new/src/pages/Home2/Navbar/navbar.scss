@@ -1,0 +1,84 @@
+
+.fixd-nabar{
+    background-color: #20344D;
+    .brand-logo {
+       width: 200px;
+    }
+}
+.mapLink{
+    background-color: #20344D;
+    width: 116px;
+    height: 44px;
+
+}
+.nav-text-btn {
+    color: white!important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+    width: auto !important;
+}
+
+.nav-text-btn::after {
+    content: '' !important;
+    display: block !important;
+    width: 0 !important;
+    height: 3px !important;
+    background: #fff312e1 !important;
+    transition: width .4s ease-in !important;
+  }
+  
+  .nav-text-btn:hover::after {
+    width: 100% !important;
+  }
+
+
+.login-icon{
+    font-size: 37px;
+    color: rgb(255, 255, 255);
+    transition: 0.3s;
+}
+.login-icon:hover{
+    font-size: 37px;
+
+    color: rgb(217, 214, 214) ;
+}
+
+
+.font-map-btn{
+  
+    color: white!important;
+    font-weight: 600 !important;
+  //  border: 2px groove rgb(244, 242, 242) ;
+    
+   
+}
+.font-map-btn:hover{
+    color: rgb(255, 255, 255);
+   // border:  2px groove #fff200 ;
+   background-color: #334e6e;
+   }
+.font-map-logo{
+    
+    height: 23px ;
+    
+}
+#dropdown-basic-user{
+    display: none ;
+}
+.userDetail{
+    .dropdown-toggle::after {
+        display: none;
+        
+    }
+}
+.cart-logo{
+    font-size: 35px;
+    color: white;
+}
+
+.anchor{
+    text-decoration: none;
+}
+.login-icon-cart{
+    height: 35px;
+}
