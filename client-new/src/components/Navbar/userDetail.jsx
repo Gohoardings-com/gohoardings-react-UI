@@ -9,6 +9,8 @@ import { AccountContext } from '../../apis/apiContext';
 import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {useCookies} from 'react-cookie'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserDetail = () => {
   const navigate = useNavigate()
@@ -16,8 +18,9 @@ const UserDetail = () => {
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
-  
-
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  const { logout } = useAuth0();
+console.log(cookies);
   let firstRender = true;
   const handelLogout = async () => {
     const data = await logoutUser()
@@ -44,6 +47,7 @@ const getUser = async () => {
   const logOut = async () => {
     sessionStorage.clear()
     localStorage.clear()
+    logout()
     handelLogout().then(() => dispatch(authActions.logout()))
   }
 

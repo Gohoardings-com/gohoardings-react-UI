@@ -79,19 +79,67 @@ exports.googleLogin = catchError(async (req, res) => {
     if (err) {
       return res.status(400).json({ message: "Wrong Data" })
     }
+   
     if (selectResult.length == 0) {
+   
+
       db.query("SELECT userid From tblcontacts ORDER By userid DESC LIMIT 1", async (err, result) => {
         if (err) {
           return res.status(404).json(err.message)
         } else {
+         
           const userid = (result[0].userid) + 1
           const password = bcrypt.hashSync(profile.givenName, 8)
           db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${profile.name}','${profile.email}','${password}','${userid}','${profile.imageUrl}','Google')`, async (err, result) => {
             if (err) {
               return res.status(400).json({ err: err.message })
             } else {
+            
               res.clearCookie(String(userid))
-              // req.cookies[`${String(userid)}`] = " ";
+              req.cookies[`${String(userid)}`] = " ";
+            token(userid, 200, res)
+            }
+          })
+        }
+      })
+
+    } else {
+          const userid = selectResult[0].userid
+          res.clearCookie(String(userid))
+          req.cookies[`${String(userid)}`] = " ";
+         token(userid, 200, res)
+    }
+  })
+})
+
+exports.linkdinLogin = catchError(async(req,res) => {
+  const {nickname,name,picture, email,sub} = req.body
+  if (!req.body) {
+    return res.status(400).json({ mess: "Linkdin authentication Failed" })
+  }
+  db.changeUser({ database: "gohoardi_crmapp" });
+  db.query("SELECT * FROM tblcontacts WHERE email='" +email + "'", async (err, selectResult) => {
+    if (err) {
+
+   
+      return res.status(400).json({ message: "Wrong Data" })
+    }
+    if (selectResult.length == 0) {
+
+      db.query("SELECT userid From tblcontacts ORDER By userid DESC LIMIT 1", async (err, result) => {
+        if (err) {
+       
+          return res.status(404).json(err.message)
+        } else {
+          const userid = (result[0].userid) + 1
+          const password = bcrypt.hashSync(nickname, 8)
+          db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${name}','${email}','${password}','${userid}','${picture}','${sub}')`, async (err, result) => {
+            if (err) {
+           
+              return res.status(400).json({ err: err.message })
+            } else {
+              res.clearCookie(String(userid))
+              req.cookies[`${String(userid)}`] = " ";
             token(userid, 200, res)
             }
           })
