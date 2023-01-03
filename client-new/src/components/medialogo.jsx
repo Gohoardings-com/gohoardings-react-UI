@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import "./medialogo.scss";
 import { CityNameImage } from "../apis/apis";
 const Medialogo = ({ search, category_name,loading }) => {
-
+console.log(category_name);
   return (
     <div className="container  ">
   
         <div className="digit-media-brand rounded-3 pb-2  row text-light animate__animated animate__zoomIn ">
           <div className="col-4 mb-xxl-auto p-2">
           {CityNameImage.map((el) =>{
-            if(category_name === el.value){
+            if(category_name === el.value || category_name === el.value2  ){
              return (
               <>
                <img
