@@ -9,7 +9,7 @@ exports.City = catchError(async(req,res,next) => {
      data = " WHERE name LIKE '"+value+"%'"
   }
   db.changeUser({ database: "gohoardi_goh" });
-  const sql = "SELECT DISTINCT name FROM `goh_cities` "+data+"  LIMIT 10"
+  const sql = "SELECT DISTINCT name FROM `goh_cities` "+data+"  LIMIT 8"
       db.query(sql, (err, result) => {
         if (err) {
           console.log(err);

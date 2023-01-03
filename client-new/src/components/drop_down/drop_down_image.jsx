@@ -8,7 +8,7 @@ const Drop_Down_Image = ({ show, setShow, Dropdown }) => {
       <Dropdown.Menu
         show={show}
         onMouseLeave={() => setShow(false)}
-        className="drop-menu w-100  pe-4 ps-4"
+        className="drop-menu w-100  pe-4 ps-4 position-fixed "
       >
         <div className="container-fluid ">
           <div className="row pt-2 ">

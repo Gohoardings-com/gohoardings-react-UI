@@ -63,11 +63,22 @@
       margin-left: 2%;
     }
   }
-
+.basic-addon{
+  background-color: #dfdfdf !important;
+  border-top-left-radius:8px;
+  border-bottom-left-radius:8px;
+  border: none;
+  .basic-addon-icon{
+    font-size: 22px;
+  }
+}
   #search-location-box {
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
     border: none;
     font-size: 15px;
-  
+    border-top-right-radius:8px;
+    border-bottom-right-radius: 8px;
     background-color: #efefef;
     color: #222222;
     height: 50px;

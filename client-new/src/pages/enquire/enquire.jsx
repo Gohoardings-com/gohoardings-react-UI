@@ -22,14 +22,14 @@ const Enquire = () => {
                   brainstormed, creative and most effective solutions instantly.
                 </p>
               </div>
-              <div className="row py-2">
+              <div className="row py-1">
                   <h6 className="enquire-qsns-cant-qsn mb-1">Have a query ?</h6>
                 <p className=" enquire-ans-cant">
                 Feel free to write to us. Our reps are right there to answer
                   them all.
                 </p>
               </div>
-              <div className="row py-2">
+              <div className="row py-1">
                   <h6 className="enquire-qsns-cant-qsn">Have a suggestion?</h6>
                 <p className=" enquire-ans-cant">
                 Your feedback and suggestions are always welcome. We are
