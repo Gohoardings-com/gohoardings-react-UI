@@ -15,6 +15,7 @@ root.render(
     domain="dev-22u-b2m7.us.auth0.com"
     clientId="qTXhk9xH54OYcElfl8SXfmgcwetRw2Eb"
     redirectUri={window.location.origin}
+    // onRedirectCallback={onRedirectCallback}
   >
     <Provider store={store}>
     <ApiContext>

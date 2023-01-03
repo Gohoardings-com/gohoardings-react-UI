@@ -1,6 +1,7 @@
-import React, {  useEffect } from "react";
+import React, {  useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.scss";
+import { AccountContext } from "../../apis/apiContext";
 import axios from "axios";
 import { authActions } from "../../store";
 import SearchMedia from '../searchmedia/searchmedia'
@@ -8,8 +9,6 @@ import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
 import Trandingcity from "../trandingcity/trandingcity";
 import City from "../citylist/city";
-import { useSelector, useDispatch } from 'react-redux'
-import { useCookies } from 'react-cookie';
 import Enquire from "../enquire/enquire";
 import Flotingnavbar from "../../components/navbar/flotingnavbar";
 

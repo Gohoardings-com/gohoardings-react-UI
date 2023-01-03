@@ -12,26 +12,22 @@ import { useNavigate } from "react-router-dom";
 const Logingoogle = ({signIn}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const { loginWithPopup, user, isAuthenticated, isLoading } = useAuth0();
-  
- 
-const singinLinkdin = async() =>{
-  if(isAuthenticated){
-    await instance.post('registration/user',user)
+  const { loginWithPopup, user } = useAuth0();
+
+  if(useAuth0()?.isAuthenticated){
+    instance.post('registration/user',user)
     localStorage.setItem(true, "long");
 const locate =  localStorage.getItem("locate");
 const backlink = locate ? locate : "/";
  localStorage.removeItem("locate");
 navigate(`${backlink}`).then(() => dispatch(authActions.login()));
-   }
+  }
   
-}
-
-
 const loginLinkdin =  async() => {
-  console.log("one");
-await loginWithPopup().then(() =>  singinLinkdin())
+    await loginWithPopup()
 }
+
+
   return (
     <>
     <div className="row mt-4">
@@ -43,16 +39,11 @@ await loginWithPopup().then(() =>  singinLinkdin())
     className="col-md-12 ps-0 mt-4 text-center"
     onClick={signIn}
   >
-  
     <a>
       <FcGoogle className="google-icon" />
     </a>
-    
-    
   </div>
   <div className="col-md-12 ps-0 mt-4 text-center mb-3 fs-1"><FaLinkedin onClick={() => loginLinkdin()}/></div>
-  
-  
   </>
   )
 }

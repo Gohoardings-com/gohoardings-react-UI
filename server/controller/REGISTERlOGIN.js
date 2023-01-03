@@ -114,7 +114,6 @@ exports.googleLogin = catchError(async (req, res) => {
 
 exports.linkdinLogin = catchError(async(req,res) => {
   const {nickname,name,picture, email,sub} = req.body
- 
   db.changeUser({ database: "gohoardi_crmapp" })
  {nickname,name,picture, email,sub ? 
   db.query("SELECT * FROM tblcontacts WHERE email='" +email + "'", async (err, selectResult) => {
