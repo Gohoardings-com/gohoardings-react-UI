@@ -7,7 +7,7 @@ const Medialogo = ({ search, category_name,loading }) => {
   return (
     <div className="container  ">
   
-        <div className="digit-media-brand rounded-3 pb-2 mt-5 row text-light animate__animated animate__zoomIn ">
+        <div className="digit-media-brand rounded-3 pb-2  row text-light animate__animated animate__zoomIn ">
           <div className="col-4 mb-xxl-auto p-2">
           {CityNameImage.map((el) =>{
             if(category_name === el.value){

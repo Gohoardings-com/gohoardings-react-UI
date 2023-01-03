@@ -5,7 +5,7 @@ import { mediawithcity, mediaFilters } from "../../action/adminAction";
 import { useSelector, useDispatch } from "react-redux";
 import { AccountContext } from "../../apis/apiContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { Modal} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import instance from "../../apis/axios";
 import {
   MdOutlineShoppingCart,
@@ -15,7 +15,6 @@ import {
 import MultiCard from "./multiCard";
 import Medialogo from "../../components/medialogo";
 import FixedNavbar from "../../components/navbar/fixednavbar";
-import { BsFilterRight } from "react-icons/bs";
 
 const Media = () => {
   const dispatch = useDispatch();
@@ -31,6 +30,7 @@ const Media = () => {
   const [mediaData, setMediadata] = useState([]);
   const [singlemedia, setsingleMedia] = useState([]);
   const [news, setNews] = useState([]);
+  const [disable, setDisable] = useState(true);
 
   let slice;
   if (!loading) {
@@ -38,13 +38,14 @@ const Media = () => {
   }
 
   useEffect(() => {
-    topFunction()
+    topFunction();
   }, []);
 
   function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
+
   const getData = async () => {
     await dispatch(mediawithcity(category_name, city_name));
   };
@@ -104,120 +105,98 @@ const Media = () => {
   const Less = () => {
     if (noOfLogo > 9) {
       setnoOfLogo(noOfLogo - 8);
+      topFunction()
     }
   };
 
   useEffect(() => {
     getData();
-    getDataByApi()
+    getDataByApi();
   }, [category_name, city_name]);
 
-  let ILLUMINATION ;
-  const getDataByApi = async() => {
-    const {data} =await instance.post("media/searchMedia",{category_name, city_name})
-    const mediaDatas = [...data]
-    setMediadata(mediaDatas) 
-  }
-
-
-  const fff = mediaData.map((o) => o.illumination)
-  ILLUMINATION = [...new Set(fff)
- ]
-
-
-  const [userModal, setUserModal] = useState(false);
-  const showUserModal = () => {
-    setUserModal(!userModal);
+  let ILLUMINATION;
+  const getDataByApi = async () => {
+    const { data } = await instance.post("media/searchMedia", {
+      category_name,
+      city_name,
+    });
+    const mediaDatas = [...data];
+    setMediadata(mediaDatas);
   };
 
+  const fff = mediaData.map((o) => o.illumination);
+  ILLUMINATION = [...new Set(fff)];
+
   function categoryFilter(cate) {
-category.forEach((el) => {
-   if(el === cate && news.indexOf(el) > -1){
-  news.splice(news.indexOf(el),1);
-setNews(news)
-
-   }
-  else if(el === cate && !news.indexOf(el)  > -1){
-    news.push(cate)
-    setNews(news)
-  }  
-  dispatch(mediaFilters(category_name, singlemedia, news, city_name))
-})  
+    category.forEach((el) => {
+      if (el === cate && news.indexOf(el) > -1) {
+        news.splice(news.indexOf(el), 1);
+        setNews(news);
+      } else if (el === cate && !news.indexOf(el) > -1) {
+        news.push(cate);
+        setNews(news);
+      }
+      dispatch(mediaFilters(category_name, singlemedia, news, city_name));
+    });
   }
-
 
   function illuminationfilter(illum) {
-   if(!loading){
-    const data  = mediaData.filter((el) => el.illumination == illum)
-    const hhh = data.map((el) => el.subcategory)
-   const category = [...new Set(hhh)]
-    setcategory(category)
-   }
-   dispatch(mediaFilters(category_name, illum, news, city_name))
-  }
-  
-  const data=async() =>{
-    navigate('/map')
+    if (!loading) {
+      const data = mediaData.filter((el) => el.illumination == illum);
+      const hhh = data.map((el) => el.subcategory);
+      const category = [...new Set(hhh)];
+      setcategory(category);
+      setDisable(false);
     }
+    dispatch(mediaFilters(category_name, illum, news, city_name));
+  }
+
+  const data = async () => {
+    navigate("/map");
+  };
+
   return (
     <>
       <FixedNavbar />
 
-      <Medialogo category_name={category_name} search={search} loading={loading} />
+      <Medialogo
+        category_name={category_name}
+        search={search}
+        loading={loading}
+      />
       <div className=" container-xxl  container-xl container-lg container-md  mt-4 mb-5 p-0 ">
         <div className="row ">
-          <p  >
-            <h5
-              className="filter-down  btn btn-outline-secondary"
-              onClick={showUserModal}
-            >
-              Filter <BsFilterRight className=" text-dark " />
-            </h5>
-            <h5
-              className="filter-down me-3 "
-              onClick={() => data()}
-            >
-            <img src="https://cdn-icons-png.flaticon.com/512/854/854894.png" className="media-location-logo-map "/>
-            </h5>
-          </p>
-
-          {userModal ? (
-            <Modal
-              show={userModal}
-              onHide={showUserModal}
-              backdrop="static"
-              centered
-            >
-              <Modal.Header closeButton>
-                <Modal.Title>
-                  {" "}
-                  <h5 className="text-dark"> Filter</h5>
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className="row">
-                  <div className="col ms-3">
-                    <h6 className="text-uppercase media-heading  media-filter-text-card-head  mt-2 text-dark mb-1">
-                     Media Type
-                    </h6>
-
-                    <div className=" row ">
-                      <ul>
+          <p className="filter-container">
+            <div className="filter-down-left d-flex ">
+              <>
+                <h5
+                  data-bs-toggle="dropdown"
+                  className=" btn me-2  dropdown-toggle"
+                >
+                  MEDIA TYPE
+                </h5>
+                <div
+                  class="dropdown-menu "
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <div className="col ms-2">
+                    <div className="row rowCheckd">
+                      <ul className="text-decoration-none">
                         {ILLUMINATION.map((item, i) => (
-                          <li className="w-100">
+                          <li className=" " id="marker">
                             <input
                               className="  collapse-none"
                               id={i}
                               name="radio"
                               type="radio"
                               onChange={(e) => illuminationfilter(item)}
-                              onClick={(e) =>setsingleMedia(item)}
+                              onClick={(e) => setsingleMedia(item)}
                               data-bs-toggle="collapse"
                               data-bs-target="#collapseT2"
                               aria-expanded="false"
                               aria-controls="collapseT2"
                             />
-                            <span className=" ms-1  media-filter-text-card-detail-filt">
+                            <span className="   media-filter-text-card-detail-filt ms-1">
                               {item}
                             </span>
                           </li>
@@ -225,16 +204,22 @@ setNews(news)
                       </ul>
                     </div>
                   </div>
-                  <div className="col sub-category-search ">
-                    <h6 className="text-uppercase media-heading text-dark  media-filter-text-card-head  mt-2 ">
-                      Sub category
-                    </h6>
-                <input
-                  type="text"
-                  className="form-control form-input text-start"
-                  placeholder="Search..."
-                  onChange={(event) => setQuery(event.target.value)}
-                />
+                </div>
+              </>
+
+              <>
+                <div className="col sub-category-search ms-1 ">
+                  <h5
+                    disabled={disable}
+                    data-bs-toggle="dropdown"
+                    className=" btn   dropdown-toggle "
+                  >
+                    SUB CATEGORY
+                  </h5>
+                  <div
+                    class="dropdown-menu ps-2 "
+                    aria-labelledby="dropdownMenuButton"
+                  >
                     <div className="rowCheck  row    ">
                       <ul>
                         {category
@@ -242,9 +227,7 @@ setNews(news)
                             if (query == "") {
                               return obj;
                             } else if (
-                              obj
-                                .toLowerCase()
-                                .includes(query.toLowerCase())
+                              obj.toLowerCase().includes(query.toLowerCase())
                             ) {
                               return obj;
                             }
@@ -257,10 +240,9 @@ setNews(news)
                                 className="me-1"
                                 value={cate}
                                 onChange={(e) => categoryFilter(cate)}
-                       
                               />
                               <span className="text-wrap  media-filter-text-card-detail-filt ">
-                                {cate}
+                                {cate.substring(0, 13)}
                               </span>
                               <br />
                             </>
@@ -269,11 +251,19 @@ setNews(news)
                     </div>
                   </div>
                 </div>
-              </Modal.Body>
-            </Modal>
-          ) : (
-            ""
-          )}
+              </>
+            </div>
+
+            <h5 className="filter-down btn  " onClick={() => data()}>
+              {" "}
+              MAP
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/854/854894.png"
+                className="media-location-logo-map ms-2"
+              />
+            </h5>
+          </p>
+
           <MultiCard
             MdOutlineShoppingCart={MdOutlineShoppingCart}
             slice={slice}
