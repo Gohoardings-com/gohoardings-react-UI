@@ -20,19 +20,19 @@ import { clientId } from "./apis/apis";
 import Signin from "./pages/authorization/signin";
 import FooterN from "./pages/footer/footerN";
 import Home2 from "./pages/Home2/home2";
-import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
+// import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
 function App() {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const [avlable,setAvlable] = useState(false)
 
 
- useGoogleOneTapLogin({
-  onSuccess:(response) => console.log(response),
-  onError:(response) => console.log(response),
-  googleAccountConfigs:{
-    client_id:clientId
-  }
- })
+//  useGoogleOneTapLogin({
+//   onSuccess:(response) => console.log(response),
+//   onError:(response) => console.log(response),
+//   googleAccountConfigs:{
+//     client_id:clientId
+//   }
+//  })
 
   const getUser = async() => {
   if(localStorage.getItem("true") || localStorage.getItem("false")){
