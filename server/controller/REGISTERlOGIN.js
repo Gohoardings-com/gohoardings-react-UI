@@ -114,10 +114,9 @@ exports.googleLogin = catchError(async (req, res) => {
 
 exports.linkdinLogin = catchError(async(req,res) => {
   const {nickname,name,picture, email,sub} = req.body
-  if (!req.body) {
-    return res.status(400).json({ mess: "Linkdin authentication Failed" })
-  }
-  db.changeUser({ database: "gohoardi_crmapp" });
+ 
+  db.changeUser({ database: "gohoardi_crmapp" })
+ {nickname,name,picture, email,sub ? 
   db.query("SELECT * FROM tblcontacts WHERE email='" +email + "'", async (err, selectResult) => {
     if (err) {
 
@@ -152,7 +151,7 @@ exports.linkdinLogin = catchError(async(req,res) => {
           req.cookies[`${String(userid)}`] = " ";
          token(userid, 200, res)
     }
-  })
+  }) : res.send(404).json({message:"No Data Found"})}
 })
 
 exports.refreshToken = catchError(async(req,res,next) => {

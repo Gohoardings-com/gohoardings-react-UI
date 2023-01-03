@@ -20,9 +20,10 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
-
+let cities;
   const getCity = async () => {
-    const  data  = await getAllCity();
+    cities = ''
+    const  data  = await getAllCity(cities);
     setCity(data);
   };
   const data=async() =>{
@@ -46,7 +47,11 @@ const Flotinggnavbar = () => {
     City.push({ label: obj.name, value: obj.name });
   });
  
-     
+  const hello = async(e) => {
+    cities = e.target.value
+    const  data  = await getAllCity(cities);
+        setCity(data);
+         }
 
 
   return (
@@ -65,16 +70,16 @@ const Flotinggnavbar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="navbar-nav mx-auto  ">
              
-                <Select
-                  defaultValue={value}
-                  onChange={setValue}
-                  options={City}
-                  openMenuOnClick={onSearch}
-                  isSearchable
-                  placeholder="Select your City"
-                  id="search-location-box"
-                  className="me-2  "
-                />
+            
+  <input list="cities" name="browser" onChange={(e) => hello(e)}/>
+  <datalist id="cities">
+   {city.map((el) =>(
+    <option>{el.name}</option>
+   ))}
+  </datalist>
+  
+
+
                 <MediaDropDown userType={userType} setUserType={setUserType}/>
                 <Link to={`/${userType}/${value.label ? value.label : "delhi"}`}>
                   <Button

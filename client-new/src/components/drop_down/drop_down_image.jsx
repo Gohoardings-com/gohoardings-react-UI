@@ -64,14 +64,6 @@ const Drop_Down_Image = ({ show, setShow, Dropdown }) => {
                   >  Office Branding</Link>
                   
                 </li>
-                <li>
-                  <BsFillRecord2Fill className="me-2" />
-               <Link        
-                  to={`/transit-media/delhi`}
-                  className="button text-dark text-nowrap is-small is-info text-decoration-none"
-                  >  Traditional OOH</Link>
-                  
-                </li>
               </ul>
             </div>
             <div className="col-3 p-0 m-0 border-box mb-3">

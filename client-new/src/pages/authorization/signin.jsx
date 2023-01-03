@@ -25,7 +25,6 @@ const Signin = () => {
     const [passwordsValidate, setPasswordsValidate] = useState();
     const [phone, setNumber] = useState("");
     const [numbervalidate, setNumbervalidate] = useState();
-    const [remember, setRemember] = useState(false);
     const [forget, setForget] = useState(false);
     const [fnotify,setFnotify] = useState(" ")
     const [signin, setSignIn] = useState(true);
@@ -51,22 +50,18 @@ const Signin = () => {
       }
     }
 
-
+const afterLogin = async() => {
+  localStorage.setItem(true, "long");
+  const locate =  localStorage.getItem("locate");
+  const backlink = locate ? locate : "/";
+   localStorage.removeItem("locate");
+  navigate(`${backlink}`).then(() => dispatch(authActions.login()));
+}
     // Google Login Request
     const onSuccess = async (res) => {
       const  data  = await googleLogin(res);
-      if (data.success=== true) {
-        if (remember) {
-           localStorage.setItem(remember, "long");
-        } else {
-          localStorage.setItem(remember, "short");
-        }
-        const locate =  localStorage.getItem("locate");
-        const backlink = locate ? locate : "/";
-         localStorage.removeItem("locate");
-        navigate(`${backlink}`).then(() => dispatch(authActions.login()));
-      } else {
-        toast("Email or Password Invalid");
+      if (data.success=== true) {  
+          afterLogin()
       }
     };
   
@@ -114,18 +109,8 @@ const Signin = () => {
           e.preventDefault();
           const data = await loginUser(email, password)
           if (data.success === true) {
-            if (remember) {
-              localStorage.setItem(remember, "long");
-           } else {
-             localStorage.setItem(remember, "short");
-           }
-            const locate =  localStorage.getItem("locate");
-            const backlink = locate ? locate : "/";
-             localStorage.removeItem("locate");
-            navigate(`${backlink}`).then(() => dispatch(authActions.login()));
-          } else {
-            toast("Email or Password Invalid");
-          }
+              afterLogin()
+          } 
         } catch (err) {
           toast("Email or Password Invalid");
         }
@@ -187,16 +172,8 @@ const Signin = () => {
           e.preventDefault()
           const data = await registerUser(name, email, phone, password);
           if (data.success === true) {
-          
-            localStorage.setItem(remember, "long");
-            const locate =  localStorage.getItem("locate");
-            const backlink = locate ? locate : "/";
-             localStorage.removeItem("locate");
-            navigate(`${backlink}`).then(() => dispatch(authActions.login()));
-          } else {
-            toast("Email or Password Invalid")
-  
-          }
+          afterLogin() 
+          } 
         } catch (err) {
           toast("Email or Password Invalid");
         }
@@ -251,7 +228,7 @@ const Signin = () => {
                    eyeViseble={eyeViseble}
                    AiFillEye={AiFillEye}
                    AiFillEyeInvisible={AiFillEyeInvisible}
-                   setRemember={setRemember}
+                  
                    clickforget={clickforget}
                    ToastContainer={ToastContainer}
                    signIn={signIn}

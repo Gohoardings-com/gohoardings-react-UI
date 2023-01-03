@@ -18,9 +18,8 @@ const UserDetail = () => {
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const { logout } = useAuth0();
-console.log(cookies);
+
   let firstRender = true;
   const handelLogout = async () => {
     const data = await logoutUser()

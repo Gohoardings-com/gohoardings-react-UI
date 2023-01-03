@@ -5,7 +5,8 @@ const { Invertor, City, SearchData, company } = require('../controller/mediaCont
 const router = express.Router();
 
 router.route('/inventory').post(Invertor).get(company)
-router.route('/searchMedia').get(City).post(SearchData)
+router.route('/searchMedia').post(SearchData)
+router.route("/citys").post(City)
 
 
 

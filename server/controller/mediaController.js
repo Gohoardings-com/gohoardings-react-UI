@@ -3,15 +3,23 @@ const jwtToken = require('jsonwebtoken')
 const catchError = require('../middelware/catchError')
 
 exports.City = catchError(async(req,res,next) => {
-      db.changeUser({ database: "gohoardi_goh" });
-      db.query("SELECT DISTINCT * FROM `goh_cities`", (err, result) => {
+  const {value} = req.body
+  let data= ''
+  if(value){
+     data = " WHERE name LIKE '"+value+"%'"
+  }
+  db.changeUser({ database: "gohoardi_goh" });
+  const sql = "SELECT DISTINCT name FROM `goh_cities` "+data+"  LIMIT 10"
+      db.query(sql, (err, result) => {
         if (err) {
+          console.log(err);
           return res.json({message:"No Data Found On this city"})
         } else {
           return res.send(result);
         }
       });
 })
+
 
 exports.Invertor = catchError(async(req,res,next) => {
   db.changeUser({ database: "gohoardi_goh" });

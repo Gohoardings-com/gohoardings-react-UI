@@ -15,36 +15,42 @@ export const  ILLUMINATION = [
       label: "Tradition Ooh",
       value: "traditional-ooh-media",
       srcImg: ".././images/tradition.jpg",
+      Link:`/traditional-ooh-media/delhi`
     },
     {
       label: "Digital OOH Media",
       value: "digital-media",
       srcImg: ".././images/digit.jpg",
+     Link:`/digital-media/delhi`
     },
     {
       label: "Mall Media",
       value: "mall-media",
       srcImg: ".././images/mall.jpg",
+      Link:`/mall-media/delhi`
     },
     {
       label: "Airport Branding",
       value: "airport-media",
       srcImg: ".././images/airport.jpg",
+      Link:`/airport-media/delhi`
     },
     {
       label: "Office Branding",
       value: "office-media",
       srcImg: ".././images/office.jpg",
+      Link:`/office-branding/delhi`
     },
     {
       label: "Transit Media",
       value: "transit-media",
       srcImg: ".././images/transit.jpg",
+      Link:`/transit-media/delhi`
     },
   ];
 
-export const getAllCity = async() =>{
-    const {data } = await instance.get("media/searchMedia");
+export const getAllCity = async(value) =>{
+    const {data } = await instance.post("media/citys", {value});
     return(data);
 };
 

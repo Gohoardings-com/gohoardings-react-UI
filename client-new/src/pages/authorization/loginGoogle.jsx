@@ -12,18 +12,18 @@ import { useNavigate } from "react-router-dom";
 const Logingoogle = ({signIn}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const { loginWithPopup, user, isAuthenticated } = useAuth0();
+  const { loginWithPopup, user, isAuthenticated, isLoading } = useAuth0();
   
  
 const singinLinkdin = async() =>{
-console.log("two");
+  if(isAuthenticated){
     await instance.post('registration/user',user)
-    console.log("hello");
     localStorage.setItem(true, "long");
 const locate =  localStorage.getItem("locate");
 const backlink = locate ? locate : "/";
  localStorage.removeItem("locate");
 navigate(`${backlink}`).then(() => dispatch(authActions.login()));
+   }
   
 }
 

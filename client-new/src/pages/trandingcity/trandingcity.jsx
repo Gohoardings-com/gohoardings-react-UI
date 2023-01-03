@@ -57,13 +57,15 @@ const Trandingcity = () => {
           </h6>
         </section>
 
-        {loading || loading == null ? (
-          <>
+        {loading ? (
             <h1>Loading... Please Wait</h1>
-          </>
         ) : (
           <>
-            <Slider {...settings}>
+      
+              {!loading == false ? 
+              <h1>Loading Please Wait</h1>
+              :<>
+              <Slider {...settings}>
               {search.map((pos, i) => (
                 <div class="container pt-3 ">
                   <div class="row  ">
@@ -88,6 +90,7 @@ const Trandingcity = () => {
                 </div>
               ))}
             </Slider>
+              </> }
           </>
         )}
       </div>

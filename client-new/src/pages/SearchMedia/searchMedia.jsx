@@ -11,8 +11,7 @@ const SearchMedia = () => {
 
 
   const getCity = async () => {
-    const  data  = await getAllCity();
-    setCity(data);
+    
   };
 
   useEffect(() => {
@@ -22,8 +21,11 @@ const SearchMedia = () => {
   const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
-  const onChange = (event) => {
+  const onChange = async(event) => {
     setValue(event.target.value);
+    const cities = event.target.value
+    const  data  = await getAllCity(cities);
+    setCity(data);
   };
 
   const onSearch = (searchTerm) => {
@@ -68,7 +70,7 @@ const SearchMedia = () => {
             <div className="col-md-5  me-0 pe-0">
               <div className="search-location ">
                 <div className="search-inner">
-                  <InputGroup className="" id="input-click ">
+                  <InputGroup className="" id="input-click">
                     {/* <InputGroup.Text id="basic-addon1 ">@</InputGroup.Text> */}
                     <Form.Control
                       placeholder="Search your Location"
@@ -88,25 +90,18 @@ const SearchMedia = () => {
                       : "dropdown-menu border-0  ps-3  dropdown-menu-location"
                   }
                 >
-                  {city
-                    .filter((item) => {
-                      const searchTerm = value.toLowerCase();
-                      const fullName = item.name.toLowerCase();
-                      return (
-                        searchTerm &&
-                        fullName.startsWith(searchTerm) &&
-                        fullName !== searchTerm
-                      );
-                    })
-                    .slice(0, 10)
-                    .map((item) => (
+                  {city.map((item) => (
+                  
                       <div
                         className="border-1"
                         key={item.name}
                         onClick={() => onSearch(item.name)}
                       >
-                        <h6 className=" text-dark mt-1">{item.name}</h6>
+                      
+                         <option value={item.name} className=" text-dark mt-1">{item.name}</option>
+                  
                       </div>
+               
                     ))}
                 </div>
               </div>
