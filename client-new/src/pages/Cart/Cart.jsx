@@ -24,7 +24,7 @@ const Cart = () => {
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
   const startDate =  `${new Date(moment(Start)).getDate()}/${new Date(moment(Start)).getMonth()+1}/${new Date(moment(Start)).getFullYear()}`
   
-  const endDate =  `${new Date(moment(Start)).getDate()}/${new Date(moment(Start)).getMonth()+1}/${new Date(moment(Start)).getFullYear()}`
+  const endDate =  `${new Date(moment(End)).getDate()}/${new Date(moment(End)).getMonth()+1}/${new Date(moment(End)).getFullYear()}`
   
   
 

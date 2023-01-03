@@ -37,14 +37,14 @@ const Media = () => {
     slice = search.slice(0, noOfLogo);
   }
 
-  useEffect(() => {
-    topFunction();
-  }, []);
-
   function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
+  useEffect(() => {
+    
+    topFunction();
+  }, []);
 
   const getData = async () => {
     await dispatch(mediawithcity(category_name, city_name));
@@ -100,12 +100,14 @@ const Media = () => {
   const More = () => {
     if (search.length >= noOfLogo) {
       setnoOfLogo(noOfLogo + 8);
+      window.scrollBy(0, 850);
     }
   };
+
   const Less = () => {
     if (noOfLogo > 9) {
       setnoOfLogo(noOfLogo - 8);
-      topFunction()
+      window.scrollBy(0, -850);
     }
   };
 

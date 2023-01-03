@@ -10,9 +10,22 @@ export const  ILLUMINATION = [
     {label: "Digital",value: "Digital"}
   ];
 
-  export const CityNameImage = [
+  export const CityNameImage = [    
     {
-      label: "Tradition Ooh",
+      label: "inFlight-branding",
+    
+      value: "inFlight-branding",
+      srcImg: ".././images/airport.jpg",
+    },
+    {
+      label: "multiplex-advertising",
+    
+      value: "multiplex-advertising",
+      srcImg: ".././images/tradition.jpg",
+    },
+    {
+      label: "Tradition OOH Medai ",
+      value2: "Traditional-OOH-Media",
       value: "traditional-ooh-media",
       srcImg: ".././images/tradition.jpg",
       Link:`/traditional-ooh-media/delhi`
@@ -36,8 +49,9 @@ export const  ILLUMINATION = [
       Link:`/airport-media/delhi`
     },
     {
-      label: "Office Branding",
+      label: "Office Branding", 
       value: "office-media",
+      value2:"office-branding",
       srcImg: ".././images/office.jpg",
       Link:`/office-branding/delhi`
     },
