@@ -67,7 +67,7 @@ exports.locationFilter = catchError(async (req,res) =>{
   }
 
   db.changeUser({ database: "gohoardi_goh" });
-  const sql= "SELECT * FROM "+table_name+" WHERE city_name='"+city+"' &&  price BETWEEN '"+min+"' AND '"+max+"' AND illumination IN ('"+newIllumation+"') AND subcategory IN ('"+newSubCate+"')";
+  const sql= "SELECT * FROM "+table_name+" WHERE city_name='"+city+"' &&  price BETWEEN '"+min+"' AND '"+max+"' AND illumination IN ('"+newIllumation+"') && subcategory IN ('"+newSubCate+"')";
   db.query(sql, async(err,result) =>{
 if(err){
   return res.status(400).json({message:err.message})
@@ -121,8 +121,11 @@ if(err){
                         }
                       }) 
             } else {
-           
-              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+illunation+"' || subcategory IN ('"+newSubCate+"') "
+              let addsubcategoryQuery = "";
+              if(newSubCate){
+               addsubcategoryQuery = "&& subcategory IN ('"+newSubCate+"')"; 
+              }
+              const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+illunation+"' "+addsubcategoryQuery+" && city_name='"+city_name+"'"
               db.query(sql,async (err,result) => {
                 if (err) {
                   return res.status(404).json({err: err,message :"Wrong Data"})

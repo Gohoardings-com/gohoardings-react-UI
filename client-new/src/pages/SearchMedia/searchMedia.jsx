@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import "./searchmedia.scss";
+import "./searchMedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
 
 const SearchMedia = () => {
