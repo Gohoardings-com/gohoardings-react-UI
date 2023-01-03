@@ -24,7 +24,7 @@ const Map = () => {
   const [query, setQuery] = useState("");
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
-  const [noOfLogo, setnoOfLogo] = useState(3);
+  const [noOfLogo, setnoOfLogo] = useState(8);
   const { initalState } = useContext(AccountContext);
 
   const addonCart = async (e) => {

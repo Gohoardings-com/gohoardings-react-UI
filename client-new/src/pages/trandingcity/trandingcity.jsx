@@ -5,18 +5,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { mediawithcity } from "../../action/adminAction";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Trandingcity = () => {
-  const dispatch = useDispatch()
-  
-  
-  const data = async () => { 
-    const category_name = "digital-media"
-    const city_name = "delhi"
-    dispatch(mediawithcity(category_name, city_name)
-    );
+  const dispatch = useDispatch();
+
+  const data = async () => {
+    const category_name = "digital-media";
+    const city_name = "delhi";
+    dispatch(mediawithcity(category_name, city_name));
   };
-  
+
   useEffect(() => {
     data();
   }, []);
@@ -58,7 +57,7 @@ const Trandingcity = () => {
           </h6>
         </section>
 
-        {loading || loading == null? (
+        {loading || loading == null ? (
           <>
             <h1>Loading... Please Wait</h1>
           </>
@@ -69,17 +68,21 @@ const Trandingcity = () => {
                 <div class="container pt-3 ">
                   <div class="row  ">
                     <div class="col p-3 ">
-                      <div className="trending-card-img  rounded-2">
-                        <img
-                          src={pos.thumb}
-                          className="  rounded-2  trending-cardd "
-                          key={i}
-                        />
-                        <div className="bottom-left">Delhi</div>
-                        <div className="bottom-left-media">
-                          {pos.medianame.substring(17, 30)}{" "}
+                      <Link
+                        to={`/details/${pos.category_name}/${pos.meta_title}`}
+                      >
+                        <div className="trending-card-img  rounded-2">
+                          <img
+                            src={pos.thumb}
+                            className="  rounded-2  trending-cardd "
+                            key={i}
+                          />
+                          <div className="bottom-left">Delhi</div>
+                          <div className="bottom-left-media">
+                            {pos.medianame.substring(17, 30)}{" "}
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>

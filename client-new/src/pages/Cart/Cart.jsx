@@ -19,9 +19,29 @@ const Cart = () => {
   const { addRemove, initalState } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
   const [price, setPrice] = useState();
-
-
+  const current = new Date();
+  
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
+  const startDate =  `${new Date(moment(Start)).getDate()}/${new Date(moment(Start)).getMonth()+1}/${new Date(moment(Start)).getFullYear()}`
+  
+  const endDate =  `${new Date(moment(Start)).getDate()}/${new Date(moment(Start)).getMonth()+1}/${new Date(moment(Start)).getFullYear()}`
+  
+  
+
+
+  const startd = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+
+
+  useEffect(() => {
+    topFunction();
+  }, []);
+
+  function topFunction() {
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0; 
+  }
 
   const getAllData = async () => {
     const { data } = await instance.get("cart/cartitems");
@@ -32,58 +52,22 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    getAllData(); 
-   
-  },[]);
+    getAllData();
+  }, []);
 
-
-  if(posts.length!=0){
-    console.log("drged");
-  }
-  if(posts.length!=0){
-    console.log("abcd");
-  }
-  if(posts.length==0){
-    console.log("empty");
-  }
-  
-
-  //const cartItemprice = posts.reduce((totalPrice, item) => totalPrice + parseInt(item.price * item.days),0);
-
-   
-  const handelprice = () => {
-   
-    let ans = 0; 
-    posts.map((item) => (ans += item.price*item.days));
-    setPrice(ans);
-  };
-
-
-  // const removefroCart = async (obj) => {
-  //   await instance.post("cart/deleteFromCart", {
-  //     code: obj.code,
-  //   });
-  //   addRemove({ type: "DECR" });
-  //   removeCart(obj);
-  // };
 
   useEffect(() => {
     getAllData();
   }, []);
 
-
-  // Start date of user item
+ 
   const StartDate = (e) => {
     setStart(e);
   };
-    // End date of user item
+ 
   const EndDate = (e) => {
     setEnd(e);
   };
-// remove from cart
-
-  // remove from cart
-
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
       code: obj.code,
@@ -96,8 +80,6 @@ const Cart = () => {
     setPrice(finalStep);
     removeCart(obj);
   };
-
-
 
   const removeCart = async (event) => {
     console.log(event);
@@ -112,7 +94,6 @@ const Cart = () => {
     });
   };
 
-
   // Increament days on of cart item
 
   const increaseDays = async (obj) => {
@@ -121,12 +102,10 @@ const Cart = () => {
       if (element.id == obj.id) {
         if (obj.isDelete == 0) {
           obj.days += 1;
-     
         }
       }
       setPosts(data);
     });
-
   };
 
   // Decrement days on of cart item
@@ -138,14 +117,12 @@ const Cart = () => {
         if (obj.days > 5) {
           obj.days -= 1;
           if (obj.isDelete == 0) {
-   
           }
         }
         setPosts(data);
       }
     });
   };
-
 
   const sumbitALlProduct = async () => {
     await instance.post("cart/processdCart", {
@@ -154,16 +131,6 @@ const Cart = () => {
       produts: posts,
     });
   };
-
-
-
-
-
-
-  const current = new Date();
-  const startdate = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
 
  
   const cartItemprice = posts.reduce(
@@ -174,15 +141,15 @@ const Cart = () => {
   return (
     <>
       <Fixednavbar />
-      <div className="container-fluid px-5  mt-5">
+      <div className="container-xxl  container-xl container-lg container-md  cart-content">
         <div className="p-0 m-0 date-select-section">
           <div className="row">
             <div className="col-md-3 ps-0">
               <div class="input-box active-grey ">
                 <label class="input-label">Start Date</label>
                 <div type="text " class="input-1 d-flex bg-light">
-                  <h6 className="me-2 calender-logo  text-secondary">
-                    {startdate}
+                  <h6 className="me-2 calender-logo  text-dark">
+                  {startDate}
                   </h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
@@ -190,7 +157,7 @@ const Cart = () => {
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-secondary" />
+                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={Start} onChange={StartDate} />
@@ -203,8 +170,8 @@ const Cart = () => {
               <div class="input-box active-grey">
                 <label class="input-label">End Date</label>
                 <div type="text " class="input-1 d-flex bg-light ">
-                  <h6 className="me-2  calender-logo  text-secondary">
-                    {startdate}
+                  <h6 className="me-2  calender-logo  text-dark">
+                    {endDate}
                   </h6>
 
                   <Dropdown className="p-0 m-0">
@@ -213,7 +180,7 @@ const Cart = () => {
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-secondary" />
+                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={End} onChange={EndDate} />
@@ -224,7 +191,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
-        <div className="row mt-5 ">
+        <div className="row mt-4 ">
           <div className="col-md-9">
             <h5 className=" p-2 ps-3 news-heading ">SELECTED MEDIA</h5>
 
@@ -382,7 +349,6 @@ const Cart = () => {
                   <h5 className="mt-4">
                     Total ammount : <FaRupeeSign />
                     {cartItemprice + (cartItemprice * 18) / 100}
-
                   </h5>
                 </div>
               </div>

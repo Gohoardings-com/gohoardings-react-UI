@@ -51,7 +51,7 @@ const Flotinggnavbar = () => {
 
   return (
     <>
-      <Navbar expand="lg px-md-0 p-1   navbar-main-floating">
+      <Navbar expand="lg px-md-0 p-1   navbar-main-floating fixed-top ">
        
           <Navbar.Brand href="/" id="home">
             <img
