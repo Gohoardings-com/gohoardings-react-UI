@@ -79,9 +79,10 @@ export const refreshToken = async() => {
 }
 
 export const googleLogin = async(res) => {
-    const {data} = await  instance.post("registration/googleSingUp", { profile: res.profileObj})
+    const {data} = await  instance.post("registration/googleSingUp", res)
       return data
 }
+
 
 export const loginUser = async(email, password) => {
     const {data} = await instance.post('registration/login',{email,password})

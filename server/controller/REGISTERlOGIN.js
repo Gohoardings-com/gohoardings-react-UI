@@ -70,12 +70,10 @@ exports.login = catchError(async (req, res) => {
 })
 
 exports.googleLogin = catchError(async (req, res) => {
-  const { profile } = req.body
-  if (!profile) {
-    return res.status(400).json({ mess: "Google authentication Failed" })
-  }
+const {name,email,givenName, imageUrl} = req.body
   db.changeUser({ database: "gohoardi_crmapp" });
-  db.query("SELECT * FROM tblcontacts WHERE email='" + profile.email + "' && provider='Google'", async (err, selectResult) => {
+
+  db.query("SELECT * FROM tblcontacts WHERE email='" + email + "' && provider='Google'", async (err, selectResult) => {
     if (err) {
       return res.status(400).json({ message: "Wrong Data" })
     }
@@ -89,8 +87,8 @@ exports.googleLogin = catchError(async (req, res) => {
         } else {
          
           const userid = (result[0].userid) + 1
-          const password = bcrypt.hashSync(profile.givenName, 8)
-          db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${profile.name}','${profile.email}','${password}','${userid}','${profile.imageUrl}','Google')`, async (err, result) => {
+          const password = bcrypt.hashSync(givenName, 8)
+          db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${name}','${email}','${password}','${userid}','${imageUrl}','Google')`, async (err, result) => {
             if (err) {
               return res.status(400).json({ err: err.message })
             } else {

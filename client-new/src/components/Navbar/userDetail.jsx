@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
-import { BiUserPlus } from 'react-icons/bi';
+import { ToastContainer, toast } from "react-toastify";
+import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
 import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
-import { clientId, getCurrentuser, logoutUser, refreshToken } from '../../apis/apis';
+import { clientId, googleLogin, logoutUser, refreshToken } from '../../apis/apis';
 import { AccountContext } from '../../apis/apiContext';
 import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
@@ -19,6 +20,23 @@ const UserDetail = () => {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
   const { logout } = useAuth0();
+
+  useGoogleOneTapLogin({
+    onSuccess:(response) => oneTap(response),
+    onError:(response) =>  toast(response.message),
+    googleAccountConfigs:{
+      client_id:'1021765109404-jk482fa4sld64n34uktdai3rgra9g0el.apps.googleusercontent.com'
+    }
+   })
+ 
+      // Google Login Request
+      const oneTap = async (response) => {
+        const  data  = await googleLogin(response);
+        if (data.success == true) { 
+          window.location.reload();
+          localStorage.setItem(true, "long").then(() => dispatch(authActions.login()));
+        }
+      };
 
   let firstRender = true;
   const handelLogout = async () => {
@@ -45,7 +63,7 @@ const getUser = async () => {
 
   const logOut = async () => {
     sessionStorage.clear()
-    localStorage.clear()
+    localStorage.removeItem("true")
     logout()
     handelLogout().then(() => dispatch(authActions.logout()))
   }
@@ -123,6 +141,7 @@ const getUser = async () => {
             Help?
           </Dropdown.Item>
         </Dropdown.Menu>
+        <ToastContainer />
       </Dropdown>
       }
     </>

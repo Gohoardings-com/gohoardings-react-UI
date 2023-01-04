@@ -29,7 +29,7 @@ const Signin = () => {
     const [fnotify,setFnotify] = useState(" ")
     const [signin, setSignIn] = useState(true);
     
-    
+   
   
     function setFocus(on) {
       var element = document.activeElement;
@@ -59,8 +59,9 @@ const afterLogin = async() => {
 }
     // Google Login Request
     const onSuccess = async (res) => {
-      const  data  = await googleLogin(res);
-      if (data.success=== true) {  
+      const profile = res.profileObj
+      const  data  = await googleLogin(profile);
+      if (data.success === true) {  
           afterLogin()
       }
     };

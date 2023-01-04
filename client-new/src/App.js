@@ -16,7 +16,6 @@ import Profile from './pages/profile/profile'
 import Testimonial from './pages/testimonial/testimonial'
 import "@fontsource/montserrat";
 import 'animate.css';
-import { clientId } from "./apis/apis";
 import Signin from "./pages/authorization/signin";
 import FooterN from "./pages/footer/footerN";
 import Home2 from "./pages/Home2/home2";
@@ -24,15 +23,6 @@ import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
 function App() {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const [avlable,setAvlable] = useState(false)
-
-
- useGoogleOneTapLogin({
-  onSuccess:(response) => console.log(response),
-  onError:(response) => console.log(response),
-  googleAccountConfigs:{
-    client_id:clientId
-  }
- })
 
   const getUser = async() => {
   if(localStorage.getItem("true") || localStorage.getItem("false")){
@@ -56,7 +46,6 @@ function App() {
           <Route exact path="/map" element={<Map/>}/>
           <Route exact path="/details/:category_name/:meta_title" element={<Details/>}/>
         {isLoggedIn &&  <Route exact path="/cart" element={<Cart/>}/> }
-
           <Route exact path="/contact" element={<Contact/>}/> 
           <Route exact path="/about" element={<About/>}/> 
           <Route exact path="/faqs" element={<FAQS/>}/> 
