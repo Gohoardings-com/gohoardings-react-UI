@@ -6,6 +6,7 @@ import {BiCurrentLocation} from 'react-icons/bi';
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchMedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
+import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
@@ -78,7 +79,7 @@ const SearchMedia = () => {
                 <div className="search-location ">
                   <div className="search-inner">
                     <InputGroup className="" id="input-click">
-                      <InputGroup.Text className="basic-addon "><BiCurrentLocation className="basic-addon-icon"/></InputGroup.Text>
+<Citylocation InputGroup={InputGroup} setValue={setValue}/>
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
@@ -91,10 +92,10 @@ const SearchMedia = () => {
                   </div>
 
                   <div className={value ? cls : clt}>
-                    {city.map((item) => (
-                      <div
+                    {city.map((item, i) => (
+                      <div key={i}
                         className="border-1"
-                        key={item.name}
+                       
                         onClick={() => onSearch(item.name)}
                       >
                         <option value={item.name} className=" text-dark mt-1">

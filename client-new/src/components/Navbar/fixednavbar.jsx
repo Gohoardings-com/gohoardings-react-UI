@@ -23,6 +23,7 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
+ 
   let cities;
   const getCity = async () => {
     cities = "";
@@ -96,7 +97,7 @@ const Flotinggnavbar = () => {
           
  <div className="search-inner me-2">
                     <InputGroup className="" id="input-click">
-                    <Citylocation InputGroup={InputGroup} setCity={setCity}/>
+                    <Citylocation InputGroup={InputGroup} setValue={setValue}/>
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
