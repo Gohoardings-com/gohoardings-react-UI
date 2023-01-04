@@ -22,11 +22,7 @@ const Cart = () => {
   const current = new Date();
   
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
-  const startDate =  `${new Date(moment(Start)).getDate()}/${new Date(moment(Start)).getMonth()+1}/${new Date(moment(Start)).getFullYear()}`
-  
-  const endDate =  `${new Date(moment(End)).getDate()}/${new Date(moment(End)).getMonth()+1}/${new Date(moment(End)).getFullYear()}`
-  
-  
+
 
 
   const startd = `${current.getDate()}/${
@@ -149,7 +145,7 @@ const Cart = () => {
                 <label class="input-label">Start Date</label>
                 <div type="text " class="input-1 d-flex bg-light">
                   <h6 className="me-2 calender-logo  text-dark">
-                  {startDate}
+                  {moment(Start).format("DD/MM/YYYY")}
                   </h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
@@ -157,7 +153,7 @@ const Cart = () => {
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-dark" />
+                      <FaCalendarAlt className="calender-logo ms-4 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={Start} onChange={StartDate} />
@@ -171,7 +167,7 @@ const Cart = () => {
                 <label class="input-label">End Date</label>
                 <div type="text " class="input-1 d-flex bg-light ">
                   <h6 className="me-2  calender-logo  text-dark">
-                    {endDate}
+                  {moment(End).format("DD/MM/YYYY")}
                   </h6>
 
                   <Dropdown className="p-0 m-0">
@@ -180,7 +176,7 @@ const Cart = () => {
                       id="dropdown-basic"
                       className="p-0 m-0"
                     >
-                      <FaCalendarAlt className="calender-logo ms-5 mb-1 text-dark" />
+                      <FaCalendarAlt className="calender-logo ms-4 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Calendar value={End} onChange={EndDate} />
@@ -243,77 +239,95 @@ const Cart = () => {
                                     </span>
                                   </h4>
                                   <div className="row mt-4">
-                                    <div className="col-md-6">
-                                      {/* <h6 className="text-secondary">
-                                          <FaRupeeSign />
-                                          {parseInt(obj.price * 30)}/month
-                                        </h6> */}
-                                      {/* <h6 className="text-secondary">
-                                          <FaRupeeSign />
-                                          {parseInt(obj.price)}/day
-                                        </h6> */}
-                                      {/* <h6 className="text-secondary">
-                                          <FaRupeeSign />{" "}
-                                          {parseInt(
-                                            (obj.price * obj.days * 11) / 10
-                                          )}{" "}
-                                          /original price
-                                        </h6> */}
-                                      {/* <h6 className="text-secondary">
-                                          <FaRupeeSign />{" "}
-                                          {parseInt(obj.price * obj.days)}
-                                          /after discount
-                                        </h6> */}
-                                      <h6 className="text-secondary">
+                            
+                                    <div className="button-section ">
+                                        <button
+                                          type="button"
+                                          class=" border-0 bg-transparent  "
+                                          onClick={() => {
+                                            decreaseDays(obj);
+                                          }}
+                                        >
+                                          <AiOutlineMinus className="quantitey text-dark" />
+                                        </button>
+                                        <button
+                                          type="button"
+                                          class=" card-text rounded bg-transparent  border-0 ps-2 pe-2  day-show text-secondary"
+                                        >
+                                          {obj.days}
+                                        </button>
+                                        <button
+                                          type="button"
+                                          class="border-0  bg-transparent  text-dark"
+                                          onClick={() => {
+                                        
+                                            increaseDays(obj);
+                                          }}
+                                        >
+                                            <AiOutlinePlus className="quantitey" />
+                                        
+                                        </button>{" "}
+                                      </div>
+                                      <span className="project-creator mt-4 ms-0 ">
+                      <img
+                        src="../../gohoarding/new-icon/rupees-logo.png"
+                    
+                        className="rupees-logo"
+                      />{" "}
+                      Price {""}
+                     
+                          <span className="text-muted text-decoration-line-through">
+                            {" "}
+                            {parseInt(((obj.price * obj.days)* 11) / 10)}{" "}
+                          </span>
+                          <span className=" ms-2 off-text">
+                            {" "}
+                            9% off 
+                          </span>
+
+                        
+                     
+                    </span>
+                    <span className="project-creator mt-2 ms-0">
+                      <img
+                        src="../../gohoarding/new-icon/offer-logo.png"
+                        className="offer-logo"
+                      />{" "}
+                      Total {""}
+                     
+                       
+                      {parseInt(
+                                          obj.price * obj.days +
+                                            (obj.price * obj.days * 18) / 100
+                                        )}
+                                     
+                      
+                    </span>
+
+
+                                      {/* <h6 className="text-secondary card-text-price mt-5">
                                         <FaRupeeSign />{" "}
                                         {parseInt(
                                           (obj.price * obj.days * 18) / 100
                                         )}
                                         /gst(18%)
-                                      </h6>
-                                      <h6 className="text-secondary">
+                                      </h6> */}
+                                      {/* <h6 className="text-secondary card-text-price">
                                         <FaRupeeSign />
                                         {parseInt(
                                           obj.price * obj.days +
                                             (obj.price * obj.days * 18) / 100
                                         )}
                                         /total
-                                      </h6>
+                                      </h6> */}
                                     </div>
-                                    <div className="col-md-6 ">
-                                      <div className="button-section">
-                                        <button
-                                          type="button"
-                                          class="btn btn-success rounded-1 me-2"
-                                          onClick={() => {
-                                            increaseDays(obj);
-                                          }}
-                                        >
-                                          <AiOutlinePlus className="quantitey" />
-                                        </button>
-                                        <span
-                                          type="button"
-                                          class="btn btn-outline-secondary rounded-1 me-2"
-                                        >
-                                          {obj.days} Days
-                                        </span>
-                                        <button
-                                          type="button"
-                                          class="btn btn-danger rounded-1"
-                                          onClick={() => {
-                                            decreaseDays(obj);
-                                          }}
-                                        >
-                                          <AiOutlineMinus className="quantitey" />
-                                        </button>{" "}
-                                      </div>
-                                    </div>
+                                 
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        
                       </>
                     </>
                   ))}
@@ -330,23 +344,23 @@ const Cart = () => {
                     {initalState}
                   </span>
                 </h5>
-                <div class="card-text">
-                  <h5 className="mt-4">Media Start on this date</h5>
-                  <h6 className="mt-4">
+                <div class="">
+                  <h5 className="mt-3 card-text">Media Start on    {moment(Start).format("DD/MM/YYYY")}</h5>
+                  {/* <h6 className="mt-4 ">
                     {moment(Start).format("MMMM Do YYYY")}
-                  </h6>
-                  <h5 className="mt-4">Media End on this date</h5>
+                  </h6> */}
+                  <h5 className="mt-3 card-text">Media End on {moment(End).format("DD/MM/YYYY")}</h5>
 
-                  <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6>
-                  <h5 className=" mt-4">
-                    Total {totalDays ? totalDays : 5} Days
+                  {/* <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6> */}
+                  <h5 className=" mt-3 card-text">
+                    Total : {totalDays ? totalDays : 5} Days
                   </h5>
 
-                  <h5 className="mt-4">
+                  <h5 className="mt-3 card-text">
                     GST(18%) : <FaRupeeSign /> {(cartItemprice * 18) / 100}
                   </h5>
 
-                  <h5 className="mt-4">
+                  <h5 className="mt-3 card-text">
                     Total ammount : <FaRupeeSign />
                     {cartItemprice + (cartItemprice * 18) / 100}
                   </h5>
@@ -355,10 +369,10 @@ const Cart = () => {
               <div className="d-grid">
                 <button
                   type="submit"
-                  className="rounded bg-info chek-avl-btn btn-lg m-2"
+                  className="rounded chek-avl-btn btn-lg m-2"
                   onClick={sumbitALlProduct}
                 >
-                  <h5 className="text-light  mt-2" onClick={sumbitALlProduct}>
+                  <h5 className="text-light  mt-2 card-title" onClick={sumbitALlProduct}>
                     Chek Availiblity
                   </h5>
                 </button>
@@ -371,3 +385,4 @@ const Cart = () => {
   );
 };
 export default Cart;
+

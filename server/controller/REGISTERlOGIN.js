@@ -238,37 +238,24 @@ exports.Profile = catchError(async (req, res) => {
 })
 
 exports.sendPasswordEmail = catchError(async(req,res,next) => {
-  const {email} = req.body;
-  db.changeUser({ database: "gohoardi_crmapp" })
-  db.query("Select id from tblcontacts Where email='"+email+"'", async(err,result) =>{
-    if(err || result.length == 0){
-     return res.status(400).json({message:"User Not Found"})
-    }else{  
-      const resetToken = result[0].id;
-      res.clearCookie(String(resetToken))
-      req.cookies[`${String(resetToken)}`] = " ";
-    const token = jwtToken.sign({id: resetToken}, process.env.jwt_secret, {
-      expiresIn: "1h",
-    });
-   
-    res.cookie(String(resetToken), token, {
-      path: '/',
-      expires: new Date(Date.now() + 1000 * 3000),
-      httpOnly: true,
-      sameSite: 'lax',
-     
-    });
-      const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/registration/resetPassword?code=${token}`;
-      const message = `Reset your password by clicking on the link below: \n\n ${resetUrl}`;
+  const {email} = req.bod
+    let otp = Math.floor(100000 + Math.random() * 900000);
+      const message =`${otp} is your one-time OTP for login into the Gohoardings account.`;
       const subject = "Reset password gohoardings.com"
       try {
-        await sendEmail({ email: email, subject: "Reset Password", message });
-        res.status(200).json({ success: true, message: `Email sent to ${email}` ,message:message, subject:subject});
+        await sendEmail({ email: email, subject: subject, message:message });
+        db.changeUser({database:"gohoardi_crmapp"})
+        const sql = "UPDATE tblcontacts SET email_otp="+otp+" WHERE email='"+email+"'"
+        db.query(sql,async(err,result) =>{
+            if(err){
+                res.status(400).json({message:err.message})
+            }else{
+                return res.status(200).json({message:`Email send on ${email}`})
+            }
+        })
     } catch (error) {
       return res.status(500).json({message:error.message})
     }
-    }
-  })
 
 })
 

@@ -56,6 +56,23 @@ export const mediaFilters  = (category_name,illunation,categorys,city_name)  => 
 
 
 
+
+export const iconFiltersData  = (distance, datas, table, city, minLatitude, maxLatitude)  => async (dispatch) =>{
+    try{
+        dispatch({type: "IconFilterRequest"});
+
+        const {data} = await instance.post(`filter/mapFilter`,{distance, datas, table, city, minLatitude, maxLatitude})
+
+        dispatch({ type: "IconFilterSuccess", payload: data});
+
+    }catch(error){
+        
+        dispatch({type: "IconFilterFail", payload: error.response.data })
+    }
+}
+
+
+
 export const cartitems = () => async (dispatch) => {
     try{
         dispatch({type: "CartRequest"});

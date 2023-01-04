@@ -18,12 +18,16 @@ const productList = require('./routes/productListRoute');
 const enquiryRoute = require('./routes/enquiryRoute');
 const filters = require('./routes/filterRoute');
 
+const otp = require('./routes/OtpRoute');
+app.use("/api/v1/otp", otp);
+
 app.use("/api/v1/filter", filters);
 app.use("/api/v1/enquiry", enquiryRoute);
 app.use("/api/v1/product", productList);
 app.use("/api/v1/cart", addOnCart);
 app.use('/api/v1/registration',LoginRoute)
 app.use('/api/v1/media', mediaRouter)
+
 
 app.use(express.static('upload'));
 

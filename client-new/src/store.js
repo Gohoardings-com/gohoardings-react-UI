@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers} from 'redux'
 import { createSlice} from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import {SearchReducer, UserReducer} from './reducer/adminReducer'
+import {SearchReducer, UserReducer, IconFilterReducer} from './reducer/adminReducer'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const authSlice = createSlice({
@@ -20,6 +20,7 @@ const authSlice = createSlice({
 const reducer = combineReducers({
     user:UserReducer,
     search:SearchReducer,
+    iconfilter:IconFilterReducer,
 //     cart:cart,
 //     item: CartReducer,
     LoginStatus:authSlice.reducer,

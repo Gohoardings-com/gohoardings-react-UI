@@ -3,12 +3,16 @@
 import React, { useEffect, useState } from "react";
 import Slider from "./slider.jsx";
 import "./icons.scss"
+import { iconFiltersData } from "../../action/adminAction.js";
+import { useDispatch, useSelector } from "react-redux";
 import instance from "../../apis/axios.jsx";
 
-const IconsSlection = ({ loading, fnmedia, search }) => {
-  const [Distance, Setdistance] = useState(0);
+const IconsSlection = ({  slice }) => {
+  const dispatch = useDispatch()
+  const [distance, Setdistance] = useState(0);
+  const [datas,setData] = useState([])
 
-  const hording = [];
+  let hording = [];
 
   function multichecked(e) {
     if (e.currentTarget.checked) {
@@ -20,11 +24,10 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
       if (index > -1) { // only splice array when item is found
         hording.splice(index, 1); // 2nd parameter means remove one item only
       }
-
     }
-
+    
+    setData(cat => [...cat, hording])
   }
-
 
   function HandleDistance(Dis) {
     Setdistance(Dis)
@@ -74,7 +77,6 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
   ];
 
   const distanceofMedia = [
-
     {
       name: 1,
       value: 1,
@@ -93,23 +95,24 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
     },
 
   ]
+
   const submitfilters = async () => {
-    console.log("mapfilter");
-    const { data } = await instance.post("filter/mapFilter", {
-      distance: Distance,
-      selected : hording,
-      tbl : "goh_media",
-      city : "Delhi"
-    });
-    
+    const value = [...slice];
+    const table = value[0].category_name;
+    const city = value[0].city_name;
+    const latitudes = slice.map(item => item.latitude);
+  const minLatitude = Math.min(...latitudes);
+  const maxLatitude = Math.max(...latitudes);
+  await dispatch(iconFiltersData(distance, datas, table, city, minLatitude, maxLatitude))
   // var newArray = media.filter(function (el)
   // {
   //   return el.id >= 3695;
   // }
   // );
   // fnmedia(newArray)
+  console.log(minLatitude);
+  console.log(maxLatitude);
   }
-
 
   return (
     <>
@@ -124,7 +127,7 @@ const IconsSlection = ({ loading, fnmedia, search }) => {
         </div>
         <div className="distance p-2 m-3">
           <p className="m-1 mb-4 pb-2">Distance</p>
-          <Slider Distance={Distance} onChange={HandleDistance} />
+          <Slider Distance={distance} onChange={HandleDistance} />
           <div className="row pt-3 ps-3 km-distance">
             {distanceofMedia.map((dis) => {
 

@@ -112,6 +112,16 @@ export const updateProfile = async(formData) =>{
     const {data} =  await instance.post("registration/updateProfile",formData);
  return data
 }
+export const mobileOTP = async(email) =>{
+
+    const {data} =  await instance.post("registration/forgetpassword",{email});
+ return data
+}
+export const sendOTP = async(otp, password,confirmpasswords) =>{
+    const {data} =  await instance.put("otp/check",{otp, password,confirmpasswords});
+ return data
+}
+
 
 
 export const updatePassword = async(state) =>{

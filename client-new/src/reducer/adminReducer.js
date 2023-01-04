@@ -80,6 +80,27 @@ export const SearchReducer = (state = {search:[]}, action) =>{
     }
 }
 
+export const IconFilterReducer = (state = {iconfilter:[]}, action) =>{
+    switch (action.type) {
+        case "IconFilterRequest":
+            return{
+                loading:true,
+            }
+        case "IconFilterSuccess":
+            return{
+                loading:false,
+                iconfilter:action.payload
+            }
+        case "IconFilterFail": 
+            return{
+                loading:true,
+                search:"No data Found"
+            }
+        default:
+            return state;
+    }
+}
+
 
 
 export const CartReducer = (state = {items:{}}, action) =>{

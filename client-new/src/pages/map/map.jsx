@@ -307,7 +307,7 @@ const Map = () => {
             </div>
             {search && search.length > 0 ? (
               <IconsSlection
-                search={search}
+                slice={slice}
                 loading={loading}
                 fnmedia={search}
               />

@@ -3,7 +3,7 @@ import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { clientId, googleLogin, loginUser } from "../../apis/apis";
+import { changePassword, clientId, googleLogin, loginUser, mobileOTP, sendOTP } from "../../apis/apis";
 import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -23,11 +23,13 @@ const Signin = () => {
     const [emailsValidate, setEmailsValidate] = useState();
     const [password, setPassword] = useState("");
     const [passwordsValidate, setPasswordsValidate] = useState();
+    const [confirmpasswords, setconfirmPasswords] = useState();
     const [phone, setNumber] = useState("");
     const [numbervalidate, setNumbervalidate] = useState();
     const [forget, setForget] = useState(false);
     const [fnotify,setFnotify] = useState(" ")
     const [signin, setSignIn] = useState(true);
+    const [otp,setOtp] = useState(0)
     
    
   
@@ -135,12 +137,20 @@ const afterLogin = async() => {
       setFnotify("");
     }
     
-    const onForget = () => {
-      // after email validate condition chek
+    const onForget = async(e) => {
+      e.preventDefault()
+      const  data  = await mobileOTP(email);
       setFnotify("We send the link to your email")
      let timeout = setTimeout(alertFunc, 4000);
      
     };
+    const checkOTP = async(e) => {
+    const data = await sendOTP(otp, password,confirmpasswords)
+     if (data.success === true) {
+      afterLogin()
+  } 
+    };
+
      
     function alertFunc() {
       setForget(false);
@@ -197,12 +207,16 @@ const afterLogin = async() => {
               {forget ? (
                 <>
                   <ForgetPass
+                  setOtp={setOtp}
                     setEmail={setEmail}
-                    email={email}
+                    phone={phone}
                     onForget={onForget}
                     setFocus={setFocus}
                     fnotif={fnotify}
-
+                    checkOTP={checkOTP}
+                    setconfirmPasswords={setconfirmPasswords}
+                    setPassword={setPassword}
+                 
                   />
                 </>
               ) : (

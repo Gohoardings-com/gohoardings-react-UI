@@ -19,10 +19,13 @@ import 'animate.css';
 import Signin from "./pages/authorization/signin";
 import FooterN from "./pages/footer/footerN";
 import Home2 from "./pages/Home2/home2";
-import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
+
 function App() {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const [avlable,setAvlable] = useState(false)
+
+
+
 
   const getUser = async() => {
   if(localStorage.getItem("true") || localStorage.getItem("false")){

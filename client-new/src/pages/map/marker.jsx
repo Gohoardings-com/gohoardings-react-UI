@@ -1,5 +1,6 @@
 import React, { useState,useEffect,useContext } from "react";
 import { AccountContext } from "../../apis/apiContext";
+import { useSelector } from "react-redux";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
 import "./marker.scss"
@@ -14,14 +15,19 @@ const center = {
 
 
 const Markers = (markers) => {
-
+  const { iconfilter, loading } = useSelector((state) => state.iconfilter);
   const navigate = useNavigate()
   const {addRemove} = useContext(AccountContext)
   markers.data.forEach(e => {
       e['position'] = {lat : e.latitude, lng : e.longitude}
     })
 
-
+if(!loading){
+  iconfilter.forEach(e => {
+    e['position'] = {lat : e.lat, lng : e.lng}
+  })
+  console.log(iconfilter);
+}
   const [activeMarker, setActiveMarker] = useState(null);
 
   const addonCart = async (code,category_name) => {
@@ -50,6 +56,10 @@ const Markers = (markers) => {
         })
       });
     };
+
+    // iconfilter.forEach(e => {
+    //   e['position'] = {lat : e.lat, lng : e.lng}
+    // })
 
     const removefroCart = async (obj) => {
 
@@ -106,6 +116,7 @@ const Markers = (markers) => {
             markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
         <Marker
           key={id}
+        
           position={position}
           onClick={() => handleActiveMarker(id)}
         >
@@ -124,6 +135,25 @@ const Markers = (markers) => {
                   {isDelete === 0 ?
                     <MdOutlineRemoveShoppingCart onClick={() => removefroCart(code,category_name)} className="sitemark text-danger"/> : < MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/>}
                 </div>
+              </div>
+            </InfoWindow>
+          ) : null}
+        </Marker>
+        ))
+    }
+      {loading ?
+                <h1>Loading.... Please Wait</h1>: 
+            iconfilter.map(({id, position , name}) => (
+        <Marker
+          key={id}
+          icon={"../../markerIcon/restaurant.png"}
+          position={position}
+          onClick={() => handleActiveMarker(id)}
+        >
+          {activeMarker === id ? (
+            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+              <div className="infoWindow">
+                  <p>{name}</p>
               </div>
             </InfoWindow>
           ) : null}

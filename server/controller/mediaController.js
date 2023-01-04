@@ -9,7 +9,7 @@ exports.City = catchError(async(req,res,next) => {
      data = " WHERE name LIKE '"+value+"%'"
   }
   db.changeUser({ database: "gohoardi_goh" });
-  const sql = "SELECT DISTINCT name FROM `goh_cities` "+data+"  LIMIT 10"
+  const sql = "SELECT DISTINCT name FROM `goh_cities` "+data+"  LIMIT 8"
       db.query(sql, (err, result) => {
         if (err) {
           console.log(err);
@@ -199,7 +199,7 @@ const token = Object.values(cookieData)[0];
 return jwtToken.verify(token, process.env.jwt_secret ,async (err,user) => {
 if(err){
         promises.push(new Promise((resolve, reject) => {
-          const sql = "SELECT * FROM "+table_name+" WHERE city_name='"+city+"'";
+          const sql = "SELECT * FROM "+table_name+" WHERE city_name='"+city+"' ORDER BY latitude ASC ";
           db.query(sql,async (err,result) => {
             if (err) {
               return res.send({err: reject(err),message :"Wrong Data"})
@@ -213,7 +213,7 @@ if(err){
 } else {
   const userID = user.id;
   promises.push(new Promise(async(resolve, reject) => {
-    db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city+"' ORDER BY `cart`.`userid` DESC ",async (err,result) => {
+    db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city+"'  `cart`.`userid` ORDER BY media.latitude ASC  ",async (err,result) => {
       if (err) {
         return res.send({err: reject(err),message :"Wrong Data"})
     } else if (resolve === []){

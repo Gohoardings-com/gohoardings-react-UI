@@ -1,7 +1,7 @@
 const jwtToken = require('jsonwebtoken')
 const catchError = require('./catchError')
 
-exports.token = catchError(async(userid, statuscode,res) =>{
+exports.token = catchError(async(userid, statuscode, res) =>{
   
   const token =  jwtToken.sign({ id: userid }, process.env.jwt_secret, {
         expiresIn: "7d",

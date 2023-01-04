@@ -30,6 +30,7 @@
     "passport": "^0.6.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "react-linkedin-login-oauth2": "^2.0.1",
+    "request": "^2.88.2",
     "sessionstorage": "^0.1.0"
   }
 }
