@@ -13,6 +13,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
 import { MdArrowUpward, MdOutlineArrowDownward } from "react-icons/md";
+
 const Map = () => {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const dispatch = useDispatch();

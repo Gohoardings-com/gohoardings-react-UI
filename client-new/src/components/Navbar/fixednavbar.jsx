@@ -11,10 +11,11 @@ import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {BiCurrentLocation} from 'react-icons/bi';
+
 import MediaDropDown from "../Media_dropDown/mediaDropDown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import Citylocation from "../cityLocation/citylocation";
 
 const Flotinggnavbar = () => {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ const Flotinggnavbar = () => {
     setCity(data);
   };
 
+
   return (
     <>
       <Navbar expand="lg px-md-0 p-1   navbar-main-floating fixed-top ">
@@ -94,7 +96,7 @@ const Flotinggnavbar = () => {
           
  <div className="search-inner me-2">
                     <InputGroup className="" id="input-click">
-                    <InputGroup.Text className="basic-addon "><BiCurrentLocation className="basic-addon-icon"/></InputGroup.Text>
+                    <Citylocation InputGroup={InputGroup} setCity={setCity}/>
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
@@ -112,7 +114,7 @@ const Flotinggnavbar = () => {
                         key={item.name}
                         onClick={() => onSearch(item.name)}
                       >
-                        <option value={item.name} className=" text-dark mt-1">
+                        <option value={item.name} className="text-dark mt-1">
                           {item.name}
                         </option>
                       </div>
