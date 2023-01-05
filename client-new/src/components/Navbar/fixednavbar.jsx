@@ -15,6 +15,7 @@ import {BiCurrentLocation} from 'react-icons/bi';
 import MediaDropDown from "../Media_dropDown/mediaDropDown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import Citylocation from "../cityLocation/citylocation";
 
 const Flotinggnavbar = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const Flotinggnavbar = () => {
     setPosts(posts);
   }, []);
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState();
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   let City = [];
@@ -67,7 +68,6 @@ const Flotinggnavbar = () => {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    console.log("search ", searchTerm);
     setCls("dropdown-menu");
   };
   const onChange = async (event) => {
@@ -94,7 +94,7 @@ const Flotinggnavbar = () => {
           
 
                     <InputGroup className="" id="input-click">
-                    <InputGroup.Text className="basic-addon "><BiCurrentLocation className="basic-addon-icon"/></InputGroup.Text>
+                 <Citylocation InputGroup={InputGroup} setValue={setValue}/>
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
@@ -119,7 +119,7 @@ const Flotinggnavbar = () => {
                     ))}
                   </div>
             <MediaDropDown userType={userType} setUserType={setUserType} />
-            <Link to={`/${userType}/${value}`}>
+            <Link to={`/${userType}/${value ? value : "delhi"}`}>
               <Button
                 className="border-0  btn-danger"
                 id="search-button-flotnav"

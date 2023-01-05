@@ -126,7 +126,6 @@ export const sendOTP = async(otp) =>{
 }
 
 export const changePasswordApi = async(password, confirmpasswords, expire) =>{
-  console.log(password, confirmpasswords, expire);
     const {data} =  await instance.post("otp/check",{password, confirmpasswords, expire});
  return data
 }

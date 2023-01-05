@@ -12,7 +12,11 @@ const SearchMedia = () => {
   const [city, setCity] = useState([]);
 
 
+<<<<<<< HEAD:client-new/src/pages/SearchMedia/searchMedia.jsx
+  const [value, setValue] = useState("delhi");
+=======
   const [value, setValue] = useState(" ");
+>>>>>>> 99a48c6fc0b9d857f9fcc2c2fba965266523b413:client-new/src/pages/SearchMedia/searchmedia.jsx
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
@@ -29,7 +33,6 @@ const SearchMedia = () => {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    console.log("search ", searchTerm);
     setCls("dropdown-menu border-0  ps-3  dropdown-menu-location");
   };
 

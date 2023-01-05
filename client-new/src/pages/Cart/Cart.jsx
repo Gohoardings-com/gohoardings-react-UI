@@ -73,7 +73,6 @@ const Cart = () => {
   };
 
   const removeCart = async (event) => {
-    console.log(event);
     let data = [...posts];
     data.forEach((element) => {
       if (element.code == event.code) {

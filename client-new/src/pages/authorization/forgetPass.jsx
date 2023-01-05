@@ -22,7 +22,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
 
   }
 
-   console.log(expire);
+
   return (
    <>
    {/* <div className="modal-heading mt-3 text-center">

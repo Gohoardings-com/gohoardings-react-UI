@@ -23,7 +23,7 @@ const data = async() => {
     const city = response.data[0]
     setValue(city.City);
   }).catch(function (error) {
-    console.error(error);
+    return false
   });
     })
 

@@ -58,7 +58,6 @@ const Details = () => {
     }
   };
   const removefroCart = async (obj) => {
-    console.log(obj);
     await instance.post("cart/deleteFromCart", {
       code: obj.code,
     });
@@ -70,7 +69,6 @@ const Details = () => {
     let data = [...markers];
     data.forEach((element) => {
       if (element.code == event.code) {
-        console.log(element);
         element.isDelete = 0;
         setPosts(data);
       }

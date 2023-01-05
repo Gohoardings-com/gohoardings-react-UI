@@ -104,14 +104,6 @@ const IconsSlection = ({  slice }) => {
   const minLatitude = Math.min(...latitudes);
   const maxLatitude = Math.max(...latitudes);
   await dispatch(iconFiltersData(distance, datas, table, city, minLatitude, maxLatitude))
-  // var newArray = media.filter(function (el)
-  // {
-  //   return el.id >= 3695;
-  // }
-  // );
-  // fnmedia(newArray)
-  console.log(minLatitude);
-  console.log(maxLatitude);
   }
 
   return (

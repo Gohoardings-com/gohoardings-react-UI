@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {HiOutlineArrowNarrowRight} from 'react-icons/hi'
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Ourservices = () => {
   {
@@ -31,7 +31,7 @@ const Ourservices = () => {
       ],
     };
   }
-
+  
   return (
     <>
       <div className="container-xxl  container-xl container-lg container-md service-content pt-5 pb-5">
@@ -78,7 +78,11 @@ const Ourservices = () => {
                  
                   className="button-serch text-white rounded-pill "
                 >
-                  <button className="search-btn">Get it Now</button>
+                    <Link to="/traditional-ooh-media/delhi">
+                  <button className="search-btn">
+                    Get it Now
+                    </button>
+                  </Link>
                 </span>
           </div>
 

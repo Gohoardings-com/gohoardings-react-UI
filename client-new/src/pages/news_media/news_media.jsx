@@ -13,7 +13,7 @@ const Newsmedia = () => {
   useEffect(()=>{
     staff()
   },[])
-console.log(posts);
+
   return (
     <>
       <Branding title="News & Media" />
