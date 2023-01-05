@@ -57,9 +57,10 @@ const afterLogin = async() => {
   navigate(`${backlink}`).then(() => dispatch(authActions.login()));
 }
     // Google Login Request
-    const onSuccess = async (res) => {
-      const  data  = await googleLogin(res);
-      if (data.success=== true) {  
+     const onSuccess = async (res) => {
+      const profile = res.profileObj
+      const  data  = await googleLogin(profile);
+      if (data.success === true) {  
           afterLogin()
       }
     };
