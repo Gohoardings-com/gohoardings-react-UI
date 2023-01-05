@@ -10,9 +10,9 @@ import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
-
-
   const [value, setValue] = useState("delhi");
+
+
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
