@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.scss";
 import { authActions } from "../../store";
 import { useNavigate } from "react-router-dom";
-import SearchMedia from '../searchmedia/searchmedia'
+import SearchMedia from '../Searchmedia/searchmedia'
 import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
 import Trandingcity from "../trandingcity/trandingcity";
