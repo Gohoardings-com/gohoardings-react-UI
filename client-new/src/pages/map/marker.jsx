@@ -99,7 +99,7 @@ if(!loading){
     >
       {!markers ?
                 <h1>Loading.... Please Wait</h1>: 
-            markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
+            markers.data.map(({ id, position, medianame,price, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
         <Marker
           key={id}
         
@@ -117,9 +117,21 @@ if(!loading){
                   <p><span>Media Type : </span>{subcategory}</p>
                   <p><span>Height X Width : </span>{height} X {width} feet</p>
                   <p><span>FTF : </span>{ftf}</p>
-                  <p><span>Price : Login to see price</span></p>
-                  {isDelete === 0 ?
-                    <MdOutlineRemoveShoppingCart onClick={() => removefroCart(code,category_name)} className="sitemark text-danger"/> : < MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/>}
+                  <p><span>Price : {price}</span></p>
+                  {isDelete === 0 ? (
+                        <img
+                          src="../../gohoarding/new-icon/remove-cart.png"
+                          onClick={() => removefroCart(code,category_name)}
+                          className="addonCart text-danger sitemark  "
+                        />
+                      ) : (
+                        <img
+                          src="../../gohoarding/new-icon/add-cart.png"
+                          onClick={() => addonCart(code,category_name)}
+                          className="addonCart addonCart-plus sitemark "
+                        />
+                      )}
+                 
                 </div>
               </div>
             </InfoWindow>

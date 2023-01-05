@@ -1,6 +1,7 @@
 .infoWindow {
     width: 300px;
     height: 200px;
+    
     .media-image img{
         width: 100%;
         position: absolute;
@@ -9,12 +10,10 @@
     }
   }
   .sitemark{
-    height: 30px;
-    width: 30px;
+    height:25px;
+    width:20px;
     margin-left: 6px;
-    padding: 3px;
-    color: black;
-    font-size: 21px;
+
   }
 .info-window{
     width: 100%;

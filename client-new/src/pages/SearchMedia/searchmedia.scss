@@ -82,6 +82,21 @@
     background-color: #efefef;
     color: #222222;
     height: 50px;
+    
+  }
+  #abcd {
+   
+    margin-top: 15px;
+      //margin-left: 25px;
+      border-radius: 8px ;
+      z-index: 4 !important;
+  }
+  #abcd > .border-1 {
+    padding: 6px 0px 0px 0px;
+  }
+  
+  #abcd > .border-1:hover{
+    background-color: #e9eaeb;
   }
   #select-media-box {
     width: 21.5vw;
