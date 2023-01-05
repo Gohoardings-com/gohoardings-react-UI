@@ -87,7 +87,6 @@ const Map = () => {
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY",
   });
 
-
   useEffect(() => {
     userCartItem();
   }, []);
@@ -112,6 +111,7 @@ const Map = () => {
     data.forEach((element) => {
       if (element.code == event.code) {
         element.isDelete = 1;
+        setcartItem(data);
       }
     });
   };
@@ -207,87 +207,94 @@ const Map = () => {
                   <>Loading .... Please wait</>
                 ) : (
                   <>
-                  {slice.length == 0 ? 
-                   <>No Data Found</>
-                  :
-                   <>
-                    {slice.map((item, i) => (
+                    {slice.length == 0 ? (
+                      <>No Data Found</>
+                    ) : (
                       <>
-                        <div className="accordion-item border rounded mb-2">
-                          <div
-                            data-bs-toggle="collapse"
-                            data-bs-target={"#" + item.code + ""}
-                            aria-expanded="true"
-                            aria-controls="collapseOne"
-                          >
-                            <div className="row m-0">
-                              <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
-                                <img
-                                  src={
-                                    item.thumb.startsWith("https")
-                                      ? item.thumb
-                                      : `https://${item.mediaownercompanyname
-                                          .trim()
-                                          .split(" ")
-                                          .slice(0, 2)
-                                          .join("_")
-                                          .toLowerCase()}.odoads.com/media/${item.mediaownercompanyname
-                                          .trim()
-                                          .split(" ")
-                                          .slice(0, 2)
-                                          .join("_")
-                                          .toLowerCase()}/media/images/new${
-                                          item.thumb
-                                        }`
-                                  }
-                                  alt="N/A"
-                                  className="w-100 h-75 mt-2 pt-2"
-                                />
-                              </div>
-                              <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
-                                <ul className="list-unstyled">
-                                  <li>
-                                    {item.page_title.substring(0, 20) + "..."}
-                                  </li>
-                                  <li>Code : {item.code}</li>
-                                  <li>FTF : {item.ftf}</li>
-                                  <li>Size : {item.size} feet</li>
+                        {slice.map((item, i) => (
+                          <>
+                            <div className="accordion-item border rounded mb-2">
+                              <div
+                                data-bs-toggle="collapse"
+                                data-bs-target={"#" + item.code + ""}
+                                aria-expanded="true"
+                                aria-controls="collapseOne"
+                              >
+                                <div className="row m-0">
+                                  <div className="col-xl-4 col-lg-12 col-md-12 col-sm-6 map-media-items">
+                                    <img
+                                      src={
+                                        item.thumb.startsWith("https")
+                                          ? item.thumb
+                                          : `https://${item.mediaownercompanyname
+                                              .trim()
+                                              .split(" ")
+                                              .slice(0, 2)
+                                              .join("_")
+                                              .toLowerCase()}.odoads.com/media/${item.mediaownercompanyname
+                                              .trim()
+                                              .split(" ")
+                                              .slice(0, 2)
+                                              .join("_")
+                                              .toLowerCase()}/media/images/new${
+                                              item.thumb
+                                            }`
+                                      }
+                                      alt="N/A"
+                                      className="w-100 h-75 mt-2 pt-2"
+                                    />
+                                  </div>
+                                  <div className="col-xl-8 col-lg-12 col-md-12 col-sm-6">
+                                    <ul className="list-unstyled">
+                                      <li>
+                                        {item.page_title.substring(0, 20) +
+                                          "..."}
+                                      </li>
+                                      <li>Code : {item.code}</li>
+                                      <li>FTF : {item.ftf}</li>
+                                      <li>Size : {item.size} feet</li>
 
-                                  <li>Price: {item.price}</li>
-                                </ul>
+                                      <li>
+                                        Price: {item.price}{" "}
+                                        {/* {item.isDelete == null ||
+                                        item.isDelete == 0 ? (
+                                          <img
+                                            src="../../gohoarding/new-icon/add-cart.png"
+                                            onClick={() => addonCart(item)}
+                                            className="addonCart addonCart-plus sitemark float-end"
+                                          />
+                                        ) : (
+                                          <img
+                                            src="../../gohoarding/new-icon/remove-cart.png"
+                                            onClick={() => removefroCart(item)}
+                                            className="addonCart text-danger sitemark float-end "
+                                          />
+                                        )} */}
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                                <div
+                                  id={item.code}
+                                  className="accordion-collapse collapse "
+                                  aria-labelledby="headingOne"
+                                  data-bs-parent="#accordionExample"
+                                >
+                                  <div className="accordion-body">
+                                    <strong>
+                                      This is the first item's accordion body.
+                                    </strong>{" "}
+                                    {item.geoloc}
+                                  </div>
+                                  
+                                </div>
                               </div>
                             </div>
-
-                            <div
-                              id={item.code}
-                              className="accordion-collapse collapse"
-                              aria-labelledby="headingOne"
-                              data-bs-parent="#accordionExample"
-                            >
-                              <div className="accordion-body">
-                                <strong>
-                                  This is the first item's accordion body.
-                                </strong>{" "}
-                                {item.geoloc}
-                              </div>
-                              {item.userid == null ||
-                              item.isDelete == null ||
-                              (item.userid != null && item.isDelete == 0) ? (
-                                <button onClick={() => addonCart(item)}>
-                                  Add To Cart
-                                </button>
-                              ) : (
-                                <button onClick={() => removefroCart(item)}>
-                                  Remove from Cart
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                          </>
+                        ))}
                       </>
-                    ))}
-                   </>
-                  }
+                    )}
                   </>
                 )}
                 {/* <div className="d-flex">
@@ -307,11 +314,7 @@ const Map = () => {
               </div>
             </div>
             {search && search.length > 0 ? (
-              <IconsSlection
-                slice={slice}
-                loading={loading}
-                fnmedia={search}
-              />
+              <IconsSlection slice={slice} loading={loading} fnmedia={search} />
             ) : null}
             <div
               className="filter-items p-2 accordion accordion-collapse collapse"
@@ -485,10 +488,16 @@ const Map = () => {
               </div>
 
               <div class="text-center map-btn-more">
-                <button class=" buttonload btn-hover m-2 " onClick={getAllDetails}>
+                <button
+                  class=" buttonload btn-hover m-2 "
+                  onClick={getAllDetails}
+                >
                   Apply
                 </button>
-                <button class=" buttonload btn-hover m-2" onClick={previousData}>
+                <button
+                  class=" buttonload btn-hover m-2"
+                  onClick={previousData}
+                >
                   Clear All
                 </button>
               </div>
@@ -551,22 +560,15 @@ const Map = () => {
                                     <li>FTF : {item.ftf}</li>
                                     <li>Size : {item.size} feet</li>
                                     <li>
-                                      Price:{" "}
-                                      {!isLoggedIn ? (
-                                        <a onClick={locatetologin}>
-                                          Please Login first
-                                        </a>
-                                      ) : (
-                                        item.price
-                                      )}
+                                      Price:
+                                      {item.price}
+                                      <img
+                                        src="../../gohoarding/new-icon/remove-cart.png"
+                                        onClick={() => removefroCart(item)}
+                                        className="addonCart text-danger float-end "
+                                      />
                                     </li>
                                   </ul>
-                                  <button
-                                    className="mb-2"
-                                    onClick={() => removefroCart(item)}
-                                  >
-                                    Remove from Cart
-                                  </button>
                                 </div>
                               </div>
                             </div>

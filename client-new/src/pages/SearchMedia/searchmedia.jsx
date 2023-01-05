@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
-import {BiCurrentLocation} from 'react-icons/bi';
+import { BiCurrentLocation } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchMedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
@@ -12,7 +12,7 @@ const SearchMedia = () => {
   const [city, setCity] = useState([]);
 
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(" ");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
@@ -74,7 +74,10 @@ const SearchMedia = () => {
                 <div className="search-location ">
                   <div className="search-inner">
                     <InputGroup className="" id="input-click">
-<Citylocation InputGroup={InputGroup} setValue={setValue}/>
+                      <Citylocation
+                        InputGroup={InputGroup}
+                        setValue={setValue}
+                      />
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
@@ -86,11 +89,11 @@ const SearchMedia = () => {
                     </InputGroup>
                   </div>
 
-                  <div className={value ? cls : clt}>
+                  <div className={value ? cls : clt} id="abcd">
                     {city.map((item, i) => (
-                      <div key={i}
+                      <div
+                        key={i}
                         className="border-1"
-                       
                         onClick={() => onSearch(item.name)}
                       >
                         <option value={item.name} className=" text-dark mt-1">
@@ -115,8 +118,6 @@ const SearchMedia = () => {
             </div>
           </div>
         </section>
-
-    
       </div>
     </>
   );

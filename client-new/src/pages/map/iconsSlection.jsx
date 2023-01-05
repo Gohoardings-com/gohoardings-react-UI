@@ -128,6 +128,7 @@ const IconsSlection = ({  slice }) => {
             </div>
           ))}
         </div>
+        
         <div className="distance p-2 m-3">
           <p className="m-1 mb-4 pb-2">Distance</p>
           <Slider Distance={distance} onChange={HandleDistance} />

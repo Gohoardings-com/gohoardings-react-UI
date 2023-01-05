@@ -36,10 +36,10 @@ const MapCart = ({cartItem, priceState, locatetologin, removefroCart}) => {
                                   <li>FTF : {item.ftf}</li>
                                   <li>Size : {item.size} feet</li>
                                   <li>
-                                    Price: {!priceState ? <a onClick={locatetologin} >Please Login first</a> : item.price}
+                                    Price: {item.price}
                                   </li>
                                 </ul>
-                                <button className="mb-2" onClick={() => removefroCart(item)}>Remove from Cart</button>
+                                <button className="mb-2" onClick={() => removefroCart(item)}>from Cart</button>
                               </div>
 
                             </div>
