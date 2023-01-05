@@ -16,7 +16,7 @@ const Team = () => {
   useEffect(()=>{
     staff()
   },[])
-console.log(posts);
+
   return (
     <>
       <section>

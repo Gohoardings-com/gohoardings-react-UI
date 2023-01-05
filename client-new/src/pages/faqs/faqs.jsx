@@ -15,7 +15,7 @@ const Faqs = () => {
   useEffect(()=>{
     staff()
   },[])
-  console.log(posts);
+
   return (
     <>
       <Branding title="FAQs" />

@@ -25,6 +25,8 @@ const Map = () => {
   const [query, setQuery] = useState("");
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
+  const [newIllum, setnewIllum] = useState([]);
+  const [newCate, setnewCate] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(8);
   const { initalState } = useContext(AccountContext);
 
@@ -96,7 +98,7 @@ const Map = () => {
     const value = [...search];
     const table = value[0].category_name;
     const city = value[0].city_name;
-    dispatch(priceSubIllu(category_name, price, illumination, table, city));
+    dispatch(priceSubIllu(newCate, price, newIllum, table, city));
   };
 
   const removefroCart = async (obj) => {
@@ -125,6 +127,7 @@ const Map = () => {
         category_name.splice(index, 1);
       }
     }
+    setnewCate(cat => [...cat,category_name])
   }
   function mediaType(e) {
     if (e.currentTarget.checked) {
@@ -135,6 +138,7 @@ const Map = () => {
         illumination.splice(index, 1);
       }
     }
+    setnewIllum(cat => [...cat,illumination])
   }
 
   const locatetologin = async () => {

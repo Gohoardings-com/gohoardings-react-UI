@@ -42,7 +42,6 @@ const Media = () => {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
   useEffect(() => {
-    
     topFunction();
   }, []);
 
@@ -68,7 +67,6 @@ const Media = () => {
     navigate("/login");
   };
   const removefroCart = async (obj) => {
-    console.log(obj);
     await instance.post("cart/deleteFromCart", {
       code: obj.code,
     });
@@ -80,7 +78,7 @@ const Media = () => {
     let data = [...search];
     data.forEach((element) => {
       if (element.code == event.code) {
-        console.log(element);
+   
         element.isDelete = 0;
         setPosts(data);
       }

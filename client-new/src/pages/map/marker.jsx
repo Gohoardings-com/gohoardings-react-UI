@@ -26,7 +26,6 @@ if(!loading){
   iconfilter.forEach(e => {
     e['position'] = {lat : e.lat, lng : e.lng}
   })
-  console.log(iconfilter);
 }
   const [activeMarker, setActiveMarker] = useState(null);
 

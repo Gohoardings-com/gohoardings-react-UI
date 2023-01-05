@@ -60,7 +60,6 @@ const EnquireRegister = () => {
         //     setMessageValidate(<MdOutlineError className="text-danger" />);
         // } else if (count === 0) {
             await instance.post("enquiry/message", { name, email, number, message });
-            console.log(name, email, number, message);
         //     notify();
         //     setName("");
         //     setNumber("");

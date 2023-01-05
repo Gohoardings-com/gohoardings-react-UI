@@ -4,7 +4,7 @@ import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
 import {BiCurrentLocation} from 'react-icons/bi';
 import InputGroup from "react-bootstrap/InputGroup";
-import "./searchMedia.scss";
+import "./searchmedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
 import Citylocation from "../../components/cityLocation/citylocation";
 
@@ -12,7 +12,7 @@ const SearchMedia = () => {
   const [city, setCity] = useState([]);
 
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
@@ -29,7 +29,6 @@ const SearchMedia = () => {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    console.log("search ", searchTerm);
     setCls("dropdown-menu border-0  ps-3  dropdown-menu-location");
   };
 
