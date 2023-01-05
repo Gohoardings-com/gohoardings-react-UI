@@ -58,11 +58,12 @@ export const mediaFilters  = (category_name,illunation,categorys,city_name)  => 
 
 
 
-export const iconFiltersData  = (distance, datas, table, city, minLatitude, maxLatitude)  => async (dispatch) =>{
+export const iconFiltersData  = (distance, datas, table, city, minLatitude, maxLatitude, uniqueValues)  => async (dispatch) =>{
+ 
     try{
         dispatch({type: "IconFilterRequest"});
 
-        const {data} = await instance.post(`filter/mapFilter`,{distance, datas, table, city, minLatitude, maxLatitude})
+        const {data} = await instance.post(`filter/mapFilter`,{distance, datas, table, city, minLatitude, maxLatitude, uniqueValues})
 
         dispatch({ type: "IconFilterSuccess", payload: data});
 

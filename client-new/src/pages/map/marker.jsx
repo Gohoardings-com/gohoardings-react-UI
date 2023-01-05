@@ -45,14 +45,13 @@ if(!loading){
     }
 
     const add = (code) => {
-      let data = [markers.data];
-      data.map((element) => {
-        element.map((obj) =>{
-          if (obj.code == code) {
-            obj.isDelete = 0;
-            markers(data);
-          }
-        })
+      let temp = [markers.data];
+      let data = temp[0];
+      data.forEach((obj) => {
+        if (obj.code == code) {
+          obj.isDelete = 0;
+          markers(data);
+        }
       });
     };
 
@@ -66,11 +65,11 @@ if(!loading){
   
     const remove = (event) => {
       let temp = [markers.data];
-      let data = [...temp];
+      let data = temp[0];
       data.forEach((element) => {
         if (element.code == event) {
-         
           element.isDelete = 1;
+          markers(data);
         }
       });
     };
@@ -141,7 +140,7 @@ if(!loading){
     }
       {loading ?
                 <h1>Loading.... Please Wait</h1>: 
-            iconfilter.map(({id, position , name}) => (
+            iconfilter.map(({id, position , name, lat,lng}) => (
         <Marker
           key={id}
           icon={"../../markerIcon/restaurant.png"}
@@ -152,6 +151,7 @@ if(!loading){
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
               <div className="infoWindow">
                   <p>{name}</p>
+                  <p>{lat},{lng}</p>
               </div>
             </InfoWindow>
           ) : null}

@@ -69,7 +69,7 @@ const Map = () => {
 
   useEffect(() => {
     userCartItem();
-    holdingtype();
+    // holdingtype();
   }, [initalState]);
 
   const cartItemprice = cartItem.reduce(
@@ -384,7 +384,7 @@ const Map = () => {
                           onChange={(event) => setQuery(event.target.value)}
                         />
                       </div>
-                      <div className="checkbox-items py-2">
+                      {/* <div className="checkbox-items py-2">
                         {category
                           .filter((obj) => {
                             if (query == "") {
@@ -410,7 +410,7 @@ const Map = () => {
                               <br />
                             </>
                           ))}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

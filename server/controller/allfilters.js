@@ -80,13 +80,15 @@ if(err){
 })
 
 exports.iconFilter = catchError(async (req,res) =>{
-  const { distance, selected, tbl, city, minLatitude, maxLatitude } = req.body;
+  const { distance, selected, tbl, city, minLatitude, maxLatitude , uniqueValues} = req.body;
   let data = ''
 if(selected){
 data = selected.flat(Infinity)
 }
 db.changeUser({ database: "gohoardi_goh" });
-const sql = "SELECT * FROM `testing_only_restaurants` WHERE mp_lat BETWEEN "+minLatitude+" AND "+maxLatitude+""
+// const sql = "SELECT * FROM `testing_only_restaurants` WHERE mp_lat BETWEEN "+minLatitude+" AND "+maxLatitude+""
+const sql = "SELECT * FROM `testing_only_restaurants` WHERE mp_lat IN ("+uniqueValues+")"
+
 db.query(sql, (err, result) => {
 if (err) {
   return res.json({message:"No Data Found On this city"})
