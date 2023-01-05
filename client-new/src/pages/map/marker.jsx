@@ -46,14 +46,13 @@ if(!loading){
     }
 
     const add = (code) => {
-      let data = [markers.data];
-      data.map((element) => {
-        element.map((obj) =>{
-          if (obj.code == code) {
-            obj.isDelete = 0;
-            markers(data);
-          }
-        })
+      let temp = [markers.data];
+      let data = temp[0];
+      data.forEach((obj) => {
+        if (obj.code == code) {
+          obj.isDelete = 0;
+          markers(data);
+        }
       });
     };
 
@@ -67,11 +66,11 @@ if(!loading){
   
     const remove = (event) => {
       let temp = [markers.data];
-      let data = [...temp];
+      let data = temp[0];
       data.forEach((element) => {
         if (element.code == event) {
-         
           element.isDelete = 1;
+          markers(data);
         }
       });
     };

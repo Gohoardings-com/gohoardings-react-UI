@@ -60,7 +60,6 @@ const Signin = () => {
     localStorage.setItem(true, "long");
     const locate = localStorage.getItem("locate");
     const backlink = locate ? locate : "/";
-    isLoggedIn = true
     localStorage.removeItem("locate");
     navigate(`${backlink}`).then(() => dispatch(authActions.login()));
   }
