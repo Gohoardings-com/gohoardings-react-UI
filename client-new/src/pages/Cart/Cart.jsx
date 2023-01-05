@@ -6,7 +6,7 @@ import { Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+
 import { FaCalendarAlt } from "react-icons/fa";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import "./cart.scss";
@@ -20,23 +20,20 @@ const Cart = () => {
   const [posts, setPosts] = useState([]);
   const [price, setPrice] = useState();
   const current = new Date();
-  
+
   const totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
-
-
 
   const startd = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
-
 
   useEffect(() => {
     topFunction();
   }, []);
 
   function topFunction() {
-    document.body.scrollTop = 0; 
-    document.documentElement.scrollTop = 0; 
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   const getAllData = async () => {
@@ -51,16 +48,14 @@ const Cart = () => {
     getAllData();
   }, []);
 
-
   useEffect(() => {
     getAllData();
   }, []);
 
- 
   const StartDate = (e) => {
     setStart(e);
   };
- 
+
   const EndDate = (e) => {
     setEnd(e);
   };
@@ -128,7 +123,6 @@ const Cart = () => {
     });
   };
 
- 
   const cartItemprice = posts.reduce(
     (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
     0
@@ -145,7 +139,7 @@ const Cart = () => {
                 <label class="input-label">Start Date</label>
                 <div type="text " class="input-1 d-flex bg-light">
                   <h6 className="me-2 calender-logo  text-dark">
-                  {moment(Start).format("DD/MM/YYYY")}
+                    {moment(Start).format("DD/MM/YYYY")}
                   </h6>
                   <Dropdown className="p-0">
                     <Dropdown.Toggle
@@ -167,7 +161,7 @@ const Cart = () => {
                 <label class="input-label">End Date</label>
                 <div type="text " class="input-1 d-flex bg-light ">
                   <h6 className="me-2  calender-logo  text-dark">
-                  {moment(End).format("DD/MM/YYYY")}
+                    {moment(End).format("DD/MM/YYYY")}
                   </h6>
 
                   <Dropdown className="p-0 m-0">
@@ -223,11 +217,11 @@ const Cart = () => {
                                           obj.thumb
                                         }`
                                   }
-                                  className="img-fluid w-100 rounded-start  cart-media-img"
+                                  className="img-fluid w-100 rounded-3  m-2 cart-media-img"
                                   alt="..."
                                 />
                               </div>
-                              <div className="col-md-8 ms-0 ps-0">
+                              <div className="col-md-8 ms-0 ps-3 ">
                                 <div className="card-body pb-1">
                                   <h4 className="card-title">
                                     {obj.areadescription}
@@ -235,84 +229,103 @@ const Cart = () => {
                                       className="float-end"
                                       onClick={() => removefroCart(obj)}
                                     >
-                                      <MdDeleteForever className="mb-2  delet-icon" />
+                                      <img src="../../clientslogo/delet-icon.png" className="delet-icon" />
                                     </span>
                                   </h4>
-                                  <div className="row mt-4">
-                            
-                                    <div className="button-section ">
-                                        <button
-                                          type="button"
-                                          class=" border-0 bg-transparent  "
-                                          onClick={() => {
-                                            decreaseDays(obj);
-                                          }}
-                                        >
-                                          <AiOutlineMinus className="quantitey text-dark" />
-                                        </button>
-                                        <button
-                                          type="button"
-                                          class=" card-text rounded bg-transparent  border-0 ps-2 pe-2  day-show text-secondary"
-                                        >
-                                          {obj.days}
-                                        </button>
-                                        <button
-                                          type="button"
-                                          class="border-0  bg-transparent  text-dark"
-                                          onClick={() => {
+                                  <div className="row ">
+                                    <div className="button-section  card-text">
+                                      Days : 
+                                  
+                                       <img src="../../clientslogo/plus.png" className="quantitey ms-2"   onClick={() => {
+                                          decreaseDays(obj);
+                                        }} />
+                                 
+                                      <span
+                                        type="button"
+                                        class=" fw-bold  rounded bg-transparent  border-0 ps-2 pe-2   text-dark"
+                                      >
+                                        {obj.days}
+                                      </span>
+                                   
+                                        <img src="../../clientslogo/minus.png" className="quantitey"      onClick={() => {
+                                          increaseDays(obj);
+                                        }} />
+                                      
+                                    </div>
+                                    <span className="project-creator mt-3 ms-0 card-text">
+                                      <img
+                                        src="../../gohoarding/new-icon/offer-logo.png"
+                                        className="rupees-logo me-2"
+                                      />
+                                      {obj.price}
+                                    
+                                      <span className="text-muted text-decoration-line-through ms-2 card-text">
+                                        {" "}
+                                        {parseInt(
+                                          (obj.price* 11) / 10
+                                        )}{" "}
+                                      </span>
+                                      <span className=" ms-2 off-text">
+                                        {" "}
+                                        9% off
+                                      </span>
+                                    </span>
+                                    <span className="project-creator mt-1 ms-0 card-text">
+                                      <img
+                                        src="../../clientslogo/tax-icon.png"
+                                        className="rupees-logo"
+                                      />{" "}
+                                    {/* Total {""} */}
+                                      <span className=" ms-1 card-text">
+                                      {parseInt(
                                         
-                                            increaseDays(obj);
-                                          }}
-                                        >
-                                            <AiOutlinePlus className="quantitey" />
-                                        
-                                        </button>{" "}
-                                      </div>
-                                      <span className="project-creator mt-4 ms-0 ">
-                      <img
-                        src="../../gohoarding/new-icon/rupees-logo.png"
-                    
-                        className="rupees-logo"
-                      />{" "}
-                      Price {""}
-                     
-                          <span className="text-muted text-decoration-line-through">
-                            {" "}
-                            {parseInt(((obj.price * obj.days)* 11) / 10)}{" "}
-                          </span>
-                          <span className=" ms-2 off-text">
-                            {" "}
-                            9% off 
-                          </span>
-
-                        
-                     
-                    </span>
-                    <span className="project-creator mt-2 ms-0">
-                      <img
-                        src="../../gohoarding/new-icon/offer-logo.png"
-                        className="offer-logo"
-                      />{" "}
-                      Total {""}
-                     
-                       
-                      {parseInt(
+                                            (obj.price* 18) / 100
+                                        )}
+                                      </span>
+                                      <span className=" ms-2 off-text">
+                                        {" "}
+                                        18% gst 
+                                      </span>
+                                    </span>
+                                    <span className="project-creator mt-1 ms-0 ">
+                                      <img
+                                        src="../../gohoarding/new-icon/rupees-logo.png"
+                                        className="rupees-logo"
+                                      />{" "}
+                                    {/* Total {""} */}
+                                      <span className=" ms-1 card-text">
+                                      {parseInt(
                                           obj.price * obj.days +
                                             (obj.price * obj.days * 18) / 100
                                         )}
-                                     
-                      
-                    </span>
+                                      </span>
+                                      <span className=" ms-2 off-text">
+                                        For  {obj.days} days include gst  {" "}
+                                        
+                                      </span>
+                                    </span>
 
 
-                                      {/* <h6 className="text-secondary card-text-price mt-5">
+                                    {/* <span className="project-creator mt-2 ms-0">
+                                      <img
+                                        src="../../gohoarding/new-icon/offer-logo.png"
+                                        className="offer-logo"
+                                      />{" "}
+                                      Total {""}
+                                      {parseInt(
+                                        obj.price * obj.days +
+                                          (obj.price * obj.days * 18) / 100
+                                      )}
+                                    </span> */}
+
+                                    {/* <h6 className="text-secondary card-text-price mt-5">
                                         <FaRupeeSign />{" "}
                                         {parseInt(
                                           (obj.price * obj.days * 18) / 100
                                         )}
                                         /gst(18%)
                                       </h6> */}
-                                      {/* <h6 className="text-secondary card-text-price">
+                                    {/* <h6 className="text-secondary card-text-price">
                                         <FaRupeeSign />
                                         {parseInt(
                                           obj.price * obj.days +
@@ -320,14 +333,12 @@ const Cart = () => {
                                         )}
                                         /total
                                       </h6> */}
-                                    </div>
-                                 
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        
+                        </div>
                       </>
                     </>
                   ))}
@@ -345,13 +356,14 @@ const Cart = () => {
                   </span>
                 </h5>
                 <div class="">
-                  <h5 className="mt-3 card-text">Media Start on    {moment(Start).format("DD/MM/YYYY")}</h5>
-                  {/* <h6 className="mt-4 ">
-                    {moment(Start).format("MMMM Do YYYY")}
-                  </h6> */}
-                  <h5 className="mt-3 card-text">Media End on {moment(End).format("DD/MM/YYYY")}</h5>
+                  <h5 className="mt-3 card-text">
+                    Media Start on {moment(Start).format("DD/MM/YYYY")}
+                  </h5>
+               
+                  <h5 className="mt-3 card-text">
+                    Media End on {moment(End).format("DD/MM/YYYY")}
+                  </h5>
 
-                  {/* <h6 className="mt-4">{moment(End).format("MMMM Do YYYY")}</h6> */}
                   <h5 className=" mt-3 card-text">
                     Total : {totalDays ? totalDays : 5} Days
                   </h5>
@@ -372,7 +384,10 @@ const Cart = () => {
                   className="rounded chek-avl-btn btn-lg m-2"
                   onClick={sumbitALlProduct}
                 >
-                  <h5 className="text-light  mt-2 card-title" onClick={sumbitALlProduct}>
+                  <h5
+                    className="text-light  mt-2 card-title"
+                    onClick={sumbitALlProduct}
+                  >
                     Chek Availiblity
                   </h5>
                 </button>
@@ -385,4 +400,3 @@ const Cart = () => {
   );
 };
 export default Cart;
-

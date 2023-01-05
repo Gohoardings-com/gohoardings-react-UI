@@ -12,13 +12,13 @@ export const  ILLUMINATION = [
 
   export const CityNameImage = [    
     {
-      label: "inFlight-branding",
+      label: "In Flight Branding",
     
       value: "inFlight-branding",
       srcImg: ".././images/airport.jpg",
     },
     {
-      label: "multiplex-advertising",
+      label: "Multiplex Advertising",
     
       value: "multiplex-advertising",
       srcImg: ".././images/tradition.jpg",

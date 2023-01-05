@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { profileDetails } from "../../apis/apis";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import NewNAvbar from "../../components/navbar/navbar";
 import ChangePassword from "./changePassword";
 import Companey from "./companey";
@@ -11,6 +12,15 @@ const Profile = () => {
   const [profile, setProfile] = useState(false);
   const [companey, setCompaney] = useState(false);
   const [posts, setPosts] = useState([]);
+
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+  useEffect(() => {
+    
+    topFunction();
+  }, []);
 
   const userData = async () => {
     const data = await profileDetails();
@@ -57,24 +67,24 @@ const Profile = () => {
   }, []);
   return (
     <>
-      <NewNAvbar />
-    <div className=" container">
+    <Fixednavbar/>
+    <div className=" container-xxl  container-xl container-lg container-md my-5">
         <div className="row  p-5">
           <div className="col-md-3">
             <div className="card">
               <img
-                src="Image Not found"
+                  src="../../clientslogo/user-profile.png"
                 className="card-img-top p-3 pb-2"
                 alt="..."
               />
               <div className="card-body text-light  row text-center pt-0 pb-2">
-                <div className="col ">
-                  <div className="p-1 border bg-success" onClick={showProfile}>
+                <div className="col pe-0 ">
+                  <div className="p-1 border prf-btn " onClick={showProfile}>
                     Profile
                   </div>
                 </div>
-                <div className="col">
-                  <div className="p-1 border bg-success" onClick={showCompaney}>
+                <div className="col ps-0">
+                  <div className="p-1 border  prf-btn" onClick={showCompaney}>
                     Companey
                   </div>
                 </div>
@@ -568,6 +578,7 @@ const Profile = () => {
                                     role="tab"
                                     data-toggle="tab"
                                     aria-expanded="true"
+                                    className="med-text"
                                   >
                                     Saved Media
                                   </a>
@@ -579,6 +590,7 @@ const Profile = () => {
                                     role="tab"
                                     data-toggle="tab"
                                     aria-expanded="false"
+                                    className="med-text"
                                   >
                                     Activity Logs
                                   </a>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./contact.scss";
 import instance from "../../apis/axios";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import { ToastContainer, toast } from "react-toastify";
 import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";
@@ -68,6 +69,14 @@ const Contact = () => {
     }
     e.preventDefault();
   };
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+  useEffect(() => {
+    
+    topFunction();
+  }, []);
 
   const notify = () => {
     toast("Thanks, we will contact you soon!");
@@ -75,10 +84,11 @@ const Contact = () => {
 
   return (
     <>
-      <section id="mainsection-contact">
-        <div className="container">
+ <Fixednavbar/>
+      <section>
+        <div className="container-xxl  container-xl container-lg container-md  mt-5">
           <div className="row pb-0 mt-3 rounded-5 main_content">
-            <div className="col-md-5 ">
+            <div className="col-md-6 ps-5">
               <div className="address">
                 <div className="main mt-5  d-flex">
                   <h1 className="text-warning fw-bold pe-2 address-tag ">
@@ -110,13 +120,13 @@ const Contact = () => {
 
               <div className="contact-form">
                 <div className=" contact-tag">
-                  <h2 className="text-center bg-danger text-light p-2 contact-tagchild">
+                  <h2 className="text-center bg-danger text-light p-1 contact-tagchild">
                     CONTACT
                   </h2>
                 </div>
 
                 <form onSubmit={onSubmit}>
-                  <div className="mb-4 mt-2 ">
+                  <div className="mb-4 mt-1 ">
                     <div className="input-box">
                       <label className="input-label">Enter your full name</label>
                       <input
@@ -194,7 +204,7 @@ const Contact = () => {
                 </form>
               </div>
             </div>
-            <div className="col-md-7 p-0  d-flex justify-content-center">
+            <div className="col-md-6 p-0  d-flex justify-content-center">
               <img
                 src="./images/contact-image.png"
                 className="img-fluid rounded "
@@ -206,7 +216,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="container-fluid rounded-4">
+      <section className="container-xxl  container-xl container-lg container-md rounded-4">
         <div id="google_map" className="">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.203386323958!2d77.31864131492027!3d28.59367469258985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce4f0a89ce605%3A0xfd09bf1f744de96f!2sGohoardings!5e0!3m2!1sen!2sin!4v1667808584343!5m2!1sen!2sin"

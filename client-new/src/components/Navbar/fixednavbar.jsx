@@ -11,11 +11,10 @@ import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-
+import {BiCurrentLocation} from 'react-icons/bi';
 import MediaDropDown from "../Media_dropDown/mediaDropDown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import Citylocation from "../cityLocation/citylocation";
 
 const Flotinggnavbar = () => {
   const dispatch = useDispatch();
@@ -23,7 +22,6 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
- 
   let cities;
   const getCity = async () => {
     cities = "";
@@ -79,7 +77,6 @@ const Flotinggnavbar = () => {
     setCity(data);
   };
 
-
   return (
     <>
       <Navbar expand="lg px-md-0 p-1   navbar-main-floating fixed-top ">
@@ -93,11 +90,11 @@ const Flotinggnavbar = () => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3"  />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="navbar-nav mx-auto  ">
+          <Nav className="navbar-nav mx-auto  search-inner-drop">
           
- <div className="search-inner me-2">
+
                     <InputGroup className="" id="input-click">
-                    <Citylocation InputGroup={InputGroup} setValue={setValue}/>
+                    <InputGroup.Text className="basic-addon "><BiCurrentLocation className="basic-addon-icon"/></InputGroup.Text>
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
@@ -107,15 +104,15 @@ const Flotinggnavbar = () => {
                         className=" "
                       />
                     </InputGroup>
-                  </div>
-                  <div className={value ? cls : clt}>
+
+                  <div className={value ? cls : clt} >
                     {city.map((item) => (
                       <div
                         className="border-1"
                         key={item.name}
                         onClick={() => onSearch(item.name)}
                       >
-                        <option value={item.name} className="text-dark mt-1">
+                        <option value={item.name} className=" text-dark mt-1 ps-3 ">
                           {item.name}
                         </option>
                       </div>
@@ -124,24 +121,24 @@ const Flotinggnavbar = () => {
             <MediaDropDown userType={userType} setUserType={setUserType} />
             <Link to={`/${userType}/${value}`}>
               <Button
-                className="border-0  btn-danger ms-2 "
+                className="border-0  btn-danger"
                 id="search-button-flotnav"
               >
                 <MdOutlineSearch className="search-logo " />
               </Button>
             </Link>
           </Nav>
-          <form className="form-inline  ">
+          <form className="form-inline  text-center">
             <Nav.Link
               className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
               onClick={(e) => data(e)}
             >
               <img
                 src="../../gohoarding/new-icon/map-icon.png"
-                className=" float-map-logo ps-0 p-0 me-1"
+                className=" float-map-logo ps-0 p-0 me-1 ms-0"
               />
 
-              <span className="map-view-float ">Map View</span>
+              <span className="map-view-float pe-1">Map</span>
             </Nav.Link>
           </form>
 
