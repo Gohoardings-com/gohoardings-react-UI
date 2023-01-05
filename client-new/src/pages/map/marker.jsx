@@ -46,14 +46,13 @@ if(!loading){
     }
 
     const add = (code) => {
-      let data = [markers.data];
-      data.map((element) => {
-        element.map((obj) =>{
-          if (obj.code == code) {
-            obj.isDelete = 0;
-            markers(data);
-          }
-        })
+      let temp = [markers.data];
+      let data = temp[0];
+      data.forEach((obj) => {
+        if (obj.code == code) {
+          obj.isDelete = 0;
+          markers(data);
+        }
       });
     };
 
@@ -67,11 +66,11 @@ if(!loading){
   
     const remove = (event) => {
       let temp = [markers.data];
-      let data = [...temp];
+      let data = temp[0];
       data.forEach((element) => {
         if (element.code == event) {
-         
           element.isDelete = 1;
+          markers(data);
         }
       });
     };
@@ -100,7 +99,7 @@ if(!loading){
     >
       {!markers ?
                 <h1>Loading.... Please Wait</h1>: 
-            markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname }) => (
+            markers.data.map(({ id, position, medianame, illumination, subcategory, height , width, ftf, code, category_name, thumb, userid, isDelete, mediaownercompanyname, latitude, longitude }) => (
         <Marker
           key={id}
         
@@ -117,8 +116,9 @@ if(!loading){
                   <h5>{illumination + "-" +medianame}</h5>
                   <p><span>Media Type : </span>{subcategory}</p>
                   <p><span>Height X Width : </span>{height} X {width} feet</p>
-                  <p><span>FTF : </span>{ftf}</p>
-                  <p><span>Price : Login to see price</span></p>
+                  {/* <p><span>FTF : </span>{ftf}</p> */}
+                  {/* <p><span>Price : Login to see price</span></p> */}
+                  <p>abc : {latitude},{longitude}</p>
                   {isDelete === 0 ?
                     <MdOutlineRemoveShoppingCart onClick={() => removefroCart(code,category_name)} className="sitemark text-danger"/> : < MdOutlineShoppingCart onClick={() => addonCart(code,category_name)} className="sitemark"/>}
                 </div>
@@ -130,7 +130,7 @@ if(!loading){
     }
       {loading ?
                 <h1>Loading.... Please Wait</h1>: 
-            iconfilter.map(({id, position , name}) => (
+            iconfilter.map(({id, position , name, lat,lng}) => (
         <Marker
           key={id}
           icon={"../../markerIcon/restaurant.png"}
@@ -141,6 +141,7 @@ if(!loading){
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
               <div className="infoWindow">
                   <p>{name}</p>
+                  <p>{lat},{lng}</p>
               </div>
             </InfoWindow>
           ) : null}

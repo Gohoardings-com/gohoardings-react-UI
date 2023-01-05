@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Slider from "./slider.jsx";
 import "./icons.scss"
-import { iconFiltersData } from "../../action/adminAction.js";
+import { iconFiltersData } from "../../action/adminAction";
 import { useDispatch, useSelector } from "react-redux";
 import instance from "../../apis/axios.jsx";
 
@@ -96,22 +96,29 @@ const IconsSlection = ({  slice }) => {
 
   ]
 
+  let uniqueValues = new Set();
+
+  slice.forEach(el => {
+    uniqueValues.add(el.mp_lat);
+  });
+  // JSON.stringify(uniqueValues)
+
   const submitfilters = async () => {
+
     const value = [...slice];
     const table = value[0].category_name;
     const city = value[0].city_name;
     const latitudes = slice.map(item => item.latitude);
   const minLatitude = Math.min(...latitudes);
   const maxLatitude = Math.max(...latitudes);
-  await dispatch(iconFiltersData(distance, datas, table, city, minLatitude, maxLatitude))
-  // var newArray = media.filter(function (el)
-  // {
-  //   return el.id >= 3695;
-  // }
-  // );
-  // fnmedia(newArray)
-  console.log(minLatitude);
-  console.log(maxLatitude);
+
+  let array = [...uniqueValues];
+  let arrayJJson = JSON.stringify(array);
+  let newString = arrayJJson.replace(/\[|\]/g, '');
+
+
+  dispatch(iconFiltersData(distance, datas, table, city, minLatitude, maxLatitude , newString))
+
   }
 
   return (
