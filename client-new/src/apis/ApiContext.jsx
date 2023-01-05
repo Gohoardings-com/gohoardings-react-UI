@@ -3,7 +3,6 @@ import instance from './axios';
 
 
 export const AccountContext = createContext(null);
-
 const ApiContext = ({ children }) => {
 
   var [initalState, setInitalState] = useState(0)

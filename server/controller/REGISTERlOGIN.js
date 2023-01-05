@@ -238,7 +238,7 @@ exports.Profile = catchError(async (req, res) => {
 })
 
 exports.sendPasswordEmail = catchError(async(req,res,next) => {
-  const {email} = req.bod
+  const {email} = req.body
     let otp = Math.floor(100000 + Math.random() * 900000);
       const message =`${otp} is your one-time OTP for login into the Gohoardings account.`;
       const subject = "Reset password gohoardings.com"

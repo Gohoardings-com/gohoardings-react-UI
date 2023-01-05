@@ -27,7 +27,7 @@ console.log(posts);
            <div className="col-md-4">
            <div className="testimonials">
              <img src="https://www.gohoardings.com/gohadmin/uploads/testimonials/anoop.jpg" alt="..." />
-             <h3>{el.email}</h3>
+             <h3>{el.name}</h3>
              <div className="stars">
                <BsStarFill />
                <BsStarFill />
@@ -35,7 +35,7 @@ console.log(posts);
                <BsStarHalf />
                <BsStar />
              </div>
-             dangerouslySetInnerHTML={{__html:el["testimony"]}}
+            <p dangerouslySetInnerHTML={{__html: el.testimony}}/>
            </div>
          </div>
          ))}

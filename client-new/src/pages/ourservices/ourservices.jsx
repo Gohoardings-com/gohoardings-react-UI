@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {HiOutlineArrowNarrowRight} from 'react-icons/hi'
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Ourservices = () => {
   {
@@ -31,7 +31,7 @@ const Ourservices = () => {
       ],
     };
   }
-
+  
   return (
     <>
       <div className="container-xxl  container-xl container-lg container-md service-content pt-5 pb-5">
@@ -59,7 +59,36 @@ const Ourservices = () => {
              ))}
         </Slider>
         </div>
-      
+        <section>
+        <div className="container-fluid    m-0 ">
+        <div className="row mx-auto add-container  text-center ">
+          <div className="col-md-3">
+          <img src="../../clientslogo/celebration.png" className="celebration-logo" />
+          </div>
+          <div className="col-md-6">
+           <span>
+            <h1>Get Your First Ad free!</h1>
+            <h6 className="pt-1">
+            Boost your business with a free advertisement!*
+        </h6>
+           </span>
+          </div>
+          <div className="col-md-3">
+          <span
+                 
+                  className="button-serch text-white rounded-pill "
+                >
+                    <Link to="/traditional-ooh-media/delhi">
+                  <button className="search-btn">
+                    Get it Now
+                    </button>
+                  </Link>
+                </span>
+          </div>
+
+        </div>
+        </div>
+      </section>
       </div>
     </>
   );

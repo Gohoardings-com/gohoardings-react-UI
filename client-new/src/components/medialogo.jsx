@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./medialogo.scss";
 import { CityNameImage } from "../apis/apis";
 const Medialogo = ({ search, category_name,loading }) => {
-console.log(category_name);
+
   return (
     <div className="container  ">
   

@@ -13,7 +13,6 @@ const ChangePassword = () => {
     const sumbithandle = async(e) =>{
       e.preventDefault()
       const data = await updatePassword(state)
-      console.log(data);
     }
     
   return (

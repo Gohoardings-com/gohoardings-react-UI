@@ -9,13 +9,14 @@ const Team = () => {
   const [posts, setPosts] = useState([])
   const staff = async() =>{
     const data = await gohordingStaffAPi()
+    
     setPosts(data)
   }
 
   useEffect(()=>{
     staff()
   },[])
-  console.log(posts);
+
   return (
     <>
       <section>
@@ -38,31 +39,32 @@ const Team = () => {
                 <div className="experties-title ">
                   <h2 className="text-secondary">Our expert team includes the following Gems</h2>
                 </div>
-              {member.map((person, index) => {
+              {posts.map((person, index) => {
                 return (
                   <div className="col-md-3 mt-3 col-6" id="maindiv">
                     <div className="single-team    text-center rounded">
                       <div className="team-img d-flex  justify-content-center  " key={index}>
                         <img
-                          src={person.img}
-                          alt={person.Name}
+                          // src={person.profile_image}
+                          src="https://www.gohoardings.com/gohadmin/uploads/testimonials/anoop.jpg"
+                          alt={person.firstname} 
                           className="image-fluid rounded-circle pt-2 "
                         /> 
                       </div>
                       <div className="team-content mt-1">
                           <div className="team-info">
-                            <h3>{person.Name}</h3>
-                            <h5>{person.Role}</h5>
+                            <h3>{person.firstname} {person.lastname}</h3>
+                            <h5>{person.name}</h5>
                           </div>
                           <div className="grid-container mt-2">
                             <div className="grid-item me-1">
-                              <FaFacebookSquare className="icon facebook" />
+                              <FaFacebookSquare className="icon facebook" onClick={person.facebook} />
                             </div>
                             <div className="grid-item me-1">
                               <TiSocialTwitter className="icon twiter" />
                             </div>
                             <div className="grid-item ">
-                              <FaLinkedin className="icon linkedin" />
+                              <FaLinkedin className="icon linkedin" onClick={person.linkedin}/>
                             </div>
                           </div>
                         </div>

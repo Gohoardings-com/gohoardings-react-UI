@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
-import {BiCurrentLocation} from 'react-icons/bi';
+import { BiCurrentLocation } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchmedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
@@ -11,13 +11,12 @@ import Citylocation from "../../components/cityLocation/citylocation";
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
 
-  const getCity = async () => {};
 
-  useEffect(() => {
-    getCity();
-  }, []);
-
-  const [value, setValue] = useState("");
+<<<<<<< HEAD:client-new/src/pages/SearchMedia/searchMedia.jsx
+  const [value, setValue] = useState("delhi");
+=======
+  const [value, setValue] = useState(" ");
+>>>>>>> 99a48c6fc0b9d857f9fcc2c2fba965266523b413:client-new/src/pages/SearchMedia/searchmedia.jsx
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
@@ -34,7 +33,6 @@ const SearchMedia = () => {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    console.log("search ", searchTerm);
     setCls("dropdown-menu border-0  ps-3  dropdown-menu-location");
   };
 
@@ -79,7 +77,10 @@ const SearchMedia = () => {
                 <div className="search-location ">
                   <div className="search-inner">
                     <InputGroup className="" id="input-click">
-<Citylocation InputGroup={InputGroup} setValue={setValue}/>
+                      <Citylocation
+                        InputGroup={InputGroup}
+                        setValue={setValue}
+                      />
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
@@ -91,11 +92,11 @@ const SearchMedia = () => {
                     </InputGroup>
                   </div>
 
-                  <div className={value ? cls : clt}>
+                  <div className={value ? cls : clt} id="abcd">
                     {city.map((item, i) => (
-                      <div key={i}
+                      <div
+                        key={i}
                         className="border-1"
-                       
                         onClick={() => onSearch(item.name)}
                       >
                         <option value={item.name} className=" text-dark mt-1">

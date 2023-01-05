@@ -3,9 +3,10 @@ const catchError = require("../middelware/catchError");
 
 exports.companyStaff = catchError(async(req,res) => {
 db.changeUser({database:"gohoardi_crmapp"})
-db.query("SELECT * FROM tblstaff",(err,result) =>{
+const sql = "SELECT staff.*, role.name FROM tblstaff as staff  RIGHT JOIN tblroles as role ON staff.role = role.roleid WHERE staff.active=1"
+db.query(sql,(err,result) =>{
     if(err){
-        return res.status(500).json({message:"Sonething Wrong"})
+        return res.status(500).json({message:err.message})
     }
     else{
         return res.status(200).json(result)

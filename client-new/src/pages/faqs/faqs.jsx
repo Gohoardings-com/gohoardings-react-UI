@@ -15,20 +15,18 @@ const Faqs = () => {
   useEffect(()=>{
     staff()
   },[])
-  console.log(posts);
+
   return (
     <>
       <Branding title="FAQs" />
       <section>
-
         <div className="container-fluid px-5  question-box mt-5 mb-5 p-2 ">
           {posts.map((data, index) => {
-
             return (
               <>
                 <p
                   key={index}
-                  className=" toggle-btn p-1  ps-2 mb-0"
+                  className=" toggle-btn p-1 ps-2 mb-0 "
                   data-bs-toggle="collapse"
                   data-bs-target={`"#${data.id}"`}
                 >
@@ -39,15 +37,6 @@ const Faqs = () => {
                 <div className="collapse" id={data.id}>
                   <div className="card-body  text-secondary pb-1 ps-2">
                     <h5>{data.description}</h5>
-=======
-                  <h4 >
-
-                 {data.id.substring(4, 5)}. {" "}  {data.question} <BsCaretDown className="down" />
-                  </h4>
-                </p>
-                <div className="collapse" id={data.id}>
-                  <div className="card-body  text-secondary pb-1 ps-4">
-                    <h5>{data.answer}</h5>
                   </div>
                 </div>
                 <hr />
