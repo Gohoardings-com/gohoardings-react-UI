@@ -83,7 +83,6 @@ exports.iconFilter = catchError(async (req,res) =>{
 if(selected){
 data = selected.flat(Infinity)
 }
-
 db.changeUser({ database: "gohoardi_goh" });
 const sql = "SELECT * FROM `testing_only_restaurants` WHERE mp_lat BETWEEN "+minLatitude+" AND "+maxLatitude+""
 db.query(sql, (err, result) => {

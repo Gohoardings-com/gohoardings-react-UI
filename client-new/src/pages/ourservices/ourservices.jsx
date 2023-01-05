@@ -59,7 +59,32 @@ const Ourservices = () => {
              ))}
         </Slider>
         </div>
-      
+        <section>
+        <div className="container-fluid    m-0 ">
+        <div className="row mx-auto add-container  text-center ">
+          <div className="col-md-3">
+          <img src="../../clientslogo/celebration.png" className="celebration-logo" />
+          </div>
+          <div className="col-md-6">
+           <span>
+            <h1>Get Your First Ad free!</h1>
+            <h6 className="pt-1">
+            Boost your business with a free advertisement!*
+        </h6>
+           </span>
+          </div>
+          <div className="col-md-3">
+          <span
+                 
+                  className="button-serch text-white rounded-pill "
+                >
+                  <button className="search-btn">Get it Now</button>
+                </span>
+          </div>
+
+        </div>
+        </div>
+      </section>
       </div>
     </>
   );

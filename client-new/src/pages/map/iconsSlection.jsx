@@ -121,7 +121,10 @@ const IconsSlection = ({  slice }) => {
           {Icons.map((icon) => (
             <div className="col-4 d-inline-block text-center py-lg-4 py-sm-2 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target={`#${icon.name}`} aria-expanded="false">
               <input type="checkbox" id={icon.id} value={icon.name} onClick={(e) => multichecked(e)} />
-              <label for={icon.id}><img src={icon.value} alt="N/A" name={icon.name} /></label>
+              <label for={icon.id}>
+                <img src={icon.value} alt="N/A" name={icon.name} />
+                </label>
+                <span className="icone-name-map">{icon.name} </span>
             </div>
           ))}
         </div>
