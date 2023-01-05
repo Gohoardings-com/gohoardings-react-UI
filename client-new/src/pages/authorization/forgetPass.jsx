@@ -1,14 +1,50 @@
 import React ,{useState} from 'react'
-import {FiLogIn} from "react-icons/fi";
-const ForgetPass = ({setFocus}) => {
+import {FiLogIn,FiArrowLeftCircle} from "react-icons/fi";
+
+
+
+const ForgetPass = ({setFocus,setForget}) => {
   const [sendOtp,setSendOtp]=useState(false);
-  const [num,setNum]=useState(" ")
+  const [pass,setPass]= useState(false);
+  const [changPassword,setChangePassword] = useState(" ");
+  const [num,setNum]=useState(" ");
+  const [otp,setOtp] = useState(" ");
   
   const onForget = (e) => {
-    setSendOtp(true)
-    setNum(" ")
-    e.preventDefault();
+    if(num!==null){
+      setSendOtp(true)
+      e.preventDefault();
+      setNum(" ");
+    }
+   
   };
+
+  const submitOTP = (e) => {
+    if(otp!==null){
+      setPass(true);
+      e.preventDefault();
+      setOtp(" ");
+    }
+   
+  };
+
+  const goBack=()=>{
+    if(pass==true){
+      setPass(false);
+      setSendOtp(true);
+    }
+    if(sendOtp==true){
+      setSendOtp(false);
+      setPass(false);
+    }
+    else{
+      setForget(false)
+    }
+    
+
+  }
+
+
 console.log(num);
 
 
@@ -19,10 +55,58 @@ console.log(num);
                     <h1 className="modal-title">
                       Did you forget your password ?
                     </h1>
+                    <a
+            
+            className="forgetpass mt-2 me-4"
+            onClick={() => goBack()}
+          >
+           <FiArrowLeftCircle/> GoBack
+          </a>
                   </div>
-                  { sendOtp ?  
-                   <div className="forget-content ">
-                    <form novalidate>
+                  {pass?  
+                  <div className="forget-content animate__animated  animate__fadeIn">
+                  <form  novalidate>
+                      <div className="input-box">
+                        <label className="input-label">
+                          Create new password
+                        </label>
+                        <input
+                          type="text"
+                          className="input-1"
+                          onFocus={() => setFocus(true)}      
+                           value={changPassword}
+                          onChange={(e) => {
+                            setChangePassword(e.target.value);
+                          }}
+                          required
+                        />
+                       {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
+                      </div>
+                      <div className="input-box">
+                        <label className="input-label">
+                          Confirm password
+                        </label>
+                        <input
+                          type="text"
+                          className="input-1"
+                          onFocus={() => setFocus(true)}
+                          value={changPassword}
+                          onChange={(e) => {
+                            setChangePassword(e.target.value);
+                          }}
+                          required
+                        />
+                       {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
+                      </div>   
+                    <button type="submit" className="signin">
+                      <span className='fw-light'>SET PASSWORD</span>
+                    </button>
+                  </form>
+                </div>
+                :<> 
+                 { sendOtp ?  
+                   <div className="forget-content animate__animated  animate__fadeIn">
+                    <form onSubmit={submitOTP} novalidate>
                       <div className=" animate__animated  animate__flipInX">
                      
                         <div className="input-box">
@@ -32,15 +116,23 @@ console.log(num);
                           <input
                             type="text"
                             className="input-1"
-                            onFocus={() => setFocus(true)}
+                             onFocus={() => setFocus(true)}
                           
-                            // value={email}
-                            // onChange={(e) => {
-                            //   setEmail(e.target.email);
-                            // }}
+                             value={otp}
+                            onChange={(e) => {
+                              setOtp(e.target.value);
+                            }}
                             required
                           />
+
                          {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
+                         <a
+              href="#"
+              className="forgetpass"
+              // onClick={() => clickforget()}
+            >
+              Resend OTP
+            </a>
                         </div>
                       </div>
                       <button type="submit" className="signin">
@@ -50,7 +142,6 @@ console.log(num);
                 
                     </form>
                   </div>
-
                   :  
                   <div className="forget-content animate__animated  animate__fadeIn">
                   <form onSubmit={onForget} novalidate>
@@ -81,11 +172,15 @@ console.log(num);
               
                   </form>
                 </div>
+                  }
+
+                </>
                 
-                  
 
                   }
                  
+            
+
    </>
   )
 }

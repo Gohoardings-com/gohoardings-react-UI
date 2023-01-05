@@ -192,12 +192,9 @@ const afterLogin = async() => {
               {forget ? (
                 <>
                   <ForgetPass
-                
                 setFocus={setFocus}
-              
-                
-                   
-                    
+                setForget={setForget}
+             
                   />
                 </>
               ) : (

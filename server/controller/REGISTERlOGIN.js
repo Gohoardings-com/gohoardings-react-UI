@@ -70,7 +70,7 @@ exports.login = catchError(async (req, res) => {
 })
 
 exports.googleLogin = catchError(async (req, res) => {
-const {name,email,givenName, imageUrl} = req.body
+const {name, email, givenName, imageUrl} = req.body
   db.changeUser({ database: "gohoardi_crmapp" });
 
   db.query("SELECT * FROM tblcontacts WHERE email='" + email + "' && provider='Google'", async (err, selectResult) => {

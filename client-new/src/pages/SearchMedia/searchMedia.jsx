@@ -4,7 +4,7 @@ import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
 import {BiCurrentLocation} from 'react-icons/bi';
 import InputGroup from "react-bootstrap/InputGroup";
-import "./searchMedia.scss";
+import "./searchmedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
 import Citylocation from "../../components/cityLocation/citylocation";
 

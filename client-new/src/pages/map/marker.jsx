@@ -57,35 +57,22 @@ if(!loading){
       });
     };
 
-    // iconfilter.forEach(e => {
-    //   e['position'] = {lat : e.lat, lng : e.lng}
-    // })
-
     const removefroCart = async (obj) => {
-
-      // await instance.post('cart/deleteFromCart', {
-      //   code: obj.code,
-      // })
-
-      // addRemove({type:"DECR"})
-      remove(obj)
-    }
-    
-
-    
-    
+      await instance.post("cart/deleteFromCart", {
+        code: obj,
+      });
+      addRemove({ type: "DECR" });
+      remove(obj);
+    };
+  
     const remove = (event) => {
-      let data = [markers.data];
-      
-      data.map((element) => {
-        element.map((obj) =>{
-          if (obj.code == event) {
-            console.log(obj);
-            obj.isDelete = 1;
-        
-          }
-        })
-
+      let temp = [markers.data];
+      let data = [...temp];
+      data.forEach((element) => {
+        if (element.code == event) {
+         
+          element.isDelete = 1;
+        }
       });
     };
 

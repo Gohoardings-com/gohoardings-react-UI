@@ -170,10 +170,11 @@ input[type="number"]::-webkit-outer-spin-button {
   right: 28px;
   color: $grey;
   margin-right: 1%;
+  cursor: pointer;
 }
 
 .forgetpass:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .end-tag {
