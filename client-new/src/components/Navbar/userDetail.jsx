@@ -16,6 +16,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserDetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const { addRemove } = useContext(AccountContext);
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
@@ -56,7 +57,10 @@ const UserDetail = () => {
   }
 
 const getUser = async () => {
-  dispatch(userDetails)
+if(isLoggedIn){
+    dispatch(userDetails)
+}
+  addRemove({ type: "DECR" });
 } 
 
 

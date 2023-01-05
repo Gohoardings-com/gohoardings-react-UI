@@ -2,6 +2,7 @@ const db = require("../conn/conn");
 const catchError = require("../middelware/catchError");
 const request = require('request')
 const bcrypt = require("bcryptjs");
+const jwtToken = require('jsonwebtoken');
 const { token } = require("../middelware/token");
 
 exports.findEmail = catchError(async(req,res, next) => {
@@ -24,6 +25,9 @@ exports.findEmail = catchError(async(req,res, next) => {
 
 exports.sendOTP = catchError(async(req,res) => {
     const phoneNumber = phone
+    if(!phoneNumber){
+      res.status(400).json({message:"Phone Number Invalid"})
+  }
     let otp = Math.floor(100000 + Math.random() * 900000);
     request({
       url:process.env.otpUrl,
@@ -44,10 +48,9 @@ exports.sendOTP = catchError(async(req,res) => {
      
         db.query(sql,async(err,result) =>{
             if(err){
-         
                 res.status(400).json({message:err.message})
             }else{
-                return res.status(200).json({message:"Mobile OTP Send.."})
+                return res.status(200).json({success:true, message:"Mobile OTP Send.."})
             }
         })
       }
@@ -58,7 +61,6 @@ exports.sendOTP = catchError(async(req,res) => {
 
 exports.checkOTP = catchError(async(req, res) => {
     const {otp} = req.body
-
     if(!otp){
         res.status(400).json({message:"OTP Invalid"})
     }
@@ -71,29 +73,43 @@ exports.checkOTP = catchError(async(req, res) => {
         }else if(result.length == 0){
             return  res.status(400).json({message:"OTP Not Match, Try After 30min"})
         }else{
-            const {password ,confirmpasswords} = req.body
-            if(password == confirmpasswords){
-              
-                const finalPassword = bcrypt.hashSync(password, 8)
-               
-                db.changeUser({database:"gohoardi_crmapp"})
-                const sqlQuery ="UPDATE tblcontacts SET password ='"+finalPassword+"' WHERE phone_otp="+otp+" || email_otp="+otp+"";
-              
-                db.query(sqlQuery,async(err,result1) =>{
-                  if(err){
-                    return res.status(500).json({message:err.message})
-                  }else{
-                 
-                   const userid = result[0].userid
-      
-                   token(userid, 200, res)
-                  }
-                })
-               }else{
-            
-                return res.status(500).json({message:"Password not matched"})
-               }
+          const userid = result[0].userid;
+          const token =  jwtToken.sign({ id: userid }, process.env.jwt_secret, {
+            expiresIn: "5m",
+          });
+          return res.status(200).json({success:true, message:token})
         }
     })
 })
 
+exports.changePassword = catchError(async(req,res) =>{
+  const {password ,confirmpasswords, expire} = req.body
+  if(!expire){
+    return res.status(400).json({message: "Time Expire"});
+  }
+  if(password == confirmpasswords){
+     jwtToken.verify(expire, process.env.jwt_secret, async (err, user) => {
+      if (err) {
+      
+        return res.status(400).json({ message: "InValid Token" });
+      } else {
+       const userid = user.id;
+        const finalPassword = bcrypt.hashSync(password, 8)
+     
+      db.changeUser({database:"gohoardi_crmapp"})
+      const sqlQuery ="UPDATE tblcontacts SET password ='"+finalPassword+"' WHERE userId = "+userid+"";
+    
+      db.query(sqlQuery,async(err,result) =>{
+        if(err){
+          return res.status(500).json({message:err.message})
+        }else{
+       token(userid, 200, res)
+        }
+      })
+      }})
+     
+     }else{
+  
+      return res.status(500).json({message:"Password not matched"})
+     }
+})

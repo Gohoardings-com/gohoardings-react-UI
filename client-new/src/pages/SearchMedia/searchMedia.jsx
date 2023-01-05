@@ -4,18 +4,13 @@ import { getAllCity } from "../../apis/apis";
 import Form from "react-bootstrap/Form";
 import {BiCurrentLocation} from 'react-icons/bi';
 import InputGroup from "react-bootstrap/InputGroup";
-import "./searchmedia.scss";
+import "./searchMedia.scss";
 import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
 import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
 
-  const getCity = async () => {};
-
-  useEffect(() => {
-    getCity();
-  }, []);
 
   const [value, setValue] = useState("");
   const [userType, setUserType] = useState("Traditional-OOH-Media");

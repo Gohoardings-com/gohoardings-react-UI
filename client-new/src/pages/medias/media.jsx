@@ -25,7 +25,7 @@ const Media = () => {
   const navigate = useNavigate();
   const [category, setcategory] = useState([]);
   const [illunation, setillunation] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(false);
   const [noOfLogo, setnoOfLogo] = useState(8);
   const [mediaData, setMediadata] = useState([]);
   const [singlemedia, setsingleMedia] = useState([]);
@@ -143,6 +143,7 @@ const Media = () => {
   }
 
   function illuminationfilter(illum) {
+    setQuery(true)
     if (!loading) {
       const data = mediaData.filter((el) => el.illumination == illum);
       const hhh = data.map((el) => el.subcategory);
@@ -152,7 +153,6 @@ const Media = () => {
     }
     dispatch(mediaFilters(category_name, illum, news, city_name));
   }
-
   const data = async () => {
     navigate("/map");
   };
@@ -160,7 +160,6 @@ const Media = () => {
   return (
     <>
       <FixedNavbar />
-
       <Medialogo
         category_name={category_name}
         search={search}
@@ -210,7 +209,7 @@ const Media = () => {
               </>
 
               <>
-                <div className="col sub-category-search ms-1 ">
+               {query &&  <div className="col sub-category-search ms-1 ">
                   <h5
                     disabled={disable}
                     data-bs-toggle="dropdown"
@@ -222,18 +221,10 @@ const Media = () => {
                     class="dropdown-menu ps-2 "
                     aria-labelledby="dropdownMenuButton"
                   >
-                    <div className="rowCheck  row    ">
+                    <div className="rowCheck  row">
                       <ul>
                         {category
-                          .filter((obj) => {
-                            if (query == "") {
-                              return obj;
-                            } else if (
-                              obj.toLowerCase().includes(query.toLowerCase())
-                            ) {
-                              return obj;
-                            }
-                          })
+                         
                           .map((cate, i) => (
                             <>
                               <input
@@ -252,7 +243,7 @@ const Media = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div>}
               </>
             </div>
 

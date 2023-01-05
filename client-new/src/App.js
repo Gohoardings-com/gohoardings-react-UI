@@ -23,12 +23,9 @@ import Home2 from "./pages/Home2/home2";
 function App() {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const [avlable,setAvlable] = useState(false)
-
-
-
-
+  
   const getUser = async() => {
-  if(localStorage.getItem("true") || localStorage.getItem("false")){
+  if(localStorage.getItem(true)){
     setAvlable(true)
   }
 }
