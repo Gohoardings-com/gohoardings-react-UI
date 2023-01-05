@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { mediawithcity } from "../../action/adminAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import clientslogo from "../about-us/clients";
 const Trandingcity = () => {
   const dispatch = useDispatch();
 
@@ -64,7 +64,8 @@ const Trandingcity = () => {
       
               {!loading == false ? 
               <h1>Loading Please Wait</h1>
-              :<>
+              :
+              <>
               <Slider {...settings}>
               {search.map((pos, i) => (
                 <div class="container pt-3 ">

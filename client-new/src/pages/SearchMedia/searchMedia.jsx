@@ -120,6 +120,8 @@ const SearchMedia = () => {
             </div>
           </div>
         </section>
+
+    
       </div>
     </>
   );

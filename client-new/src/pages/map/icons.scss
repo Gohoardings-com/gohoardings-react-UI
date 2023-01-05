@@ -1,42 +1,65 @@
 .poi-item input[type="checkbox"][id^="cb"] {
-    display: none;
-  }
+  display: none;
+}
+
+
 .poi-item label {
-    padding: 10px;
-    display: block;
-    position: relative;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+}
+
 .poi-item label:before {
-    background-color: white;
-    color: white;
-    content: " ";
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    width: 25px;
-    height: 25px;
+  background-color: white;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+}
+
+.poi-item :checked + label {
+  border-color: #ddd;
+}
+
+.poi-item :checked + label:before {
+  content: "✓";
+  background-color: rgb(0, 255, 0);
+  transform: scale(1);
+}
+
+.poi-item :checked + label img {
+  transform: scale(0.9);
+  z-index: -1;
+}
+.icone-name-map {
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 1024px) {
+  .poi-item label {
+    padding: 5px;
+    margin: 5px;
+  }
+  .poi-item label:before {
+    width: 20px;
+    height: 16px;
     text-align: center;
-    line-height: 28px;
+    line-height: 18px;
     transition-duration: 0.4s;
     transform: scale(0);
   }
-  
-.poi-item :checked + label {
-    border-color: #ddd;
+  .icone-name-map {
+    font-size: small;
   }
-  
-.poi-item :checked + label:before {
-    content: "✓";
-    background-color: rgb(0, 255, 0);
-    transform: scale(1);
-  }
-  
-.poi-item :checked + label img {
-    transform: scale(0.9);
-    z-index: -1;
-  }
+}
