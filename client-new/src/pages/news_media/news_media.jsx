@@ -15,12 +15,13 @@ const Newsmedia = () => {
   },[])
 console.log(posts);
   return (
-    <>
-      <Branding title="News & Media" />
-      <section className="mt-5">
-        <div className="container-fluid px-5 news pt-3">
+    <> 
+      <Branding title="News & Media " />
+      <section className="mt-5 ">
+        <div className="container-xxl  container-xl container-lg container-md news pt-3">
           <h5 className=" p-2 ps-3 news-heading ">Latest News</h5>
           <div className="card mb-3">
+<<<<<<< HEAD
           {!posts ? <></>:<>
           {posts.map((el,i) =>(
             <>
@@ -59,6 +60,37 @@ console.log(posts);
             </>
            ))}
           </>}
+=======
+            <div className="row">
+              <div className="col-md-3">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/000/198/210/original/breaking-news-background-with-earth-planet-vector.jpg"
+                  className="img-fluid rounded-start"
+                  alt="..."
+                  id="news-img"
+                />
+              </div>
+              <div className="col-md-9">
+                <div className="card-body">
+                  <h5 className="card-title">
+                    A Discount Toner Cartridge Is Better Than Ever.
+                  </h5>
+                  <p className="card-text-new">
+                    <small className="text-muted">
+                      Last updated 3 mins ago
+                    </small>
+                  </p>
+                  <p className="card-text-new mt-3">
+                    This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.What is Lorem Ipsum? From its medieval origins to the
+                    digital era, learn everything there is to know about the
+                    ubiquitous lorem ipsum passage.
+                  </p>
+                </div>
+              </div>
+            </div>
+>>>>>>> 336f61aba40588afd041920892c119606a62834f
           </div>
         </div>
       </section>

@@ -4,6 +4,7 @@
 
 .question-box{
   background-image: $card_background;
+  cursor: pointer;
   .toggle-btn {
     border: none;
     background: transparent;
@@ -11,7 +12,7 @@
 }
 
 .toggle-btn h4{
-  font-size: 23.5px;
+  font-size: 22px;
     }
 .collapse {
   background: transparent;
@@ -19,11 +20,11 @@
 .down {
   float: right;
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 1366px) {
   .toggle-btn h4{
-    font-size: 15px;
+    font-size: 16px;
       }
   .card-body h5{
-   font-size: 11px;
+   font-size: 14px;
   }
-}
+} 

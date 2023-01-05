@@ -9,27 +9,20 @@
 .float-brand{
   box-shadow: rgba(28, 28, 28, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   width: 200px;
-
   margin-left: 48px;
-
 }
 @media screen and (max-width: 1366px) {
-  
 .float-brand{
   box-shadow: rgba(28, 28, 28, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   width: 180px;
- 
   margin-left: 19px;}
   .cart {
   margin-left: 0px !important;
   }
   .float-map-btn{
-
-  
     .float-map-logo{
       height: 19px ;
-  
-  
+
     }
   }  
 }
@@ -41,24 +34,25 @@
 }
 
 #search-button-flotnav{
-  width: 5vw;
+  width: 4vw;
   height: 38px;
-  border-radius: 8px;
+  border-radius: 0px;
+  border-top-right-radius:16px;
+  border-bottom-right-radius:16px;
 }
 .basic-addon{
 background-color: #ededed !important;
-  border-top-left-radius:8px;
-  border-bottom-left-radius:8px;
+  border-top-left-radius:16px;
+  border-bottom-left-radius:16px;
   border: none;
   .basic-addon-icon{
     font-size: 21px;
   }
 }
  #search-location-box{
-  border-top-left-radius:0px;
-  border-bottom-left-radius:0px;
+border-radius: 0px;
   border: transparent !important;
-  width: 20vw !important;
+  width: 19vw !important;
   color: $grey;
   background: $white !important;
   text-align: left;
@@ -66,21 +60,23 @@ background-color: #ededed !important;
   font-size: 15px;
   padding-bottom: 3px;
   height: 38px !important;
-  border-top-right-radius:8px;
-  border-bottom-right-radius: 8px;
+  border-right: 1px dotted rgb(205, 205, 205) !important ;
+
+}
+.search-inner-drop{
+  .dropdown-menu {
+    width: 19vw;
+    padding: 0px !important ;
+    cursor: pointer;
+  }
 }
 
-.dropdown-menu {
-  width: 22vw;
-  padding: 0px !important ;
-  cursor: pointer;
-}
 
 
 
 #select-media-box{
  border: transparent !important;
-  width: 22vw !important;
+  width:19vw !important;
   color: $grey;
   background: $white !important;
   text-align: left;
@@ -88,25 +84,27 @@ background-color: #ededed !important;
   font-size: 15px;
   padding-bottom: 2px;
   height: 38px !important;
-  border-radius: 8px;
+  border-radius: 0px ;
+  
 }
 .select-media-icon{
   height: 24px;
   margin-right: 4%;
   margin-left: 2%;
 }
-// ghj
+
 .float-map-btn{
-  color: #FFFFFF;
+
+  border: transparent;
+  color: #ffffff;
+  background-color: #252c35;
   font-weight: 500;
-  padding-top: 2px;
-  height: 38px;
-  //background-color: transparent;
-   border:  2px groove #ffffffe1 ;
+  padding-top: 3px;
+    height: 38px !important;
+  width: 78px;
   .float-map-logo{
-    height: 20px ;
-
-
+    height: 17px ;
+   
   }
  
 }

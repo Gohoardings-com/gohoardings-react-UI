@@ -32,18 +32,20 @@ const loginLinkdin =  async() => {
     <>
     <div className="row mt-4">
     <div className="col-md-5 or_border"></div>
-    <div className="col-md-2 or  text-center ">OR</div>
+    <div className="col-md-2 or  text-center  or-text">OR</div>
     <div className="col-md-5  or_border  "></div>
   </div>
   <div
     className="col-md-12 ps-0 mt-4 text-center"
-    onClick={signIn}
+   
   >
-    <a>
-      <FcGoogle className="google-icon" />
-    </a>
+  
+
+      <FcGoogle className="google-icon"  onClick={signIn}/>
+      <img  src="../../clientslogo/linkdin.png" className="google-icon offset-1" onClick={loginLinkdin}/>
+
   </div>
-  <div className="col-md-12 ps-0 mt-4 text-center mb-3 fs-1"><FaLinkedin onClick={() => loginLinkdin()}/></div>
+ 
   </>
   )
 }

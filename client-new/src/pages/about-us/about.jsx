@@ -27,7 +27,7 @@ const About = () => {
           <div className="row">
             <div className="col-md-7  text-container text-center mt-3">
               <h2>Welcome to India’s largest outdoor advertising agency</h2>
-              <p>
+              <p className="descrption" >
                 our advertising network is spread across 130 cities with more
                 than 1.2 lakh OOH and DOOH sites Offering hassle-free branding
                 experiences at an unmatched price.We are building brands since
@@ -57,7 +57,7 @@ const About = () => {
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6">
               <div className="card about-cards">
                 <h6 >TRADITIONAL </h6>
-                <p>
+                <p className="descrption">
                   Local directory is the smartest way to find the best services
                 </p>
               </div>
@@ -65,7 +65,7 @@ const About = () => {
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6 ">
               <div className="card about-cards">
                 <h6>MALL MEDIA</h6>
-                <p>
+                <p className="descrption">
                   Local directory is the smartest way to find the best services
                 </p>
               </div>
@@ -73,7 +73,7 @@ const About = () => {
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6">
               <div className="card about-cards">
                 <h6>DIGITAL OOH MEDIA</h6>
-                <p>
+                <p className="descrption">
                   Local directory is the smartest way to find the best services
                 </p>
               </div>
@@ -81,7 +81,7 @@ const About = () => {
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6">
               <div className="card about-cards">
                 <h6>AIRPORT BRANDING</h6>
-                <p>
+                <p className="descrption">
                   Local directory is the smartest way to find the best services
                 </p>
               </div>
@@ -89,7 +89,7 @@ const About = () => {
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6">
               <div className="card about-cards">
                 <h6>OFFICE BRANDING</h6>
-                <p>
+                <p className="descrption">
                   Local directory is the smartest way to find the best services
                 </p>
               </div>
@@ -97,7 +97,7 @@ const About = () => {
             <div className="col-lg-2 col-md-4 mt-2 col-sm-6 col-6">
               <div className="card about-cards">
                 <h6>TRANSIT MEDIA</h6>
-                <p>
+                <p className="descrption">
                   Local directory is the smartest way to find the best services
                 </p>
               </div>
@@ -110,14 +110,14 @@ const About = () => {
           <div className="row ">
             <div className="col-md-7  text-container " >
               <h2>Our Vision </h2>
-              <p>
+              <p className="descrption">
                 Our vision to create a holistic system that helps a user quickly
                 and efficiently plan, book and manage out of home advertising
                 campaigns across the globe. We want to provide a voice to your
                 brand,show you the power of marketing communication,and build a
                 bridge between your brand and customer.
               </p>
-              <p>
+              <p className="descrption">
                 We do it in a different way.We've got the creative eye and the
                 perfect equation of ideas.We help you grow by adding the word
                 called success to your brand.Thus to conclude our vision is to
@@ -138,15 +138,15 @@ const About = () => {
             <div className="col-md-7 text-container">
               <h2>Our Mission</h2>
 
-              <p>
+              <p className="descrption">
                 We aim to become the world's best OOH and DOOH advertising
                 company.Our mission is to guide you to find your brand’s voice
                 and help you to tell a bigger story through our best services
-                available in every city."Quality never goes out of style" and we
+                available in  city."Quality never goes out of style" and we
                 ensure to provide the best one.
               </p>
 
-              <p>
+              <p className="descrption">
                 The promotion that your company needs,for the traffic, you would
                 love.Where creativity meets ads,You’ve got a business, we have
                 got brilliant minds,striving each day to make this space the

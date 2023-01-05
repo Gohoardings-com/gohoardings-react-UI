@@ -6,7 +6,7 @@ import Logingoogle from './loginGoogle';
 const Register = ({ signIn,setFocus, onVisible, eyeViseble, toggleSignUp, passwordsValidate, setPassword, password, setEmail, email, emailsValidate, numbervalidate, phone, AiFillEye, AiFillEyeInvisible, setNumber, nameValidate, setName, name, onRegister}) => {
   return (
     <>
-      <div className="register mt-0">
+      <div className="register mt-0 animate__animated  animate__fadeIn">
         <div className="form">
           <form onSubmit={onRegister}>
             <div className="mb-2 mt-0 ">

@@ -22,6 +22,17 @@ const Details = () => {
   const [markers, setPosts] = useState([]);
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
 
+
+
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+  useEffect(() => {
+    
+    topFunction();
+  }, []);
+
   const getMedia = async () => {
     const { data } = await instance.post("product/product", {
       meta_title: meta_title,
@@ -108,8 +119,8 @@ const Details = () => {
       ) : (
         <>
           {markers.map((item, i) => (
-            <div className="conatiner-fluid px-4">
-              <div className="row mt-sm-5  mb-5 pb-5 mt-3 ms-sm-5 ps-sm-5 me-sm-5 pe-sm-5">
+            <div className="container-xxl  container-xl container-lg container-md my-5">
+              <div className="row pt-5 ">
                 <div className="col-md-6 text-center">
                   <div className=" rounded-3 p-2">
                     <img
@@ -129,7 +140,7 @@ const Details = () => {
                               .toLowerCase()}/media/images/new${item.thumb}`
                       }
                       alt="About media"
-                      className="w-75 rounded-3 img-fluid maindivbordermediadetails p-2"
+                      className="rounded-3  detail-mg p-2"
                     />
                   </div>
                   <div style={{width:"20px", height:"20px"}}>
@@ -139,7 +150,7 @@ const Details = () => {
 
                 <div className="col " id="media">
 
-                  <div className="ms-3 me-3 maindivbordermediadetails p-3 pt-0  pb-1 rounded-2 mt-2">
+                  <div className="ms-3 me-3 detail-mg-detail p-3 pt-0  pb-1 rounded-2 mt-2">
                     <h4 className=" pt-3 fw-bold">{item.page_title}</h4>
 
                     <div className="row ">
@@ -162,7 +173,7 @@ const Details = () => {
                         </h6>
                       </div>
                       <div className="col mt-4 d-flex offset-4">
-                        <a href="/map" className=" text-decoration-none ms-5">
+                        <a href="/map" className=" text-decoration-none logo-set">
                           <img
                             src="../../gohoarding/new-icon/detail-map.png"
                             className="ms-4 "
@@ -226,7 +237,7 @@ const Details = () => {
                   </div>
 
                  {/* form section */}
-                  <div className="row ms-3 me-3 mt-5 maindivbordermediadetails rounded-3 p-2">
+                  <div className="row ms-3 me-3 mt-5 detail-mg-detail rounded-3 p-2">
                      <div className=" p-2 datail-heading  rounded-3">
                         <h4 className="text-light">GET A FREE CONSULTATION!</h4>
                       </div>

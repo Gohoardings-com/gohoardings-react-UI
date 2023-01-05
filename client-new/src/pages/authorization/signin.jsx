@@ -3,7 +3,7 @@ import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { changePassword, clientId, googleLogin, loginUser, mobileOTP, sendOTP } from "../../apis/apis";
+import { clientId, googleLogin, loginUser } from "../../apis/apis";
 import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -23,14 +23,11 @@ const Signin = () => {
     const [emailsValidate, setEmailsValidate] = useState();
     const [password, setPassword] = useState("");
     const [passwordsValidate, setPasswordsValidate] = useState();
-    const [confirmpasswords, setconfirmPasswords] = useState();
     const [phone, setNumber] = useState("");
     const [numbervalidate, setNumbervalidate] = useState();
     const [forget, setForget] = useState(false);
     const [fnotify,setFnotify] = useState(" ")
     const [signin, setSignIn] = useState(true);
-    const [otp,setOtp] = useState(0)
-    
    
   
     function setFocus(on) {
@@ -61,9 +58,8 @@ const afterLogin = async() => {
 }
     // Google Login Request
     const onSuccess = async (res) => {
-      const profile = res.profileObj
-      const  data  = await googleLogin(profile);
-      if (data.success === true) {  
+      const  data  = await googleLogin(res);
+      if (data.success=== true) {  
           afterLogin()
       }
     };
@@ -132,30 +128,19 @@ const afterLogin = async() => {
     };
   
   
-    function alertFunc() {
-      setForget(false);
-      setFnotify("");
-    }
+    // function alertFunc() {
+    //   setForget(false);
+    //   setFnotify("");
+    // }
     
-    const onForget = async(e) => {
-      e.preventDefault()
-      const  data  = await mobileOTP(email);
-      setFnotify("We send the link to your email")
-     let timeout = setTimeout(alertFunc, 4000);
+   
      
-    };
-    const checkOTP = async(e) => {
-    const data = await sendOTP(otp, password,confirmpasswords)
-     if (data.success === true) {
-      afterLogin()
-  } 
-    };
+    // function alertFunc() {
+    //   setForget(false);
+    //   setFnotify("");
+    // }
 
-     
-    function alertFunc() {
-      setForget(false);
-      setFnotify("");
-    }
+    
 
     const onRegister = async (e) => {
     if (name === "") {
@@ -207,22 +192,18 @@ const afterLogin = async() => {
               {forget ? (
                 <>
                   <ForgetPass
-                  setOtp={setOtp}
-                    setEmail={setEmail}
-                    phone={phone}
-                    onForget={onForget}
-                    setFocus={setFocus}
-                    fnotif={fnotify}
-                    checkOTP={checkOTP}
-                    setconfirmPasswords={setconfirmPasswords}
-                    setPassword={setPassword}
-                 
+                
+                setFocus={setFocus}
+              
+                
+                   
+                    
                   />
                 </>
               ) : (
                 <>
               
-                  <div className="modal-heading mt-3 text-center">
+                  <div className="modal-heading mt-3 text-center ">
                     <h1 className="modal-title">Welcome to Gohoardings!</h1>
                     <p className="modal-desc text-secondary">
                       OOH Advertising made easy and affordable.

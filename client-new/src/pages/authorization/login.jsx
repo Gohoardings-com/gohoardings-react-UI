@@ -7,8 +7,8 @@ const Login = ({onSignIn, setFocus, email, setEmail, signIn,toggleSignUp,ToastCo
   return (
     <>
 
-      <div className="signIn">
-        <div className="form">
+      <div className="signIn animate__animated  animate__fadeIn">
+        <div className="form ">
           <form onSubmit={onSignIn}>
             <div className="mb-4 mt-2">
               <div className="input-box">

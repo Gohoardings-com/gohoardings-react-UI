@@ -1,96 +1,88 @@
-@import '../../assets/scss/_variables.scss';
+@import "../../assets/scss/_variables.scss";
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700");
 
-
-#mainsection{
+#mainsection {
   margin-top: 0%;
   padding: 2%;
   padding-bottom: 3%;
   background-color: #8e8e8e;
   background-image: url(../../../public/images/Icons.png);
-  .all-content{
-box-shadow: $box-shadow;
-background-color: #FFFFFF;
-
-
+  .all-content {
+    box-shadow: $box-shadow;
+    background-color: #ffffff;
   }
- 
 }
-.form{
+.form {
   margin-top: 12%;
 }
-.form h3{
-    text-align: center;
-    margin-bottom: 40px;
+.form h3 {
+  text-align: center;
+  margin-bottom: 40px;
 }
-.forget-content{
-margin-top: 25%;
-
+.forget-content {
+  margin-top: 25%;
 }
-.signin{
-    border: none;
-    padding: 15px 70px;
-    border-radius: 8px;
-    display: block;
-    margin: auto;
-    height: 45px;
-    margin-top: 40px;
-    background: $red;
-    color: $white;
-    font-weight: bold;
-    -webkit-box-shadow: 0px 9px 15px -11px RGB(254, 111, 63);
-    -moz-box-shadow: 0px 9px 15px -11px RGB(254, 111, 63);
-    box-shadow: 0px 9px 15px -11px RGB(254, 111, 63);
-  -webkit-transition:.5s;
-  transition:.5s;
+.signin {
+  border: none;
+  padding: 15px 70px;
+  border-radius: 8px;
+  display: block;
+  margin: auto;
+  height: 45px;
+  margin-top: 40px;
+  background: $red;
+  color: $white;
+  font-weight: bold;
+  -webkit-box-shadow: 0px 9px 15px -11px RGB(254, 111, 63);
+  -moz-box-shadow: 0px 9px 15px -11px RGB(254, 111, 63);
+  box-shadow: 0px 9px 15px -11px RGB(254, 111, 63);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  span{
-    position:absolute;
-    display:block;
+  span {
+    position: absolute;
+    display: block;
     font-size: large;
-    -webkit-transform:translateX(0);
-    transform:translateX(0);
-    -webkit-transition:.5s;
-    transition:.5s;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
   }
-  &:hover{
-    span{
-      -webkit-transform:translateX(20px);
-      transform:translateX(13px);
+  &:hover {
+    span {
+      -webkit-transform: translateX(20px);
+      transform: translateX(13px);
       // color: rgb(168, 167, 167);
-      }
-   }
+    }
+  }
 }
-#l-switch{
-  margin-top: 9.2% !important ;
+#l-switch {
+  margin-top: 12.4% !important ;
 }
-.car_icon{
+.car_icon {
   font-size: 20px;
 }
-.main_content1{
-  background-color: #FFFFFF;
-   //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.main_content1 {
+  background-color: #ffffff;
 }
- #png {
+#png {
   height: 520px;
+  width: 450px;
   margin-top: 1%;
- }
- .main_content2{
+}
+.main_content2 {
   height: 530px;
- 
- // background-image: linear-gradient(to left,#858789,#9fa1a3,#c3c4c5) ;
- 
- }
- input[type=number]::-webkit-inner-spin-button, 
- input[type=number]::-webkit-outer-spin-button { 
-     -webkit-appearance: none; 
-     margin: 0; 
- }
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .input-box {
   position: relative;
   margin: 10px 10px;
@@ -123,7 +115,7 @@ margin-top: 25%;
     width: 100%;
     color: rgb(41, 41, 41);
     border: none;
-    border-bottom: 2px solid $dark-blue ;
+    border-bottom: 2px solid $dark-blue;
     padding: 13px 15px 3px;
     background-color: transparent;
     transition: 250ms;
@@ -135,7 +127,7 @@ margin-top: 25%;
     }
   }
 }
-.eye{
+.eye {
   color: $grey;
   position: absolute;
   margin-left: -3%;
@@ -143,67 +135,64 @@ margin-top: 25%;
   cursor: pointer;
 }
 
-
-.or{
-
-        text-align: center;
-        font-size: 27px;
-        color: $grey;
-        font-family: monospace; 
+.or {
+  text-align: center;
+  font-size: 27px;
+  color: $grey;
+  font-family: monospace;
 }
 
-.google-icon{
-    font-size: 42px;
-    margin-bottom: 15px;
-    transition: 0.10;
-    cursor: pointer;
+.google-icon {
+  height: 35px;
+  width: 35px;
+  margin-bottom: 15px;
+  transition: 0.1;
+  cursor: pointer;
 }
-.modal-heading{
+.modal-heading {
   margin-left: 7%;
-  
 }
-.modal-title{
+.modal-title {
   font-size: 28px;
   margin: 0;
   font-weight: 800;
   color: $grey;
-
 }
-.modal-desc{
+.modal-desc {
   font-size: 14px;
 }
-.google-icon:hover{
-  transform: scale(1.1)
+.google-icon:hover {
+  transform: scale(1.1);
 }
-.forgetpass{
-    text-decoration: none;
-    float: right;
-    right: 28px;
-    color: $grey;
-    margin-right: 1%;
-  }
-  
-  .forgetpass:hover {
-    text-decoration: underline;
-  }
-  
-  .end-tag{
-    position: absolute;
-    float: right;
-  }
-  .rmb {
-    position: absolute;
-    margin-left: -24%;
-    margin-top: 0px;
-    color: #524d4d;
-    font-size: 16px;
-  }
-  
-.input-box p{
-color: $red;
-font-size: 12px;
-padding: 0%;
-margin: 0%;
+.forgetpass {
+  text-decoration: none;
+  float: right;
+  right: 28px;
+  color: $grey;
+  margin-right: 1%;
+}
+
+.forgetpass:hover {
+  text-decoration: underline;
+}
+
+.end-tag {
+  position: absolute;
+  float: right;
+}
+.rmb {
+  position: absolute;
+  margin-left: -24%;
+  margin-top: 0px;
+  color: #524d4d;
+  font-size: 16px;
+}
+
+.input-box p {
+  color: $red;
+  font-size: 12px;
+  padding: 0%;
+  margin: 0%;
 }
 .input-box.focus,
 .input-box.active {
@@ -221,60 +210,67 @@ margin: 0%;
     }
   }
 }
-.switch{
+.switch {
   color: $blue;
   text-decoration: none;
   font-weight: 700;
   cursor: pointer;
   margin-right: 3%;
 }
-.switch:hover{
+.switch:hover {
   text-decoration: underline;
   color: $blue;
 }
 
-@media screen and (max-width: 425px) {
-  .main_content2{
-  height: 0px !important;
-   }
-   .form{
-    margin-top: 8.5%;
-   margin-right: 3.8%;
-  }
-  .main_content2{
-    display: none !important;
-   }
-}
 @media screen and (max-width: 1366px) {
-  .main_content2{
-    height: 722px !important;
-   }
- 
-   
-}
+  #l-switch {
+    margin-top: 17.1% !important ;
+  }
+  .google-icon {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 10px;
 
-@media screen and (max-width:768px) {
-  .forgetpass{
-  position: unset;
   }
-  .modal-title{
-    font-size:20px;
+  .or-text{
+    font-size: 20px;
   }
-  .modal-desc{
-    font-size: 10px;
+  .modal-title {
+    font-size: 22px;
+
+    font-weight: 700;
   }
-   #png {
-    height: 495px;
-    padding-left: 0%;
-    margin-top: 5%;
+  #png {
+    height: 380px;
+    width: 335px;
+  }
+  .modal-desc {
+    font-size: 13px;
+  }
+  .form {
+    font-size: medium;
+  }
+  .signin{
+   
+    padding: 12px 60px;
+    border-radius: 8px;
+
+    height: 35px;
+    margin-top: 30px;
+ 
+    font-weight: 500;
+ 
+  span{
+
+    font-size: medium;
+
+  }
+  &:hover{
+    span{
+      -webkit-transform:translateX(16px);
+      transform:translateX(10px);
+  
+      }
    }
-   .main_content2{
-    height: 600px !important;
-   }
-   .form{
-  font-size: small;
-  }
-  .l_switch{
-    margin-top: 16.3%  !important;
-  }
+}
 }
