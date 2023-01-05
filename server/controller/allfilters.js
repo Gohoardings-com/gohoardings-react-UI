@@ -7,7 +7,7 @@ exports.categorieFilter = catchError(async (req, res) => {
     db.changeUser({ database: "gohoardi_goh" });
     db.query("SELECT p_id,name FROM tblmedia_categories",async(err, result) => {
       if (err) {
-        return res.json({message:"No Data Found On this city"})
+        return res.status(400).json({message:"No Data Found On this city"})
       } else {
         return res.send(result);
       }

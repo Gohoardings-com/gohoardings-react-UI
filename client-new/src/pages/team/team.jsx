@@ -1,9 +1,21 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import "./team.scss";
+import { gohordingStaffAPi } from "../../apis/apis";
 import member from "./teammember";
 import { FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 import {TiSocialTwitter} from "react-icons/ti"
+
 const Team = () => {
+  const [posts, setPosts] = useState([])
+  const staff = async() =>{
+    const data = await gohordingStaffAPi()
+    setPosts(data)
+  }
+
+  useEffect(()=>{
+    staff()
+  },[])
+  console.log(posts);
   return (
     <>
       <section>

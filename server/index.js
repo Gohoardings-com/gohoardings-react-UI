@@ -17,10 +17,12 @@ const addOnCart = require('./routes/CartItemRoute');
 const productList = require('./routes/productListRoute');
 const enquiryRoute = require('./routes/enquiryRoute');
 const filters = require('./routes/filterRoute');
-
 const otp = require('./routes/OtpRoute');
-app.use("/api/v1/otp", otp);
+const staticPage = require('./routes/StaticPages');
 
+app.use("/api/v1/static", staticPage);
+
+app.use("/api/v1/otp", otp);
 app.use("/api/v1/filter", filters);
 app.use("/api/v1/enquiry", enquiryRoute);
 app.use("/api/v1/product", productList);

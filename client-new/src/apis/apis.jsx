@@ -122,6 +122,31 @@ export const sendOTP = async(otp, password,confirmpasswords) =>{
  return data
 }
 
+export const gohordingStaffAPi = async() =>{
+    const {data} =  await instance.get("static/gohordingStaff");
+ return data
+}
+
+export const goh_quick_linksApi = async() =>{
+    const {data} =  await instance.get("static/goh_quick_links");
+ return data
+}
+
+export const goh_faqsApi = async() =>{
+    const {data} =  await instance.get("static/goh_faqs");
+ return data
+}
+
+export const goh_media_and_newsApi = async() =>{
+    const {data} =  await instance.get("static/goh_media_and_news");
+ return data
+}
+
+export const goh_testimonialsApi = async() =>{
+    const {data} =  await instance.get("static/goh_testimonials");
+ return data
+}
+
 
 
 export const updatePassword = async(state) =>{
