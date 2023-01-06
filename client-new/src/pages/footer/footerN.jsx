@@ -87,11 +87,13 @@ const FooterN = () => {
       <div className=" footerN-content  pb-3  p-0 px-5 py-5  ">
         <div className="row footer-branding pb-4">
           <div className="col-md-3 pt-1">
-            <img
+           <a href="/">
+           <img
               src="../../images/logo.png"
               alt=""
               className="brand-logo-footer "
             />
+            </a>
           </div>
           <div className="col-md-9 ">
             <h4 className="f-heading">
