@@ -103,7 +103,7 @@ exports.checkOTP = catchError(async(req, res) => {
         }else{
           const userid = result[0].userid;
           const token =  jwtToken.sign({ id: userid }, process.env.jwt_secret, {
-            expiresIn: "5m",
+            expiresIn: "1m",
           });
           return res.status(200).json({success:true, message:token})
         }

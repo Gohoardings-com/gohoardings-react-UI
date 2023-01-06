@@ -159,7 +159,7 @@ export const goh_testimonialsApi = async() =>{
 
 export const updatePassword = async(state) =>{
     const {data} =  await instance.put("registration/forgetpassword",{
-      oldPassword: state.oldPassword, newPassword:state.newPassword,confirmPassword:state.confirmPassword
+     newPassword:state.newPassword,confirmPassword:state.confirmPassword
     });
  return data
 }
