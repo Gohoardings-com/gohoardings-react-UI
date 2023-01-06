@@ -12,7 +12,7 @@ const Enquire = () => {
 
   {
     var settings = {
-
+      pauseOnHover: false,
       infinite: true,
       slidesToShow: 7,
       slidesToScroll: 3,

@@ -1,21 +1,13 @@
 const nodemailer = require('nodemailer')
 exports.sendEmail = async (options)=>{
   var transport = nodemailer.createTransport({
-    
-    // host: 'smtp.ethereal.email',
-    // secureConnection: true,
-    // port: 587,
-    // auth: {
-    //     user: 'drake.denesik46@ethereal.email',
-    //     pass: 'tj14VPv2NMf1Q37Daw'
-    // }
      
-    host: "smtp.elasticemail.com",
-    port: 2525,
+   host:process.env.EMAIL_HOST,
+    port:process.env.EMAIL_PORT,
     secureConnection: true,
     auth: {
-      user: "rickygathwal@gmail.com",
-      pass: "52D5651301C72EE2CBC94F899098779599F7"
+      user:process.env.EMAIL_USER,
+      pass:process.env.EMAIL_PASS
     }
   });
       

@@ -27,12 +27,14 @@ const Signin = () => {
   const [numbervalidate, setNumbervalidate] = useState();
   const [forget, setForget] = useState(false);
   const [pass,setPass]= useState(false);
-  const [fnotify, setFnotify] = useState(" ")
+  const [fnotify, setFnotify] = useState("")
   const [signin, setSignIn] = useState(true);
-  const [otp, setOtp] = useState(0)
+  const [otp, setOtp] = useState("");
+  const [sendOtp,setSendOtp]=useState(false);
   const [expire, setexpire] = useState("")
   const [confirmpasswords, setconfirmPasswords] = useState();
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
+  
 
 
   function setFocus(on) {
@@ -146,12 +148,15 @@ const Signin = () => {
     e.preventDefault()
     if (isNaN(parseInt(email))) {
       const data = await emailOTP(email)
+      console.log(data);
       setEmail(" ")
       if (data.success == true) {
-        setEmailsValidate(true)
-     
+        setSendOtp(true)
+   
       }else{
-        toast(data.message)
+        toast(data.message )
+      
+    
       }
     } else {
       const data = await mobileOTP(email);
@@ -160,7 +165,7 @@ const Signin = () => {
       if (data.success == true) {
         setEmailsValidate(true)
       }else{
-        toast(data.message)
+        toast("Invalid Number")
       }
     }
   };
@@ -180,7 +185,7 @@ const Signin = () => {
   const checkOTP = async (e) => {
     e.preventDefault()
     const data = await sendOTP(otp)
-    setOtp(" ")
+  
     if (data.success === true) {
       setexpire(data.message)
       setPass(true)
@@ -240,12 +245,16 @@ const Signin = () => {
                   setconfirmPasswords={setconfirmPasswords}
                   expire={expire}
                   setOtp={setOtp}
-                  ToastContainer={ToastContainer}
+                  otp={otp}
+                  email={email}
+
+                  setEmail={setEmail}
+              
                   checkOTP={checkOTP}
                   changePassword={changePassword}
-                  setEmail={setEmail}
                   phone={phone}
-
+                  sendOtp={sendOtp}
+                  setSendOtp={setSendOtp}
                   onForget={onForget}
                   setFocus={setFocus}
                   fnotif={fnotify}
@@ -282,7 +291,6 @@ const Signin = () => {
                     eyeViseble={eyeViseble}
                     AiFillEye={AiFillEye}
                     AiFillEyeInvisible={AiFillEyeInvisible}
-
                     clickforget={clickforget}
                     ToastContainer={ToastContainer}
                     signIn={signIn}

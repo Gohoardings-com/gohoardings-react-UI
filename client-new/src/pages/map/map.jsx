@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AccountContext } from "../../apis/apiContext";
+import { AccountContext } from "../../apis/apicontext";
 import { useNavigate } from "react-router-dom";
 import "./map.scss";
 import { mediawithcity, priceSubIllu } from "../../action/adminAction";
@@ -12,6 +12,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
 import { MdArrowUpward, MdOutlineArrowDownward } from "react-icons/md";
+const BASE_URL = process.env.REACT_APP_CRYPTO_URL;
 
 const Map = () => {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
@@ -137,7 +138,7 @@ const Map = () => {
   }
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY",
+    googleMapsApiKey: BASE_URL,
   });
 
   const getAllDetails = async () => {

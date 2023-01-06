@@ -6,11 +6,10 @@ import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
 import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
 import { clientId, googleLogin, logoutUser, refreshToken } from '../../apis/apis';
-import { AccountContext } from '../../apis/apiContext';
+import { AccountContext } from '../../apis/apicontext';
 import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
-import {useCookies} from 'react-cookie'
 import { useAuth0 } from "@auth0/auth0-react";
 
 const UserDetail = () => {
@@ -38,6 +37,7 @@ const UserDetail = () => {
           localStorage.setItem(true, "long").then(() => dispatch(authActions.login()));
         }
       };
+
 
   let firstRender = true;
   const handelLogout = async () => {

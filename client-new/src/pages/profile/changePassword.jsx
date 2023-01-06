@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
+import {ToastContainer, toast } from 'react-toastify';
 import { updatePassword } from '../../apis/apis';
 
 const ChangePassword = () => {
   const [state,setState] = useState({
-    oldPassword: " ", newPassword: " ",confirmPassword:" "
+    newPassword: "",confirmPassword:""
   });
   const handleChange =async(e) =>{
     const {name, value} = e.target
@@ -13,6 +14,9 @@ const ChangePassword = () => {
     const sumbithandle = async(e) =>{
       e.preventDefault()
       const data = await updatePassword(state)
+      if(data.success == true){
+        toast(data.message)
+      }
     }
     
   return (
@@ -23,16 +27,6 @@ const ChangePassword = () => {
                        accept-charset="utf-8"
                           onSubmit={sumbithandle}
                         >
-                          <div className="form-group mt-2">
-                            <label for="oldPassword">Old Password</label>
-                            <input
-                              type="text"
-                              name="oldPassword"
-                              id="oldPassword"
-                              value={state.oldPassword}
-                              onChange={handleChange}
-                            />
-                          </div>
                           <div className="form-group mt-2">
                             <label for="newPassword">New Password</label>
                             <input
@@ -55,6 +49,7 @@ const ChangePassword = () => {
                               onChange={handleChange}
                             />
                           </div>
+
                           <div className="form-group mt-2">
                             <input
                               type="submit"
@@ -63,6 +58,7 @@ const ChangePassword = () => {
                             />
                              
                           </div>
+                          <ToastContainer/>
                         </form>
                       </div>
                     </div>

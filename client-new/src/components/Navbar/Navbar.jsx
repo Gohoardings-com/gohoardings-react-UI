@@ -11,14 +11,6 @@ const NewNAvbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [posts, setPosts] = useState()
-
-
-  const data=async() =>{
-    
-  await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
-  navigate('/map')
-
-  }
   
 useEffect(() => {
   setPosts(posts)
@@ -54,14 +46,17 @@ useEffect(() => {
               >
                 Contact
               </Nav.Link>
+            
+
               <Nav.Link
                 className="mapLink font-map-btn   text-nowrap rounded-pill "
-                onClick={(e) => data(e)}
-      
+                href="/map"
               >
                 <img src="./gohoarding/new-icon/map-icon.png" className="ps-0 p-0 me-1  pb-1 font-map-logo" />
                 Map View
               </Nav.Link>
+             
+            
               <UserDetail posts={posts} setPosts={setPosts}/>
             </Nav>
           </Navbar.Collapse>

@@ -280,39 +280,32 @@ exports.changepasswoed = catchError(async(req,res,next) => {
   const userId = req.id;
   if(!userId){
     return res.status(400).json({message:"User not found"})
-  }else{
-    db.changeUser({ database: "gohoardi_crmapp" })
-    db.query("SELECT password from tblcontacts WHERE userid='"+userId+"'", async(err,result) =>{
-      if(err){
-        return res.status(401).json({message:err.message})
+  }
+    const {newPassword, confirmPassword} = req.body;
+    if(newPassword === confirmPassword){
+      const finalPassword = bcrypt.hashSync(newPassword, 8)
+      if(!finalPassword){
+        return res.status(500).json({message:"Password Error"})
       }else{
-      const {oldPassword, newPassword, confirmPassword} = req.body;
-      const password = result[0].password
-      const resetPassword = bcrypt.compareSync(oldPassword, password)
-      if(resetPassword){
-        if(newPassword === confirmPassword){
-          const finalPassword = bcrypt.hashSync(newPassword, 8)
-          if(!finalPassword){
-            return res.status(500).json({message:"Password Error"})
-          }else{
+            db.changeUser({ database: "gohoardi_crmapp" })
             const sql ="UPDATE tblcontacts SET password = '"+finalPassword+"' WHERE userid='"+userId+"'";
             db.query(sql,async(err,result) =>{
               if(err){
+                console.log(err);
                 return res.status(800).json({message:err.message})
               }else{
-                return res.status(200).json({message:result})
+                console.log(result);
+                return res.status(200).json({message:"Password Change Successfully"})
               }
             })
           }
-        }
+        
       }else{
         return res.status(400).json({message:"Your Password Not Matched"})
-      }
+      
       
       }
     })
-  }
-}) 
 
 
 exports.updateProfile = catchError(async(req,res,next) =>{

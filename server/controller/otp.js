@@ -63,7 +63,7 @@ db.query("SELECT userid from tblcontacts WHERE  email='"+email+"'",async(err,con
   if(err){
     return  res.status(400).json({message:err.message})
   }else if(confirm.length == 0){
-    return  res.status(404).json({message:"Email Invalid"})
+    return  res.status(206).json({message:"Email Invalid"})
   }else{
  let otp = Math.floor(100000 + Math.random() * 900000);
       const message =`${otp} is your one-time OTP for login into the Gohoardings account.`;
@@ -103,7 +103,7 @@ exports.checkOTP = catchError(async(req, res) => {
         }else{
           const userid = result[0].userid;
           const token =  jwtToken.sign({ id: userid }, process.env.jwt_secret, {
-            expiresIn: "5m",
+            expiresIn: "1m",
           });
           return res.status(200).json({success:true, message:token})
         }

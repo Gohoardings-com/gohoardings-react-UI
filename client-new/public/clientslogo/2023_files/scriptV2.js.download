@@ -1,0 +1,1106 @@
+window.OlvyInstances=[];const OLVY_WIDGET_TYPE_RELEASES="announcements";const OLVY_WIDGET_TYPE_FEEDBACK="feedback";const OLVY_WIDGET_FEEDBACK_SUB_TYPE_SIMPLE="simple";const OLVY_WIDGET_FEEDBACK_SUB_TYPE_RATING="rating";const OLVY_WIDGET_RELEASES_SUB_TYPE_MODAL="modal";const OLVY_WIDGET_RELEASES_SUB_TYPE_SIDEBAR="sidebar";const OLVY_WIDGET_RELEASES_SUB_TYPE_EMBED="embed";const OLVY_WIDGET_RELEASES_SUB_TYPE_POPUP="popup";let isUserActive=false;let isScrolling=false;let isNotificationPopupSetup=false;const DEFAULT_WIDGET_CONFIG={appearance:{customCSS:``,showSearch:false,compact:false,showUnreadIndicator:true,unreadIndicatorColor:"#cc1919",unreadIndicatorPosition:"top-right",},config:{floatPosition:"",targetElement:"#olvy-whats-new",appendTo:"body",},};function __addPathChangeListener(fn){var currentPath=window.location.pathname;return window.setInterval(()=>{if(window.location.pathname!==currentPath){currentPath=window.location.pathname;fn();}},50);}
+function __waitForElement(selector){return new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(new Error("target element not found in the DOM")),15000);if(document.querySelector(selector)){return resolve(document.querySelector(selector));}
+const observer=new MutationObserver((mutations)=>{if(document.querySelector(selector)){resolve(document.querySelector(selector));observer.disconnect();window.clearTimeout(timeout);}});observer.observe(document.body,{childList:true,subtree:true,});});}
+function __removePathChangeListener(id){return window.clearInterval(id);}
+function getAliasFromCookies(){var cookie=document.cookie.split(";");for(var i=0;i<cookie.length;i++){var name=cookie[i].split("=")[0].trim();if(name=="olvyWorkspaceAlias"){return cookie[i].split("=")[1];}}}
+function __checkAndAddMetaViewPort(){const isViewportTagPresent=document.querySelector('meta[name="viewport"]');if(!isViewportTagPresent&&document){const meta=document.createElement("meta");meta.name="viewport";meta.content="width=device-width, initial-scale=1.0";document.head.appendChild(meta);}}
+function getPopupPosition(widgetInstance){try{let viewHeight=Math.max(document.documentElement.clientHeight||0,window.innerHeight||0);let viewWidth=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);let popupHeight=viewHeight*0.6;let popupWidth=480;let targetEl=document.querySelector(widgetInstance.config.targetElement);var viewportOffset=targetEl.getBoundingClientRect();let targetButtonHeight=targetEl.clientHeight;let targetButtonWidth=targetEl.clientWidth;const viewportX=viewportOffset.x;const viewportY=viewportOffset.y;let bodyRect=document.body.getBoundingClientRect();let targetButtonOffsetTop=Math.round(viewportOffset.top-bodyRect.top);const heightAvailable=viewportY>popupHeight;const widthAvailable=viewportX>popupWidth;const bottomPositionOfPopup=Math.round(viewHeight-targetButtonOffsetTop);const rightPositionOfPopup=Math.round(viewWidth-viewportX-targetButtonWidth);const popupFinalPosition=`
+      ${
+heightAvailable?"bottom: "+bottomPositionOfPopup+"px;":"top: "+(targetButtonOffsetTop+targetButtonHeight+10)+"px;"
+}
+      ${
+widthAvailable?"right: "+rightPositionOfPopup+"px;":"left: "+viewportX+"px;"
+}
+    `;return{popupFinalPosition,heightAvailable,widthAvailable,};}catch(e){console.warn("[Olvy] - We ran into issue finding or linking your target element with the widget. Please check if the element you've added to the widget config exists on the page");}}
+function getPopupPositionOnScroll(widgetInstance){let popupId="olvy-iframe-container-"+widgetInstance.alias;let{heightAvailable,popupFinalPosition}=getPopupPosition(widgetInstance);applyPopupFinalPosition(popupId,popupFinalPosition);}
+function applyPopupFinalPosition(popupId,popupFinalPosition){let popupElement=document.getElementById(popupId);if(popupElement){popupElement.setAttribute("style",popupFinalPosition);}else{console.warn("popup not found");}}
+function __isObject(item){return item&&typeof item==="object"&&!Array.isArray(item);}
+function __deepMerge(target,...sources){if(!sources.length)return target;const source=sources.shift();if(__isObject(target)&&__isObject(source)){for(const key in source){if(__isObject(source[key])){if(!target[key])Object.assign(target,{[key]:{}});__deepMerge(target[key],source[key]);}else{Object.assign(target,{[key]:source[key]});}}}
+return __deepMerge(target,...sources);}
+function __onPageReady(fn){if(document.readyState==="complete"){fn();}else{window.addEventListener("load",()=>{fn();});}}
+function _triggerOnIdle(cb){const cbTimeout=10000;if(window.requestIdleCallback){const idleCbID=window.requestIdleCallback((callInfo)=>{window.cancelIdleCallback(idleCbID);if(callInfo.timeRemaining()>0)cb();},{timeout:cbTimeout});}else{setTimeout(cb,cbTimeout);}}
+function _triggerFileDownload(link,name){const downloadElement=document.createElement("a");downloadElement.href=link;downloadElement.download=`attached-media-${name}`;downloadElement.style.cssText="display:none;";document.body.appendChild(downloadElement);downloadElement.click();}
+function OlvyReleasesModalWidget(widgetInstance){this.widgetInstance=widgetInstance;this.olvyInstance=widgetInstance.olvyInstance;this.handleTargetClick=(e)=>{e.preventDefault();e.stopPropagation();this.widgetInstance.show();};this.init=()=>{};this.setup=(forceSetup)=>{let isWidgetToBeAutoShown=this.widgetInstance?.appearance?.autoShowWidget;let modalTargetElement=null;if(this.widgetInstance.config&&this.widgetInstance?.config?.targetElement){modalTargetElement=document.querySelector(this.widgetInstance?.config?.targetElement);}
+if(modalTargetElement||isWidgetToBeAutoShown||forceSetup){const modalElement=document.createElement("div");modalElement.id=`olvy-modal-${this.widgetInstance.alias}`;modalElement.classList.add("olvy-modal");modalElement.innerHTML=`
+      <div data-test="modal-overlay" class="olvy-modal-overlay" id="${`olvy-modal-overlay-${this.widgetInstance.alias}`}"></div>
+          <div data-test="modal-frame-container" class="olvy-frame-container olvy-frame-modal" id="${`olvy-frame-container-${this.widgetInstance.alias}`}">
+        <iframe data-test="modal-iframe" allow="clipboard-read; clipboard-write" class="olvy-frame" name="olvy-frame-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed?widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}"></iframe>
+          </div>
+        `;this.widgetInstance.setElement(modalElement);document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(modalElement);this.insertCSS(this.widgetInstance);this.setupEventListeners();this.autoShowWidget();}};this.autoShowWidget=()=>{if(this.widgetInstance?.appearance?.autoShowWidget){let isNewReleasePresent=this.widgetInstance.getUnreadReleasesCount();if(isNewReleasePresent>0){this.show();}}};this.setupEventListeners=()=>{document.addEventListener("click",(e)=>{if(this.widgetInstance?.config?.disableOverlay){if(!e.target.closest(`#olvy-sidebar-overlay-${this.widgetInstance.alias}`)?.length){this.widgetInstance.hide();}}else{if(e.target.id===`olvy-modal-overlay-${this.widgetInstance.alias}`||e.target.id===`olvy-frame-container-${this.widgetInstance.alias}`){e.preventDefault();e.stopPropagation();this.widgetInstance.hide();}}});document.addEventListener("keydown",(e)=>{if(e.keyCode==27){this.widgetInstance.hide();}});if(this.widgetInstance.config&&this.widgetInstance?.config?.targetElement){const targetElement=document.querySelector(this.widgetInstance?.config?.targetElement);if(targetElement){targetElement.addEventListener("click",this.handleTargetClick);}}
+if(this.widgetInstance?.appearance?.showUnreadIndicator){this.widgetInstance.refreshUnreadCount();}else{this.widgetInstance.removeUnreadIndicatorElement();}};this.teardown=()=>{this.widgetInstance.removeUnreadIndicatorElement();this.removeCSS();if(document.querySelector(`#${`olvy-modal-${this.widgetInstance.alias}`}`)){document.querySelector(this.widgetInstance?.config?.appendTo).removeChild(document.querySelector(`#${`olvy-modal-${this.widgetInstance.alias}`}`));}
+window.removeEventListener("message",(e)=>{if(e.data===this.widgetInstance.eventKeys.close){this.widgetInstance.hide();}else if(e.data===this.widgetInstance.eventKeys.loaded){this.widgetInstance.contentLoaded=true;}},false);this.teardownEventListeners();this.widgetInstance.setElement(null);};this.teardownEventListeners=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.removeEventListener("click",this.handleTargetClick);}}};this.show=()=>{if(!this.widgetInstance.elementRef){this.setup(true);}
+this.widgetInstance.elementRef.classList.add("visible");const bodyElement=document.querySelector(`body`);bodyElement.classList.add("olvy-modal-open");document.getElementsByName(`olvy-frame-${this.widgetInstance.alias}`)[0].classList.add("bounceInAnimation");this.widgetInstance.visible=true;window.localStorage.setItem(`olvy-${this.olvyInstance.workspaceAlias}-lastOpened`,new Date().toISOString());if(document.querySelector(this.widgetInstance?.config?.targetElement)&&document.querySelector(this.widgetInstance?.config?.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}`)){document.querySelector(this.widgetInstance?.config?.targetElement).removeChild(document.querySelector(this.widgetInstance?.config?.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}`));}};this.hide=()=>{if(this.widgetInstance.elementRef){this.widgetInstance.elementRef.classList.remove("visible");}
+const bodyElement=document.querySelector(`body`);if(bodyElement){bodyElement.classList.remove("olvy-modal-open");}
+this.widgetInstance.visible=false;};this.insertCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}
+const styleEl=document.createElement("style");styleEl.id=`olvy-css-${this.widgetInstance.alias}`;CSSElement=styleEl;CSSElement.innerHTML=`
+        ${this.widgetInstance?.config?.targetElement} {
+          position: relative;
+        }
+        .olvy-modal {
+          display: none;
+          transition: display 0.5s ease-in-out;
+        }
+        .olvy-modal-open {
+          overflow: hidden !important;
+        }
+        .olvy-modal.visible {
+          display: block;
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          z-index: 2000000;
+        }
+        .olvy-modal-overlay {
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          background-color: #000000bf;
+          z-index: 2000000;
+          opacity: 0;
+          animation: opacityTransition 0.5s ease forwards;
+        }
+        .olvy-frame-modal .olvy-frame {
+          max-height: 45rem;
+          height: 100%;
+          max-width: 700px;
+          width: 100%;
+          border-radius: 8px;
+          overflow: hidden;
+          border: none;
+          background-color: var(--widget-background);
+        }
+        .olvy-frame-container.olvy-frame-modal {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 100%;
+          z-index: 2000002;
+          position: relative;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias} {
+          position: absolute;
+          display: block;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          box-shadow: 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          animation: olvyPulse-${this.widgetInstance.alias} 2s infinite;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: #fff;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.top-right {
+          right: -10px;
+          top: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.top-left {
+          left: -10px;
+          top: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.bottom-left {
+          bottom: -10px;
+          left: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.bottom-right {
+          bottom: -10px;
+          right: -10px;
+        }
+        @-webkit-keyframes olvyPulse-${this.widgetInstance.alias} {
+          0% {
+            -webkit-box-shadow: 0 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          }
+          70% {
+              -webkit-box-shadow: 0 0 0 10px #0000;
+          }
+          100% {
+              -webkit-box-shadow: 0 0 0 0 #0000;
+          }
+        }
+        @keyframes olvyPulse-${this.widgetInstance.alias} {
+          0% {
+            -moz-box-shadow: 0 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+            box-shadow: 0 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          }
+          70% {
+              -moz-box-shadow: 0 0 0 10px #0000;
+              box-shadow: 0 0 0 10px #0000;
+          }
+          100% {
+              -moz-box-shadow: 0 0 0 0 #0000;
+              box-shadow: 0 0 0 0 #0000;
+          }
+        }
+       .bounceInAnimation {
+        animation-name: bounce;
+        animation-duration: 0.3s;
+        transition-timing-function: ease;
+       }
+       @keyframes bounce {
+        0% {
+          opacity: 0;
+          transform: scale(0.8) translate3d(0,0,0);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translate3d(0,0,0);
+        }
+       }
+       @keyframes opacityTransition {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+       }
+      `;document.querySelector("head").appendChild(CSSElement);};this.removeCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}};}
+function OlvyReleasesSidebarWidget(widgetInstance){this.widgetInstance=widgetInstance;this.olvyInstance=widgetInstance.olvyInstance;this.handleTargetClick=(e)=>{e.preventDefault();e.stopPropagation();this.widgetInstance.show();};this.init=()=>{};this.setup=(forceSetup)=>{let isWidgetToBeAutoShown=this.widgetInstance?.appearance?.autoShowWidget;let sidebarTargetElement=null;if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){sidebarTargetElement=document.querySelector(this.widgetInstance.config.targetElement);}
+if(sidebarTargetElement||isWidgetToBeAutoShown||forceSetup){const sidebarElement=document.createElement("div");sidebarElement.id=`olvy-sidebar-${this.widgetInstance.alias}`;sidebarElement.classList.add("olvy-sidebar");sidebarElement.innerHTML=`
+        <div data-test="sidebar-overlay" class="olvy-sidebar-overlay" id="${`olvy-sidebar-overlay-${this.widgetInstance.alias}`}"></div>
+          <div data-test="sidebar-frame-container" class="olvy-frame-container olvy-frame-sidebar" id="${`olvy-frame-container-${this.widgetInstance.alias}`}">
+          <iframe data-test="sidebar-iframe" allow="clipboard-read; clipboard-write" class="olvy-frame" name="olvy-frame-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed?widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}"></iframe> 
+          </div>
+        `;this.widgetInstance.setElement(sidebarElement);document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(sidebarElement);this.insertCSS(this.widgetInstance);this.setupEventListeners();this.autoShowWidget();}};this.autoShowWidget=()=>{if(this.widgetInstance?.appearance?.autoShowWidget){let isNewReleasePresent=this.widgetInstance.getUnreadReleasesCount();if(isNewReleasePresent>0){this.show();}}};this.setupEventListeners=()=>{document.addEventListener("click",(e)=>{if(this.widgetInstance?.config?.disableOverlay){if(!e.target.closest(`#olvy-sidebar-overlay-${this.widgetInstance.alias}`)?.length){this.widgetInstance.hide();}}else{if(e.target.id===`olvy-sidebar-overlay-${this.widgetInstance.alias}`||e.target.id===`olvy-frame-container-${this.widgetInstance.alias}`){e.preventDefault();e.stopPropagation();this.widgetInstance.hide();}}});document.addEventListener("keydown",(e)=>{if(e.keyCode==27){this.widgetInstance.hide();}});if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.addEventListener("click",this.handleTargetClick);}}
+if(this.widgetInstance?.appearance?.showUnreadIndicator){this.widgetInstance.refreshUnreadCount();}else{this.widgetInstance.removeUnreadIndicatorElement();}};this.teardown=()=>{this.widgetInstance.removeUnreadIndicatorElement();this.removeCSS();if(document.querySelector(`#${`olvy-sidebar-${this.widgetInstance.alias}`}`)){document.querySelector(this.widgetInstance?.config?.appendTo).removeChild(document.querySelector(`#${`olvy-sidebar-${this.widgetInstance.alias}`}`));}
+window.removeEventListener("message",(e)=>{if(e.data===this.widgetInstance.eventKeys.close){this.widgetInstance.hide();}else if(e.data===this.widgetInstance.eventKeys.loaded){this.widgetInstance.contentLoaded=true;}},false);this.teardownEventListeners();this.widgetInstance.setElement(null);};this.teardownEventListeners=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.removeEventListener("click",this.handleTargetClick);}}};this.show=()=>{if(!this.widgetInstance.elementRef){this.setup(true);}
+this.widgetInstance.elementRef.classList.add("visible");const bodyElement=document.querySelector(`body`);bodyElement.classList.add("olvy-sidebar-open");document.getElementsByName(`olvy-frame-${this.widgetInstance.alias}`)[0].classList.add("transitionAnimation");this.widgetInstance.visible=true;window.localStorage.setItem(`olvy-${this.olvyInstance.workspaceAlias}-lastOpened`,new Date().toISOString());if(document.querySelector(this.widgetInstance?.config?.targetElement)&&document.querySelector(this.widgetInstance?.config?.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}`)){document.querySelector(this.widgetInstance?.config?.targetElement).removeChild(document.querySelector(this.widgetInstance?.config?.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}`));}};this.hide=()=>{if(this.widgetInstance.elementRef){this.widgetInstance.elementRef.classList.remove("visible");}
+const bodyElement=document.querySelector(`body`);if(bodyElement){bodyElement.classList.remove("olvy-sidebar-open");}
+this.widgetInstance.visible=false;};this.insertCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}
+const styleEl=document.createElement("style");styleEl.id=`olvy-css-${this.widgetInstance.alias}`;CSSElement=styleEl;CSSElement.innerHTML=`
+        ${this.widgetInstance?.config?.targetElement} {
+          position: relative;
+        }
+        .olvy-sidebar {
+          display: none;
+          transition: display 0.5s ease-in-out;
+        }
+        .olvy-sidebar-open {
+          overflow: hidden !important;
+        }
+        .olvy-sidebar.visible {
+          display: block;
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          z-index: 2000000;
+        }
+        .olvy-sidebar-overlay {
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          background-color: #000000bf;
+          z-index: 2000000;
+          opacity: 0;
+          animation: opacityTransition 0.5s ease forwards;
+        }
+        .olvy-frame-sidebar .olvy-frame {
+          height: 100%;
+          max-width: 450px;
+          width: 100%;
+          border-radius: 8px;
+          overflow: hidden;
+          border: none;
+          position: fixed;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background: var(--widget-background);
+        }
+        .olvy-frame-container.olvy-frame-sidebar {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 100%;
+          z-index: 2000002;
+          position: relative;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias} {
+          position: absolute;
+          display: block;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          box-shadow: 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          animation: olvyPulse-${this.widgetInstance.alias} 2s infinite;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: #fff;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.top-right {
+          right: -10px;
+          top: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.top-left {
+          left: -10px;
+          top: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.bottom-left {
+          bottom: -10px;
+          left: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}.bottom-right {
+          bottom: -10px;
+          right: -10px;
+        }
+        @-webkit-keyframes olvyPulse-${this.widgetInstance.alias} {
+          0% {
+            -webkit-box-shadow: 0 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          }
+          70% {
+              -webkit-box-shadow: 0 0 0 10px #0000;
+          }
+          100% {
+              -webkit-box-shadow: 0 0 0 0 #0000;
+          }
+        }
+        @keyframes olvyPulse-${this.widgetInstance.alias} {
+          0% {
+            -moz-box-shadow: 0 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+            box-shadow: 0 0 0 0 ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          }
+          70% {
+              -moz-box-shadow: 0 0 0 10px #0000;
+              box-shadow: 0 0 0 10px #0000;
+          }
+          100% {
+              -moz-box-shadow: 0 0 0 0 #0000;
+              box-shadow: 0 0 0 0 #0000;
+          }
+        }
+        .transitionAnimation{
+          animation-name: slide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+        
+        @-webkit-keyframes slide {
+          0% {right: -450px;}
+          100% { right: 0; }
+        }
+        
+        @keyframes slide {
+          0% {right: -450px;}
+          100% { right: 0; }
+        }
+        @keyframes opacityTransition {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+      `;document.querySelector("head").appendChild(CSSElement);};this.removeCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}};}
+function OlvyReleasesEmbedWidget(widgetInstance){this.widgetInstance=widgetInstance;this.olvyInstance=widgetInstance.olvyInstance;this.init=()=>{};this.setup=()=>{let embedElement="";if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){embedElement=document.querySelector(this.widgetInstance.config?.targetElement);}
+if(embedElement){embedElement.innerHTML=`<iframe data-test="embed-iframe" allow="clipboard-read; clipboard-write" class="olvy-frame" name="${`olvy-frame-${this.widgetInstance.alias}`}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed?widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}" style="height: 100%; width: 100%; border: none;"></iframe>`;this.widgetInstance.setElement(embedElement);}};this.teardown=()=>{const embedElement=document.querySelector(this.widgetInstance?.config?.targetElement);if(embedElement){embedElement.innerHTML=``;this.widgetInstance.setElement(null);}};this.show=()=>{};this.hide=()=>{};this.insertCSS=()=>{};}
+function OlvyReleasesPopupWidget(widgetInstance){this.widgetInstance=widgetInstance;this.olvyInstance=widgetInstance.olvyInstance;this.handleTargetClick=(e)=>{e.preventDefault();e.stopPropagation();this.widgetInstance.show();};this.init=()=>{};this.setup=(forceSetup)=>{let isWidgetToBeAutoShown=this.widgetInstance?.appearance?.autoShowWidget;let popupTargetElement="";if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){popupTargetElement=document.querySelector(this.widgetInstance.config.targetElement);}
+if(popupTargetElement||isWidgetToBeAutoShown||forceSetup){const popupElement=document.createElement("div");popupElement.id=`olvy-popup-${this.widgetInstance.alias}`;popupElement.classList.add("olvy-popup","olvy-popup-iframe-container","rounded-lg");popupElement.setAttribute("data-test","popup-frame");popupElement.setAttribute("id",`olvy-iframe-container-${this.widgetInstance.alias}`);popupElement.innerHTML=`
+        <iframe data-test="popup-iframe" allow="clipboard-read; clipboard-write" class="popup-widget" name="olvy-frame-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed?widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}">
+        </iframe>
+        `;this.widgetInstance.setElement(popupElement);document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(popupElement);this.insertCSS(this.widgetInstance);this.setupEventListeners();this.autoShowWidget();}};this.autoShowWidget=()=>{if(this.widgetInstance?.appearance?.autoShowWidget){let isNewReleasePresent=this.widgetInstance.getUnreadReleasesCount();if(isNewReleasePresent>0)this.show();}};this.setupEventListeners=()=>{document.addEventListener("click",(e)=>{if(!e.target.closest(`#olvy-iframe-container-${this.widgetInstance.alias}`)?.length){this.widgetInstance.hide();}});document.addEventListener("keydown",(e)=>{if(e.keyCode==27){this.widgetInstance.hide();}});window.addEventListener("scroll",(e)=>{isScrolling=true;});let widgetInstanceForPopup=this.widgetInstance;setInterval(function(){if(isScrolling){isScrolling=false;getPopupPositionOnScroll(widgetInstanceForPopup);}},500);if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.addEventListener("click",this.handleTargetClick);}}
+if(this.widgetInstance?.appearance?.showUnreadIndicator){this.widgetInstance.refreshUnreadCount();}else{this.widgetInstance.removeUnreadIndicatorElement();}};this.teardown=()=>{this.widgetInstance.removeUnreadIndicatorElement();this.removeCSS();if(document.querySelector(`#${`olvy-iframe-container-${this.widgetInstance.alias}`}`)){document.querySelector(this.widgetInstance?.config?.appendTo).removeChild(document.querySelector(`#${`olvy-iframe-container-${this.widgetInstance.alias}`}`));}
+window.removeEventListener("message",(e)=>{if(e.data===this.widgetInstance.eventKeys.close){this.widgetInstance.hide();}else if(e.data===this.widgetInstance.eventKeys.loaded){this.widgetInstance.contentLoaded=true;}},false);window.removeEventListener("scroll",(e)=>{isScrolling=false;});this.teardownEventListeners();this.widgetInstance.setElement(null);};this.teardownEventListeners=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.removeEventListener("click",this.handleTargetClick);}}};this.show=()=>{if(!this.widgetInstance.elementRef){this.setup(true);}
+this.widgetInstance.elementRef.classList.add("visible");this.widgetInstance.visible=true;window.localStorage.setItem(`olvy-${this.olvyInstance.workspaceAlias}-lastOpened`,new Date().toISOString());if(document.querySelector(this.widgetInstance?.config?.targetElement)&&document.querySelector(this.widgetInstance?.config?.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}`)){document.querySelector(this.widgetInstance?.config?.targetElement).removeChild(document.querySelector(this.widgetInstance?.config?.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias}`));}
+let docBody=document.querySelector("body");if(window.innerWidth<440){if(docBody){docBody.classList.add("widget-show-close-button");}}else{if(docBody){docBody.classList.add("widget-hide-close-button");}}};this.hide=()=>{if(this.widgetInstance.elementRef){this.widgetInstance.elementRef.classList.remove("visible");}
+this.widgetInstance.visible=false;};this.insertCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}
+const styleEl=document.createElement("style");styleEl.id=`olvy-css-${this.widgetInstance.alias}`;CSSElement=styleEl;let{heightAvailable,popupFinalPosition}=getPopupPosition(this.widgetInstance);CSSElement.innerHTML=`
+        ${this.widgetInstance?.config?.targetElement} {
+          position: relative;
+        }
+        .olvy-popup {
+          display: none;
+          transition: display 0.5s ease-in-out;
+        }
+        .olvy-popup {
+          --widget-topbar-background:
+          ${
+this.widgetInstance?.appearance?.theme?.headerBackgroundColor||"#ffffff"
+}; --widget-background:
+          ${
+this.widgetInstance?.appearance?.theme?.backgroundColor||"#ffffff"
+}; --widget-card-background:
+          ${
+this.widgetInstance?.appearance?.theme?.cardBackgroundColor||"#ffffff"
+}; --widget-text-primary-color:
+          ${this.widgetInstance?.appearance?.theme?.textColor||"#303855"};
+          --widget-text-secondary-color:
+          ${
+this.widgetInstance?.appearance?.theme?.secondaryTextColor||"#4a5568"
+}; --widget-brand-color:
+          ${this.widgetInstance?.appearance?.theme?.brandColor||"#db2777"};
+          --widget-link-color:
+          ${this.widgetInstance?.appearance?.theme?.linkColor||"#2b43d8"};
+          --widget-link-hover-color:
+          ${
+this.widgetInstance?.appearance?.theme?.linkHoverColor||"#2b43d8"
+};
+          --widget-border-color:
+          ${this.widgetInstance?.appearance?.theme?.borderColor||"#e4e8ea"};
+          --widget-input-background-color:
+          ${
+this.widgetInstance?.appearance?.theme?.inputBackgroundColor||"#ffffff"
+}; --widget-input-text-color:
+          ${
+this.widgetInstance?.appearance?.theme?.inputTextColor||"#303956"
+};
+          --widget-input-placeholder-color:
+          ${
+this.widgetInstance?.appearance?.theme?.inputPlaceholderColor||"#cfd8dc"
+};
+        }
+        .olvy-popup-open {
+          overflow: hidden !important;
+        }
+        .olvy-popup.visible {
+          display: block;
+          width: 360px;
+          max-width: 480px;
+          position: absolute;
+          ${popupFinalPosition}
+          height: 60%;
+          max-height: 510px;
+          z-index: 2000000;
+          filter: drop-shadow(0px 2px 20px rgba(220,220,220,1));
+          background: var(--widget-background);
+          border-radius: 8px;
+        }
+        .popup-widget {
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
+          border: none;
+        }
+        #widget-close-button, .popup-close-icon{
+          display:none;
+        }
+
+        @media(min-width: 768px){
+          .olvy-frame-popup .olvy-frame{
+            height: 60%;
+            position: fixed;
+            ${popupFinalPosition}
+            padding-bottom: 1rem;
+            filter: drop-shadow(0px 2px 20px rgba(220,220,220,1));
+            background: var(--widget-background);
+          }
+
+          .olvy-popup, .popup-widget{
+            max-width: 480px;
+          }
+          #widget-close-button,
+          #embed-widget-close-button{
+            display:none;
+          }
+        }
+        @media(max-width: 767px){
+          .olvy-popup.visible {
+            height: 100% !important;
+            width: 100% !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0;
+            left: 0;
+            max-height: 100%;
+            position: fixed !important;
+            margin-top: 0;
+            max-width: 100% !important;
+            filter: drop-shadow(0px 2px 20px rgba(220,220,220,1));
+            background: var(--widget-background);
+            z-index: 2000000;
+            border-radius: 8px;
+          }
+
+          #widget-close-button,
+          #embed-widget-close-button{
+            display:block;
+          }
+          #widget-close-button, .popup-close-icon{
+            display:block;
+          }
+        }
+
+        .popup-widget .popup-release-card{
+          width: 100%;
+          max-width: calc(480px - 2rem);
+        }
+
+        .olvy-unread-indicator.olvy-widget-${this.widgetInstance.alias} {
+          position: absolute;
+          display: block;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: ${this.widgetInstance?.appearance?.unreadIndicatorColor};
+          box-shadow: 0 0 0 ${
+this.widgetInstance?.appearance?.unreadIndicatorColor
+};
+          animation: olvyPulse-${this.widgetInstance.alias} 2s infinite;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: #fff;
+        }
+        .olvy-unread-indicator.olvy-widget-${
+this.widgetInstance.alias
+}.top-right {
+          right: -10px;
+          top: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${
+this.widgetInstance.alias
+}.top-left {
+          left: -10px;
+          top: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${
+this.widgetInstance.alias
+}.bottom-left {
+          bottom: -10px;
+          left: -10px;
+        }
+        .olvy-unread-indicator.olvy-widget-${
+this.widgetInstance.alias
+}.bottom-right {
+          bottom: -10px;
+          right: -10px;
+        }
+        @-webkit-keyframes olvyPulse-${this.widgetInstance.alias} {
+          0% {
+            -webkit-box-shadow: 0 0 0 0 ${
+this.widgetInstance?.appearance?.unreadIndicatorColor
+};
+          }
+          70% {
+              -webkit-box-shadow: 0 0 0 10px #0000;
+          }
+          100% {
+              -webkit-box-shadow: 0 0 0 0 #0000;
+          }
+        }
+        @keyframes olvyPulse-${this.widgetInstance.alias} {
+          0% {
+            -moz-box-shadow: 0 0 0 0 ${
+this.widgetInstance?.appearance?.unreadIndicatorColor
+};
+            box-shadow: 0 0 0 0 ${
+this.widgetInstance?.appearance?.unreadIndicatorColor
+};
+          }
+          70% {
+              -moz-box-shadow: 0 0 0 10px #0000;
+              box-shadow: 0 0 0 10px #0000;
+          }
+          100% {
+              -moz-box-shadow: 0 0 0 0 #0000;
+              box-shadow: 0 0 0 0 #0000;
+          }
+        }
+        .bouncePopup{
+          animation-name: bounce;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+        .popup-widget-fade-out-bottom {
+          -webkit-mask-image: linear-gradient(180deg, #000 95%, transparent);
+          mask-image: linear-gradient(90deg, #000 95%, transparent);
+          -webkit-mask-size: 20px;
+        }
+
+        @-webkit-@keyframes bounce {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translate3d(0,0,0);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translate3d(0,0,0);
+          }
+        }
+
+        @keyframes bounce {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translate3d(0,0,0);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translate3d(0,0,0);
+          }
+        }
+      `;document.querySelector("head").appendChild(CSSElement);};this.removeCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}};}
+function OlvyFeedbackSimpleWidget(widgetInstance){this.widgetInstance=widgetInstance;this.olvyInstance=widgetInstance.olvyInstance;this.notificationPollingInterval=null;this.notificationInfo={};this.prevNotificationInfo={};this.feedbackWidgetShown=false;this.notificationShown=false;this.notificationPollingTimeout=10000;this.handleTargetClick=(e)=>{e.preventDefault();e.stopPropagation();this.widgetInstance.show();};this.init=()=>{};this.setup=(forceSetup)=>{let feedbackTargetElement="";if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){feedbackTargetElement=document.querySelector(this.widgetInstance.config.targetElement);}
+if(feedbackTargetElement||forceSetup){const widgetElement=document.createElement("div");widgetElement.id=`olvy-simple-feedback-${this.widgetInstance.alias}`;widgetElement.classList.add("olvy-simple-feedback");widgetElement.classList.add(this.widgetInstance?.appearance?.widgetPosition);widgetElement.innerHTML=`
+            <div class="olvy-simple-feedback-overlay" id="${`olvy-simple-feedback-overlay-${this.widgetInstance.alias}`}"></div>
+        <div class="olvy-frame-container olvy-frame-simple-feedback" id="${`olvy-frame-container-${this.widgetInstance.alias}`}">
+        <iframe class="olvy-frame" name="olvy-frame-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed/feedback?alias=${this.olvyInstance.getAlias()}&widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}"></iframe>
+          </div>
+        `;this.widgetInstance.setElement(widgetElement);document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(widgetElement);this.setupEventListeners();this.insertCSS(this.widgetInstance);this.setupReplies();this.autoShowWidget();}};this.autoShowWidget=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.autoShowWidget){if(this.widgetInstance.config.autoShowSnoozeEnabled){let snoozeTS=window.localStorage.getItem(`olvy-feedback-${this.olvyInstance.getAlias()}-snooze`);if(snoozeTS){const currentTS=new Date().getTime();snoozeTS=new Date(snoozeTS).getTime();if(currentTS>=snoozeTS)this.show();}else this.show();}else this.show();}};this.setupReplies=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.repliesEnabled&&!isNotificationPopupSetup){this.setupNotificationPolling();}};this.setupEventListeners=()=>{document.addEventListener("click",(e)=>{if(e.target.id===`olvy-simple-feedback-overlay-${this.widgetInstance.alias}`||e.target.id===`olvy-frame-container-${this.widgetInstance.alias}`){e.preventDefault();e.stopPropagation();this.widgetInstance.hide();}});document.addEventListener("keydown",(e)=>{if(e.keyCode==27){this.widgetInstance.hide();}});if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.addEventListener("click",this.handleTargetClick);}}};this.setupNotificationPolling=async()=>{const alias=this.olvyInstance.getAlias();const userInLocalStorage=window.localStorage.getItem(`olvy-user-${alias}`);let userObject={};if(userInLocalStorage){userObject=JSON.parse(userInLocalStorage);}
+if(this.olvyInstance?.organisationId&&userObject?.email){if(this.widgetInstance.config&&this.widgetInstance.config.replyNotifications){this.setupNotificationPopup();isNotificationPopupSetup=true;}
+await this.processNotificationCount(userObject);this.notificationPollingInterval=setInterval(async()=>{await this.processNotificationCount(userObject);},this.notificationPollingTimeout);}};this.refreshRepliesCount=async()=>{const userInLocalStorage=window.localStorage.getItem(`olvy-user-${this.olvyInstance.getAlias()}`);let userObject={};if(userInLocalStorage){userObject=JSON.parse(userInLocalStorage);}
+if(this.olvyInstance?.organisationId&&userObject?.email){await this.processNotificationCount(userObject);}};this.processNotificationCount=async(userObject)=>{await this.fetchNotificationCount(userObject?.email);if(this.feedbackWidgetShown===false&&this.notificationInfo?.newReplyCount>0&&this.notificationInfo?.newReplyCount!==this.prevNotificationInfo?.newReplyCount&&this.notificationInfo?.latestReplyText!==this.prevNotificationInfo?.latestReplyText){this.prevNotificationInfo=this.notificationInfo;this.showNotificationPopup();window.frames[`olvy-feeback-notify-popup-${this.widgetInstance.alias}`].postMessage({key:`olvy-setNotificationInfo`,value:this.notificationInfo,},"*");}
+window.frames[`olvy-frame-${this.widgetInstance.alias}`].postMessage({key:`olvy-setNotificationInfo`,value:this.notificationInfo,},"*");};this.setupNotificationPopup=(isBuilder=false)=>{const element=document.createElement("div");element.id=`olvy-feeback-notify-popup-${this.widgetInstance.alias}`;element.innerHTML=`
+        <div data-test="feeback-notify-popup" class="olvy-frame-notify-popup" id="${`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`}">
+      <iframe data-test="feeback-notify-popup-iframe" class="olvy-frame" name="olvy-feeback-notify-popup-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed/notification?alias=${this.olvyInstance.getAlias()}&widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}&logo=${
+this.widgetInstance.organisationLogo
+}&builder=${isBuilder}"></iframe>
+        </div>
+      `;document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(element);window.addEventListener("message",(e)=>{if(e.data===`olvy-open-feedback-widget-${this.widgetInstance.alias}`){if(this.notificationShown)this.hideNotificationPopup();this.show();}else if(e.data===`olvy-close-notification-popup-${this.widgetInstance.alias}`){if(this.notificationShown)this.hideNotificationPopup();}else if(e.data===`olvy-loaded-${this.widgetInstance.alias}`){window.frames[`olvy-feeback-notify-popup-${this.widgetInstance.alias}`].postMessage({key:`olvy-setNotificationInfo`,value:this.notificationInfo,},"*");}});};this.setupNotificationPopupForBuilder=()=>{this.setupNotificationPopup(true);this.showNotificationPopup();this.hide();};this.fetchNotificationCount=async(userEmail)=>{var myHeaders=new Headers();myHeaders.append("Content-Type","application/json");var requestOptions={method:"GET",headers:myHeaders,};var lastReplyOpenedTime=localStorage.getItem(`olvy-reply-lastOpened-${this.olvyInstance.getAlias()}`)?localStorage.getItem(`olvy-reply-lastOpened-${this.olvyInstance.getAlias()}`).replaceAll('"',""):"null";var params=new URLSearchParams({org_id:this.olvyInstance.organisationId,contact_email:userEmail,compare_time:lastReplyOpenedTime,});await fetch(`${this.olvyInstance.API_URL}/widget_reply_count?`+params,requestOptions).then((response)=>{return response.json();}).then((result)=>{if(result?.status==="success"){this.notificationInfo=result;}else{console.warn("[Olvy] - ",result.error||result.errors[0]);}}).catch((error)=>console.warn("[Olvy] - Error fetching feedback reply",error));};this.showNotificationPopup=()=>{document.getElementById(`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`).classList.add("olvy-notify-popup-visible");const bodyElement=document.querySelector(`body`);bodyElement.classList.add("olvy-simple-feedback-open");document.getElementById(`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`).classList.add(this.widgetInstance?.appearance?.widgetPosition+"-animation");this.notificationShown=true;};this.hideNotificationPopup=()=>{document.getElementById(`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`).classList.remove("olvy-notify-popup-visible");const bodyElement=document.querySelector(`body`);if(bodyElement){bodyElement.classList.remove("olvy-simple-feedback-open");}
+this.notificationShown=false;};this.teardown=()=>{this.removeCSS();if(document.querySelector(`#${`olvy-simple-feedback-${this.widgetInstance.alias}`}`)){document.querySelector(this.widgetInstance?.config?.appendTo).removeChild(document.querySelector(`#${`olvy-simple-feedback-${this.widgetInstance.alias}`}`));}
+if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.removeEventListener("click",this.handleTargetClick);}}
+window.removeEventListener("message",(e)=>{if(e.data===this.widgetInstance.eventKeys.close){this.widgetInstance.hide();}else if(e.data===this.widgetInstance.eventKeys.loaded){this.widgetInstance.contentLoaded=true;}},false);this.widgetInstance.setElement(null);if(this.notificationPollingInterval!=null)
+clearInterval(this.notificationPollingInterval);};this.show=()=>{if(!this.widgetInstance.elementRef){this.setup(true);}
+this.widgetInstance.elementRef.classList.add("visible");const bodyElement=document.querySelector(`body`);bodyElement.classList.add("olvy-simple-feedback-open");document.getElementById(`olvy-frame-container-${this.widgetInstance.alias}`).classList.add(this.widgetInstance?.appearance?.widgetPosition+"-animation");this.widgetInstance.visible=true;this.feedbackWidgetShown=true;if(this.notificationShown)this.hideNotificationPopup();};this.hide=()=>{if(this.widgetInstance.elementRef){this.widgetInstance.elementRef.classList.remove("visible");}
+const bodyElement=document.querySelector(`body`);if(bodyElement){bodyElement.classList.remove("olvy-simple-feedback-open");}
+this.widgetInstance.visible=false;this.feedbackWidgetShown=false;};this.setSnoozeTimestamp=()=>{if(this.widgetInstance.config&&this.widgetInstance.config?.autoShowSnoozeEnabled&&this.widgetInstance.config?.snoozeValues){const days=this.widgetInstance?.config?.snoozeValues?.days||0;const hrs=this.widgetInstance?.config?.snoozeValues?.hours||0;const currentTime=new Date();let finalTime=new Date(currentTime);finalTime.setDate(currentTime.getDate()+parseInt(days));finalTime.setHours(currentTime.getHours()+parseInt(hrs));window.localStorage.setItem(`olvy-feedback-${this.olvyInstance.getAlias()}-snooze`,finalTime.toISOString());}};this.reduceWidgetHeightForOlvyBranding=()=>{const ele=document.getElementById(`olvy-frame-container-${this.widgetInstance.alias}`);ele.style.maxHeight=this.widgetInstance?.config?.repliesEnabled?"575px":"525px";};this.insertCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}
+const styleEl=document.createElement("style");styleEl.id=`olvy-css-${this.widgetInstance.alias}`;CSSElement=styleEl;CSSElement.innerHTML=`
+        ${this.widgetInstance?.config?.targetElement} {
+          position: relative;
+        }
+
+        .olvy-simple-feedback {
+          display: none;
+          transition: display 0.5s ease-in-out;
+        }
+
+        .olvy-simple-feedback-open {
+          overflow: hidden !important;
+        }
+
+        .olvy-simple-feedback-overlay {
+          width: 100%;
+          height: 100%;
+          background-color: ${
+this.widgetInstance.appearance&&this.widgetInstance?.appearance?.showOverlay?"#000000bf":"transparent"
+};
+          z-index: 2000000;
+        }
+
+        .olvy-simple-feedback.visible {
+          display: block;
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          z-index: 2000000;
+        }
+
+        .olvy-simple-feedback.visible.top-right .olvy-frame-container {
+          right: 1rem;
+          top: 1rem;
+        }
+
+        .olvy-simple-feedback.visible.top-left .olvy-frame-container {
+          left: 1rem;
+          top: 1rem;
+        }
+
+        .olvy-simple-feedback.visible.bottom-left .olvy-frame-container {
+          left: 1rem;
+          bottom: 1rem;
+        }
+        .olvy-simple-feedback.visible.bottom-right .olvy-frame-container {
+          right: 1rem;
+          bottom: 1rem;
+        }
+        .olvy-simple-feedback.visible.center .olvy-frame-container {
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: auto;
+        }
+        .olvy-simple-feedback.center .olvy-frame-container {
+          max-height: ${
+this.widgetInstance?.config?.repliesEnabled?"600px":"535px"
+};
+          margin: 0px auto;
+          max-width: 360px;
+        }
+
+        .olvy-frame-simple-feedback .olvy-frame {
+          height: 100%;
+          width: 100%;
+          max-height: ${
+this.widgetInstance?.config?.repliesEnabled?"600px":"555px"
+};
+          max-width: 360px;
+          border-radius: 8px;
+          overflow: hidden;
+          border: none;
+          box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .olvy-frame-notify-popup .olvy-frame {
+          height: 100%;
+          width: 100%;
+          max-height: 130px;
+          max-width: 400px;
+          border-radius: 8px;
+          overflow: hidden;
+          border: none;
+        }
+
+        .olvy-frame-notify-popup {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          z-index: 2000002;
+          max-height: 130px;
+          max-width: 400px;
+          border-radius: 8px;     
+        }
+
+        .olvy-notify-popup-visible {
+          display: block !important;
+          position: absolute;
+          right: 1rem;
+          bottom: 1rem;
+          z-index: 2000000;
+          height: 130px;
+          width: 400px;
+          border: 1px solid #CBD5E1;
+          box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .olvy-frame-container.olvy-frame-simple-feedback {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          z-index: 2000002;
+          max-height: ${
+this.widgetInstance?.config?.repliesEnabled?"600px":"555px"
+};
+          max-width: 360px;
+          border-radius: 8px;
+        }
+
+        .bottom-right-animation {
+          animation-name: rightSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .bottom-left-animation {
+          animation-name: leftSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .top-left-animation {
+          animation-name: leftSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .top-right-animation {
+          animation-name: rightSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .center-animation {
+          animation-name: bounce;
+          animation-duration: 0.3s;
+          transition-timing-function: ease;
+        }
+              
+        @keyframes rightSlide {
+            0% {
+              right: -450px;
+            }
+            100% {
+              right: 1rem;
+            }
+        }
+
+        @keyframes leftSlide {
+          0% {
+            left: -450px;
+          }
+          100% { 
+            left: 1rem; 
+          }
+        }
+  
+        @keyframes bounce {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translate3d(0,0,0);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translate3d(0,0,0);
+          }
+        }
+
+        @media only screen and (max-width: 600px) {
+          .olvy-frame-notify-popup{
+            display: none !important;
+          }
+        }
+        
+        @media only screen and (max-width: 480px) {
+          .olvy-frame-container.olvy-frame-simple-feedback{
+            bottom: 1rem !important;
+            top: auto !important;
+            left: 0 !important;
+            right: 0 !important;
+            margin: auto !important;
+          }
+        }
+
+      `;document.querySelector("head").appendChild(CSSElement);};this.removeCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}};}
+function OlvyFeedbackRatingWidget(widgetInstance){this.widgetInstance=widgetInstance;this.olvyInstance=widgetInstance.olvyInstance;this.notificationPollingInterval=null;this.notificationInfo={};this.prevNotificationInfo={};this.feedbackWidgetShown=false;this.notificationShown=false;this.notificationPollingTimeout=10000;this.showOlvyBranding=true;this.handleTargetClick=(e)=>{e.preventDefault();e.stopPropagation();this.widgetInstance.show();};this.init=()=>{};this.setup=()=>{const widgetElement=document.createElement("div");widgetElement.id=`olvy-rating-feedback-${this.widgetInstance.alias}`;widgetElement.classList.add("olvy-rating-feedback");widgetElement.classList.add(this.widgetInstance?.appearance?.widgetPosition);widgetElement.innerHTML=`
+          <div class="olvy-rating-feedback-overlay" id="${`olvy-rating-feedback-overlay-${this.widgetInstance.alias}`}"></div>
+      <div class="olvy-frame-container olvy-frame-rating-feedback" id="${`olvy-frame-container-${this.widgetInstance.alias}`}">
+      <iframe class="olvy-frame" name="olvy-frame-${
+this.widgetInstance.alias
+}"  id="olvy-frame-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed/feedback/rating?alias=${this.olvyInstance.getAlias()}&widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}"></iframe>
+        </div>
+      `;this.widgetInstance.setElement(widgetElement);document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(widgetElement);this.insertCSS();this.setupEventListeners();this.setupReplies();this.autoShowWidget();};this.autoShowWidget=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.autoShowWidget){if(this.widgetInstance.config.autoShowSnoozeEnabled){let snoozeTS=window.localStorage.getItem(`olvy-rating-${this.olvyInstance.getAlias()}-snooze`);if(snoozeTS){const currentTS=new Date().getTime();snoozeTS=new Date(snoozeTS).getTime();if(currentTS>=snoozeTS)this.show();}else this.show();}else this.show();}};this.setupReplies=()=>{if(this.widgetInstance.config&&this.widgetInstance.config.repliesEnabled&&!isNotificationPopupSetup){this.setupNotificationPolling();}};this.setupEventListeners=()=>{document.addEventListener("click",(e)=>{if(e.target.id===`olvy-rating-feedback-overlay-${this.widgetInstance.alias}`||e.target.id===`olvy-frame-container-${this.widgetInstance.alias}`){e.preventDefault();e.stopPropagation();this.widgetInstance.hide();}});document.addEventListener("keydown",(e)=>{if(e.keyCode==27){this.widgetInstance.hide();}});if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.addEventListener("click",this.handleTargetClick);}}
+this.insertCSS(this.widgetInstance);window.addEventListener("message",(e)=>{if(e.data===`olvy-show-with-replies-${this.widgetInstance.alias}`){}else if(e.data===`olvy-show-expanded-${this.widgetInstance.alias}`){if(!this.showOlvyBranding&&!this.widgetInstance?.config?.repliesEnabled){document.getElementById(`${`olvy-frame-container-${this.widgetInstance.alias}`}`).classList.add("translateContainerHeightUpWithoutOlvyBranding");}else{document.getElementById(`${`olvy-frame-container-${this.widgetInstance.alias}`}`).classList.add("translateContainerHeightUp");}
+document.getElementById(`${`olvy-frame-${this.widgetInstance.alias}`}`).classList.add("translateFrameMaxHeightUp");}else if(e.data===`olvy-hide-expanded-${this.widgetInstance.alias}`){if(document.getElementById(`${`olvy-frame-container-${this.widgetInstance.alias}`}`).classList.contains("translateContainerHeightUp")||document.getElementById(`${`olvy-frame-${this.widgetInstance.alias}`}`).classList.contains("translateFrameMaxHeightUp")||document.getElementById(`${`olvy-frame-${this.widgetInstance.alias}`}`).classList.contains("translateContainerHeightUpWithoutOlvyBranding")){document.getElementById(`${`olvy-frame-container-${this.widgetInstance.alias}`}`).classList.remove("translateContainerHeightUp");document.getElementById(`${`olvy-frame-${this.widgetInstance.alias}`}`).classList.remove("translateFrameMaxHeightUp");document.getElementById(`${`olvy-frame-container-${this.widgetInstance.alias}`}`).classList.remove("translateContainerHeightUpWithoutOlvyBranding");}}});};this.setupNotificationPolling=async()=>{const userInLocalStorage=window.localStorage.getItem(`olvy-user-${this.olvyInstance.getAlias()}`);let userObject={};if(userInLocalStorage){userObject=JSON.parse(userInLocalStorage);}
+if(this.olvyInstance?.organisationId&&userObject?.email){if(this.widgetInstance.config&&this.widgetInstance.config.replyNotifications){this.setupNotificationPopup();isNotificationPopupSetup=true;}
+await this.processNotificationCount(userObject);this.notificationPollingInterval=setInterval(async()=>{await this.processNotificationCount(userObject);},this.notificationPollingTimeout);}};this.refreshRepliesCount=async()=>{const userInLocalStorage=window.localStorage.getItem(`olvy-user-${this.olvyInstance.getAlias()}`);let userObject={};if(userInLocalStorage){userObject=JSON.parse(userInLocalStorage);}
+if(this.olvyInstance?.organisationId&&userObject?.email){await this.processNotificationCount(userObject);}};this.processNotificationCount=async(userObject)=>{await this.fetchNotificationCount(userObject?.email);if(this.feedbackWidgetShown===false&&this.notificationInfo?.newReplyCount>0&&this.notificationInfo?.newReplyCount!==this.prevNotificationInfo?.newReplyCount&&this.notificationInfo?.latestReplyText!==this.prevNotificationInfo?.latestReplyText){this.prevNotificationInfo=this.notificationInfo;this.showNotificationPopup();window.frames[`olvy-feeback-notify-popup-${this.widgetInstance.alias}`].postMessage({key:`olvy-setNotificationInfo`,value:this.notificationInfo,},"*");}
+window.frames[`olvy-frame-${this.widgetInstance.alias}`].postMessage({key:`olvy-setNotificationInfo`,value:this.notificationInfo,},"*");isNotificationPopupSetup=true;};this.setupNotificationPopup=(isBuilder=false)=>{const element=document.createElement("div");element.id=`olvy-feeback-notify-popup-${this.widgetInstance.alias}`;element.innerHTML=`
+        <div data-test="feeback-notify-popup" class="olvy-frame-notify-popup" id="${`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`}">
+      <iframe data-test="feeback-notify-popup-iframe" class="olvy-frame" name="olvy-feeback-notify-popup-${
+this.widgetInstance.alias
+}" src="https://${this.olvyInstance.getAlias()}.olvy.co/embed/notification?alias=${this.olvyInstance.getAlias()}&widget=${encodeURIComponent(JSON.stringify(this.widgetInstance.widgetObject))}&workspaceAlias=${this.olvyInstance.getAlias()}&logo=${
+this.widgetInstance.organisationLogo
+}&builder=${isBuilder}"></iframe>
+        </div>
+      `;document.querySelector(this.widgetInstance?.config?.appendTo).appendChild(element);window.addEventListener("message",(e)=>{if(e.data===`olvy-open-feedback-widget-${this.widgetInstance.alias}`){if(this.notificationShown)this.hideNotificationPopup();this.show();}else if(e.data===`olvy-close-notification-popup-${this.widgetInstance.alias}`){if(this.notificationShown)this.hideNotificationPopup();}else if(e.data===`olvy-loaded-${this.widgetInstance.alias}`){window.frames[`olvy-feeback-notify-popup-${this.widgetInstance.alias}`].postMessage({key:`olvy-setNotificationInfo`,value:this.notificationInfo,},"*");}});};this.setupNotificationPopupForBuilder=()=>{this.setupNotificationPopup(true);this.showNotificationPopup();this.hide();};this.fetchNotificationCount=async(userEmail)=>{var myHeaders=new Headers();myHeaders.append("Content-Type","application/json");var requestOptions={method:"GET",headers:myHeaders,};var lastReplyOpenedTime=localStorage.getItem(`olvy-reply-lastOpened-${this.olvyInstance.getAlias()}`)?localStorage.getItem(`olvy-reply-lastOpened-${this.olvyInstance.getAlias()}`).replaceAll('"',""):"null";var params=new URLSearchParams({org_id:this.olvyInstance.organisationId,contact_email:userEmail,compare_time:lastReplyOpenedTime,});await fetch(`${this.olvyInstance.API_URL}/widget_reply_count?`+params,requestOptions).then((response)=>{return response.json();}).then((result)=>{if(result?.status==="success"){this.notificationInfo=result;}else{console.warn("[Olvy] - ",result.error||result.errors[0]);}}).catch((error)=>console.warn("[Olvy] - Error fetching feedback reply",error));};this.showNotificationPopup=()=>{document.getElementById(`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`).classList.add("olvy-notify-popup-visible");const bodyElement=document.querySelector(`body`);bodyElement.classList.add("olvy-rating-feedback-open");document.getElementById(`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`).classList.add(this.widgetInstance?.appearance?.widgetPosition+"-animation");this.notificationShown=true;};this.hideNotificationPopup=()=>{document.getElementById(`olvy-feeback-notify-popup-container-${this.widgetInstance.alias}`).classList.remove("olvy-notify-popup-visible");const bodyElement=document.querySelector(`body`);if(bodyElement){bodyElement.classList.remove("olvy-rating-feedback-open");}
+this.notificationShown=false;};this.teardown=()=>{this.removeCSS();if(document.querySelector(`#${`olvy-rating-feedback-${this.widgetInstance.alias}`}`)){document.querySelector(this.widgetInstance?.config?.appendTo).removeChild(document.querySelector(`#${`olvy-rating-feedback-${this.widgetInstance.alias}`}`));}
+if(this.widgetInstance.config&&this.widgetInstance.config.targetElement){const targetElement=document.querySelector(this.widgetInstance.config.targetElement);if(targetElement){targetElement.removeEventListener("click",this.handleTargetClick);}}
+window.removeEventListener("message",(e)=>{if(e.data===this.widgetInstance.eventKeys.close){this.widgetInstance.hide();}else if(e.data===this.widgetInstance.eventKeys.loaded){this.widgetInstance.contentLoaded=true;}},false);this.widgetInstance.setElement(null);if(this.notificationPollingInterval!=null)
+clearInterval(this.notificationPollingInterval);};this.show=()=>{if(!this.widgetInstance.elementRef){this.setup(this.widgetInstance);}
+this.widgetInstance.elementRef.classList.add("visible");const bodyElement=document.querySelector(`body`);bodyElement.classList.add("olvy-rating-feedback-open");document.getElementById(`olvy-frame-container-${this.widgetInstance.alias}`).classList.add(this.widgetInstance?.appearance?.widgetPosition+"-animation");this.widgetInstance.visible=true;this.feedbackWidgetShown=true;if(this.notificationShown)this.hideNotificationPopup();};this.hide=()=>{if(this.widgetInstance.elementRef){this.widgetInstance.elementRef.classList.remove("visible");}
+const bodyElement=document.querySelector(`body`);if(bodyElement){bodyElement.classList.remove("olvy-rating-feedback-open");}
+this.widgetInstance.visible=false;this.feedbackWidgetShown=false;};this.setSnoozeTimestamp=()=>{if(this.widgetInstance.config&&this.widgetInstance.config?.autoShowSnoozeEnabled&&this.widgetInstance.config?.snoozeValues){const days=this.widgetInstance.config.snoozeValues?.days||0;const hrs=this.widgetInstance.config.snoozeValues?.hours||0;const currentTime=new Date();let finalTime=new Date(currentTime);finalTime.setDate(currentTime.getDate()+parseInt(days));finalTime.setHours(currentTime.getHours()+parseInt(hrs));window.localStorage.setItem(`olvy-rating-${this.olvyInstance.getAlias()}-snooze`,finalTime.toISOString());}};this.reduceWidgetHeightForOlvyBranding=()=>{const ele=document.getElementById(`olvy-frame-container-${this.widgetInstance.alias}`);this.showOlvyBranding=false;ele.style.maxHeight=!this.widgetInstance?.config?.repliesEnabled?"300px":"351px";};this.insertCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}
+const styleEl=document.createElement("style");styleEl.id=`olvy-css-${this.widgetInstance.alias}`;CSSElement=styleEl;CSSElement.innerHTML=`
+        ${this.widgetInstance?.config?.targetElement} {
+          position: relative;
+        }
+
+        .olvy-rating-feedback {
+          display: none;
+          transition: display 0.5s ease-in-out;
+        }
+
+        .olvy-rating-feedback-open {
+          overflow: hidden !important;
+        }
+
+        .olvy-rating-feedback-overlay {
+          width: 100%;
+          height: 100%;
+          background-color: ${
+this.widgetInstance.appearance&&this.widgetInstance?.appearance?.showOverlay?"#000000bf":"transparent"
+};
+          z-index: 2000000;
+        }
+
+        .olvy-rating-feedback.visible {
+          display: block;
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          z-index: 2000000;
+        }
+
+        .olvy-rating-feedback.visible.top-right .olvy-frame-container {
+          right: 1rem;
+          top: 1rem;
+        }
+
+        .olvy-rating-feedback.visible.top-left .olvy-frame-container {
+          left: 1rem;
+          top: 1rem;
+        }
+
+        .olvy-rating-feedback.visible.bottom-left .olvy-frame-container {
+          left: 1rem;
+          bottom: 1rem;
+        }
+        .olvy-rating-feedback.visible.bottom-right .olvy-frame-container {
+          right: 1rem;
+          bottom: 1rem;
+        }
+        .olvy-rating-feedback.visible.center .olvy-frame-container {
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          height: 100%;
+          width: 100%;
+          max-height: 100%;
+          max-width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: auto;
+        }
+        .olvy-rating-feedback.center .olvy-frame-container {
+          max-height: ${
+!this.widgetInstance?.config?.repliesEnabled?"322px":"376px"
+};
+          margin: 0px auto;
+          max-width: 360px;
+        }
+
+
+        .olvy-frame-rating-feedback .olvy-frame {
+          height: 100%;
+          width: 100%;
+          max-height: ${
+!this.widgetInstance?.config?.repliesEnabled?"322px":"376px"
+};
+          max-width: 360px;
+          border-radius: 8px;
+          overflow: hidden;
+          border: none;
+          box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        
+        .olvy-frame-notify-popup .olvy-frame {
+          height: 100%;
+          width: 100%;
+          max-height: 130px;
+          max-width: 400px;
+          border-radius: 8px;
+          overflow: hidden;
+          border: none;
+        }
+
+        .olvy-frame-notify-popup {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          z-index: 2000002;
+          max-height: 130px;
+          max-width: 400px;
+          border-radius: 8px;     
+        }
+
+        .olvy-notify-popup-visible {
+          display: block !important;
+          position: absolute;
+          right: 1rem;
+          bottom: 1rem;
+          z-index: 2000000;
+          height: 130px;
+          width: 400px;
+          border: 1px solid #CBD5E1;
+          box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .olvy-frame-container.olvy-frame-rating-feedback {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          z-index: 2000002;
+          max-height: ${
+!this.widgetInstance?.config?.repliesEnabled?"322px":"376px"
+};
+          max-width: 360px;
+          border-radius: 8px;
+        }
+
+        .translateContainerHeightUp {
+          max-height: 640px !important;
+          animation: 250ms ease translateUp forwards;
+        }
+
+        .translateContainerHeightUpWithoutOlvyBranding {
+          max-height: 600px !important;
+          animation: 250ms ease translateUp forwards;
+        }
+
+        .translateFrameMaxHeightUp {
+          animation: 250ms ease translateMaxHeightUp forwards;
+        }
+
+        .bottom-right-animation {
+          animation-name: rightSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .bottom-left-animation {
+          animation-name: leftSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .top-left-animation {
+          animation-name: leftSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .top-right-animation {
+          animation-name: rightSlide;
+          animation-duration: 0.2s;
+          transition-timing-function: ease;
+        }
+
+        .center-animation {
+          animation-name: bounce;
+          animation-duration: 0.3s;
+          transition-timing-function: ease;
+        }
+              
+        @keyframes rightSlide {
+            0% {
+              right: -450px;
+            }
+            100% {
+              right: 1rem;
+            }
+        }
+
+        @keyframes leftSlide {
+          0% {
+            left: -450px;
+          }
+          100% { 
+            left: 1rem; 
+          }
+        }
+  
+        @keyframes bounce {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translate3d(0,0,0);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translate3d(0,0,0);
+          }
+        }
+
+        @keyframes translateUp {
+          0% {
+            height: 322px;
+          }
+          100% {
+            height: 640px;
+          }
+        }
+
+        @keyframes translateMaxHeightUp {
+          0% {
+            max-height: 322px;
+          }
+          100% {
+            max-height: 640px;
+          }
+        }
+
+        @media only screen and (max-width: 600px) {
+          .olvy-frame-notify-popup{
+            display: none !important;
+          }
+        }
+        
+        @media only screen and (max-width: 480px) {
+          .olvy-frame-container.olvy-frame-rating-feedback{
+            bottom: 1rem !important;
+            top: auto !important;
+            left: 0 !important;
+            right: 0 !important;
+            margin: auto !important;
+          }
+        }
+      `;document.querySelector("head").appendChild(CSSElement);};this.removeCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-${this.widgetInstance.alias}`);if(CSSElement){CSSElement.remove();}};}
+function OlvyWidget(olvyInstance,settings,logo){settings=__deepMerge({},DEFAULT_WIDGET_CONFIG,settings);this.olvyInstance=olvyInstance;this.id=settings.id;this.name=settings.name;this.description=settings.description;this.alias=settings.alias;this.type=settings.type;this.subType=settings.subType;this.targeting=settings.targeting;this.appearance=settings.appearance;this.content=settings.content;this.config=settings.config;this.widgetObject=settings;this.organisationLogo=logo;this.userObject=null;this.feedbackMetaInfo=null;this.widgetTypeInstance=null;this.contentLoaded=false;this.elementRef=null;this.visible=false;this.eventKeys={close:`olvy-close-${this.alias}`,loaded:`olvy-loaded-${this.alias}`,downloadLink:`olvy-download-link-${this.alias}-`,download:`olvy-feedback-widget-download-link-${this.alias}`,refreshReplyCount:`olvy-refresh-reply-${this.alias}`,setNotificationPolling:`olvy-set-replies-polling-${this.alias}`,setItemToLocalStorage:`olvy-setItemLC-${this.alias}`,getItemFromLocalStorage:`olvy-getItemLC-${this.alias}`,reduceWidgetHeightForBranding:`olvy-reduce-branding-widget-height-${this.alias}`,setSnoozeTimestamp:`olvy-set-snooze-${this.alias}`,};this.previewFeedbackNotificationPopup=()=>{if(this.widgetTypeInstance&&this.widgetTypeInstance.setupNotificationPopupForBuilder)
+this.widgetTypeInstance.setupNotificationPopupForBuilder();};this.teardownPreviewFeedbackNotificationPopup=()=>{if(this.widgetTypeInstance&&this.widgetTypeInstance.hideNotificationPopup){this.widgetTypeInstance.hideNotificationPopup();this.widgetTypeInstance.teardown();}};this.setElement=(elementRef)=>{this.elementRef=elementRef;};this.getOrganisationLogo=()=>{return this.organisationLogo;};this.setWidgetTypeInstance=()=>{if(this.type===OLVY_WIDGET_TYPE_RELEASES){if(this.subType===OLVY_WIDGET_RELEASES_SUB_TYPE_MODAL){this.widgetTypeInstance=new OlvyReleasesModalWidget(this);}
+if(this.subType===OLVY_WIDGET_RELEASES_SUB_TYPE_SIDEBAR){this.widgetTypeInstance=new OlvyReleasesSidebarWidget(this);}
+if(this.subType===OLVY_WIDGET_RELEASES_SUB_TYPE_EMBED){this.widgetTypeInstance=new OlvyReleasesEmbedWidget(this);}
+if(this.subType===OLVY_WIDGET_RELEASES_SUB_TYPE_POPUP){this.widgetTypeInstance=new OlvyReleasesPopupWidget(this);}}else if(this.type===OLVY_WIDGET_TYPE_FEEDBACK){if(this.subType===OLVY_WIDGET_FEEDBACK_SUB_TYPE_SIMPLE)
+this.widgetTypeInstance=new OlvyFeedbackSimpleWidget(this);if(this.subType===OLVY_WIDGET_FEEDBACK_SUB_TYPE_RATING)
+this.widgetTypeInstance=new OlvyFeedbackRatingWidget(this);}};this.setWidgetTypeInstance();this.init=()=>{if(this.widgetTypeInstance){this.widgetTypeInstance.init();}
+window.addEventListener("message",(e)=>{if(e.data===this.eventKeys.close){this.hide();}else if(e.data===this.eventKeys.loaded){this.contentLoaded=true;if(window.frames[`olvy-frame-${this.alias}`]){this.userObject=JSON.parse(localStorage.getItem("olvy-user-"+this.olvyInstance.workspaceAlias));if(this.userObject){window.frames[`olvy-frame-${this.alias}`].postMessage({key:`olvy-setUser`,value:this.userObject,},"*");}
+if(this.feedbackMetaInfo){window.frames[`olvy-frame-${this.alias}`].postMessage({key:`olvy-setFeedbackMetaInfo`,value:this.feedbackMetaInfo,},"*");}
+window.frames[`olvy-frame-${this.alias}`].postMessage({key:`olvy-setPageInfo`,value:{url:window.location.toString(),title:document.title,},},"*");}}else if(e.data.key===this.eventKeys.refreshReplyCount){if(this.widgetTypeInstance&&this.widgetTypeInstance.refreshRepliesCount){this.widgetTypeInstance.refreshRepliesCount();}}else if(e.data.key===this.eventKeys.setNotificationPolling){if(this.widgetTypeInstance&&this.widgetTypeInstance.setupReplies){this.widgetTypeInstance.setupReplies();}}else if(e.data.key===this.eventKeys.download){if(e.data.value){_triggerFileDownload(e.data.value?.link,e.data.value?.name);}}else if(e.data.key===this.eventKeys.setItemToLocalStorage){if(e.data.value){localStorage.setItem(e.data.value?.keyName,e.data.value?.value);}}else if(e.data.key===this.eventKeys.getItemFromLocalStorage){if(e.data.value){const value=JSON.parse(localStorage.getItem(e.data.value.keyName));if(value){window.frames[`olvy-frame-${this.alias}`].postMessage({key:`olvy-localStorage-value`,value:{keyName:e.data.value.keyName,value:value,},},"*");}}}else if(e.data.key===this.eventKeys.reduceWidgetHeightForBranding){if(this.widgetTypeInstance&&this.widgetTypeInstance.reduceWidgetHeightForOlvyBranding){this.widgetTypeInstance.reduceWidgetHeightForOlvyBranding();}}else if(e.data.key===this.eventKeys.setSnoozeTimestamp){if(this.widgetTypeInstance&&this.widgetTypeInstance.setSnoozeTimestamp){this.widgetTypeInstance.setSnoozeTimestamp();}}},false);};this.setup=()=>{if(this.widgetTypeInstance){if(this.config&&this.config.targetElement&&!document.querySelector(this.config.targetElement)){__waitForElement(this.config.targetElement).then(()=>{this.widgetTypeInstance.setup();}).catch(()=>{console.warn("[Olvy] - couldn't setup the target element. Does it exist in the DOM?");});}else{this.widgetTypeInstance.setup();}}};this.show=()=>{if(this.widgetTypeInstance){this.widgetTypeInstance.show();this.olvyInstance.registerEvent("widget_open",this.id,this.olvyInstance.organisationId,null,null);}};this.hide=()=>{if(this.widgetTypeInstance&&this.olvyInstance.options.preventClose!==true){this.widgetTypeInstance.hide();}};this.teardown=()=>{if(this.widgetTypeInstance){this.widgetTypeInstance.teardown();}
+if(this.pathChangeListener){__removePathChangeListener(this.pathChangeListener);}};this.isEnabled=()=>{return true;};this.setupEventListeners=()=>{if(this.widgetTypeInstance&&this.widgetTypeInstance.setupEventListeners){this.widgetTypeInstance.setupEventListeners();}};this.teardownEventListeners=()=>{if(this.widgetTypeInstance&&this.widgetTypeInstance.teardownEventListeners){this.widgetTypeInstance.teardownEventListeners();}};this.refresh=()=>{this.teardown();new Olvy((window.OlvyConfig||OlvyConfig).workspaceAlias);};this.refreshUnreadCount=async()=>{const lastOpened=window.localStorage.getItem(`olvy-${this.olvyInstance.getAlias()}-lastOpened`);if(lastOpened){const unreadReleases=await this.getUnreadReleasesCount(lastOpened);if(unreadReleases>0&&!this.appearance.autoShowWidget){this.addUnreadIndicatorElement(unreadReleases);}}else{this.addUnreadIndicatorElement(1);}};this.getUnreadReleasesCount=(timestamp)=>{return this.olvyInstance.unreadReleasesCount;};this.addUnreadIndicatorElement=(count)=>{this.removeUnreadIndicatorElement();const throbber=document.createElement("div");throbber.classList.add("olvy-unread-indicator",`olvy-widget-${this.alias}`,this.appearance.unreadIndicatorPosition);if(count!==undefined){throbber.innerText=count>9?9:count;}
+if(document.querySelector(this.config.targetElement)){document.querySelector(this.config.targetElement).appendChild(throbber);}};this.removeUnreadIndicatorElement=()=>{if(document.querySelector(this.config.targetElement)&&document.querySelector(this.config.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.alias}`)){document.querySelector(this.config.targetElement).removeChild(document.querySelector(this.config.targetElement).querySelector(`.olvy-unread-indicator.olvy-widget-${this.alias}`));}};this.setUser=(userObject)=>{if(window.frames[`olvy-frame-${this.alias}`]&&this.contentLoaded){window.frames[`olvy-frame-${this.alias}`].postMessage({key:`olvy-setUser`,value:userObject,},"*");}else{this.userObject=userObject;}
+this.olvyInstance.registerEvent("set_user",this.id,this.olvyInstance.organisationId,null,userObject);};this.setFeedbackMetaInfo=(metaInfo)=>{if(window.frames[`olvy-frame-${this.alias}`]&&this.contentLoaded){window.frames[`olvy-frame-${this.alias}`].postMessage({key:`olvy-setFeedbackMetaInfo`,value:metaInfo,},"*");}else{this.feedbackMetaInfo=metaInfo;}};const widgetIndex=this.olvyInstance.widgets.findIndex((w)=>w.id===this.id);this.pathChangeListener=__addPathChangeListener(()=>{if(this.elementRef&&document.contains(this.elementRef)){this.teardownEventListeners();this.setupEventListeners();}else{this.setup();}});this.updateConfig=(config,type="widget")=>{if(this.widgetTypeInstance){const clonedConfig=JSON.parse(JSON.stringify(config));const frameName=type==="notification"?`olvy-feeback-notify-popup-${this.alias}`:`olvy-frame-${this.alias}`;window.frames[frameName].postMessage({key:`olvy-update-widget-config`,value:clonedConfig,},"*");}};}
+function Olvy(workspaceAlias,options={fetchWidgets:true,preventClose:false,user:null,feedbackMetaInfo:null,}){this.workspaceAlias=workspaceAlias;this.widgets=[];this.API_URL="https://app.olvy.co/api/v2";this.unreadReleasesCount=0;this.options=options;this.organisationId=null;this.userObject=options.user;this.feedbackMetaInfo=options.feedbackMetaInfo;this.widgetYetToLoad=[];this.getAlias=()=>{return this.workspaceAlias;};this.getLastOpenedTimestamp=()=>{try{const lastOpened=window.localStorage.getItem(`olvy-${this.workspaceAlias}-lastOpened`);return lastOpened;}catch(e){return "";}};this.afterWidgetsFetched=()=>{if(this.userObject){this.widgets.forEach((wdgt)=>{wdgt.setUser(this.userObject);});}
+if(this.feedbackMetaInfo){this.widgets.forEach((wdgt)=>{wdgt.setFeedbackMetaInfo(this.feedbackMetaInfo);});}
+if(this.organisationId){this.registerEvent("script_load",null,this.organisationId,null,null);}};if(options.fetchWidgets===undefined||options.fetchWidgets){var myHeaders=new Headers();myHeaders.append("Content-Type","application/json");var graphql=JSON.stringify({operationName:"GetOrganisationWidgets",query:"query GetOrganisationWidgets ($workspaceAlias: String! $timestamp: String){ organisation(id: $workspaceAlias){ id logo liveWidgets{ id alias type subType targeting{ device{ key operator value } page{ key operator value } user{ key operator value } } content appearance config } publishedReleasesSince(timestamp: $timestamp) } }",variables:{workspaceAlias:workspaceAlias,timestamp:this.getLastOpenedTimestamp()||null,},});var requestOptions={method:"POST",headers:myHeaders,body:graphql,redirect:"follow",};fetch(`${this.API_URL}/graphql`,requestOptions).then((response)=>{return response.json();}).then((result)=>{if(!result.error&&!result.errors?.length){if(result.data.organisation){this.unreadReleasesCount=result.data.organisation.publishedReleasesSince;const logo=result?.data?.organisation?.logo;this.organisationId=result.data.organisation.id;(result.data.organisation.liveWidgets||[]).forEach((wSettings)=>{const widget=new OlvyWidget(this,wSettings,logo);this.widgets.push(widget);widget.init();});__onPageReady(()=>{this.widgets.forEach((widget)=>{if(widget.isEnabled()){const targetID=widget?.config?.targetElement?widget.config.targetElement.slice(1,widget.config.targetElement.length):"";if(document.getElementById(targetID)!=null)widget.setup();else this.widgetYetToLoad.push(widget?.config?.targetElement);}});if(this.widgetYetToLoad.length>0){_triggerOnIdle(()=>{this.widgets.forEach((widget)=>{if(this.widgetYetToLoad.indexOf(widget?.config?.targetElement)>-1){widget.setup();}});});}});this.afterWidgetsFetched();}else{console.warn("[Olvy] - couldn't get organisation data.");}}else{console.warn("[Olvy] - ",result.error||result.errors[0]);}}).catch((error)=>console.warn("[Olvy] - Error fetching your widgets",error));}
+this.teardown=()=>{this.widgets.forEach((widget)=>{widget.teardown();});};this.registerEvent=(eventType,value,organisationId,userId,meta)=>{if(["localhost","127.0.0.1","","::1"].includes(window.location.hostname)||window.location.hostname.startsWith("192.168.")||window.location.hostname.startsWith("10.0.")||window.location.hostname.endsWith(".local")){console.warn("[Olvy] - not registering script events on localhost");}
+if(eventType=="script_load"&&window!==undefined){try{const timestamp=window.localStorage.getItem(`olvy-script-load-${this.workspaceAlias}`);if(timestamp){const lastTimestamp=new Date(timestamp);const lastString=`${lastTimestamp.getDate()}${lastTimestamp.getMonth()}${lastTimestamp.getFullYear()}`;const now=new Date();const nowString=`${now.getDate()}${now.getMonth()}${now.getFullYear()}`;if(lastString==nowString){return;}}
+window.localStorage.setItem(`olvy-script-load-${this.workspaceAlias}`,new Date().toISOString());}catch(e){console.error("[Olvy] - error logging script load event");}}
+var myHeaders=new Headers();myHeaders.append("Content-Type","application/json");var requestOptions={method:"POST",headers:myHeaders,body:JSON.stringify({eventType,value,organisationId,userId,meta,}),redirect:"follow",};fetch(`${this.API_URL}/register_event`,requestOptions);};this.insertGlobalCSS=()=>{let CSSElement=document.querySelector(`style#olvy-css-shared`);if(!CSSElement){const styleEl=document.createElement("style");styleEl.id=`olvy-css-shared`;CSSElement=styleEl;}
+CSSElement.innerHTML=``;document.querySelector("head").appendChild(CSSElement);};this.insertGlobalCSS();this.showWidget=(aliasOrID)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.show();}};this.hideWidget=(aliasOrID)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.show();}};this.setUser=(userObject)=>{this.userObject=userObject;this.widgets.forEach((wdgt)=>{wdgt.setUser(userObject);});};this.setFeedbackMetaInfo=(metaInfo)=>{this.feedbackMetaInfo=metaInfo;this.widgets.forEach((wdgt)=>{wdgt.setFeedbackMetaInfo(metaInfo);});};this.refresh=(aliasOrID)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.refresh();}};this.refreshUnreadCount=(aliasOrID)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.refreshUnreadCount();}};this.getUnreadReleasesCount=(aliasOrID)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.getUnreadReleasesCount();}};this.addUnreadIndicatorElement=(aliasOrID,count)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.addUnreadIndicatorElement(count);}};this.removeUnreadIndicatorElement=(aliasOrID)=>{const wdgt=this.widgets.find((w)=>w.id===aliasOrID||w.alias===aliasOrID);if(wdgt){wdgt.removeUnreadIndicatorElement();}};const olvyInstanceIndex=(window.OlvyInstances||[]).findIndex((w)=>w.workspaceAlias===this.workspaceAlias);if(olvyInstanceIndex<0){window.OlvyInstances.push(this);}
+this.fetchOrganisationId=async()=>{var myHeaders=new Headers();myHeaders.append("Content-Type","application/json");var graphql=JSON.stringify({operationName:"GetOrganisationWidgets",query:"query GetOrganisationWidgets ($workspaceAlias: String! ){ organisation(id: $workspaceAlias){ id } }",variables:{workspaceAlias:this.workspaceAlias,},});var requestOptions={method:"POST",headers:myHeaders,body:graphql,redirect:"follow",};await fetch(`${this.API_URL}/graphql`,requestOptions).then((response)=>{return response.json();}).then((result)=>{if(!result.error&&!result.errors?.length){this.organisationId=result.data.organisation.id;}});};__checkAndAddMetaViewPort();this.createFeedback=async(params)=>{if(this.organisationId===null){await this.fetchOrganisationId();}
+const feedbackCreationParams={body:params?.text||"",title:params?.title||"",type:params?.type||"",resourceId:"",resourceType:"widgets",source:{type:"olvy_api",app:"olvy-external",timestamp:new Date().toISOString(),url:"",title:"",},contact:{},meta:params?.metaDetails!==null?params.metaDetails:this.feedbackMetaInfo!=null?this.feedbackMetaInfo:null,};const myHeaders=new Headers();myHeaders.append("Content-Type","application/json");const createFeedbackBody=JSON.stringify({query:`
+      mutation ($organisationId: String!, $params: CreateFeedbackInput!) {
+        createFeedback(organisationId: $organisationId, params: $params)
+      }`,variables:{organisationId:this.organisationId,params:feedbackCreationParams,},});let createdFeedbackId="";await fetch(`${this.API_URL}/graphql`,{method:"POST",headers:myHeaders,body:createFeedbackBody,redirect:"follow",}).then((response)=>{return response.json();}).then((result)=>{if(!result.error&&!result.errors?.length){createdFeedbackId=result?.data?.createFeedback;if(!(params?.contact&&Object.keys(params.contact).length>0))
+console.info("[Olvy] - feedback pushed!");}else console.warn("[Olvy] - ",result.error||result.errors[0]);});if(params?.contact&&Object.keys(params.contact).length>0&&params?.contact?.name!==null&&params?.contact?.email!==null){const contactParams={name:params?.contact?.name||null,email:params?.contact?.email||null,meta:params?.contact?.metaDetails||null,designation:params?.contact?.designation||null,};const contactMutationBody=JSON.stringify({query:`
+          mutation (
+            $organisationId: String!
+            $feedbackId: String!
+            $params: CreateFeedbackContactParams!
+          ) {
+            addContactToFeedback(
+              organisationId: $organisationId
+              feedbackId: $feedbackId
+              params: $params
+            )
+          }`,variables:{organisationId:this.organisationId,feedbackId:createdFeedbackId,params:contactParams,},});await fetch(`${this.API_URL}/graphql`,{method:"POST",headers:myHeaders,body:contactMutationBody,redirect:"follow",}).then((response)=>{return response.json();}).then((result)=>{if(!result.error&&!result.errors?.length){console.info("[Olvy] - feedback pushed!");}else console.warn("[Olvy] - ",result.error||result.errors[0]);});}};}
+(function(){"use strict";try{window.OlvyUtils={showWidget:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.showWidget(widgetAliasOrID);}},hideWidget:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.hideWidget(widgetAliasOrID);}},setUser:(workspaceAlias,userObject)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.setUser(userObject);}},setFeedbackMetaInfo:(workspaceAlias,metaInfo)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.setFeedbackMetaInfo(metaInfo);}},refreshUnreadCount:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.refreshUnreadCount(widgetAliasOrID);}},getUnreadReleasesCount:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.getUnreadReleasesCount(widgetAliasOrID);}},addUnreadIndicatorElement:(workspaceAlias,widgetAliasOrID,count)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.addUnreadIndicatorElement(widgetAliasOrID,count);}},removeUnreadIndicatorElement:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.removeUnreadIndicatorElement(widgetAliasOrID);}},getLastOpenedTimestamp:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.getLastOpenedTimestamp(widgetAliasOrID);}},refresh:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.refresh(widgetAliasOrID);}},teardown:(workspaceAlias,widgetAliasOrID)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.teardown(widgetAliasOrID);}},createFeedback:(workspaceAlias,params)=>{const olvyInstance=window.OlvyInstances.find((o)=>o.workspaceAlias===workspaceAlias);if(olvyInstance){olvyInstance.createFeedback(params);}},defaultWorkspace:{showWidget:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.showWidget(widgetAliasOrID);},hideWidget:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.hideWidget(widgetAliasOrID);},setUser:(widgetAliasOrID,userObject)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.setUser(widgetAliasOrID,userObject);},setFeedbackMetaInfo:(widgetAliasOrID,metaInfo)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.setFeedbackMetaInfo(widgetAliasOrID,metaInfo);},refreshUnreadCount:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.refreshUnreadCount(widgetAliasOrID);},getUnreadReleasesCount:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.getUnreadReleasesCount(widgetAliasOrID);},removeUnreadIndicatorElement:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.removeUnreadIndicatorElement(widgetAliasOrID);},addUnreadIndicatorElement:(widgetAliasOrID,count)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.addUnreadIndicatorElement(widgetAliasOrID,count);},getLastOpenedTimestamp:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.getLastOpenedTimestamp(widgetAliasOrID);},refresh:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.refresh(widgetAliasOrID);},teardown:(widgetAliasOrID)=>{let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.teardown(widgetAliasOrID);},createFeedback:(params)=>{if(window.OlvyConfig||typeof OlvyConfig!=="undefined"){let defaultWorkspaceInstance=window.OlvyInstances[0];defaultWorkspaceInstance.createFeedback(params);}},},};__onPageReady(()=>{if(window.OlvyConfig||typeof OlvyConfig!=="undefined"){new Olvy((window.OlvyConfig||OlvyConfig).workspaceAlias);}});}catch(e){console.warn("[Olvy] - Ran into an issue initialising your widgets from Olvy Config",e);}})();

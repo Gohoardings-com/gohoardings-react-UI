@@ -166,7 +166,7 @@ const {category_name,  city_name } = req.body
 const city = city_name ? city_name : "delhi";
 const cookieData = req.cookies
 if (!cookieData) {
-  return res.status(400).json({message:"No Cookie Found"})
+  return res.status(204).json({message:"No Cookie Found"})
 }
 const promises = []
   db.changeUser({ database: "gohoardi_goh" });
@@ -202,9 +202,9 @@ if(err){
           const sql = "SELECT * FROM "+table_name+" WHERE city_name='"+city+"'";
           db.query(sql,async (err,result) => {
             if (err) {
-              return res.send({err: reject(err),message :"Wrong Data"})
+              return res.status(204).json({err: reject(err),message :"Wrong Data"})
           } else if (resolve == []){
-              return res.send({resolve: "Empty",message :"Media Not Found"})
+              return res.status(204).json({resolve: "Empty",message :"Media Not Found"})
           } else{
           resolve(result)
           }
@@ -215,9 +215,9 @@ if(err){
   promises.push(new Promise(async(resolve, reject) => {
     db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM "+table_name+" AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '"+userID+"' WHERE media.city_name = '"+city+"' ORDER BY `cart`.`userid` DESC ",async (err,result) => {
       if (err) {
-        return res.send({err: reject(err),message :"Wrong Data"})
+        return res.status(204).json({err: reject(err),message :"Wrong Data"})
     } else if (resolve === []){
-        return res.send({resolve: "Empty",message :"Media Not Found"})
+        return res.status(204).json({resolve: "Empty",message :"Media Not Found"})
     } else{
     resolve(result)
     }

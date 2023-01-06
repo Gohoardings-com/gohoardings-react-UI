@@ -17,7 +17,7 @@ exports.message = catchError(async(req,res, next) => {
     })
  : res.send({message:"User data Null"})
 } catch (err){
-  res.status(404).json({
+  res.status(204).json({
     messsage:err.res
   })
 }
