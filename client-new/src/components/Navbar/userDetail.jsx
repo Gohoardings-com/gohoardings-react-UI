@@ -10,7 +10,6 @@ import { AccountContext } from '../../apis/apiContext';
 import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
-import {useCookies} from 'react-cookie'
 import { useAuth0 } from "@auth0/auth0-react";
 
 const UserDetail = () => {
@@ -39,6 +38,7 @@ const UserDetail = () => {
         }
       };
 
+
   let firstRender = true;
   const handelLogout = async () => {
     const data = await logoutUser()
@@ -57,11 +57,10 @@ const UserDetail = () => {
   }
 
 const getUser = async () => {
-  const see = localStorage.getItem(true)
-if(see){
+
     dispatch(userDetails)
     addRemove({ type: "DECR" });
-}
+
 } 
 
 

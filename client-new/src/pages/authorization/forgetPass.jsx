@@ -191,7 +191,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
                          <a
               href="#"
               className="forgetpass"
-              // onClick={() => clickforget()}
+              onClick={() => onForget()}
             >
               Resend OTP
             </a>

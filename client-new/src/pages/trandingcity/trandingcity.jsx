@@ -11,16 +11,21 @@ const Trandingcity = () => {
   const dispatch = useDispatch();
 
   const data = async () => {
-    const category_name = "digital-media";
+    const category_name = "traditional-ooh-media";
     const city_name = "delhi";
     dispatch(mediawithcity(category_name, city_name));
   };
 
+
+  
   useEffect(() => {
     data();
   }, []);
   const { search, loading } = useSelector((state) => state.search);
-
+  let  newData;
+if(!loading){
+ newData = search.splice(0,7)
+}
   {
     var settings = {
       dots: true,
@@ -70,7 +75,7 @@ const Trandingcity = () => {
               :
               <>
               <Slider {...slider}>
-              {search.map((pos, i) => (
+              {newData.map((pos, i) => (
                 <div class="container pt-3 ">
                   <div class="row  ">
                     <div class="col p-3 ">
@@ -78,11 +83,27 @@ const Trandingcity = () => {
                         to={`/details/${pos.category_name}/${pos.meta_title}`}
                       >
                         <div className="trending-card-img  rounded-2">
-                          <img
-                            src={pos.thumb}
-                            className="  rounded-2  trending-cardd "
-                            key={i}
-                          />
+                             <img
+                             className="  rounded-2  trending-cardd "
+                             key={i}
+                             src={
+                              pos.thumb.startsWith("https")
+                                 ? pos.thumb
+                                 : `https://${pos.mediaownercompanyname
+                                     .trim()
+                                     .split(" ")
+                                     .slice(0, 2)
+                                     .join("_")
+                                     .toLowerCase()}.odoads.com/media/${pos.mediaownercompanyname
+                                     .trim()
+                                     .split(" ")
+                                     .slice(0, 2)
+                                     .join("_")
+                                     .toLowerCase()}/media/images/new${pos.thumb}`
+                             }
+                           />
+                           
+                        
                           <div className="bottom-left">Delhi</div>
                           <div className="bottom-left-media">
                             {pos.medianame.substring(17, 30)}{" "}
