@@ -7,7 +7,7 @@ exports.test001 = catchError(async (req,res,next) => {
   // const {category_name, city_name} = req.body
   const cookieData = req.cookies
   if (!cookieData) {
-    return res.status(400).json({message:"No Cookie Found"})
+    return res.status(204).json({message:"No Cookie Found"})
   }
   city_name = "Delhi";
   category_name = "traditional-ooh-media";

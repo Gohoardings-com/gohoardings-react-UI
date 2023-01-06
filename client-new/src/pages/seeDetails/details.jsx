@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { RiUser3Fill } from "react-icons/ri";
-import { AccountContext } from "../../apis/apiContext";
+import { AccountContext } from "../../apis/apicontext";
 import { useParams } from "react-router-dom";
 import { IoIosSettings, IoMdLocate } from "react-icons/io";
 import { GrMapLocation } from "react-icons/gr";

@@ -5,7 +5,7 @@ const catchError  = require('../middelware/catchError')
 exports.addOnCart = catchError(async (req, res) => {
 const cookieData = req.cookies
 if (!cookieData) {
-  return res.status(400).json({message:"No Cookie Found"})
+  return res.status(204).json({message:"No Cookie Found"})
 } 
 const token = Object.values(cookieData)[0];
 return jwtToken.verify(token,  process.env.jwt_secret ,async (err,user) => {

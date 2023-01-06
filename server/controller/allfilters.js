@@ -7,7 +7,7 @@ exports.categorieFilter = catchError(async (req, res) => {
     db.changeUser({ database: "gohoardi_goh" });
     db.query("SELECT p_id,name FROM tblmedia_categories",async(err, result) => {
       if (err) {
-        return res.status(400).json({message:"No Data Found On this city"})
+        return res.status(204).json({message:"No Data Found On this city"})
       } else {
         return res.send(result);
       }
@@ -22,9 +22,9 @@ exports.mapFilter = catchError(async (req,res) =>{
     db.query("SELECT  * FROM "+tbl+" WHERE illumination='"+illumna+"' || subcategory= '"+catego+"'  &&  subcategory= '"+catego+"' &&  illumination='"+illumna+"'",async (err,result) => {
       if (err) {
 
-        return res.status(404).json({err: err,message :"Wrong Data"})
+        return res.status(204).json({err: err,message :"Wrong Data"})
        } else if (result.length == 0 ){
-        return res.status(400).json({message:"No data"})
+        return res.status(204).json({message:"No data"})
     } else{
     return res.send(result); 
     }
@@ -70,7 +70,7 @@ exports.locationFilter = catchError(async (req,res) =>{
   const sql= "SELECT * FROM "+table_name+" WHERE city_name='"+city+"' &&  price BETWEEN '"+min+"' AND '"+max+"' AND illumination='"+illumination+"' && subcategory IN ('"+newSubCate+"')";
   db.query(sql, async(err,result) =>{
 if(err){
-  return res.status(400).json({message:err.message})
+  return res.status(204).json({message:err.message})
 }else{
   return res.status(200).json(result)
 }
@@ -148,14 +148,14 @@ if (err) {
               const sql = "SELECT * FROM "+table_name+" WHERE illumination='"+illunation+"' "+addsubcategoryQuery+" && city_name='"+city_name+"'"
               db.query(sql,async (err,result) => {
                 if (err) {
-                  return res.status(404).json({err: err,message :"Wrong Data"})
+                  return res.status(204).json({err: err,message :"Wrong Data"})
                  } else{
               return res.status(200).json(result)
               }
             })
             }
     }catch (err){
-    res.status(404).json({
+    res.status(204).json({
       messsage:err.res
     })
   }

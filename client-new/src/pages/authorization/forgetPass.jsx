@@ -1,20 +1,18 @@
 import React,{useState} from 'react'
-import { mobileOTP, sendOTP } from '../../apis/apis'
 import {FiLogIn,FiArrowLeftCircle} from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
 
-
-const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword, setEmail, onForget, setFocus,   setPassword, setForget, ToastContainer, emailsValidate, setPass,
+const ForgetPass = ({setconfirmPasswords,sendOtp,setSendOtp,setOtp,email,otp,  toast, checkOTP,changePassword, setEmail, onForget, setFocus,   setPassword, setForget, setPass,
   pass}) => {
-  const [sendOtp,setSendOtp]=useState(false);
- 
+
   const goBack=()=>{
     if(pass==true){
       setPass(false);
-      setSendOtp(true);
+       setSendOtp(false);
     }
     if(sendOtp==true){
       setSendOtp(false);
-      setPass(false);
+       setPass(false);
     }
     else{
       setForget(false)
@@ -22,101 +20,12 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
     
 
   }
-  console.log(expire);
+  
 
+  
   return (
    <>
-   {/* <div className="modal-heading mt-3 text-center">
-                    <h1 className="modal-title">
-                      Did you forget your password ?
-                    </h1>
-                    <p className="modal-desc text-secondary">
-                    On Submit, an email with a link to create a password will be sent to your email account
-                    </p>
-                  </div>
-                  <div className="forget-content">
-                    <form onSubmit={onForget} novalidate>
-                      <div className="">
-                     
-                        <div className="input-box">
-                          <label className="input-label">
-                            Enter your user@email.com
-                          </label>
-                          <input
-                            type="text"
-                            className="input-1"
-                            onFocus={() => setFocus(true)}
-                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                          />
-                         <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6>
-                        </div>
-                      </div>
-                      <button type="submit" className="signin">
-                        <span>SUBMIT</span>
-                      </button>
-                
-                    </form>
-                    <form onSubmit={checkOTP}>
-                    <div className="input-box">
-                          <label className="input-label">
-                            Enter your OTP
-                          </label>
-                          <input
-                          type="number"
-                          className="input-1"
-                          onFocus={() => setFocus(true)}
-                          onChange={(e) => setOtp(e.target.value)}
-                          required
-                          />
-                          </div>
-                          <button type="submit" className="signin">
-                        <span>SUBMIT</span>
-                      </button>
-                    </form>
-                    <form onSubmit={changePassword} novalidate>
-                    
-                     
-                       
-                         <div className="input-box">
-                          <label className="input-label">
-                            Enter New Password
-                          </label>
-                          <input
-                            type="text"
-                            className="input-1"
-                            onFocus={() => setFocus(true)}
-                          
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                          />
-                          </div>
-                          <div className="input-box">
-                          <label className="input-label">
-                            Enter Confirm Password
-                          </label>
-                           <input
-                            type="text"
-                            className="input-1"
-                            onFocus={() => setFocus(true)}
-                          
-                            onChange={(e) => setconfirmPasswords(e.target.value)}
-                            required
-                          />
-                       
-                         <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6>
-                       
-                      </div>
-                      <button type="submit" className="signin">
-                        <span>SUBMIT</span>
-                      </button>
-                
-                    </form>
-        
-                  </div> */}
-
-
+  
 <div className="modal-heading mt-3 text-center">
                     <h1 className="modal-title">
                       Did you forget your password ?
@@ -146,7 +55,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
                           }
                           required
                         />
-                       {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
+                       <h6 className=" p-0 text-success mt-2 text-center">{toast}</h6>
                       </div>
                       <div className="input-box">
                         <label className="input-label">
@@ -170,7 +79,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
                   </form>
                 </div>
                 :<> 
-                 { emailsValidate ?  
+                 { sendOtp ? 
                    <div className="forget-content animate__animated  animate__fadeIn">
                     <form onSubmit={checkOTP} novalidate>
                       <div className=" animate__animated  animate__flipInX">
@@ -182,12 +91,13 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
                           <input
                             type="text"
                             className="input-1"
+                            value={otp}
                              onFocus={() => setFocus(true)}
                             onChange={(e) => setOtp(e.target.value)}
                             required
                           />
 
-                         {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
+<h6 className=" p-0 text-success mt-2 text-center">{toast}</h6>
                          <a
               href="#"
               className="forgetpass"
@@ -201,7 +111,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
                         <span>SUBMIT <FiLogIn/></span>
                 
                       </button>
-                
+                <ToastContainer/>
                     </form>
                   </div>
                   :  
@@ -216,11 +126,12 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword
                         <input
                           type="text"
                           className="input-1"
+                          value={email}
                           onFocus={() => setFocus(true)}
                           onChange={(e) => setEmail(e.target.value)}
                           required
                         />
-                       {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
+                       <h6 className=" p-0 text-success mt-2 text-center">{toast}</h6>
                       </div>
                     </div>
                     <button type="submit" className="signin">

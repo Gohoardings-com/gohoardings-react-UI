@@ -3,7 +3,7 @@ import "./media.scss";
 // import { ILLUMINATION } from "../../apis/apis";
 import { mediawithcity, mediaFilters } from "../../action/adminAction";
 import { useSelector, useDispatch } from "react-redux";
-import { AccountContext } from "../../apis/apiContext";
+import { AccountContext } from "../../apis/apicontext";
 import { useParams, useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import instance from "../../apis/axios";

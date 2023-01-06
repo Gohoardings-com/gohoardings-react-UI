@@ -48,11 +48,11 @@ exports.login = catchError(async (req, res) => {
 
       const keypassword = result[0].password;
       if (!keypassword) {
-        return res.status(404).json({ messsage: "Invalid Email and password" });
+        return res.status(204).json({ messsage: "Invalid Email and password" });
       } else {
         const confimPassword = bcrypt.compareSync(password, keypassword)
         if (!confimPassword) {
-          return res.status(404).json({
+          return res.status(204).json({
             success: false,
             message: "Wrong Email & Password"
           });
@@ -63,7 +63,7 @@ exports.login = catchError(async (req, res) => {
         token(userid, 200, res)
       }
     } else {
-      return res.status(404).json({ messsage: "Invalid Email and password" });
+      return res.status(204).json({ messsage: "Invalid Email and password" });
     }
   })
 })
@@ -74,7 +74,7 @@ const {name, email, givenName, imageUrl} = req.body
 
   db.query("SELECT * FROM tblcontacts WHERE email='" + email + "' && provider='Google'", async (err, selectResult) => {
     if (err) {
-      return res.status(400).json({ message: "Wrong Data" })
+      return res.status(204).json({ message: "Wrong Data" })
     }
    
     if (selectResult.length == 0) {
@@ -82,14 +82,14 @@ const {name, email, givenName, imageUrl} = req.body
 
       db.query("SELECT userid From tblcontacts ORDER By userid DESC LIMIT 1", async (err, result) => {
         if (err) {
-          return res.status(404).json(err.message)
+          return res.status(204).json(err.message)
         } else {
          
           const userid = (result[0].userid) + 1
           const password = bcrypt.hashSync(givenName, 8)
           db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${name}','${email}','${password}','${userid}','${imageUrl}','Google')`, async (err, result) => {
             if (err) {
-              return res.status(400).json({ err: err.message })
+              return res.status(204).json({ err: err.message })
             } else {
             
               res.clearCookie(String(userid))
@@ -117,21 +117,21 @@ exports.linkdinLogin = catchError(async(req,res) => {
     if (err) {
 
    
-      return res.status(400).json({ message: "Wrong Data" })
+      return res.status(204).json({ message: "Wrong Data" })
     }
     if (selectResult.length == 0) {
 
       db.query("SELECT userid From tblcontacts ORDER By userid DESC LIMIT 1", async (err, result) => {
         if (err) {
        
-          return res.status(404).json(err.message)
+          return res.status(204).json(err.message)
         } else {
           const userid = (result[0].userid) + 1
           const password = bcrypt.hashSync(nickname, 8)
           db.query(`Insert into tblcontacts (firstname, email, password, userid, profile_image, provider) VALUES ('${name}','${email}','${password}','${userid}','${picture}','${sub}')`, async (err, result) => {
             if (err) {
            
-              return res.status(400).json({ err: err.message })
+              return res.status(204).json({ err: err.message })
             } else {
               res.clearCookie(String(userid))
               req.cookies[`${String(userid)}`] = " ";
@@ -147,21 +147,21 @@ exports.linkdinLogin = catchError(async(req,res) => {
           req.cookies[`${String(userid)}`] = " ";
          token(userid, 200, res)
     }
-  }) : res.send(404).json({message:"No Data Found"})}
+  }) : res.send(204).json({message:"No Data Found"})}
 })
 
 exports.refreshToken = catchError(async(req,res,next) => {
   const cookieData = req.cookies;
   if (!cookieData) {
-    return res.status(400).json({ message: "No Cookie Found" })
+    return res.status(204).json({ message: "No Cookie Found" })
   }
   const token = Object.values(cookieData)[0];
   if (!token) {
-    return res.status(400).json({ message: "No Token Found" })
+    return res.status(204).json({ message: "No Token Found" })
   } else {
     return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
       if (err) {
-        return res.status(400).json({ message: "InValid Token" });
+        return res.status(204).json({ message: "InValid Token" });
       } else {
            res.clearCookie(`${user.id}`)
            req.cookies[`${user.id}`] = "";
@@ -187,12 +187,12 @@ exports.refreshToken = catchError(async(req,res,next) => {
 exports.getuser = catchError(async (req, res) => {
   const userId = req.id;
   if (!userId) {
-    return res.status(404).json({ message: "Token Valid" })
+    return res.status(204).json({ message: "Token Valid" })
   } else {
     db.changeUser({ database: "gohoardi_crmapp" })
     db.query("SELECT * FROM tblcontacts WHERE userid='" + userId + "'", async (err, result) => {
       if (err) {
-        return res.status(404).json({ message: "User Not found" })
+        return res.status(204).json({ message: "User Not found" })
       } else {
         return res.status(200).json(result)
       }
@@ -203,7 +203,7 @@ exports.getuser = catchError(async (req, res) => {
 exports.logout = catchError(async (req, res) => {
   const user = req.id
   if (!user) {
-    return next(new ErrorHandler("No user found Plese Login Again", 400))
+    return next(new ErrorHandler("No user found Plese Login Again", 204))
   }
   res.clearCookie(`${user}`)
   req.cookies[`${user}`] = "";
@@ -241,16 +241,16 @@ exports.resetPasswordEmail = catchError(async(req,res,next) => {
   const {code} = req.query
   const cookieData = req.cookies;
   if (!cookieData) {
-    return res.status(400).json({ message: "No Cookie Found" })
+    return res.status(204).json({ message: "No Cookie Found" })
   }
   const token = Object.values(cookieData)[0];
   if (!token) {
-    return res.status(400).json({ message: "No Token Found" })
+    return res.status(204).json({ message: "No Token Found" })
   } else {
     if(token === code){
       return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
         if (err) {
-          return res.status(400).json({ message: "InValid Token" });
+          return res.status(204).json({ message: "InValid Token" });
         } else {
           const userId = user.id
           const {password, confirmPassword}  = req.body;
@@ -265,12 +265,12 @@ exports.resetPasswordEmail = catchError(async(req,res,next) => {
             }
           })
          }else{
-          return res.status(500).json({message:"Password not matched"})
+          return res.status(204).json({message:"Password not matched"})
          }
         }
       })
     }else{
-      return res.status(400).json({ message: "Verfication failed" })
+      return res.status(204).json({ message: "Verfication failed" })
     }
    
   }
@@ -279,7 +279,7 @@ exports.resetPasswordEmail = catchError(async(req,res,next) => {
 exports.changepasswoed = catchError(async(req,res,next) => {
   const userId = req.id;
   if(!userId){
-    return res.status(400).json({message:"User not found"})
+    return res.status(204).json({message:"User not found"})
   }else{
     db.changeUser({ database: "gohoardi_crmapp" })
     db.query("SELECT password from tblcontacts WHERE userid='"+userId+"'", async(err,result) =>{
@@ -293,7 +293,7 @@ exports.changepasswoed = catchError(async(req,res,next) => {
         if(newPassword === confirmPassword){
           const finalPassword = bcrypt.hashSync(newPassword, 8)
           if(!finalPassword){
-            return res.status(500).json({message:"Password Error"})
+            return res.status(204).json({message:"Password Error"})
           }else{
             const sql ="UPDATE tblcontacts SET password = '"+finalPassword+"' WHERE userid='"+userId+"'";
             db.query(sql,async(err,result) =>{
@@ -306,7 +306,7 @@ exports.changepasswoed = catchError(async(req,res,next) => {
           }
         }
       }else{
-        return res.status(400).json({message:"Your Password Not Matched"})
+        return res.status(204).json({message:"Your Password Not Matched"})
       }
       
       }
@@ -320,13 +320,13 @@ exports.updateProfile = catchError(async(req,res,next) =>{
 const {firstname,email,phonenumber} =req.body
 const userId = req.id;
 if (!userId) {
-  return res.status(404).json({ message: "Token Valid" })
+  return res.status(204).json({ message: "Token Valid" })
 } else {
   db.changeUser({ database: "gohoardi_crmapp" })
   const sql = "UPDATE tblcontacts SET firstname='"+firstname+"', email='"+email+"', phonenumber='"+phonenumber+"',profile_image='"+filename+"' WHERE userid='"+userId+"'"
   db.query(sql,async(err,result) =>{
     if(err){
-      return res.status(400).json({sucess:false, message:"Updation failed"})
+      return res.status(204).json({sucess:false, message:"Updation failed"})
     } else{
       return res.status(200).json({sucess:false, message:"Profile Updated"})
     }
