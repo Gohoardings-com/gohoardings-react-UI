@@ -13,9 +13,6 @@ const ApiContext = ({ children }) => {
     return initalState;
   }
 
-  useEffect(() => {
-    item()
-  }, [])
 
   const reducer = (state, action) => {
     if (action.type === 'INCR') {
