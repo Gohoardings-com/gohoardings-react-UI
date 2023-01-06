@@ -7,10 +7,6 @@ import "./marker.scss"
 import {useNavigate } from 'react-router-dom';
 import instance from "../../apis/axios";
 
-const center = {
-    lat: 28.5821195,
-    lng: 77.3266991
-  };
 
 
 
@@ -18,6 +14,7 @@ const Markers = (markers) => {
   const { iconfilter, loading } = useSelector((state) => state.iconfilter);
   const navigate = useNavigate()
   const {addRemove} = useContext(AccountContext)
+  const { zoom, setZoom } =  useState(10);
   markers.data.forEach(e => {
       e['position'] = {lat : e.latitude, lng : e.longitude}
     })
@@ -90,9 +87,9 @@ if(!loading){
 
   return (
     <GoogleMap
-      zoom={10}
+      zoom={zoom}
       onLoad={handleOnLoad}
-      center={center}
+      // center={latitude,longitude}
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ height: "100%" }}
     >
