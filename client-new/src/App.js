@@ -18,6 +18,10 @@ import "@fontsource/montserrat";
 import 'animate.css';
 import Signin from "./pages/authorization/signin";
 import FooterN from "./pages/footer/footerN";
+<<<<<<< HEAD
+
+=======
+>>>>>>> 072a7694668ceeb07e40566a68d7b9a542e3d339
 
 function App() {
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
@@ -39,7 +43,10 @@ function App() {
       <BrowserRouter>
         <Routes>
          <Route index path="/" element={<Home/>}/>
+<<<<<<< HEAD
+=======
  
+>>>>>>> 072a7694668ceeb07e40566a68d7b9a542e3d339
           <Route exact path="/login" element={avlable ? <Home />:<Signin />}></Route>
           <Route exact path="/:category_name/:city_name" element={ <Media/>}/>   
           <Route exact path="/map" element={<Map/>}/>

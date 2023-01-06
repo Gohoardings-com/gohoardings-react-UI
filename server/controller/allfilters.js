@@ -34,11 +34,8 @@ exports.mapFilter = catchError(async (req,res) =>{
 
 exports.locationFilter = catchError(async (req,res) =>{
   const {category_name,price, illumination, table, city} = req.body;
-  const newCate = category_name.flat(1)
-  const newIll = illumination.flat(1)
-  const Illumation = newIll.toString()
-  var newIllumation = Illumation.replace(/,/g, "','");
-  const SubCategory = newCate.toString()
+  // console.log(category_name,price, illumination, table, city);
+  const SubCategory = category_name.toString()
   const newSubCate = SubCategory.replace(/,/g, "','")
  const min = price.split(",")[0].slice(4);
  const max =  price.split(",")[1].slice(4);
@@ -69,7 +66,8 @@ exports.locationFilter = catchError(async (req,res) =>{
   }
 
   db.changeUser({ database: "gohoardi_goh" });
-  const sql= "SELECT * FROM "+table_name+" WHERE city_name='"+city+"' &&  price BETWEEN '"+min+"' AND '"+max+"' AND illumination IN ('"+newIllumation+"') && subcategory IN ('"+newSubCate+"')";
+  
+  const sql= "SELECT * FROM "+table_name+" WHERE city_name='"+city+"' &&  price BETWEEN '"+min+"' AND '"+max+"' AND illumination='"+illumination+"' && subcategory IN ('"+newSubCate+"')";
   db.query(sql, async(err,result) =>{
 if(err){
   return res.status(400).json({message:err.message})

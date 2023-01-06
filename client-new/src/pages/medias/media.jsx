@@ -151,6 +151,7 @@ const Media = () => {
     }
     dispatch(mediaFilters(category_name, illum, news, city_name));
   }
+  
   const data = async () => {
     navigate("/map");
   };

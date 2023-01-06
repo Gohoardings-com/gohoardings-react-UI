@@ -3,9 +3,10 @@ import { mobileOTP, sendOTP } from '../../apis/apis'
 import {FiLogIn,FiArrowLeftCircle} from "react-icons/fi";
 
 
-const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePassword, setEmail, onForget, setFocus, fnotify,  setPassword, emailsValidate, setForget}) => {
+const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP,changePassword, setEmail, onForget, setFocus,   setPassword, setForget, ToastContainer, emailsValidate, setPass,
+  pass}) => {
   const [sendOtp,setSendOtp]=useState(false);
-  const [pass,setPass]= useState(false);
+ 
   const goBack=()=>{
     if(pass==true){
       setPass(false);
@@ -21,7 +22,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
     
 
   }
-
+  console.log(expire);
 
   return (
    <>
@@ -130,7 +131,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                   </div>
                   {pass?  
                   <div className="forget-content animate__animated  animate__fadeIn">
-                  <form  novalidate>
+                  <form onSubmit={changePassword} novalidate>
                       <div className="input-box">
                         <label className="input-label">
                           Create new password
@@ -140,9 +141,9 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                           className="input-1"
                           onFocus={() => setFocus(true)}      
                     
-                          onChange={(e) => {
-                            setPassword(e.target.value);
-                          }}
+                          onChange={(e) =>
+                            setPassword(e.target.value)
+                          }
                           required
                         />
                        {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
@@ -156,9 +157,9 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                           className="input-1"
                           onFocus={() => setFocus(true)}
                         
-                          onChange={(e) => {
-                            setconfirmPasswords(e.target.value);
-                          }}
+                          onChange={(e) => 
+                            setconfirmPasswords(e.target.value)
+                          }
                           required
                         />
                        {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
@@ -169,7 +170,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                   </form>
                 </div>
                 :<> 
-                 { sendOtp ?  
+                 { emailsValidate ?  
                    <div className="forget-content animate__animated  animate__fadeIn">
                     <form onSubmit={checkOTP} novalidate>
                       <div className=" animate__animated  animate__flipInX">
@@ -182,11 +183,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                             type="text"
                             className="input-1"
                              onFocus={() => setFocus(true)}
-                          
-                           
-                            onChange={(e) => {
-                              setOtp(e.target.value);
-                            }}
+                            onChange={(e) => setOtp(e.target.value)}
                             required
                           />
 
@@ -220,9 +217,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                           type="text"
                           className="input-1"
                           onFocus={() => setFocus(true)}
-                          onChange={(e) => {
-                            setEmail(e.target.value);
-                          }}
+                          onChange={(e) => setEmail(e.target.value)}
                           required
                         />
                        {/* <h6 className=" p-0 text-success mt-2 text-center">{fnotify}</h6> */}
@@ -232,6 +227,7 @@ const ForgetPass = ({setconfirmPasswords, expire,setOtp, checkOTP, changePasswor
                       <span>SEND OTP <FiLogIn/></span>
               
                     </button>
+                  <ToastContainer/>
               
                   </form>
                 </div>
