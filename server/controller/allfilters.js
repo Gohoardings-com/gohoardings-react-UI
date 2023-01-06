@@ -34,7 +34,6 @@ exports.mapFilter = catchError(async (req,res) =>{
 
 exports.locationFilter = catchError(async (req,res) =>{
   const {category_name,price, illumination, table, city} = req.body;
-  // console.log(category_name,price, illumination, table, city);
   const SubCategory = category_name.toString()
   const newSubCate = SubCategory.replace(/,/g, "','")
  const min = price.split(",")[0].slice(4);

@@ -14,8 +14,9 @@ const NewNAvbar = () => {
 
 
   const data=async() =>{
-    navigate('/map')
+    
   await dispatch(mediawithcity({category_name:"traditional-ooh-media", city_name:"delhi"}))
+  navigate('/map')
 
   }
   

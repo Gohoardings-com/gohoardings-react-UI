@@ -26,7 +26,6 @@ export const mediawithcity  = (category_name, city_name)  => async(dispatch) =>{
 
 
 export const priceSubIllu  = (category_name,price,illumination,table,city) => async (dispatch) =>{
-    console.log(category_name,price,illumination,table,city);
     try{
         dispatch({type: "MediaWithCityRequest"});
     

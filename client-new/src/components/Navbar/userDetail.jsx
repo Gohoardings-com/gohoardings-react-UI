@@ -57,11 +57,10 @@ const UserDetail = () => {
   }
 
 const getUser = async () => {
-  const see = localStorage.getItem(true)
-if(see){
+
     dispatch(userDetails)
     addRemove({ type: "DECR" });
-}
+
 } 
 
 

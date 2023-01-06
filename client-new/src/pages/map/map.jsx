@@ -103,6 +103,7 @@ const Map = () => {
   const fff = mediaData.map((o) => o.illumination);
   ILLUMINATION = [...new Set(fff)];
 
+
   function categoryFilter(cate) {
     category.forEach((el) => {
       if (el === cate && news.indexOf(el) > -1) {

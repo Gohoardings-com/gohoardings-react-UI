@@ -1,7 +1,7 @@
 import React, {  useEffect, useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.scss";
-import SearchMedia from '../Searchmedia/searchmedia'
+import SearchMedia from '../searchmedia/searchmedia'
 import Navbar from '../../components/navbar/navbar'
 import Ourservices from "../ourservices/ourservices";
 import Trandingcity from "../trandingcity/trandingcity";
