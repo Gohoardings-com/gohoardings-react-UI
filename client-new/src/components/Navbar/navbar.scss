@@ -55,6 +55,22 @@
 
 }
 
+.user-detail-login{
+  .login-icon {
+    height: 30px ;
+    width: 30px ;
+  }
+  .dropdown-toggle::after {
+display: none;
+  }
+  .drop-togel{
+    border: transparent !important;
+  }
+  .drop-item{
+    color: #373435 !important;
+    font-weight: 600 !important;
+  }
+}
 .login-profile{
   .login-icon {
     height: 30px ;

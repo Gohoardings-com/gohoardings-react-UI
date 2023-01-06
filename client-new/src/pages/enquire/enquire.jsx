@@ -6,8 +6,6 @@ import "./enquire.scss";
 import clientslogo from "../about-us/clients";
 import EnquireRegister from "./enquireRegister";
 
-console.log(clientslogo);
-
 const Enquire = () => {
   {
     var settings = {

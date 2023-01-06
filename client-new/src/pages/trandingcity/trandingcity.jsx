@@ -44,6 +44,9 @@ const Trandingcity = () => {
       ],
     };
   }
+
+  let slider = settings;
+
   return (
     <>
       <div className="container-xxl  container-xl container-lg container-md  mt-5 mt-md-2 mb-md-4  py-5 mb-5 trending-contain ">
@@ -66,7 +69,7 @@ const Trandingcity = () => {
               <h1>Loading Please Wait</h1>
               :
               <>
-              <Slider {...settings}>
+              <Slider {...slider}>
               {search.map((pos, i) => (
                 <div class="container pt-3 ">
                   <div class="row  ">
