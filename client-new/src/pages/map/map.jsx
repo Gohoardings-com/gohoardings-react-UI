@@ -116,7 +116,6 @@ const Map = () => {
   }
 
   function illuminationfilter(illum) {
-    setQuery(true)
     if (!loading) {
       const data = mediaData.filter((el) => el.illumination == illum);
       const hhh = data.map((el) => el.subcategory);
