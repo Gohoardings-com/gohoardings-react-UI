@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import './navbar.scss'
-import UserDetail from "./userDetail";
+import UserDetail from "./userdetail";
 
 const NewNAvbar = () => {
   const dispatch = useDispatch()
