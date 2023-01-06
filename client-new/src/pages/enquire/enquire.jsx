@@ -7,6 +7,9 @@ import clientslogo from "../about-us/clients";
 import EnquireRegister from "./enquireRegister";
 
 const Enquire = () => {
+
+  const slice = clientslogo.slice(0, 21);
+
   {
     var settings = {
 
@@ -35,19 +38,19 @@ const Enquire = () => {
      <section className="our-clients-content my-4 " >
        
        <Slider {...settings}>
-         {clientslogo.map((clients, i) => (
+         {slice.map((clients, i) => (
            <div class="container pt-3 ">
              <div class="row  ">
                <div class="col p-3 ">
              
-                 {/* <div className="trending-card-img  rounded-2" > */}
+            
                    <img
                      src={clients.img}
                      alt={clients.alt}
                      key={i}
                      className=" rounded-2  trending-cardd "
                    />
-                 {/* </div> */}
+               
            
                </div>
              </div>
