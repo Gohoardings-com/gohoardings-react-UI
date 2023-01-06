@@ -250,7 +250,7 @@ const Media = () => {
               {" "}
               MAP
               <img
-                src="https://cdn-icons-png.flaticon.com/512/854/854894.png"
+                src="https://cdn-icons-png.flaticon.com/512/854/854894.png" 
                 className="media-location-logo-map ms-2"
               />
             </h5>
@@ -270,7 +270,12 @@ const Media = () => {
           />
         </div>
       </div>
-      <div className="position-relative mb-5 pb-5">
+
+      
+      {loading ? <> </>
+      :<>  {slice.length == 0? <>
+      
+        </>:<><div className="position-relative mb-5 pb-5 " >
         <div className=" position-absolute  top-0 start-50 translate-middle">
           <button className=" buttonload btn-hover" onClick={() => More()}>
             View More <MdOutlineArrowDownward />
@@ -280,7 +285,11 @@ const Media = () => {
             View Less <MdArrowUpward />
           </button>
         </div>
-      </div>
+      </div> </>}</>
+     }
+
+
+      
     </>
   );
 };

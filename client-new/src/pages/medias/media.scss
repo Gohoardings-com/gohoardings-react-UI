@@ -1,7 +1,16 @@
 .overflow {
   background-color: #f1f1f1;
 }
-
+.no-data{
+  img{
+    height: 240px;
+    box-shadow: 0px 15px 10px -15px rgb(192, 192, 192);   
+    
+  }
+  h2{
+  color: #DC3545;
+  }
+}
 .filter-container {
 h5{
   border: 1px solid rgb(191, 191, 191);
@@ -123,6 +132,16 @@ h5:hover{
   // transform: scale(0.9);
 }
 @media screen and (max-width: 1366px) {
+  .no-data{
+    img{
+      height: 200px;
+
+    }
+    h2{
+
+    font-size: 1.3rem;
+    }
+  }
   .btn-hover {
     width: 175px;
     font-size: 16px;
@@ -350,3 +369,5 @@ h5:hover{
 #marker {
   list-style-type: none;
 }
+
+
