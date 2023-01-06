@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from "../../apis/apiContext";
 import { useNavigate } from "react-router-dom";
 import "./map.scss";
-import { ILLUMINATION } from "../../apis/apis";
 import { mediawithcity, priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,14 +20,19 @@ const Map = () => {
   const navigate = useNavigate();
   const [medias, setMedias] = useState(search);
   const { addRemove } = useContext(AccountContext);
+  const [mediaData, setMediadata] = useState([]);
   const [price, setprice] = useState([]);
   const [query, setQuery] = useState("");
+  const [singlemedia, setsingleMedia] = useState([]);
   const [category, setcategory] = useState([]);
   const [cartItem, setcartItem] = useState([]);
   const [newIllum, setnewIllum] = useState([]);
   const [newCate, setnewCate] = useState([]);
+  const [news, setNews] = useState([]);
   const [noOfLogo, setnoOfLogo] = useState(8);
   const { initalState } = useContext(AccountContext);
+  const [disable, setDisable] = useState(true);
+
 
   const addonCart = async (e) => {
     const { data } = await instance.post("cart/addOnCart", {
@@ -53,6 +57,7 @@ const Map = () => {
       }
     });
   };
+
   const previousData = async () => {
     dispatch(
       mediawithcity({
@@ -69,8 +74,57 @@ const Map = () => {
 
   useEffect(() => {
     userCartItem();
-    // holdingtype();
   }, [initalState]);
+
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+  useEffect(() => {
+    topFunction();
+    getDataByApi()
+  }, []);
+
+
+  let ILLUMINATION;
+  const getDataByApi = async () => {
+    const value = [...search];
+    const category_name = value[0].category_name;
+    const city_name = value[0].city_name;
+    const { data } = await instance.post("media/searchMedia", {
+      category_name,
+      city_name,
+    });
+    const mediaDatas = [...data];
+    setMediadata(mediaDatas);
+  };
+
+
+  const fff = mediaData.map((o) => o.illumination);
+  ILLUMINATION = [...new Set(fff)];
+
+  function categoryFilter(cate) {
+    category.forEach((el) => {
+      if (el === cate && news.indexOf(el) > -1) {
+        news.splice(news.indexOf(el), 1);
+        setNews(news);
+      } else if (el === cate && !news.indexOf(el) > -1) {
+        news.push(cate);
+        setNews(news);
+      }
+    });
+  }
+
+  function illuminationfilter(illum) {
+    setQuery(true)
+    if (!loading) {
+      const data = mediaData.filter((el) => el.illumination == illum);
+      const hhh = data.map((el) => el.subcategory);
+      const category = [...new Set(hhh)];
+      setcategory(category);
+      setDisable(false);
+    }
+  }
 
   const cartItemprice = cartItem.reduce(
     (totalPrice, item) => totalPrice + parseInt(item.price),
@@ -82,22 +136,15 @@ const Map = () => {
     slice = search.slice(0, noOfLogo);
   }
 
-  const illumination = [];
-  const category_name = [];
-
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyDUxCgbNSGMkX-rNarQmh4eS_MAAzWncyY",
   });
-
-  useEffect(() => {
-    userCartItem();
-  }, []);
 
   const getAllDetails = async () => {
     const value = [...search];
     const table = value[0].category_name;
     const city = value[0].city_name;
-    dispatch(priceSubIllu(newCate, price, newIllum, table, city));
+    dispatch(priceSubIllu(news, price, singlemedia, table, city))
   };
 
   const removefroCart = async (obj) => {
@@ -118,37 +165,9 @@ const Map = () => {
     });
   };
 
-  function multicheck(e) {
-    if (e.currentTarget.checked) {
-      category_name.push(e.target.value);
-    } else {
-      var index = category_name.indexOf(e.target.value);
-      if (index > -1) {
-        category_name.splice(index, 1);
-      }
-    }
-    setnewCate(cat => [...cat,category_name])
-  }
-  function mediaType(e) {
-    if (e.currentTarget.checked) {
-      illumination.push(e.target.value);
-    } else {
-      var index = illumination.indexOf(e.target.value);
-      if (index > -1) {
-        illumination.splice(index, 1);
-      }
-    }
-    setnewIllum(cat => [...cat,illumination])
-  }
-
   const locatetologin = async () => {
     window.localStorage.setItem("locate", `/map`);
     navigate("/login");
-  };
-
-  const holdingtype = async () => {
-    const { data } = await instance.get("filter/categoryfilter");
-    setcategory(data);
   };
 
   const More = async () => {
@@ -356,64 +375,74 @@ const Map = () => {
                     </div>
                   </div>
                 </div>
-                <div className="accordion-item mb-3">
-                  <h2 className="accordion-header" id="flush-headingTwo">
-                    <button
+                <div className="container">
+                      <div className="row pb-2">
+                      <h4 className="accordion-header" id="flush-headingFour">
+                    {/* <button
                       className="accordion-button collapsed bg-secondary bg-opacity-25"
                       type="button"
                       data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseTwo"
+                      data-bs-target="#flush-collapseFour"
                       aria-expanded="false"
-                      aria-controls="flush-collapseTwo"
+                      aria-controls="flush-collapseFour"
                     >
+                    </button> */}
+                      Illumination
+                  </h4>
+                        {ILLUMINATION.map((illumation, i) => (
+                          <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
+                             <input
+                             
+                              id={i}
+                              name="radio"
+                              type="radio"
+                              onChange={(e) => illuminationfilter(illumation)}
+                              onClick={(e) => setsingleMedia(illumation)}
+                              // data-bs-toggle="collapse"
+                              // data-bs-target="#collapseT2"
+                              // aria-expanded="false"
+                              // aria-controls="collapseT2"
+                            />
+                            <label htmlFor="1" className="ps-2">
+                              {illumation}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+              {!disable &&   <div className="accordion-item mb-3">
+                  <h2 className="accordion-header" id="flush-headingTwo">
+                  
                       Hoarding Type
-                    </button>
+               
                   </h2>
                   <div
-                    id="flush-collapseTwo"
-                    className="accordion-collapse collapse bg-secondary bg-opacity-25"
-                    aria-labelledby="flush-headingTwo"
-                    data-bs-parent="#accordionTest2"
+                  
                   >
-                    <div className="accordion-body pt-0">
-                      <div className="pe-3 mb-2 pt-1">
-                        <input
-                          type="search"
-                          placeholder="Search Hoarding Type"
-                          className="w-100"
-                          onChange={(event) => setQuery(event.target.value)}
-                        />
+                
+                     
+                      <div className="checkbox-items py-2">
+                      {category
+                         
+                         .map((cate, i) => (
+                           <>
+                             <input
+                               type="checkbox"
+                               id={i}
+                               className="me-1"
+                               value={cate}
+                               onChange={(e) => categoryFilter(cate)}
+                             />
+                             <span className="text-wrap  media-filter-text-card-detail-filt ">
+                               {cate.substring(0, 13)}
+                             </span>
+                             <br />
+                           </>
+                         ))}
                       </div>
-                      {/* <div className="checkbox-items py-2">
-                        {category
-                          .filter((obj) => {
-                            if (query == "") {
-                              return obj;
-                            } else if (
-                              obj.name
-                                .toLowerCase()
-                                .includes(query.toLowerCase())
-                            ) {
-                              return obj;
-                            }
-                          })
-                          .map((illum, i) => (
-                            <>
-                              <input
-                                type="checkbox"
-                                id={i}
-                                className="me-1"
-                                value={illum.name}
-                                onChange={(e) => multicheck(e)}
-                              />
-                              <span>{illum.name}</span>
-                              <br />
-                            </>
-                          ))}
-                      </div> */}
                     </div>
                   </div>
-                </div>
+               }
 
                 {/* location filter */}
 
@@ -452,42 +481,15 @@ const Map = () => {
                 </div>
               </div>  */}
                 <div className="accordion-item mb-3">
-                  <h2 className="accordion-header" id="flush-headingFour">
-                    <button
-                      className="accordion-button collapsed bg-secondary bg-opacity-25"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseFour"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseFour"
-                    >
-                      Illumination
-                    </button>
-                  </h2>
-                  <div
+               
+                  {/* <div
                     id="flush-collapseFour"
                     className="accordion-collapse collapse bg-secondary bg-opacity-25"
                     aria-labelledby="flush-headingFour"
                     data-bs-parent="#accordionTest2"
                   >
-                    <div className="container">
-                      <div className="row pb-2">
-                        {ILLUMINATION.map((illumation, i) => (
-                          <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
-                            <input
-                              type="checkbox"
-                              id={i}
-                              value={illumation.value}
-                              onChange={(e) => mediaType(e)}
-                            />
-                            <label htmlFor="1" className="ps-2">
-                              {illumation.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                   
+                  </div> */}
                 </div>
               </div>
 

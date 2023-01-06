@@ -4,37 +4,31 @@ const request = require('request')
 const bcrypt = require("bcryptjs");
 const jwtToken = require('jsonwebtoken');
 const { token } = require("../middelware/token");
+const { sendEmail } = require("../middelware/sendEmail");
 
-exports.findEmail = catchError(async(req,res, next) => {
-    const {email} = req.body
-    if(!email){
-        res.status(400).json({message:"Email Invalid"})
-    }
-    db.changeUser({database:"gohoardi_crmapp"})
-    const sql = "SELECT phonenumber from tblcontacts WHERE email='"+email+"'"
-    db.query(sql,(err,result) => {
-        if(err){
-       
-            res.status(400).json({message:err.message})
-        }else{
-           phone = result[0].phonenumber
-           next()
-        }
-    })
-})
 
 exports.sendOTP = catchError(async(req,res) => {
-    const phoneNumber = phone
-    if(!phoneNumber){
-      res.status(400).json({message:"Phone Number Invalid"})
+    const {email} =req.body
+    console.log(req.body);
+    if(!email){
+      res.status(400).json({message:"Wrong Input"})
   }
-    let otp = Math.floor(100000 + Math.random() * 900000);
+  db.changeUser({database:"gohoardi_crmapp"})
+  const sql = "SELECT email from tblcontacts WHERE phonenumber="+email+""
+  db.query(sql,(err,result) => {
+    if(err){
+        res.status(400).json({message:err.message})
+    }else if(result.length == 0) {
+      return  res.status(404).json({message:"Phone Number Invalid"})
+    
+    }else{
+      let otp = Math.floor(100000 + Math.random() * 900000);
     request({
       url:process.env.otpUrl,
       method: process.env.otpMethod,
       form: {
         'authkey': process.env.otpauthkey,
-        'mobiles': phoneNumber,
+        'mobiles': email,
         'message':  `${otp} is your one-time OTP for login into the Gohoardings account.`,
         'sender': process.env.otpSender,
         'route': process.env.otpRoute,
@@ -44,8 +38,7 @@ exports.sendOTP = catchError(async(req,res) => {
       if (error) {
         res.status(400).json({message:error.message})
       } else {
-        const sql = "UPDATE tblcontacts SET phone_otp= "+otp+" WHERE phonenumber="+phoneNumber+""
-     
+        const sql = "UPDATE tblcontacts SET phone_otp= "+otp+" WHERE phonenumber="+email+""
         db.query(sql,async(err,result) =>{
             if(err){
                 res.status(400).json({message:err.message})
@@ -54,22 +47,57 @@ exports.sendOTP = catchError(async(req,res) => {
             }
         })
       }
-    });
-   
+    })
+  }   
+})   
 })
+
+
+exports.sendPasswordEmail = catchError(async(req,res,next) => {
+  const {email} = req.body
+  if(!email){
+    res.status(400).json({message:"Wrong Input"})
+}
+db.changeUser({database:"gohoardi_crmapp"})
+db.query("SELECT userid from tblcontacts WHERE  email='"+email+"'",async(err,confirm) =>{
+  if(err){
+    return  res.status(400).json({message:err.message})
+  }else if(confirm.length == 0){
+    return  res.status(404).json({message:"Email Invalid"})
+  }else{
+ let otp = Math.floor(100000 + Math.random() * 900000);
+      const message =`${otp} is your one-time OTP for login into the Gohoardings account.`;
+      const subject = "Reset password gohoardings.com"
+      try {
+        await sendEmail({ email: email, subject: subject, message:message });
+        const sql = "UPDATE tblcontacts SET email_otp="+otp+" WHERE email='"+email+"'"
+        db.query(sql,async(err,result) =>{
+            if(err){
+              return  res.status(400).json({message:err.message})
+            }else{
+                return res.status(200).json({success:true,message:`Email send on ${email}`})
+            }
+        })
+    } catch (error) {
+      return res.status(500).json({message:error.message})
+    }
+  }
+})
+})
+
 
 
 exports.checkOTP = catchError(async(req, res) => {
     const {otp} = req.body
     if(!otp){
-        res.status(400).json({message:"OTP Invalid"})
+      return  res.status(400).json({message:"OTP Invalid"})
     }
     db.changeUser({database:"gohoardi_crmapp"})
     const sql = "SELECT userid from tblcontacts WHERE phone_otp="+otp+" || email_otp="+otp+""
 
     db.query(sql,(err,result) => {
         if(err){
-         res.status(400).json({message:"OTP Invalid"})
+          return res.status(400).json({message:"OTP Invalid"})
         }else if(result.length == 0){
             return  res.status(400).json({message:"OTP Not Match, Try After 30min"})
         }else{
@@ -90,26 +118,24 @@ exports.changePassword = catchError(async(req,res) =>{
   if(password == confirmpasswords){
      jwtToken.verify(expire, process.env.jwt_secret, async (err, user) => {
       if (err) {
-      
+      console.log(err);
         return res.status(400).json({ message: "InValid Token" });
       } else {
        const userid = user.id;
         const finalPassword = bcrypt.hashSync(password, 8)
-     
       db.changeUser({database:"gohoardi_crmapp"})
       const sqlQuery ="UPDATE tblcontacts SET password ='"+finalPassword+"' WHERE userId = "+userid+"";
     
       db.query(sqlQuery,async(err,result) =>{
         if(err){
+          console.log(err);
           return res.status(500).json({message:err.message})
         }else{
        token(userid, 200, res)
         }
       })
-      }})
-     
+      }})   
      }else{
-  
       return res.status(500).json({message:"Password not matched"})
      }
 })

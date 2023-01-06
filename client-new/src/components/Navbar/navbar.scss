@@ -27,12 +27,32 @@
 .nav-text-btn:hover::after {
   width: 100% !important;
 }
+.user-detail-login{
+  .login-icon {
+    height: 30px ;
+    width: 30px ;
+  }
+  .dropdown-toggle::after {
+display: none;
+  }
+  .drop-togel{
+    border: transparent !important;
+  }
+  .drop-item{
+    color: #373435 !important;
+    font-weight: 600 !important;
+  }
+
+}
+
+
 .login-profile{
 
   .drop-togel{
     border: transparent !important;
     margin-left: 16px;
   }
+  
   @media screen and (max-width: 1366px) {
 
     .drop-togel{

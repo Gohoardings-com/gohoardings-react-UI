@@ -1,5 +1,6 @@
 const express = require('express');
-const { register, login, getuser,  googleLogin, logout, Profile, refreshToken, sendPasswordEmail, resetPasswordEmail, changepasswoed, imageupload, updateProfile, linkdinLogin } = require('../controller/REGISTERlOGIN');
+const { sendPasswordEmail } = require('../controller/otp');
+const { register, login, getuser,  googleLogin, logout, Profile, refreshToken,  resetPasswordEmail, changepasswoed, imageupload, updateProfile, linkdinLogin } = require('../controller/REGISTERlOGIN');
 const upload = require('../middelware/ImageUpload');
 const { verifyToken } = require('../middelware/token');
 const router = express.Router()

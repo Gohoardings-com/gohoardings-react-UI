@@ -3,7 +3,7 @@ import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { changePassword, changePasswordApi, clientId, emailOTP, googleLogin, loginUser, mobileOTP, sendOTP } from "../../apis/apis";
+import { changePasswordApi, clientId, emailOTP, googleLogin, loginUser, mobileOTP, sendOTP } from "../../apis/apis";
 import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -23,18 +23,16 @@ const Signin = () => {
   const [emailsValidate, setEmailsValidate] = useState();
   const [password, setPassword] = useState("");
   const [passwordsValidate, setPasswordsValidate] = useState();
-
   const [phone, setNumber] = useState("");
   const [numbervalidate, setNumbervalidate] = useState();
   const [forget, setForget] = useState(false);
+  const [pass,setPass]= useState(false);
   const [fnotify, setFnotify] = useState(" ")
   const [signin, setSignIn] = useState(true);
   const [otp, setOtp] = useState(0)
   const [expire, setexpire] = useState("")
   const [confirmpasswords, setconfirmPasswords] = useState();
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
-
-
 
 
   function setFocus(on) {
@@ -69,6 +67,9 @@ const Signin = () => {
     const data = await googleLogin(profile);
     if (data.success === true) {
       afterLogin()
+    }else{
+      toast(data.message)
+      
     }
   };
 
@@ -112,15 +113,15 @@ const Signin = () => {
       count = +1;
       setPasswordsValidate(<MdOutlineError className="text-danger" />);
     } else if (count === 0) {
-      try {
+    
         e.preventDefault();
         const data = await loginUser(email, password)
         if (data.success === true) {
           afterLogin()
+        }else{
+          toast(data.message)
         }
-      } catch (err) {
-        toast("Email or Password Invalid");
-      }
+     
     }
     e.preventDefault();
   };
@@ -144,23 +145,24 @@ const Signin = () => {
   const onForget = async (e) => {
     e.preventDefault()
     if (isNaN(parseInt(email))) {
-      const data = await mobileOTP(email);
-      setEmail(" ")
-      if (data.success == true) {
-        setEmailsValidate(true)
-      }
-    } else {
       const data = await emailOTP(email)
       setEmail(" ")
       if (data.success == true) {
         setEmailsValidate(true)
+     
+      }else{
+        toast(data.message)
+      }
+    } else {
+      const data = await mobileOTP(email);
+      setEmail(" ")
+      setEmailsValidate(true)
+      if (data.success == true) {
+        setEmailsValidate(true)
+      }else{
+        toast(data.message)
       }
     }
-    //
-
-    //  
-    //  
-
   };
 
   const changePassword = async (e) => {
@@ -170,6 +172,8 @@ const Signin = () => {
     setconfirmPasswords(" ")
     if (data.success === true) {
       afterLogin()
+    }else{
+      toast(data.message)
     }
   };
 
@@ -179,14 +183,11 @@ const Signin = () => {
     setOtp(" ")
     if (data.success === true) {
       setexpire(data.message)
+      setPass(true)
+    }else{
+      toast(data.message)
     }
   };
-
-
-  function alertFunc() {
-    setForget(false);
-    setFnotify("");
-  }
 
   const onRegister = async (e) => {
     if (name === "") {
@@ -210,15 +211,13 @@ const Signin = () => {
     } else if (password.length <= 3) {
       setPasswordsValidate("Password should be atleast 4 digit ");
     } else if (count === 0) {
-      try {
         e.preventDefault()
         const data = await registerUser(name, email, phone, password);
         if (data.success === true) {
           afterLogin()
+        }else{
+          toast(data.message)
         }
-      } catch (err) {
-        toast("Email or Password Invalid");
-      }
     }
     e.preventDefault();
   };
@@ -241,10 +240,12 @@ const Signin = () => {
                   setconfirmPasswords={setconfirmPasswords}
                   expire={expire}
                   setOtp={setOtp}
+                  ToastContainer={ToastContainer}
                   checkOTP={checkOTP}
                   changePassword={changePassword}
                   setEmail={setEmail}
                   phone={phone}
+
                   onForget={onForget}
                   setFocus={setFocus}
                   fnotif={fnotify}
@@ -252,6 +253,8 @@ const Signin = () => {
                   password={password}
                   setPassword={setPassword}
                   setForget={setForget}
+                  setPass={setPass}
+                  pass={pass}
 
                 />
               </>

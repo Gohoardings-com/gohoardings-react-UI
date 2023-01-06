@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const db = require('../conn/conn');
 const jwtToken = require('jsonwebtoken')
-const {sendEmail} = require('../middelware/sendEmail')
 const catchError = require('../middelware/catchError');
 const {token} = require('../middelware/token')
 
@@ -237,27 +236,6 @@ exports.Profile = catchError(async (req, res) => {
   // 
 })
 
-exports.sendPasswordEmail = catchError(async(req,res,next) => {
-  const {email} = req.body
-    let otp = Math.floor(100000 + Math.random() * 900000);
-      const message =`${otp} is your one-time OTP for login into the Gohoardings account.`;
-      const subject = "Reset password gohoardings.com"
-      try {
-        await sendEmail({ email: email, subject: subject, message:message });
-        db.changeUser({database:"gohoardi_crmapp"})
-        const sql = "UPDATE tblcontacts SET email_otp="+otp+" WHERE email='"+email+"'"
-        db.query(sql,async(err,result) =>{
-            if(err){
-                res.status(400).json({message:err.message})
-            }else{
-                return res.status(200).json({message:`Email send on ${email}`})
-            }
-        })
-    } catch (error) {
-      return res.status(500).json({message:error.message})
-    }
-
-})
 
 exports.resetPasswordEmail = catchError(async(req,res,next) => {
   const {code} = req.query
