@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import "./trendingcity.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { mediawithcity } from "../../action/adminAction";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import {mediawithcity} from "../../action/adminAction";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+
 const Trendingcity = () => {
   const dispatch = useDispatch();
 
@@ -16,7 +17,6 @@ const Trendingcity = () => {
   };
 
 
-  
   useEffect(() => {
     data();
   }, []);

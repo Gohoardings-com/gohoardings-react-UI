@@ -1,26 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import { RiUser3Fill } from "react-icons/ri";
-import { AccountContext } from "../../apis/apicontext";
-import { useParams } from "react-router-dom";
-import { IoIosSettings, IoMdLocate } from "react-icons/io";
-import { GrMapLocation } from "react-icons/gr";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {RiUser3Fill} from "react-icons/ri";
+import {AccountContext} from "../../apis/apicontext";
+import {useNavigate, useParams} from "react-router-dom";
+import {IoIosSettings, IoMdLocate} from "react-icons/io";
+import {useSelector} from "react-redux";
 import "./details.scss";
-import {
-  MdOutlineRemoveShoppingCart,
-  MdOutlineAddShoppingCart,
-} from "react-icons/md";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
-import Markers from "../map/marker";
 
 const Details = () => {
-  const { category_name, meta_title } = useParams();
-  const { addRemove } = useContext(AccountContext);
+  const {category_name, meta_title} = useParams();
+  const {addRemove} = useContext(AccountContext);
   const navigate = useNavigate();
   const [markers, setPosts] = useState([]);
-  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
+  const {isLoggedIn} = useSelector((state) => state.LoginStatus);
 
 
 

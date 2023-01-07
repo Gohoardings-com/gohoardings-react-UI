@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/home/home";
 import Media from './pages/medias/media';
 import "react-toastify/dist/ReactToastify.css";
@@ -10,7 +10,7 @@ import Contact from "./pages/contact-us/contact";
 import About from './pages/about-us/about'
 import FAQS from './pages/faqs/faqs'
 import Team from './pages/team/team'
-import { useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 import News from './pages/news_media/news_media'
 import Profile from './pages/profile/profile'
 import Testimonial from './pages/testimonial/testimonial'

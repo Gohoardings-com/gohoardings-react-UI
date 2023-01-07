@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AccountContext } from "../../apis/apicontext";
+import {AccountContext} from "../../apis/apicontext";
 import moment from "moment";
-import { Dropdown } from "react-bootstrap";
+import {Dropdown} from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { FaRupeeSign } from "react-icons/fa";
-import { FaCalendarAlt } from "react-icons/fa";
+import {FaCalendarAlt, FaRupeeSign} from "react-icons/fa";
 import "./cart.scss";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";

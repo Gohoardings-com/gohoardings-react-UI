@@ -1,16 +1,13 @@
-
-
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 import Slider from "./slider.jsx";
 import "./icons.scss"
-import { iconFiltersData } from "../../action/adminAction";
-import { useDispatch, useSelector } from "react-redux";
-import instance from "../../apis/axios.jsx";
+import {iconFiltersData} from "../../action/adminAction";
+import {useDispatch} from "react-redux";
 
-const IconsSlection = ({  slice }) => {
+const IconsSlection = ({slice}) => {
   const dispatch = useDispatch()
   const [distance, Setdistance] = useState(0);
-  const [datas,setData] = useState([])
+  const [datas, setData] = useState([])
 
   let hording = [];
 

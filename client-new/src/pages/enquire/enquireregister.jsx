@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { ToastContainer, toast } from "react-toastify";
-import { MdOutlineError } from "react-icons/md";
+import React, {useState} from 'react';
+import {toast, ToastContainer} from "react-toastify";
+import {MdOutlineError} from "react-icons/md";
 import './enquire.scss';
 import instance from '../../apis/axios';
 
 
 const Enquireregister = () => {
 
-   
+
     const [name, setName] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");

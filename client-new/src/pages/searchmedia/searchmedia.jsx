@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getAllCity } from "../../apis/apis";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
+import {getAllCity} from "../../apis/apis";
 import Form from "react-bootstrap/Form";
-import { BiCurrentLocation } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchmedia.scss";
 import MediaDropDown from "../../components/media_dropdown/mediadropdown";

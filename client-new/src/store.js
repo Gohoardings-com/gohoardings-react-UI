@@ -1,17 +1,17 @@
-import { createStore, applyMiddleware, combineReducers} from 'redux'
-import { createSlice} from '@reduxjs/toolkit'
+import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {createSlice} from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import {SearchReducer, UserReducer, IconFilterReducer} from './reducer/adminReducer'
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {IconFilterReducer, SearchReducer, UserReducer} from './reducer/adminReducer'
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 const authSlice = createSlice({
-    name:'auth',
-    initialState:{isLoggedIn:false},
-    reducers:{
-        login(state){
+    name: 'auth',
+    initialState: {isLoggedIn: false},
+    reducers: {
+        login(state) {
             state.isLoggedIn = true
         },
-        logout(state){
+        logout(state) {
             state.isLoggedIn = true;
         }
     }

@@ -1,14 +1,15 @@
 import React from 'react'
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import {Dropdown, DropdownButton} from "react-bootstrap";
+
 const Mediadropdown = ({userType, setUserType}) => {
-  
+
   return (
-    <DropdownButton
-    title={userType}
-    placeholder="Search your City"
-    id="select-media-box"
-    onSelect={(e) => setUserType(e)}
-    className=""
+      <DropdownButton
+          title={userType}
+          placeholder="Search your City"
+          id="select-media-box"
+          onSelect={(e) => setUserType(e)}
+          className=""
   >
     <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
     <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media

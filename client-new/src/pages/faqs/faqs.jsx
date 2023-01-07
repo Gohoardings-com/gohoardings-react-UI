@@ -1,9 +1,9 @@
-import React,{useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./faqs.scss";
-import { BsCaretDown } from "react-icons/bs";
+import {BsCaretDown} from "react-icons/bs";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 import Branding from "../../components/branding/branding";
-import { goh_faqsApi } from "../../apis/apis";
+import {goh_faqsApi} from "../../apis/apis";
 
 const Faqs = () => {
   const [posts, setPosts] = useState([])

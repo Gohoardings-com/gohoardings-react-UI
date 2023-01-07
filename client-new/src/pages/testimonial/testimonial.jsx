@@ -1,19 +1,19 @@
-import React,{useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import './testimonial.scss'
 import Branding from "../../components/branding/branding";
 import Fixednavbar from "../../components/navbar/fixednavbar";
-import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
-import { goh_testimonialsApi } from "../../apis/apis";
+import {BsStar, BsStarFill, BsStarHalf} from "react-icons/bs";
+import {goh_testimonialsApi} from "../../apis/apis";
 
 const Testimonial = () => {
-  const [posts, setPosts] = useState([])
-  
-  const staff = async() =>{
-    const data = await goh_testimonialsApi()
-    setPosts(data)
-  }
+    const [posts, setPosts] = useState([])
 
-  useEffect(()=>{
+    const staff = async () => {
+        const data = await goh_testimonialsApi()
+        setPosts(data)
+    }
+
+    useEffect(() => {
     staff()
   },[])
 

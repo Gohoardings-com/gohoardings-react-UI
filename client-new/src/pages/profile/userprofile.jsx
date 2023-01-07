@@ -1,16 +1,15 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import {  Form } from 'react-bootstrap';
-import { updateProfile } from '../../apis/apis'
-import { ToastContainer, toast } from "react-toastify";
+import React, {useEffect, useState} from 'react'
+import {Form} from 'react-bootstrap';
+import {updateProfile} from '../../apis/apis'
+import {toast, ToastContainer} from "react-toastify";
+
 const initalState = {
-  firstname:"",
-  email:"",
-  phonenumber:"",
+  firstname: "",
+  email: "",
+  phonenumber: "",
 }
-const Userprofile = ({ posts }) => {
-  const [state,setState] = useState(initalState);
+const Userprofile = ({posts}) => {
+  const [state, setState] = useState(initalState);
   const [imge, setImage] = useState([])
 
   const {firstname, email, phonenumber}= state;

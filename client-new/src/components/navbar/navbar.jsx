@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import Nav from "react-bootstrap/Nav";
-import { mediawithcity } from "../../action/adminAction";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import './navbar.scss'
 import Userdetail from "./userdetail";
@@ -11,8 +10,8 @@ const NewNAvbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [posts, setPosts] = useState()
-  
-useEffect(() => {
+
+  useEffect(() => {
   setPosts(posts)
 }, []);
 

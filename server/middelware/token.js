@@ -1,39 +1,42 @@
 const jwtToken = require('jsonwebtoken')
 const catchError = require('./catchError')
 
-exports.token = catchError(async(userid, statuscode, res) =>{
-  
-  const token =  jwtToken.sign({ id: userid }, process.env.jwt_secret, {
+exports.token = catchError(async (userid, statuscode, res) => {
+
+    const token = jwtToken.sign({id: userid}, process.env.jwt_secret, {
         expiresIn: "7d",
-      });
-     const option =  {
+    });
+    const option = {
         path: '/',
-        expires:  new Date(Date.now() + 7 * 24 * 3600000),
+        expires: new Date(Date.now() + 7 * 24 * 3600000),
         httpOnly: false,
         sameSite: 'lax',
-      }
-      return res.status(statuscode).cookie(String(userid), token,option).json({success:true, message:"Login Successfully"})
+    }
+    return res.status(statuscode).cookie(String(userid), token, option).json({
+        success: true,
+        message: "Login Successfully"
+    })
 })
 
 exports.verifyToken = catchError(async (req, res, next) => {
     const cookieData = req.cookies;
     if (!cookieData) {
-      return res.status(400).json({ message: "No Cookie Found" })
+        return res.status(400).json({message: "No Cookie Found"})
     }
     const token = Object.values(cookieData)[0];
     if (!token) {
-      return res.status(400).json({ message: "No Token Found" })
+        return res.status(400).json({message: "No Token Found"})
     } else {
-      return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
-        if (err) {
-          return res.status(400).json({ message: "InValid Token" });
-        } else {
-          req.id = user.id;
-          next()
-        }
-      })
+        return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
+            if (err) {
+                return res.status(400).json({message: "InValid Token"});
+            } else {
+                req.id = user.id;
+                next()
+            }
+        })
     }
-  })
+})
 
 
 

@@ -6,9 +6,14 @@ const cookieParser = require('cookie-parser')
 
 dotenv.config()
 const app = express();
-app.use(cors({credentials:true, origin:"http://localhost:3000",  methods: "GET,POST,PUT,DELETE",  optionsSuccessStatus: 200}))
-app.use( express.json({limit: '14kb'}))
-app.use(bodyparser.urlencoded({ extended: true}));
+app.use(cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    optionsSuccessStatus: 200
+}))
+app.use(express.json({limit: '14kb'}))
+app.use(bodyparser.urlencoded({extended: true}));
 app.use(cookieParser());
 
 const mediaRouter = require('./routes/mediaRoutes')
@@ -27,13 +32,13 @@ app.use("/api/v1/filter", filters);
 app.use("/api/v1/enquiry", enquiryRoute);
 app.use("/api/v1/product", productList);
 app.use("/api/v1/cart", addOnCart);
-app.use('/api/v1/registration',LoginRoute)
+app.use('/api/v1/registration', LoginRoute)
 app.use('/api/v1/media', mediaRouter)
 
 
 app.use(express.static('upload'));
 
 
-app.listen( process.env.PORT, () => {
-    console.log(`Your Website Running at ${ process.env.PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Your Website Running at ${process.env.PORT}`);
 })

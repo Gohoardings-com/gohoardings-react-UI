@@ -1,17 +1,17 @@
-import React,{useState} from 'react'
-import {ToastContainer, toast } from 'react-toastify';
-import { updatePassword } from '../../apis/apis';
+import React, {useState} from 'react'
+import {toast, ToastContainer} from 'react-toastify';
+import {updatePassword} from '../../apis/apis';
 
 const ChangePassword = () => {
-  const [state,setState] = useState({
-    newPassword: "",confirmPassword:""
+  const [state, setState] = useState({
+    newPassword: "", confirmPassword: ""
   });
-  const handleChange =async(e) =>{
+  const handleChange = async (e) => {
     const {name, value} = e.target
-  setState({...state,[name]:value})
-    }
+    setState({...state, [name]: value})
+  }
 
-    const sumbithandle = async(e) =>{
+  const sumbithandle = async(e) =>{
       e.preventDefault()
       const data = await updatePassword(state)
       if(data.success == true){

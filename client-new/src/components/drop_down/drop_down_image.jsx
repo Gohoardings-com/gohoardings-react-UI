@@ -1,15 +1,16 @@
 import React from "react";
-import {BsFillRecord2Fill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import {BsFillRecord2Fill} from "react-icons/bs";
+import {Link} from "react-router-dom";
 import "./dropdown.scss";
-const Drop_Down_Image = ({ show, setShow, Dropdown }) => {
 
-  return (
-    <>
-      <Dropdown.Menu
-        show={show}
-        onMouseLeave={() => setShow(false)}
-        className="drop-menu w-100  pe-4 ps-4 position-fixed "
+const Drop_Down_Image = ({show, setShow, Dropdown}) => {
+
+    return (
+        <>
+            <Dropdown.Menu
+                show={show}
+                onMouseLeave={() => setShow(false)}
+                className="drop-menu w-100  pe-4 ps-4 position-fixed "
       >
         <div className="container-fluid ">
           <div className="row pt-2 ">

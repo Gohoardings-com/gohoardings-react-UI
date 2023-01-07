@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import "./contact.scss";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
-import { ToastContainer, toast } from "react-toastify";
-import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
-import { ImMobile } from "react-icons/im";
+import {toast, ToastContainer} from "react-toastify";
+import {MdEmail, MdLocationPin, MdOutlineError} from "react-icons/md";
+import {ImMobile} from "react-icons/im";
 
 const Contact = () => {
 

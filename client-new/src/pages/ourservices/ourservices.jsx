@@ -1,11 +1,11 @@
 import React from "react";
 import "./ourservices.scss";
-import { CityNameImage } from "../../apis/apis";
+import {CityNameImage} from "../../apis/apis";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {HiOutlineArrowNarrowRight} from 'react-icons/hi'
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Ourservices = () => {
   {

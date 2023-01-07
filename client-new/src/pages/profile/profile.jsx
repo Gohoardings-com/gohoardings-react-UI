@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { profileDetails } from "../../apis/apis";
+import React, {useEffect, useState} from "react";
+import {profileDetails} from "../../apis/apis";
 import Fixednavbar from "../../components/navbar/fixednavbar";
-import NewNAvbar from "../../components/navbar/navbar";
 import ChangePassword from "./changePassword";
 import Companey from "./companey";
 import "./profile.scss";

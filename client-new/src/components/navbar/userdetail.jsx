@@ -1,23 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { authActions } from '../../store';
-import { ToastContainer, toast } from "react-toastify";
+import React, {useContext, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {authActions} from '../../store';
+import {toast, ToastContainer} from "react-toastify";
 import {useGoogleOneTapLogin} from 'react-google-one-tap-login'
-import { GoogleLogout } from 'react-google-login'
+import {GoogleLogout} from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
-import { clientId, googleLogin, logoutUser, refreshToken } from '../../apis/apis';
-import { AccountContext } from '../../apis/apicontext';
-import { userDetails } from '../../action/adminAction';
+import {clientId, googleLogin, logoutUser, refreshToken} from '../../apis/apis';
+import {AccountContext} from '../../apis/apicontext';
+import {userDetails} from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useAuth0 } from "@auth0/auth0-react";
+import {useAuth0} from "@auth0/auth0-react";
 
 const Userdetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { initalState } = useContext(AccountContext)
-  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
-  const {user,loading} = useSelector((state) => state.user)
-  const { logout } = useAuth0();
+  const {initalState} = useContext(AccountContext)
+  const {isLoggedIn} = useSelector((state) => state.LoginStatus);
+  const {user, loading} = useSelector((state) => state.user)
+  const {logout} = useAuth0();
 
   useGoogleOneTapLogin({
     onSuccess:(response) => oneTap(response),

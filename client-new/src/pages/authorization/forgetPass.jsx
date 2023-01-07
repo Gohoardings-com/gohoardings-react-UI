@@ -1,16 +1,32 @@
-import React,{useState} from 'react'
-import {FiLogIn,FiArrowLeftCircle} from "react-icons/fi";
-import { ToastContainer, toast } from "react-toastify";
+import React from 'react'
+import {FiArrowLeftCircle, FiLogIn} from "react-icons/fi";
+import {ToastContainer} from "react-toastify";
 
-const ForgetPass = ({setconfirmPasswords,sendOtp,setSendOtp,setOtp,email,otp,  toast, checkOTP,changePassword, setEmail, onForget, setFocus,   setPassword, setForget, setPass,
-  pass}) => {
+const ForgetPass = ({
+                        setconfirmPasswords,
+                        sendOtp,
+                        setSendOtp,
+                        setOtp,
+                        email,
+                        otp,
+                        toast,
+                        checkOTP,
+                        changePassword,
+                        setEmail,
+                        onForget,
+                        setFocus,
+                        setPassword,
+                        setForget,
+                        setPass,
+                        pass
+                    }) => {
 
-  const goBack=()=>{
-    if(pass==true){
-      setPass(false);
-       setSendOtp(false);
-    }
-    if(sendOtp==true){
+    const goBack = () => {
+        if (pass == true) {
+            setPass(false);
+            setSendOtp(false);
+        }
+        if (sendOtp == true) {
       setSendOtp(false);
        setPass(false);
     }

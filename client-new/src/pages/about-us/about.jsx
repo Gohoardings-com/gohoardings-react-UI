@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 import Branding from "../../components/branding/branding";
 import "../about-us/about.scss";
 import clientslogo from "./clients";
+
 const About = () => {
   const [noOfLogo, setnoOfLogo] = useState(18);
   const [showButton,setshowButon]=useState(true);

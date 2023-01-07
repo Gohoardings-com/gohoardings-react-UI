@@ -1,25 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./media.scss";
 // import { ILLUMINATION } from "../../apis/apis";
-import { mediawithcity, mediaFilters } from "../../action/adminAction";
-import { useSelector, useDispatch } from "react-redux";
-import { AccountContext } from "../../apis/apicontext";
-import { useParams, useNavigate } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import {mediaFilters, mediawithcity} from "../../action/adminAction";
+import {useDispatch, useSelector} from "react-redux";
+import {AccountContext} from "../../apis/apicontext";
+import {useNavigate, useParams} from "react-router-dom";
 import instance from "../../apis/axios";
-import {
-  MdOutlineShoppingCart,
-  MdArrowUpward,
-  MdOutlineArrowDownward,
-} from "react-icons/md";
+import {MdArrowUpward, MdOutlineArrowDownward, MdOutlineShoppingCart,} from "react-icons/md";
 import Multicard from "./multicard";
 import Medialogo from "../../components/medialogo";
 import FixedNavbar from "../../components/navbar/fixednavbar";
 
 const Media = () => {
   const dispatch = useDispatch();
-  const { search, loading } = useSelector((state) => state.search);
-  const { category_name, city_name } = useParams();
+  const {search, loading} = useSelector((state) => state.search);
+  const {category_name, city_name} = useParams();
   const { addRemove } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();

@@ -1,27 +1,28 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AccountContext } from "../../apis/apicontext";
-import { useNavigate } from "react-router-dom";
+import {AccountContext} from "../../apis/apicontext";
+import {useNavigate} from "react-router-dom";
 import "./map.scss";
 import Fixednavbar from "../../components/navbar/fixednavbar";
-import { mediawithcity, priceSubIllu } from "../../action/adminAction";
+import {mediawithcity, priceSubIllu} from "../../action/adminAction";
 import "./icons.scss";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import instance from "../../apis/axios";
 import Multirangeslider from "./multirangeslider";
-import { useJsApiLoader } from "@react-google-maps/api";
+import {useJsApiLoader} from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
-import { MdArrowUpward, MdOutlineArrowDownward } from "react-icons/md";
+import {MdOutlineArrowDownward} from "react-icons/md";
+
 const BASE_URL = process.env.REACT_APP_CRYPTO_URL;
 
 const Map = () => {
-  const { isLoggedIn } = useSelector((state) => state.LoginStatus);
+  const {isLoggedIn} = useSelector((state) => state.LoginStatus);
   const dispatch = useDispatch();
-  const { search, loading } = useSelector((state) => state.search);
+  const {search, loading} = useSelector((state) => state.search);
   const navigate = useNavigate();
   const [medias, setMedias] = useState(search);
-  const { addRemove } = useContext(AccountContext);
+  const {addRemove} = useContext(AccountContext);
   const [mediaData, setMediadata] = useState([]);
   const [price, setprice] = useState([]);
   const [query, setQuery] = useState("");

@@ -1,20 +1,17 @@
-import React, { useState,useEffect,useContext } from "react";
-import { AccountContext } from "../../apis/apicontext";
-import { useSelector } from "react-redux";
-import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
-import { MdOutlineRemoveShoppingCart, MdOutlineShoppingCart } from 'react-icons/md'
+import React, {useContext, useState} from "react";
+import {AccountContext} from "../../apis/apicontext";
+import {useSelector} from "react-redux";
+import {GoogleMap, InfoWindow, Marker} from "@react-google-maps/api";
 import "./marker.scss"
-import {useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import instance from "../../apis/axios";
 
 
-
-
 const Markers = (markers) => {
-  const { iconfilter, loading } = useSelector((state) => state.iconfilter);
+  const {iconfilter, loading} = useSelector((state) => state.iconfilter);
   const navigate = useNavigate()
   const {addRemove} = useContext(AccountContext)
-  const { zoom, setZoom } =  useState(10);
+  const {zoom, setZoom} = useState(10);
   markers.data.forEach(e => {
       e['position'] = {lat : e.latitude, lng : e.longitude}
     })

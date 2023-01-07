@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import "./footer.scss";
 
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import instance from "../../apis/axios";
-import { FiPhoneCall } from "react-icons/fi";
-import { BiMailSend } from "react-icons/bi";
-import { MdLocationOn } from "react-icons/md";
+import {FiPhoneCall} from "react-icons/fi";
+import {BiMailSend} from "react-icons/bi";
+import {MdLocationOn} from "react-icons/md";
 
 function useWindowSize() {
   const [size, setSize] = useState([window.innerWidth]);

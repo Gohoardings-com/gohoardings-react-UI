@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { mediawithcity } from "../../action/adminAction";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getAllCity } from "../../apis/apis";
+import {mediawithcity} from "../../action/adminAction";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {getAllCity} from "../../apis/apis";
 import Userdetail from "./userdetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
-import { MdOutlineSearch } from "react-icons/md";
+import {MdOutlineSearch} from "react-icons/md";
 import {RiArrowDropDownLine} from "react-icons/ri"
-import { Dropdown } from "react-bootstrap";
+import {Dropdown} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import MediaDropDown from "../media_dropdown/mediadropdown";
 import Form from "react-bootstrap/Form";

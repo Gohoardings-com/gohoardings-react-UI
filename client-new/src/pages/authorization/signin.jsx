@@ -1,25 +1,32 @@
-import React, { useState,useContext } from 'react'
+import React, {useContext, useState} from 'react'
 import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
-import { ToastContainer, toast } from "react-toastify";
-import { changePasswordApi, clientId, emailOTP, googleLogin, loginUser, mobileOTP, sendOTP } from "../../apis/apis";
-import { useGoogleLogin } from "react-google-login";
-import { MdOutlineError } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
+import {
+  changePasswordApi,
+  clientId,
+  emailOTP,
+  googleLogin,
+  loginUser,
+  mobileOTP,
+  registerUser,
+  sendOTP
+} from "../../apis/apis";
+import {useGoogleLogin} from "react-google-login";
+import {MdOutlineError} from "react-icons/md";
+import {useNavigate} from "react-router-dom";
 import Register from "./signup";
-import { AccountContext } from '../../apis/apicontext';
-import { useSelector, useDispatch } from 'react-redux'
-import { authActions } from "../../store";
-import { registerUser } from '../../apis/apis';
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import {AccountContext} from '../../apis/apicontext';
+import {useDispatch, useSelector} from 'react-redux'
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 
 
 const Signin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  const { addRemove } = useContext(AccountContext);
+  const {addRemove} = useContext(AccountContext);
   const [nameValidate, setNameValidate] = useState();
   const [email, setEmail] = useState();
   const [emailsValidate, setEmailsValidate] = useState();

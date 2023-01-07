@@ -1,4 +1,4 @@
-import React, {  useEffect, useContext, useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.scss";
 import SearchMedia from '../searchmedia/searchmedia'

@@ -1,21 +1,19 @@
 import React from 'react'
-import { FcGoogle } from "react-icons/fc";
-import { FaLinkedin } from "react-icons/fa";
+import {FcGoogle} from "react-icons/fc";
 import instance from '../../apis/axios';
-import { authActions } from '../../store';
-import { useDispatch } from 'react-redux';
-import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
-
+import {authActions} from '../../store';
+import {useDispatch} from 'react-redux';
+import {useAuth0} from "@auth0/auth0-react";
+import {useNavigate} from "react-router-dom";
 
 
 const Logingoogle = ({signIn}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const { loginWithPopup, user } = useAuth0();
+  const {loginWithPopup, user} = useAuth0();
 
-  if(useAuth0()?.isAuthenticated){
-    instance.post('registration/user',user)
+  if (useAuth0()?.isAuthenticated) {
+    instance.post('registration/user', user)
     localStorage.setItem(true, "long");
 const locate =  localStorage.getItem("locate");
 const backlink = locate ? locate : "/";

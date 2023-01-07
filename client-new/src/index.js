@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap"
 import './index.css';
 import Apicontext from './apis/apicontext';
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import App from './App';
-import { Auth0Provider } from "@auth0/auth0-react";
+import {Auth0Provider} from "@auth0/auth0-react";
 import store from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
