@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from "react";
 import "./news_media.scss";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import Branding from "../../components/branding/branding";
 import { goh_media_and_newsApi } from "../../apis/apis";
 
@@ -16,6 +17,7 @@ const Newsmedia = () => {
 
   return (
     <>
+    <Fixednavbar/>
       <Branding title="News & Media" />
       <section className="mt-5">
         <div className="container-fluid px-5 news pt-3">

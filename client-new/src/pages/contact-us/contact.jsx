@@ -126,13 +126,14 @@ const Contact = () => {
                 </div>
 
                 <form onSubmit={onSubmit}>
-                  <div className="mb-4 mt-1 ">
+                  <div className="form-floating mb-4 mt-1 ">
                     <div className="input-box">
-                      <label className="input-label">Enter your full name</label>
+                      <label className="input-label" htmlFor="floatingInput">Enter your full name</label>
                       <input
+                        id="floatingInput"
                         type="text"
                         className="input-1 "
-                        onFocus={() => setFocus(true)}
+                        // onFocus={() => setFocus(true)}
                         value={name}
                         onChange={(e) => {
                           setName(e.target.value);
@@ -150,7 +151,7 @@ const Contact = () => {
                       <input
                         type="number"
                         className="input-1 "
-                        onFocus={() => setFocus(true)}
+                        // onFocus={() => setFocus(true)}
                         value={number}
                         onChange={(e) => {
                           setNumber(e.target.value);

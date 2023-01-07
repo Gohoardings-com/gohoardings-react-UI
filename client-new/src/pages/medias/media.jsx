@@ -176,7 +176,7 @@ const Media = () => {
                   MEDIA TYPE
                 </h5>
                 <div
-                  class="dropdown-menu "
+                  className="dropdown-menu "
                   aria-labelledby="dropdownMenuButton"
                 >
                   <div className="col ms-2">
@@ -217,7 +217,7 @@ const Media = () => {
                     SUB CATEGORY
                   </h5>
                   <div
-                    class="dropdown-menu ps-2 "
+                    className="dropdown-menu ps-2 "
                     aria-labelledby="dropdownMenuButton"
                   >
                     <div className="rowCheck  row">

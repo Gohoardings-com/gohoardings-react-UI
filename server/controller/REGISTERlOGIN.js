@@ -71,7 +71,6 @@ exports.login = catchError(async (req, res) => {
 exports.googleLogin = catchError(async (req, res) => {
 const {name, email, givenName, imageUrl} = req.body
   db.changeUser({ database: "gohoardi_crmapp" });
-
   db.query("SELECT * FROM tblcontacts WHERE email='" + email + "' && provider='Google'", async (err, selectResult) => {
     if (err) {
       return res.status(400).json({ message: "Wrong Data" })
@@ -291,10 +290,10 @@ exports.changepasswoed = catchError(async(req,res,next) => {
             const sql ="UPDATE tblcontacts SET password = '"+finalPassword+"' WHERE userid='"+userId+"'";
             db.query(sql,async(err,result) =>{
               if(err){
-                console.log(err);
+             
                 return res.status(800).json({message:err.message})
               }else{
-                console.log(result);
+            
                 return res.status(200).json({message:"Password Change Successfully"})
               }
             })

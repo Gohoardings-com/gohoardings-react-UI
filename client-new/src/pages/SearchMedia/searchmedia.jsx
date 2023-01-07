@@ -53,7 +53,7 @@ const SearchMedia = () => {
             <a href="/contact" className="text-decoration-none">
               <button
                 type="button"
-                class="btn  fw-bold p-2 ps-3 pe-3 mt-3 enquire-now text-decoration-none"
+                className="btn  fw-bold p-2 ps-3 pe-3 mt-3 enquire-now text-decoration-none"
               >
                 Enquire now
               </button>

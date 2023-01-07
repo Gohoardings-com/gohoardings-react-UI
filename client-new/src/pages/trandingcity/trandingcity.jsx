@@ -54,6 +54,7 @@ if(!loading){
 
   return (
     <>
+    
       <div className="container-xxl  container-xl container-lg container-md  mt-5 mt-md-2 mb-md-4  py-5 mb-5 trending-contain ">
         <section>
           <h1 className="text-center text-nowrap ">
@@ -76,9 +77,9 @@ if(!loading){
               <>
               <Slider {...slider}>
               {newData.map((pos, i) => (
-                <div class="container pt-3 ">
-                  <div class="row  ">
-                    <div class="col p-3 ">
+                <div className="container pt-3" key={i}>
+                  <div className="row  ">
+                    <div className="col p-3 ">
                       <Link
                         to={`/details/${pos.category_name}/${pos.meta_title}`}
                       >
@@ -106,7 +107,7 @@ if(!loading){
                         
                           <div className="bottom-left">Delhi</div>
                           <div className="bottom-left-media">
-                            {pos.medianame.substring(17, 30)}{" "}
+                            {pos.medianame.substring(1, 17)}{" "}
                           </div>
                         </div>
                       </Link>

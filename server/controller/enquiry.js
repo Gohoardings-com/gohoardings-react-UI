@@ -4,7 +4,6 @@ const catchError = require("../middelware/catchError");
 exports.message = catchError(async(req,res, next) => {
   try {   
     const {name, email, phone, message} = req.body
-    console.log(req.body);
     db.changeUser({database:"sql_login"})
     req.body ? db.query("INSERT into enquiry (name, email, phone, message) VALUES ('"+name+"', '"+email+"', '"+phone+"','"+message+"')", async (err,result) => {
         if(err){

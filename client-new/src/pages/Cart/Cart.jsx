@@ -6,9 +6,7 @@ import { Dropdown } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FaRupeeSign } from "react-icons/fa";
-
 import { FaCalendarAlt } from "react-icons/fa";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import "./cart.scss";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
@@ -43,10 +41,6 @@ const Cart = () => {
     });
     setPosts(data);
   };
-
-  useEffect(() => {
-    getAllData();
-  }, []);
 
   useEffect(() => {
     getAllData();
@@ -134,9 +128,9 @@ const Cart = () => {
         <div className="p-0 m-0 date-select-section">
           <div className="row">
             <div className="col-md-3 ps-0">
-              <div class="input-box active-grey ">
-                <label class="input-label">Start Date</label>
-                <div type="text " class="input-1 d-flex bg-light">
+              <div className="input-box active-grey ">
+                <label className="input-label">Start Date</label>
+                <div type="text " className="input-1 d-flex bg-light">
                   <h6 className="me-2 calender-logo  text-dark">
                     {moment(Start).format("DD/MM/YYYY")}
                   </h6>
@@ -156,9 +150,9 @@ const Cart = () => {
               </div>
             </div>
             <div className="col-md-3">
-              <div class="input-box active-grey">
-                <label class="input-label">End Date</label>
-                <div type="text " class="input-1 d-flex bg-light ">
+              <div className="input-box active-grey">
+                <label className="input-label">End Date</label>
+                <div type="text " className="input-1 d-flex bg-light ">
                   <h6 className="me-2  calender-logo  text-dark">
                     {moment(End).format("DD/MM/YYYY")}
                   </h6>
@@ -241,7 +235,7 @@ const Cart = () => {
                                  
                                       <span
                                         type="button"
-                                        class=" fw-bold  rounded bg-transparent  border-0 ps-2 pe-2   text-dark"
+                                        className=" fw-bold  rounded bg-transparent  border-0 ps-2 pe-2   text-dark"
                                       >
                                         {obj.days}
                                       </span>
@@ -346,15 +340,15 @@ const Cart = () => {
           </div>
           <div className="col-md-3 ">
             <h5 className=" p-2 ps-3 news-heading ">Gross Total</h5>
-            <div class="card text-center bill-card mt-3 bg-light ">
-              <div class="card-body">
-                <h5 class="card-title">
+            <div className="card text-center bill-card mt-3 bg-light ">
+              <div className="card-body">
+                <h5 className="card-title">
                   Total media :
-                  <span type="button" class=" ms-1">
+                  <span type="button" className=" ms-1">
                     {initalState}
                   </span>
                 </h5>
-                <div class="">
+                <div className="">
                   <h5 className="mt-3 card-text">
                     Media Start on {moment(Start).format("DD/MM/YYYY")}
                   </h5>

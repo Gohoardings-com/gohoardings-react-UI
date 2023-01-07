@@ -43,11 +43,11 @@ const Ourservices = () => {
         <div>
         <Slider {...settings}>
           {CityNameImage.map((pos,i) => (
-             <div class="container pt-4 " key={i}>
-            <div class="row bg-light rounded-2 service-card me-2 ms-2 " >
-              <div class="col p-3"><img src={pos.srcImg} className="  rounded-2 service-card-img"/>
+             <div className="container pt-4 " key={i}>
+            <div className="row bg-light rounded-2 service-card me-2 ms-2 " >
+              <div className="col p-3"><img src={pos.srcImg} className="  rounded-2 service-card-img"/>
               </div>
-              <div class="col p-3 ps-0 position-relative">
+              <div className="col p-3 ps-0 position-relative">
                 <h6 className="position-absolute  ps-0 fw-bold">{pos.label}</h6>
                 <Link
               to={`/${pos.value}/delhi`}

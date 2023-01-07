@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from "react";
 import "./team.scss";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import { gohordingStaffAPi } from "../../apis/apis";
-import member from "./teammember";
 import { FaFacebookSquare, FaLinkedin } from "react-icons/fa";
 import {TiSocialTwitter} from "react-icons/ti"
 
@@ -19,7 +19,8 @@ const Team = () => {
 
   return (
     <>
-      <section>
+    <Fixednavbar/>
+      <section className="mt-5">
         <div className="container">
           <div className="row">
             <div className="inn-pag-ban">

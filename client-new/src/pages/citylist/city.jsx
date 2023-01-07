@@ -13,9 +13,9 @@ const City = () => {
           world from our partners and friends.
         </h6>
       </section>
-      <div class="container mt-5 ">
-        <div class="row">
-          <div class="col col-md-4"> 
+      <div className="container mt-5 ">
+        <div className="row">
+          <div className="col col-md-4"> 
           <Link to={`/traditional-ooh-media/delhi`}>
             <div className="city-img-container ">
             <img
@@ -27,7 +27,7 @@ const City = () => {
               <div className="bottom-left-media">1893 <span className="bottom-left-media-text" >medias  </span> </div>
             </div>
             </Link></div>
-          <div class="col col-md-4"><Link to={`/traditional-ooh-media/mumbai`}>
+          <div className="col col-md-4"><Link to={`/traditional-ooh-media/mumbai`}>
              <div className="city-img-container ">
               <img
                 src="./gohoarding/home1.jpg"
@@ -38,7 +38,7 @@ const City = () => {
                   <div className="bottom-left-media">1316 <span className="bottom-left-media-text">medias  </span> </div>
             </div>
             </Link></div>
-          <div class="col col-md-4"><Link to={`/traditional-ooh-media/bengaluru`}>
+          <div className="col col-md-4"><Link to={`/traditional-ooh-media/bengaluru`}>
             <div className="city-img-container" >
               <img
                 src="./gohoarding/home2.jpg"
@@ -52,9 +52,9 @@ const City = () => {
         </div>
       </div>
 
-      <div class="container mt-4">
-           <div class="row justify-content-md-center">
-          <div class="col"><Link to={`/traditional-ooh-media/chennai`}>
+      <div className="container mt-4">
+           <div className="row justify-content-md-center">
+          <div className="col"><Link to={`/traditional-ooh-media/chennai`}>
              <div className="city-img-container">
               <img
                 src="./gohoarding/home3.webp"
@@ -66,7 +66,7 @@ const City = () => {
             </div>
             </Link></div>
    
-          <div class="col"><Link to={`/traditional-ooh-media/hyderabad`}>
+          <div className="col"><Link to={`/traditional-ooh-media/hyderabad`}>
              <div className="city-img-container ">
               <img
                 src="./gohoarding/home4.jpg"

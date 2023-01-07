@@ -1,11 +1,13 @@
 import React,{useState, useEffect} from "react";
 import './testimonial.scss'
 import Branding from "../../components/branding/branding";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import { goh_testimonialsApi } from "../../apis/apis";
 
 const Testimonial = () => {
   const [posts, setPosts] = useState([])
+  
   const staff = async() =>{
     const data = await goh_testimonialsApi()
     setPosts(data)
@@ -14,9 +16,10 @@ const Testimonial = () => {
   useEffect(()=>{
     staff()
   },[])
-console.log(posts);
+
   return (
     <>
+     <Fixednavbar/>
       <Branding title="Testimonials" />
       <div className="container  mt-5">
         <div className="row testimonial-row mt-5">

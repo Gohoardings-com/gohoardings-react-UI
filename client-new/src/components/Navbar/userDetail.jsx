@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../../store';
 import { ToastContainer, toast } from "react-toastify";
@@ -7,7 +7,6 @@ import { GoogleLogout } from 'react-google-login'
 import {useNavigate} from 'react-router-dom'
 import { clientId, googleLogin, logoutUser, refreshToken } from '../../apis/apis';
 import { AccountContext } from '../../apis/apicontext';
-import { useContext } from 'react';
 import { userDetails } from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -15,7 +14,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserDetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { addRemove } = useContext(AccountContext);
   const { initalState } = useContext(AccountContext)
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
   const {user,loading} = useSelector((state) => state.user)
@@ -57,10 +55,7 @@ const UserDetail = () => {
   }
 
 const getUser = async () => {
-
     dispatch(userDetails)
-    addRemove({ type: "DECR" });
-
 } 
 
 

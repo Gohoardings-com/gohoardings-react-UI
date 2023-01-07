@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState,useContext } from 'react'
 import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
@@ -8,6 +8,7 @@ import { useGoogleLogin } from "react-google-login";
 import { MdOutlineError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Register from "./signup";
+import { AccountContext } from '../../apis/apicontext';
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from "../../store";
 import { registerUser } from '../../apis/apis';
@@ -18,6 +19,7 @@ const Signin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const { addRemove } = useContext(AccountContext);
   const [nameValidate, setNameValidate] = useState();
   const [email, setEmail] = useState();
   const [emailsValidate, setEmailsValidate] = useState();
@@ -61,7 +63,8 @@ const Signin = () => {
     const locate = localStorage.getItem("locate");
     const backlink = locate ? locate : "/";
     localStorage.removeItem("locate");
-    navigate(`${backlink}`).then(() => dispatch(authActions.login()));
+    addRemove({ type: "DECR" });
+    navigate(`${backlink}`);
   }
   // Google Login Request
   const onSuccess = async (res) => {
@@ -82,10 +85,7 @@ const Signin = () => {
 
   const { signIn } = useGoogleLogin({
     onSuccess,
-    onFailure,
     clientId,
-    isSignedIn: false,
-    accessType: "online",
   });
 
   const emailformate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

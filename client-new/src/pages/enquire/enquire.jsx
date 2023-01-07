@@ -39,9 +39,9 @@ const Enquire = () => {
        
        <Slider {...settings}>
          {slice.map((clients, i) => (
-           <div class="container pt-3 ">
-             <div class="row  ">
-               <div class="col p-3 ">
+           <div className="container pt-3" key={i}>
+             <div className="row  ">
+               <div className="col p-3 ">
              
             
                    <img

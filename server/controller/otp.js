@@ -9,7 +9,6 @@ const { sendEmail } = require("../middelware/sendEmail");
 
 exports.sendOTP = catchError(async(req,res) => {
     const {email} =req.body
-    console.log(req.body);
     if(!email){
       res.status(400).json({message:"Wrong Input"})
   }
@@ -83,7 +82,7 @@ db.query("SELECT userid from tblcontacts WHERE  email='"+email+"'",async(err,con
     }
   }
 })
-})
+})   
 
 
 
@@ -118,7 +117,6 @@ exports.changePassword = catchError(async(req,res) =>{
   if(password == confirmpasswords){
      jwtToken.verify(expire, process.env.jwt_secret, async (err, user) => {
       if (err) {
-      console.log(err);
         return res.status(400).json({ message: "InValid Token" });
       } else {
        const userid = user.id;
@@ -128,7 +126,7 @@ exports.changePassword = catchError(async(req,res) =>{
     
       db.query(sqlQuery,async(err,result) =>{
         if(err){
-          console.log(err);
+
           return res.status(500).json({message:err.message})
         }else{
        token(userid, 200, res)

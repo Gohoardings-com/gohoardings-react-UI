@@ -58,9 +58,11 @@ exports.goh_testimonials = catchError(async(req,res) => {
 db.changeUser({database:"gohoardi_goh"})
 db.query("SELECT * FROM goh_testimonials",(err,result) =>{
     if(err){
+   
         return res.status(204).json({message:"Sonething Wrong"})
     }
     else{
+       
         return res.status(200).json(result)
     }
 })

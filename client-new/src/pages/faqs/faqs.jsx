@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from "react";
 import "./faqs.scss";
 import { BsCaretDown } from "react-icons/bs";
-import faqsData from "./faqsData";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import Branding from "../../components/branding/branding";
 import { goh_faqsApi } from "../../apis/apis";
 
@@ -18,6 +18,7 @@ const Faqs = () => {
 
   return (
     <>
+    <Fixednavbar/>
       <Branding title="FAQs" />
       <section>
         <div className="container-fluid px-5  question-box mt-5 mb-5 p-2 ">

@@ -5,15 +5,15 @@ const Branding = (props) => {
  
   return (
    <>
-    <section className="inn-page-bg ">
+    <section className="inn-page-bg mt-5">
         <div className="container">
           <div className="row">
             <a href="/">
-              <img
+              {/* <img
                 src="https://gohoardings.com/assets/images/logopng.png"
                 alt="logo"
                 className="logo ps-2"
-              />
+              /> */}
             </a>
             <div className="inn-pag-ban">
               <h2>{props.title}</h2>

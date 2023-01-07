@@ -12,7 +12,6 @@ exports.City = catchError(async(req,res,next) => {
   const sql = "SELECT DISTINCT name FROM `goh_cities` "+data+"  LIMIT 8"
       db.query(sql, (err, result) => {
         if (err) {
-          console.log(err);
           return res.json({message:"No Data Found On this city"})
         } else {
           return res.send(result);

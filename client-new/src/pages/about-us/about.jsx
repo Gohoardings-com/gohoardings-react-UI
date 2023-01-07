@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import Branding from "../../components/branding/branding";
 import "../about-us/about.scss";
 import clientslogo from "./clients";
@@ -21,6 +22,7 @@ const About = () => {
   }
   return (
     <>
+    <Fixednavbar/>
     <Branding title="About Us"/>
       <section>
         <div className="container mt-2">

@@ -152,8 +152,8 @@ const IconsSlection = ({  slice }) => {
         </div>
       
                    
-        <div class="text-center map-btn-more">
-          <button class=" buttonload btn-hover" onClick={() => submitfilters()}>
+        <div className="text-center map-btn-more">
+          <button className=" buttonload btn-hover" onClick={() => submitfilters()}>
             Apply
           </button>
           
