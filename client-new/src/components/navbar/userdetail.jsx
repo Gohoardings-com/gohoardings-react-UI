@@ -15,7 +15,7 @@ const Userdetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const {initalState} = useContext(AccountContext)
-  const {isLoggedIn} = useSelector((state) => state.LoginStatus);
+  let {isLoggedIn} = useSelector((state) => state.LoginStatus);
   const {user, loading} = useSelector((state) => state.user)
   const {logout} = useAuth0();
 
