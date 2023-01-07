@@ -51,7 +51,7 @@ function App() {
           <Route exact path="/news" element={<News/>}/>  
           <Route exact path="/profile" element={<Profile/>}/>
           <Route exact path="/testimonial" element={<Testimonial/>}/> 
-          <Route exact path="*" element={<img className="img-fluid" src="./images/6029646.jpg" alt="page not found"/>}/> 
+          <Route exact path="*" element={<img className="img-fluid" src="./images/404.png" alt="page not found"/>}/> 
         </Routes>
         <FooterN/>
       </BrowserRouter>  

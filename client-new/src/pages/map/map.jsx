@@ -186,7 +186,7 @@ const Map = () => {
 
   return (
   <>
-  <Fixednavbar/>
+  {/* <Fixednavbar/> */}
   <div className="container-fluid mh-100">
       <div className="row" id="map-view-row">
         <div className="col-lg-3 col-md-3 col-sm-12 p-0 border-end position-relative">

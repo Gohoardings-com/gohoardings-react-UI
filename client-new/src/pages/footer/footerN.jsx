@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import "./footer.scss";
-
 import {Link} from "react-router-dom";
 import instance from "../../apis/axios";
 import {FiPhoneCall} from "react-icons/fi";
@@ -412,7 +411,7 @@ const FooterN = () => {
                 Contact{" "}
               </button>
             </form>
-            <h6 className=" py-4 text-muted">
+            <h6 className=" py-3 text-muted">
               * Join our newsletter for the most recent information.
             </h6>
           </div>
