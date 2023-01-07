@@ -50,10 +50,6 @@ const Flotinggnavbar = () => {
   const [value, setValue] = useState();
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
-  let City = [];
-  city.forEach((obj) => {
-    City.push({ label: obj.name, value: obj.name });
-  });
 
   // const hello = async (e) => {
   //   cities = e.target.value;
