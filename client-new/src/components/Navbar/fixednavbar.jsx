@@ -12,11 +12,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import {RiArrowDropDownLine} from "react-icons/ri"
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-<<<<<<< HEAD:client-new/src/components/Navbar/fixednavbar.jsx
-import MediaDropDown from "../media_dropdown/media_dropdown";
-=======
-import Mediadropdown from "../media_dropdown/mediadropdown";
->>>>>>> 026b3be331a6c6627a514e8f7b8dc81d70cf0c68:client-new/src/components/navbar/fixednavbar.jsx
+import MediaDropDown from "../media_dropdown/mediadropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Citylocation from "../cityLocation/citylocation";
@@ -124,7 +120,7 @@ const Flotinggnavbar = () => {
                       </div>
                     ))}
                   </div>
-            <Mediadropdown userType={userType} setUserType={setUserType} />
+            <MediaDropDown userType={userType} setUserType={setUserType} />
             <Link to={`/${userType}/${value ? value : "delhi"}`}>
               <Button
                 className="border-0  btn-danger"
