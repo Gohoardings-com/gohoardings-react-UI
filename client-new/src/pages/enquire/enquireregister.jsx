@@ -64,42 +64,42 @@ const Enquireregister = () => {
     <h1 className="txt-clr-tlk">Talk to us!</h1>
             <h6 className="txt-clr" >*Please fill all the details.</h6>
             <form className='mt-4 "position-relative' onSubmit={onSubmit}>
-  <div class="form-group py-3 ">
-    <label for="formGroupExampleInput">Name*</label>
-    <input type="text" class="form-control ps-0 rounded-0" id="formGroupExampleInput" placeholder="Your Full Name" value={name}
+  <div className="form-group py-3 ">
+    <label htmlFor="formGroupExampleInput">Name*</label>
+    <input type="text" className="form-control ps-0 rounded-0" id="formGroupExampleInput" placeholder="Your Full Name" value={name}
                 onChange={(e) => {
                     setName(e.target.value);
                 }}/>
                   <p className="ms-2 p-0 text ">{nameValidate}</p>
   </div>
-  <div class="row py-3">
-  <div class="col">
-    <label for="Last-name">Email*</label>
-      <input type="text" class="form-control ps-0 rounded-0" placeholder="Your Mail ID" id='first-name'   value={email}
+  <div className="row py-3">
+  <div className="col">
+    <label htmlFor="Last-name">Email*</label>
+      <input type="text" className="form-control ps-0 rounded-0" placeholder="Your Mail ID" id='first-name'   value={email}
                 onChange={(e) => {
                     setEmail(e.target.value);
                 }}/>
                   <p className="ms-2 p-0 text ">{emailValidate}</p>
     </div>
-    <div class="col">
-    <label for="Last-name">Phone Number*</label>
-      <input type="text" class="form-control ps-0 rounded-0" placeholder="+1 012 3456 789" id='+1 012 3456 789'  value={number}
+    <div className="col">
+    <label htmlFor="Last-name">Phone Number*</label>
+      <input type="text" className="form-control ps-0 rounded-0" placeholder="+1 012 3456 789" id='+1 012 3456 789'  value={number}
                 onChange={(e) => {
                     setNumber(e.target.value);
                 }}/>
                   <p className="ms-2 p-0 text ">{numbervalidate}</p>
     </div>
   </div>
-  <div class="form-group py-3">
-    <label for="formGroupExampleInput2">Message*</label>
-    <input type="text" class="form-control ps-0 rounded-0" id="formGroupExampleInput2" placeholder="Write your message.."   value={message}
+  <div className="form-group py-3">
+    <label htmlFor="formGroupExampleInput2">Message*</label>
+    <input type="text" className="form-control ps-0 rounded-0" id="formGroupExampleInput2" placeholder="Write your message.."   value={message}
                 onChange={(e) => {
                     setMessage(e.target.value);
                 }}/>
            <p className="ms-2 p-0 text ">{messageValidate}</p>     
   </div>
  <div className=' p-0 m-0 position-relative '>
- <button type="submit" class="btn btn-lg  message-btn  float-end" role="button">Send Message</button>
+ <button type="submit" className="btn btn-lg  message-btn  float-end" role="button">Send Message</button>
  <ToastContainer/>
  </div>
  
