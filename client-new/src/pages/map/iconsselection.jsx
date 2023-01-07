@@ -4,7 +4,7 @@ import "./icons.scss"
 import {iconFiltersData} from "../../action/adminAction";
 import {useDispatch} from "react-redux";
 
-const IconsSlection = ({slice}) => {
+const Iconsselection = ({slice}) => {
   const dispatch = useDispatch()
   const [distance, Setdistance] = useState(0);
   const [datas, setData] = useState([])
@@ -161,4 +161,4 @@ const IconsSlection = ({slice}) => {
   )
 }
 
-export default IconsSlection
+export default Iconsselection

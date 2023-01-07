@@ -11,7 +11,7 @@ import instance from "../../apis/axios";
 import Multirangeslider from "./multirangeslider";
 import {useJsApiLoader} from "@react-google-maps/api";
 import Markers from "./marker";
-import IconsSlection from "./iconsSlection";
+import Iconsselection from "./iconsselection";
 import {MdOutlineArrowDownward} from "react-icons/md";
 
 const BASE_URL = process.env.REACT_APP_CRYPTO_URL;
@@ -342,7 +342,7 @@ const Map = () => {
               </div>
             </div>
             {search && search.length > 0 ? (
-              <IconsSlection slice={slice} loading={loading} fnmedia={search} />
+              <Iconsselection slice={slice} loading={loading} fnmedia={search} />
             ) : null}
             <div
               className="filter-items p-2 accordion accordion-collapse collapse"

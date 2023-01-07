@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {profileDetails} from "../../apis/apis";
 import Fixednavbar from "../../components/navbar/fixednavbar";
-import ChangePassword from "./changePassword";
+import Changepassword from "./changepassword";
 import Companey from "./companey";
 import "./profile.scss";
 import Userprofile from "./userprofile";
@@ -549,7 +549,7 @@ const Profile = () => {
               <div className="col-md-3 ">
                 {profile ? (
                   <>
-                    <ChangePassword />
+                    <Changepassword />
                   </>
                 ) : (
                   <>

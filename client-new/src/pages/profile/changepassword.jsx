@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {toast, ToastContainer} from 'react-toastify';
 import {updatePassword} from '../../apis/apis';
 
-const ChangePassword = () => {
+const Changepassword = () => {
   const [state, setState] = useState({
     newPassword: "", confirmPassword: ""
   });
@@ -66,4 +66,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword
+export default Changepassword
