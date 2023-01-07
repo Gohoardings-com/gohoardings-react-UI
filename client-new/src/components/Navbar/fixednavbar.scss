@@ -49,6 +49,8 @@ background-color: #ededed !important;
     font-size: 21px;
   }
 }
+
+
  #search-location-box{
 border-radius: 0px;
   border: transparent !important;
@@ -63,6 +65,12 @@ border-radius: 0px;
   border-right: 1px dotted rgb(205, 205, 205) !important ;
 
 }
+#search-location-box:focus{
+
+  box-shadow: none !important;
+  
+  }
+
 .search-inner-drop{
   .dropdown-menu {
     width: 19vw;

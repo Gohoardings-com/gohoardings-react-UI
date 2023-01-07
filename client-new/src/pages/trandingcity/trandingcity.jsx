@@ -107,7 +107,7 @@ if(!loading){
                         
                           <div className="bottom-left">Delhi</div>
                           <div className="bottom-left-media">
-                            {pos.medianame.substring(1, 17)}{" "}
+                            {pos.medianame.substring(17, 30)}{" "}
                           </div>
                         </div>
                       </Link>
