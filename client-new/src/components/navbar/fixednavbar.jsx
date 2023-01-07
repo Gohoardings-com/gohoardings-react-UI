@@ -24,19 +24,11 @@ const Flotinggnavbar = () => {
   const [posts, setPosts] = useState();
 
   const getCity = async () => {
-   const cities = "agra";
-    const data = await getAllCity();
+   const cities = "";
+    const data = await getAllCity(cities);
     setCity(data);
   };
-  // const data = async () => {
-  //   await dispatch(
-  //     mediawithcity({
-  //       category_name: "traditional-ooh-media",
-  //       city_name: "delhi",
-  //     })
-  //   );
-  //   navigate("/map");
-  // };
+
   // const onSearch = (searchTerm) => {
   //   setValue(searchTerm);
   // };
@@ -129,7 +121,7 @@ const Flotinggnavbar = () => {
           <form className="form-inline  text-center">
             <Nav.Link
               className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
-              // onClick={(e) => data(e)}
+             href="/map"
             >
               <img
                 src="../../gohoarding/new-icon/map-icon.png"

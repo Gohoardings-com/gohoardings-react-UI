@@ -11,15 +11,15 @@ import store from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Auth0Provider
-  domain="dev-u6imab7im45pcjdk.us.auth0.com"
-  clientId="7NxYErpTNLEnOH4632aomXrrZnGgnCr6"
-  redirectUri={window.location.origin}
-  >
+  // <Auth0Provider
+  // domain="dev-u6imab7im45pcjdk.us.auth0.com"
+  // clientId="7NxYErpTNLEnOH4632aomXrrZnGgnCr6"
+  // redirectUri={window.location.origin}
+  // >
     <Provider store={store}>
     <Apicontext>
     <App />
     </Apicontext>
   </Provider>
-  </Auth0Provider>
+  // </Auth0Provider>
 );
