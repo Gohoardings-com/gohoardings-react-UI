@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import './navbar.scss'
-import UserDetail from "./userdetail";
+import Userdetail from "./userdetail";
 
 const NewNAvbar = () => {
   const dispatch = useDispatch()
@@ -57,7 +57,7 @@ useEffect(() => {
               </Nav.Link>
              
             
-              <UserDetail posts={posts} setPosts={setPosts}/>
+              <Userdetail posts={posts} setPosts={setPosts}/>
             </Nav>
           </Navbar.Collapse>
         </div>

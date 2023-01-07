@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAllCity } from "../../apis/apis";
-import UserDetail from "./userdetail";
+import Userdetail from "./userdetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
 import { Dropdown } from "react-bootstrap";
@@ -142,7 +142,7 @@ const Flotinggnavbar = () => {
           </form>
 
           <form className="form-inline mt-2 me-auto">
-            <UserDetail posts={posts} setPosts={setPosts} />
+            <Userdetail posts={posts} setPosts={setPosts} />
           </form>
         </Navbar.Collapse>
       </Navbar>
