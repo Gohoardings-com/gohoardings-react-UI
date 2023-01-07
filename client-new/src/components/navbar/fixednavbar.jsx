@@ -22,28 +22,27 @@ const Flotinggnavbar = () => {
   const [show, setShow] = useState(false);
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
-  let cities;
+
   const getCity = async () => {
-    cities = "";
-    const data = await getAllCity(cities);
+   const cities = "agra";
+    const data = await getAllCity();
     setCity(data);
   };
-  const data = async () => {
-    await dispatch(
-      mediawithcity({
-        category_name: "traditional-ooh-media",
-        city_name: "delhi",
-      })
-    );
-    navigate("/map");
-  };
+  // const data = async () => {
+  //   await dispatch(
+  //     mediawithcity({
+  //       category_name: "traditional-ooh-media",
+  //       city_name: "delhi",
+  //     })
+  //   );
+  //   navigate("/map");
+  // };
   // const onSearch = (searchTerm) => {
   //   setValue(searchTerm);
   // };
 
   useEffect(() => {
     getCity();
-    setPosts(posts);
   }, []);
 
   const [value, setValue] = useState();
@@ -67,10 +66,12 @@ const Flotinggnavbar = () => {
   };
   const onChange = async (event) => {
     setValue(event.target.value);
+    console.log(event);
     const cities = event.target.value;
     const data = await getAllCity(cities);
     setCity(data);
   };
+  console.log(city);
 
   return (
     <>
@@ -128,7 +129,7 @@ const Flotinggnavbar = () => {
           <form className="form-inline  text-center">
             <Nav.Link
               className="mapLink float-map-btn  ps-1  pt-1 rounded-pill "
-              onClick={(e) => data(e)}
+              // onClick={(e) => data(e)}
             >
               <img
                 src="../../gohoarding/new-icon/map-icon.png"

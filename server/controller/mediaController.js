@@ -2,16 +2,19 @@ const db = require("../conn/conn");
 const jwtToken = require('jsonwebtoken')
 const catchError = require('../middelware/catchError')
 
-exports.City = catchError(async (req, res, next) => {
+exports.city = catchError(async (req, res, next) => {
+    db.changeUser({database: "gohoardi_goh"});
     const {value} = req.body
     let data = ''
     if (value) {
-        data = " WHERE name LIKE '" + value + "%'"
+        data = "WHERE name LIKE '" + value + "%'"
     }
-    db.changeUser({database: "gohoardi_goh"});
-    const sql = "SELECT DISTINCT name FROM `goh_cities` " + data + "  LIMIT 8"
-    db.query(sql, (err, result) => {
+
+    const sql = "SELECT * from goh_cities";
+//const sql = "SELECT DISTINCT name FROM `goh_cities` " + data + "  LIMIT 8"
+    db.query("SELECT * from goh_cities", (err, result) => {
         if (err) {
+            console.log(err);
             return res.json({message: "No Data Found On this city"})
         } else {
             return res.send(result);
@@ -201,6 +204,7 @@ exports.SearchData = catchError(async (req, res, next) => {
                     const sql = "SELECT * FROM " + table_name + " WHERE city_name='" + city + "'";
                     db.query(sql, async (err, result) => {
                         if (err) {
+                            console.log(err);
                             return res.status(204).json({err: reject(err), message: "Wrong Data"})
                         } else if (resolve == []) {
                             return res.status(204).json({resolve: "Empty", message: "Media Not Found"})
@@ -214,6 +218,7 @@ exports.SearchData = catchError(async (req, res, next) => {
                 promises.push(new Promise(async (resolve, reject) => {
                     db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM " + table_name + " AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '" + userID + "' WHERE media.city_name = '" + city + "' ORDER BY `cart`.`userid` DESC ", async (err, result) => {
                         if (err) {
+                            console.log(err);
                             return res.status(204).json({err: reject(err), message: "Wrong Data"})
                         } else if (resolve === []) {
                             return res.status(204).json({resolve: "Empty", message: "Media Not Found"})

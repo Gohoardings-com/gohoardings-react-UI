@@ -19,7 +19,7 @@ const Home = () => {
  <Ourservices/> 
  <City/>
 <Enquire/>
-<Trendingcity/>
+{/* <Trendingcity/> */}
     </>
   );
 };
