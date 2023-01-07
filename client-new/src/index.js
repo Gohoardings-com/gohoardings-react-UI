@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap"
 import './index.css';
-import ApiContext from './apis/apicontext';
+import Apicontext from './apis/apicontext';
 import { Provider } from "react-redux";
 import App from './App';
 import { Auth0Provider } from "@auth0/auth0-react";
@@ -17,9 +17,9 @@ root.render(
   redirectUri={window.location.origin}
   >
     <Provider store={store}>
-    <ApiContext>
+    <Apicontext>
     <App />
-    </ApiContext>
+    </Apicontext>
   </Provider>
   </Auth0Provider>
 );
