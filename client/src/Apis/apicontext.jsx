@@ -2,6 +2,7 @@ import React,{useEffect, useState, useReducer, createContext} from 'react'
 import instance from './Axios';
 import { useStateWithCallbackLazy } from 'use-state-with-callback';
 
+
 export const AccountContext = createContext(null);
 const reducer = (state, action) => {
     if(action.type === 'INCR'){
@@ -14,7 +15,7 @@ const reducer = (state, action) => {
   };
   var initalState;
   
-const ApiContext = ({children}) => {
+const Apicontext = ({children}) => {
     const [person,setPerson] = useStateWithCallbackLazy();
     useEffect(() => {
         const item = async() =>{
@@ -36,4 +37,4 @@ const ApiContext = ({children}) => {
   )
 }
 
-export default ApiContext
+export default Apicontext

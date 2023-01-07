@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import "./home.scss";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate,Link } from "react-router-dom";
-import NewNAvbar from '../../Components/Navbar/Navbar'
+import NewNAvbar from '../../Components/Navbar/navbar'
 import Navbar from "react-bootstrap/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import SearchMedia from "../SearchMedia/SeachMedia";

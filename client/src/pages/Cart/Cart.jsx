@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
-import { AccountContext } from "../../Apis/ApiContext";
+import { AccountContext } from "../../Apis/apicontext";
 import axios from "axios";
 import { remove } from "../../reducer/adminReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { cartitems } from "../../action/adminAction";
 import "./cart.scss";
-import Navbar from "../../Components/Navbar/Navbar";
+import Navbar from "../../Components/Navbar/navbar";
 import Footer from "../../Components/Footer/Footer";
 import instance from "../../Apis/Axios";
 

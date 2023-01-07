@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BsListCheck } from 'react-icons/bs';
 import { MdChecklist } from 'react-icons/md';
 import { add,remove} from '../../reducer/adminReducer';
-import { AccountContext } from '../../Apis/ApiContext';
+import { AccountContext } from '../../Apis/apicontext';
 import { mediawithcity } from '../../action/adminAction';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Service.scss"
-import Newbar from '../../Components/Navbar/Navbar'
+import Newbar from '../../Components/Navbar/navbar'
 import instance from '../../Apis/Axios';
 import { useParams,useNavigate } from 'react-router-dom';
 import CartPattern from './MultiCartItem';

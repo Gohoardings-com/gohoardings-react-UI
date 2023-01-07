@@ -2,7 +2,7 @@ import React,{ useState,useContext } from "react";
 import {remove} from '../../reducer/adminReducer'
 import {AccountContext} from '../../context/Context'
 import { useSelector, useDispatch } from "react-redux";
-import NewNAvbar from "../../Components/Navbar/Navbar";
+import NewNAvbar from "../../Components/Navbar/navbar";
 import axios from "axios";
 const Cart = () => {
   const dispatch = useDispatch();
