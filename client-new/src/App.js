@@ -4,7 +4,7 @@ import Home from "./pages/home/home";
 import Media from './pages/medias/media';
 import "react-toastify/dist/ReactToastify.css";
 import Map from './pages/map/map';
-import Details from './pages/seeDetails/details'
+import Details from './pages/seedetails/details'
 import Cart from './pages/cart/cart'
 import Contact from "./pages/contact-us/contact";
 import About from './pages/about-us/about'

@@ -11,7 +11,7 @@ import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import MediaDropDown from "../Media_dropDown/mediaDropDown";
+import Mediadropdown from "../media_dropdown/mediadropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Citylocation from "../cityLocation/citylocation";
@@ -117,7 +117,7 @@ const Flotinggnavbar = () => {
                       </div>
                     ))}
                   </div>
-            <MediaDropDown userType={userType} setUserType={setUserType} />
+            <Mediadropdown userType={userType} setUserType={setUserType} />
             <Link to={`/${userType}/${value ? value : "delhi"}`}>
               <Button
                 className="border-0  btn-danger"

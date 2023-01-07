@@ -1,6 +1,6 @@
 import React from 'react'
 import { DropdownButton, Dropdown } from "react-bootstrap";
-const MediaDropDown = ({userType, setUserType}) => {
+const Mediadropdown = ({userType, setUserType}) => {
   
   return (
     <DropdownButton
@@ -35,4 +35,4 @@ const MediaDropDown = ({userType, setUserType}) => {
   )
 }
 
-export default MediaDropDown
+export default Mediadropdown

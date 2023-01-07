@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { BiCurrentLocation } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchmedia.scss";
-import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
+import Mediadropdown from "../../components/media_dropdown/mediadropdown";
 import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {
@@ -104,7 +104,7 @@ const SearchMedia = () => {
                 </div>
               </div>
               <div className="col-md-5  ms-0 pt-2 pb-2 ">
-                <MediaDropDown userType={userType} setUserType={setUserType} />
+                <Mediadropdown userType={userType} setUserType={setUserType} />
               </div>
               <div className="col-md-2 pt-2 pb-2">
                 <Link
