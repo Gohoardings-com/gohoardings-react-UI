@@ -11,7 +11,7 @@ import { userDetails } from '../../action/adminAction';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useAuth0 } from "@auth0/auth0-react";
 
-const UserDetail = () => {
+const Userdetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { initalState } = useContext(AccountContext)
@@ -147,4 +147,4 @@ const getUser = async () => {
   )
 }
 
-export default UserDetail;
+export default Userdetail;

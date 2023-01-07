@@ -88,7 +88,7 @@ const Enquire = () => {
             </div>
             <div className="row py-1">
               <h6 className="enquire-qsns-cant-qsn">Have a suggestion?</h6>
-              <p className=" enquire-ans-cant mb-5">
+              <p className=" enquire-ans-cant mb-4">
                 Your feedback and suggestions are always welcome. We are
                 constantly striving to be better than what we were yesterday.
               </p>

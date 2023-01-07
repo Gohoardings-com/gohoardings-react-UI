@@ -6,12 +6,17 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAllCity } from "../../apis/apis";
-import UserDetail from "./userdetail";
+import Userdetail from "./userdetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
+import {RiArrowDropDownLine} from "react-icons/ri"
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+<<<<<<< HEAD:client-new/src/components/Navbar/fixednavbar.jsx
 import MediaDropDown from "../media_dropdown/media_dropdown";
+=======
+import Mediadropdown from "../media_dropdown/mediadropdown";
+>>>>>>> 026b3be331a6c6627a514e8f7b8dc81d70cf0c68:client-new/src/components/navbar/fixednavbar.jsx
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Citylocation from "../cityLocation/citylocation";
@@ -85,6 +90,8 @@ const Flotinggnavbar = () => {
             className="border-0 brand float-brand  "
             onMouseOver={() => setShow(true)}
           />
+          <RiArrowDropDownLine  className="riArrowDropDownLine" />
+
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3"  />
@@ -117,7 +124,7 @@ const Flotinggnavbar = () => {
                       </div>
                     ))}
                   </div>
-            <MediaDropDown userType={userType} setUserType={setUserType} />
+            <Mediadropdown userType={userType} setUserType={setUserType} />
             <Link to={`/${userType}/${value ? value : "delhi"}`}>
               <Button
                 className="border-0  btn-danger"
@@ -142,7 +149,7 @@ const Flotinggnavbar = () => {
           </form>
 
           <form className="form-inline mt-2 me-auto">
-            <UserDetail posts={posts} setPosts={setPosts} />
+            <Userdetail posts={posts} setPosts={setPosts} />
           </form>
         </Navbar.Collapse>
       </Navbar>
