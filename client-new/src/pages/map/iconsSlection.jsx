@@ -18,7 +18,7 @@ const IconsSlection = ({  slice }) => {
     if (e.currentTarget.checked) {
       hording.push(e.target.value)
     } else {
-      // for (let i = 0; i < hording.length; i++) {
+      // htmlFor (let i = 0; i < hording.length; i++) {
       // if (e.target.value == hording[i]) {
       var index = hording.indexOf(e.target.value)
       if (index > -1) { // only splice array when item is found
@@ -125,10 +125,10 @@ const IconsSlection = ({  slice }) => {
     <>
       <div className="poi-items accordion-collapse collapse" id="collapseT2" data-bs-parent="#accordionTest">
         <div className="row poi-item">
-          {Icons.map((icon) => (
-            <div className="col-4 d-inline-block text-center pb-3 shadow-sm border position-relative collapsed" data-bs-toggle="collapse" data-bs-target={`#${icon.name}`} aria-expanded="false">
+          {Icons.map((icon, i) => (
+            <div className="col-4 d-inline-block text-center pb-3 shadow-sm border position-relative collapsed" key={i} data-bs-toggle="collapse" data-bs-target={`#${icon.name}`} aria-expanded="false" >
               <input type="checkbox" id={icon.id} value={icon.name} onClick={(e) => multichecked(e)} />
-              <label for={icon.id}>
+              <label htmlFor={icon.id}>
                 <img src={icon.value} alt="N/A" name={icon.name} />
                 </label>
                 <span className="icone-name-map pb-2">{icon.name} </span>
@@ -140,9 +140,9 @@ const IconsSlection = ({  slice }) => {
           <p className="m-1 mb-4 pb-2">Distance</p>
           <Slider Distance={distance} onChange={HandleDistance} />
           <div className="row pt-3 ps-3 km-distance">
-            {distanceofMedia.map((dis) => {
+            {distanceofMedia.map((dis, i) => {
 
-              <div className="col-lg-3 col-sm-2 ps-1">{dis.name}</div>
+              <div className="col-lg-3 col-sm-2 ps-1" key={i}>{dis.name}</div>
             })}
             <div className="col-lg-3 col-sm-2 ps-2">0km</div>
             <div className="col-lg-3 col-sm-2 ps-2">1km</div>

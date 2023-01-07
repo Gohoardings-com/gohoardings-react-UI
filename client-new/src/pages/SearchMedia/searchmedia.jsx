@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { BiCurrentLocation } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./searchmedia.scss";
-import MediaDropDown from "../../components/Media_dropDown/mediaDropDown";
+import MediaDropDown from "../../components/media_dropdown/media_dropdown";
 import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {

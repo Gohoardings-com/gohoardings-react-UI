@@ -9,17 +9,20 @@ const Medialogo = ({ search, category_name,loading }) => {
   
         <div className="digit-media-brand rounded-3 pb-2  row text-light animate__animated animate__zoomIn ">
           <div className="col-4 mb-xxl-auto p-2">
-          {CityNameImage.map((el) =>{
+          {CityNameImage.map((el, i) =>{
             if(category_name === el.value || category_name === el.value2  ){
              return (
-              <>
-               <img
+              
+              <div className="p-0 m-0" key={i}>
+                 <img
+               key={i}
               src={el.srcImg}
               alt={el.srcImg}
               className="About-media-img  mt-2  ms-2 rounded-1"
               id="About-media-img-d"
             />
-            </>
+              </div>
+          
              )
             }
           })} 

@@ -28,8 +28,8 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart }) => {
           ) : (
             <>
               {slice.map((item, i) => (
-                <>
-                  <div className="project text-center m-2">
+      
+                  <div className="project text-center m-2" key={i}>
                     <figure className="img-responsive  ">
                       <img
                         className="img-responsive-media rounded-top"
@@ -105,7 +105,7 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart }) => {
                       </span>
                     </figure>
                   </div>
-                </>
+             
               ))}
             </>
           )}

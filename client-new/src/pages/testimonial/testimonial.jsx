@@ -27,7 +27,7 @@ const Testimonial = () => {
           <h1>Loading Please wait</h1>
           </>:<>
          {posts.map((el,i) => (
-           <div className="col-md-4">
+           <div className="col-md-4" key={i}>
            <div className="testimonials">
              <img src="https://www.gohoardings.com/gohadmin/uploads/testimonials/anoop.jpg" alt="..." />
              <h3>{el.name}</h3>

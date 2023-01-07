@@ -42,9 +42,9 @@ const Team = () => {
                 </div>
               {posts.map((person, index) => {
                 return (
-                  <div className="col-md-3 mt-3 col-6" id="maindiv">
+                  <div className="col-md-3 mt-3 col-6" id="maindiv"  key={index}>
                     <div className="single-team    text-center rounded">
-                      <div className="team-img d-flex  justify-content-center  " key={index}>
+                      <div className="team-img d-flex  justify-content-center">
                         <img
                           // src={person.profile_image}
                           src="https://www.gohoardings.com/gohadmin/uploads/testimonials/anoop.jpg"

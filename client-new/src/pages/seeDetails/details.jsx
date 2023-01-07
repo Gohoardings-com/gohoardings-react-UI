@@ -117,7 +117,7 @@ const Details = () => {
       ) : (
         <>
           {markers.map((item, i) => (
-            <div className="container-xxl  container-xl container-lg container-md my-5">
+            <div className="container-xxl  container-xl container-lg container-md my-5" key={i}>
               <div className="row pt-5 ">
                 <div className="col-md-6 text-center">
                   <div className=" rounded-3 p-2">

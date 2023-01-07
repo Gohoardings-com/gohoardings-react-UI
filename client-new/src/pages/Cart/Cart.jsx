@@ -36,7 +36,7 @@ const Cart = () => {
 
   const getAllData = async () => {
     const { data } = await instance.get("cart/cartitems");
-    data.map((obj) => {
+    data.map((obj,i) => {
       obj["days"] = 5;
     });
     setPosts(data);
@@ -186,9 +186,8 @@ const Cart = () => {
               <>
                 {posts.length > 0 &&
                   posts.map((obj, index) => (
-                    <>
-                      <>
-                        <div className="card mb-3 mt-3 maincard ">
+                   <>
+                        <div className="card mb-3 mt-3 maincard" key={index}>
                           <div className="row">
                             <div className="d-flex ">
                               <div className="col-md-4 pe-0 me-0">
@@ -332,7 +331,7 @@ const Cart = () => {
                             </div>
                           </div>
                         </div>
-                      </>
+                    
                     </>
                   ))}
               </>

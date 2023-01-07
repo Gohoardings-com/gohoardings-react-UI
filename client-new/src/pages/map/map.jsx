@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from "../../apis/apicontext";
 import { useNavigate } from "react-router-dom";
 import "./map.scss";
+import Fixednavbar from "../../components/navbar/fixednavbar";
 import { mediawithcity, priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,8 +79,8 @@ const Map = () => {
   }, [initalState]);
 
   function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // htmlFor Safari
+    document.documentElement.scrollTop = 0; // htmlFor Chrome, Firefox, IE and Opera
   }
   useEffect(() => {
     topFunction();
@@ -183,7 +184,9 @@ const Map = () => {
   };
 
   return (
-    <div className="container-fluid mh-100">
+  <>
+  <Fixednavbar/>
+  <div className="container-fluid mh-100">
       <div className="row" id="map-view-row">
         <div className="col-lg-3 col-md-3 col-sm-12 p-0 border-end position-relative">
           <div className="row filter-icons m-0">
@@ -237,7 +240,7 @@ const Map = () => {
                       <>
                         {slice.map((item, i) => (
                           <>
-                            <div className="accordion-item border rounded mb-2">
+                            <div className="accordion-item border rounded mb-2" key={i}>
                               <div
                                 data-bs-toggle="collapse"
                                 data-bs-target={"#" + item.code + ""}
@@ -326,12 +329,12 @@ const Map = () => {
                   <button className="ms-3" onClick={() => Less()}>View Less</button>
                 </div> */}
 
-                <div class="text-center map-btn-more">
-                  <button class=" buttonload btn-hover" onClick={() => More()}>
+                <div className="text-center map-btn-more">
+                  <button className=" buttonload btn-hover" onClick={() => More()}>
                     View More <MdOutlineArrowDownward />
                   </button>
                   {}
-                  {/* <button class=" ms-5 buttonload btn-hover" onClick={() => Less()}>
+                  {/* <button className=" ms-5 buttonload btn-hover" onClick={() => Less()}>
             View Less <MdArrowUpward />
           </button> */}
                 </div>
@@ -391,10 +394,10 @@ const Map = () => {
                       Illumination
                   </h4>
                         {ILLUMINATION.map((illumation, i) => (
-                          <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4">
+                          <div className="col-xl-6 col-lg-6 col-sm-12 col-xxl-4"  key={i}>
                              <input
                              
-                              id={i}
+                            
                               name="radio"
                               type="radio"
                               onChange={(e) => illuminationfilter(illumation)}
@@ -427,13 +430,15 @@ const Map = () => {
                          
                          .map((cate, i) => (
                            <>
-                             <input
+                            <div className="m-0 p-0" key={i}>
+                            <input
                                type="checkbox"
-                               id={i}
+                              
                                className="me-1"
                                value={cate}
                                onChange={(e) => categoryFilter(cate)}
                              />
+                            </div>
                              <span className="text-wrap  media-filter-text-card-detail-filt ">
                                {cate.substring(0, 13)}
                              </span>
@@ -494,15 +499,15 @@ const Map = () => {
                 </div>
               </div>
 
-              <div class="text-center map-btn-more">
+              <div className="text-center map-btn-more">
                 <button
-                  class=" buttonload btn-hover m-2 "
+                  className=" buttonload btn-hover m-2 "
                   onClick={getAllDetails}
                 >
                   Apply
                 </button>
                 <button
-                  class=" buttonload btn-hover m-2"
+                  className=" buttonload btn-hover m-2"
                   onClick={previousData}
                 >
                   Clear All
@@ -524,16 +529,16 @@ const Map = () => {
                   </>
                 ) : (
                   <>
-                    {cartItem.map((item) => (
+                    {cartItem.map((item, i) => (
                       <>
                         {item.isDelete == 0 ? (
-                          <div className="accordion-item">
-                            <div
+                          <div className="accordion-item" 
+                            
                               data-bs-toggle="collapse"
                               data-bs-target="#collapseFour"
                               aria-expanded="true"
                               aria-controls="collapseOne"
-                            >
+                              key={i}>
                               <div className="row m-0">
                                 <p className="my-2">
                                   {item.page_title.substring(0, 20) + "..."}
@@ -579,7 +584,7 @@ const Map = () => {
                                 </div>
                               </div>
                             </div>
-                          </div>
+                     
                         ) : (
                           <h6 className="text-center">
                             Your Item Deleted Successfully
@@ -659,6 +664,7 @@ const Map = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

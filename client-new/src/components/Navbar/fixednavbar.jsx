@@ -11,7 +11,7 @@ import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import MediaDropDown from "../Media_dropDown/mediaDropDown";
+import MediaDropDown from "../media_dropdown/media_dropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Citylocation from "../cityLocation/citylocation";
@@ -105,10 +105,10 @@ const Flotinggnavbar = () => {
                     </InputGroup>
 
                   <div className={value ? cls : clt} >
-                    {city.map((item) => (
+                    {city.map((item,i) => (
                       <div
                         className="border-1"
-                        key={item.name}
+                        key={i}
                         onClick={() => onSearch(item.name)}
                       >
                         <option value={item.name} className=" text-dark mt-1 ps-3 ">

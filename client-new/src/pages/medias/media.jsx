@@ -166,7 +166,7 @@ const Media = () => {
       />
       <div className=" container-xxl  container-xl container-lg container-md  mt-4 mb-5 p-0 ">
         <div className="row ">
-          <p className="filter-container">
+          <div className="filter-container">
             <div className="filter-down-left d-flex ">
               <>
                 <h5
@@ -183,10 +183,10 @@ const Media = () => {
                     <div className="row rowCheckd">
                       <ul className="text-decoration-none">
                         {ILLUMINATION.map((item, i) => (
-                          <li className=" " id="marker">
+                          <li className=" " id="marker"  key={i}>
                             <input
                               className="  collapse-none"
-                              id={i}
+                             
                               name="radio"
                               type="radio"
                               onChange={(e) => illuminationfilter(item)}
@@ -222,17 +222,17 @@ const Media = () => {
                   >
                     <div className="rowCheck  row">
                       <ul>
-                        {category
-                         
-                          .map((cate, i) => (
+                        {category.map((cate, i) => (
                             <>
+                              <div className="m-0 p-0" key={i}>
                               <input
                                 type="checkbox"
-                                id={i}
+                          
                                 className="me-1"
                                 value={cate}
                                 onChange={(e) => categoryFilter(cate)}
                               />
+                              </div>
                               <span className="text-wrap  media-filter-text-card-detail-filt ">
                                 {cate.substring(0, 13)}
                               </span>
@@ -246,15 +246,15 @@ const Media = () => {
               </>
             </div>
 
-            <h5 className="filter-down btn  " onClick={() => data()}>
-              {" "}
+            <p className="filter-down btn  " onClick={() => data()}>
+
               MAP
               <img
                 src="https://cdn-icons-png.flaticon.com/512/854/854894.png" 
                 className="media-location-logo-map ms-2"
               />
-            </h5>
-          </p>
+            </p>
+          </div>
 
           <MultiCard
             MdOutlineShoppingCart={MdOutlineShoppingCart}

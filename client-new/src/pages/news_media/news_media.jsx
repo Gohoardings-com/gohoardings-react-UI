@@ -23,7 +23,9 @@ const Newsmedia = () => {
         <div className="container-fluid px-5 news pt-3">
           <h5 className=" p-2 ps-3 news-heading ">Latest News</h5>
           <div className="card mb-3">
-          {!posts ? <></>:<>
+          {!posts ? <>
+          <h1>Loadin Please Wait...</h1>
+          </>:<>
           {posts.map((el,i) =>(
             <>
              <div className="row" key={i}>
