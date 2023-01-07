@@ -87,7 +87,6 @@ const SearchMedia = () => {
                       />
                     </InputGroup>
                   </div>
-
                   <div className={value ? cls : clt} id="abcd">
                     {city.map((item, i) => (
                       <div

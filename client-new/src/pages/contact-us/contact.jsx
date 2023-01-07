@@ -7,24 +7,7 @@ import { MdLocationPin, MdOutlineError, MdEmail } from "react-icons/md";
 import { ImMobile } from "react-icons/im";
 
 const Contact = () => {
-  function setFocus(on) {
-    var element = document.activeElement;
-    var $ = window.jQuery;
-    if (on) {
-      setTimeout(function () {
-        element.parentNode.classList.add("focus");
-      });  
-    } else {
-      let box = document.querySelector(".input-box");
-      box.classList.remove("focus");
-      $("input").each(function () {
-        var $input = $(this);
-        var $parent = $input.closest(".input-box");
-        if ($input.val()) $parent.addClass("focus");
-        else $parent.removeClass("focus");
-      });
-    }
-  }
+
 
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -125,15 +108,15 @@ const Contact = () => {
                   </h2>
                 </div>
 
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} className="form-floating">
                   <div className="form-floating mb-4 mt-1 ">
                     <div className="input-box">
-                      <label className="input-label" htmlFor="floatingInput">Enter your full name</label>
+
                       <input
+                      placeholder="Enter your full name"
                         id="floatingInput"
                         type="text"
                         className="input-1 "
-                        // onFocus={() => setFocus(true)}
                         value={name}
                         onChange={(e) => {
                           setName(e.target.value);
@@ -145,13 +128,11 @@ const Contact = () => {
 
                   <div className="mb-4 mt-2 ">
                     <div className="input-box">
-                      <label className="input-label">
-                        Enter your contact number
-                      </label>
+        
                       <input
                         type="number"
                         className="input-1 "
-                        // onFocus={() => setFocus(true)}
+                       placeholder=" Enter your contact number"
                         value={number}
                         onChange={(e) => {
                           setNumber(e.target.value);
@@ -162,13 +143,11 @@ const Contact = () => {
                   </div>
                   <div className="mb-4 mt-2">
                     <div className="input-box">
-                      <label className="input-label">
-                        Enter your email@gmail.com
-                      </label>
+                    
                       <input
                         type="text"
                         className="input-1"
-                        onFocus={() => setFocus(true)}
+                    placeholder="Enter your email@gmail.com"
                         value={email}
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -179,14 +158,12 @@ const Contact = () => {
                   </div>
                   <div className="mb-2 mt-2">
                     <div className="input-box">
-                      <label className="input-label">
-                        Enter your message for our team
-                      </label>
+                    
                       <input
                         type="text"
                         className="input-1"
-                        onFocus={() => setFocus(true)}
-                        // onBlur={() => setFocus(false)}
+                     
+                       placeholder=" Enter your message for our team"
                         value={message}
                         onChange={(e) => {
                           setMessage(e.target.value);
@@ -197,7 +174,7 @@ const Contact = () => {
                   </div>
 
                   <div className="d-grid">
-                    <button type="submit" className="rounded btn-lg mt-3">
+                    <button type="submit" className="rounded btn-lg mt-3 mb-2">
                       <h5 className="text-light  mt-2">SEND MESSAGE</h5>
                     </button>{" "}
                     <ToastContainer />

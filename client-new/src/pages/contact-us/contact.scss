@@ -34,7 +34,7 @@
 .contact-form {
   padding: 65px 13px 4px;
   margin-top: 8%;
-  height: 430px;
+  height: auto;
   width: 475px;
   border-radius: 5px;
   box-shadow: $box-shadow;
@@ -101,7 +101,7 @@
 .contact-form .input-box {
   position: relative;
   margin: 10px 10px;
-  .input-label {
+  ::-webkit-input-placeholder { 
     position: absolute;
     color: $dark-blue;
     font-size: 16px;
@@ -124,6 +124,7 @@
       transition: 250ms;
     }
   }
+
   .input-1 {
     box-sizing: border-box;
     height: 50px;
@@ -148,22 +149,9 @@
   padding: 0%;
   margin: 0%;
 }
-.input-box.focus,
-.input-box.active {
-  .input-label {
-    top: -8px;
-    background: transparent;
-    font-size: 15px;
-    transition: 250ms;
-    svg {
-      position: relative;
-      width: 11px;
-      height: 11px;
-      top: 2px;
-      transition: 250ms;
-    }
-  }
-}
+
+
+
 
 
 @media screen and (max-width: 1366px) {

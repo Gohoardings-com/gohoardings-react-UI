@@ -76,13 +76,13 @@ const Flotinggnavbar = () => {
   return (
     <>
       <Navbar expand="lg px-md-0 p-1   navbar-main-floating fixed-top ">
-        <Navbar.Brand href="/" id="home">
+        <Navbar.Brand href="/" id="home" onMouseOver={() => setShow(true)} >
           <img
             src="../../images/logo.png"
             className="border-0 brand float-brand  "
-            onMouseOver={() => setShow(true)}
+           
           />
-          <RiArrowDropDownLine  className="riArrowDropDownLine" />
+          <RiArrowDropDownLine  className="riArrowDropDownLine"  />
 
         </Navbar.Brand>
 
@@ -103,7 +103,7 @@ const Flotinggnavbar = () => {
                       />
                     </InputGroup>
 
-                  <div className={value ? cls : clt} >
+                  <div className={value ? cls : clt} id="xyz" >
                     {city.map((item,i) => (
                       <div
                         className="border-1"
