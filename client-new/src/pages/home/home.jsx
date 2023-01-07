@@ -14,12 +14,12 @@ const Home = () => {
   return (
     <>
 <Navbar/>
-{/* <Flotingnavbar/> */}
+<Flotingnavbar/>
 <SearchMedia/>
  <Ourservices/> 
  <City/>
 <Enquire/>
-{/* <Trendingcity/> */}
+<Trendingcity/>
     </>
   );
 };
