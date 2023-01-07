@@ -9,6 +9,7 @@ import { getAllCity } from "../../apis/apis";
 import Userdetail from "./userdetail";
 import Drop_Down_Image from "../drop_down/drop_down_image";
 import { MdOutlineSearch } from "react-icons/md";
+import {RiArrowDropDownLine} from "react-icons/ri"
 import { Dropdown } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Mediadropdown from "../media_dropdown/mediadropdown";
@@ -85,6 +86,8 @@ const Flotinggnavbar = () => {
             className="border-0 brand float-brand  "
             onMouseOver={() => setShow(true)}
           />
+          <RiArrowDropDownLine  className="riArrowDropDownLine" />
+
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3"  />

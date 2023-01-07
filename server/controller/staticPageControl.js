@@ -47,6 +47,7 @@ db.query("SELECT * FROM goh_media_and_news",(err,result) =>{
         return res.status(204).json({message:"Sonething Wrong"})
     }
     else{
+       
         return res.status(200).json(result)
     }
 })
