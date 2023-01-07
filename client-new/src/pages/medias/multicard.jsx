@@ -5,7 +5,7 @@ import { TfiEye } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import VariantsExample from "../../components/loading/loading";
 
-const MultiCard = ({ slice, loading, addonCart, removefroCart }) => {
+const Multicard = ({ slice, loading, addonCart, removefroCart }) => {
   return (
     <div className=" mt-1 multi-card-contaier row row-cols-4 ">
       {loading ? (
@@ -115,4 +115,4 @@ const MultiCard = ({ slice, loading, addonCart, removefroCart }) => {
   );
 };
 
-export default MultiCard;
+export default Multicard;

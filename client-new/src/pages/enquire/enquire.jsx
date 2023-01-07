@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./enquire.scss";
 import clientslogo from "../about-us/clients";
-import EnquireRegister from "./enquireRegister";
+import Enquireregister from "./enquireregister";
 
 const Enquire = () => {
 
@@ -95,7 +95,7 @@ const Enquire = () => {
             </div>
           </div>
           <div className="col-9 col-md-8 p-3 p-md-3 ps-5 pt-2">
-            <EnquireRegister />
+            <Enquireregister />
           </div>
         </div>
       </div>

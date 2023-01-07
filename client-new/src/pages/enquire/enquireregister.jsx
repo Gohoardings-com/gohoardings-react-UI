@@ -5,7 +5,7 @@ import './enquire.scss';
 import instance from '../../apis/axios';
 
 
-const EnquireRegister = () => {
+const Enquireregister = () => {
 
    
     const [name, setName] = useState("");
@@ -109,5 +109,5 @@ const EnquireRegister = () => {
     )
 }
 
-export default EnquireRegister;
+export default Enquireregister;
 

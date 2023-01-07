@@ -8,7 +8,7 @@ import { mediawithcity, priceSubIllu } from "../../action/adminAction";
 import "./icons.scss";
 import { useDispatch, useSelector } from "react-redux";
 import instance from "../../apis/axios";
-import MultiRangeSlider from "./multiRangeSlider";
+import Multirangeslider from "./multirangeslider";
 import { useJsApiLoader } from "@react-google-maps/api";
 import Markers from "./marker";
 import IconsSlection from "./iconsSlection";
@@ -369,7 +369,7 @@ const Map = () => {
                     data-bs-parent="#accordionTest2"
                   >
                     <div className="price-range">
-                      <MultiRangeSlider
+                      <Multirangeslider
                         min={0}
                         max={1000000}
                         onChange={({ min, max }) =>

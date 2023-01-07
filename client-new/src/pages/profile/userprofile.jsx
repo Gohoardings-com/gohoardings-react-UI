@@ -9,7 +9,7 @@ const initalState = {
   email:"",
   phonenumber:"",
 }
-const UserProfile = ({ posts }) => {
+const Userprofile = ({ posts }) => {
   const [state,setState] = useState(initalState);
   const [imge, setImage] = useState([])
 
@@ -121,4 +121,4 @@ setState({...state,[name]:value})
   )
 }
 
-export default UserProfile
+export default Userprofile

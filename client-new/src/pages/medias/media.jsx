@@ -12,7 +12,7 @@ import {
   MdArrowUpward,
   MdOutlineArrowDownward,
 } from "react-icons/md";
-import MultiCard from "./multiCard";
+import Multicard from "./multicard";
 import Medialogo from "../../components/medialogo";
 import FixedNavbar from "../../components/navbar/fixednavbar";
 
@@ -256,7 +256,7 @@ const Media = () => {
             </p>
           </div>
 
-          <MultiCard
+          <Multicard
             MdOutlineShoppingCart={MdOutlineShoppingCart}
             slice={slice}
             search={search}

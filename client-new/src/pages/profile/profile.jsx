@@ -6,7 +6,7 @@ import NewNAvbar from "../../components/navbar/navbar";
 import ChangePassword from "./changePassword";
 import Companey from "./companey";
 import "./profile.scss";
-import UserProfile from "./userProfile";
+import Userprofile from "./userprofile";
 
 const Profile = () => {
   const [profile, setProfile] = useState(false);
@@ -402,7 +402,7 @@ const Profile = () => {
               <div className="col-md-6 ">
                 {profile ? (
                   <>
-                    <UserProfile posts={posts} />
+                    <Userprofile posts={posts} />
                   </>
                 ) : (
                   <>
