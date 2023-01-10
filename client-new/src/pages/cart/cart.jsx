@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import {useDispatch, useSelector} from 'react-redux'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AccountContext } from "../../apis/apicontext";
 import moment from "moment";
@@ -11,8 +12,10 @@ import "./cart.scss";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
 import { toast, ToastContainer } from "react-toastify";
+import {userDetails} from '../../action/adminAction';
 
 const Cart = () => {
+
   const [Start, setStart] = useState(new Date());
   const [End, setEnd] = useState(new Date());
 
@@ -24,6 +27,8 @@ const Cart = () => {
   const [price, setPrice] = useState();
 
   let totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
+
+  const {user, loading} = useSelector((state) => state.user)
 
   useEffect(() => {
     topFunction();
@@ -41,6 +46,7 @@ const Cart = () => {
     });
     setPosts(data);
   };
+
 
   useEffect(() => {
     getAllData();
@@ -78,9 +84,6 @@ const Cart = () => {
     });
   };
 
-  // Increament days on of cart item
-
-console.log(totalDays);
   const increaseDays = async (obj) => {
     // setStart(new Date());
     // setEnd(new Date());
@@ -112,17 +115,17 @@ console.log(totalDays);
   };
 
   const sumbitALlProduct = async () => {
+    console.log(user[0].userid);
     await instance.post("cart/processdCart", {
       start_date: Start,
       end_date: End,
       produts: posts,
+      user : user[0].userid,
+      phone : user[0].phonenumber,
+      
+
     });
   };
-
-  const chekAvbl = () =>{
-    // toast("Thanks, we will contact you soon!")
-  }
-
 
   const cartItemprice = posts.reduce(
     (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
@@ -358,7 +361,6 @@ console.log(totalDays);
               </div>
               <div className="d-grid">
                 <button
-                onClick={chekAvbl}
                   type="submit"
                   className="rounded chek-avl-btn btn-lg m-2"
                   data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -378,7 +380,7 @@ console.log(totalDays);
       </div>
       <div class="modal-footer">
         
-        <button type="button" class="btn chek-avl-btn text-light" data-bs-dismiss="modal">Continue</button>
+        <button type="button" class="btn chek-avl-btn text-light" data-bs-dismiss="modal" onClick={sumbitALlProduct} >Continue</button>
       </div>
     </div>
   </div>

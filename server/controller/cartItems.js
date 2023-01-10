@@ -37,48 +37,42 @@ exports.addOnCart = catchError(async (req, res) => {
 })
 
 exports.processdCart = catchError(async (req, res) => {
-    const {start_date, end_date, produts, userid, phonenumber} = req.body;
+    var {user, phone, start_date, end_date, produts} = req.body;
+    let promises = [];
     db.changeUser({database: "gohoardi_goh"});
     db.query(
-        "SELECT DISTINCT campaigid FROM goh_shopping_carts_item WHERE userid = '" +
-        userid +
-        "'",
-        (err, result) => {
+        "SELECT MAX(campaigid) as campaigid FROM goh_shopping_carts_item",
+        async (err, result) => {
             if (err) {
             } else {
                 const campaign_name = result[0].campaigid;
                 produts.map((el) => {
-                    db.query(
-                        "INSERT into goh_serach_activities (user, phone, campaign_name, start_date, end_date, city, pincode, address, campaign_city, media_type, status, payment_status) VALUES ('" +
-                        userid +
-                        "','" +
-                        phonenumber +
-                        "','campaign-" +
-                        campaign_name +
-                        "','" +
-                        start_date +
-                        "','" +
-                        end_date +
-                        "','" +
-                        el.city_name +
-                        "','" +
-                        el.city +
-                        "','" +
-                        el.location +
-                        "','" +
-                        el.city +
-                        "','" +
-                        el.category_name +
-                        "', 2,0)",
-                        (err, result) => {
-                            if (err) {
-                                return res.send(err);
-                            } else {
-                                return res.send(result);
-                            }
-                        }
-                    );
+                    try {
+                        promises.push(
+                            new Promise(async (reject, resolve) => {
+                                db.query(
+                                    "INSERT into goh_serach_activities (user, phone, campaign_name, start_date, end_date) VALUES ("+user+",'"+phone+"',"+campaign_name+",'"+start_date+"','"+end_date+"')",
+                                    async (err, result) => {
+                                        if (err) {
+                                            reject(err);
+                                        } else {
+                                            resolve(result);
+                                        }
+                                    }
+                                  );
+                            })
+                        );
+                    } catch (err) {
+                        console.log(err);
+                    }
                 });
+                try {
+                    const data = await Promise.allSettled(promises);
+                    return res.send(data);
+                } catch (err) {
+                    console.log(err);
+                }
+               
             }
         }
     );
