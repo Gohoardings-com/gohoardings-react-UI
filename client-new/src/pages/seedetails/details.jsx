@@ -5,8 +5,10 @@ import {useNavigate, useParams} from "react-router-dom";
 import {IoIosSettings, IoMdLocate} from "react-icons/io";
 import {useSelector} from "react-redux";
 import "./details.scss";
+import {toast, ToastContainer} from "react-toastify";
 import instance from "../../apis/axios";
 import Fixednavbar from "../../components/navbar/fixednavbar";
+
 
 const Details = () => {
   const {category_name, meta_title} = useParams();
@@ -15,7 +17,56 @@ const Details = () => {
   const [markers, setPosts] = useState([]);
   const {isLoggedIn} = useSelector((state) => state.LoginStatus);
 
+  const [name, setName] = useState("");
+    const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [nameValidate, setNameValidate] = useState();
+    const [numbervalidate, setNumbervalidate] = useState();
+    const [emailValidate, setEmailValidate] = useState();
+    const [messageValidate, setMessageValidate] = useState();
 
+    const onSubmit = async (e) => {
+
+        e.preventDefault();
+        // const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
+        // let count = 0;
+        // if (name === "") {
+        //     count = +1;
+        //     setNameValidate(<MdOutlineError className="text-danger" />);
+        // } else if (number.length <= 0) {
+        //     count = +1;
+        //     setNumbervalidate(<MdOutlineError className="text-danger" />);
+        // } else if (number.length !== 10) {
+        //     count = +1;
+        //     setNumbervalidate("Type your 10 digit number corectly");
+        // } else if (email === "") {
+        //     count = +1;
+        //     setEmailValidate(<MdOutlineError className="text-danger" />);
+        // } else if (!emailformate.test(email)) {
+        //     count = +1;
+        //     setEmailValidate("Type your email corectly");
+        // } else if (message === "") {
+        //     count = +1;
+        //     setMessageValidate(<MdOutlineError className="text-danger" />);
+        // } else if (count === 0) {
+          await instance.post("enquiry/message", { name, email, number, message });
+           
+            notify();
+            setName("");
+            setNumber("");
+            setEmail("");
+            setMessage("");
+            setNameValidate("");
+            setNumbervalidate("");
+            setEmailValidate("");
+            setMessageValidate("");
+
+        // }
+    };
+    const notify = async () => {
+        toast("Thanks, we will contact you soon!");
+    };
 
   function topFunction() {
     document.body.scrollTop = 0; // For Safari
@@ -228,34 +279,45 @@ const Details = () => {
                   </div>
 
                  {/* form section */}
-                  <div className="row ms-3 me-3 mt-5 detail-mg-detail rounded-3 p-2">
+                 <div className="row ms-3 me-3 mt-5 detail-mg-detail rounded-3 p-2">
                      <div className=" p-2 datail-heading  rounded-3">
                         <h4 className="text-light">GET A FREE CONSULTATION!</h4>
                       </div>
-                      <form className="row g-3 needs-validation ms-1" novalidate>
-  <div className="col-md-6 position-relative">
-    <label for="validationTooltip01" className="form-label">Name</label>
-    <input type="text" className="form-control" id="validationTooltip01"  required/>
-
+                      <form className="row g-3 needs-validation ms-1" onSu>
+  <div className="col-md-12 position-relative">
+  <label htmlFor="validationTooltip02" className="form-label">Name*</label>
+    <input type="text" className="form-control" id="validationTooltip02" placeholder="Your Full Name" value={name}
+                onChange={(e) => {
+                    setName(e.target.value);
+                }}/>
+                  
   </div>
   <div className="col-md-6 position-relative">
-    <label for="validationTooltip02" className="form-label">Number</label>
-    <input type="number" className="form-control" id="validationTooltip02" required/>
+    <label htmlFor="validationTooltip02" className="form-label">Number</label>
+    <input type="number" className="form-control" id="validationTooltip02" value={number}
+                onChange={(e) => {
+                    setNumber(e.target.value);
+                }} required/>
  
-  </div>
+  </div>  
   <div className="col-md-6 position-relative">
     <label for="validationTooltip03" className="form-label">Email</label>
-    <input type="text" className="form-control" id="validationTooltip03" required/>
+    <input type="text" className="form-control" id="validationTooltip03" value={email}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                }} required/>
+              
   
   </div>
-  <div className="col-md-6 position-relative">
-    <label for="validationTooltip03" className="form-label">City</label>
-    <input type="text" className="form-control" id="validationTooltip03" required/>
- 
-  </div>
+  
   <div className="col-md-12 position-relative">
     <label for="validationTextarea" className="form-label">Textarea</label>
-    <textarea className="form-control " id="validationTextarea" placeholder="Required example textarea" required></textarea>
+    <textarea className="form-control " id="validationTextarea" placeholder="Required example textarea" required
+     value={message}
+     onChange={(e) => {
+         setMessage(e.target.value);
+     }}></textarea>
+        
   </div>
 
   <div className="col-12 d-grid ">

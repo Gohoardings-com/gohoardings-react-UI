@@ -46,7 +46,7 @@ const Register = ({ signIn,setFocus, onVisible, eyeViseble, toggleSignUp, passwo
             <div className="mb-2 mt-0">
               <div className="input-box">
                 <label className="input-label">
-                  Enter your email@gmail.com
+                  Enter your email address
                 </label>
                 <input
                   type="text"

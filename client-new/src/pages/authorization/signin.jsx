@@ -155,7 +155,7 @@ const Signin = () => {
     e.preventDefault()
     if (isNaN(parseInt(email))) {
       const data = await emailOTP(email)
-      console.log(data);
+    
       setEmail(" ")
       if (data.success == true) {
         setSendOtp(true)

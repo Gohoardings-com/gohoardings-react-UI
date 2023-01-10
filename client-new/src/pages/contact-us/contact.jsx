@@ -18,6 +18,7 @@ const Contact = () => {
   const [emailValidate, setEmailValidate] = useState();
   const [messageValidate, setMessageValidate] = useState();
   const onSubmit = async (e) => {
+  e.preventDefault();
     const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
     let count = 0;
     if (name === "") {
@@ -147,7 +148,7 @@ const Contact = () => {
                       <input
                         type="text"
                         className="input-1"
-                    placeholder="Enter your email@gmail.com"
+                    placeholder="Enter your email address"
                         value={email}
                         onChange={(e) => {
                           setEmail(e.target.value);

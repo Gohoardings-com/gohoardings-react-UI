@@ -101,8 +101,7 @@ const FooterN = () => {
             <h6 className="f-second-heading pt-1">
               It s advertising network spread across 130 cities with more than
               1.2 lakh OOH and DOOH sites offering hassle free branding
-              experiences
-              <br /> at an unmatched price.
+              experiences at an unmatched price.
             </h6>
           </div>
         </div>
@@ -386,7 +385,7 @@ const FooterN = () => {
               alt="payment"
             />
             <h6 className=" py-4 text-muted">
-              copyrights &#169; 2022 Gohaordings.com
+              copyrights &#169; 2023 Gohaordings.com
             </h6>
           </div>
           <div className="col text-light  offset-2">

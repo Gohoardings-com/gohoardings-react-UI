@@ -346,7 +346,7 @@ const Cart = () => {
                     className="text-light  mt-2 card-title"
 
                   > 
-                    Chek Availiblity
+                    Check Availability
                 </h5> 
                 </button>
               </div>

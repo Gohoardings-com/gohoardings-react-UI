@@ -106,7 +106,7 @@ const SearchMedia = () => {
               </div>
               <div className="col-md-2 pt-2 pb-2">
                 <Link
-                  to={`/${userType}/${value}`}
+                 to={`/${userType}/${value ? value : "delhi"}`}
                   className="button-serch text-white rounded-pill "
                 >
                   <button className="search-btn">Search</button>

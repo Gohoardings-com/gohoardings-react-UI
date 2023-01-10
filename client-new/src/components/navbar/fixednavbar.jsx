@@ -23,29 +23,12 @@ const Flotinggnavbar = () => {
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
 
-  const getCity = async () => {
-   const cities = "";
-    const data = await getAllCity(cities);
-    setCity(data);
-  };
-
-  // const onSearch = (searchTerm) => {
-  //   setValue(searchTerm);
-  // };
-
   useEffect(() => {
-    getCity();
+    onChange();
   }, []);
 
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
-
-
-  // const hello = async (e) => {
-  //   cities = e.target.value;
-  //   const data = await getAllCity(cities);
-  //   setCity(data);
-  // };
 
   var clt = "dropdown-menu";
   const [cls, setCls] = useState(
@@ -56,14 +39,13 @@ const Flotinggnavbar = () => {
     setValue(searchTerm);
     setCls("dropdown-menu");
   };
+let cities = ''
   const onChange = async (event) => {
-    setValue(event.target.value);
-    console.log(event);
-    const cities = event.target.value;
+   setValue(event.target.value);
+     cities = event.target.value;
     const data = await getAllCity(cities);
     setCity(data);
   };
-  console.log(city);
 
   return (
     <>
@@ -128,7 +110,7 @@ const Flotinggnavbar = () => {
                 className=" float-map-logo ps-0 p-0 me-1 ms-0"
               />
 
-              <span className="map-view-float pe-1">Map</span>
+              <span className="map-view-float pe-1">Map View</span>
             </Nav.Link>
           </form>
 

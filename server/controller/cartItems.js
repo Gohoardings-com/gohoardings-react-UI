@@ -9,7 +9,7 @@ exports.addOnCart = catchError(async (req, res) => {
     }
     const token = Object.values(cookieData)[0];
     return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
-        if (!token || token == 0) {
+        if (err) {
             return res.status(200).json({message: "Login First"})
         } else {
             const userid = user.id

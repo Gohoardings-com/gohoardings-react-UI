@@ -20,27 +20,27 @@ const Enquireregister = () => {
     const onSubmit = async (e) => {
 
         e.preventDefault();
-        // const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
-        // let count = 0;
-        // if (name === "") {
-        //     count = +1;
-        //     setNameValidate(<MdOutlineError className="text-danger" />);
-        // } else if (number.length <= 0) {
-        //     count = +1;
-        //     setNumbervalidate(<MdOutlineError className="text-danger" />);
-        // } else if (number.length !== 10) {
-        //     count = +1;
-        //     setNumbervalidate("Type your 10 digit number corectly");
-        // } else if (email === "") {
-        //     count = +1;
-        //     setEmailValidate(<MdOutlineError className="text-danger" />);
-        // } else if (!emailformate.test(email)) {
-        //     count = +1;
-        //     setEmailValidate("Type your email corectly");
-        // } else if (message === "") {
-        //     count = +1;
-        //     setMessageValidate(<MdOutlineError className="text-danger" />);
-        // } else if (count === 0) {
+        const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
+        let count = 0;
+        if (name === "") {
+            count = +1;
+            setNameValidate(<MdOutlineError className="text-danger" />);
+        } else if (number.length <= 0) {
+            count = +1;
+            setNumbervalidate(<MdOutlineError className="text-danger" />);
+        } else if (number.length !== 10) {
+            count = +1;
+            setNumbervalidate("Type your 10 digit number corectly");
+        } else if (email === "") {
+            count = +1;
+            setEmailValidate(<MdOutlineError className="text-danger" />);
+        } else if (!emailformate.test(email)) {
+            count = +1;
+            setEmailValidate("Type your email corectly");
+        } else if (message === "") {
+            count = +1;
+            setMessageValidate(<MdOutlineError className="text-danger" />);
+        } else if (count === 0) {
           await instance.post("enquiry/message", { name, email, number, message });
            
             notify();
@@ -53,7 +53,7 @@ const Enquireregister = () => {
             setEmailValidate("");
             setMessageValidate("");
 
-        // }
+        }
     };
 
     const notify = async () => {
