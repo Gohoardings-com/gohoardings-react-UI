@@ -1,10 +1,9 @@
-.loading-container{
-      
+
+.loading-container{  
       #container {
         width: 200px;
         height: 200px;
       }
-      
       @keyframes animation {
         0% {
           stroke-dasharray: 1 98;
@@ -19,7 +18,6 @@
           stroke-dashoffset: -300;
         }
       }
-      
       #spinner {
         transform-origin: center;
         animation-name: animation;

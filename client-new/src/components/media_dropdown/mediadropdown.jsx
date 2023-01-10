@@ -9,7 +9,7 @@ const Mediadropdown = ({userType, setUserType}) => {
           placeholder="Search your City"
           id="select-media-box"
           onSelect={(e) => setUserType(e)}
-          className=""
+          className=" "
   >
     <Dropdown.Item eventKey="traditional-ooh-media" className="p-2 mt-0 ">
     <span><img src="../../gohoarding/new-icon/t1.png" className="select-media-icon"/></span>Traditional OOH Media

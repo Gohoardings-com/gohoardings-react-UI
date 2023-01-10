@@ -5,6 +5,8 @@ import instance from "../../apis/axios";
 import {FiPhoneCall} from "react-icons/fi";
 import {BiMailSend} from "react-icons/bi";
 import {MdLocationOn} from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+
 
 function useWindowSize() {
   const [size, setSize] = useState([window.innerWidth]);
@@ -42,16 +44,32 @@ const FooterN = () => {
     handleCss();
   }, [width]);
 
+  const [error, setEror] = useState(false);
+  const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
+
   const handelSubmit = async (e) => {
+    let count = 0;
     e.preventDefault();
-    await instance.post("enquiry/message", {
-      email: getEmail,
-    });
+   if (!emailformate.test(getEmail)) {
+      count = +1;
+      setEror(true);
+    } 
+    else if (count===0){
+      await instance.post("enquiry/message", {
+        email: getEmail,
+        
+      });
+      setEmail("")
+      toast("Thanks, we will contact you soon!")
+      setEror(false);
+    }
+    
+
+ 
   };
   const logo = [
     {
       id: 1,
-
       img: "../.../../clientslogo/facebook.png",
       alt: "logo1",
       link: "https://www.facebook.com/gohoardings/",
@@ -400,8 +418,10 @@ const FooterN = () => {
                 className="text-dark border-0  p-2 cnt-input-box rounded-start mt-2 "
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
+                value={getEmail}
                 placeholder="Enter you email address"
                 formcontrolname="email"
+                id="footer-input"
               />
               <button
                 className="text-light btn bg-warning p-2 w-25  border-0 rounded-0 rounded-end mt-2"
@@ -409,7 +429,11 @@ const FooterN = () => {
               >
                 Contact{" "}
               </button>
+           
+             
+              <ToastContainer />
             </form>
+            <p className="error-msg"> {error==true && (!emailformate.test(getEmail)) ?  <small className="p-0 p-0 text-danger text-small  ">Type your email corectly</small> :<> </> } </p>  
             <h6 className=" py-3 text-muted">
               * Join our newsletter for the most recent information.
             </h6>

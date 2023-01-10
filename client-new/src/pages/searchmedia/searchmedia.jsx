@@ -9,9 +9,9 @@ import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
-  const [value, setValue] = useState("delhi");
+  const [value, setValue] = useState("");
 
-
+  const [focus,setFocus] = useState(false);
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
@@ -21,16 +21,14 @@ const SearchMedia = () => {
     setCity(data);
   };
 
-  var clt = "dropdown-menu  border-0 show ps-3  dropdown-menu-location p-1";
-  const [cls, setCls] = useState(
-    "dropdown-menu border-0 show   ps-3  dropdown-menu-location"
-  );
+
+
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    setCls("dropdown-menu border-0  ps-3  dropdown-menu-location");
+  setFocus(false)
   };
-
+console.log(value);
   return (
     <>
       <div className="container-xxl  container-xl container-lg container-md mb-4  search-media-content">
@@ -77,23 +75,26 @@ const SearchMedia = () => {
                         setValue={setValue}
                       />
                       <Form.Control
+                      autoComplete="off"
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
                         onChange={onChange}
                         value={value}
+                        onFocus={() => setFocus(true)}
+                        // onBlur={() => setFocus(false)}
                         id="search-location-box"
                         className=""
                       />
                     </InputGroup>
                   </div>
-                  <div className={value ? cls : clt} id="abcd">
+                  <div className={focus ?    "dropdown-menu  border-0 show ps-3  dropdown-menu-location p-1" :    "dropdown-menu" } id="abcd">
                     {city.map((item, i) => (
                       <div
                         key={i}
                         className="border-1"
                         onClick={() => onSearch(item.name)}
                       >
-                        <option value={item.name} className=" text-dark mt-1">
+                        <option value={item.name} className=" text-dark mt-1" >
                           {item.name}
                         </option>
                       </div>

@@ -26,18 +26,14 @@ const Flotinggnavbar = () => {
   useEffect(() => {
     onChange();
   }, []);
-
+  const [focus,setFocus] = useState(false);
   const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
-  var clt = "dropdown-menu";
-  const [cls, setCls] = useState(
-    "dropdown-menu border-0 show  mt-5  ps-5 "
-  );
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    setCls("dropdown-menu");
+    setFocus(false);
   };
 let cities = ''
   const onChange = async (event) => {
@@ -70,17 +66,20 @@ let cities = ''
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
+                        autoComplete="off"
                         onChange={onChange}
                         value={value}
+                        onFocus={() => setFocus(true)}
+                        // onBlur={() => setFocus(false)}
                         id="search-location-box"
                         className=" "
                       />
                     </InputGroup>
 
-                  <div className={value ? cls : clt} id="xyz" >
+                  <div className={focus ? "dropdown-menu border-0 show  mt-5  ps-5 " : "dropdown-menu "} id="xyz" >
                     {city.map((item,i) => (
                       <div
-                        className="border-1"
+                        className="border-1 rounded-3"
                         key={i}
                         onClick={() => onSearch(item.name)}
                       >

@@ -4,6 +4,9 @@
 
 .navbar-main-floating {
   background-color: #000000;
+  .search-logo{
+    font-size: 23px;
+  }
   #xyz {
     width: 303px;
    
@@ -13,7 +16,7 @@
       z-index: 4 !important;
       padding: 0px !important;
       
-      // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px !important;
   }
       #xyz  > .border-1 {
       margin-top: 0px;
