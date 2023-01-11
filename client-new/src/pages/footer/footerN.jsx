@@ -119,12 +119,8 @@ const FooterN = () => {
             <h6 className="f-second-heading pt-1">
               It s advertising network spread across 130 cities with more than
               1.2 lakh OOH and DOOH sites offering hassle free branding
-<<<<<<< HEAD
               experiences
               at an unmatched price.
-=======
-              experiences at an unmatched price.
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
             </h6>
           </div>
         </div>

@@ -48,16 +48,10 @@ const Team = () => {
                     <div className="single-team    text-center rounded">
                       <div className="team-img d-flex  justify-content-center">
                         <img
-<<<<<<< HEAD
                      
              src={person.profile_image ? `https://www.gohoardings.com/gohadmin/uploads/testimonials/${person.profile_image}` : `../../clientslogo/user-profile.png`} 
 
                      
-=======
-                          // src={person.profile_image}
-                                    src={person.profile_image ? `https://www.gohoardings.com/gohadmin/uploads/testimonials/${person.profile_image}` : `../../clientslogo/user-profile.png`} 
-
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
                           alt={person.firstname} 
                           className="image-fluid rounded-circle pt-2 "
                         /> 

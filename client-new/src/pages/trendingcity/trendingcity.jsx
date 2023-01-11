@@ -67,28 +67,16 @@ if(!loading){
         </section>
 
         {loading ? (
-<<<<<<< HEAD
           <div className=" container ">
           <div className="row  text-center my-3">
             <VariantsExample />
           </div>
         </div>
-=======
-            <div className=" container ">
-            <div className="row  text-center my-3">
-              <VariantsExample />
-            </div>
-          </div>
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
         ) : (
           <>
       
               {!loading == false ? 
-<<<<<<< HEAD
             <div className=" container ">
-=======
-			<div className=" container ">
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
             <div className="row  text-center my-3">
               <VariantsExample />
             </div>

@@ -16,18 +16,14 @@ import {userDetails} from '../../action/adminAction';
 
 const Cart = () => {
 
+  
   const [Start, setStart] = useState(new Date());
-  const [End, setEnd] = useState(new Date());
-
-  var tomorrow = new Date();
-  let ff = new Date(tomorrow.setDate(Start.getDate() + 5));
-
+  let defaultEndDate = new Date(new Date().setDate(Start.getDate() + 5));
+  const [End, setEnd] = useState(defaultEndDate);
   const { addRemove, initalState } = useContext(AccountContext);
   const [posts, setPosts] = useState([]);
   const [price, setPrice] = useState();
-
-  let totalDays = new Date(moment(End) - moment(Start)).getDate() - 1;
-
+  
   const {user, loading} = useSelector((state) => state.user)
 
   useEffect(() => {
@@ -52,12 +48,28 @@ const Cart = () => {
     getAllData();
   }, []);
 
+
+  const setCommonDays = (daysdifference) => {
+    posts.map((obj) => {
+          obj.days  = parseInt(daysdifference);
+        setPosts(posts);
+
+    });
+   
+  }
+
   const StartDate = (e) => {
+    var diff = End.getTime() - e.getTime(); 
+    let daysdifference = diff / (1000 * 60 * 60 * 24); 
+    setCommonDays(daysdifference + 1);
     setStart(e);
   };
 
   const EndDate = (e) => {
-    setEnd(e);
+      var diff = e.getTime() - Start.getTime(); 
+      let daysdifference = diff / (1000 * 60 * 60 * 24); 
+      setCommonDays(daysdifference + 1);
+      setEnd(e);
   };
   const removefroCart = async (obj) => {
     await instance.post("cart/deleteFromCart", {
@@ -85,31 +97,27 @@ const Cart = () => {
   };
 
   const increaseDays = async (obj) => {
-    // setStart(new Date());
-    // setEnd(new Date());
     let data = [...posts];
-
     data.map((element) => {
       if (element.id == obj.id) {
           obj.days += 1;
+          setPosts(data);
       }
-      setPosts(data);
+    
     });
   };
 
   // Decrement days on of cart item
   const decreaseDays = async (obj) => {
-    setStart(new Date());
-    setEnd(new Date());
     let data = [...posts];
 
     data.map((element) => {
       if (element.id === obj.id) {
         if (obj.days > 5) {
           obj.days -= 1;
-        
+          setPosts(data);
         }
-        setPosts(data);
+   
       }
     });
   };
@@ -127,14 +135,14 @@ const Cart = () => {
     });
   };
 
+
+
+
+
   const cartItemprice = posts.reduce(
     (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
     0
   );
-<<<<<<< HEAD
-=======
-
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
 
   return (
     <>
@@ -158,15 +166,11 @@ const Cart = () => {
                       <FaCalendarAlt className="calender-logo ms-4 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-<<<<<<< HEAD
-                      <Calendar value={Start} onChange={StartDate} showNeighboringMonth={true} />
-=======
                       <Calendar
                         value={Start}
                         onChange={StartDate}
                         minDate={new Date()}
                       />
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
@@ -177,9 +181,7 @@ const Cart = () => {
                 <label className="input-label">End Date</label>
                 <div type="text " className="input-1 d-flex bg-light ">
                   <h6 className="me-2  calender-logo  text-dark">
-                    {totalDays
-                      ? moment(End).format("DD/MM/YYYY")
-                      : moment(End).add(5, "days").format("DD/MM/YYYY")}
+                    {  moment(End).format("DD/MM/YYYY")}
                   </h6>
 
                   <Dropdown className="p-0 m-0">
@@ -191,11 +193,7 @@ const Cart = () => {
                       <FaCalendarAlt className="calender-logo ms-4 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-<<<<<<< HEAD
-                      <Calendar value={End}  onChange={EndDate} showNeighboringMonth={true} />
-=======
-                      <Calendar value={End} onChange={EndDate} minDate={ff} />
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
+                      <Calendar value={End} onChange={EndDate} minDate={defaultEndDate} />
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
@@ -270,7 +268,7 @@ const Cart = () => {
                                       type="button"
                                       className=" fw-bold  rounded bg-transparent  border-0 ps-2 pe-2   text-dark"
                                     >
-                                      {totalDays ? totalDays   : obj.days}
+                                      {obj.days}
                                     </span>
                                     <img
                                       src="../../clientslogo/minus.png"
@@ -309,28 +307,22 @@ const Cart = () => {
                                       18% gst
                                     </span>
                                   </span>
+                                 
                                   <span className="project-creator mt-1 ms-0 ">
                                     <img
                                       src="../../gohoarding/new-icon/rupees-logo.png"
                                       className="rupees-logo"
                                     />{" "}
                                     <span className=" ms-1 card-text">
-                                      {totalDays
-                                        ? parseInt(
-                                            obj.price * (totalDays) +
-                                              (obj.price *
-                                                (totalDays) *
-                                                18) /
-                                                100
-                                          )
-                                        : parseInt(
+                                 
+                                      {parseInt(
                                             obj.price * obj.days +
                                               (obj.price * obj.days * 18) / 100
                                           )}
                                     </span>
                                     <span className=" ms-2 off-text">
-                                      For {totalDays ? totalDays  : obj.days}{" "}
-                                      days include gst{" "}
+                                      For <b>{obj.days}{" "}
+                                      days including gst{" "}</b>
                                     </span>
                                   </span>
                                 </div>
@@ -346,7 +338,7 @@ const Cart = () => {
           </div>
           <div className="col-md-3 ">
             <h5 className=" p-2 ps-3 news-heading ">Gross Total</h5>
-            <div className="card text-center bill-card mt-3 bg-light ">
+            <div className="card  bill-card mt-3 bg-light ">
               <div className="card-body">
                 <h5 className="card-title">
                   Total media :
@@ -354,19 +346,23 @@ const Cart = () => {
                     {initalState}
                   </span>
                 </h5>
+                <hr/>
                 <div className="">
+                 
                   <h5 className="mt-3 card-text">
-                    GST(18%) : <FaRupeeSign />{" "}
-                    {totalDays
-                      ? ((cartItemprice / 5) * (totalDays) * 18) / 100
-                      : (cartItemprice * 18) / 100}
+                    Total amount : <FaRupeeSign />
+                    {cartItemprice }
                   </h5>
                   <h5 className="mt-3 card-text">
-                    Total ammount : <FaRupeeSign />
-                    {totalDays
-                      ? (cartItemprice / 5) * (totalDays) +
-                        ((cartItemprice / 5) * (totalDays) * 18) / 100
-                      : cartItemprice + (cartItemprice * 18) / 100}
+                    GST(18%) : <FaRupeeSign />{" "}
+                    {
+                   ( cartItemprice * 18) / 100
+                      }
+                  </h5>
+                  <hr/>
+                  <h5 className="mt-3 card-text">
+                    Final amount : <FaRupeeSign />
+                    {cartItemprice + ( cartItemprice * 18) / 100}
                   </h5>
                 </div>
               </div>

@@ -22,11 +22,7 @@ const Faqs = () => {
       <Branding title="FAQs" />
       <section>
         <div className="container-fluid px-5  question-box mt-5 mb-5 p-2 ">
-<<<<<<< HEAD
           {posts.map((data, index) => {
-=======
-        {posts.map((data, index) => {
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
             let abc = 'a' + data.id;
             return (
               <>
@@ -41,11 +37,7 @@ const Faqs = () => {
                   </h4>
                 </p>
                 <div className="collapse" id={abc}>
-<<<<<<< HEAD
                   <div className="card-body  text-dark pb-1 ps-2">
-=======
-                  <div className="card-body  text-secondary pb-1 ps-2">
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
                     <h5>{data.description}</h5>
                   </div>
                 </div>

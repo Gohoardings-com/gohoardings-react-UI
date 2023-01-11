@@ -8,11 +8,7 @@ exports.register = catchError(async (req, res) => {
     const {name, email, phone, password: Npassword} = req.body
     const password = bcrypt.hashSync(Npassword, 8)
     db.changeUser({database: "gohoardi_crmapp"})
-<<<<<<< HEAD
-    db.query("SELECT email, phonenumber FROM tblcontacts WHERE email='" + email + "' ||  phonenumber='" + phone + "'", async (err, result) => {
-=======
     db.query("SELECT email, phonenumber FROM tblcontacts WHERE email='" + email + "' || phonenumber='" + phone + "'", async (err, result) => {
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
         if (err) {
             return res.send(err)
         } else if (result.length == []) {
@@ -26,7 +22,7 @@ exports.register = catchError(async (req, res) => {
                                 return res.send({err: err.message, message: "Something Wrong here"})
                             } else {
                                 res.clearCookie(String(userid))
-                                req.cookies[`${String(userid)}`] = " ";
+                                // req.cookies[`${String(userid)}`] = " ";
                                 token(userid, 200, res)
                             }
                         })
@@ -34,7 +30,7 @@ exports.register = catchError(async (req, res) => {
                 })
                 : res.send({message: "User data Null"})
         } else {
-            return res.status(206).json({
+            return res.status(201).json({
                 mess: "Profile Already Exist"
             })
         }
@@ -44,18 +40,18 @@ exports.register = catchError(async (req, res) => {
 exports.login = catchError(async (req, res) => {
     const {email, password} = req.body;
     db.changeUser({database: "gohoardi_crmapp"})
-    db.query("SELECT password FROM tblcontacts WHERE email ='" + email + "' ", async (err, result) => {
+    db.query("SELECT * FROM tblcontacts WHERE email ='" + email + "' ", async (err, result) => {
         if (err) {
-            return res.status(206).json({message: "No User Found"})
+            return res.json({message: "No User Found"})
         } else if (!result.length == 0) {
 
             const keypassword = result[0].password;
             if (!keypassword) {
-                return res.status(206).json({messsage: "Invalid Email and password"});
+                return res.status(404).json({messsage: "Invalid Email and password"});
             } else {
                 const confimPassword = bcrypt.compareSync(password, keypassword)
                 if (!confimPassword) {
-                    return res.status(206).json({
+                    return res.status(404).json({
                         success: false,
                         message: "Wrong Email & Password"
                     });
@@ -66,7 +62,7 @@ exports.login = catchError(async (req, res) => {
                 token(userid, 200, res)
             }
         } else {
-            return res.status(206).json({messsage: "Invalid Email and password"});
+            return res.status(404).json({messsage: "Invalid Email and password"});
         }
     })
 })
@@ -76,9 +72,12 @@ exports.googleLogin = catchError(async (req, res) => {
     db.changeUser({database: "gohoardi_crmapp"});
     db.query("SELECT * FROM tblcontacts WHERE email='" + email + "' && provider='Google'", async (err, selectResult) => {
         if (err) {
-            return res.status(206).json({message: "Wrong Data"})
+            return res.status(400).json({message: "Wrong Data"})
         }
+
         if (selectResult.length == 0) {
+
+
             db.query("SELECT userid From tblcontacts ORDER By userid DESC LIMIT 1", async (err, result) => {
                 if (err) {
                     return res.status(404).json(err.message)
@@ -117,7 +116,7 @@ exports.linkdinLogin = catchError(async (req, res) => {
                 if (err) {
 
 
-                    return res.status(206).json({message: "Wrong Data"})
+                    return res.status(400).json({message: "Wrong Data"})
                 }
                 if (selectResult.length == 0) {
 
@@ -154,15 +153,15 @@ exports.linkdinLogin = catchError(async (req, res) => {
 exports.refreshToken = catchError(async (req, res, next) => {
     const cookieData = req.cookies;
     if (!cookieData) {
-        return res.status(206).json({message: "No Cookie Found"})
+        return res.status(400).json({message: "No Cookie Found"})
     }
     const token = Object.values(cookieData)[0];
     if (!token) {
-        return res.status(206).json({message: "No Token Found"})
+        return res.status(400).json({message: "No Token Found"})
     } else {
         return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
             if (err) {
-                return res.status(206).json({message: "InValid Token"});
+                return res.status(400).json({message: "InValid Token"});
             } else {
                 res.clearCookie(`${user.id}`)
                 req.cookies[`${user.id}`] = "";
@@ -188,12 +187,12 @@ exports.refreshToken = catchError(async (req, res, next) => {
 exports.getuser = catchError(async (req, res) => {
     const userId = req.id;
     if (!userId) {
-        return res.status(206).json({message: "Token Valid"})
+        return res.status(404).json({message: "Token Valid"})
     } else {
         db.changeUser({database: "gohoardi_crmapp"})
         db.query("SELECT * FROM tblcontacts WHERE userid='" + userId + "'", async (err, result) => {
             if (err) {
-                return res.status(206).json({message: "User Not found"})
+                return res.status(404).json({message: "User Not found"})
             } else {
                 return res.status(200).json(result)
             }
@@ -204,7 +203,7 @@ exports.getuser = catchError(async (req, res) => {
 exports.logout = catchError(async (req, res) => {
     const user = req.id
     if (!user) {
-        return next(new ErrorHandler("No user found Plese Login Again", 206))
+        return next(new ErrorHandler("No user found Plese Login Again", 400))
     }
     res.clearCookie(`${user}`)
     req.cookies[`${user}`] = "";
@@ -242,16 +241,16 @@ exports.resetPasswordEmail = catchError(async (req, res, next) => {
     const {code} = req.query
     const cookieData = req.cookies;
     if (!cookieData) {
-        return res.status(205).json({message: "No Cookie Found"})
+        return res.status(400).json({message: "No Cookie Found"})
     }
     const token = Object.values(cookieData)[0];
     if (!token) {
-        return res.status(206).json({message: "No Token Found"})
+        return res.status(400).json({message: "No Token Found"})
     } else {
         if (token === code) {
             return jwtToken.verify(token, process.env.jwt_secret, async (err, user) => {
                 if (err) {
-                    return res.status(206).json({message: "InValid Token"});
+                    return res.status(400).json({message: "InValid Token"});
                 } else {
                     const userId = user.id
                     const {password, confirmPassword} = req.body;

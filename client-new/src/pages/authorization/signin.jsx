@@ -1,8 +1,8 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import ForgetPass from './forgetPass';
 import Login from './login';
 import "./login.scss";
-import {toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import {
   changePasswordApi,
   clientId,
@@ -13,20 +13,20 @@ import {
   registerUser,
   sendOTP
 } from "../../apis/apis";
-import {useGoogleLogin} from "react-google-login";
-import {MdOutlineError} from "react-icons/md";
-import {useNavigate} from "react-router-dom";
+import { useGoogleLogin } from "react-google-login";
+import { MdOutlineError } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import Register from "./signup";
-import {AccountContext} from '../../apis/apicontext';
-import {useDispatch, useSelector} from 'react-redux'
-import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
+import { AccountContext } from '../../apis/apicontext';
+import { useDispatch, useSelector } from 'react-redux'
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 
 const Signin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  const {addRemove} = useContext(AccountContext);
+  const { addRemove } = useContext(AccountContext);
   const [nameValidate, setNameValidate] = useState();
   const [email, setEmail] = useState();
   const [emailsValidate, setEmailsValidate] = useState();
@@ -35,15 +35,15 @@ const Signin = () => {
   const [phone, setNumber] = useState("");
   const [numbervalidate, setNumbervalidate] = useState();
   const [forget, setForget] = useState(false);
-  const [pass,setPass]= useState(false);
+  const [pass, setPass] = useState(false);
   const [fnotify, setFnotify] = useState("")
   const [signin, setSignIn] = useState(true);
   const [otp, setOtp] = useState("");
-  const [sendOtp,setSendOtp]=useState(false);
+  const [sendOtp, setSendOtp] = useState(false);
   const [expire, setexpire] = useState("")
   const [confirmpasswords, setconfirmPasswords] = useState();
   const { isLoggedIn } = useSelector((state) => state.LoginStatus);
-  
+
 
 
   function setFocus(on) {
@@ -79,9 +79,9 @@ const Signin = () => {
     const data = await googleLogin(profile);
     if (data.success === true) {
       afterLogin()
-    }else{
+    } else {
       toast(data.message)
-      
+
     }
   };
 
@@ -122,15 +122,15 @@ const Signin = () => {
       count = +1;
       setPasswordsValidate(<MdOutlineError className="text-danger" />);
     } else if (count === 0) {
-    
-        e.preventDefault();
-        const data = await loginUser(email, password)
-        if (data.success === true) {
-          afterLogin()
-        }else{
-          toast(data.message)
-        }
-     
+
+      e.preventDefault();
+      const data = await loginUser(email, password)
+      if (data.success === true) {
+        afterLogin()
+      } else {
+        toast(data.message)
+      }
+
     }
     e.preventDefault();
   };
@@ -154,32 +154,20 @@ const Signin = () => {
   const onForget = async (e) => {
     e.preventDefault()
     if (isNaN(parseInt(email))) {
-<<<<<<< HEAD
-      const data = await emailOTP(email) 
-     
-=======
       const data = await emailOTP(email)
-    
-      setEmail(" ")
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
       if (data.success == true) {
         setEmail(" ")
         setSendOtp(true)
-   
-      }else{
+      } else {
         toast(data.message)
-      
-    
       }
     } else {
       const data = await mobileOTP(email);
-   
-    
       if (data.success == true) {
         setEmail(" ")
         setSendOtp(true)
-   
-      }else{
+
+      } else {
         toast(data.message)
       }
     }
@@ -192,7 +180,7 @@ const Signin = () => {
     setconfirmPasswords(" ")
     if (data.success === true) {
       afterLogin()
-    }else{
+    } else {
       toast(data.message)
     }
   };
@@ -200,11 +188,11 @@ const Signin = () => {
   const checkOTP = async (e) => {
     e.preventDefault()
     const data = await sendOTP(otp)
-  
+
     if (data.success === true) {
       setexpire(data.message)
       setPass(true)
-    }else{
+    } else {
       toast(data.message)
     }
   };
@@ -231,13 +219,13 @@ const Signin = () => {
     } else if (password.length <= 3) {
       setPasswordsValidate("Password should be atleast 4 digit ");
     } else if (count === 0) {
-        e.preventDefault()
-        const data = await registerUser(name, email, phone, password);
-        if (data.success === true) {
-          afterLogin()
-        }else{
-          toast(data.message)
-        }
+      e.preventDefault()
+      const data = await registerUser(name, email, phone, password);
+      if (data.success === true) {
+        afterLogin()
+      } else {
+        toast(data.message)
+      }
     }
     e.preventDefault();
   };
@@ -264,7 +252,7 @@ const Signin = () => {
                   email={email}
 
                   setEmail={setEmail}
-              
+
                   checkOTP={checkOTP}
                   changePassword={changePassword}
                   phone={phone}

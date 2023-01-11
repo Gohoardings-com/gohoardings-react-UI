@@ -35,15 +35,10 @@ const Flotinggnavbar = () => {
     setValue(searchTerm);
     setFocus(false);
   };
-let cities = ''
+
   const onChange = async (event) => {
-<<<<<<< HEAD
     setValue(event.target.value);
     const cities = event.target.value;
-=======
-   setValue(event.target.value);
-     cities = event.target.value;
->>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
     const data = await getAllCity(cities);
     setCity(data);
   };
