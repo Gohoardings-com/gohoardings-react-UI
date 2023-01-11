@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {mediawithcity} from "../../action/adminAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import VariantsExample from "../../components/loading/loading";
 
 const Trendingcity = () => {
   const dispatch = useDispatch();
@@ -66,12 +67,20 @@ if(!loading){
         </section>
 
         {loading ? (
-            <h1>Loading... Please Wait</h1>
+          <div className=" container ">
+          <div className="row  text-center my-3">
+            <VariantsExample />
+          </div>
+        </div>
         ) : (
           <>
       
               {!loading == false ? 
-              <h1>Loading Please Wait</h1>
+            <div className=" container ">
+            <div className="row  text-center my-3">
+              <VariantsExample />
+            </div>
+          </div>
               :
               <>
               <Slider {...slider}>

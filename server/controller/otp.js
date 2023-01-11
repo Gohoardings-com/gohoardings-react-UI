@@ -18,7 +18,7 @@ exports.sendOTP = catchError(async (req, res) => {
         if (err) {
             res.status(400).json({message: err.message})
         } else if (result.length == 0) {
-            return res.status(404).json({message: "Phone Number Invalid"})
+            return res.status(206).json({message: "Phone Number Invalid"})
 
         } else {
             let otp = Math.floor(100000 + Math.random() * 900000);
@@ -55,7 +55,7 @@ exports.sendOTP = catchError(async (req, res) => {
 exports.sendPasswordEmail = catchError(async (req, res, next) => {
     const {email} = req.body
     if (!email) {
-        res.status(400).json({message: "Wrong Input"})
+        res.status(206).json({message: "Wrong Input"})
     }
     db.changeUser({database: "gohoardi_crmapp"})
     db.query("SELECT userid from tblcontacts WHERE  email='" + email + "'", async (err, confirm) => {
@@ -88,20 +88,20 @@ exports.sendPasswordEmail = catchError(async (req, res, next) => {
 exports.checkOTP = catchError(async (req, res) => {
     const {otp} = req.body
     if (!otp) {
-        return res.status(400).json({message: "OTP Invalid"})
+        return res.status(206).json({message: "OTP Invalid"})
     }
     db.changeUser({database: "gohoardi_crmapp"})
     const sql = "SELECT userid from tblcontacts WHERE phone_otp=" + otp + " || email_otp=" + otp + ""
 
     db.query(sql, (err, result) => {
         if (err) {
-            return res.status(400).json({message: "OTP Invalid"})
+            return res.status(206).json({message: "OTP Invalid"})
         } else if (result.length == 0) {
-            return res.status(400).json({message: "OTP Not Match, Try After 30min"})
+            return res.status(206).json({message: "OTP Not Match, Try After 1min"})
         } else {
             const userid = result[0].userid;
             const token = jwtToken.sign({id: userid}, process.env.jwt_secret, {
-                expiresIn: "1m",
+                expiresIn: "60000",
             });
             return res.status(200).json({success: true, message: token})
         }
@@ -110,13 +110,14 @@ exports.checkOTP = catchError(async (req, res) => {
 
 exports.changePassword = catchError(async (req, res) => {
     const {password, confirmpasswords, expire} = req.body
+
     if (!expire) {
-        return res.status(400).json({message: "Time Expire"});
+        return res.status(206).json({message: "Otp Expire"});
     }
     if (password == confirmpasswords) {
         jwtToken.verify(expire, process.env.jwt_secret, async (err, user) => {
             if (err) {
-                return res.status(400).json({message: "InValid Token"});
+                return res.status(206).json({message: "InValid Token"});
             } else {
                 const userid = user.id;
                 const finalPassword = bcrypt.hashSync(password, 8)

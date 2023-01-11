@@ -112,8 +112,6 @@ const Iconsselection = ({slice}) => {
   let array = [...uniqueValues];
   let arrayJJson = JSON.stringify(array);
   let newString = arrayJJson.replace(/\[|\]/g, '');
-
-
   dispatch(iconFiltersData(distance, datas, table, city, minLatitude, maxLatitude , newString))
 
   }

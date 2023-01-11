@@ -102,7 +102,7 @@ const FooterN = () => {
               It s advertising network spread across 130 cities with more than
               1.2 lakh OOH and DOOH sites offering hassle free branding
               experiences
-              <br /> at an unmatched price.
+              at an unmatched price.
             </h6>
           </div>
         </div>

@@ -58,12 +58,10 @@ const Flotinggnavbar = () => {
   };
   const onChange = async (event) => {
     setValue(event.target.value);
-    console.log(event);
     const cities = event.target.value;
     const data = await getAllCity(cities);
     setCity(data);
   };
-  console.log(city);
 
   return (
     <>

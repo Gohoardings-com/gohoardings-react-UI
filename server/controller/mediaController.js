@@ -200,7 +200,7 @@ exports.SearchData = catchError(async (req, res, next) => {
                     const sql = "SELECT * FROM " + table_name + " WHERE city_name='" + city + "'";
                     db.query(sql, async (err, result) => {
                         if (err) {
-                            console.log(err);
+                     
                             return res.status(204).json({err: reject(err), message: "Wrong Data"})
                         } else if (resolve == []) {
                             return res.status(204).json({resolve: "Empty", message: "Media Not Found"})
@@ -214,7 +214,7 @@ exports.SearchData = catchError(async (req, res, next) => {
                 promises.push(new Promise(async (resolve, reject) => {
                     db.query("SELECT DISTINCT media.*,cart.campaigid, cart.userid, cart.isDelete FROM " + table_name + " AS media LEFT JOIN goh_shopping_carts_item AS cart ON media.code=cart.mediaid AND cart.userid = '" + userID + "' WHERE media.city_name = '" + city + "' ORDER BY `cart`.`userid` DESC ", async (err, result) => {
                         if (err) {
-                            console.log(err);
+                        
                             return res.status(204).json({err: reject(err), message: "Wrong Data"})
                         } else if (resolve === []) {
                             return res.status(204).json({resolve: "Empty", message: "Media Not Found"})

@@ -14,7 +14,7 @@ const Newsmedia = () => {
   useEffect(()=>{
     staff()
   },[])
-
+  
   return (
     <>
     <Fixednavbar/>

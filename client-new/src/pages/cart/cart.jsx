@@ -126,7 +126,6 @@ const Cart = () => {
     (totalPrice, item) => totalPrice + parseInt(item.price * item.days),
     0
   );
-  console.log(posts);
 
   return (
     <>
@@ -150,7 +149,7 @@ const Cart = () => {
                       <FaCalendarAlt className="calender-logo ms-4 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Calendar value={Start} onChange={StartDate} />
+                      <Calendar value={Start} onChange={StartDate} showNeighboringMonth={true} />
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
@@ -174,7 +173,7 @@ const Cart = () => {
                       <FaCalendarAlt className="calender-logo ms-4 mb-1 text-dark" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Calendar value={End}  onChange={EndDate} />
+                      <Calendar value={End}  onChange={EndDate} showNeighboringMonth={true} />
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>

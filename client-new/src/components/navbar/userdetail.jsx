@@ -63,7 +63,7 @@ const getUser = async () => {
   const logOut = async () => {
     sessionStorage.clear()
     localStorage.removeItem("true")
-    logout()
+    // logout()
     handelLogout().then(() => dispatch(authActions.logout()))
   }
 

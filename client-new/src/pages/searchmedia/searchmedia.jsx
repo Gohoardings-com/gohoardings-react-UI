@@ -52,7 +52,7 @@ const SearchMedia = () => {
             <a href="/contact" className="text-decoration-none">
               <button
                 type="button"
-                className="btn  fw-bold p-2 ps-3 pe-3 mt-3 enquire-now text-decoration-none"
+                className="btn enquire-now fw-bold mt-3 p-2 pe-3 ps-3 text-body text-decoration-none"
               >
                 Enquire now
               </button>
@@ -77,6 +77,7 @@ const SearchMedia = () => {
                         setValue={setValue}
                       />
                       <Form.Control
+                      autoComplete="off"
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
                         onChange={onChange}

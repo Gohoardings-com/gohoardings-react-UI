@@ -1,9 +1,8 @@
 import React from "react";
 import "./media.scss";
 import {TfiEye} from "react-icons/tfi";
-
-import {Link} from "react-router-dom";
 import VariantsExample from "../../components/loading/loading";
+import {Link} from "react-router-dom";
 
 const Multicard = ({ slice, loading, addonCart, removefroCart }) => {
   return (

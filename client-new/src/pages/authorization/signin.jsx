@@ -154,25 +154,27 @@ const Signin = () => {
   const onForget = async (e) => {
     e.preventDefault()
     if (isNaN(parseInt(email))) {
-      const data = await emailOTP(email)
-      console.log(data);
-      setEmail(" ")
+      const data = await emailOTP(email) 
+     
       if (data.success == true) {
+        setEmail(" ")
         setSendOtp(true)
    
       }else{
-        toast(data.message )
+        toast(data.message)
       
     
       }
     } else {
       const data = await mobileOTP(email);
-      setEmail(" ")
-      setEmailsValidate(true)
+   
+    
       if (data.success == true) {
-        setEmailsValidate(true)
+        setEmail(" ")
+        setSendOtp(true)
+   
       }else{
-        toast("Invalid Number")
+        toast(data.message)
       }
     }
   };

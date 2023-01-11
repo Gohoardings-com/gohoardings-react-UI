@@ -190,7 +190,7 @@ const Map = () => {
   <div className="container-fluid mh-100">
       <div className="row" id="map-view-row">
         <div className="col-lg-3 col-md-3 col-sm-12 p-0 border-end position-relative">
-          <div className="row filter-icons m-0">
+          <div className="row filter-icons mt-5 pt-1">
             <div
               className="col-4 list d-inline-block text-center py-2 shadow-sm border-top-0 border collapse-none"
               data-bs-toggle="collapse"

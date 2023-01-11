@@ -20,9 +20,9 @@ exports.sendEmail = async (options) => {
 
     transport.sendMail(mailOptions, function (error, response) {
         if (error) {
-            console.log(error);
+           return error
         } else {
-            console.log("Message sent: " + response.accepted);
+        return true
         }
 
         // if you don't want to use this transport object anymore, uncomment following line

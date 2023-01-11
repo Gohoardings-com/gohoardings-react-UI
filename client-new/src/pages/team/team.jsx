@@ -17,6 +17,8 @@ const Team = () => {
     staff()
   },[])
 
+    console.log(posts);
+  
   return (
     <>
     <Fixednavbar/>
@@ -46,8 +48,10 @@ const Team = () => {
                     <div className="single-team    text-center rounded">
                       <div className="team-img d-flex  justify-content-center">
                         <img
-                          // src={person.profile_image}
-                          src="https://www.gohoardings.com/gohadmin/uploads/testimonials/anoop.jpg"
+                     
+             src={person.profile_image ? `https://www.gohoardings.com/gohadmin/uploads/testimonials/${person.profile_image}` : `../../clientslogo/user-profile.png`} 
+
+                     
                           alt={person.firstname} 
                           className="image-fluid rounded-circle pt-2 "
                         /> 
