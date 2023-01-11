@@ -43,10 +43,11 @@ const Flotinggnavbar = () => {
     setCity(data);
   };
 
+ 
   return (
     <>
-      <Navbar expand="lg px-md-0 p-1   navbar-main-floating fixed-top ">
-        <Navbar.Brand href="/" id="home" onMouseOver={() => setShow(true)} >
+      <Navbar expand="lg px-md-0 p-1 m-0 border-0   navbar-main-floating fixed-top " >
+        <Navbar.Brand href="/" id="home" onMouseOver={() => setShow(true)}    onMouseLeave={() => setShow(false)}  >
           <img
             src="../../images/logo.png"
             className="border-0 brand float-brand  "

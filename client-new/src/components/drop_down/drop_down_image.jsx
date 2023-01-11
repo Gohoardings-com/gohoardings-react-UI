@@ -9,9 +9,9 @@ const Drop_Down_Image = ({show, setShow, Dropdown}) => {
         <>
             <Dropdown.Menu
                 show={show}
+                onMouseOver={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}
-                className="drop-menu w-100  pe-4 ps-4 position-fixed "
-      >
+                className="drop-menu w-100  pe-4 ps-4 position-fixed">
         <div className="container-fluid ">
           <div className="row pt-2 ">
             <div className="col-6  ">
@@ -24,7 +24,7 @@ const Drop_Down_Image = ({show, setShow, Dropdown}) => {
               <h5 className="ms-3 "> SUPPORT & FAQ</h5>
             </div>
           </div>
-          <hr />
+          <hr/>
           <div className="row m-1 drop-data">
             <div className="col-3 p-0  border-box mb-3">
               <ul className="list-none ms-2">
@@ -143,10 +143,10 @@ const Drop_Down_Image = ({show, setShow, Dropdown}) => {
           <div className="row mb-2">
             <div className="col-6 ms-5">
               <h5>Get Instant Quote</h5>
-              <h2 className="mt-3 text-danger">Call us on: +91 7777871717</h2>
+              <h3 className="mt-3 text-danger">Call us on: +91 7777871717</h3>
             </div>
             <div className="col ">
-              <button className="btn  float-end  border-0 mt-4 me-5 text-center " id="write-btn"><h4 className="text-light"><a className="text-decoration-none text-dark" href="/contact">Write To Us</a></h4></button>
+            <a className="text-decoration-none" href="/contact">  <button className="btn text-light float-end  border-0 mt-4 me-5 text-center " id="write-btn">Write To Us</button></a>
             </div>
           </div>
           <hr/>
