@@ -25,7 +25,7 @@ export const  ILLUMINATION = [
       srcImg: ".././images/tradition.jpg",
     },
     {
-      label: "Tradition OOH Medai ",
+      label: "Tradition OOH Media ",
       value2: "Traditional-OOH-Media",
       value: "traditional-ooh-media",
       srcImg: ".././images/tradition.jpg",

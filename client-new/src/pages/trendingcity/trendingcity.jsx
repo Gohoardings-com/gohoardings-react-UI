@@ -24,7 +24,7 @@ const Trendingcity = () => {
   const { search, loading } = useSelector((state) => state.search);
   let  newData;
 if(!loading){
- newData = search.splice(0,7)
+ newData = search.splice(0,8)
 }
   {
     var settings = {
@@ -67,16 +67,28 @@ if(!loading){
         </section>
 
         {loading ? (
+<<<<<<< HEAD
           <div className=" container ">
           <div className="row  text-center my-3">
             <VariantsExample />
           </div>
         </div>
+=======
+            <div className=" container ">
+            <div className="row  text-center my-3">
+              <VariantsExample />
+            </div>
+          </div>
+>>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
         ) : (
           <>
       
               {!loading == false ? 
+<<<<<<< HEAD
             <div className=" container ">
+=======
+			<div className=" container ">
+>>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
             <div className="row  text-center my-3">
               <VariantsExample />
             </div>
@@ -115,7 +127,7 @@ if(!loading){
                         
                           <div className="bottom-left">Delhi</div>
                           <div className="bottom-left-media">
-                            {pos.medianame.substring(17, 30)}{" "}
+                            {pos.medianame.substring(0, 17)}...
                           </div>
                         </div>
                       </Link>

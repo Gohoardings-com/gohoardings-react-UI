@@ -13,7 +13,7 @@ const Login = ({onSignIn, setFocus, email, setEmail, signIn,toggleSignUp,ToastCo
             <div className="mb-4 mt-2">
               <div className="input-box">
                 <label className="input-label">
-                  Enter your email@gmail.com
+                  Enter your email address
                 </label>
                 <input
                   type="text"
@@ -56,7 +56,7 @@ const Login = ({onSignIn, setFocus, email, setEmail, signIn,toggleSignUp,ToastCo
                 </p>
               </div>
             </div>
-            <label className="ms-2 checkbox">
+             <label className="ms-2 checkbox d-none">
               <input
                 type="checkbox"
                 onChange={() => setRemember(true)}

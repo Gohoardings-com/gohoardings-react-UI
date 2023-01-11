@@ -154,8 +154,14 @@ const Signin = () => {
   const onForget = async (e) => {
     e.preventDefault()
     if (isNaN(parseInt(email))) {
+<<<<<<< HEAD
       const data = await emailOTP(email) 
      
+=======
+      const data = await emailOTP(email)
+    
+      setEmail(" ")
+>>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
       if (data.success == true) {
         setEmail(" ")
         setSendOtp(true)

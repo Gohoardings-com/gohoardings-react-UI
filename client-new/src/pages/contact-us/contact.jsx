@@ -17,27 +17,29 @@ const Contact = () => {
   const [numbervalidate, setNumbervalidate] = useState();
   const [emailValidate, setEmailValidate] = useState();
   const [messageValidate, setMessageValidate] = useState();
+  const [error,setEror] = useState(false);
+  const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
+
+  let count = 0;
   const onSubmit = async (e) => {
-    const emailformate = /^\w+([-]?\w+)*@\w+(.-]?\w+)*(\.\w{2,3})+$/;
-    let count = 0;
+    e.preventDefault();
+   
     if (name === "") {
-      count = +1;
-      setNameValidate(<MdOutlineError className="text-danger" />);
-    } else if (number.length <= 0) {
-      count = +1;
-      setNumbervalidate(<MdOutlineError className="text-danger" />);
-    } else if (number.length !== 10) {
-      count = +1;
-      setNumbervalidate("Type your 10 digit number corectly");
-    } else if (email === "") {
-      count = +1;
-      setEmailValidate(<MdOutlineError className="text-danger" />);
-    } else if (!emailformate.test(email)) {
-      count = +1;
-      setEmailValidate("Type your email corectly");
+  
+      setEror(true);
+      count= +1;
+     
+    }  else if (number.length !== 10) {
+      count= +1;
+      setEror(true);
+    }else if (!emailformate.test(email)) {
+      count= +1;
+      setEror(true);
+
     } else if (message === "") {
-      count = +1;
-      setMessageValidate(<MdOutlineError className="text-danger" />);
+      count= +1;
+       setEror(true);
+
     } else if (count === 0) {
       await instance.post("enquiry/message", { name, email, number, message });
       setName("");
@@ -48,18 +50,20 @@ const Contact = () => {
       setNumbervalidate("");
       setEmailValidate("");
       setMessageValidate("");
+      setEror(false);
       notify();
     }
-    e.preventDefault();
+  
   };
-  function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
-  useEffect(() => {
+
+  // function topFunction() {
+  //   document.body.scrollTop = 0; // For Safari
+  //   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  // }
+  // useEffect(() => {
     
-    topFunction();
-  }, []);
+  //   topFunction();
+  // }, []);
 
   const notify = () => {
     toast("Thanks, we will contact you soon!");
@@ -122,7 +126,8 @@ const Contact = () => {
                           setName(e.target.value);
                         }}
                       />
-                      <p className="ms-3 p-0 text ">{nameValidate}</p>
+                      {error==true && name === "" ? <p className="ms-3 p-0 text ">Please enter your name</p> : <> </> }
+                      
                     </div>
                   </div>
 
@@ -138,7 +143,8 @@ const Contact = () => {
                           setNumber(e.target.value);
                         }}
                       />
-                      <p className="ms-2 p-0 text ">{numbervalidate}</p>
+                      {error==true && number.length !== 10 ?  <p className="ms-2 p-0 text ">Type your 10 digit number corectly</p>  :<> </> }
+                     
                     </div>
                   </div>
                   <div className="mb-4 mt-2">
@@ -153,7 +159,7 @@ const Contact = () => {
                           setEmail(e.target.value);
                         }}
                       />
-                      <p className="ms-2 p-0 text ">{emailValidate}</p>
+                        {error==true && (!emailformate.test(email)) ?  <p className="ms-2 p-0 text ">Type your email corectly</p>  :<> </> }
                     </div>
                   </div>
                   <div className="mb-2 mt-2">
@@ -169,7 +175,7 @@ const Contact = () => {
                           setMessage(e.target.value);
                         }}
                       />
-                      <p className="ms-2 p-0 text">{messageValidate}</p>
+                      {error==true && message === "" ?  <p className="ms-2 p-0 text ">Please enter your message for our team</p>  :<> </> }
                     </div>
                   </div>
 

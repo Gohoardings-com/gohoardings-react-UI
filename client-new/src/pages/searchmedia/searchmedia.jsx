@@ -9,9 +9,9 @@ import Citylocation from "../../components/cityLocation/citylocation";
 
 const SearchMedia = () => {
   const [city, setCity] = useState([]);
-  const [value, setValue] = useState("delhi");
+  const [value, setValue] = useState("");
 
-
+  const [focus,setFocus] = useState(false);
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
   const onChange = async (event) => {
@@ -21,16 +21,14 @@ const SearchMedia = () => {
     setCity(data);
   };
 
-  var clt = "dropdown-menu  border-0 show ps-3  dropdown-menu-location p-1";
-  const [cls, setCls] = useState(
-    "dropdown-menu border-0 show   ps-3  dropdown-menu-location"
-  );
+
+
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    setCls("dropdown-menu border-0  ps-3  dropdown-menu-location");
+  setFocus(false)
   };
-
+console.log(value);
   return (
     <>
       <div className="container-xxl  container-xl container-lg container-md mb-4  search-media-content">
@@ -82,19 +80,21 @@ const SearchMedia = () => {
                         aria-describedby="basic-addon1"
                         onChange={onChange}
                         value={value}
+                        onFocus={() => setFocus(true)}
+                        // onBlur={() => setFocus(false)}
                         id="search-location-box"
                         className=""
                       />
                     </InputGroup>
                   </div>
-                  <div className={value ? cls : clt} id="abcd">
+                  <div className={focus ?    "dropdown-menu  border-0 show ps-3  dropdown-menu-location p-1" :    "dropdown-menu" } id="abcd">
                     {city.map((item, i) => (
                       <div
                         key={i}
                         className="border-1"
                         onClick={() => onSearch(item.name)}
                       >
-                        <option value={item.name} className=" text-dark mt-1">
+                        <option value={item.name} className=" text-dark mt-1" >
                           {item.name}
                         </option>
                       </div>
@@ -107,7 +107,7 @@ const SearchMedia = () => {
               </div>
               <div className="col-md-2 pt-2 pb-2">
                 <Link
-                  to={`/${userType}/${value}`}
+                 to={`/${userType}/${value ? value : "delhi"}`}
                   className="button-serch text-white rounded-pill "
                 >
                   <button className="search-btn">Search</button>

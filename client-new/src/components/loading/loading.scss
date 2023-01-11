@@ -1,10 +1,13 @@
 
+<<<<<<< HEAD
 .loading-container{
+=======
+.loading-container{  
+>>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
       #container {
         width: 200px;
         height: 200px;
       }
-      
       @keyframes animation {
         0% {
           stroke-dasharray: 1 98;
@@ -19,7 +22,6 @@
           stroke-dashoffset: -300;
         }
       }
-      
       #spinner {
         transform-origin: center;
         animation-name: animation;

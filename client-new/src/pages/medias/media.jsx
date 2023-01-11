@@ -49,6 +49,7 @@ const Media = () => {
       mediaid: e.code,
       mediatype: e.category_name,
     });
+  console.log(data)
     if (data.message == "Login First") {
       window.localStorage.setItem("locate", `/${category_name}/${city_name}`);
       navigate("/login");
@@ -164,6 +165,9 @@ const Media = () => {
           <div className="filter-container">
             <div className="filter-down-left d-flex ">
               <>
+                <h6 className="fs-4 me-3 text-dark">
+                  Filter By : 
+                </h6>
                 <h5
                   data-bs-toggle="dropdown"
                   className=" btn me-2  dropdown-toggle"
@@ -227,11 +231,12 @@ const Media = () => {
                                 value={cate}
                                 onChange={(e) => categoryFilter(cate)}
                               />
-                              </div>
-                              <span className="text-wrap  media-filter-text-card-detail-filt ">
+                                <span className="text-wrap  media-filter-text-card-detail-filt ">
                                 {cate.substring(0, 13)}
                               </span>
-                              <br />
+                              </div>
+                            
+                           
                             </>
                           ))}
                       </ul>
@@ -243,7 +248,7 @@ const Media = () => {
 
             <p className="filter-down btn  " onClick={() => data()}>
 
-              MAP
+              Map View
               <img
                 src="https://cdn-icons-png.flaticon.com/512/854/854894.png" 
                 className="media-location-logo-map ms-2"
@@ -267,18 +272,27 @@ const Media = () => {
       </div>
 
       
-      {loading ? <> </>
-      :<>  {slice.length == 0? <>
+            {loading ? <> </>
+      :<>  { 
+      slice.length < 8 ? <>
       
         </>:<><div className="position-relative mb-5 pb-5 " >
         <div className=" position-absolute  top-0 start-50 translate-middle">
-          <button className=" buttonload btn-hover" onClick={() => More()}>
-            View More <MdOutlineArrowDownward />
-          </button>
-          {}
-          <button className=" ms-5 buttonload btn-hover" onClick={() => Less()}>
-            View Less <MdArrowUpward />
-          </button>
+          {slice.length == search.length ? <> </> : 
+                    <button className=" buttonload btn-hover" onClick={() => More()}>
+                    View More <MdOutlineArrowDownward />
+                  </button>
+                  }
+                  {slice.length <= 8 ? (
+                    <> </>
+                  ) : (
+                    <button
+                      className=" ms-5 buttonload btn-hover"
+                      onClick={() => Less()}
+                    >
+                      View Less <MdArrowUpward />
+                    </button>
+                  )}
         </div>
       </div> </>}</>
      }

@@ -23,42 +23,27 @@ const Flotinggnavbar = () => {
   const [city, setCity] = useState([]);
   const [posts, setPosts] = useState();
 
-  const getCity = async () => {
-   const cities = "";
-    const data = await getAllCity(cities);
-    setCity(data);
-  };
-
-  // const onSearch = (searchTerm) => {
-  //   setValue(searchTerm);
-  // };
-
   useEffect(() => {
-    getCity();
+    onChange();
   }, []);
-
-  const [value, setValue] = useState();
+  const [focus,setFocus] = useState(false);
+  const [value, setValue] = useState("delhi");
   const [userType, setUserType] = useState("Traditional-OOH-Media");
 
 
-  // const hello = async (e) => {
-  //   cities = e.target.value;
-  //   const data = await getAllCity(cities);
-  //   setCity(data);
-  // };
-
-  var clt = "dropdown-menu";
-  const [cls, setCls] = useState(
-    "dropdown-menu border-0 show  mt-5  ps-5 "
-  );
-
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    setCls("dropdown-menu");
+    setFocus(false);
   };
+let cities = ''
   const onChange = async (event) => {
+<<<<<<< HEAD
     setValue(event.target.value);
     const cities = event.target.value;
+=======
+   setValue(event.target.value);
+     cities = event.target.value;
+>>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
     const data = await getAllCity(cities);
     setCity(data);
   };
@@ -86,17 +71,20 @@ const Flotinggnavbar = () => {
                       <Form.Control
                         placeholder="Search your Location"
                         aria-describedby="basic-addon1"
+                        autoComplete="off"
                         onChange={onChange}
                         value={value}
+                        onFocus={() => setFocus(true)}
+                        // onBlur={() => setFocus(false)}
                         id="search-location-box"
                         className=" "
                       />
                     </InputGroup>
 
-                  <div className={value ? cls : clt} id="xyz" >
+                  <div className={focus ? "dropdown-menu border-0 show  mt-5  ps-5 " : "dropdown-menu "} id="xyz" >
                     {city.map((item,i) => (
                       <div
-                        className="border-1"
+                        className="border-1 rounded-3"
                         key={i}
                         onClick={() => onSearch(item.name)}
                       >
@@ -126,7 +114,7 @@ const Flotinggnavbar = () => {
                 className=" float-map-logo ps-0 p-0 me-1 ms-0"
               />
 
-              <span className="map-view-float pe-1">Map</span>
+              <span className="map-view-float pe-1">Map View</span>
             </Nav.Link>
           </form>
 

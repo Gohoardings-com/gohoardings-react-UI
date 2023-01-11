@@ -8,7 +8,11 @@ exports.register = catchError(async (req, res) => {
     const {name, email, phone, password: Npassword} = req.body
     const password = bcrypt.hashSync(Npassword, 8)
     db.changeUser({database: "gohoardi_crmapp"})
+<<<<<<< HEAD
     db.query("SELECT email, phonenumber FROM tblcontacts WHERE email='" + email + "' ||  phonenumber='" + phone + "'", async (err, result) => {
+=======
+    db.query("SELECT email, phonenumber FROM tblcontacts WHERE email='" + email + "' || phonenumber='" + phone + "'", async (err, result) => {
+>>>>>>> 11980b76bc3f5c2bdf034130033c851e40f69f7c
         if (err) {
             return res.send(err)
         } else if (result.length == []) {
